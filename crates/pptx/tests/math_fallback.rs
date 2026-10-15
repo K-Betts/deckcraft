@@ -139,3 +139,53 @@ fn table_without_equations_is_not_wrapped() {
     let xml = slide_xml(&deckcraft_pptx::export(&p).expect("export"));
     assert!(!xml.contains("mc:AlternateContent"), "{xml}");
 }
+
+fn deck_with_display_equation(jc: Option<&str>) -> deckcraft_model::Presentation {
+    let jc = jc.map(|v| format!(r#"<m:oMathParaPr><m:jc m:val="{v}"/></m:oMathParaPr>"#)).unwrap_or_default();
+    let omml = OMML.replacen("<m:oMath>", &format!("{jc}<m:oMath>"), 1);
+    let mut p = deck_with_equation();
+    if let Some(s) = p.slides.first_mut()
+        && let Some(shape) = std::sync::Arc::make_mut(s).shapes.first_mut()
+        && let Some(run) = shape.text.as_mut().and_then(|t| t.paragraphs.first_mut()).and_then(|p| p.runs.first_mut())
+    {
+        run.kind = RunKind::Math { omml };
+    }
+    p
+}
+
+/// The part of the slide after the fallback opens, and the part before.
+fn branches(p: &deckcraft_model::Presentation) -> (String, String) {
+    let xml = slide_xml(&deckcraft_pptx::export(p).expect("export"));
+    let (choice, fallback) = xml.split_once("<mc:Fallback>").expect("fallback branch");
+    (choice.to_string(), fallback.to_string())
+}
+
+#[test]
+fn equation_wrappers_declare_a14_on_the_alternate_content() {
+    for p in [deck_with_equation(), deck_with_equation_in_a_table_cell()] {
+        let (choice, _) = branches(&p);
+        let ac = choice.split("<mc:AlternateContent").nth(1).expect("alternate content");
+        let (wrapper, rest) = ac.split_once("<mc:Choice").expect("choice");
+        assert!(wrapper.contains("xmlns:a14="), "a14 is not declared on the wrapper: {wrapper}");
+        let choice_tag = rest.split('>').next().expect("choice tag");
+        assert!(choice_tag.contains(r#"Requires="a14""#) && !choice_tag.contains("xmlns"), "{choice_tag}");
+    }
+}
+
+#[test]
+fn display_equation_fallback_text_is_centred_like_the_equation() {
+    for jc in [None, Some("centerGroup"), Some("center")] {
+        let (choice, fallback) = branches(&deck_with_display_equation(jc));
+        assert!(fallback.contains(r#"algn="ctr""#), "{jc:?}: {fallback}");
+        // The OMML branch is left exactly as it was read.
+        assert!(!choice.contains(r#"algn="ctr""#), "{jc:?}: {choice}");
+    }
+}
+
+#[test]
+fn display_equation_fallback_follows_the_equation_alignment() {
+    let (_, left) = branches(&deck_with_display_equation(Some("left")));
+    assert!(left.contains(r#"algn="l""#), "{left}");
+    let (_, right) = branches(&deck_with_display_equation(Some("right")));
+    assert!(right.contains(r#"algn="r""#), "{right}");
+}
