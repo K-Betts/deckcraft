@@ -71,3 +71,71 @@ fn equation_fallback_text_is_written_with_the_equation_size() {
     assert!(fallback.contains(r#"sz="4000""#), "fallback run lost its size: {fallback}");
     assert!(fallback.contains("Cambria Math"), "fallback run lost its font: {fallback}");
 }
+
+fn deck_with_equation_in_a_table_cell() -> deckcraft_model::Presentation {
+    use deckcraft_model::ShapeKind;
+    let mut p = defaults::new_presentation(None);
+    let id = ShapeId(p.alloc_id().expect("id"));
+    let mut t = deckcraft_model::Table::new(2, 2, 200.0, 30.0);
+    if let Some(cell) = t.rows.first_mut().and_then(|r| r.cells.first_mut()) {
+        cell.text = TextBody {
+            paragraphs: vec![Paragraph {
+                runs: vec![Run { text: "x+1=8".into(), props: RunProps::default(), kind: RunKind::Math { omml: OMML.into() } }],
+                ..Default::default()
+            }],
+            ..Default::default()
+        };
+    }
+    let table = Shape { id, name: "Table".into(), xfrm: Some(Xfrm::new(10.0, 10.0, 200.0, 60.0)), kind: ShapeKind::Table(t), ..Default::default() };
+    if let Some(s) = p.slides.first_mut() {
+        std::sync::Arc::make_mut(s).shapes = vec![table];
+    }
+    p
+}
+
+fn first_cell_run(p: &deckcraft_model::Presentation) -> Run {
+    let shape = p.slides[0].shapes.iter().find(|s| s.name == "Table").expect("table");
+    let deckcraft_model::ShapeKind::Table(t) = &shape.kind else { panic!("not a table") };
+    t.rows[0].cells[0].text.paragraphs[0].runs[0].clone()
+}
+
+#[test]
+fn equation_in_a_table_cell_survives_a_round_trip() {
+    let bytes = deckcraft_pptx::export(&deck_with_equation_in_a_table_cell()).expect("export");
+    let q = deckcraft_pptx::import(&bytes).expect("import");
+    let run = first_cell_run(&q);
+    // Still an equation (not flattened to text), and still with its formatting.
+    match &run.kind {
+        RunKind::Math { omml } => assert!(omml.contains("+1=8"), "{omml}"),
+        other => panic!("equation in a cell was flattened: {other:?}"),
+    }
+    assert_eq!(run.props.size, Some(40.0));
+    // And a second pass changes nothing.
+    let again = deckcraft_pptx::import(&deckcraft_pptx::export(&q).expect("export")).expect("import");
+    assert_eq!(first_cell_run(&again).kind, run.kind);
+}
+
+#[test]
+fn table_with_an_equation_has_an_omml_branch_and_a_formatted_text_fallback() {
+    let bytes = deckcraft_pptx::export(&deck_with_equation_in_a_table_cell()).expect("export");
+    let q = deckcraft_pptx::import(&bytes).expect("import");
+    let xml = slide_xml(&deckcraft_pptx::export(&q).expect("export again"));
+    let (choice, fallback) = xml.split_once("<mc:Fallback>").expect("fallback branch");
+    assert!(choice.contains("<mc:Choice") && choice.contains("<a:tbl>") && choice.contains("<a14:m"), "{choice}");
+    assert!(fallback.contains("<a:tbl>") && !fallback.contains("<a14:m"), "{fallback}");
+    assert!(fallback.contains(r#"sz="4000""#), "fallback cell text lost its size: {fallback}");
+}
+
+#[test]
+fn table_without_equations_is_not_wrapped() {
+    let mut p = deck_with_equation_in_a_table_cell();
+    if let Some(s) = p.slides.first_mut()
+        && let Some(shape) = std::sync::Arc::make_mut(s).shapes.first_mut()
+        && let deckcraft_model::ShapeKind::Table(t) = &mut shape.kind
+        && let Some(cell) = t.rows.first_mut().and_then(|r| r.cells.first_mut())
+    {
+        cell.text = TextBody::default();
+    }
+    let xml = slide_xml(&deckcraft_pptx::export(&p).expect("export"));
+    assert!(!xml.contains("mc:AlternateContent"), "{xml}");
+}
