@@ -10,7 +10,6 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
 git fetch -q origin main
-LOCAL="$(git rev-parse --short HEAD)"
 LATEST="$(git rev-parse --short origin/main)"
 INSTALLED_FILE="${INSTALL_DIR:-/Applications}/DeckCraft.app/Contents/Resources/.built-from"
 INSTALLED="$(cat "$INSTALLED_FILE" 2>/dev/null || echo none)"
