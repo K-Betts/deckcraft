@@ -147,6 +147,7 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
         "dark": app.ui.brightness == theme::Brightness::Dark,
         "uiScale": app.ui.ui_scale,
         "packs": app.ui.packs,
+        "communityLinks": app.ui.show_community_links,
         "prefs": serde_json::to_value(&app.session.prefs).unwrap_or(Value::Null),
     })
 }
@@ -161,6 +162,9 @@ fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
+    }
+    if let Some(on) = before.get("communityLinks").and_then(Value::as_bool) {
+        app.ui.show_community_links = on;
     }
     if let Some(packs) = before.get("packs").and_then(|p| serde_json::from_value(p.clone()).ok()) {
         app.ui.packs = packs;
@@ -2171,6 +2175,12 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     let _ = app.run("app.pack", json!({"id": pack.id, "on": on}));
                 }
                 ui.label(egui::RichText::new(pack.blurb).size(11.0).color(Tokens::get(ui.ctx()).text_faint));
+            }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Links").font(theme::bold(13.0)));
+            let mut links = app.ui.show_community_links;
+            if ui.checkbox(&mut links, "Show community links (Discord, website, source) in Home and About").changed() {
+                let _ = app.run("app.communityLinks", json!({"on": links}));
             }
             ui.add_space(4.0);
             ui.label(egui::RichText::new("Editing").font(theme::bold(13.0)));

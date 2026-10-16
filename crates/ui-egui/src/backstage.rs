@@ -694,6 +694,23 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
         crate::dialogs::paint_logo(ui.painter(), r);
         ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
     });
+    if app.ui.packs.is_empty() && !app.ui.subjects_hint_dismissed {
+        ui.add_space(12.0);
+        egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
+            ui.horizontal(|ui| {
+                ui.label("Teaching a subject? Switch on its tools (Teacher Mode aids, starter slides). You can change this any time in Preferences.");
+                for pack in crate::packs::PACKS {
+                    if ui.button(format!("Turn on {}", pack.label)).clicked() {
+                        let _ = app.run("app.pack", json!({"id": pack.id, "on": true}));
+                        let _ = app.run("app.dismissSubjectsHint", json!({}));
+                    }
+                }
+                if ui.button("Not now").clicked() {
+                    let _ = app.run("app.dismissSubjectsHint", json!({}));
+                }
+            });
+        });
+    }
     ui.add_space(18.0);
     ui.horizontal(|ui| {
         ui.label(RichText::new("New").font(theme::bold(16.0)).color(t.text));

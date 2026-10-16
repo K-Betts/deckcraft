@@ -284,6 +284,8 @@ pub struct UiState {
     pub show_community_links: bool,
     /// Subject packs the teacher has switched on (see [`packs`]); empty on a fresh install.
     pub packs: std::collections::BTreeSet<String>,
+    /// The Home screen's “teach a subject?” card was dismissed.
+    pub subjects_hint_dismissed: bool,
 }
 
 impl Default for UiState {
@@ -319,6 +321,7 @@ impl Default for UiState {
             qat: qat::defaults(),
             show_community_links: false,
             packs: Default::default(),
+            subjects_hint_dismissed: false,
         }
     }
 }
@@ -399,6 +402,7 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
+    ("app.dismissSubjectsHint", "Dismiss the Subjects Hint", None, "{}: stop showing the Home card that offers subject tools"),
     ("app.pack", "Switch Subject Pack", None, "{id: maths, on?: bool}: switch a subject pack on or off"),
     (
         "app.communityLinks",
@@ -1007,6 +1011,7 @@ impl SlideApp {
                     self.ui.packs.remove(id);
                 }
             }
+            "app.dismissSubjectsHint" => self.ui.subjects_hint_dismissed = true,
             "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
