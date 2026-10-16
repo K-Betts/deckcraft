@@ -32,7 +32,11 @@ pub fn bundled() -> Vec<&'static [u8]> {
 pub fn substitutes(family: &str) -> &'static [&'static str] {
     match family.to_ascii_lowercase().as_str() {
         "calibri" | "calibri light" => &["Carlito", "Liberation Sans", "Arial", "Inter"],
-        "cambria" | "cambria math" => &["Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
+        // Equations: an open maths font first, which has the math-italic letters (𝑥, 𝑦) and
+        // operators that equations are written in; Caladea and the serifs have neither.
+        // STIX Two Math is installed with macOS and is OFL-1.1.
+        "cambria math" => &["STIX Two Math", "Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
+        "cambria" => &["Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
         "arial" | "helvetica" | "helvetica neue" | "arial nova" => &["Liberation Sans", "Arial", "Helvetica Neue", "Helvetica", "Inter"],
         "times new roman" | "times" => &["Liberation Serif", "Times New Roman", "Times", "Merriweather"],
         "courier new" | "courier" | "consolas" | "menlo" => &["Liberation Mono", "Courier New", "Menlo", "Courier"],

@@ -382,6 +382,16 @@ mod tests {
     }
 
     #[test]
+    fn equations_prefer_an_open_maths_font() {
+        // Cambria Math stands in with a font that has the math-italic letters equations use.
+        assert_eq!(substitutes("Cambria Math").first(), Some(&"STIX Two Math"));
+        assert_eq!(substitutes("cambria math").first(), Some(&"STIX Two Math"));
+        // Cambria (body text) keeps its metric-compatible twin first.
+        assert_eq!(substitutes("Cambria").first(), Some(&"Caladea"));
+        assert!(!substitutes("Cambria").contains(&"STIX Two Math"));
+    }
+
+    #[test]
     fn shaping_produces_clusters_and_advances() {
         let face = any_face();
         let g = shape(&face, "Hello", &[], |c| c);
