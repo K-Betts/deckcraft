@@ -30,11 +30,14 @@ committed.
 | 2026-10-16 | Display equations are placed by their own justification (centred by default), in the editor and in the saved text fallback, even when the paragraph says left. Fixes slides 3 and 6 in DeckCraft. | `fix/display-equation-alignment` |
 | 2026-10-16 | Empty notes pages survive PPTX and native-format round trips, including notes masters with slide-number placeholders. | `fix/empty-notes-page-round-trip` |
 | 2026-10-16 | PPTX notes import skips an empty body placeholder instead of dropping later speaker-note text; an engine open-save test verifies the text in the saved XML. | `fix/notes-page-round-trip` |
+| 2026-10-16 | `deckcraft-cli fidelity ORIGINAL SAVED` emits a JSON model-difference report without modifying either deck. | `feat/fidelity-comparison` |
 
 ## Known gaps
 
 - DeckCraft's editor draws equations as their plain-text stand-in (no fractions, layout or
   stacking). Real equation drawing is phase 3.
+- The fidelity report has not yet been run on additional real decks from Kieran's private test
+  corpus; it compares imported models, not rendered pixels.
 - STIX Two Math isn't bundled yet: macOS has it installed, other systems may not. Bundling it means
   adding it to a fork of `storytold/craft-fonts` (fonts never live in this repo, AGENTS.md §1.3).
 - Not yet built or run on a Mac.

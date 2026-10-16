@@ -198,8 +198,14 @@ fn slide_details(cp: &Presentation, a: &Slide, rp: &Presentation, b: &Slide) -> 
     if layout_name(cp, a) != layout_name(rp, b) {
         out.push("layout".into());
     }
+    let has_notes_page = |s: &Slide| s.notes_page_present || !s.notes.is_empty();
+    if has_notes_page(a) != has_notes_page(b) {
+        out.push("notes page".into());
+    }
     if a.notes.text() != b.notes.text() {
         out.push("notes".into());
+    } else if a.notes != b.notes {
+        out.push("notes formatting".into());
     }
     if a.transition != b.transition {
         out.push("transition".into());
@@ -451,5 +457,14 @@ mod tests {
         assert!(s.execute("review.compare", &json!({"name": "x.bin", "data": "AAAA"})).is_err());
         assert!(s.execute("review.compare", &json!({})).is_err());
         assert!(s.execute("review.accept", &json!({"index": 999})).is_err());
+    }
+
+    #[test]
+    fn reports_empty_notes_page_and_notes_formatting_changes() {
+        let original = deckcraft_model::defaults::new_presentation(None);
+        let mut revised = original.clone();
+        std::sync::Arc::make_mut(&mut revised.slides[0]).notes_page_present = true;
+        let changes = super::diff(&original, &revised, true);
+        assert!(changes[0].details.iter().any(|detail| detail == "notes page"), "{changes:?}");
     }
 }
