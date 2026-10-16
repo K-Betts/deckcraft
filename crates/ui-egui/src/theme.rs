@@ -1,4 +1,4 @@
-//! Design tokens (light, PowerPoint-like; and dark) and fonts for the UI.
+//! Design tokens (light and dark: calm, Mac-like greys with a blue accent) and fonts for the UI.
 
 use egui::{Color32, CornerRadius, FontData, FontDefinitions, FontFamily, Stroke, Visuals};
 use serde::{Deserialize, Serialize};
@@ -48,21 +48,21 @@ impl Tokens {
     pub fn light() -> Self {
         Tokens {
             dark: false,
-            chrome: Color32::from_rgb(0xF5, 0xF5, 0xF5),
+            chrome: Color32::from_rgb(0xF7, 0xF7, 0xF8),
             card: Color32::WHITE,
-            card_border: Color32::from_rgb(0xE3, 0xE3, 0xE3),
-            canvas: Color32::from_rgb(0xF0, 0xF0, 0xF0),
-            text: Color32::from_rgb(0x24, 0x24, 0x24),
-            text_dim: Color32::from_rgb(0x5C, 0x5C, 0x5C),
-            text_faint: Color32::from_rgb(0x99, 0x99, 0x99),
-            border: Color32::from_rgb(0xD6, 0xD6, 0xD6),
-            separator: Color32::from_rgb(0xE1, 0xE1, 0xE1),
-            hover: Color32::from_rgb(0xEB, 0xEB, 0xEB),
-            pressed: Color32::from_rgb(0xDE, 0xDE, 0xDE),
-            selected: Color32::from_rgb(0xE6, 0xE6, 0xE6),
-            accent: Color32::from_rgb(0xD9, 0x5A, 0x1A),
+            card_border: Color32::from_rgb(0xE4, 0xE4, 0xE8),
+            canvas: Color32::from_rgb(0xEC, 0xED, 0xF0),
+            text: Color32::from_rgb(0x1D, 0x1D, 0x1F),
+            text_dim: Color32::from_rgb(0x5E, 0x5E, 0x66),
+            text_faint: Color32::from_rgb(0x9A, 0x9A, 0xA2),
+            border: Color32::from_rgb(0xD8, 0xD8, 0xDE),
+            separator: Color32::from_rgb(0xE6, 0xE6, 0xEA),
+            hover: Color32::from_rgb(0xEC, 0xEC, 0xF0),
+            pressed: Color32::from_rgb(0xDF, 0xE1, 0xE8),
+            selected: Color32::from_rgb(0xE3, 0xEB, 0xFA),
+            accent: Color32::from_rgb(0x2B, 0x63, 0xC6),
             accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0xC2, 0x4E, 0x14),
+            contextual: Color32::from_rgb(0x1F, 0x4F, 0xA3),
             selection: Color32::from_rgb(0x7A, 0x7A, 0x7A),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
@@ -70,16 +70,16 @@ impl Tokens {
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
             field_bg: Color32::WHITE,
-            shadow: Color32::from_black_alpha(28),
+            shadow: Color32::from_black_alpha(22),
         }
     }
     pub fn dark() -> Self {
         Tokens {
             dark: true,
-            chrome: Color32::from_rgb(0x26, 0x26, 0x26),
-            card: Color32::from_rgb(0x33, 0x33, 0x33),
-            card_border: Color32::from_rgb(0x44, 0x44, 0x44),
-            canvas: Color32::from_rgb(0x1E, 0x1E, 0x1E),
+            chrome: Color32::from_rgb(0x24, 0x24, 0x27),
+            card: Color32::from_rgb(0x2F, 0x2F, 0x33),
+            card_border: Color32::from_rgb(0x42, 0x42, 0x47),
+            canvas: Color32::from_rgb(0x1B, 0x1B, 0x1E),
             text: Color32::from_rgb(0xEE, 0xEE, 0xEE),
             text_dim: Color32::from_rgb(0xBB, 0xBB, 0xBB),
             text_faint: Color32::from_rgb(0x88, 0x88, 0x88),
@@ -87,10 +87,10 @@ impl Tokens {
             separator: Color32::from_rgb(0x48, 0x48, 0x48),
             hover: Color32::from_rgb(0x40, 0x40, 0x40),
             pressed: Color32::from_rgb(0x4C, 0x4C, 0x4C),
-            selected: Color32::from_rgb(0x47, 0x47, 0x47),
-            accent: Color32::from_rgb(0xF2, 0x6B, 0x1D),
+            selected: Color32::from_rgb(0x2C, 0x3B, 0x57),
+            accent: Color32::from_rgb(0x5B, 0x8D, 0xEF),
             accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0xF5, 0x8A, 0x4B),
+            contextual: Color32::from_rgb(0x7F, 0xA6, 0xF2),
             selection: Color32::from_rgb(0xAA, 0xAA, 0xAA),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
@@ -143,9 +143,9 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.popup_shadow = egui::epaint::Shadow { offset: [0, 3], blur: 12, spread: 0, color: t.shadow };
     ctx.set_visuals(v);
     ctx.global_style_mut(|s| {
-        s.spacing.item_spacing = egui::vec2(6.0, 4.0);
-        s.spacing.button_padding = egui::vec2(6.0, 3.0);
-        s.spacing.interact_size.y = 22.0;
+        s.spacing.item_spacing = egui::vec2(8.0, 5.0);
+        s.spacing.button_padding = egui::vec2(8.0, 4.0);
+        s.spacing.interact_size.y = 24.0;
         s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(13.0));
         s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(13.0));
         s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(11.0));
