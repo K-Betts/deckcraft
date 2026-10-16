@@ -288,11 +288,11 @@ fn the_timer_is_a_small_card_not_a_bar_across_the_screen() {
     overlay(&mut h).add_timer();
     h.run_steps(3);
     let setting = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
-    assert!(setting.width() < 320.0 && setting.height() < 220.0, "setting: {setting:?}");
+    assert!(setting.width() < 420.0 && setting.height() < 340.0, "setting: {setting:?}");
     h.get_by_label("Start").click();
     h.run_steps(3);
     let running = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
-    assert!(running.width() < 320.0 && running.height() < 160.0, "running: {running:?}");
+    assert!(running.width() < 520.0 && running.height() < 260.0, "running: {running:?}");
 }
 
 #[test]
@@ -311,4 +311,51 @@ fn maths_tools_appear_in_teacher_mode_only_with_the_maths_pack_on() {
 #[test]
 fn palette_controls_are_at_least_a_fingertip_wide() {
     const { assert!(crate::teacher_overlay::TOUCH_TARGET >= 44.0) };
+}
+
+#[test]
+fn a_running_timer_is_digits_only_until_it_is_tapped_or_paused() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(3);
+    h.get_by_label("Start").click();
+    h.run_steps(3);
+    assert!(overlay(&mut h).timers[0].running);
+    h.event(Event::PointerMoved(pos2(1100.0, 700.0)));
+    h.run_steps(3);
+    assert!(h.query_by_label("Reset").is_none(), "no chrome while it counts");
+    assert!(h.query_by_label("Pause").is_none());
+    overlay(&mut h).timers[0].toggle();
+    h.run_steps(3);
+    assert!(h.query_by_label("Resume").is_some(), "paused brings the controls back");
+    assert!(h.query_by_label("Reset").is_some());
+}
+
+#[test]
+fn the_digits_turn_amber_then_red_and_grow_with_the_screen() {
+    use crate::teacher_overlay::{timer_digit_size, timer_ink};
+    let white = egui::Color32::WHITE;
+    assert_eq!(timer_ink(120.0, true), white);
+    assert_ne!(timer_ink(30.0, true), white);
+    assert_ne!(timer_ink(10.0, true), timer_ink(30.0, true), "red is not amber");
+    assert_eq!(timer_ink(5.0, false), white, "a paused timer keeps its calm colour");
+    assert!(timer_digit_size(1080.0) > timer_digit_size(540.0));
+    assert!(timer_digit_size(300.0) >= 72.0 && timer_digit_size(5000.0) <= 200.0);
+}
+
+#[test]
+fn timer_digits_stay_on_one_line_for_every_value() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(3);
+    h.get_by_label("Start").click();
+    h.run_steps(3);
+    let id = egui::Id::new(("teacher_timer", 1u64));
+    let tall = h.ctx.memory(|m| m.area_rect(id)).unwrap().height();
+    overlay(&mut h).timers[0].remaining = 48.0;
+    h.run_steps(3);
+    let later = h.ctx.memory(|m| m.area_rect(id)).unwrap().height();
+    assert_eq!(tall, later, "5:00 and 0:48 occupy the same box (the old row wrapped to two lines)");
 }

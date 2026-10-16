@@ -16,7 +16,6 @@ const TIMER_DEFAULT_SECS: f64 = 300.0;
 const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
 /// One-tap durations offered while setting a timer, in minutes.
 const TIMER_QUICK_MINS: [u32; 4] = [1, 2, 5, 10];
-const TIMER_CARD_W: f32 = 200.0;
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
 /// The smallest a control may be: a fingertip on a board or a tablet, not a mouse pointer.
@@ -1112,97 +1111,179 @@ fn palette_anchor(full: Rect, edge: Edge, along: f32) -> (Pos2, Align2) {
     }
 }
 
+/// A digit takes this fraction of the type size across, so the numbers never shift as they change.
+const DIGIT_CELL: f32 = 0.62;
+const COLON_CELL: f32 = 0.34;
+/// With this long left the digits turn amber, and red from `TIMER_RED_SECS`.
+const TIMER_AMBER_SECS: f64 = 30.0;
+const TIMER_RED_SECS: f64 = 10.0;
+
+fn cell_width(c: char, size: f32) -> f32 {
+    if c == ':' { size * COLON_CELL } else { size * DIGIT_CELL }
+}
+
+fn run_width(text: &str, size: f32) -> f32 {
+    text.chars().map(|c| cell_width(c, size)).sum()
+}
+
+/// Draw `text` with every character in a fixed-width cell, so `:` and `1` take their place and
+/// the line cannot wrap or wobble.
+fn paint_cells(p: &Painter, left_top: Pos2, text: &str, size: f32, colour: Color32) {
+    let mut x = left_top.x;
+    for c in text.chars() {
+        let w = cell_width(c, size);
+        p.text(pos2(x + w / 2.0, left_top.y + size / 2.0), Align2::CENTER_CENTER, c.to_string(), crate::theme::bold(size), colour);
+        x += w;
+    }
+}
+
+/// The digits' colour: white, then amber for the last half minute, then red for the last ten
+/// seconds, so a class sees time running out without reading the numbers.
+pub fn timer_ink(remaining: f64, running: bool) -> Color32 {
+    if !running {
+        Color32::WHITE
+    } else if remaining <= TIMER_RED_SECS {
+        Color32::from_rgb(255, 99, 99)
+    } else if remaining <= TIMER_AMBER_SECS {
+        Color32::from_rgb(255, 196, 64)
+    } else {
+        Color32::WHITE
+    }
+}
+
+/// How big the running digits are for a screen of this height: readable from the back of a room.
+pub fn timer_digit_size(screen_height: f32) -> f32 {
+    (screen_height * 0.16).clamp(72.0, 200.0)
+}
+
+/// A drawn cross: the ✕ glyph is missing from the bundled fonts and shows as an empty box.
+fn close_button(ui: &mut Ui) -> Response {
+    let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
+    let fill = if resp.hovered() { Color32::from_gray(96) } else { Color32::from_gray(72) };
+    ui.painter().rect_filled(r, CornerRadius::same(8), fill);
+    let (c, k) = (r.center(), 8.0);
+    let s = egui::Stroke::new(2.5, Color32::WHITE);
+    ui.painter().line_segment([c + vec2(-k, -k), c + vec2(k, k)], s);
+    ui.painter().line_segment([c + vec2(-k, k), c + vec2(k, -k)], s);
+    resp
+}
+
+fn timer_button(ui: &mut Ui, text: &str, fill: Color32, width: f32) -> Response {
+    ui.add(egui::Button::new(egui::RichText::new(text).size(18.0).strong().color(Color32::WHITE)).fill(fill).min_size(vec2(width, TOUCH_TARGET)))
+}
+
 /// A floating timer. Returns whether it was dismissed, and where it is.
+///
+/// Setting: `HH:MM:SS` with an arrow above and below each pair, 1/2/5/10 minute shortcuts and a
+/// big Start. Running: nearly only digits, as large as the screen allows; tap them to pause. The
+/// buttons recede while it runs and come back when the pointer is over it or it is paused.
 fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, now: f64) -> (bool, Rect) {
     let mut remove = false;
     let mut start = false;
     let flash = t.expired && (now * 2.0) as i64 % 2 == 0;
-    let fill = if flash { Color32::from_rgb(200, 30, 30) } else { Color32::from_rgba_unmultiplied(24, 24, 28, 235) };
-    let out = egui::Area::new(Id::new(("teacher_timer", t.id)))
+    let fill = if flash { Color32::from_rgb(200, 30, 30) } else { Color32::from_rgba_unmultiplied(20, 20, 24, 232) };
+    let setting = t.setup.is_some();
+    let size = if setting { 52.0 } else { timer_digit_size(full.height()) };
+    let id = Id::new(("teacher_timer", t.id));
+    let last_rect: Option<Rect> = ctx.data(|d| d.get_temp(id.with("rect")));
+    let hovered = last_rect.zip(ctx.pointer_hover_pos()).is_some_and(|(r, p)| r.expand(8.0).contains(p));
+    let digits_w = run_width("00:00:00", 52.0).max(run_width("00:00", size));
+    let out = egui::Area::new(id)
         .order(Order::Foreground)
-        .default_pos(pos2(full.min.x + 24.0, full.min.y + 24.0 + index as f32 * 150.0))
+        .default_pos(pos2(full.center().x - digits_w / 2.0 - 24.0, full.min.y + 24.0 + index as f32 * 90.0))
         .movable(true)
         .constrain(true)
         .show(ctx, |ui| {
-            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(12)).inner_margin(Margin::symmetric(12, 8)).show(ui, |ui| {
-                ui.spacing_mut().item_spacing = vec2(6.0, 2.0);
-                // An Area offers the whole screen, which `vertical_centered` would fill.
-                ui.set_width(TIMER_CARD_W);
-                ui.vertical_centered(|ui| {
-                    let setting = t.setup.is_some();
-                    let mut set = t.setup.unwrap_or_else(|| split_hms(t.remaining.ceil()));
-                    timer_digits(ui, &mut set, setting);
-                    if setting {
-                        ui.horizontal(|ui| {
-                            for mins in TIMER_QUICK_MINS {
-                                if ui.selectable_label(set == [0, mins, 0], format!("{mins}")).on_hover_text(format!("{mins} minute(s)")).clicked() {
-                                    set = [0, mins, 0];
-                                }
+            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(18)).inner_margin(Margin::symmetric(24, 14)).show(ui, |ui| {
+                ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
+                if setting {
+                    let mut set = t.setup.unwrap_or_default();
+                    timer_dials(ui, &mut set, size);
+                    ui.horizontal(|ui| {
+                        for mins in TIMER_QUICK_MINS {
+                            let on = set == [0, mins, 0];
+                            let fill = if on { Color32::from_rgb(52, 112, 214) } else { Color32::from_gray(72) };
+                            if timer_button(ui, &format!("{mins}"), fill, TOUCH_TARGET + 6.0).on_hover_text(format!("{mins} minute(s)")).clicked() {
+                                set = [0, mins, 0];
                             }
-                            ui.label(egui::RichText::new("min").small().color(Color32::from_gray(170)));
-                        });
-                        t.setup = Some(set);
+                        }
+                        ui.label(egui::RichText::new("min").size(16.0).color(Color32::from_gray(200)));
+                    });
+                    t.setup = Some(set);
+                    ui.horizontal(|ui| {
+                        let go = egui::Button::new(egui::RichText::new("Start").size(22.0).strong().color(Color32::WHITE))
+                            .fill(Color32::from_rgb(30, 140, 70))
+                            .min_size(vec2(150.0, 52.0));
+                        if ui.add_enabled(set != [0, 0, 0], go).clicked() {
+                            start = true;
+                        }
+                        if close_button(ui).on_hover_text("Dismiss").clicked() {
+                            remove = true;
+                        }
+                    });
+                } else {
+                    let text = t.label();
+                    let (r, resp) = ui.allocate_exact_size(vec2(run_width(&text, size), size * 1.15), Sense::click());
+                    paint_cells(ui.painter(), r.left_top(), &text, size, timer_ink(t.remaining, t.running));
+                    if resp.on_hover_text("Tap to pause or resume").clicked() {
+                        t.toggle();
+                    }
+                    if !t.running || hovered {
                         ui.horizontal(|ui| {
-                            let go = egui::Button::new(egui::RichText::new("Start").strong()).fill(Color32::from_rgb(30, 140, 70));
-                            if ui.add_enabled(set != [0, 0, 0], go).clicked() {
-                                start = true;
-                            }
-                            if ui.button("✕").on_hover_text("Dismiss").clicked() {
-                                remove = true;
-                            }
-                        });
-                    } else {
-                        ui.horizontal(|ui| {
-                            if ui.button(if t.running { "Pause" } else { "Start" }).clicked() {
+                            let (label, fill) =
+                                if t.running { ("Pause", Color32::from_gray(72)) } else { ("Resume", Color32::from_rgb(30, 140, 70)) };
+                            if timer_button(ui, label, fill, 110.0).clicked() {
                                 t.toggle();
                             }
-                            if ui.button("Reset").on_hover_text("Back to setting the time").clicked() {
+                            if timer_button(ui, "Reset", Color32::from_gray(72), 96.0).on_hover_text("Back to setting the time").clicked() {
                                 t.reset();
                                 t.begin_setup();
                             }
-                            if ui.button("✕").on_hover_text("Dismiss").clicked() {
+                            if close_button(ui).on_hover_text("Dismiss").clicked() {
                                 remove = true;
                             }
                         });
                     }
-                });
+                }
             });
         });
+    ctx.data_mut(|d| d.insert_temp(id.with("rect"), out.response.rect));
     if start {
         t.start_from_setup();
     }
     (remove, out.response.rect)
 }
 
-/// Large `HH:MM:SS`. While `setting`, each pair has an up arrow above and a down arrow below.
-fn timer_digits(ui: &mut Ui, set: &mut [u32; 3], setting: bool) {
+/// `HH:MM:SS` for setting: each pair has a large up arrow above and down arrow below.
+fn timer_dials(ui: &mut Ui, set: &mut [u32; 3], size: f32) {
+    let pair_w = size * DIGIT_CELL * 2.0;
     let arrow = |ui: &mut Ui, up: bool| -> bool {
-        let (r, resp) = ui.allocate_exact_size(vec2(46.0, 14.0), Sense::click());
-        let col = if resp.hovered() { Color32::WHITE } else { Color32::from_gray(150) };
-        let (c, s) = (r.center(), 5.0);
+        let (r, resp) = ui.allocate_exact_size(vec2(pair_w, 34.0), Sense::click());
+        let col = if resp.hovered() { Color32::WHITE } else { Color32::from_gray(190) };
+        let (c, s) = (r.center(), 8.0);
         let d = if up { -1.0 } else { 1.0 };
         ui.painter().add(Shape::line(
             vec![pos2(c.x - s, c.y - s * 0.5 * d), pos2(c.x, c.y + s * 0.5 * d), pos2(c.x + s, c.y - s * 0.5 * d)],
-            egui::Stroke::new(2.0, col),
+            egui::Stroke::new(3.0, col),
         ));
         resp.clicked()
     };
     ui.horizontal(|ui| {
-        ui.spacing_mut().item_spacing.x = 2.0;
-        for (i, v) in (*set).into_iter().enumerate() {
+        ui.spacing_mut().item_spacing.x = 0.0;
+        for i in 0..3 {
             if i > 0 {
-                ui.vertical(|ui| {
-                    ui.add_space(if setting { 14.0 } else { 0.0 });
-                    ui.label(egui::RichText::new(":").monospace().size(34.0).color(Color32::WHITE));
-                });
+                let (r, _) = ui.allocate_exact_size(vec2(size * COLON_CELL, 34.0 + size * 1.15 + 34.0), Sense::hover());
+                let y = r.min.y + 34.0;
+                paint_cells(ui.painter(), pos2(r.min.x, y), ":", size, Color32::WHITE);
             }
-            ui.vertical_centered(|ui| {
+            ui.vertical(|ui| {
                 ui.spacing_mut().item_spacing.y = 0.0;
-                if setting && arrow(ui, true) {
+                if arrow(ui, true) {
                     nudge(set, i, 1);
                 }
-                ui.label(egui::RichText::new(format!("{v:02}")).monospace().size(34.0).color(Color32::WHITE));
-                if setting && arrow(ui, false) {
+                let (r, _) = ui.allocate_exact_size(vec2(pair_w, size * 1.15), Sense::hover());
+                paint_cells(ui.painter(), r.left_top(), &format!("{:02}", set.get(i).copied().unwrap_or(0)), size, Color32::WHITE);
+                if arrow(ui, false) {
                     nudge(set, i, -1);
                 }
             });
