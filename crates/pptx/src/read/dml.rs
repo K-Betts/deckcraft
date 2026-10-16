@@ -607,13 +607,32 @@ pub fn paragraph(imp: &mut Imp, part: &Part, p: &El) -> Paragraph {
                     text.push_str(&t.text());
                 }
                 let omml = e.elements().map(|c| part.keep_inner(c)).collect::<String>();
-                para.runs.push(Run { text, props: RunProps::default(), kind: RunKind::Math { omml } });
+                // The plain text stands in for the equation where OMML is not understood (and in
+                // our own drawing), so it keeps the size, font and colour the equation was set in.
+                let props = math_text_props(imp, part, e);
+                para.runs.push(Run { text, props, kind: RunKind::Math { omml } });
             }
             "endParaRPr" => para.end_props = rpr(imp, part, e),
             _ => {}
         }
     }
     para
+}
+
+/// Formatting for the plain-text stand-in of an equation: the DrawingML run properties
+/// (`a:rPr`, not the math `m:rPr`) of the equation's runs. The first one that sets a size wins, as
+/// the first run is often a bare variable; otherwise the first one. Italic is dropped: the math
+/// italic letters are already italic characters.
+fn math_text_props(imp: &mut Imp, part: &Part, math: &El) -> RunProps {
+    let mut found = vec![];
+    math.find_all("rPr", &mut found);
+    found.retain(|r| r.prefix() != "m");
+    let Some(r) = found.iter().find(|r| r.has_attr("sz")).or(found.first()) else {
+        return RunProps::default();
+    };
+    let mut props = rpr(imp, part, r);
+    props.italic = None;
+    props
 }
 
 #[cfg(test)]

@@ -277,8 +277,10 @@ pub fn shape(w: &mut W, x: &mut Exp, o: &mut Out, cx: &mut Ctx, s: &Shape, depth
         ShapeKind::Shape => {
             if s.text.as_ref().is_some_and(dml::has_math) {
                 // Equations: OMML for readers that know it, plain text otherwise.
-                w.open("mc:AlternateContent", A::new().a("xmlns:mc", NS_MC));
-                w.open("mc:Choice", A::new().a("xmlns:a14", crate::opc::NS_A14).a("Requires", "a14"));
+                // `a14` is declared on the wrapper, where PowerPoint declares it, so the
+                // `Requires` prefix is in scope for the whole alternate.
+                w.open("mc:AlternateContent", A::new().a("xmlns:mc", NS_MC).a("xmlns:a14", crate::opc::NS_A14));
+                w.open("mc:Choice", A::new().a("Requires", "a14"));
                 let id = cx.id_for(s);
                 sp(w, x, o, id, s, true);
                 w.close("mc:Choice");
@@ -377,11 +379,20 @@ pub fn shape(w: &mut W, x: &mut Exp, o: &mut Out, cx: &mut Ctx, s: &Shape, depth
         }
         ShapeKind::Table(t) => {
             let id = cx.id_for(s);
-            frame_open(w, x, o, id, s);
-            w.open("a:graphicData", A::new().a("uri", "http://schemas.openxmlformats.org/drawingml/2006/table"));
-            table(w, x, o, t);
-            w.close("a:graphicData");
-            frame_close(w);
+            if t.rows.iter().flat_map(|r| &r.cells).any(|c| dml::has_math(&c.text)) {
+                // Equations in cells: OMML for readers that know it, plain text otherwise, as for
+                // equations in text boxes.
+                w.open("mc:AlternateContent", A::new().a("xmlns:mc", NS_MC).a("xmlns:a14", crate::opc::NS_A14));
+                w.open("mc:Choice", A::new().a("Requires", "a14"));
+                table_frame(w, x, o, id, s, t, true);
+                w.close("mc:Choice");
+                w.open0("mc:Fallback");
+                table_frame(w, x, o, id, s, t, false);
+                w.close("mc:Fallback");
+                w.close("mc:AlternateContent");
+            } else {
+                table_frame(w, x, o, id, s, t, false);
+            }
         }
         ShapeKind::Chart(c) => {
             let id = cx.id_for(s);
@@ -695,7 +706,15 @@ fn frame_close(w: &mut W) {
     w.close("p:graphicFrame");
 }
 
-fn table(w: &mut W, x: &mut Exp, o: &mut Out, t: &Table) {
+fn table_frame(w: &mut W, x: &mut Exp, o: &mut Out, id: u32, s: &Shape, t: &Table, math: bool) {
+    frame_open(w, x, o, id, s);
+    w.open("a:graphicData", A::new().a("uri", "http://schemas.openxmlformats.org/drawingml/2006/table"));
+    table(w, x, o, t, math);
+    w.close("a:graphicData");
+    frame_close(w);
+}
+
+fn table(w: &mut W, x: &mut Exp, o: &mut Out, t: &Table, math: bool) {
     let mut t = t.clone();
     t.normalize();
     w.open0("a:tbl");
@@ -734,7 +753,7 @@ fn table(w: &mut W, x: &mut Exp, o: &mut Out, t: &Table) {
                     .t("hMerge", c.h_merge)
                     .t("vMerge", c.v_merge),
             );
-            dml::text_body(w, x, o, "a:txBody", &c.text, false);
+            dml::text_body(w, x, o, "a:txBody", &c.text, math);
             let mut a = A::new();
             if let Some(m) = c.margins {
                 a = a.a("marL", emu(m[0])).a("marR", emu(m[1])).a("marT", emu(m[2])).a("marB", emu(m[3]));

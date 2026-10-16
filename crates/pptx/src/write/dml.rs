@@ -3,7 +3,7 @@
 use deckcraft_geom::{Xfrm, pt_to_emu};
 use deckcraft_model::style::{ColorBase, ColorRef, Compound, Dash, Effects, Fill, GradientShape, Line, LineCap, LineJoin, PictureFill, PictureMode};
 use deckcraft_model::text::{
-    Action, AutoFit, BodyProps, Bullet, Caps, Hyperlink, ListStyle, ParaProps, Paragraph, RunKind, RunProps, Spacing, Strike, TextBody,
+    Action, Align, AutoFit, BodyProps, Bullet, Caps, Hyperlink, ListStyle, ParaProps, Paragraph, Run, RunKind, RunProps, Spacing, Strike, TextBody,
 };
 
 use super::{Exp, Out};
@@ -746,11 +746,38 @@ fn run_text(w: &mut W, x: &mut Exp, o: &mut Out, text: &str, props: &RunProps) {
     }
 }
 
+/// Where PowerPoint puts a display equation (`m:oMathPara`): centred unless `m:jc` says otherwise.
+/// `None` for a paragraph that is not just one display equation.
+fn display_math_align(p: &Paragraph) -> Option<Align> {
+    let [Run { kind: RunKind::Math { omml }, .. }] = p.runs.as_slice() else {
+        return None;
+    };
+    if !omml.contains("oMathPara") {
+        return None;
+    }
+    let jc = omml.split("<m:jc").nth(1).and_then(|s| s.split("m:val=\"").nth(1)).and_then(|s| s.split('"').next());
+    Some(match jc {
+        Some("left") => Align::Left,
+        Some("right") => Align::Right,
+        _ => Align::Center,
+    })
+}
+
 pub fn paragraph(w: &mut W, x: &mut Exp, o: &mut Out, p: &Paragraph, math: bool, index: usize) {
     w.open0("a:p");
+    // Without OMML (the fallback branch) a display equation is plain text, so give it the
+    // alignment PowerPoint gives the equation, unless the paragraph already sets one.
+    let aligned;
+    let props = match display_math_align(p).filter(|_| !math && p.props.align.is_none()) {
+        Some(a) => {
+            aligned = ParaProps { align: Some(a), ..p.props.clone() };
+            &aligned
+        }
+        None => &p.props,
+    };
     let def = (p.def_props != RunProps::default()).then_some(&p.def_props);
-    if p.level > 0 || !is_default_ppr(&p.props) || def.is_some() {
-        ppr(w, x, o, "a:pPr", Some(p.level), &p.props, def);
+    if p.level > 0 || !is_default_ppr(props) || def.is_some() {
+        ppr(w, x, o, "a:pPr", Some(p.level), props, def);
     }
     for (ri, r) in p.runs.iter().enumerate() {
         match &r.kind {
