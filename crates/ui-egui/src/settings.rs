@@ -9,10 +9,11 @@ use std::path::Path;
 
 use deckcraft_engine::Prefs;
 
-use crate::UiState;
+use crate::{UiState, maths_tools::MathsToolsSettings};
 
 pub const UI_FILE: &str = "ui.json";
 pub const PREFS_FILE: &str = "prefs.json";
+pub const MATHS_TOOLS_FILE: &str = "maths-tools.json";
 /// Larger settings files are not settings.
 pub const MAX_BYTES: u64 = 4 << 20;
 
@@ -38,6 +39,11 @@ pub fn load(dir: &Path) -> (Option<UiState>, Option<Prefs>) {
     (read::<UiState>(&dir.join(UI_FILE)).map(UiState::sanitized), read::<Prefs>(&dir.join(PREFS_FILE)).map(Prefs::sanitized))
 }
 
+/// Load local maths-tool preferences, defaulting when the file is missing or unusable.
+pub fn load_maths_tools(dir: &Path) -> MathsToolsSettings {
+    read(&dir.join(MATHS_TOOLS_FILE)).unwrap_or_default()
+}
+
 /// Write `bytes` to `path` through a temporary file beside it.
 fn write_atomic(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
     let tmp = path.with_extension("json.tmp");
@@ -58,6 +64,18 @@ pub fn save(dir: &Path, ui: &UiState, prefs: &Prefs) {
         if let Err(e) = json.map_err(std::io::Error::other).and_then(|b| write_atomic(&path, &b)) {
             log::warn!("{}: {e}", path.display());
         }
+    }
+}
+
+/// Save maths-tool preferences outside the presentation, beside the other local settings.
+pub fn save_maths_tools(dir: &Path, settings: &MathsToolsSettings) {
+    if let Err(e) = std::fs::create_dir_all(dir) {
+        log::warn!("{}: {e}; maths tools settings not saved", dir.display());
+        return;
+    }
+    let path = dir.join(MATHS_TOOLS_FILE);
+    if let Err(e) = serde_json::to_vec_pretty(settings).map_err(std::io::Error::other).and_then(|b| write_atomic(&path, &b)) {
+        log::warn!("{}: {e}; maths tools settings not saved", path.display());
     }
 }
 
@@ -138,6 +156,17 @@ mod tests {
         // A settings folder that is a file: nothing saved, no panic.
         std::fs::write(d.join("blocked"), "file").unwrap();
         save(&d.join("blocked"), &ui, &prefs);
+    }
+
+    #[test]
+    fn maths_tools_settings_round_trip_in_the_local_config_file() {
+        let d = dir("maths-tools");
+        let settings =
+            MathsToolsSettings { enabled: [crate::maths_tools::MathsTool::Calculator, crate::maths_tools::MathsTool::Ruler].into_iter().collect() };
+        save_maths_tools(&d, &settings);
+        assert_eq!(load_maths_tools(&d), settings);
+        assert!(d.join(MATHS_TOOLS_FILE).is_file());
+        assert!(!d.join("presentation.pptx").exists());
     }
 
     /// The window opens with the worst `ui.json` values once they are sanitized; a zoom of

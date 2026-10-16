@@ -79,6 +79,7 @@ fn load_prefs(app: &mut SlideApp) {
     if let Some(prefs) = prefs {
         app.session.prefs = prefs;
     }
+    app.maths_tools = deckcraft_ui_egui::settings::load_maths_tools(&dir);
 }
 
 fn save_prefs(app: &SlideApp) {
@@ -87,6 +88,7 @@ fn save_prefs(app: &SlideApp) {
     }
     if let Some(dir) = config_dir() {
         deckcraft_ui_egui::settings::save(&dir, &app.ui, &app.session.prefs);
+        deckcraft_ui_egui::settings::save_maths_tools(&dir, &app.maths_tools);
     }
 }
 

@@ -16,6 +16,7 @@ pub mod doc_window;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
+pub mod maths_tools;
 pub mod media;
 pub mod menus;
 pub mod notes;
@@ -445,6 +446,8 @@ pub struct SlideApp {
     pub session: Session,
     pub services: Services,
     pub ui: UiState,
+    /// Maths tools available to the current local teacher account.
+    pub maths_tools: maths_tools::MathsToolsSettings,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -544,6 +547,7 @@ impl SlideApp {
             session,
             services,
             ui: UiState::default(),
+            maths_tools: maths_tools::MathsToolsSettings::default(),
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),

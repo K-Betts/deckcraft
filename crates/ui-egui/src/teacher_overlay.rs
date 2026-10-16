@@ -266,6 +266,8 @@ pub struct TeacherOverlay {
     palette_drag: Option<Pos2>,
     /// Whether the tool palette is out; the tab on the left edge toggles it.
     pub palette_open: bool,
+    /// The maths tools chooser and its transient canvas widgets.
+    pub maths_tools_panel: crate::maths_tools::MathsToolsPanel,
     palette_rect: Option<Rect>,
     last_tick: Option<f64>,
     hit_rects: Vec<Rect>,
@@ -296,6 +298,7 @@ impl Default for TeacherOverlay {
             along: 0.5,
             palette_drag: None,
             palette_open: false,
+            maths_tools_panel: crate::maths_tools::MathsToolsPanel::default(),
             palette_rect: None,
             last_tick: None,
             hit_rects: vec![],
@@ -393,7 +396,7 @@ impl TeacherOverlay {
 
     /// With a tool on, the wheel belongs to the overlay rather than turning the page.
     pub fn owns_wheel(&self) -> bool {
-        self.tool != Tool::Pointer
+        self.tool != Tool::Pointer || self.maths_tools_panel.has_visible_widgets()
     }
 
     /// Rub out ink within `radius` of `p`. In pixel mode only the ink under the eraser goes and
@@ -468,7 +471,7 @@ impl TeacherOverlay {
     }
 
     /// One frame: timers, pointer tools, painting and the palette. Returns what the palette asked for.
-    pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64) -> Vec<Action> {
+    pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64, settings: &mut crate::maths_tools::MathsToolsSettings) -> Vec<Action> {
         let ctx = ui.ctx().clone();
         let mut actions = vec![];
         let mut beep_now = false;
@@ -509,6 +512,7 @@ impl TeacherOverlay {
             }
         }
         self.timers.retain(|t| !dead.contains(&t.id));
+        self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
         if self.timers.iter().any(|t| t.running || t.expired) {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
         }
@@ -791,6 +795,9 @@ impl TeacherOverlay {
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
         }
+        if icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
+            self.maths_tools_panel.toggle();
+        }
         if icon_button(ui, false, "Previous", |p, r, c| paint_arrow_icon(p, r, c, false)).clicked() {
             actions.push(Action::Prev);
         }
@@ -890,6 +897,27 @@ fn paint_timer_icon(p: &Painter, r: Rect, c: Color32) {
     p.circle_stroke(ctr, r.width() * 0.5, s);
     p.line_segment([ctr, ctr + vec2(0.0, -r.width() * 0.32)], s);
     p.line_segment([ctr, ctr + vec2(r.width() * 0.25, 0.0)], s);
+}
+
+fn paint_math_tools_icon(p: &Painter, r: Rect, c: Color32) {
+    let s = egui::Stroke::new(1.8, c);
+    let left = r.left() + 2.0;
+    let right = r.right() - 2.0;
+    let top = r.top() + 3.0;
+    let base = r.bottom() - 3.0;
+    p.line_segment([pos2(left, top), pos2(right, top)], s);
+    p.line_segment([pos2(left, base), pos2(right, base)], s);
+    for i in 0..=10 {
+        let x = egui::lerp(left..=right, i as f32 / 10.0);
+        let height = if i % 5 == 0 {
+            7.0
+        } else if i % 2 == 0 {
+            4.0
+        } else {
+            2.0
+        };
+        p.line_segment([pos2(x, top), pos2(x, top + height)], s);
+    }
 }
 
 fn paint_arrow_icon(p: &Painter, r: Rect, c: Color32, right: bool) {
