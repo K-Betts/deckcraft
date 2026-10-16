@@ -18,6 +18,7 @@ const TIMER_DEFAULT_SECS: f64 = 300.0;
 const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
 /// One-tap durations offered while setting a timer, in minutes.
 const TIMER_QUICK_MINS: [u32; 4] = [1, 2, 5, 10];
+const TIMER_CARD_W: f32 = 200.0;
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
 
@@ -1058,6 +1059,8 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
         .show(ctx, |ui| {
             egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(12)).inner_margin(Margin::symmetric(12, 8)).show(ui, |ui| {
                 ui.spacing_mut().item_spacing = vec2(6.0, 2.0);
+                // An Area offers the whole screen, which `vertical_centered` would fill.
+                ui.set_width(TIMER_CARD_W);
                 ui.vertical_centered(|ui| {
                     let setting = t.setup.is_some();
                     let mut set = t.setup.unwrap_or_else(|| split_hms(t.remaining.ceil()));
