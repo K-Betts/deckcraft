@@ -34,6 +34,16 @@ committed.
 | W3. Live projection | Two-tab or two-device session: a presenter URL (editable) and a viewer URL (read-only live view). WebSockets or SSE to push slide changes; no server needed beyond static hosting + a tiny relay. | Kieran can open the editor on his iPad, project the viewer on a Mac via the same URL, and have changes appear in real time. |
 | W4. PWA / offline | Service worker caches the wasm bundle and the STIX font. App works without a network after first load; files are stored in the browser's origin (OPFS) or opened from local disk via the File System Access API. | Works fully offline on iPad and Mac. |
 
+## Platform targets
+
+| Platform | Build target | Status |
+| --- | --- | --- |
+| Mac | Native egui app | Local build and install: `packaging/macos/install-local.sh`. |
+| Windows | Native egui app (`x86_64-pc-windows-gnu`) | Build: `packaging/windows/build-windows.sh`. Cross-compiling from Mac requires the MinGW-w64 toolchain. |
+| Web | WASM (`wasm32-unknown-unknown`) | `packaging/web/package.sh`; browser startup verified, see W1 above. |
+| iOS | TBD | No build target or supported workflow yet. |
+| Chrome OS | Web build | Use the WASM build in Chrome. |
+
 ---
 
 ## Security posture (school context)
@@ -128,6 +138,8 @@ directly without duplication.
 | 2026-10-16 | Teacher Mode: eraser is now a pixel eraser by default (cuts a gap, shapes become strokes when bitten; a stroke-eraser option stays in the palette). Four fingers down at once acts as a palm wipe whatever tool is on (egui gives no contact size, so this is a finger-count approximation; untested on real touch hardware). Laser and spotlight removed from Teacher Mode. | `feature/teacher-eraser-palm` |
 | 2026-10-16 | Web build (W1) now starts in the browser: fixed two startup panics (process id and font access before the first frame), and presenter view is off by default there (one screen). Checked in headless Chromium over WebGL: the sample deck, ribbon, thumbnails and notes draw. No automated test covers these wasm-only crashes; touch, iPad and Safari unchecked. Local run: `packaging/web/package.sh`, then serve `dist/web`. | `feat/web-local-build` |
 | 2026-10-16 | Local Mac app: `packaging/macos/install-local.sh` builds the release app and installs it to /Applications (ad-hoc signed, runs on this Mac only; no more `cargo run`). Still named DeckCraft; a signed .dmg for other Macs needs an Apple Developer account. | `feat/local-mac-app` |
+| 2026-10-16 | `packaging/macos/update-local.sh` brings the installed app up to date with `main` in one command (`--check` only reports). It builds in a temporary checkout, so your own branch is untouched. This is a manual update, not automatic; in-app auto-update needs signed releases and a host (planned with the rebrand). | `feat/update-local-app` |
+| 2026-10-16 | Added a local Windows GNU-target build script and documented the supported build targets. | `feat/update-local-app` |
 | 2026-10-16 | Equations imported from PowerPoint: each equation of a display group is its own line (`y = 2x + 1` over `y = 3 − 2x`, not run together), and relations and binary operators are spaced as PowerPoint draws them. Checked on slides 10 and 12 of a real 54-slide deck against PowerPoint's own PDF export; shapes and pictures already matched. Fractions, powers and roots are not yet checked. | `fix/equation-spacing-and-breaks` |
 
 ## Known gaps
