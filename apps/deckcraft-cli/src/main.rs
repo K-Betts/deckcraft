@@ -51,6 +51,7 @@ fn main() -> ExitCode {
             ExitCode::SUCCESS
         }
         Some("info") => report(info(rest)),
+        Some("fidelity") => report(fidelity(rest)),
         Some("bench") => report(bench(rest)),
         Some("render") => report(render(rest)),
         Some("render-transition") => report(render_transition(rest)),
@@ -235,6 +236,45 @@ fn info(args: &[String]) -> Result<(), String> {
     let v = s.execute("document.inspect", &json!({})).map_err(|e| e.to_string())?;
     outln!("{}", serde_json::to_string_pretty(&v).unwrap_or_default());
     Ok(())
+}
+
+/// Compare two imported presentations by slide position and print a JSON difference report.
+fn fidelity(args: &[String]) -> Result<(), String> {
+    if args.first().is_some_and(|a| is_help(a)) {
+        outln!("{}", help_page("fidelity"));
+        return Ok(());
+    }
+    let positional: Vec<&str> = args.iter().filter(|a| !a.starts_with("--")).map(String::as_str).collect();
+    if args.iter().any(|a| a.starts_with("--")) {
+        return Err("fidelity: unexpected option".into());
+    }
+    let [original_path, saved_path] = positional.as_slice() else {
+        return Err("fidelity needs ORIGINAL and SAVED files".into());
+    };
+    let result = fidelity_report(original_path, saved_path)?;
+    let output = serde_json::to_string_pretty(&result).map_err(|e| format!("fidelity report: {e}"))?;
+    outln!("{output}");
+    Ok(())
+}
+
+fn fidelity_report(original_path: &str, saved_path: &str) -> Result<Value, String> {
+    let original_bytes = std::fs::read(original_path).map_err(|e| format!("{original_path}: {e}"))?;
+    let saved_bytes = std::fs::read(saved_path).map_err(|e| format!("{saved_path}: {e}"))?;
+    let original = deckcraft_engine::cmd::file::open_presentation(original_path, &original_bytes).map_err(|e| e.to_string())?;
+    let saved = deckcraft_engine::cmd::file::open_presentation(saved_path, &saved_bytes).map_err(|e| e.to_string())?;
+    let changes = deckcraft_engine::compare::diff(&original, &saved, true);
+    Ok(json!({
+        "version": 1,
+        "comparison": "slide-model",
+        "original": original_path,
+        "saved": saved_path,
+        "slides": {
+            "original": original.slides.len(),
+            "saved": saved.slides.len(),
+        },
+        "hasSlideChanges": original.slides.len() != saved.slides.len() || !changes.is_empty(),
+        "changes": changes,
+    }))
 }
 
 fn render(args: &[String]) -> Result<(), String> {
@@ -662,10 +702,45 @@ mod tests {
     #[test]
     fn other_subcommands_accept_help() {
         assert!(info(&args(&["--help"])).is_ok());
+        assert!(fidelity(&args(&["--help"])).is_ok());
         assert!(convert(&args(&["-h"])).is_ok());
         assert!(run(&args(&["--help"])).is_ok());
         assert!(describe(Some("--help")).is_ok());
         assert!(mcp(&args(&["-h"])).is_ok());
+    }
+
+    #[test]
+    fn fidelity_report_identifies_notes_changes() {
+        let dir = std::env::temp_dir().join(format!("deckcraft-cli-fidelity-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let original_path = dir.join("original.pptx");
+        let saved_path = dir.join("saved.pptx");
+        let mut s = Session::with_new();
+        let original = deckcraft_engine::cmd::file::save_bytes(&s.doc().unwrap().doc, "pptx").unwrap();
+        std::fs::write(&original_path, original).unwrap();
+        s.execute("slide.notes", &json!({"text": "Edited speaker notes"})).unwrap();
+        let saved = deckcraft_engine::cmd::file::save_bytes(&s.doc().unwrap().doc, "pptx").unwrap();
+        std::fs::write(&saved_path, saved).unwrap();
+
+        let report = fidelity_report(&original_path.to_string_lossy(), &saved_path.to_string_lossy()).unwrap();
+        assert_eq!(report["version"], 1);
+        assert_eq!(report["comparison"], "slide-model");
+        assert_eq!(report["hasSlideChanges"], true);
+        assert_eq!(report["slides"]["original"], 1);
+        assert_eq!(report["slides"]["saved"], 1);
+        let details = report["changes"][0]["details"].as_array().unwrap();
+        assert!(details.iter().any(|detail| detail == "notes"), "{details:?}");
+        assert!(details.iter().any(|detail| detail == "notes page"), "{details:?}");
+
+        std::fs::remove_file(original_path).unwrap();
+        std::fs::remove_file(saved_path).unwrap();
+        std::fs::remove_dir(dir).unwrap();
+    }
+
+    #[test]
+    fn fidelity_rejects_missing_inputs_and_unknown_options() {
+        assert!(fidelity(&[]).unwrap_err().contains("ORIGINAL and SAVED"));
+        assert!(fidelity(&args(&["one.pptx", "two.pptx", "--strict"])).unwrap_err().contains("unexpected option"));
     }
 
     #[test]

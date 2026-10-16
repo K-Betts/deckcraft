@@ -18,6 +18,19 @@ The shapes of one slide, with their ids, boxes and text, come from the slide.ins
   deckcraft-cli run --in deck.deckcraft --print --cmd 'slide.inspect={\"index\":0}'",
     },
     Subcommand {
+        name: "fidelity",
+        usage: "fidelity ORIGINAL SAVED",
+        summary: "compare two decks and print a machine-readable difference report",
+        details: "Opens ORIGINAL and SAVED (.deckcraft or .pptx) and compares their slides by position. Prints a
+JSON report to stdout with slide counts, a `hasSlideChanges` flag and slide-level changes, including changed
+text, formatting, notes, pictures, transitions and animations. The input files are never modified.
+`hasSlideChanges` is scoped to the fields checked by the slide-model comparison; it is not a claim
+that every part of the Office package is byte-for-byte equal. This does not compare rendered
+pixels; use `render` to inspect visual differences.
+
+  deckcraft-cli fidelity original.pptx saved.pptx > fidelity-report.json",
+    },
+    Subcommand {
         name: "render",
         usage: "render (FILE | --sample) [--slide N | --all] [--scale S] [--edit] OUT",
         summary: "draw slides as PNG images",
