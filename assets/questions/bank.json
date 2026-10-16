@@ -1,0 +1,203 @@
+{
+  "version": 1,
+  "note": "PLACEHOLDER starter questions written for this app so the Get Ready slide works. Replace this file with the curated bank export; format is documented in docs/design/ux-review.md.",
+  "questions": [
+    {
+      "id": "num-001",
+      "topic": "Number",
+      "subtopic": "Fractions",
+      "difficulty": 1,
+      "text": "Work out 3/4 + 1/8.",
+      "answer": "7/8",
+      "needsDiagram": false
+    },
+    {
+      "id": "num-002",
+      "topic": "Number",
+      "subtopic": "Percentages",
+      "difficulty": 1,
+      "text": "Find 15% of 80.",
+      "answer": "12",
+      "needsDiagram": false
+    },
+    {
+      "id": "num-003",
+      "topic": "Number",
+      "subtopic": "Order of operations",
+      "difficulty": 1,
+      "text": "Work out 6 + 4 × 3 − 2.",
+      "answer": "16",
+      "needsDiagram": false
+    },
+    {
+      "id": "num-004",
+      "topic": "Number",
+      "subtopic": "Rounding",
+      "difficulty": 2,
+      "text": "Round 4.0763 to 2 decimal places and to 2 significant figures.",
+      "answer": "4.08; 4.1",
+      "needsDiagram": false
+    },
+    {
+      "id": "num-005",
+      "topic": "Number",
+      "subtopic": "Standard form",
+      "difficulty": 3,
+      "text": "Write 0.000 46 in standard form.",
+      "answer": "4.6 × 10⁻⁴",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-001",
+      "topic": "Algebra",
+      "subtopic": "Expanding",
+      "difficulty": 1,
+      "text": "Expand 3(x + 4).",
+      "answer": "3x + 12",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-002",
+      "topic": "Algebra",
+      "subtopic": "Solving equations",
+      "difficulty": 1,
+      "text": "Solve 2x + 5 = 17.",
+      "answer": "x = 6",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-003",
+      "topic": "Algebra",
+      "subtopic": "Factorising",
+      "difficulty": 2,
+      "text": "Factorise x² + 7x + 12.",
+      "answer": "(x + 3)(x + 4)",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-004",
+      "topic": "Algebra",
+      "subtopic": "Substitution",
+      "difficulty": 1,
+      "text": "Work out 3a − b when a = 4 and b = 5.",
+      "answer": "7",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-005",
+      "topic": "Algebra",
+      "subtopic": "Simultaneous equations",
+      "difficulty": 3,
+      "text": "Solve x + y = 9 and x − y = 3.",
+      "answer": "x = 6, y = 3",
+      "needsDiagram": false
+    },
+    {
+      "id": "alg-006",
+      "topic": "Algebra",
+      "subtopic": "Sequences",
+      "difficulty": 2,
+      "text": "Find the nth term of 5, 8, 11, 14, …",
+      "answer": "3n + 2",
+      "needsDiagram": false
+    },
+    {
+      "id": "rat-001",
+      "topic": "Ratio",
+      "subtopic": "Sharing",
+      "difficulty": 1,
+      "text": "Share 40 in the ratio 3 : 5.",
+      "answer": "15 and 25",
+      "needsDiagram": false
+    },
+    {
+      "id": "rat-002",
+      "topic": "Ratio",
+      "subtopic": "Proportion",
+      "difficulty": 2,
+      "text": "5 pens cost £3.50. How much do 8 pens cost?",
+      "answer": "£5.60",
+      "needsDiagram": false
+    },
+    {
+      "id": "geo-001",
+      "topic": "Geometry",
+      "subtopic": "Area",
+      "difficulty": 1,
+      "text": "Find the area of a rectangle 7 cm by 6 cm.",
+      "answer": "42 cm²",
+      "needsDiagram": false
+    },
+    {
+      "id": "geo-002",
+      "topic": "Geometry",
+      "subtopic": "Angles",
+      "difficulty": 1,
+      "text": "Angles on a straight line add up to what? One angle is 65°. Find the other.",
+      "answer": "180°; 115°",
+      "needsDiagram": false
+    },
+    {
+      "id": "geo-003",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras",
+      "difficulty": 2,
+      "text": "A right-angled triangle has shorter sides 6 cm and 8 cm. Find the hypotenuse.",
+      "answer": "10 cm",
+      "needsDiagram": false
+    },
+    {
+      "id": "geo-004",
+      "topic": "Geometry",
+      "subtopic": "Circles",
+      "difficulty": 2,
+      "text": "Find the circumference of a circle of radius 5 cm, in terms of π.",
+      "answer": "10π cm",
+      "needsDiagram": false
+    },
+    {
+      "id": "sta-001",
+      "topic": "Statistics",
+      "subtopic": "Averages",
+      "difficulty": 1,
+      "text": "Find the mean of 3, 7, 8, 10 and 12.",
+      "answer": "8",
+      "needsDiagram": false
+    },
+    {
+      "id": "sta-002",
+      "topic": "Statistics",
+      "subtopic": "Probability",
+      "difficulty": 2,
+      "text": "A fair dice is rolled once. What is the probability of a prime number?",
+      "answer": "1/2",
+      "needsDiagram": false
+    },
+    {
+      "id": "sta-003",
+      "topic": "Statistics",
+      "subtopic": "Range",
+      "difficulty": 1,
+      "text": "Find the median and range of 4, 9, 2, 7, 5.",
+      "answer": "5; 7",
+      "needsDiagram": false
+    },
+    {
+      "id": "geo-901",
+      "topic": "Geometry",
+      "subtopic": "Angles in a triangle",
+      "difficulty": 1,
+      "text": "Find angle x in the triangle (angles 50° and 60° shown).",
+      "answer": "70°",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "triangle-angles",
+        "values": [
+          50,
+          60,
+          null
+        ]
+      }
+    }
+  ]
+}

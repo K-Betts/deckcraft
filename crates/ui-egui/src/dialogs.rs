@@ -57,6 +57,7 @@ fn title(id: &str) -> &'static str {
         "replaceFonts" => "Replace Font",
         "equation" => "Equation",
         "dateTime" => "Date and Time",
+        "getReady" => "Get Ready Starter",
         "spelling" => "Spelling",
         "pasteSpecial" => "Paste Special",
         "find" => "Find and Replace",
@@ -2199,6 +2200,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeColors" => theme_colors_dialog(app, ui, d),
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
+        "getReady" => get_ready_dialog(app, ui, d),
         _ => {
             ui.label(format!("“{}” is not available yet.", d.id));
             let (ok, cancel) = buttons(ui, "OK");
@@ -2535,6 +2537,87 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         return app.run("insert.dateTime", json!({"format": format, "update": update, "language": lang})).is_ok();
     }
     cancel
+}
+
+/// A seed that differs every time the teacher asks, so Reroll gives different questions. The
+/// engine command stays deterministic: the clock is read here, in the UI.
+fn fresh_seed() -> u64 {
+    std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(1)
+}
+
+/// Get Ready Starter: pick a topic and difficulty, insert four questions as ordinary text boxes
+/// (they save to PowerPoint like any others), or reroll the starter already on this slide.
+fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    ui.set_min_width(380.0);
+    let topics = deckcraft_engine::questions::starter().map(|b| b.topics()).unwrap_or_default();
+    let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
+    let topic = d.get("topic", "");
+    let difficulty = d.get("difficulty", "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Topic:"));
+        egui::ComboBox::from_id_salt("getready-topic")
+            .selected_text(if topic.is_empty() { "Any topic" } else { topic.as_str() })
+            .width(220.0)
+            .show_ui(ui, |ui| {
+                if ui.selectable_label(topic.is_empty(), "Any topic").clicked() {
+                    d.fields.insert("topic".into(), String::new());
+                }
+                for t in &topics {
+                    if ui.selectable_label(&topic == t, t).clicked() {
+                        d.fields.insert("topic".into(), t.clone());
+                    }
+                }
+            });
+    });
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Difficulty:"));
+        for (value, label) in [("", "Any"), ("1", "Secure"), ("2", "Core"), ("3", "Stretch")] {
+            if ui.selectable_label(difficulty == value, label).clicked() {
+                d.fields.insert("difficulty".into(), value.into());
+            }
+        }
+    });
+    ui.label(
+        egui::RichText::new("Questions are placeholders until your own bank is added. Answers go in the speaker notes.")
+            .size(11.0)
+            .color(Tokens::get(ui.ctx()).text_dim),
+    );
+    let mut params = json!({"seed": fresh_seed()});
+    if !topic.is_empty() {
+        params["topic"] = json!(topic);
+    }
+    if let Ok(n) = difficulty.parse::<u8>() {
+        params["difficulty"] = json!(n);
+    }
+    let mut go = false;
+    let mut reroll = false;
+    ui.add_space(8.0);
+    ui.horizontal(|ui| {
+        let t = Tokens::get(ui.ctx());
+        go = ui.add(egui::Button::new(egui::RichText::new("Insert").color(t.accent_text)).fill(t.accent).min_size(vec2(96.0, 32.0))).clicked();
+        if on_starter {
+            reroll = ui.add(egui::Button::new("Reroll this slide").min_size(vec2(140.0, 32.0))).clicked();
+        }
+        if ui.add(egui::Button::new("Cancel").min_size(vec2(80.0, 32.0))).clicked() {
+            go = false;
+            reroll = false;
+            d.fields.insert("cancel".into(), "1".into());
+        }
+    });
+    if reroll {
+        params["reroll"] = json!(true);
+    }
+    if go || reroll {
+        if let Err(e) = app.run("slide.getReady", params) {
+            d.fields.insert("error".into(), e);
+            return false;
+        }
+        return true;
+    }
+    if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
+        ui.colored_label(Tokens::get(ui.ctx()).accent, e);
+    }
+    d.fields.contains_key("cancel")
 }
 
 fn format_spacing(v: f64) -> String {
