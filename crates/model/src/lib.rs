@@ -39,6 +39,10 @@ pub(crate) fn yes() -> bool {
     true
 }
 
+fn is_false(value: &bool) -> bool {
+    !value
+}
+
 macro_rules! id_type {
     ($name:ident) => {
         #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
@@ -619,6 +623,9 @@ pub struct Slide {
     pub animations: Vec<Animation>,
     /// Speaker notes.
     pub notes: TextBody,
+    /// Whether the source file had a notes page, including pages with no speaker-note text.
+    #[serde(skip_serializing_if = "is_false")]
+    pub notes_page_present: bool,
     pub comments: Vec<Comment>,
     /// `clrMapOvr`: a colour map replacing the layout's or master's (`bg1`→`dk1`…); None follows
     /// the layout.
@@ -645,6 +652,7 @@ impl Default for Slide {
             transition: None,
             animations: vec![],
             notes: TextBody::default(),
+            notes_page_present: false,
             comments: vec![],
             color_map: None,
             tags: vec![],
