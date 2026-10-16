@@ -294,3 +294,21 @@ fn the_timer_is_a_small_card_not_a_bar_across_the_screen() {
     let running = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
     assert!(running.width() < 320.0 && running.height() < 160.0, "running: {running:?}");
 }
+
+#[test]
+fn maths_tools_appear_in_teacher_mode_only_with_the_maths_pack_on() {
+    let mut h = harness();
+    teacher(&mut h);
+    assert!(!overlay(&mut h).maths, "a fresh install is subject-neutral");
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    h.run_steps(2);
+    assert!(overlay(&mut h).maths);
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": false})).unwrap();
+    h.run_steps(2);
+    assert!(!overlay(&mut h).maths, "switching it off puts the palette back as it was");
+}
+
+#[test]
+fn palette_controls_are_at_least_a_fingertip_wide() {
+    const { assert!(crate::teacher_overlay::TOUCH_TARGET >= 44.0) };
+}

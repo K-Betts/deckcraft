@@ -19,6 +19,8 @@ const TIMER_QUICK_MINS: [u32; 4] = [1, 2, 5, 10];
 const TIMER_CARD_W: f32 = 200.0;
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
+/// The smallest a control may be: a fingertip on a board or a tablet, not a mouse pointer.
+pub const TOUCH_TARGET: f32 = 44.0;
 
 pub const PEN_COLOURS: [(&str, Color32); 5] = [
     ("Red", Color32::from_rgb(230, 40, 40)),
@@ -537,7 +539,7 @@ impl TeacherOverlay {
             .fixed_pos(pos2(x, full.center().y))
             .pivot(Align2::LEFT_CENTER)
             .show(ctx, |ui| {
-                let (r, resp) = ui.allocate_exact_size(vec2(22.0, 56.0), Sense::click());
+                let (r, resp) = ui.allocate_exact_size(vec2(34.0, 72.0), Sense::click());
                 let fill =
                     if resp.hovered() { Color32::from_rgba_unmultiplied(60, 60, 68, 240) } else { Color32::from_rgba_unmultiplied(24, 24, 28, 220) };
                 ui.painter().rect_filled(r, CornerRadius { nw: 0, sw: 0, ne: 12, se: 12 }, fill);
@@ -673,7 +675,7 @@ impl TeacherOverlay {
                         if has_options {
                             lay(ui, horizontal, |ui| this.options(ui));
                         }
-                        lay(ui, horizontal, |ui| this.main_row(ui, full, actions));
+                        lay(ui, horizontal, |ui| this.main_row(ui, full, horizontal, actions));
                     };
                     if horizontal {
                         ui.vertical_centered(|ui| body(self, ui));
@@ -689,11 +691,11 @@ impl TeacherOverlay {
 
     fn options(&mut self, ui: &mut Ui) {
         let swatch = |ui: &mut Ui, colour: Color32, on: bool, tip: &str| {
-            let (r, resp) = ui.allocate_exact_size(vec2(24.0, 24.0), Sense::click());
+            let (r, resp) = ui.allocate_exact_size(vec2(36.0, 36.0), Sense::click());
             let shown = Color32::from_rgb(colour.r(), colour.g(), colour.b());
-            ui.painter().circle_filled(r.center(), 9.0, shown);
+            ui.painter().circle_filled(r.center(), 13.0, shown);
             if on || resp.hovered() {
-                ui.painter().circle_stroke(r.center(), 11.5, egui::Stroke::new(2.0, Color32::WHITE));
+                ui.painter().circle_stroke(r.center(), 16.0, egui::Stroke::new(2.5, Color32::WHITE));
             }
             resp.on_hover_text(tip)
         };
@@ -705,7 +707,7 @@ impl TeacherOverlay {
                     }
                 }
                 for (name, w) in WIDTHS {
-                    let (r, resp) = ui.allocate_exact_size(vec2(26.0, 24.0), Sense::click());
+                    let (r, resp) = ui.allocate_exact_size(vec2(40.0, 36.0), Sense::click());
                     let col = if self.pen_width == w { Color32::WHITE } else { Color32::from_gray(150) };
                     ui.painter().line_segment(
                         [r.left_center() + vec2(4.0, 0.0), r.right_center() - vec2(4.0, 0.0)],
@@ -768,10 +770,13 @@ impl TeacherOverlay {
         }
     }
 
-    fn main_row(&mut self, ui: &mut Ui, full: Rect, actions: &mut Vec<Action>) {
-        let grip = ui.allocate_response(vec2(16.0, 34.0), Sense::drag()).on_hover_text("Drag to move the toolbar");
-        for dy in [-7.0, 0.0, 7.0] {
-            ui.painter().circle_filled(grip.rect.center() + vec2(0.0, dy), 1.8, Color32::from_gray(150));
+    fn main_row(&mut self, ui: &mut Ui, full: Rect, horizontal: bool, actions: &mut Vec<Action>) {
+        let grip = ui
+            .allocate_response(if horizontal { vec2(24.0, TOUCH_TARGET) } else { vec2(TOUCH_TARGET, 24.0) }, Sense::drag())
+            .on_hover_text("Drag to move the toolbar");
+        for d in [-7.0, 0.0, 7.0] {
+            let off = if horizontal { vec2(0.0, d) } else { vec2(d, 0.0) };
+            ui.painter().circle_filled(grip.rect.center() + off, 2.0, Color32::from_gray(150));
         }
         if grip.dragged() {
             self.palette_drag = grip.interact_pointer_pos();
@@ -782,37 +787,40 @@ impl TeacherOverlay {
             self.edge = nearest_edge(full, p);
             self.along = along_edge(full, self.edge, p);
         }
-        let tools: [(Tool, &str); 6] = [
-            (Tool::Pointer, "Pointer"),
-            (Tool::Pen, "Pen"),
-            (Tool::Highlighter, "Highlighter"),
-            (Tool::Shape, "Shapes"),
-            (Tool::Eraser, "Eraser"),
-            (Tool::Revealer, "Revealer (click again to put it away)"),
-        ];
-        for (tool, name) in tools {
-            if tool == Tool::Revealer && icon_button(ui, false, "Clear all marks", paint_clear_icon).clicked() {
-                self.clear();
+        let tool_btn = |this: &mut Self, ui: &mut Ui, tool: Tool, name: &str| {
+            if icon_button(ui, this.tool == tool, name, |p, r, c| paint_tool_icon(p, r, c, tool)).clicked() {
+                this.set_tool(tool);
             }
-            if icon_button(ui, self.tool == tool, name, |p, r, c| paint_tool_icon(p, r, c, tool)).clicked() {
-                self.set_tool(tool);
-            }
+        };
+        // Four groups, each a different job: look, mark up, rub out, and run the lesson.
+        tool_btn(self, ui, Tool::Pointer, "Pointer");
+        group_gap(ui, horizontal);
+        tool_btn(self, ui, Tool::Pen, "Pen");
+        tool_btn(self, ui, Tool::Highlighter, "Highlighter");
+        tool_btn(self, ui, Tool::Shape, "Shapes");
+        group_gap(ui, horizontal);
+        tool_btn(self, ui, Tool::Eraser, "Eraser");
+        if icon_button(ui, false, "Clear all marks", paint_clear_icon).clicked() {
+            self.clear();
         }
+        group_gap(ui, horizontal);
+        tool_btn(self, ui, Tool::Revealer, "Revealer (click again to put it away)");
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
         }
         if self.maths && icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
             self.maths_tools_panel.toggle();
         }
+        group_gap(ui, horizontal);
         if icon_button(ui, false, "Previous", |p, r, c| paint_arrow_icon(p, r, c, false)).clicked() {
             actions.push(Action::Prev);
         }
         if icon_button(ui, false, "Next", |p, r, c| paint_arrow_icon(p, r, c, true)).clicked() {
             actions.push(Action::Next);
         }
-        let (r, resp) = ui.allocate_exact_size(vec2(30.0, 30.0), Sense::click());
+        let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
         let fill = if resp.hovered() { Color32::from_rgb(240, 70, 70) } else { Color32::from_rgb(200, 40, 40) };
-        ui.painter().circle_filled(r.center(), 13.0, fill);
+        ui.painter().circle_filled(r.center(), 16.0, fill);
         let c = r.center();
         let s = egui::Stroke::new(2.2, Color32::WHITE);
         ui.painter().line_segment([c + vec2(-4.5, -4.5), c + vec2(4.5, 4.5)], s);
@@ -820,6 +828,17 @@ impl TeacherOverlay {
         if resp.on_hover_text("Exit Teacher Mode (Esc)").clicked() {
             actions.push(Action::Exit);
         }
+    }
+}
+
+/// A thin rule between groups of tools.
+fn group_gap(ui: &mut Ui, horizontal: bool) {
+    let (r, _) = ui.allocate_exact_size(if horizontal { vec2(9.0, TOUCH_TARGET) } else { vec2(TOUCH_TARGET, 9.0) }, Sense::hover());
+    let s = egui::Stroke::new(1.0, Color32::from_white_alpha(60));
+    if horizontal {
+        ui.painter().line_segment([r.center_top() + vec2(0.0, 8.0), r.center_bottom() - vec2(0.0, 8.0)], s);
+    } else {
+        ui.painter().line_segment([r.left_center() + vec2(8.0, 0.0), r.right_center() - vec2(8.0, 0.0)], s);
     }
 }
 
@@ -832,14 +851,14 @@ fn lay(ui: &mut Ui, horizontal: bool, add: impl FnOnce(&mut Ui)) {
 }
 
 fn icon_button(ui: &mut Ui, selected: bool, tip: &str, paint: impl FnOnce(&Painter, Rect, Color32)) -> Response {
-    let (r, resp) = ui.allocate_exact_size(vec2(34.0, 34.0), Sense::click());
+    let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
     let p = ui.painter();
     if selected {
         p.rect_filled(r, CornerRadius::same(10), Color32::from_rgb(52, 112, 214));
     } else if resp.hovered() {
         p.rect_filled(r, CornerRadius::same(10), Color32::from_white_alpha(28));
     }
-    paint(p, r.shrink(7.0), Color32::WHITE);
+    paint(p, r.shrink(11.0), Color32::WHITE);
     resp.on_hover_text(tip)
 }
 

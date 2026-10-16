@@ -87,6 +87,10 @@ impl Default for NumberLineRange {
     }
 }
 
+const TILES_PER_ROW: usize = 3;
+const TILE_W: f32 = 108.0;
+const TILE_H: f32 = 52.0;
+
 pub struct MathsToolsPanel {
     pub open: bool,
     open_tools: BTreeSet<MathsTool>,
@@ -242,30 +246,50 @@ impl MathsToolsPanel {
             let shown = egui::Window::new("Maths tools")
                 .id(Id::new("maths_tools_panel"))
                 .order(Order::Foreground)
-                .default_pos(canvas.min + vec2(24.0, 84.0))
-                .default_width(260.0)
+                // Beside the palette (docked on the left by default), clear of the timers.
+                .default_pos(canvas.min + vec2(88.0, canvas.height() * 0.25))
                 .resizable(false)
                 .open(&mut open)
                 .show(ctx, |ui| {
-                    ui.label("Enabled tools");
-                    ui.horizontal_wrapped(|ui| {
+                    ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
+                    let chosen: Vec<MathsTool> = MathsTool::ALL.into_iter().filter(|t| settings.is_enabled(*t)).collect();
+                    if chosen.is_empty() {
+                        ui.label("No tools chosen yet. Open “Choose tools” below.");
+                    }
+                    // Big tiles, three across: tap to bring a tool onto the slide, tap again to put it away.
+                    for row in chosen.chunks(TILES_PER_ROW) {
+                        ui.horizontal(|ui| {
+                            for tool in row {
+                                let on = self.open_tools.contains(tool);
+                                let (fill, ink) = if on {
+                                    (Color32::from_rgb(52, 112, 214), Color32::WHITE)
+                                } else {
+                                    (Color32::from_gray(233), Color32::from_gray(30))
+                                };
+                                let label = egui::RichText::new(tool.label()).size(15.0).strong().color(ink);
+                                let tile = egui::Button::new(label).min_size(vec2(TILE_W, TILE_H)).fill(fill).corner_radius(10).wrap();
+                                if ui.add(tile).clicked() {
+                                    if on {
+                                        self.open_tools.remove(tool);
+                                    } else {
+                                        self.open_tools.insert(*tool);
+                                    }
+                                }
+                            }
+                        });
+                    }
+                    ui.add_space(4.0);
+                    egui::CollapsingHeader::new("Choose tools").default_open(false).show(ui, |ui| {
                         for tool in MathsTool::ALL {
-                            if settings.is_enabled(tool) && ui.button(format!("Open {}", tool.label())).clicked() {
-                                self.open_tools.insert(tool);
+                            let mut enabled = settings.is_enabled(tool);
+                            if ui.checkbox(&mut enabled, tool.label()).changed() {
+                                settings.set_enabled(tool, enabled);
+                                if !enabled {
+                                    self.open_tools.remove(&tool);
+                                }
                             }
                         }
                     });
-                    ui.separator();
-                    ui.label("Choose which tools are available");
-                    for tool in MathsTool::ALL {
-                        let mut enabled = settings.is_enabled(tool);
-                        if ui.checkbox(&mut enabled, tool.label()).changed() {
-                            settings.set_enabled(tool, enabled);
-                            if !enabled {
-                                self.open_tools.remove(&tool);
-                            }
-                        }
-                    }
                 });
             self.open = open;
             if let Some(shown) = shown {
@@ -586,13 +610,13 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        assert!(harness.query_by_label("Open Compass").is_none());
+        assert_eq!(harness.query_all_by_label("Compass").count(), 0, "not chosen, so no tile");
+        harness.get_by_label("Choose tools").click();
+        harness.run_steps(2);
         harness.get_by_label("Compass").click();
         harness.run_steps(2);
-        assert!(harness.query_by_label("Open Compass").is_some());
-        harness.get_by_label("Ruler").click();
-        harness.run_steps(2);
-        assert!(harness.query_by_label("Open Ruler").is_none());
+        assert!(harness.state().settings.is_enabled(MathsTool::Compass));
+        assert_eq!(harness.query_all_by_label("Compass").count(), 2, "the checkbox and its new tile");
     }
 
     #[test]
@@ -606,9 +630,9 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        assert!(harness.query_by_label("Open Ruler").is_some());
-        assert!(harness.query_by_label("Open Number line").is_none());
-        assert!(harness.query_by_label("Open Compass").is_none());
+        assert!(harness.query_by_label("Ruler").is_some());
+        assert!(harness.query_by_label("Number line").is_none());
+        assert!(harness.query_by_label("Compass").is_none());
     }
 
     #[test]
@@ -624,7 +648,7 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        harness.get_by_label("Open Ruler").click();
+        harness.get_by_label("Ruler").click();
         harness.run_steps(2);
         assert!(harness.query_by_label("Centimetres").is_some());
     }
@@ -643,8 +667,7 @@ mod tests {
         );
         harness.run_steps(2);
         for tool in MathsTool::ALL {
-            let label = format!("Open {}", tool.label());
-            harness.get_by_label(&label).click();
+            harness.get_by_label(tool.label()).click();
             harness.run_steps(2);
         }
         assert!(harness.query_by_label_contains("coming soon").is_none());
