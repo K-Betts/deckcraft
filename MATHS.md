@@ -42,11 +42,39 @@ The app is local-first and is designed to handle no pupil data, so the attack su
 These are the practical things to keep in mind and fix over time.
 
 ### Already good
-- **No network calls from the app.** DeckCraft (and this fork) makes no HTTP requests during normal
-  use. Fonts load from disk; decks open and save locally.
+- **No network calls unless the teacher switches Google Drive on and signs in.** DeckCraft (and this
+  fork) makes no HTTP requests during normal use. Fonts load from disk; decks open and save
+  locally. The one exception is the optional Google Drive feature, below.
 - **No telemetry or analytics.** The app collects nothing.
 - **Sandboxed renderer.** The render and pptx crates never read or write files; only the
   CLI/UI layer touches the filesystem.
+
+### Google Drive (optional, off by default)
+Added in `crates/drive` (native builds only; never in the web build). What it talks to, when, and
+what it sends:
+
+| When | Host | What is sent |
+| --- | --- | --- |
+| Only after Preferences ▸ Use Google Drive is on **and** the teacher presses *Sign in with Google* | `accounts.google.com` (in the teacher's own browser) | The sign-in request: the OAuth client ID, a PKCE challenge, a random `state`, scope `drive.file`. The browser redirects back to a one-shot listener on `127.0.0.1` (random port, loopback only). |
+| Right after sign-in, and when a token is about to expire | `oauth2.googleapis.com` | The one-time code and PKCE verifier; later the refresh token. Signing out also sends a revoke request. |
+| Only when the teacher presses *Refresh list*, *Open* or *Save to Google Drive* | `www.googleapis.com` | File list / download requests; on save, the presentation as .pptx bytes plus its name. |
+
+- **Scope is `drive.file` only:** DeckCraft sees only files it saved to Drive (in a folder it creates
+  called "DeckCraft") or files the teacher explicitly picks. It cannot read the rest of a Drive.
+- **Signed out on a fresh install.** Nothing contacts Google, and the keychain is not read, until the
+  switch is on and the button pressed.
+- **Tokens are in the system keychain** (macOS Keychain), never in `prefs.json`. Signing out deletes
+  them and asks Google to revoke the grant.
+- **Nothing is uploaded silently.** Uploads happen only from the *Save to Google Drive* button. A
+  save to a file that changed in Drive since it was opened is refused (no overwriting a colleague).
+- **Client ID is configuration**, never compiled in: `DECKCRAFT_GOOGLE_CLIENT_ID` or
+  `~/.config/deckcraft/drive.toml`. Google's Desktop-app client also has a secret that cannot be
+  kept confidential in an installed app; it is optional config, protected by PKCE not secrecy.
+- **No pupil data** is read or sent by DeckCraft itself; what goes to Drive is the deck the teacher
+  chose to save, so the rule "no pupil data in decks" applies to what is uploaded.
+- Dependencies added for this: `ureq` (HTTPS client, rustls), `sha2` (PKCE), `base64`, `getrandom`,
+  `keyring` (system credential store). Run `cargo audit` before sharing a build (not run in the
+  overnight build: the tool is not installed on this Mac).
 
 ### To do before sharing builds
 - **Apple notarization.** Without a signed, notarised `.dmg`, macOS Gatekeeper blocks the app for

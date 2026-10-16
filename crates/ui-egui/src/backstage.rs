@@ -1367,7 +1367,10 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             });
             ui.add_space(16.0);
             heading(ui, "User Information");
-            dim(ui, "DeckCraft has no accounts: there is nothing to sign in to, and your presentations stay on your device.");
+            dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
+            if app.ui.drive_enabled {
+                crate::drive_ui::section(app, ui);
+            }
         });
         ui.add_space(40.0);
         ui.vertical(|ui| {

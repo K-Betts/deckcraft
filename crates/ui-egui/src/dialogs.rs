@@ -148,6 +148,7 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
         "uiScale": app.ui.ui_scale,
         "packs": app.ui.packs,
         "communityLinks": app.ui.show_community_links,
+        "drive": app.ui.drive_enabled,
         "prefs": serde_json::to_value(&app.session.prefs).unwrap_or(Value::Null),
     })
 }
@@ -162,6 +163,11 @@ fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
+    }
+    if let Some(on) = before.get("drive").and_then(Value::as_bool)
+        && on != app.ui.drive_enabled
+    {
+        let _ = app.run("app.drive", json!({"on": on}));
     }
     if let Some(on) = before.get("communityLinks").and_then(Value::as_bool) {
         app.ui.show_community_links = on;
@@ -2175,6 +2181,12 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     let _ = app.run("app.pack", json!({"id": pack.id, "on": on}));
                 }
                 ui.label(egui::RichText::new(pack.blurb).size(11.0).color(Tokens::get(ui.ctx()).text_faint));
+            }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Google Drive").font(theme::bold(13.0)));
+            let mut drive = app.ui.drive_enabled;
+            if ui.checkbox(&mut drive, "Use Google Drive (optional; you sign in on File > Account)").changed() {
+                let _ = app.run("app.drive", json!({"on": drive}));
             }
             ui.add_space(4.0);
             ui.label(egui::RichText::new("Links").font(theme::bold(13.0)));

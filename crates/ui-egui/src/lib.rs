@@ -13,6 +13,7 @@ pub mod control;
 pub mod credits;
 pub mod dialogs;
 pub mod doc_window;
+pub mod drive_ui;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
@@ -223,6 +224,8 @@ pub struct Services {
     pub clipboard_set_html: Option<Box<dyn FnMut(&str, &str) -> bool>>,
     /// Audio output for media playback (cpal on desktop); without one media plays silently.
     pub audio_out: Option<Box<dyn deckcraft_media::AudioOut>>,
+    /// Google Drive, when the host was built with it (desktop only). See [`drive_ui`].
+    pub drive: Option<Box<dyn drive_ui::DriveBackend>>,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -286,6 +289,8 @@ pub struct UiState {
     pub packs: std::collections::BTreeSet<String>,
     /// The Home screen's “teach a subject?” card was dismissed.
     pub subjects_hint_dismissed: bool,
+    /// Google Drive features are switched on (Preferences). Off by default: signed out, silent.
+    pub drive_enabled: bool,
 }
 
 impl Default for UiState {
@@ -322,6 +327,7 @@ impl Default for UiState {
             show_community_links: false,
             packs: Default::default(),
             subjects_hint_dismissed: false,
+            drive_enabled: false,
         }
     }
 }
@@ -403,6 +409,18 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
     ("app.dismissSubjectsHint", "Dismiss the Subjects Hint", None, "{}: stop showing the Home card that offers subject tools"),
+    ("app.drive", "Google Drive Features", None, "{on?: bool}: switch the optional Google Drive features on or off (off by default)"),
+    ("drive.signIn", "Sign in to Google Drive", None, "{}: opens your browser; asks only for files DeckCraft saves"),
+    ("drive.cancel", "Cancel Google Sign-in", None, "{}"),
+    ("drive.signOut", "Sign out of Google Drive", None, "{}: deletes the stored sign-in"),
+    ("drive.refresh", "Refresh Google Drive List", None, "{}"),
+    ("drive.open", "Open from Google Drive", None, "{id, name, modified}"),
+    (
+        "drive.save",
+        "Save to Google Drive",
+        None,
+        "{}: saves the open presentation as .pptx in your DeckCraft folder, or updates the Drive file it came from",
+    ),
     ("app.pack", "Switch Subject Pack", None, "{id: maths, on?: bool}: switch a subject pack on or off"),
     (
         "app.communityLinks",
@@ -468,6 +486,7 @@ pub struct SlideApp {
     pub ui: UiState,
     /// Maths tools available to the current local teacher account.
     pub maths_tools: maths_tools::MathsToolsSettings,
+    pub drive: drive_ui::DriveUi,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -568,6 +587,7 @@ impl SlideApp {
             services,
             ui: UiState::default(),
             maths_tools: maths_tools::MathsToolsSettings::default(),
+            drive: Default::default(),
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),
@@ -1011,6 +1031,13 @@ impl SlideApp {
                     self.ui.packs.remove(id);
                 }
             }
+            "app.drive" => {
+                self.ui.drive_enabled = self.flag(p, self.ui.drive_enabled);
+                if !self.ui.drive_enabled {
+                    self.drive = Default::default();
+                }
+            }
+            "drive.signIn" | "drive.cancel" | "drive.signOut" | "drive.refresh" | "drive.open" | "drive.save" => return self.run_drive(id, p),
             "app.dismissSubjectsHint" => self.ui.subjects_hint_dismissed = true,
             "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
@@ -1607,6 +1634,7 @@ impl SlideApp {
         self.last_time = now;
         self.drain_control(ctx);
         self.poll_opening();
+        self.poll_drive();
         if self.fonts_ready {
             self.drain_inbox();
         }
@@ -2089,6 +2117,8 @@ mod browsetheme_tests;
 mod cleanup_tests;
 #[cfg(test)]
 mod compare_tests;
+#[cfg(test)]
+mod drive_tests;
 #[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]
