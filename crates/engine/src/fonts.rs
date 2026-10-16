@@ -22,12 +22,19 @@ pub fn install_embedded_fonts(p: &Presentation) {
 }
 
 /// The font families the slides' text is drawn in (theme fonts resolved, bullet fonts included)
-/// that aren't installed or bundled, sorted, without duplicates (case-insensitive).
+/// that aren't installed or bundled **and have no installed open substitute**, sorted, without
+/// duplicates (case-insensitive).
+///
+/// Families like "Cambria Math" that have STIX Two Math (or another substitute) installed are
+/// excluded: DeckCraft draws them in the substitute, so showing a "not installed" warning would
+/// mislead the teacher.
 pub fn missing_fonts(p: &Presentation) -> Vec<String> {
     let db = FontDb::global();
     let mut out: Vec<String> = Vec::new();
     for family in used_fonts(p) {
-        if !db.has_family(&family) && !out.iter().any(|f| f.eq_ignore_ascii_case(&family)) {
+        let covered = db.has_family(&family)
+            || deckcraft_fonts::substitutes(&family).iter().any(|&sub| db.has_family(sub));
+        if !covered && !out.iter().any(|f| f.eq_ignore_ascii_case(&family)) {
             out.push(family);
         }
     }

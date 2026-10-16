@@ -1095,6 +1095,28 @@ fn opening_a_file_lists_the_fonts_it_uses_that_are_missing() {
 }
 
 #[test]
+fn a_font_with_an_installed_substitute_is_not_listed_as_missing() {
+    // "Cambria Math" is not installed on CI, but STIX Two Math (its substitute) is on macOS.
+    // On a machine where neither is installed the family shows as missing; here we only check that
+    // a family whose first substitute IS installed is silently covered.
+    let db = deckcraft_fonts::FontDb::global();
+    let subs = deckcraft_fonts::substitutes("Cambria Math");
+    // Find a substitute that is actually installed so the test is meaningful on this machine.
+    let Some(installed_sub) = subs.iter().find(|&&s| db.has_family(s)) else {
+        // No substitute is installed → nothing to assert; skip.
+        return;
+    };
+    // A deck that uses Cambria Math when an installed substitute exists should not toast.
+    let data = deck_in_font("Cambria Math");
+    let mut s = Session::with_new();
+    let r = s.execute("file.openBytes", &json!({"name": "math.pptx", "data": data})).unwrap();
+    assert!(
+        !r["missingFonts"].as_array().is_some_and(|v| v.iter().any(|f| f == "Cambria Math")),
+        "Cambria Math listed as missing even though {installed_sub} is installed: {:?}", r["missingFonts"]
+    );
+}
+
+#[test]
 fn an_embedded_face_is_used_when_the_machine_lacks_it() {
     let mut p = deckcraft_model::Presentation::default();
     let slide = std::sync::Arc::make_mut(&mut p.slides[0]);
