@@ -30,6 +30,7 @@ pub mod show;
 pub mod sorter;
 pub mod squiggles;
 pub mod status;
+pub mod teacher_overlay;
 pub mod textures;
 pub mod theme;
 pub mod thumbs;
@@ -259,6 +260,8 @@ pub struct UiState {
     pub sorter_zoom: f32,
     pub recent: Vec<String>,
     pub presenter_view: bool,
+    /// Teacher Mode keeps its marks and revealer when the slide changes.
+    pub keep_annotations_on_advance: bool,
     pub ui_scale: f32,
     /// Format Shape pane: tab (`fill`, `effects`, `size`, `picture`, `text`).
     pub format_tab: String,
@@ -297,6 +300,7 @@ impl Default for UiState {
             sorter_zoom: 1.0,
             recent: vec![],
             presenter_view: true,
+            keep_annotations_on_advance: false,
             ui_scale: 1.0,
             format_tab: "fill".into(),
             smartart_row: 0,
@@ -381,6 +385,8 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("view.newWindow", "New Window", None, "{on?: bool, slide?: index, delta?: int}"),
     ("show.start", "Slide Show", Some("F5"), "{from?: index, custom?: name}"),
     ("show.presenter", "Presenter View", None, "{on?: bool}"),
+    ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
+    ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
     ("animation.preview", "Preview Animations", None, "{on?: bool}"),
     ("app.home", "Home", None, "{on?}"),
@@ -956,6 +962,11 @@ impl SlideApp {
                 }
             }
             "show.presenter" => self.ui.presenter_view = self.flag(p, self.ui.presenter_view),
+            "show.teacher" => {
+                let on = self.flag(p, self.show.as_ref().is_some_and(|s| s.teacher.is_some()));
+                self.set_teacher_mode(on);
+            }
+            "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
                 self.show = None;
                 self.media.stop_owned(media::Owner::Show);
@@ -1073,6 +1084,18 @@ impl SlideApp {
         self.media.stop_owned(media::Owner::Editor);
         if let Some(d) = self.session.active() {
             self.show = Some(show::Show::new(&d.doc, from, reading, self.ui.presenter_view && !reading));
+        }
+    }
+
+    /// Teacher Mode is the slide show with the annotation overlay on top. Turning it on starts a
+    /// show at the current slide when none is running; turning it off puts the overlay away.
+    pub fn set_teacher_mode(&mut self, on: bool) {
+        if on && self.show.is_none() {
+            let from = self.session.active().map(|d| d.selection.slide).unwrap_or(0);
+            self.start_show(from, false);
+        }
+        if let Some(show) = self.show.as_mut() {
+            show.teacher = on.then(teacher_overlay::TeacherOverlay::new);
         }
     }
 
@@ -2026,6 +2049,8 @@ mod ime_tests;
 mod replacefonts_tests;
 #[cfg(test)]
 mod slide_size_tests;
+#[cfg(test)]
+mod teacher_tests;
 #[cfg(test)]
 mod texture_limit_tests;
 #[cfg(test)]

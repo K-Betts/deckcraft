@@ -2255,6 +2255,21 @@ fn view(app: &mut SlideApp, ui: &mut Ui) {
     });
     group(ui, |ui| {
         let has = app.session.active().is_some();
+        if big_button(ui, Icon::PlayFromCurrent, "Teacher\nMode", has)
+            .on_hover_text("Present with pen, revealer, spotlight and timers (Cmd+Shift+T)")
+            .clicked()
+        {
+            let _ = app.run("show.teacher", json!({"on": true}));
+        }
+        rows(ui, |ui| {
+            let mut keep = app.ui.keep_annotations_on_advance;
+            if ui.checkbox(&mut keep, "Keep marks on advance").changed() {
+                app.ui.keep_annotations_on_advance = keep;
+            }
+        });
+    });
+    group(ui, |ui| {
+        let has = app.session.active().is_some();
         let on = app.doc_window.is_some();
         let resp = big_button_ex(ui, Icon::NewWindow, "New\nWindow", has, false, on).0;
         if resp.on_hover_text("Open another window on this presentation").clicked() {

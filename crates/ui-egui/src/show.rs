@@ -42,6 +42,8 @@ pub struct Show {
     /// A dot that follows the pointer and leaves no ink (`Cmd/Ctrl+L`).
     laser: bool,
     strokes: Vec<Vec<Pos2>>,
+    /// Teacher Mode: the annotation overlay and its palette, when on.
+    pub teacher: Option<crate::teacher_overlay::TeacherOverlay>,
     /// Digits typed for Go to Slide, shown until Enter, Esc, or a short pause.
     goto: String,
     goto_at: f64,
@@ -193,6 +195,7 @@ impl Show {
             pen: false,
             laser: false,
             strokes: vec![],
+            teacher: None,
             goto: String::new(),
             goto_at: 0.0,
             started: false,
@@ -209,6 +212,16 @@ impl Show {
             media_clock: None,
             media_cues: vec![],
         }
+    }
+
+    #[cfg(test)]
+    pub(crate) fn pen_on(&self) -> bool {
+        self.pen
+    }
+
+    #[cfg(test)]
+    pub(crate) fn laser_on(&self) -> bool {
+        self.laser
     }
 
     /// Pen and laser are different pointers: turning one on puts the other away.
@@ -291,6 +304,9 @@ impl Show {
                 self.step_end = now;
                 self.media_clock = None;
                 self.strokes.clear();
+                if let Some(t) = self.teacher.as_mut() {
+                    t.on_slide_change();
+                }
                 if self.preview_only {
                     return false;
                 }
@@ -423,6 +439,10 @@ fn part_textures(ctx: &egui::Context, doc: &Presentation, from: Option<usize>, t
 /// Read the current viewport's show keys before its widgets can consume them. Both the
 /// audience window and Presenter View use this path, including animation steps and end-of-show.
 fn keyboard(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64) -> bool {
+    // Typing a timer's time must not turn pages or jump to a slide.
+    if show.teacher.as_ref().is_some_and(|t| t.editing_timer()) {
+        return true;
+    }
     let keys: Vec<(egui::Key, egui::Modifiers)> = ctx.input(|i| {
         i.events
             .iter()
@@ -475,8 +495,8 @@ fn keyboard(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64) 
                     show.ended = false;
                     actions.push(show.state.prev(doc));
                 }
-                P if m.command => show.set_pen(!show.pen),
-                L if m.command => show.set_laser(!show.laser),
+                P if m.command && show.teacher.is_none() => show.set_pen(!show.pen),
+                L if m.command && show.teacher.is_none() => show.set_laser(!show.laser),
                 A if m.command => show.arrow(),
                 Home => {
                     if let Some(i) = show.state.first_index(doc) {
@@ -490,7 +510,17 @@ fn keyboard(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64) 
                 }
                 B | Period => toggle_blank(show, Color32::BLACK),
                 W | Comma => toggle_blank(show, Color32::WHITE),
-                E => show.strokes.clear(),
+                E => {
+                    show.strokes.clear();
+                    if let Some(t) = show.teacher.as_mut() {
+                        t.clear();
+                    }
+                }
+                Z if m.command && !m.shift && show.teacher.is_some() => {
+                    if let Some(t) = show.teacher.as_mut() {
+                        t.undo();
+                    }
+                }
                 G if plain(m) => show.grid = true,
                 Z if plain(m) => show.zoom_key(),
                 T if plain(m) => show.timer.toggle(now),
@@ -548,12 +578,18 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     let avail = if show.reading { Rect::from_min_max(full.min, pos2(full.max.x, full.max.y - 34.0)) } else { full };
     let srect = fit(avail, &doc);
     let pointer = ctx.input(|i| i.pointer.interact_pos());
+    if let Some(t) = show.teacher.as_mut() {
+        t.keep_on_advance = app.ui.keep_annotations_on_advance;
+    }
+    let teacher_blocks = show.teacher.as_ref().is_some_and(|t| t.wants_pointer(pointer));
+    let teacher_wheel = show.teacher.as_ref().is_some_and(|t| t.owns_wheel());
     show.expire_goto(now);
     // The clock of the triggered animations runs before anything reacts to the pointer.
     show.tick_triggers(&doc, now);
     let on_slide = !show.grid
         && !show.pen
         && !show.laser
+        && !teacher_blocks
         && !show.ended
         && show.blank.is_none()
         && show.zoom.is_none()
@@ -597,7 +633,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
         }
     } else if clicked && show.zoom.is_some() && !show.pen && !show.reading_bar_hit(&ctx) {
         show.dismiss_zoom();
-    } else if clicked && !show.pen && !show.reading_bar_hit(&ctx) && !pointer_on_media_bar(&ctx, ui, &doc, &show) {
+    } else if clicked && !show.pen && !teacher_blocks && !show.reading_bar_hit(&ctx) && !pointer_on_media_bar(&ctx, ui, &doc, &show) {
         if show.ended {
             keep = false;
         } else if show.blank.is_some() {
@@ -619,6 +655,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     // A trackpad swipe (and the mouse wheel) turns the page. The pen is drawing, so a flick
     // there stays on the slide. Pinch zoom is not a show gesture.
     if !show.pen
+        && !teacher_wheel
         && let Some(next) = crate::canvas::page_flick(ctx.input(|i| i.smooth_scroll_delta))
         && now - show.last_swipe > 0.35
     {
@@ -938,6 +975,29 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
         painter.circle_filled(p, 16.0, Color32::from_rgba_unmultiplied(c.r(), c.g(), c.b(), 70));
         painter.circle_filled(p, 5.5, c);
     }
+    if !show.grid
+        && let Some(mut t) = show.teacher.take()
+    {
+        let asked = t.ui(ui, full, now);
+        show.teacher = Some(t);
+        for action in asked {
+            match action {
+                crate::teacher_overlay::Action::Prev => {
+                    show.ended = false;
+                    let a = show.state.prev(&doc);
+                    show.apply(a, &doc, now);
+                }
+                crate::teacher_overlay::Action::Next if show.ended => keep = false,
+                crate::teacher_overlay::Action::Next => {
+                    let a = show.state.next(&doc);
+                    if !show.apply(a, &doc, now) {
+                        keep = false;
+                    }
+                }
+                crate::teacher_overlay::Action::Exit => keep = false,
+            }
+        }
+    }
     if show.zoom_arm && !show.grid {
         painter.text(
             pos2(full.center().x, full.min.y + 36.0),
@@ -976,7 +1036,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
             let a = show.state.prev(&doc);
             show.apply(a, &doc, now);
         }
-    } else if !show.grid && (now - show.last_move < 2.5 || show.zoom_arm) {
+    } else if !show.grid && show.teacher.is_none() && (now - show.last_move < 2.5 || show.zoom_arm) {
         let bar = tool_bar_rect(full);
         painter.rect_filled(bar, CornerRadius::same(17), Color32::from_black_alpha(140));
         let mut child =
@@ -1432,7 +1492,7 @@ impl Show {
         // Clicks on the on-screen controls must not also advance.
         ctx.input(|i| i.pointer.interact_pos()).is_some_and(|p| {
             let r = ctx.content_rect();
-            (self.reading && p.y > r.max.y - 34.0) || (!self.reading && tool_bar_rect(r).expand(8.0).contains(p))
+            (self.reading && p.y > r.max.y - 34.0) || (!self.reading && self.teacher.is_none() && tool_bar_rect(r).expand(8.0).contains(p))
         })
     }
 }
