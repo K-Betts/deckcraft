@@ -28,13 +28,13 @@ committed.
 | 2026-10-16 | Equations keep size, font, colour and alignment in the text fallback; equations in table cells survive saving; a14 declared on the wrapper. Real 54-slide deck: all 275 equations, positions, text, pictures and animations unchanged after a save. Kieran: "much better" in PowerPoint. | PR #1 |
 | 2026-10-16 | Equation letters (x, y) draw in STIX Two Math, an open maths font, when Cambria Math isn't installed. | PR #3 |
 | 2026-10-16 | Display equations are placed by their own justification (centred by default), in the editor and in the saved text fallback, even when the paragraph says left. Fixes slides 3 and 6 in DeckCraft. | `fix/display-equation-alignment` |
+| 2026-10-16 | Empty notes pages survive PPTX and native-format round trips, including notes masters with slide-number placeholders. | `fix/empty-notes-page-round-trip` |
 | 2026-10-16 | PPTX notes import skips an empty body placeholder instead of dropping later speaker-note text; an engine open-save test verifies the text in the saved XML. | `fix/notes-page-round-trip` |
 
 ## Known gaps
 
 - DeckCraft's editor draws equations as their plain-text stand-in (no fractions, layout or
   stacking). Real equation drawing is phase 3.
-- A notes page with no speaker-note text (such as slide 53 of the test deck, which has only a slide-number placeholder) is not represented by the model and is omitted on save.
 - STIX Two Math isn't bundled yet: macOS has it installed, other systems may not. Bundling it means
   adding it to a fork of `storytold/craft-fonts` (fonts never live in this repo, AGENTS.md §1.3).
 - Not yet built or run on a Mac.

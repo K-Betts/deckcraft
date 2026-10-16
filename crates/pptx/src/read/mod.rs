@@ -518,6 +518,7 @@ pub fn import(bytes: &[u8]) -> Result<Presentation, PptxError> {
             && let Some(nd) = load(&pkg, &n.target)
         {
             let np = Part::new(&pkg, &n.target, &nd);
+            slide.notes_page_present = true;
             slide.notes = read_notes(&mut imp, &np, &nd.root);
         }
         // Comments. A modern part and the legacy part can describe the same threads (PowerPoint
