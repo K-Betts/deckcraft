@@ -719,8 +719,8 @@ pub fn paragraph_words(p: &deckcraft_model::Paragraph, default: &str) -> Vec<Wor
             if !part.is_empty()
                 && let Some(c) = chars.get(k)
             {
-                if p.runs.get(c.1).is_some_and(|r| r.props.no_proof == Some(true)) {
-                    // Marked "do not check spelling".
+                if p.runs.get(c.1).is_some_and(|r| r.props.no_proof == Some(true) || matches!(r.kind, deckcraft_model::text::RunKind::Math { .. })) {
+                    // Marked "do not check spelling", or an equation (x, y are variables, not words).
                 } else {
                     out.push(Word { start: k, end: k + n, text: part.to_string(), lang: lang_of(c.1), repeated: None });
                 }
@@ -882,6 +882,18 @@ SFX D Y 1\nSFX D 0 ed/S .\n";
         };
         let w: Vec<String> = paragraph_words(&p, "en-US").into_iter().map(|w| w.text).collect();
         assert_eq!(w, vec!["check", "done"]);
+    }
+
+    #[test]
+    fn equations_are_not_spell_checked() {
+        use deckcraft_model::text::RunKind;
+        use deckcraft_model::{Paragraph, Run};
+        // "x x" in an equation is neither a misspelling nor a repeated word.
+        let eq = Run { text: "\u{1D465}=3 x x".into(), props: Default::default(), kind: RunKind::Math { omml: "<m:oMath/>".into() } };
+        let p = Paragraph { runs: vec![Run::new("solve "), eq, Run::new(" here")], ..Default::default() };
+        let w: Vec<String> = paragraph_words(&p, "en-US").into_iter().map(|w| w.text).collect();
+        assert_eq!(w, vec!["solve", "here"]);
+        assert!(repeated(&p, "en-US").is_empty());
     }
 
     #[test]
