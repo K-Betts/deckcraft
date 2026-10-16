@@ -462,7 +462,7 @@ fn text_and_formatting_round_trip() {
     let eq = by_name(&q.slides[5], "Equation");
     let run = &eq.text.as_ref().expect("text").paragraphs[0].runs[0];
     assert!(matches!(&run.kind, RunKind::Math { omml } if omml.contains("oMath")), "{run:?}");
-    assert_eq!(run.text, "x=1");
+    assert_eq!(run.text, "x = 1");
 }
 
 #[test]

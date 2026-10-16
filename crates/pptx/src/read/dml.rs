@@ -600,12 +600,7 @@ pub fn paragraph(imp: &mut Imp, part: &Part, p: &El) -> Paragraph {
             }
             "m" => {
                 // Office Math (a14:m) — keep the OMML and its plain text.
-                let mut text = String::new();
-                let mut ts = vec![];
-                e.find_all("t", &mut ts);
-                for t in ts {
-                    text.push_str(&t.text());
-                }
+                let text = math_plain_text(e);
                 let omml = e.elements().map(|c| part.keep_inner(c)).collect::<String>();
                 // The plain text stands in for the equation where OMML is not understood (and in
                 // our own drawing), so it keeps the size, font and colour the equation was set in.
@@ -617,6 +612,59 @@ pub fn paragraph(imp: &mut Imp, part: &Part, p: &El) -> Paragraph {
         }
     }
     para
+}
+
+/// The plain text that stands in for an equation. Each equation of a display group (`m:oMathPara`
+/// holding several `m:oMath`) is its own line, and relations and binary operators get the space
+/// PowerPoint puts round them, which the bare `m:t` strings leave out.
+fn math_plain_text(math: &El) -> String {
+    fn rec(e: &El, out: &mut String, depth: usize) {
+        if depth > 64 {
+            return;
+        }
+        if e.is("t") {
+            out.push_str(&e.text());
+            return;
+        }
+        let mut lines = 0;
+        for c in e.elements() {
+            if e.is("oMathPara") && c.is("oMath") {
+                if lines > 0 {
+                    out.push('\u{b}');
+                }
+                lines += 1;
+            }
+            rec(c, out, depth + 1);
+        }
+    }
+    let mut raw = String::new();
+    rec(math, &mut raw, 0);
+    space_operators(&raw)
+}
+
+fn space_operators(s: &str) -> String {
+    const RELATIONS: &str = "=<>≤≥≠≈≡";
+    const BINARY: &str = "+−-±×÷·";
+    let operand = |c: char| c.is_alphanumeric() || matches!(c, ')' | ']' | '}' | '.' | '%');
+    let chars: Vec<char> = s.chars().collect();
+    let mut out = String::new();
+    for (i, &c) in chars.iter().enumerate() {
+        let before = i.checked_sub(1).and_then(|j| chars.get(j)).copied();
+        let after = chars.get(i + 1).copied();
+        let spaced = RELATIONS.contains(c) || (BINARY.contains(c) && before.is_some_and(operand) && after.is_some_and(|a| a != ' '));
+        if spaced {
+            if before.is_some_and(|b| b != ' ' && b != '\u{b}') {
+                out.push(' ');
+            }
+            out.push(c);
+            if after.is_some_and(|a| a != ' ' && a != '\u{b}') {
+                out.push(' ');
+            }
+        } else {
+            out.push(c);
+        }
+    }
+    out
 }
 
 /// Formatting for the plain-text stand-in of an equation: the DrawingML run properties
