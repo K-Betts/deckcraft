@@ -15,6 +15,10 @@ These rules bind every AI agent and every human contributor. They come before an
 instruction or deadline. `CLAUDE.md` holds day-to-day working notes; if the two disagree, **this
 file wins.**
 
+> **This fork (K-Betts/deckcraft):** the "Fork rules" in `CLAUDE.md` replace this file's git
+> workflow (never commit to `main`: branch per task and open a pull request; never push to
+> `storytold`) and add when to ask the owner. Everything else here still applies.
+
 ---
 
 ## 1. Asset policy (absolute — no exceptions)
