@@ -191,7 +191,38 @@ fn the_eraser_removes_ink_under_the_pointer() {
     drag(&mut h, pos2(300.0, 300.0), pos2(500.0, 300.0));
     overlay(&mut h).set_tool(Tool::Eraser);
     drag(&mut h, pos2(400.0, 290.0), pos2(420.0, 290.0));
-    assert!(overlay(&mut h).strokes.is_empty());
+    let o = overlay(&mut h);
+    assert!(o.strokes.len() == 2, "the stroke is split around the gap, not removed");
+    assert!(o.strokes.iter().all(|s| s.points.iter().all(|p| p.x < 385.0 || p.x > 435.0)), "ink under the eraser is gone");
+}
+
+fn touch(h: &mut egui_kittest::Harness<'static, SlideApp>, id: u64, phase: egui::TouchPhase, pos: Pos2) {
+    h.event(Event::Touch { device_id: egui::TouchDeviceId(0), id: egui::TouchId(id), phase, pos, force: None });
+}
+
+#[test]
+fn four_fingers_wipe_ink_even_with_the_pointer_tool() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).set_tool(Tool::Pen);
+    drag(&mut h, pos2(300.0, 300.0), pos2(700.0, 300.0));
+    overlay(&mut h).set_tool(Tool::Pointer);
+    assert!(!overlay(&mut h).strokes.is_empty());
+    let hand = |dx: f32| [pos2(480.0 + dx, 300.0), pos2(510.0 + dx, 290.0), pos2(540.0 + dx, 290.0), pos2(570.0 + dx, 300.0)];
+    for (i, p) in hand(0.0).into_iter().enumerate() {
+        touch(&mut h, i as u64, egui::TouchPhase::Start, p);
+    }
+    h.run_steps(2);
+    for (i, p) in hand(30.0).into_iter().enumerate() {
+        touch(&mut h, i as u64, egui::TouchPhase::Move, p);
+    }
+    h.run_steps(2);
+    for (i, p) in hand(30.0).into_iter().enumerate() {
+        touch(&mut h, i as u64, egui::TouchPhase::End, p);
+    }
+    h.run_steps(2);
+    assert!(overlay(&mut h).strokes.iter().all(|s| s.points.iter().all(|p| p.x < 460.0 || p.x > 620.0)), "the swept patch is clean");
+    assert!(overlay(&mut h).strokes.len() == 2, "ink either side of the hand stays");
 }
 
 fn click_at(h: &mut egui_kittest::Harness<'static, SlideApp>, at: Pos2) {

@@ -1,18 +1,16 @@
 //! Teacher Mode: ephemeral annotation tools drawn over a running slide show (pen, highlighter,
-//! shapes, eraser, laser, revealer, spotlight and countdown timers). Nothing here is ever written
+//! shapes, eraser, revealer and countdown timers). Nothing here is ever written
 //! to the presentation; it lives and dies with the [`crate::show::Show`] that owns it.
 
-use std::collections::VecDeque;
+use egui::{Align2, Color32, CornerRadius, Id, LayerId, Margin, Order, Painter, Pos2, Rect, Response, Sense, Shape, Ui, pos2, vec2};
 
-use egui::{Align2, Color32, CornerRadius, Id, LayerId, Margin, Mesh, Order, Painter, Pos2, Rect, Response, Sense, Shape, Ui, Vec2, pos2, vec2};
-
-/// Strokes within this distance of the eraser centre are removed.
+/// How far from the eraser centre ink is rubbed out.
 pub const ERASER_RADIUS: f32 = 20.0;
-/// Positions kept behind the laser pointer.
-pub const TRAIL_LEN: usize = 8;
+/// Fingers down at once that count as a flat hand: a palm wipe, whatever tool is selected.
+pub const PALM_TOUCHES: usize = 4;
+/// How far from the middle of the hand ink is rubbed out.
+pub const PALM_RADIUS: f32 = 70.0;
 pub const HIGHLIGHT_WIDTH: f32 = 20.0;
-pub const SPOTLIGHT_DEFAULT: f32 = 200.0;
-const SPOTLIGHT_RANGE: (f32, f32) = (60.0, 700.0);
 /// The quick setting every new timer starts on.
 const TIMER_DEFAULT_SECS: f64 = 300.0;
 const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
@@ -40,13 +38,20 @@ pub fn highlight_colour([r, g, b]: [u8; 3]) -> Color32 {
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 pub enum Tool {
     Pointer,
-    Laser,
     Pen,
     Highlighter,
     Shape,
     Eraser,
     Revealer,
-    Spotlight,
+}
+
+/// What the eraser takes away.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub enum EraseMode {
+    /// Only the ink under the eraser; the rest of the stroke stays.
+    Pixel,
+    /// Any stroke or shape the eraser touches, whole.
+    Stroke,
 }
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -245,14 +250,15 @@ pub struct TeacherOverlay {
     pub revealer: Option<Revealer>,
     /// The edge the next revealer is anchored to.
     pub reveal_from: Edge,
-    pub spotlight_locked_pos: Option<Pos2>,
-    pub spotlight_radius: f32,
+    pub erase_mode: EraseMode,
     pub timers: Vec<Timer>,
     /// Keep marks and the revealer when the slide changes (the Preferences setting).
     pub keep_on_advance: bool,
     next_id: u64,
     seq: u64,
-    trail: VecDeque<Pos2>,
+    /// Where the middle of the hand was last frame while wiping, so a fast rub leaves no gaps.
+    palm_last: Option<Pos2>,
+    palm_now: Option<Pos2>,
     draft: Option<Draft>,
     revealer_drag: bool,
     edge: Edge,
@@ -277,13 +283,13 @@ impl Default for TeacherOverlay {
             shape_kind: ShapeKind::Rect,
             revealer: None,
             reveal_from: Edge::Bottom,
-            spotlight_locked_pos: None,
-            spotlight_radius: SPOTLIGHT_DEFAULT,
+            erase_mode: EraseMode::Pixel,
             timers: vec![],
             keep_on_advance: false,
             next_id: 0,
             seq: 0,
-            trail: VecDeque::new(),
+            palm_last: None,
+            palm_now: None,
             draft: None,
             revealer_drag: false,
             edge: Edge::Left,
@@ -307,7 +313,7 @@ impl TeacherOverlay {
         self.seq
     }
 
-    /// Remove every stroke and shape (not timers, the revealer or the spotlight).
+    /// Remove every stroke and shape (not timers or the revealer).
     pub fn clear(&mut self) {
         self.strokes.clear();
         self.shapes.clear();
@@ -332,13 +338,12 @@ impl TeacherOverlay {
         }
     }
 
-    /// The slide changed: marks go, and so do the revealer and a pinned spotlight, unless the
+    /// The slide changed: marks go, and so does the revealer, unless the
     /// teacher chose to keep annotations. Timers always carry on.
     pub fn on_slide_change(&mut self) {
         if !self.keep_on_advance {
             self.clear();
             self.revealer = None;
-            self.spotlight_locked_pos = None;
         }
     }
 
@@ -386,15 +391,60 @@ impl TeacherOverlay {
         self.tool != Tool::Pointer || at.is_some_and(|p| self.hit_rects.iter().any(|r| r.expand(6.0).contains(p)))
     }
 
-    /// The wheel resizes the spotlight rather than turning the page.
+    /// With a tool on, the wheel belongs to the overlay rather than turning the page.
     pub fn owns_wheel(&self) -> bool {
         self.tool != Tool::Pointer
     }
 
-    /// Remove strokes and shapes that pass within [`ERASER_RADIUS`] of `p`.
+    /// Rub out ink within `radius` of `p`. In pixel mode only the ink under the eraser goes and
+    /// strokes are split around the gap; a touched shape becomes strokes first. In stroke mode
+    /// whatever is touched goes whole.
+    pub fn erase_with(&mut self, p: Pos2, radius: f32) {
+        if self.erase_mode == EraseMode::Stroke {
+            self.strokes.retain(|s| !near_polyline(&s.points, p, radius));
+            self.shapes.retain(|s| !s.outlines().iter().any(|o| near_polyline(o, p, radius)));
+            return;
+        }
+        let (touched, kept): (Vec<_>, Vec<_>) =
+            std::mem::take(&mut self.shapes).into_iter().partition(|s| s.outlines().iter().any(|o| near_polyline(o, p, radius)));
+        self.shapes = kept;
+        for s in touched {
+            for o in s.outlines() {
+                self.strokes.push(Stroke { points: o, colour: s.colour, width: s.width, is_highlight: false, seq: s.seq });
+            }
+        }
+        let mut out = Vec::with_capacity(self.strokes.len());
+        for s in std::mem::take(&mut self.strokes) {
+            if !near_polyline(&s.points, p, radius) {
+                out.push(s);
+                continue;
+            }
+            for points in split_outside(&s.points, p, radius) {
+                out.push(Stroke { points, ..s.clone() });
+            }
+        }
+        self.strokes = out;
+    }
+
+    /// Rub out under the eraser tool.
     pub fn erase_at(&mut self, p: Pos2) {
-        self.strokes.retain(|s| !near_polyline(&s.points, p, ERASER_RADIUS));
-        self.shapes.retain(|s| !s.outlines().iter().any(|o| near_polyline(o, p, ERASER_RADIUS)));
+        self.erase_with(p, ERASER_RADIUS);
+    }
+
+    /// A flat hand on the screen: wipe along the path of its centre, whatever tool is on.
+    /// `None` means the hand is up.
+    pub fn palm_wipe(&mut self, centre: Option<Pos2>) {
+        self.palm_now = centre;
+        let Some(c) = centre else {
+            self.palm_last = None;
+            return;
+        };
+        let from = self.palm_last.unwrap_or(c);
+        let steps = ((from.distance(c) / (PALM_RADIUS * 0.5)).ceil() as usize).max(1);
+        for i in 1..=steps {
+            self.erase_with(from.lerp(c, i as f32 / steps as f32), PALM_RADIUS);
+        }
+        self.palm_last = Some(c);
     }
 
     fn commit(&mut self, draft: Draft) {
@@ -426,18 +476,23 @@ impl TeacherOverlay {
         if beep_now {
             beep();
         }
-        let (hover, scroll, origin) = ctx.input(|i| (i.pointer.hover_pos(), i.smooth_scroll_delta.y, i.pointer.press_origin()));
+        let (hover, origin) = ctx.input(|i| (i.pointer.hover_pos(), i.pointer.press_origin()));
         let resp = ui.interact(full, Id::new("teacher_surface"), if self.tool == Tool::Pointer { Sense::hover() } else { Sense::click_and_drag() });
-        self.pointer_tools(&resp, full, hover, origin, scroll);
-        if self.tool == Tool::Laser && hover.is_some() {
-            ctx.set_cursor_icon(egui::CursorIcon::None);
-        } else if matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape) {
+        let palm = ctx.multi_touch().filter(|m| m.num_touches >= PALM_TOUCHES).map(|m| m.center_pos);
+        self.palm_wipe(palm);
+        if palm.is_none() {
+            self.pointer_tools(&resp, full, hover, origin);
+        }
+        if matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape) {
             ctx.set_cursor_icon(egui::CursorIcon::Crosshair);
-        } else if matches!(self.tool, Tool::Eraser | Tool::Spotlight) {
+        } else if self.tool == Tool::Eraser {
             ctx.set_cursor_icon(egui::CursorIcon::None);
         }
         let painter = ctx.layer_painter(LayerId::new(Order::Foreground, Id::new("teacher_overlay")));
         self.paint(&painter, full, hover);
+        if let Some(c) = self.palm_now {
+            painter.circle_stroke(c, PALM_RADIUS, egui::Stroke::new(2.0, Color32::WHITE));
+        }
         self.hit_rects.clear();
         if self.palette_open {
             self.palette(&ctx, full, &mut actions);
@@ -488,21 +543,11 @@ impl TeacherOverlay {
         }
     }
 
-    fn pointer_tools(&mut self, resp: &Response, full: Rect, hover: Option<Pos2>, origin: Option<Pos2>, scroll: f32) {
+    fn pointer_tools(&mut self, resp: &Response, full: Rect, hover: Option<Pos2>, origin: Option<Pos2>) {
         let dragging = resp.dragged();
         let at = resp.interact_pointer_pos().or(hover);
         match self.tool {
             Tool::Pointer => {}
-            Tool::Laser => {
-                if let Some(p) = hover
-                    && self.trail.back() != Some(&p)
-                {
-                    self.trail.push_back(p);
-                    while self.trail.len() > TRAIL_LEN {
-                        self.trail.pop_front();
-                    }
-                }
-            }
             Tool::Pen | Tool::Highlighter => {
                 if resp.drag_started() {
                     let s = self.new_stroke(origin.or(at).unwrap_or(Pos2::ZERO));
@@ -563,17 +608,6 @@ impl TeacherOverlay {
                     }
                 }
             }
-            Tool::Spotlight => {
-                if scroll != 0.0 {
-                    self.spotlight_radius = (self.spotlight_radius + scroll * 0.5).clamp(SPOTLIGHT_RANGE.0, SPOTLIGHT_RANGE.1);
-                }
-                if resp.clicked() {
-                    self.spotlight_locked_pos = match self.spotlight_locked_pos {
-                        Some(_) => None,
-                        None => hover,
-                    };
-                }
-            }
         }
     }
 
@@ -603,23 +637,6 @@ impl TeacherOverlay {
             let (a, b) = if full.contains(a) && full.contains(b) { (a, b) } else { (a + nudge, b + nudge) };
             p.line_segment([a, b], egui::Stroke::new(2.0, Color32::WHITE));
         }
-        if self.tool == Tool::Spotlight
-            && let Some(c) = self.spotlight_locked_pos.or(hover)
-        {
-            p.add(Shape::mesh(spotlight_mesh(full, c, self.spotlight_radius, Color32::from_rgba_unmultiplied(0, 0, 0, 180))));
-            p.circle_stroke(c, self.spotlight_radius, egui::Stroke::new(1.5, Color32::from_white_alpha(120)));
-        }
-        if self.tool == Tool::Laser {
-            let n = self.trail.len();
-            for (i, q) in self.trail.iter().enumerate() {
-                let f = (i + 1) as f32 / (n.max(1) + 1) as f32;
-                p.circle_filled(*q, 4.0 + 4.0 * f, Color32::from_rgba_unmultiplied(255, 30, 30, (90.0 * f) as u8));
-            }
-            if let Some(h) = hover {
-                p.circle_filled(h, 8.0, Color32::from_rgba_unmultiplied(255, 30, 30, 90));
-                p.circle_filled(h, 5.0, Color32::from_rgb(255, 30, 30));
-            }
-        }
         if self.tool == Tool::Eraser
             && let Some(h) = hover
         {
@@ -641,7 +658,7 @@ impl TeacherOverlay {
                 .inner_margin(Margin::symmetric(10, 6))
                 .show(ui, |ui| {
                     ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                    let has_options = matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer);
+                    let has_options = matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
                     let mut body = |this: &mut Self, ui: &mut Ui| {
                         if has_options {
                             lay(ui, horizontal, |ui| this.options(ui));
@@ -721,6 +738,22 @@ impl TeacherOverlay {
                     }
                 }
             }
+            Tool::Eraser => {
+                if icon_button(ui, self.erase_mode == EraseMode::Pixel, "Pixel eraser: rubs out only what it touches", |p, r, c| {
+                    p.circle_stroke(r.center(), r.width() * 0.3, egui::Stroke::new(2.0, c));
+                })
+                .clicked()
+                {
+                    self.erase_mode = EraseMode::Pixel;
+                }
+                if icon_button(ui, self.erase_mode == EraseMode::Stroke, "Stroke eraser: removes a whole mark at a touch", |p, r, c| {
+                    p.line_segment([r.left_bottom(), r.right_top()], egui::Stroke::new(2.0, c));
+                })
+                .clicked()
+                {
+                    self.erase_mode = EraseMode::Stroke;
+                }
+            }
             _ => {}
         }
     }
@@ -739,15 +772,13 @@ impl TeacherOverlay {
             self.edge = nearest_edge(full, p);
             self.along = along_edge(full, self.edge, p);
         }
-        let tools: [(Tool, &str); 8] = [
+        let tools: [(Tool, &str); 6] = [
             (Tool::Pointer, "Pointer"),
-            (Tool::Laser, "Laser pointer"),
             (Tool::Pen, "Pen"),
             (Tool::Highlighter, "Highlighter"),
             (Tool::Shape, "Shapes"),
             (Tool::Eraser, "Eraser"),
             (Tool::Revealer, "Revealer (click again to put it away)"),
-            (Tool::Spotlight, "Spotlight (click to pin, scroll to resize)"),
         ];
         for (tool, name) in tools {
             if tool == Tool::Revealer && icon_button(ui, false, "Clear all marks", paint_clear_icon).clicked() {
@@ -815,10 +846,6 @@ fn paint_tool_icon(p: &Painter, r: Rect, c: Color32, tool: Tool) {
             ];
             p.add(Shape::convex_polygon(pts, c, egui::Stroke::NONE));
         }
-        Tool::Laser => {
-            p.circle_filled(ctr, 8.0, Color32::from_rgba_unmultiplied(255, 60, 60, 90));
-            p.circle_filled(ctr, 4.0, Color32::from_rgb(255, 60, 60));
-        }
         Tool::Pen => {
             p.line_segment([r.left_bottom(), r.right_top()], egui::Stroke::new(4.0, c));
             p.line_segment([r.left_bottom(), r.left_bottom() + vec2(3.0, -3.0)], egui::Stroke::new(4.0, Color32::from_rgb(255, 90, 90)));
@@ -846,10 +873,6 @@ fn paint_tool_icon(p: &Painter, r: Rect, c: Color32, tool: Tool) {
         Tool::Revealer => {
             p.rect_stroke(r, CornerRadius::same(2), s, egui::StrokeKind::Middle);
             p.rect_filled(Rect::from_min_max(pos2(r.min.x, ctr.y), r.max), CornerRadius::same(2), c);
-        }
-        Tool::Spotlight => {
-            p.rect_filled(r, CornerRadius::same(2), Color32::from_gray(90));
-            p.circle_filled(ctr, r.width() * 0.3, c);
         }
     }
 }
@@ -976,49 +999,40 @@ fn dist_to_segment(p: Pos2, a: Pos2, b: Pos2) -> f32 {
     p.distance(a + ab * t)
 }
 
+/// The parts of a polyline outside the circle (centre `c`, radius `r`), each a separate run.
+/// Long segments are subdivided so a gap is cut even when no sampled point fell inside.
+fn split_outside(points: &[Pos2], c: Pos2, r: f32) -> Vec<Vec<Pos2>> {
+    let mut dense: Vec<Pos2> = vec![];
+    for (i, &a) in points.iter().enumerate() {
+        dense.push(a);
+        if let Some(&b) = points.get(i + 1) {
+            let n = (a.distance(b) / 3.0).ceil() as usize;
+            for k in 1..n {
+                dense.push(a.lerp(b, k as f32 / n as f32));
+            }
+        }
+    }
+    let mut runs: Vec<Vec<Pos2>> = vec![];
+    let mut cur: Vec<Pos2> = vec![];
+    for q in dense {
+        if q.distance(c) > r {
+            cur.push(q);
+        } else if !cur.is_empty() {
+            runs.push(std::mem::take(&mut cur));
+        }
+    }
+    if !cur.is_empty() {
+        runs.push(cur);
+    }
+    runs
+}
+
 fn near_polyline(points: &[Pos2], p: Pos2, r: f32) -> bool {
     match points {
         [] => false,
         [only] => only.distance(p) <= r,
         _ => points.windows(2).any(|w| dist_to_segment(p, w[0], w[1]) <= r),
     }
-}
-
-/// The screen with a circle cut out, as a triangle mesh (egui has no "hole" shape).
-pub fn spotlight_mesh(full: Rect, centre: Pos2, r: f32, colour: Color32) -> Mesh {
-    let mut m = Mesh::default();
-    let sq = Rect::from_center_size(centre, Vec2::splat(r * 2.0));
-    let cx = |x: f32| x.clamp(full.min.x, full.max.x);
-    let cy = |y: f32| y.clamp(full.min.y, full.max.y);
-    let (x0, x1, y0, y1) = (cx(sq.min.x), cx(sq.max.x), cy(sq.min.y), cy(sq.max.y));
-    for rect in [
-        Rect::from_min_max(full.min, pos2(full.max.x, y0)),
-        Rect::from_min_max(pos2(full.min.x, y1), full.max),
-        Rect::from_min_max(pos2(full.min.x, y0), pos2(x0, y1)),
-        Rect::from_min_max(pos2(x1, y0), pos2(full.max.x, y1)),
-    ] {
-        if rect.width() > 0.0 && rect.height() > 0.0 {
-            m.add_colored_rect(rect, colour);
-        }
-    }
-    // The ring between the circle and its bounding square. The corners of the square sit on
-    // sample angles, so the outer edge follows the square exactly.
-    const N: u32 = 96;
-    let base = m.vertices.len() as u32;
-    for k in 0..N {
-        let t = std::f32::consts::FRAC_PI_4 + k as f32 * std::f32::consts::TAU / N as f32;
-        let d = vec2(t.cos(), t.sin());
-        let out = r / d.x.abs().max(d.y.abs());
-        m.colored_vertex(centre + d * r, colour);
-        m.colored_vertex(centre + d * out, colour);
-    }
-    for k in 0..N {
-        let n = (k + 1) % N;
-        let (a, b, c, d) = (base + 2 * k, base + 2 * k + 1, base + 2 * n, base + 2 * n + 1);
-        m.add_triangle(a, b, d);
-        m.add_triangle(a, d, c);
-    }
-    m
 }
 
 fn nearest_edge(full: Rect, p: Pos2) -> Edge {
@@ -1306,6 +1320,7 @@ mod tests {
     #[test]
     fn eraser_removes_what_it_touches_and_keeps_the_rest() {
         let mut o = TeacherOverlay::new();
+        o.erase_mode = EraseMode::Stroke;
         stroke(&mut o, &[(100.0, 100.0), (200.0, 100.0)]);
         stroke(&mut o, &[(100.0, 400.0), (200.0, 400.0)]);
         shape(&mut o, ShapeKind::Rect, (500.0, 500.0), (600.0, 600.0));
@@ -1319,14 +1334,53 @@ mod tests {
     }
 
     #[test]
+    fn the_eraser_defaults_to_pixel_mode() {
+        assert_eq!(TeacherOverlay::new().erase_mode, EraseMode::Pixel);
+    }
+
+    #[test]
+    fn pixel_eraser_cuts_a_gap_and_leaves_the_rest_of_the_stroke() {
+        let mut o = TeacherOverlay::new();
+        stroke(&mut o, &[(0.0, 100.0), (300.0, 100.0)]);
+        o.erase_at(pos2(150.0, 100.0));
+        assert_eq!(o.strokes.len(), 2, "split in two, even though no sampled point was under the eraser");
+        let (a, b) = (&o.strokes[0].points, &o.strokes[1].points);
+        assert!(a.iter().all(|p| p.x < 150.0 - ERASER_RADIUS + 0.5));
+        assert!(b.iter().all(|p| p.x > 150.0 + ERASER_RADIUS - 0.5));
+        assert!(a.first().is_some_and(|p| p.x == 0.0) && b.last().is_some_and(|p| p.x == 300.0));
+    }
+
+    #[test]
+    fn pixel_eraser_takes_a_bite_out_of_a_shape() {
+        let mut o = TeacherOverlay::new();
+        shape(&mut o, ShapeKind::Rect, (100.0, 100.0), (300.0, 300.0));
+        o.erase_at(pos2(200.0, 100.0));
+        assert!(o.shapes.is_empty());
+        assert!(!o.strokes.is_empty());
+        assert!(o.strokes.iter().all(|s| s.points.iter().all(|p| p.distance(pos2(200.0, 100.0)) > ERASER_RADIUS)));
+        assert!(o.strokes.iter().any(|s| s.points.iter().any(|p| p.y == 300.0)), "the far side is untouched");
+    }
+
+    #[test]
+    fn a_palm_wipe_rubs_out_ink_along_its_path_with_any_tool() {
+        let mut o = TeacherOverlay::new();
+        stroke(&mut o, &[(0.0, 100.0), (600.0, 100.0)]);
+        stroke(&mut o, &[(0.0, 500.0), (600.0, 500.0)]);
+        o.palm_wipe(Some(pos2(100.0, 100.0)));
+        o.palm_wipe(Some(pos2(500.0, 100.0)));
+        o.palm_wipe(None);
+        assert!(o.strokes.iter().all(|s| s.points.iter().all(|p| p.y == 500.0 || p.x < 31.0 || p.x > 569.0)));
+        assert!(o.strokes.iter().any(|s| s.points.iter().any(|p| p.y == 500.0)), "ink away from the hand stays");
+    }
+
+    #[test]
     fn slide_change_clears_marks_but_keeps_timers() {
         let mut o = TeacherOverlay::new();
         stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
         o.add_timer();
         o.set_tool(Tool::Revealer);
-        o.spotlight_locked_pos = Some(pos2(5.0, 5.0));
         o.on_slide_change();
-        assert!(o.strokes.is_empty() && o.revealer.is_none() && o.spotlight_locked_pos.is_none());
+        assert!(o.strokes.is_empty() && o.revealer.is_none());
         assert_eq!(o.timers.len(), 1);
     }
 
@@ -1368,25 +1422,6 @@ mod tests {
         assert_eq!(o.revealer, Some(Revealer { from: Edge::Left, cover: 0.4 }));
         o.set_tool(Tool::Revealer);
         assert!(o.revealer.is_none() && o.tool == Tool::Pointer);
-    }
-
-    #[test]
-    fn spotlight_mesh_covers_everything_but_the_circle() {
-        let full = Rect::from_min_size(Pos2::ZERO, vec2(1000.0, 800.0));
-        let r = 200.0;
-        let m = spotlight_mesh(full, pos2(500.0, 400.0), r, Color32::BLACK);
-        let area: f32 = m
-            .indices
-            .chunks(3)
-            .map(|t| {
-                let v = |i: u32| m.vertices[i as usize].pos;
-                let (a, b, c) = (v(t[0]), v(t[1]), v(t[2]));
-                ((b - a).x * (c - a).y - (b - a).y * (c - a).x).abs() / 2.0
-            })
-            .sum();
-        // A 96-gon is slightly smaller than the circle it approximates.
-        let hole = 96.0 / 2.0 * r * r * (std::f32::consts::TAU / 96.0).sin();
-        assert!((area - (full.area() - hole)).abs() < 1.0, "{area}");
     }
 
     #[test]
