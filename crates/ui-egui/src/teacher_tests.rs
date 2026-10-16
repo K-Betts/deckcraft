@@ -241,7 +241,7 @@ fn a_new_timer_opens_its_dials_and_start_runs_the_dialled_time() {
     overlay(&mut h).add_timer();
     h.run_steps(3);
     assert_eq!(overlay(&mut h).timers[0].setup, Some([0, 5, 0]), "five minutes is the quick setting");
-    h.get_by_label("10 min").click();
+    h.get_by_label("10").click();
     h.run_steps(3);
     h.get_by_label("Start").click();
     h.run_steps(3);
