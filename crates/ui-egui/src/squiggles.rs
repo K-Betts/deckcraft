@@ -172,7 +172,7 @@ fn default_lang(st: &DocState) -> String {
             return l;
         }
     }
-    "en-US".into()
+    deckcraft_model::defaults::DEFAULT_LANG.into()
 }
 
 /// A word under a squiggle: `(tag, start, end)`.

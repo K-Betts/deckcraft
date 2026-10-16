@@ -10,13 +10,14 @@ use egui::{Align2, Color32, CornerRadius, Id, LayerId, Margin, Mesh, Order, Pain
 pub const ERASER_RADIUS: f32 = 20.0;
 /// Positions kept behind the laser pointer.
 pub const TRAIL_LEN: usize = 8;
-/// Seconds without pointer activity before the palette hides.
-pub const HIDE_AFTER: f64 = 3.0;
 pub const HIGHLIGHT_WIDTH: f32 = 20.0;
 pub const SPOTLIGHT_DEFAULT: f32 = 200.0;
 const SPOTLIGHT_RANGE: (f32, f32) = (60.0, 700.0);
+/// The quick setting every new timer starts on.
 const TIMER_DEFAULT_SECS: f64 = 300.0;
-const TIMER_MAX_SECS: f64 = 99.0 * 60.0 + 59.0;
+const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
+/// One-tap durations offered while setting a timer, in minutes.
+const TIMER_QUICK_MINS: [u32; 3] = [1, 5, 10];
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
 
@@ -145,13 +146,32 @@ pub struct Timer {
     pub remaining: f64,
     pub running: bool,
     pub expired: bool,
-    editing: Option<String>,
+    /// Hours, minutes and seconds on the dials while the timer is being set; `None` once started.
+    pub setup: Option<[u32; 3]>,
 }
 
 impl Timer {
     pub fn new(id: u64, duration: f64) -> Self {
         let duration = duration.clamp(1.0, TIMER_MAX_SECS);
-        Timer { id, duration, remaining: duration, running: false, expired: false, editing: None }
+        Timer { id, duration, remaining: duration, running: false, expired: false, setup: None }
+    }
+
+    /// Open the dials on the current duration.
+    pub fn begin_setup(&mut self) {
+        self.running = false;
+        self.setup = Some(split_hms(self.duration));
+    }
+
+    /// Take the dialled time and start counting down. Does nothing at 00:00:00.
+    pub fn start_from_setup(&mut self) {
+        let Some([h, m, s]) = self.setup else { return };
+        let secs = f64::from(h * 3600 + m * 60 + s);
+        if secs < 1.0 {
+            return;
+        }
+        self.set_duration(secs);
+        self.setup = None;
+        self.running = true;
     }
 
     /// Advance by `dt` seconds. `on_zero` runs once, on the tick that reaches zero.
@@ -186,27 +206,30 @@ impl Timer {
         self.reset();
     }
 
-    /// `MM:SS`, rounding up so a fresh 5:00 timer reads 05:00 until a full second has passed.
+    /// `MM:SS`, or `H:MM:SS` from an hour up; rounds up so a fresh 5:00 timer reads 05:00 until a
+    /// full second has passed.
     pub fn label(&self) -> String {
         let s = self.remaining.max(0.0).ceil() as u64;
-        format!("{:02}:{:02}", s / 60, s % 60)
+        if s >= 3600 { format!("{}:{:02}:{:02}", s / 3600, s / 60 % 60, s % 60) } else { format!("{:02}:{:02}", s / 60, s % 60) }
     }
 }
 
-/// `m:ss`, `mm:ss` or plain minutes (`5`, `7.5`) as seconds.
-pub fn parse_duration(text: &str) -> Option<f64> {
-    let t = text.trim();
-    let secs = match t.split_once(':') {
-        Some((m, s)) => {
-            let (m, s) = (m.trim().parse::<u32>().ok()?, s.trim().parse::<u32>().ok()?);
-            if s >= 60 {
-                return None;
-            }
-            f64::from(m) * 60.0 + f64::from(s)
-        }
-        None => t.parse::<f64>().ok().filter(|m| m.is_finite())? * 60.0,
-    };
-    (1.0..=TIMER_MAX_SECS).contains(&secs).then_some(secs)
+fn split_hms(secs: f64) -> [u32; 3] {
+    let s = secs.clamp(0.0, TIMER_MAX_SECS) as u32;
+    [s / 3600, s / 60 % 60, s % 60]
+}
+
+/// The value a dial shows when the pointer is at `at` around `centre`: 0 at twelve o'clock,
+/// rising clockwise, wrapping after `steps`.
+pub fn dial_value(centre: Pos2, at: Pos2, steps: u32) -> u32 {
+    let (dx, dy) = (at.x - centre.x, at.y - centre.y);
+    let turn = dx.atan2(-dy).rem_euclid(std::f32::consts::TAU) / std::f32::consts::TAU;
+    (turn * steps as f32).round() as u32 % steps.max(1)
+}
+
+/// The clockwise angle from twelve o'clock for `value` of `steps`.
+pub fn dial_angle(value: u32, steps: u32) -> f32 {
+    value as f32 / steps.max(1) as f32 * std::f32::consts::TAU
 }
 
 enum Draft {
@@ -238,8 +261,9 @@ pub struct TeacherOverlay {
     edge: Edge,
     along: f32,
     palette_drag: Option<Pos2>,
-    palette_hot: bool,
-    last_activity: Option<f64>,
+    /// Whether the tool palette is out; the tab on the left edge toggles it.
+    pub palette_open: bool,
+    palette_rect: Option<Rect>,
     last_tick: Option<f64>,
     hit_rects: Vec<Rect>,
 }
@@ -265,11 +289,11 @@ impl Default for TeacherOverlay {
             trail: VecDeque::new(),
             draft: None,
             revealer_drag: false,
-            edge: Edge::Bottom,
+            edge: Edge::Left,
             along: 0.5,
             palette_drag: None,
-            palette_hot: false,
-            last_activity: None,
+            palette_open: false,
+            palette_rect: None,
             last_tick: None,
             hit_rects: vec![],
         }
@@ -346,7 +370,9 @@ impl TeacherOverlay {
     pub fn add_timer(&mut self) {
         self.next_id += 1;
         let id = self.next_id;
-        self.timers.push(Timer::new(id, TIMER_DEFAULT_SECS));
+        let mut t = Timer::new(id, TIMER_DEFAULT_SECS);
+        t.begin_setup();
+        self.timers.push(t);
     }
 
     /// Advance the timers to `now`, calling `on_zero` for each that finishes.
@@ -356,10 +382,6 @@ impl TeacherOverlay {
         for t in &mut self.timers {
             t.tick(dt, &mut on_zero);
         }
-    }
-
-    pub fn editing_timer(&self) -> bool {
-        self.timers.iter().any(|t| t.editing.is_some())
     }
 
     /// Whether the overlay takes the pointer, so the show must not also act on the click.
@@ -407,11 +429,7 @@ impl TeacherOverlay {
         if beep_now {
             beep();
         }
-        let (hover, delta, down, origin, scroll) =
-            ctx.input(|i| (i.pointer.hover_pos(), i.pointer.delta(), i.pointer.any_down(), i.pointer.press_origin(), i.smooth_scroll_delta.y));
-        if delta.length() > 0.0 || down || self.last_activity.is_none() {
-            self.last_activity = Some(now);
-        }
+        let (hover, scroll, origin) = ctx.input(|i| (i.pointer.hover_pos(), i.smooth_scroll_delta.y, i.pointer.press_origin()));
         let resp = ui.interact(full, Id::new("teacher_surface"), if self.tool == Tool::Pointer { Sense::hover() } else { Sense::click_and_drag() });
         self.pointer_tools(&resp, full, hover, origin, scroll);
         if self.tool == Tool::Laser && hover.is_some() {
@@ -424,12 +442,12 @@ impl TeacherOverlay {
         let painter = ctx.layer_painter(LayerId::new(Order::Foreground, Id::new("teacher_overlay")));
         self.paint(&painter, full, hover);
         self.hit_rects.clear();
-        let idle = now - self.last_activity.unwrap_or(now);
-        if idle < HIDE_AFTER || self.palette_hot || self.palette_drag.is_some() {
+        if self.palette_open {
             self.palette(&ctx, full, &mut actions);
         } else {
-            self.palette_hot = false;
+            self.palette_rect = None;
         }
+        self.palette_tab(&ctx, full);
         let mut dead = vec![];
         for (i, t) in self.timers.iter_mut().enumerate() {
             let (remove, rect) = timer_widget(&ctx, t, i, full, now);
@@ -441,10 +459,36 @@ impl TeacherOverlay {
         self.timers.retain(|t| !dead.contains(&t.id));
         if self.timers.iter().any(|t| t.running || t.expired) {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
-        } else if idle < HIDE_AFTER {
-            ctx.request_repaint_after(std::time::Duration::from_millis(((HIDE_AFTER - idle).max(0.05) * 1000.0) as u64));
         }
         actions
+    }
+
+    /// The small arrow on the left edge that puts the palette away or brings it out.
+    fn palette_tab(&mut self, ctx: &egui::Context, full: Rect) {
+        // Beside the palette when that is docked on the left, so the two never overlap.
+        let x = match (self.palette_open, self.edge, self.palette_rect) {
+            (true, Edge::Left, Some(r)) => r.max.x + 2.0,
+            _ => full.min.x,
+        };
+        let out = egui::Area::new(Id::new("teacher_palette_tab"))
+            .order(Order::Foreground)
+            .fixed_pos(pos2(x, full.center().y))
+            .pivot(Align2::LEFT_CENTER)
+            .show(ctx, |ui| {
+                let (r, resp) = ui.allocate_exact_size(vec2(22.0, 56.0), Sense::click());
+                let fill =
+                    if resp.hovered() { Color32::from_rgba_unmultiplied(60, 60, 68, 240) } else { Color32::from_rgba_unmultiplied(24, 24, 28, 220) };
+                ui.painter().rect_filled(r, CornerRadius { nw: 0, sw: 0, ne: 12, se: 12 }, fill);
+                let (c, s) = (r.center(), 5.0);
+                let dir = if self.palette_open { -1.0 } else { 1.0 };
+                let pts = [pos2(c.x - s * dir * 0.6, c.y - s), pos2(c.x + s * dir * 0.6, c.y), pos2(c.x - s * dir * 0.6, c.y + s)];
+                ui.painter().add(Shape::line(pts.to_vec(), egui::Stroke::new(2.5, Color32::WHITE)));
+                resp.on_hover_text(if self.palette_open { "Hide the tools" } else { "Show the tools" })
+            });
+        self.hit_rects.push(out.response.rect);
+        if out.inner.clicked() {
+            self.palette_open = !self.palette_open;
+        }
     }
 
     fn pointer_tools(&mut self, resp: &Response, full: Rect, hover: Option<Pos2>, origin: Option<Pos2>, scroll: f32) {
@@ -616,7 +660,7 @@ impl TeacherOverlay {
         });
         let rect = out.response.rect;
         self.hit_rects.push(rect);
-        self.palette_hot = ctx.input(|i| i.pointer.hover_pos()).is_some_and(|p| rect.expand(8.0).contains(p));
+        self.palette_rect = Some(rect);
     }
 
     fn options(&mut self, ui: &mut Ui) {
@@ -1007,6 +1051,7 @@ fn palette_anchor(full: Rect, edge: Edge, along: f32) -> (Pos2, Align2) {
 /// A floating timer. Returns whether it was dismissed, and where it is.
 fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, now: f64) -> (bool, Rect) {
     let mut remove = false;
+    let mut start = false;
     let flash = t.expired && (now * 2.0) as i64 % 2 == 0;
     let fill = if flash { Color32::from_rgb(200, 30, 30) } else { Color32::from_rgba_unmultiplied(24, 24, 28, 235) };
     let out = egui::Area::new(Id::new(("teacher_timer", t.id)))
@@ -1017,43 +1062,101 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
         .show(ctx, |ui| {
             egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(16)).inner_margin(Margin::same(12)).show(ui, |ui| {
                 ui.vertical_centered(|ui| {
-                    if let Some(text) = t.editing.as_mut() {
-                        let edit = ui.add(
-                            egui::TextEdit::singleline(text)
-                                .desired_width(130.0)
-                                .font(egui::FontId::monospace(40.0))
-                                .horizontal_align(egui::Align::Center),
-                        );
-                        edit.request_focus();
-                        let esc = ui.input(|i| i.key_pressed(egui::Key::Escape));
-                        if edit.lost_focus() || esc {
-                            let committed = if esc { None } else { parse_duration(text) };
-                            t.editing = None;
-                            if let Some(secs) = committed {
-                                t.set_duration(secs);
-                            }
-                        }
+                    if let Some(set) = t.setup.as_mut() {
+                        remove = timer_setup(ui, set, &mut start);
                     } else {
                         let label = egui::RichText::new(t.label()).monospace().size(44.0).color(Color32::WHITE);
-                        if ui.add(egui::Button::new(label).frame(false)).on_hover_text("Click to set the time (m:ss or minutes)").clicked() {
-                            t.editing = Some(t.label());
+                        let tip = if t.running { "Running" } else { "Click to change the time" };
+                        if ui.add(egui::Button::new(label).frame(false)).on_hover_text(tip).clicked() && !t.running {
+                            t.begin_setup();
                         }
+                        ui.horizontal(|ui| {
+                            if ui.button(if t.running { "Pause" } else { "Start" }).clicked() {
+                                t.toggle();
+                            }
+                            if ui.button("Reset").clicked() {
+                                t.reset();
+                            }
+                            if ui.button("✕").on_hover_text("Dismiss").clicked() {
+                                remove = true;
+                            }
+                        });
                     }
-                    ui.horizontal(|ui| {
-                        if ui.button(if t.running { "Pause" } else { "Start" }).clicked() {
-                            t.toggle();
-                        }
-                        if ui.button("Reset").clicked() {
-                            t.reset();
-                        }
-                        if ui.button("✕").on_hover_text("Dismiss").clicked() {
-                            remove = true;
-                        }
-                    });
                 });
             });
         });
+    if start {
+        t.start_from_setup();
+    }
     (remove, out.response.rect)
+}
+
+/// The three dials, the quick settings and Start. Returns whether the timer was dismissed.
+fn timer_setup(ui: &mut Ui, set: &mut [u32; 3], start: &mut bool) -> bool {
+    let mut dismissed = false;
+    ui.horizontal(|ui| {
+        ui.spacing_mut().item_spacing.x = 10.0;
+        dial(ui, &mut set[0], 24, "hours");
+        dial(ui, &mut set[1], 60, "minutes");
+        dial(ui, &mut set[2], 60, "seconds");
+    });
+    ui.horizontal(|ui| {
+        for mins in TIMER_QUICK_MINS {
+            let on = *set == [0, mins, 0];
+            if ui.selectable_label(on, format!("{mins} min")).on_hover_text("Quick setting").clicked() {
+                *set = [0, mins, 0];
+            }
+        }
+    });
+    ui.horizontal(|ui| {
+        let total = set.iter().zip([3600, 60, 1]).map(|(v, m)| v * m).sum::<u32>();
+        if ui.add_enabled(total > 0, egui::Button::new(egui::RichText::new("Start").strong()).fill(Color32::from_rgb(30, 140, 70))).clicked() {
+            *start = true;
+        }
+        if ui.button("✕").on_hover_text("Dismiss").clicked() {
+            dismissed = true;
+        }
+    });
+    dismissed
+}
+
+/// A rotatable dial: drag or click around the face, or scroll, to choose `0..steps`.
+fn dial(ui: &mut Ui, value: &mut u32, steps: u32, caption: &str) {
+    const FACE: f32 = 92.0;
+    ui.vertical(|ui| {
+        let (rect, resp) = ui.allocate_exact_size(vec2(FACE, FACE), Sense::click_and_drag());
+        let (centre, radius) = (rect.center(), FACE / 2.0 - 3.0);
+        if (resp.dragged() || resp.clicked())
+            && let Some(p) = resp.interact_pointer_pos()
+            && p.distance(centre) > 6.0
+        {
+            *value = dial_value(centre, p, steps);
+        }
+        if resp.hovered() {
+            let scroll = ui.input(|i| i.smooth_scroll_delta.y);
+            let step = (scroll / 4.0).round() as i64;
+            *value = (i64::from(*value) + step).rem_euclid(i64::from(steps)) as u32;
+        }
+        let p = ui.painter();
+        p.circle_filled(centre, radius, Color32::from_gray(52));
+        p.circle_stroke(
+            centre,
+            radius,
+            egui::Stroke::new(2.0, if resp.hovered() || resp.dragged() { Color32::WHITE } else { Color32::from_gray(130) }),
+        );
+        let tick_every = if steps == 24 { 2 } else { 5 };
+        for i in (0..steps).step_by(tick_every as usize) {
+            let a = dial_angle(i, steps);
+            let dir = vec2(a.sin(), -a.cos());
+            p.line_segment([centre + dir * (radius - 7.0), centre + dir * (radius - 2.0)], egui::Stroke::new(1.5, Color32::from_gray(170)));
+        }
+        let a = dial_angle(*value, steps);
+        let dir = vec2(a.sin(), -a.cos());
+        p.line_segment([centre, centre + dir * (radius - 10.0)], egui::Stroke::new(3.0, Color32::from_rgb(90, 170, 255)));
+        p.circle_filled(centre + dir * (radius - 10.0), 6.0, Color32::from_rgb(90, 170, 255));
+        p.text(centre + vec2(0.0, 18.0), Align2::CENTER_CENTER, format!("{:02}", *value), egui::FontId::monospace(22.0), Color32::WHITE);
+        ui.vertical_centered(|ui| ui.label(egui::RichText::new(caption).small().color(Color32::from_gray(190))));
+    });
 }
 
 /// A short system sound when a timer ends. macOS only (no audio dependency); elsewhere the
@@ -1156,14 +1259,56 @@ mod tests {
     }
 
     #[test]
-    fn durations_parse_as_minutes_or_mm_ss() {
-        assert_eq!(parse_duration("5"), Some(300.0));
-        assert_eq!(parse_duration("7:30"), Some(450.0));
-        assert_eq!(parse_duration(" 0:45 "), Some(45.0));
-        assert_eq!(parse_duration("1.5"), Some(90.0));
-        for bad in ["", "abc", "1:75", "0", "0:00", "-3", "NaN", "9999"] {
-            assert_eq!(parse_duration(bad), None, "{bad:?}");
+    fn a_new_timer_opens_its_dials_on_the_five_minute_quick_setting() {
+        let mut o = TeacherOverlay::new();
+        o.add_timer();
+        assert_eq!(o.timers[0].setup, Some([0, 5, 0]));
+        assert!(!o.timers[0].running);
+    }
+
+    #[test]
+    fn starting_from_the_dials_sets_the_time_and_runs() {
+        let mut t = Timer::new(1, 300.0);
+        t.setup = Some([1, 2, 3]);
+        t.start_from_setup();
+        assert_eq!((t.duration, t.running, t.setup), (3723.0, true, None));
+        assert_eq!(t.label(), "1:02:03");
+    }
+
+    #[test]
+    fn dials_at_zero_do_not_start() {
+        let mut t = Timer::new(1, 300.0);
+        t.setup = Some([0, 0, 0]);
+        t.start_from_setup();
+        assert!(!t.running && t.setup.is_some());
+    }
+
+    #[test]
+    fn clicking_the_time_reopens_the_dials_on_the_current_duration() {
+        let mut t = Timer::new(1, 90.0);
+        t.begin_setup();
+        assert_eq!(t.setup, Some([0, 1, 30]));
+    }
+
+    #[test]
+    fn a_dial_reads_clockwise_from_twelve_and_wraps() {
+        let c = pos2(100.0, 100.0);
+        assert_eq!(dial_value(c, pos2(100.0, 50.0), 60), 0, "straight up");
+        assert_eq!(dial_value(c, pos2(150.0, 100.0), 60), 15, "right is a quarter turn");
+        assert_eq!(dial_value(c, pos2(100.0, 150.0), 60), 30, "down is half");
+        assert_eq!(dial_value(c, pos2(50.0, 100.0), 60), 45, "left is three quarters");
+        assert_eq!(dial_value(c, pos2(99.9, 50.0), 60), 0, "just short of a full turn wraps to zero");
+        assert_eq!(dial_value(c, pos2(150.0, 100.0), 24), 6);
+        for v in 0..60 {
+            let a = dial_angle(v, 60);
+            let at = c + vec2(a.sin(), -a.cos()) * 40.0;
+            assert_eq!(dial_value(c, at, 60), v);
         }
+    }
+
+    #[test]
+    fn the_palette_starts_put_away() {
+        assert!(!TeacherOverlay::new().palette_open);
     }
 
     #[test]

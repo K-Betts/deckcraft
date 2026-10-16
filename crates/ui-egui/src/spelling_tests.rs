@@ -12,7 +12,7 @@ use crate::{Services, SlideApp};
 fn spelling_dialog_changes_and_ignores_words() {
     let aff = "SET UTF-8\nTRY esianrtolcdugmphbyfvkwzxjq\nSFX S Y 1\nSFX S 0 s .\n";
     let dic = "6\nthe/S\nslide/S\nquarter/S\nplan/S\nour\nfor\n";
-    deckcraft_engine::spell::install("en-US", deckcraft_engine::spell::Dictionary::parse(aff.as_bytes(), dic.as_bytes()));
+    deckcraft_engine::spell::install("en-GB", deckcraft_engine::spell::Dictionary::parse(aff.as_bytes(), dic.as_bytes()));
     let mut app = SlideApp::new(Session::with_new(), Services::default());
     app.session.execute("shape.insert", &json!({"preset": "rect", "rect": [100, 100, 500, 120], "text": "Our plna for teh quarter"})).unwrap();
     app.dialog = Some(crate::dialogs::Dialog::new("spelling"));
@@ -276,4 +276,13 @@ fn notes_menu_language_dialog_and_repeated_words() {
     assert_eq!(crate::dialogs::selected_language(h.state()), ("xx-NM".to_string(), true));
     let st = h.state().session.active().unwrap().clone();
     assert!(h.state_mut().squiggles.settle(&st).is_empty(), "nothing in text marked Do Not Check is flagged, repeats included");
+}
+
+#[test]
+fn a_deck_that_names_no_language_is_proofed_as_uk_english() {
+    let app = SlideApp::new(Session::with_new(), Services::default());
+    assert_eq!(crate::dialogs::selected_language(&app).0, "en-GB");
+    let mut s = Session::with_new();
+    let info = s.execute("review.dictionary", &json!({})).unwrap();
+    assert_eq!(info.get("lang").and_then(|v| v.as_str()), Some("en-GB"));
 }

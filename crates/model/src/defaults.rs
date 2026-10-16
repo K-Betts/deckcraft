@@ -9,6 +9,10 @@ use deckcraft_geom::{Size, Xfrm};
 use crate::style::ColorRef;
 use crate::text::{Anchor, AutoFit, BodyProps, Bullet, LevelStyle, ListStyle, ParaProps, RunProps, Spacing, TextBody, TextDir};
 use crate::theme::Theme;
+
+/// The proofing language used when nothing in the deck or selection says otherwise.
+pub const DEFAULT_LANG: &str = "en-GB";
+
 use crate::{
     Background, Fill, HeaderFooter, Layout, LayoutId, LayoutType, Master, MasterId, PhType, Placeholder, Presentation, Shape, ShapeId, ShapeKind,
     Slide, SlideId,
