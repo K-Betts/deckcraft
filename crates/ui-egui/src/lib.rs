@@ -490,6 +490,8 @@ pub struct SlideApp {
     styled: bool,
     restyle: bool,
     fonts_ready: bool,
+    /// `ui` has run in a frame, so egui's fonts exist (they aren't there before the first pass).
+    frame_drawn: bool,
     last_time: f64,
     /// When AutoRecover data was last written (seconds, egui time).
     pub last_recovery: f64,
@@ -571,6 +573,7 @@ impl SlideApp {
             styled: false,
             restyle: true,
             fonts_ready: false,
+            frame_drawn: false,
             last_time: 0.0,
             last_recovery: 0.0,
             quit_confirmed: false,
@@ -1545,7 +1548,7 @@ impl SlideApp {
             theme::install_fonts_with(ctx, &self.ui_fonts.faces);
             self.styled = true;
             self.restyle = true;
-        } else {
+        } else if self.frame_drawn {
             self.fonts_ready = true;
         }
         if self.restyle {
@@ -1796,6 +1799,7 @@ impl SlideApp {
     /// Lay out the whole window.
     pub fn ui(&mut self, ui: &mut egui::Ui) {
         let ctx = ui.ctx().clone();
+        self.frame_drawn = true;
         if !self.fonts_ready {
             ctx.request_repaint();
             return;
