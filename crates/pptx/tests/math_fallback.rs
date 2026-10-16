@@ -183,6 +183,22 @@ fn display_equation_fallback_text_is_centred_like_the_equation() {
 }
 
 #[test]
+fn display_equation_fallback_is_centred_even_when_the_paragraph_says_left() {
+    // PowerPoint writes algn="l" on text boxes holding a centred display equation.
+    let mut p = deck_with_display_equation(None);
+    if let Some(s) = p.slides.first_mut()
+        && let Some(shape) = std::sync::Arc::make_mut(s).shapes.first_mut()
+        && let Some(para) = shape.text.as_mut().and_then(|t| t.paragraphs.first_mut())
+    {
+        para.props.align = Some(deckcraft_model::text::Align::Left);
+    }
+    let (choice, fallback) = branches(&p);
+    assert!(fallback.contains(r#"algn="ctr""#), "{fallback}");
+    // The OMML branch keeps the paragraph as it was read.
+    assert!(choice.contains(r#"algn="l""#), "{choice}");
+}
+
+#[test]
 fn display_equation_fallback_follows_the_equation_alignment() {
     let (_, left) = branches(&deck_with_display_equation(Some("left")));
     assert!(left.contains(r#"algn="l""#), "{left}");
