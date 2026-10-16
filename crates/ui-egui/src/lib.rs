@@ -21,6 +21,7 @@ pub mod media;
 pub mod menus;
 pub mod notes;
 pub mod opening;
+pub mod packs;
 pub mod panes;
 mod preview;
 pub mod qat;
@@ -281,6 +282,8 @@ pub struct UiState {
     /// Upstream community links (Discord, app page, source) in Home, Info and About. Off by
     /// default: a school app does not point staff at another product's chat server.
     pub show_community_links: bool,
+    /// Subject packs the teacher has switched on (see [`packs`]); empty on a fresh install.
+    pub packs: std::collections::BTreeSet<String>,
 }
 
 impl Default for UiState {
@@ -315,6 +318,7 @@ impl Default for UiState {
             comment_focus: None,
             qat: qat::defaults(),
             show_community_links: false,
+            packs: Default::default(),
         }
     }
 }
@@ -355,6 +359,7 @@ impl UiState {
             self.format_tab = d.format_tab;
         }
         self.pane = self.pane.filter(short);
+        self.packs = packs::sanitized(std::mem::take(&mut self.packs));
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);
@@ -394,7 +399,13 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
-    ("app.communityLinks", "Show Community Links in Menus", None, "{on?: bool}: show the upstream Discord, app-page and source links in Home, Info and About"),
+    ("app.pack", "Switch Subject Pack", None, "{id: maths, on?: bool}: switch a subject pack on or off"),
+    (
+        "app.communityLinks",
+        "Show Community Links in Menus",
+        None,
+        "{on?: bool}: show the upstream Discord, app-page and source links in Home, Info and About",
+    ),
     ("animation.preview", "Preview Animations", None, "{on?: bool}"),
     ("app.home", "Home", None, "{on?}"),
     ("app.backstage", "File", Some("Alt+F"), "{page?: home|new|open|info|saveAs|print|export|account, on?: bool}"),
@@ -846,6 +857,11 @@ impl SlideApp {
         }
     }
 
+    /// Whether the subject pack `id` is switched on.
+    pub fn pack_on(&self, id: &str) -> bool {
+        self.ui.packs.contains(id)
+    }
+
     fn flag(&mut self, params: &Value, cur: bool) -> bool {
         params.get("on").and_then(Value::as_bool).unwrap_or(!cur)
     }
@@ -978,6 +994,18 @@ impl SlideApp {
             "show.teacher" => {
                 let on = self.flag(p, self.show.as_ref().is_some_and(|s| s.teacher.is_some()));
                 self.set_teacher_mode(on);
+            }
+            "app.pack" => {
+                let id = p.get("id").and_then(Value::as_str).unwrap_or_default();
+                if packs::find(id).is_none() {
+                    return Err(format!("unknown subject pack “{id}”"));
+                }
+                let on = self.flag(p, self.pack_on(id));
+                if on {
+                    self.ui.packs.insert(id.to_string());
+                } else {
+                    self.ui.packs.remove(id);
+                }
             }
             "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
@@ -2062,6 +2090,8 @@ mod eyedropper_tests;
 mod huge_deck_tests;
 #[cfg(test)]
 mod ime_tests;
+#[cfg(test)]
+mod packs_tests;
 #[cfg(test)]
 mod replacefonts_tests;
 #[cfg(test)]

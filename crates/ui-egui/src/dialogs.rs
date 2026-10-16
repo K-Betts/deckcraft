@@ -145,6 +145,7 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
     json!({
         "dark": app.ui.brightness == theme::Brightness::Dark,
         "uiScale": app.ui.ui_scale,
+        "packs": app.ui.packs,
         "prefs": serde_json::to_value(&app.session.prefs).unwrap_or(Value::Null),
     })
 }
@@ -159,6 +160,9 @@ fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
+    }
+    if let Some(packs) = before.get("packs").and_then(|p| serde_json::from_value(p.clone()).ok()) {
+        app.ui.packs = packs;
     }
     if let Some(prefs) = before.get("prefs").and_then(|p| serde_json::from_value(p.clone()).ok()) {
         app.session.prefs = prefs;
@@ -2158,6 +2162,16 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 }
                 d.fields.remove("uiScale");
             }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Subjects").font(theme::bold(13.0)));
+            for pack in crate::packs::PACKS {
+                let mut on = app.pack_on(pack.id);
+                if ui.checkbox(&mut on, format!("{} tools", pack.label)).on_hover_text(pack.blurb).changed() {
+                    let _ = app.run("app.pack", json!({"id": pack.id, "on": on}));
+                }
+                ui.label(egui::RichText::new(pack.blurb).size(11.0).color(Tokens::get(ui.ctx()).text_faint));
+            }
+            ui.add_space(4.0);
             ui.label(egui::RichText::new("Editing").font(theme::bold(13.0)));
             ui.checkbox(&mut app.session.prefs.smart_guides, "Show smart guides");
             ui.checkbox(&mut app.session.prefs.snap_to_grid, "Snap objects to grid");

@@ -268,6 +268,8 @@ pub struct TeacherOverlay {
     pub palette_open: bool,
     /// The maths tools chooser and its transient canvas widgets.
     pub maths_tools_panel: crate::maths_tools::MathsToolsPanel,
+    /// The Maths subject pack is on: show its tool group (set every frame by `ui`).
+    pub maths: bool,
     palette_rect: Option<Rect>,
     last_tick: Option<f64>,
     hit_rects: Vec<Rect>,
@@ -299,6 +301,7 @@ impl Default for TeacherOverlay {
             palette_drag: None,
             palette_open: false,
             maths_tools_panel: crate::maths_tools::MathsToolsPanel::default(),
+            maths: false,
             palette_rect: None,
             last_tick: None,
             hit_rects: vec![],
@@ -471,7 +474,8 @@ impl TeacherOverlay {
     }
 
     /// One frame: timers, pointer tools, painting and the palette. Returns what the palette asked for.
-    pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64, settings: &mut crate::maths_tools::MathsToolsSettings) -> Vec<Action> {
+    pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64, settings: &mut crate::maths_tools::MathsToolsSettings, maths: bool) -> Vec<Action> {
+        self.maths = maths;
         let ctx = ui.ctx().clone();
         let mut actions = vec![];
         let mut beep_now = false;
@@ -512,7 +516,9 @@ impl TeacherOverlay {
             }
         }
         self.timers.retain(|t| !dead.contains(&t.id));
-        self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
+        if self.maths {
+            self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
+        }
         if self.timers.iter().any(|t| t.running || t.expired) {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
         }
@@ -795,7 +801,7 @@ impl TeacherOverlay {
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
         }
-        if icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
+        if self.maths && icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
             self.maths_tools_panel.toggle();
         }
         if icon_button(ui, false, "Previous", |p, r, c| paint_arrow_icon(p, r, c, false)).clicked() {
