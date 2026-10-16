@@ -278,6 +278,9 @@ pub struct UiState {
     pub comment_focus: Option<(usize, usize)>,
     /// Quick Access Toolbar buttons, left to right.
     pub qat: Vec<qat::QatItem>,
+    /// Upstream community links (Discord, app page, source) in Home, Info and About. Off by
+    /// default: a school app does not point staff at another product's chat server.
+    pub show_community_links: bool,
 }
 
 impl Default for UiState {
@@ -311,6 +314,7 @@ impl Default for UiState {
             grayscale: false,
             comment_focus: None,
             qat: qat::defaults(),
+            show_community_links: false,
         }
     }
 }
@@ -390,6 +394,7 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
+    ("app.communityLinks", "Show Community Links in Menus", None, "{on?: bool}: show the upstream Discord, app-page and source links in Home, Info and About"),
     ("animation.preview", "Preview Animations", None, "{on?: bool}"),
     ("app.home", "Home", None, "{on?}"),
     ("app.backstage", "File", Some("Alt+F"), "{page?: home|new|open|info|saveAs|print|export|account, on?: bool}"),
@@ -974,6 +979,7 @@ impl SlideApp {
                 let on = self.flag(p, self.show.as_ref().is_some_and(|s| s.teacher.is_some()));
                 self.set_teacher_mode(on);
             }
+            "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
                 self.show = None;
@@ -2046,6 +2052,8 @@ fn js_now() -> f64 {
 mod animpane_tests;
 #[cfg(test)]
 mod browsetheme_tests;
+#[cfg(test)]
+mod cleanup_tests;
 #[cfg(test)]
 mod compare_tests;
 #[cfg(test)]
