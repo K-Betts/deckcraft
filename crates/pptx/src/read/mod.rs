@@ -1129,7 +1129,7 @@ fn read_notes(imp: &mut Imp, part: &Part, root: &El) -> TextBody {
             // Notes keep only content: drop body formatting from the notes master placeholder.
             t.list_style = Default::default();
             if t.is_empty() {
-                return TextBody::default();
+                continue;
             }
             return t;
         }

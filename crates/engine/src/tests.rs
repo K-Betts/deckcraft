@@ -3084,6 +3084,51 @@ fn editing_notes_keeps_their_formatting_through_pptx() {
 }
 
 #[test]
+fn opening_and_saving_notes_skips_an_empty_body_placeholder() {
+    use std::io::{Cursor, Read, Write};
+
+    const NOTES_TEXT: &str = "Speaker notes on slide one";
+    const NOTES_PART: &str = "ppt/notesSlides/notesSlide1.xml";
+
+    let mut p = deckcraft_model::defaults::new_presentation(None);
+    std::sync::Arc::make_mut(&mut p.slides[0]).notes = deckcraft_model::text::TextBody::from_text(NOTES_TEXT);
+    let bytes = deckcraft_pptx::export(&p).unwrap();
+
+    // Some notes slides contain an empty body placeholder before the one with the notes.
+    // It must not mask the later, populated placeholder.
+    let mut src = zip::ZipArchive::new(Cursor::new(bytes)).unwrap();
+    let mut out = zip::ZipWriter::new(Cursor::new(Vec::new()));
+    let mut found_notes = false;
+    for i in 0..src.len() {
+        let mut file = src.by_index(i).unwrap();
+        let name = file.name().to_string();
+        let mut data = Vec::new();
+        file.read_to_end(&mut data).unwrap();
+        if name == NOTES_PART {
+            let xml = String::from_utf8(data).unwrap();
+            let body = r#"<p:sp><p:nvSpPr><p:cNvPr id="3""#;
+            assert!(xml.contains(body), "expected populated notes placeholder in {NOTES_PART}");
+            let empty_body = r#"<p:sp><p:nvSpPr><p:cNvPr id="4" name="Empty Notes Placeholder"/><p:cNvSpPr/><p:nvPr><p:ph type="body" idx="2"/></p:nvPr></p:nvSpPr><p:spPr/><p:txBody><a:bodyPr/><a:lstStyle/><a:p/></p:txBody></p:sp>"#;
+            data = xml.replacen(body, &format!("{empty_body}{body}"), 1).into_bytes();
+            found_notes = true;
+        }
+        out.start_file(name, zip::write::SimpleFileOptions::default()).unwrap();
+        out.write_all(&data).unwrap();
+    }
+    assert!(found_notes, "exported package has no notes part");
+    let bytes = out.finish().unwrap().into_inner();
+
+    let mut s = session();
+    s.execute("file.openBytes", &json!({"name": "notes.pptx", "data": crate::cmd::base64_encode(&bytes)})).unwrap();
+    let saved = s.execute("file.saveBytes", &json!({"format": "pptx"})).unwrap()["data"].as_str().unwrap().to_string();
+    let saved = crate::cmd::base64_decode(&saved).unwrap();
+    let mut zip = zip::ZipArchive::new(Cursor::new(saved)).unwrap();
+    let mut xml = String::new();
+    zip.by_name(NOTES_PART).unwrap().read_to_string(&mut xml).unwrap();
+    assert!(xml.contains(NOTES_TEXT), "speaker notes are present in saved XML: {xml}");
+}
+
+#[test]
 fn autocorrect_options_as_you_type() {
     let mut s = session();
     let title = s.doc().unwrap().current_slide().unwrap().shapes[0].id.0;
