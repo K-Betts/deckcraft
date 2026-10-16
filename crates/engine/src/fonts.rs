@@ -32,8 +32,7 @@ pub fn missing_fonts(p: &Presentation) -> Vec<String> {
     let db = FontDb::global();
     let mut out: Vec<String> = Vec::new();
     for family in used_fonts(p) {
-        let covered = db.has_family(&family)
-            || deckcraft_fonts::substitutes(&family).iter().any(|&sub| db.has_family(sub));
+        let covered = db.has_family(&family) || deckcraft_fonts::substitutes(&family).iter().any(|&sub| db.has_family(sub));
         if !covered && !out.iter().any(|f| f.eq_ignore_ascii_case(&family)) {
             out.push(family);
         }

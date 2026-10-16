@@ -1112,7 +1112,8 @@ fn a_font_with_an_installed_substitute_is_not_listed_as_missing() {
     let r = s.execute("file.openBytes", &json!({"name": "math.pptx", "data": data})).unwrap();
     assert!(
         !r["missingFonts"].as_array().is_some_and(|v| v.iter().any(|f| f == "Cambria Math")),
-        "Cambria Math listed as missing even though {installed_sub} is installed: {:?}", r["missingFonts"]
+        "Cambria Math listed as missing even though {installed_sub} is installed: {:?}",
+        r["missingFonts"]
     );
 }
 
