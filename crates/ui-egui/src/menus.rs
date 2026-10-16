@@ -59,6 +59,7 @@ pub fn ui_shortcut(app: &mut SlideApp, key: egui::Key, m: Mods) -> bool {
             return true;
         }
         (P, true, true, false) => "app.palette",
+        (T, true, true, false) => "show.teacher",
         (Comma, true, false, false) => "app.preferences",
         (Equals | Plus, true, false, false) => "view.zoomIn",
         (Minus, true, false, false) => "view.zoomOut",
@@ -204,6 +205,7 @@ pub fn menu_tree() -> Vec<(&'static str, Vec<(&'static str, &'static str)>)> {
                 ("Outline View", "view.outline"),
                 ("Reading View", "view.reading"),
                 ("Slide Show", "show.start"),
+                ("Teacher Mode", "show.teacher"),
                 ("-", ""),
                 ("Slide Master", "view.slideMaster"),
                 ("Handout Master", "view.handoutMaster"),
