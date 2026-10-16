@@ -87,11 +87,142 @@ impl Default for NumberLineRange {
     }
 }
 
-#[derive(Default)]
 pub struct MathsToolsPanel {
     pub open: bool,
     open_tools: BTreeSet<MathsTool>,
     number_line: NumberLineRange,
+    protractor_angle: f32,
+    compass_radius: f32,
+    coordinate_grid: CoordinateGridState,
+    fraction_denominators: BTreeSet<usize>,
+    algebra_tiles: Vec<AlgebraTile>,
+    hundred_square: BTreeSet<u8>,
+    calculator: CalculatorState,
+}
+
+impl Default for MathsToolsPanel {
+    fn default() -> Self {
+        Self {
+            open: false,
+            open_tools: BTreeSet::new(),
+            number_line: NumberLineRange::default(),
+            protractor_angle: 45.0,
+            compass_radius: 50.0,
+            coordinate_grid: CoordinateGridState::default(),
+            fraction_denominators: [2, 3, 4, 5, 6, 8, 10, 12].into_iter().collect(),
+            algebra_tiles: Vec::new(),
+            hundred_square: BTreeSet::new(),
+            calculator: CalculatorState::default(),
+        }
+    }
+}
+
+#[derive(Default)]
+struct CoordinateGridState {
+    x: i32,
+    y: i32,
+    points: Vec<(i32, i32)>,
+}
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum AlgebraTile {
+    X,
+    NegativeX,
+    Unit,
+    NegativeUnit,
+}
+
+impl AlgebraTile {
+    fn label(self) -> &'static str {
+        match self {
+            Self::X => "x",
+            Self::NegativeX => "-x",
+            Self::Unit => "1",
+            Self::NegativeUnit => "-1",
+        }
+    }
+
+    fn colour(self) -> Color32 {
+        match self {
+            Self::X => Color32::from_rgb(79, 145, 212),
+            Self::NegativeX => Color32::from_rgb(222, 112, 112),
+            Self::Unit => Color32::from_rgb(102, 178, 126),
+            Self::NegativeUnit => Color32::from_rgb(226, 173, 83),
+        }
+    }
+}
+
+#[derive(Clone)]
+struct CalculatorState {
+    display: String,
+    accumulator: Option<f64>,
+    operation: Option<char>,
+    replace_input: bool,
+}
+
+impl Default for CalculatorState {
+    fn default() -> Self {
+        Self { display: "0".into(), accumulator: None, operation: None, replace_input: true }
+    }
+}
+
+impl CalculatorState {
+    fn press(&mut self, key: &str) {
+        match key {
+            "AC" => *self = Self::default(),
+            "±" => {
+                if let Ok(value) = self.display.parse::<f64>() {
+                    self.display = format_number(-value);
+                }
+            }
+            "." if self.replace_input => {
+                self.display = "0.".into();
+                self.replace_input = false;
+            }
+            "." if !self.display.contains('.') => self.display.push('.'),
+            "." => {}
+            "+" | "−" | "×" | "÷" => {
+                if let Ok(value) = self.display.parse::<f64>() {
+                    self.accumulator = Some(value);
+                    self.operation = key.chars().next();
+                    self.replace_input = true;
+                }
+            }
+            "=" => {
+                let Some(left) = self.accumulator else { return };
+                let Ok(right) = self.display.parse::<f64>() else { return };
+                let Some(operation) = self.operation.take() else { return };
+                let result = match operation {
+                    '+' => Some(left + right),
+                    '−' => Some(left - right),
+                    '×' => Some(left * right),
+                    '÷' if right != 0.0 => Some(left / right),
+                    '÷' => None,
+                    _ => None,
+                };
+                self.display = result.filter(|n| n.is_finite()).map_or_else(|| "Error".into(), format_number);
+                self.accumulator = None;
+                self.replace_input = true;
+            }
+            _ if key.chars().all(|c| c.is_ascii_digit()) => {
+                if self.replace_input || self.display == "0" || self.display == "Error" {
+                    self.display = key.into();
+                    self.replace_input = false;
+                } else {
+                    self.display.push_str(key);
+                }
+            }
+            _ => {}
+        }
+    }
+}
+
+fn format_number(value: f64) -> String {
+    if value.fract() == 0.0 && value.abs() < 1.0e15 {
+        format!("{value:.0}")
+    } else {
+        format!("{value:.8}").trim_end_matches('0').trim_end_matches('.').to_string()
+    }
 }
 
 impl MathsToolsPanel {
@@ -142,7 +273,7 @@ impl MathsToolsPanel {
             }
         }
 
-        for tool in MathsTool::ALL {
+        for (index, tool) in MathsTool::ALL.into_iter().enumerate() {
             if !self.open_tools.contains(&tool) {
                 continue;
             }
@@ -150,16 +281,10 @@ impl MathsToolsPanel {
             let shown = egui::Window::new(tool.label())
                 .id(Id::new(("maths_tool", tool)))
                 .order(Order::Foreground)
-                .default_pos(canvas.center() - vec2(180.0, 70.0))
+                .default_pos(canvas.center() - vec2(180.0, 70.0) + vec2(index as f32 * 18.0, index as f32 * 20.0))
                 .resizable(false)
                 .open(&mut open)
-                .show(ctx, |ui| match tool {
-                    MathsTool::Ruler => draw_ruler(ui),
-                    MathsTool::NumberLine => draw_number_line(ui, &mut self.number_line),
-                    _ => {
-                        ui.label(format!("{} tool coming soon.", tool.label()));
-                    }
-                });
+                .show(ctx, |ui| self.draw_tool(tool, ui));
             if let Some(shown) = shown {
                 rects.push(shown.response.rect);
             }
@@ -168,6 +293,200 @@ impl MathsToolsPanel {
             }
         }
         rects
+    }
+
+    fn draw_tool(&mut self, tool: MathsTool, ui: &mut egui::Ui) {
+        match tool {
+            MathsTool::Ruler => draw_ruler(ui),
+            MathsTool::Protractor => draw_protractor(ui, &mut self.protractor_angle),
+            MathsTool::Compass => draw_compass(ui, &mut self.compass_radius),
+            MathsTool::NumberLine => draw_number_line(ui, &mut self.number_line),
+            MathsTool::CoordinateGrid => draw_coordinate_grid(ui, &mut self.coordinate_grid),
+            MathsTool::FractionWall => draw_fraction_wall(ui, &mut self.fraction_denominators),
+            MathsTool::AlgebraTiles => draw_algebra_tiles(ui, &mut self.algebra_tiles),
+            MathsTool::HundredSquare => draw_hundred_square(ui, &mut self.hundred_square),
+            MathsTool::Calculator => self.calculator.ui(ui),
+        }
+    }
+}
+
+fn draw_protractor(ui: &mut egui::Ui, degrees: &mut f32) {
+    ui.add(egui::Slider::new(degrees, 0.0..=180.0).step_by(1.0).suffix("°"));
+    ui.label(format!("Angle: {:.0}°", *degrees));
+    let (rect, _) = ui.allocate_exact_size(vec2(260.0, 148.0), Sense::hover());
+    let painter = ui.painter();
+    let centre = pos2(rect.center().x, rect.bottom() - 8.0);
+    let radius = (rect.width() * 0.46).min(rect.height() * 0.9);
+    painter.line_segment([pos2(centre.x - radius, centre.y), pos2(centre.x + radius, centre.y)], Stroke::new(1.5, Color32::DARK_GRAY));
+    for angle in (0..=180).step_by(10) {
+        let radians = (180 - angle) as f32 * std::f32::consts::PI / 180.0;
+        let outer = centre + vec2(radians.cos(), -radians.sin()) * radius;
+        let length = if angle % 30 == 0 { 10.0 } else { 5.0 };
+        let inner = centre + vec2(radians.cos(), -radians.sin()) * (radius - length);
+        painter.line_segment([inner, outer], Stroke::new(1.0, Color32::DARK_GRAY));
+        if angle % 30 == 0 {
+            let label_pos = centre + vec2(radians.cos(), -radians.sin()) * (radius - 23.0);
+            painter.text(label_pos, Align2::CENTER_CENTER, angle.to_string(), egui::FontId::proportional(9.0), Color32::DARK_GRAY);
+        }
+    }
+    let radians = (180.0 - *degrees) * std::f32::consts::PI / 180.0;
+    let tip = centre + vec2(radians.cos(), -radians.sin()) * (radius - 13.0);
+    painter.line_segment([centre, tip], Stroke::new(2.5, Color32::from_rgb(200, 50, 50)));
+    painter.circle_filled(centre, 3.0, Color32::from_rgb(200, 50, 50));
+}
+
+fn draw_compass(ui: &mut egui::Ui, radius: &mut f32) {
+    ui.add(egui::Slider::new(radius, 10.0..=100.0).suffix(" units"));
+    ui.label(format!("Radius: {:.0} units", *radius));
+    let (rect, _) = ui.allocate_exact_size(vec2(250.0, 210.0), Sense::hover());
+    let centre = rect.center();
+    let screen_radius = *radius * 0.9;
+    ui.painter().circle_stroke(centre, screen_radius, Stroke::new(2.0, Color32::from_rgb(42, 105, 178)));
+    ui.painter().line_segment([centre, centre + vec2(screen_radius, 0.0)], Stroke::new(1.5, Color32::from_gray(70)));
+    ui.painter().circle_filled(centre, 3.0, Color32::DARK_GRAY);
+    ui.painter().circle_filled(centre + vec2(screen_radius, 0.0), 3.0, Color32::from_rgb(190, 50, 50));
+}
+
+fn draw_coordinate_grid(ui: &mut egui::Ui, state: &mut CoordinateGridState) {
+    ui.horizontal(|ui| {
+        ui.label("Point (x, y)");
+        ui.add(egui::DragValue::new(&mut state.x).range(-10..=10));
+        ui.add(egui::DragValue::new(&mut state.y).range(-10..=10));
+        if ui.button("Plot").clicked() {
+            state.points.push((state.x, state.y));
+        }
+        if ui.button("Clear points").clicked() {
+            state.points.clear();
+        }
+    });
+    let (rect, _) = ui.allocate_exact_size(vec2(300.0, 280.0), Sense::hover());
+    let painter = ui.painter();
+    let step = 12.0;
+    let centre = rect.center();
+    for i in -10..=10 {
+        let x = centre.x + i as f32 * step;
+        let y = centre.y + i as f32 * step;
+        let axis = i == 0;
+        let color = if axis { Color32::from_gray(65) } else { Color32::from_gray(205) };
+        let width = if axis { 1.5 } else { 0.7 };
+        painter.line_segment([pos2(x, rect.top()), pos2(x, rect.bottom())], Stroke::new(width, color));
+        painter.line_segment([pos2(rect.left(), y), pos2(rect.right(), y)], Stroke::new(width, color));
+    }
+    for &(x, y) in &state.points {
+        painter.circle_filled(centre + vec2(x as f32 * step, -(y as f32) * step), 4.5, Color32::from_rgb(200, 55, 55));
+    }
+}
+
+fn draw_fraction_wall(ui: &mut egui::Ui, denominators: &mut BTreeSet<usize>) {
+    ui.label("Choose equal-part rows. Each coloured block is one unit fraction.");
+    ui.horizontal_wrapped(|ui| {
+        for denominator in 2..=12 {
+            let mut selected = denominators.contains(&denominator);
+            if ui.checkbox(&mut selected, denominator.to_string()).changed() {
+                if selected {
+                    denominators.insert(denominator);
+                } else {
+                    denominators.remove(&denominator);
+                }
+            }
+        }
+    });
+    for &denominator in denominators.iter() {
+        ui.horizontal(|ui| {
+            ui.label(format!("1/{denominator}"));
+            let (rect, _) = ui.allocate_exact_size(vec2(300.0, 22.0), Sense::hover());
+            let width = rect.width() / denominator as f32;
+            for part in 0..denominator {
+                let cell = Rect::from_min_max(
+                    pos2(rect.left() + part as f32 * width, rect.top()),
+                    pos2(rect.left() + (part + 1) as f32 * width, rect.bottom()),
+                );
+                let color = if part % 2 == 0 { Color32::from_rgb(91, 157, 208) } else { Color32::from_rgb(135, 190, 224) };
+                ui.painter().rect_filled(cell, CornerRadius::ZERO, color);
+                ui.painter().rect_stroke(cell, CornerRadius::ZERO, Stroke::new(0.7, Color32::WHITE), StrokeKind::Inside);
+            }
+        });
+    }
+}
+
+fn draw_algebra_tiles(ui: &mut egui::Ui, tiles: &mut Vec<AlgebraTile>) {
+    ui.label("Add tiles, then click a tile to remove it.");
+    ui.horizontal_wrapped(|ui| {
+        for (tile, label) in
+            [(AlgebraTile::X, "+ x"), (AlgebraTile::NegativeX, "− x"), (AlgebraTile::Unit, "+ 1"), (AlgebraTile::NegativeUnit, "− 1")]
+        {
+            if ui.button(label).clicked() {
+                tiles.push(tile);
+            }
+        }
+        if ui.button("Clear").clicked() {
+            tiles.clear();
+        }
+    });
+    ui.label(format!(
+        "x tiles: {}, unit tiles: {}",
+        tiles.iter().filter(|t| matches!(t, AlgebraTile::X | AlgebraTile::NegativeX)).count(),
+        tiles.len()
+    ));
+    let mut remove = None;
+    ui.horizontal_wrapped(|ui| {
+        for (index, tile) in tiles.iter().enumerate() {
+            let color = tile.colour();
+            let text = egui::RichText::new(tile.label()).color(Color32::BLACK).strong();
+            if ui
+                .add(
+                    egui::Button::new(text)
+                        .fill(color)
+                        .min_size(vec2(if matches!(tile, AlgebraTile::X | AlgebraTile::NegativeX) { 48.0 } else { 30.0 }, 32.0)),
+                )
+                .clicked()
+            {
+                remove = Some(index);
+                break;
+            }
+        }
+    });
+    if let Some(index) = remove {
+        tiles.remove(index);
+    }
+}
+
+fn draw_hundred_square(ui: &mut egui::Ui, selected: &mut BTreeSet<u8>) {
+    ui.horizontal(|ui| {
+        ui.label(format!("Selected: {} / 100", selected.len()));
+        if ui.button("Clear").clicked() {
+            selected.clear();
+        }
+    });
+    egui::Grid::new("maths_hundred_square").spacing(vec2(2.0, 2.0)).show(ui, |ui| {
+        for row in 0..10 {
+            for col in 0..10 {
+                let value = row * 10 + col + 1;
+                let value = value as u8;
+                let color = if selected.contains(&value) { Color32::from_rgb(250, 205, 83) } else { Color32::from_rgb(228, 239, 249) };
+                if ui.add(egui::Button::new(value.to_string()).fill(color).min_size(vec2(28.0, 25.0))).clicked() && !selected.insert(value) {
+                    selected.remove(&value);
+                }
+            }
+            ui.end_row();
+        }
+    });
+}
+
+impl CalculatorState {
+    fn ui(&mut self, ui: &mut egui::Ui) {
+        ui.label(egui::RichText::new(&self.display).size(28.0).monospace());
+        egui::Grid::new("maths_calculator").spacing(vec2(4.0, 4.0)).show(ui, |ui| {
+            for (index, key) in ["AC", "±", "÷", "7", "8", "9", "×", "4", "5", "6", "−", "1", "2", "3", "+", "0", ".", "="].into_iter().enumerate()
+            {
+                if ui.add_sized(vec2(48.0, 36.0), egui::Button::new(key)).clicked() {
+                    self.press(key);
+                }
+                if index % 4 == 3 {
+                    ui.end_row();
+                }
+            }
+        });
     }
 }
 
@@ -308,5 +627,46 @@ mod tests {
         harness.get_by_label("Open Ruler").click();
         harness.run_steps(2);
         assert!(harness.query_by_label("Centimetres").is_some());
+    }
+
+    #[test]
+    fn every_enabled_tool_opens_without_a_placeholder() {
+        let state = State {
+            panel: MathsToolsPanel { open: true, ..Default::default() },
+            settings: MathsToolsSettings { enabled: MathsTool::ALL.into_iter().collect() },
+        };
+        let mut harness = egui_kittest::Harness::builder().with_size(vec2(1200.0, 900.0)).build_ui_state(
+            |ui, state: &mut State| {
+                state.panel.ui(ui.ctx(), ui.max_rect(), &mut state.settings);
+            },
+            state,
+        );
+        harness.run_steps(2);
+        for tool in MathsTool::ALL {
+            let label = format!("Open {}", tool.label());
+            harness.get_by_label(&label).click();
+            harness.run_steps(2);
+        }
+        assert!(harness.query_by_label_contains("coming soon").is_none());
+        for label in ["Angle: 45°", "Radius: 50 units", "Point (x, y)", "Selected: 0 / 100", "AC"] {
+            assert!(harness.query_by_label(label).is_some(), "{label}");
+        }
+    }
+
+    #[test]
+    fn calculator_handles_operations_and_division_by_zero() {
+        let mut calculator = CalculatorState::default();
+        calculator.press("7");
+        calculator.press("×");
+        calculator.press("6");
+        calculator.press("=");
+        assert_eq!(calculator.display, "42");
+
+        calculator.press("AC");
+        calculator.press("8");
+        calculator.press("÷");
+        calculator.press("0");
+        calculator.press("=");
+        assert_eq!(calculator.display, "Error");
     }
 }
