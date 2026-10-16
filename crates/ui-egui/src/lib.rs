@@ -299,7 +299,8 @@ impl Default for UiState {
             zoom: None,
             sorter_zoom: 1.0,
             recent: vec![],
-            presenter_view: true,
+            // A browser tab is one screen: presenter view would float over the slide.
+            presenter_view: !cfg!(target_arch = "wasm32"),
             keep_annotations_on_advance: false,
             ui_scale: 1.0,
             format_tab: "fill".into(),
