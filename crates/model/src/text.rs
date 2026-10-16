@@ -514,6 +514,24 @@ impl Paragraph {
     pub fn new(text: &str) -> Self {
         Paragraph { runs: if text.is_empty() { vec![] } else { vec![Run::new(text)] }, ..Default::default() }
     }
+    /// A paragraph that is one display equation (`m:oMathPara`) is placed by the equation's own
+    /// justification (`m:jc`, centred as a group when absent), not by the paragraph's alignment:
+    /// PowerPoint centres it in the text box even when the paragraph says `algn="l"`.
+    /// `None` for anything else, including equations inline with text.
+    pub fn display_math_align(&self) -> Option<Align> {
+        let [Run { kind: RunKind::Math { omml }, .. }] = self.runs.as_slice() else {
+            return None;
+        };
+        if !omml.contains("oMathPara") {
+            return None;
+        }
+        let jc = omml.split("<m:jc").nth(1).and_then(|s| s.split("m:val=\"").nth(1)).and_then(|s| s.split('"').next());
+        Some(match jc {
+            Some("left") => Align::Left,
+            Some("right") => Align::Right,
+            _ => Align::Center,
+        })
+    }
     /// Leading tabs are the outline level (at most 8), the same rule as a typed indent.
     /// Returns whether any tab was consumed.
     pub fn promote_leading_tabs(&mut self) -> bool {

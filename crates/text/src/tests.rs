@@ -365,6 +365,29 @@ fn alignment_center_and_right() {
 }
 
 #[test]
+fn display_equation_is_centred_even_in_a_left_aligned_paragraph() {
+    const PARA: &str = r#"<m:oMathPara xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"><m:oMath><m:r><m:t>x=3</m:t></m:r></m:oMath></m:oMathPara>"#;
+    let (p, mut sh) = setup("x=3", 400.0, 100.0);
+    let para = &mut sh.text.as_mut().unwrap().paragraphs[0];
+    para.props.align = Some(Align::Left);
+    para.props.bullet = Some(Bullet::None);
+    para.runs = vec![Run { text: "x=3".into(), props: Default::default(), kind: RunKind::Math { omml: PARA.into() } }];
+    let display = lay(&p, &sh, 400.0, 100.0);
+    assert!(display.lines[0].caret_x[0] > 100.0, "display equation not centred: {}", display.lines[0].caret_x[0]);
+
+    // Right-justified (m:jc="right") goes to the right edge.
+    sh.text.as_mut().unwrap().paragraphs[0].runs[0].kind =
+        RunKind::Math { omml: PARA.replace("<m:oMath>", r#"<m:oMathParaPr><m:jc m:val="right"/></m:oMathParaPr><m:oMath>"#) };
+    let right = lay(&p, &sh, 400.0, 100.0);
+    assert!(right.lines[0].caret_x[0] > display.lines[0].caret_x[0], "right {} centre {}", right.lines[0].caret_x[0], display.lines[0].caret_x[0]);
+
+    // An inline equation (no m:oMathPara) keeps the paragraph's left alignment.
+    sh.text.as_mut().unwrap().paragraphs[0].runs[0].kind = RunKind::Math { omml: "<m:oMath><m:r><m:t>x=3</m:t></m:r></m:oMath>".into() };
+    let inline = lay(&p, &sh, 400.0, 100.0);
+    assert!(inline.lines[0].caret_x[0] < 50.0, "inline equation moved: {}", inline.lines[0].caret_x[0]);
+}
+
+#[test]
 fn empty_and_hostile_bodies_never_panic() {
     let (p, mut sh) = setup("", 10.0, 10.0);
     let _ = lay(&p, &sh, 10.0, 10.0);

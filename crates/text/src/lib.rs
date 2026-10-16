@@ -715,7 +715,11 @@ fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, 
             rtl: false,
         };
     };
-    let props = resolve::para(ctx, shape, para);
+    let mut props = resolve::para(ctx, shape, para);
+    // A display equation sits where its own justification puts it (centred by default).
+    if let Some(a) = para.display_math_align() {
+        props.align = Some(a);
+    }
     let rtl = props.rtl.unwrap_or(false);
     let mut styles: Vec<Style> = vec![];
     let mut faces: Vec<Arc<FontFace>> = vec![];

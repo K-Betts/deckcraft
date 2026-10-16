@@ -26,7 +26,8 @@ committed.
 | Date | What | Where |
 | --- | --- | --- |
 | 2026-10-16 | Equations keep size, font, colour and alignment in the text fallback; equations in table cells survive saving; a14 declared on the wrapper. Real 54-slide deck: all 275 equations, positions, text, pictures and animations unchanged after a save. Kieran: "much better" in PowerPoint. | PR #1 |
-| 2026-10-16 | Equation letters (x, y) draw in STIX Two Math, an open maths font, when Cambria Math isn't installed. | `fix/math-font-fallback` |
+| 2026-10-16 | Equation letters (x, y) draw in STIX Two Math, an open maths font, when Cambria Math isn't installed. | PR #3 |
+| 2026-10-16 | Display equations are placed by their own justification (centred by default), in the editor and in the saved text fallback, even when the paragraph says left. Fixes slides 3 and 6 in DeckCraft. | `fix/display-equation-alignment` |
 
 ## Known gaps
 
