@@ -1753,7 +1753,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 _ => ui.label(
                     egui::RichText::new(format!(
                         "No {} dictionary is installed, so only common misspellings are found. Put a Hunspell .aff/.dic pair in {}.",
-                        info.get("lang").and_then(Value::as_str).unwrap_or("en-US"),
+                        info.get("lang").and_then(Value::as_str).unwrap_or(deckcraft_model::defaults::DEFAULT_LANG),
                         info.get("folders")
                             .and_then(Value::as_array)
                             .and_then(|a| a.get(1).or(a.first()))
@@ -2477,7 +2477,7 @@ fn date_rows(lang: &str) -> Vec<(&'static str, String)> {
 fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     ui.set_min_width(440.0);
     ui.label("Available formats:");
-    let lang = d.get("language", "en-US");
+    let lang = d.get("language", deckcraft_model::defaults::DEFAULT_LANG);
     let rows = date_rows(&lang);
     if !rows.iter().any(|(k, _)| *k == d.get("format", "datetime1"))
         && let Some((k, _)) = rows.first()
@@ -2512,7 +2512,7 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     let update = check(ui, d, "Update automatically", "update", true);
     let (ok, cancel) = buttons(ui, "OK");
     if ok {
-        let lang = d.get("language", "en-US");
+        let lang = d.get("language", deckcraft_model::defaults::DEFAULT_LANG);
         let mut format = d.get("format", "datetime1");
         let probe = deckcraft_text::datetime::DateTime::new(2026, 10, 9, 20, 5, 7);
         if deckcraft_text::datetime::field_text(&format, Some(&lang), probe).is_none() {
@@ -2653,9 +2653,9 @@ pub fn paint_logo(p: &egui::Painter, r: Rect) {
 }
 
 /// The selection's proofing language and whether it's marked Do Not Check Spelling: the run at
-/// the caret, else the first run of the first selected shape; US English when none says.
+/// the caret, else the first run of the first selected shape; UK English when none says.
 pub fn selected_language(app: &SlideApp) -> (String, bool) {
-    let Some(st) = app.session.active() else { return ("en-US".into(), false) };
+    let Some(st) = app.session.active() else { return (deckcraft_model::defaults::DEFAULT_LANG.into(), false) };
     let run = |sh: &deckcraft_model::Shape, at: Option<(usize, usize)>| -> Option<deckcraft_model::RunProps> {
         let t = sh.text.as_ref()?;
         if let Some((p, c)) = at {
@@ -2676,7 +2676,7 @@ pub fn selected_language(app: &SlideApp) -> (String, bool) {
         _ => st.selection.shapes.first().and_then(|id| st.shape(*id)).and_then(|sh| run(sh, None)),
     };
     let props = props.unwrap_or_default();
-    (props.lang.unwrap_or_else(|| "en-US".into()), props.no_proof == Some(true))
+    (props.lang.unwrap_or_else(|| deckcraft_model::defaults::DEFAULT_LANG.into()), props.no_proof == Some(true))
 }
 
 fn seed_once(d: &mut Dialog, key: &str, val: String) {

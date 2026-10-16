@@ -123,7 +123,8 @@ directly without duplication.
 | 2026-10-16 | Equations no longer trigger spell-check red squiggles. | PR #5 |
 | 2026-10-16 | UI calmer look: softer greys, blue accent, better spacing. Kieran: "working better". | PR #6 |
 | 2026-10-16 | Missing-font toast no longer lists Cambria Math when STIX Two Math is installed. | PR #7 |
-| 2026-10-16 | Teacher Mode (Cmd+Shift+T, View menu): fullscreen overlay with pointer, laser, pen, highlighter, shapes, eraser, clear, revealer, spotlight and countdown timers. Marks are ephemeral and never saved; they clear on slide change (timers stay). Ruler and protractor not built yet; not yet checked by eye on a projector. | `feature/presentation-overlay` |
+| 2026-10-16 | Teacher Mode (Cmd+Shift+T, View menu): fullscreen overlay with pointer, laser, pen, highlighter, shapes, eraser, clear, revealer, spotlight and countdown timers. Marks are ephemeral and never saved; they clear on slide change (timers stay). Ruler and protractor not built yet; not yet checked by eye on a projector. | PR #11 |
+| 2026-10-16 | Teacher Mode polish: tools hide behind a left-edge arrow; timers are set with hour/minute/second dials (5 min quick setting, plus 1 and 10) and can be dragged; Teacher Mode button in the status bar; UK English is the default proofing language. | `feature/teacher-mode-polish` |
 
 ## Known gaps
 

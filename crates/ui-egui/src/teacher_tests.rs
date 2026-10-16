@@ -3,6 +3,7 @@
 #![allow(clippy::unwrap_used, clippy::expect_used)]
 
 use egui::{Event, Key, Modifiers, PointerButton, Pos2, pos2};
+use egui_kittest::kittest::Queryable;
 use serde_json::json;
 
 use crate::teacher_overlay::{TeacherOverlay, Tool};
@@ -193,22 +194,58 @@ fn the_eraser_removes_ink_under_the_pointer() {
     assert!(overlay(&mut h).strokes.is_empty());
 }
 
+fn click_at(h: &mut egui_kittest::Harness<'static, SlideApp>, at: Pos2) {
+    h.event(Event::PointerMoved(at));
+    h.run_steps(1);
+    for pressed in [true, false] {
+        h.event(Event::PointerButton { pos: at, button: PointerButton::Primary, pressed, modifiers: Modifiers::NONE });
+        h.run_steps(1);
+    }
+    h.run_steps(2);
+}
+
+fn tab_centre(h: &egui_kittest::Harness<'static, SlideApp>) -> Pos2 {
+    h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_palette_tab"))).expect("the tab is drawn").center()
+}
+
 #[test]
-fn the_palette_hides_when_idle_and_returns_on_movement() {
+fn the_palette_starts_away_and_the_left_tab_brings_it_out_and_puts_it_back() {
     let mut h = harness();
     teacher(&mut h);
     let palette = |h: &egui_kittest::Harness<'static, SlideApp>| {
         h.ctx.memory(|m| m.areas().visible_last_frame(&egui::LayerId::new(egui::Order::Foreground, egui::Id::new("teacher_palette"))))
     };
-    assert!(palette(&h), "shown on entry");
-    h.step();
-    for _ in 0..(4 * 60) {
+    assert!(!palette(&h), "out of the way on entry");
+    let tab = h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_palette_tab"))).expect("tab");
+    assert!(tab.min.x < 12.0 && tab.center().x < 40.0, "the tab sits on the left edge");
+    for _ in 0..(5 * 60) {
         h.step();
     }
-    assert!(!palette(&h), "hidden after a few idle seconds");
-    h.event(Event::PointerMoved(pos2(100.0, 100.0)));
-    h.run_steps(1);
-    h.event(Event::PointerMoved(pos2(140.0, 120.0)));
-    h.run_steps(2);
-    assert!(palette(&h), "back on movement");
+    assert!(!palette(&h), "it does not appear by itself either");
+    let c = tab_centre(&h);
+    click_at(&mut h, c);
+    assert!(palette(&h), "the tab brings the palette out");
+    for _ in 0..(5 * 60) {
+        h.step();
+    }
+    assert!(palette(&h), "and it stays out while idle");
+    let c = tab_centre(&h);
+    click_at(&mut h, c);
+    assert!(!palette(&h), "the tab puts it away again");
+}
+
+#[test]
+fn a_new_timer_opens_its_dials_and_start_runs_the_dialled_time() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(3);
+    assert_eq!(overlay(&mut h).timers[0].setup, Some([0, 5, 0]), "five minutes is the quick setting");
+    h.get_by_label("10 min").click();
+    h.run_steps(3);
+    h.get_by_label("Start").click();
+    h.run_steps(3);
+    let t = &overlay(&mut h).timers[0];
+    assert!(t.running && t.setup.is_none());
+    assert_eq!(t.duration, 600.0);
 }

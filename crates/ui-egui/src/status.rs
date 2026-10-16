@@ -75,6 +75,9 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
         if small_icon(&mut right, Icon::ViewNormalSmall, "Normal", view == ViewMode::Normal).clicked() {
             app.ui.view = ViewMode::Normal;
         }
+        if small_icon(&mut right, Icon::Pen, "Teacher Mode (Cmd+Shift+T)", false).clicked() {
+            app.set_teacher_mode(true);
+        }
         right.add_space(8.0);
         let c_on = app.ui.pane.as_deref() == Some("comments");
         if labeled(&mut right, Icon::CommentsSmall, "Comments", c_on).clicked() {
@@ -163,7 +166,12 @@ pub fn notes_pane(app: &mut SlideApp, ui: &mut Ui) {
             let r = out.response.response.clone();
             let mut buf = draft.text.clone();
             // Spelling squiggles under misspelt words of the notes.
-            let lang = app.session.active().and_then(|d| d.doc.slides.get(idx)).and_then(|s| notes_lang(s)).unwrap_or_else(|| "en-US".into());
+            let lang = app
+                .session
+                .active()
+                .and_then(|d| d.doc.slides.get(idx))
+                .and_then(|s| notes_lang(s))
+                .unwrap_or_else(|| deckcraft_model::defaults::DEFAULT_LANG.into());
             let caret = out.cursor_range.map(|c| c.primary.index.0);
             for (a, b) in app.squiggles.notes(&buf, &lang, caret, Some(ui.ctx())) {
                 let (ra, rb) = (out.galley.pos_from_cursor(egui::text::CCursor::new(a)), out.galley.pos_from_cursor(egui::text::CCursor::new(b)));

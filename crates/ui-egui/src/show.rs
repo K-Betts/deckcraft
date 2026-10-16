@@ -439,10 +439,6 @@ fn part_textures(ctx: &egui::Context, doc: &Presentation, from: Option<usize>, t
 /// Read the current viewport's show keys before its widgets can consume them. Both the
 /// audience window and Presenter View use this path, including animation steps and end-of-show.
 fn keyboard(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64) -> bool {
-    // Typing a timer's time must not turn pages or jump to a slide.
-    if show.teacher.as_ref().is_some_and(|t| t.editing_timer()) {
-        return true;
-    }
     let keys: Vec<(egui::Key, egui::Modifiers)> = ctx.input(|i| {
         i.events
             .iter()

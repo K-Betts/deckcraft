@@ -310,7 +310,7 @@ fn check_lang(doc: &deckcraft_model::Presentation, p: &Value) -> String {
             }
         });
     }
-    found.unwrap_or_else(|| "en-US".into())
+    found.unwrap_or_else(|| deckcraft_model::defaults::DEFAULT_LANG.into())
 }
 
 fn spelling(s: &mut Session, p: &Value) -> Result<Value> {
@@ -522,7 +522,7 @@ fn walk_text_mut(shapes: &mut [deckcraft_model::Shape], depth: usize, f: &mut dy
 fn dictionary_info(s: &mut Session, p: &Value) -> Result<Value> {
     let lang = match s.doc() {
         Ok(st) => check_lang(&st.doc, p),
-        Err(_) => str_param(p, "lang").unwrap_or("en-US").to_string(),
+        Err(_) => str_param(p, "lang").unwrap_or(deckcraft_model::defaults::DEFAULT_LANG).to_string(),
     };
     let dirs = crate::spell::search_dirs();
     let found = crate::spell::find_in(&dirs, &lang).map(|(a, _)| a.with_extension("").display().to_string());
