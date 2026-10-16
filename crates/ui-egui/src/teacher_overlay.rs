@@ -17,7 +17,8 @@ const SPOTLIGHT_RANGE: (f32, f32) = (60.0, 700.0);
 const TIMER_DEFAULT_SECS: f64 = 300.0;
 const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
 /// One-tap durations offered while setting a timer, in minutes.
-const TIMER_QUICK_MINS: [u32; 3] = [1, 5, 10];
+const TIMER_QUICK_MINS: [u32; 4] = [1, 2, 5, 10];
+const TIMER_CARD_W: f32 = 200.0;
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
 
@@ -219,17 +220,13 @@ fn split_hms(secs: f64) -> [u32; 3] {
     [s / 3600, s / 60 % 60, s % 60]
 }
 
-/// The value a dial shows when the pointer is at `at` around `centre`: 0 at twelve o'clock,
-/// rising clockwise, wrapping after `steps`.
-pub fn dial_value(centre: Pos2, at: Pos2, steps: u32) -> u32 {
-    let (dx, dy) = (at.x - centre.x, at.y - centre.y);
-    let turn = dx.atan2(-dy).rem_euclid(std::f32::consts::TAU) / std::f32::consts::TAU;
-    (turn * steps as f32).round() as u32 % steps.max(1)
-}
-
-/// The clockwise angle from twelve o'clock for `value` of `steps`.
-pub fn dial_angle(value: u32, steps: u32) -> f32 {
-    value as f32 / steps.max(1) as f32 * std::f32::consts::TAU
+/// Step one field of the set-up time by `delta`, wrapping within its range (hours 0–23,
+/// minutes and seconds 0–59) like the up and down arrows on a board timer.
+pub fn nudge(set: &mut [u32; 3], field: usize, delta: i32) {
+    let range = if field == 0 { 24 } else { 60 };
+    if let Some(v) = set.get_mut(field) {
+        *v = (*v as i32 + delta).rem_euclid(range) as u32;
+    }
 }
 
 enum Draft {
@@ -1060,22 +1057,41 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
         .movable(true)
         .constrain(true)
         .show(ctx, |ui| {
-            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(16)).inner_margin(Margin::same(12)).show(ui, |ui| {
+            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(12)).inner_margin(Margin::symmetric(12, 8)).show(ui, |ui| {
+                ui.spacing_mut().item_spacing = vec2(6.0, 2.0);
+                // An Area offers the whole screen, which `vertical_centered` would fill.
+                ui.set_width(TIMER_CARD_W);
                 ui.vertical_centered(|ui| {
-                    if let Some(set) = t.setup.as_mut() {
-                        remove = timer_setup(ui, set, &mut start);
+                    let setting = t.setup.is_some();
+                    let mut set = t.setup.unwrap_or_else(|| split_hms(t.remaining.ceil()));
+                    timer_digits(ui, &mut set, setting);
+                    if setting {
+                        ui.horizontal(|ui| {
+                            for mins in TIMER_QUICK_MINS {
+                                if ui.selectable_label(set == [0, mins, 0], format!("{mins}")).on_hover_text(format!("{mins} minute(s)")).clicked() {
+                                    set = [0, mins, 0];
+                                }
+                            }
+                            ui.label(egui::RichText::new("min").small().color(Color32::from_gray(170)));
+                        });
+                        t.setup = Some(set);
+                        ui.horizontal(|ui| {
+                            let go = egui::Button::new(egui::RichText::new("Start").strong()).fill(Color32::from_rgb(30, 140, 70));
+                            if ui.add_enabled(set != [0, 0, 0], go).clicked() {
+                                start = true;
+                            }
+                            if ui.button("✕").on_hover_text("Dismiss").clicked() {
+                                remove = true;
+                            }
+                        });
                     } else {
-                        let label = egui::RichText::new(t.label()).monospace().size(44.0).color(Color32::WHITE);
-                        let tip = if t.running { "Running" } else { "Click to change the time" };
-                        if ui.add(egui::Button::new(label).frame(false)).on_hover_text(tip).clicked() && !t.running {
-                            t.begin_setup();
-                        }
                         ui.horizontal(|ui| {
                             if ui.button(if t.running { "Pause" } else { "Start" }).clicked() {
                                 t.toggle();
                             }
-                            if ui.button("Reset").clicked() {
+                            if ui.button("Reset").on_hover_text("Back to setting the time").clicked() {
                                 t.reset();
+                                t.begin_setup();
                             }
                             if ui.button("✕").on_hover_text("Dismiss").clicked() {
                                 remove = true;
@@ -1091,71 +1107,39 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
     (remove, out.response.rect)
 }
 
-/// The three dials, the quick settings and Start. Returns whether the timer was dismissed.
-fn timer_setup(ui: &mut Ui, set: &mut [u32; 3], start: &mut bool) -> bool {
-    let mut dismissed = false;
+/// Large `HH:MM:SS`. While `setting`, each pair has an up arrow above and a down arrow below.
+fn timer_digits(ui: &mut Ui, set: &mut [u32; 3], setting: bool) {
+    let arrow = |ui: &mut Ui, up: bool| -> bool {
+        let (r, resp) = ui.allocate_exact_size(vec2(46.0, 14.0), Sense::click());
+        let col = if resp.hovered() { Color32::WHITE } else { Color32::from_gray(150) };
+        let (c, s) = (r.center(), 5.0);
+        let d = if up { -1.0 } else { 1.0 };
+        ui.painter().add(Shape::line(
+            vec![pos2(c.x - s, c.y - s * 0.5 * d), pos2(c.x, c.y + s * 0.5 * d), pos2(c.x + s, c.y - s * 0.5 * d)],
+            egui::Stroke::new(2.0, col),
+        ));
+        resp.clicked()
+    };
     ui.horizontal(|ui| {
-        ui.spacing_mut().item_spacing.x = 10.0;
-        dial(ui, &mut set[0], 24, "hours");
-        dial(ui, &mut set[1], 60, "minutes");
-        dial(ui, &mut set[2], 60, "seconds");
-    });
-    ui.horizontal(|ui| {
-        for mins in TIMER_QUICK_MINS {
-            let on = *set == [0, mins, 0];
-            if ui.selectable_label(on, format!("{mins} min")).on_hover_text("Quick setting").clicked() {
-                *set = [0, mins, 0];
+        ui.spacing_mut().item_spacing.x = 2.0;
+        for (i, v) in (*set).into_iter().enumerate() {
+            if i > 0 {
+                ui.vertical(|ui| {
+                    ui.add_space(if setting { 14.0 } else { 0.0 });
+                    ui.label(egui::RichText::new(":").monospace().size(34.0).color(Color32::WHITE));
+                });
             }
+            ui.vertical_centered(|ui| {
+                ui.spacing_mut().item_spacing.y = 0.0;
+                if setting && arrow(ui, true) {
+                    nudge(set, i, 1);
+                }
+                ui.label(egui::RichText::new(format!("{v:02}")).monospace().size(34.0).color(Color32::WHITE));
+                if setting && arrow(ui, false) {
+                    nudge(set, i, -1);
+                }
+            });
         }
-    });
-    ui.horizontal(|ui| {
-        let total = set.iter().zip([3600, 60, 1]).map(|(v, m)| v * m).sum::<u32>();
-        if ui.add_enabled(total > 0, egui::Button::new(egui::RichText::new("Start").strong()).fill(Color32::from_rgb(30, 140, 70))).clicked() {
-            *start = true;
-        }
-        if ui.button("✕").on_hover_text("Dismiss").clicked() {
-            dismissed = true;
-        }
-    });
-    dismissed
-}
-
-/// A rotatable dial: drag or click around the face, or scroll, to choose `0..steps`.
-fn dial(ui: &mut Ui, value: &mut u32, steps: u32, caption: &str) {
-    const FACE: f32 = 92.0;
-    ui.vertical(|ui| {
-        let (rect, resp) = ui.allocate_exact_size(vec2(FACE, FACE), Sense::click_and_drag());
-        let (centre, radius) = (rect.center(), FACE / 2.0 - 3.0);
-        if (resp.dragged() || resp.clicked())
-            && let Some(p) = resp.interact_pointer_pos()
-            && p.distance(centre) > 6.0
-        {
-            *value = dial_value(centre, p, steps);
-        }
-        if resp.hovered() {
-            let scroll = ui.input(|i| i.smooth_scroll_delta.y);
-            let step = (scroll / 4.0).round() as i64;
-            *value = (i64::from(*value) + step).rem_euclid(i64::from(steps)) as u32;
-        }
-        let p = ui.painter();
-        p.circle_filled(centre, radius, Color32::from_gray(52));
-        p.circle_stroke(
-            centre,
-            radius,
-            egui::Stroke::new(2.0, if resp.hovered() || resp.dragged() { Color32::WHITE } else { Color32::from_gray(130) }),
-        );
-        let tick_every = if steps == 24 { 2 } else { 5 };
-        for i in (0..steps).step_by(tick_every as usize) {
-            let a = dial_angle(i, steps);
-            let dir = vec2(a.sin(), -a.cos());
-            p.line_segment([centre + dir * (radius - 7.0), centre + dir * (radius - 2.0)], egui::Stroke::new(1.5, Color32::from_gray(170)));
-        }
-        let a = dial_angle(*value, steps);
-        let dir = vec2(a.sin(), -a.cos());
-        p.line_segment([centre, centre + dir * (radius - 10.0)], egui::Stroke::new(3.0, Color32::from_rgb(90, 170, 255)));
-        p.circle_filled(centre + dir * (radius - 10.0), 6.0, Color32::from_rgb(90, 170, 255));
-        p.text(centre + vec2(0.0, 18.0), Align2::CENTER_CENTER, format!("{:02}", *value), egui::FontId::monospace(22.0), Color32::WHITE);
-        ui.vertical_centered(|ui| ui.label(egui::RichText::new(caption).small().color(Color32::from_gray(190))));
     });
 }
 
@@ -1291,19 +1275,27 @@ mod tests {
     }
 
     #[test]
-    fn a_dial_reads_clockwise_from_twelve_and_wraps() {
-        let c = pos2(100.0, 100.0);
-        assert_eq!(dial_value(c, pos2(100.0, 50.0), 60), 0, "straight up");
-        assert_eq!(dial_value(c, pos2(150.0, 100.0), 60), 15, "right is a quarter turn");
-        assert_eq!(dial_value(c, pos2(100.0, 150.0), 60), 30, "down is half");
-        assert_eq!(dial_value(c, pos2(50.0, 100.0), 60), 45, "left is three quarters");
-        assert_eq!(dial_value(c, pos2(99.9, 50.0), 60), 0, "just short of a full turn wraps to zero");
-        assert_eq!(dial_value(c, pos2(150.0, 100.0), 24), 6);
-        for v in 0..60 {
-            let a = dial_angle(v, 60);
-            let at = c + vec2(a.sin(), -a.cos()) * 40.0;
-            assert_eq!(dial_value(c, at, 60), v);
-        }
+    fn the_arrows_step_a_field_and_wrap_without_carrying() {
+        let mut set = [0, 59, 0];
+        nudge(&mut set, 1, 1);
+        assert_eq!(set, [0, 0, 0], "59 minutes up is 00, hours untouched");
+        nudge(&mut set, 2, -1);
+        assert_eq!(set, [0, 0, 59]);
+        nudge(&mut set, 0, -1);
+        assert_eq!(set, [23, 0, 59]);
+        nudge(&mut set, 0, 1);
+        assert_eq!(set, [0, 0, 59]);
+    }
+
+    #[test]
+    fn reset_goes_back_to_the_dials_on_the_full_time() {
+        let mut t = Timer::new(1, 120.0);
+        t.setup = None;
+        t.running = true;
+        t.remaining = 30.0;
+        t.reset();
+        t.begin_setup();
+        assert_eq!((t.running, t.remaining, t.setup), (false, 120.0, Some([0, 2, 0])));
     }
 
     #[test]

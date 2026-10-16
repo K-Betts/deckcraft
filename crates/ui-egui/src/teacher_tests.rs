@@ -241,11 +241,25 @@ fn a_new_timer_opens_its_dials_and_start_runs_the_dialled_time() {
     overlay(&mut h).add_timer();
     h.run_steps(3);
     assert_eq!(overlay(&mut h).timers[0].setup, Some([0, 5, 0]), "five minutes is the quick setting");
-    h.get_by_label("10 min").click();
+    h.get_by_label("10").click();
     h.run_steps(3);
     h.get_by_label("Start").click();
     h.run_steps(3);
     let t = &overlay(&mut h).timers[0];
     assert!(t.running && t.setup.is_none());
     assert_eq!(t.duration, 600.0);
+}
+
+#[test]
+fn the_timer_is_a_small_card_not_a_bar_across_the_screen() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(3);
+    let setting = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
+    assert!(setting.width() < 320.0 && setting.height() < 220.0, "setting: {setting:?}");
+    h.get_by_label("Start").click();
+    h.run_steps(3);
+    let running = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
+    assert!(running.width() < 320.0 && running.height() < 160.0, "running: {running:?}");
 }
