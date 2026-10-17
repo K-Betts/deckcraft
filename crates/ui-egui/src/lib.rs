@@ -509,8 +509,14 @@ pub struct SlideApp {
     /// Maths tools available to the current local teacher account.
     pub maths_tools: maths_tools::MathsToolsSettings,
     pub drive: drive_ui::DriveUi,
-    /// How far (points) the current ribbon tab runs past the right edge of its card; 0 when it fits.
-    pub ribbon_hidden: f32,
+    /// How many groups of the current ribbon tab are folded into its More menu (0 when all fit).
+    pub ribbon_folded: usize,
+    /// Fold ribbon groups that do not fit into a More menu. On in the app; off by default in unit
+    /// tests (their stand-in windows and fonts are narrower than a real one, and most tests are
+    /// about what a button does, not where it sits). Tests of the folding turn it on.
+    pub ribbon_fold: bool,
+    /// Each ribbon tab's group widths, learned as the groups are drawn (see `ribbon::responsive_tab`).
+    pub(crate) ribbon_widths: std::collections::HashMap<String, Vec<f32>>,
     pub(crate) update_started: bool,
     /// An update was installed and the teacher chose Restart: close the window on the next frame.
     pub(crate) pending_quit: bool,
@@ -615,7 +621,9 @@ impl SlideApp {
             ui: UiState::default(),
             maths_tools: maths_tools::MathsToolsSettings::default(),
             drive: Default::default(),
-            ribbon_hidden: 0.0,
+            ribbon_folded: 0,
+            ribbon_fold: !cfg!(test),
+            ribbon_widths: Default::default(),
             update_started: false,
             pending_quit: false,
             textures: textures::Textures::default(),
@@ -2168,6 +2176,8 @@ mod ime_tests;
 mod packs_tests;
 #[cfg(test)]
 mod replacefonts_tests;
+#[cfg(test)]
+mod ribbon_fold_tests;
 #[cfg(test)]
 mod slide_size_tests;
 #[cfg(test)]
