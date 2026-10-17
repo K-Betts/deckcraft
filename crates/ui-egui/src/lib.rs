@@ -13,13 +13,16 @@ pub mod control;
 pub mod credits;
 pub mod dialogs;
 pub mod doc_window;
+pub mod drive_ui;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
+pub mod maths_tools;
 pub mod media;
 pub mod menus;
 pub mod notes;
 pub mod opening;
+pub mod packs;
 pub mod panes;
 mod preview;
 pub mod qat;
@@ -221,6 +224,8 @@ pub struct Services {
     pub clipboard_set_html: Option<Box<dyn FnMut(&str, &str) -> bool>>,
     /// Audio output for media playback (cpal on desktop); without one media plays silently.
     pub audio_out: Option<Box<dyn deckcraft_media::AudioOut>>,
+    /// Google Drive, when the host was built with it (desktop only). See [`drive_ui`].
+    pub drive: Option<Box<dyn drive_ui::DriveBackend>>,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -277,6 +282,15 @@ pub struct UiState {
     pub comment_focus: Option<(usize, usize)>,
     /// Quick Access Toolbar buttons, left to right.
     pub qat: Vec<qat::QatItem>,
+    /// Upstream community links (Discord, app page, source) in Home, Info and About. Off by
+    /// default: a school app does not point staff at another product's chat server.
+    pub show_community_links: bool,
+    /// Subject packs the teacher has switched on (see [`packs`]); empty on a fresh install.
+    pub packs: std::collections::BTreeSet<String>,
+    /// The Home screen's “teach a subject?” card was dismissed.
+    pub subjects_hint_dismissed: bool,
+    /// Google Drive features are switched on (Preferences). Off by default: signed out, silent.
+    pub drive_enabled: bool,
 }
 
 impl Default for UiState {
@@ -310,6 +324,10 @@ impl Default for UiState {
             grayscale: false,
             comment_focus: None,
             qat: qat::defaults(),
+            show_community_links: false,
+            packs: Default::default(),
+            subjects_hint_dismissed: false,
+            drive_enabled: false,
         }
     }
 }
@@ -350,6 +368,7 @@ impl UiState {
             self.format_tab = d.format_tab;
         }
         self.pane = self.pane.filter(short);
+        self.packs = packs::sanitized(std::mem::take(&mut self.packs));
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);
@@ -389,6 +408,26 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
+    ("app.dismissSubjectsHint", "Dismiss the Subjects Hint", None, "{}: stop showing the Home card that offers subject tools"),
+    ("app.drive", "Google Drive Features", None, "{on?: bool}: switch the optional Google Drive features on or off (off by default)"),
+    ("drive.signIn", "Sign in to Google Drive", None, "{}: opens your browser; asks only for files DeckCraft saves"),
+    ("drive.cancel", "Cancel Google Sign-in", None, "{}"),
+    ("drive.signOut", "Sign out of Google Drive", None, "{}: deletes the stored sign-in"),
+    ("drive.refresh", "Refresh Google Drive List", None, "{}"),
+    ("drive.open", "Open from Google Drive", None, "{id, name, modified}"),
+    (
+        "drive.save",
+        "Save to Google Drive",
+        None,
+        "{}: saves the open presentation as .pptx in your DeckCraft folder, or updates the Drive file it came from",
+    ),
+    ("app.pack", "Switch Subject Pack", None, "{id: maths, on?: bool}: switch a subject pack on or off"),
+    (
+        "app.communityLinks",
+        "Show Community Links in Menus",
+        None,
+        "{on?: bool}: show the upstream Discord, app-page and source links in Home, Info and About",
+    ),
     ("animation.preview", "Preview Animations", None, "{on?: bool}"),
     ("app.home", "Home", None, "{on?}"),
     ("app.backstage", "File", Some("Alt+F"), "{page?: home|new|open|info|saveAs|print|export|account, on?: bool}"),
@@ -445,6 +484,9 @@ pub struct SlideApp {
     pub session: Session,
     pub services: Services,
     pub ui: UiState,
+    /// Maths tools available to the current local teacher account.
+    pub maths_tools: maths_tools::MathsToolsSettings,
+    pub drive: drive_ui::DriveUi,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -544,6 +586,8 @@ impl SlideApp {
             session,
             services,
             ui: UiState::default(),
+            maths_tools: maths_tools::MathsToolsSettings::default(),
+            drive: Default::default(),
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),
@@ -837,6 +881,11 @@ impl SlideApp {
         }
     }
 
+    /// Whether the subject pack `id` is switched on.
+    pub fn pack_on(&self, id: &str) -> bool {
+        self.ui.packs.contains(id)
+    }
+
     fn flag(&mut self, params: &Value, cur: bool) -> bool {
         params.get("on").and_then(Value::as_bool).unwrap_or(!cur)
     }
@@ -970,6 +1019,27 @@ impl SlideApp {
                 let on = self.flag(p, self.show.as_ref().is_some_and(|s| s.teacher.is_some()));
                 self.set_teacher_mode(on);
             }
+            "app.pack" => {
+                let id = p.get("id").and_then(Value::as_str).unwrap_or_default();
+                if packs::find(id).is_none() {
+                    return Err(format!("unknown subject pack “{id}”"));
+                }
+                let on = self.flag(p, self.pack_on(id));
+                if on {
+                    self.ui.packs.insert(id.to_string());
+                } else {
+                    self.ui.packs.remove(id);
+                }
+            }
+            "app.drive" => {
+                self.ui.drive_enabled = self.flag(p, self.ui.drive_enabled);
+                if !self.ui.drive_enabled {
+                    self.drive = Default::default();
+                }
+            }
+            "drive.signIn" | "drive.cancel" | "drive.signOut" | "drive.refresh" | "drive.open" | "drive.save" => return self.run_drive(id, p),
+            "app.dismissSubjectsHint" => self.ui.subjects_hint_dismissed = true,
+            "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
                 self.show = None;
@@ -1564,6 +1634,7 @@ impl SlideApp {
         self.last_time = now;
         self.drain_control(ctx);
         self.poll_opening();
+        self.poll_drive();
         if self.fonts_ready {
             self.drain_inbox();
         }
@@ -2043,13 +2114,21 @@ mod animpane_tests;
 #[cfg(test)]
 mod browsetheme_tests;
 #[cfg(test)]
+mod cleanup_tests;
+#[cfg(test)]
 mod compare_tests;
 #[cfg(test)]
+mod drive_tests;
+#[cfg(test)]
 mod eyedropper_tests;
+#[cfg(test)]
+mod get_ready_tests;
 #[cfg(test)]
 mod huge_deck_tests;
 #[cfg(test)]
 mod ime_tests;
+#[cfg(test)]
+mod packs_tests;
 #[cfg(test)]
 mod replacefonts_tests;
 #[cfg(test)]

@@ -974,7 +974,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     if !show.grid
         && let Some(mut t) = show.teacher.take()
     {
-        let asked = t.ui(ui, full, now);
+        let asked = t.ui(ui, full, now, &mut app.maths_tools, app.ui.packs.contains(crate::packs::MATHS));
         show.teacher = Some(t);
         for action in asked {
             match action {

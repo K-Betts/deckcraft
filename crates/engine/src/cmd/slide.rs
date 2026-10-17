@@ -20,6 +20,15 @@ pub fn specs() -> Vec<CommandSpec> {
             has_doc,
             new
         ),
+        cmd!(
+            "slide.getReady",
+            "Get Ready Starter",
+            ["Insert", "Slides From"],
+            None,
+            "{topic?: text, difficulty?: 1|2|3, count?: 1-8 (default 4), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank (default: the built-in one), at?: index} → {index, questions: [ids]}",
+            has_doc,
+            get_ready
+        ),
         cmd!("slide.duplicate", "Duplicate Slide", ["Insert"], None, "{index?}", has_slide, duplicate),
         cmd!("slide.delete", "Delete Slide", ["Edit"], None, "{index?, ids?: [slide id]}", has_slide, delete),
         cmd!("slide.move", "Move Slide", [], None, "{from?: index, to: index}", has_slide, move_slide),
@@ -615,6 +624,78 @@ fn section_move(s: &mut Session, p: &Value) -> Result<Value> {
     ok()
 }
 
+/// The name that marks a slide made by `slide.getReady`, so a reroll can find it again.
+pub const GET_READY_NAME: &str = "Get Ready";
+
+/// A retrieval starter: a title and up to eight questions as ordinary text boxes (they save to
+/// PowerPoint like any others), with the answers in the speaker notes.
+fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
+    use crate::questions::{self, Filter};
+    let bank = match str_param(p, "bank") {
+        Some(path) => {
+            let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
+            let text = String::from_utf8(bytes).map_err(|_| bad("slide.getReady", "the question bank is not text"))?;
+            questions::parse(&text)
+        }
+        None => questions::starter(),
+    }
+    .map_err(|e| bad("slide.getReady", e))?;
+    let difficulty = match p.get("difficulty") {
+        None | Some(Value::Null) => None,
+        Some(v) => Some(
+            v.as_u64()
+                .and_then(|d| u8::try_from(d).ok())
+                .filter(|d| questions::DIFFICULTIES.contains(d))
+                .ok_or_else(|| bad("slide.getReady", "`difficulty` must be 1, 2 or 3"))?,
+        ),
+    };
+    let count = usize_param(p, "count").unwrap_or(4);
+    if !(1..=8).contains(&count) {
+        return Err(bad("slide.getReady", "`count` must be 1 to 8"));
+    }
+    let filter = Filter { topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from), difficulty };
+    let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
+    let picked: Vec<_> = bank.pick(&filter, seed, count).into_iter().cloned().collect();
+    if picked.is_empty() {
+        return Err(bad("slide.getReady", "no questions match that topic and difficulty"));
+    }
+    // Where it goes: after the current slide, or in place of the current Get Ready slide.
+    let (cur, replace) = {
+        let st = s.doc()?;
+        let cur = st.selection.slide;
+        let is_ready = st.doc.slides.get(cur).is_some_and(|sl| sl.name == GET_READY_NAME);
+        (cur, bool_param(p, "reroll").unwrap_or(false) && is_ready)
+    };
+    let at = if replace { cur } else { usize_param(p, "at").unwrap_or(cur + 1) };
+    s.execute("slide.new", &json!({"layout": "titleOnly", "title": GET_READY_NAME, "at": at}))?;
+    let new_index = {
+        let st = s.doc()?;
+        st.selection.slide
+    };
+    s.execute("slide.rename", &json!({"name": GET_READY_NAME, "index": new_index}))?;
+    let (cols, rows) = (2usize, count.div_ceil(2));
+    let (left, top, gap) = (48.0, 150.0, 24.0);
+    let w = (960.0 - 2.0 * left - gap) / cols as f64;
+    let h = ((540.0 - top - 36.0 - gap * (rows as f64 - 1.0)) / rows as f64).min(170.0);
+    let mut ids = vec![];
+    let mut answers = String::new();
+    for (i, q) in picked.iter().enumerate() {
+        let (col, row) = (i % cols, i / cols);
+        let rect = [left + col as f64 * (w + gap), top + row as f64 * (h + gap), w, h];
+        let r = s.execute("insert.textBox", &json!({"rect": rect, "text": format!("{}.  {}", i + 1, q.text)}))?;
+        let id = r.get("id").and_then(Value::as_u64).ok_or_else(|| bad("slide.getReady", "insert failed"))?;
+        s.execute("format.size", &json!({"ids": [id], "size": 28}))?;
+        ids.push(q.id.clone());
+        answers.push_str(&format!("{}. {}\n", i + 1, q.answer));
+    }
+    s.execute("slide.notes", &json!({"text": format!("Answers:\n{answers}")}))?;
+    if replace {
+        s.execute("slide.delete", &json!({"index": new_index + 1}))?;
+        s.execute("slide.go", &json!({"index": new_index}))?;
+    }
+    Ok(json!({"index": new_index, "questions": ids}))
+}
+
 fn from_outline(s: &mut Session, p: &Value) -> Result<Value> {
     let text = str_param(p, "text").unwrap_or("").to_string();
     let markdown = bool_param(p, "markdown").unwrap_or(false);
@@ -652,6 +733,75 @@ mod tests {
         assert_eq!(all.len(), 4);
         assert_eq!(sec, &all, "section order must match slide order");
         assert_eq!(sec.first(), Some(&orig));
+    }
+
+    fn ready_texts(s: &Session, i: usize) -> Vec<String> {
+        let st = s.doc().expect("doc");
+        let slide = st.doc.slides.get(i).expect("slide");
+        slide.shapes.iter().filter_map(|sh| sh.text.as_ref().map(|t| t.paragraphs.iter().map(|p| p.text()).collect::<Vec<_>>().join(" "))).collect()
+    }
+
+    #[test]
+    fn get_ready_makes_a_titled_slide_of_four_ordinary_text_boxes_with_answers_in_the_notes() {
+        let mut s = Session::with_new();
+        let r = s.execute("slide.getReady", &json!({"seed": 5})).expect("get ready");
+        assert_eq!(r["questions"].as_array().expect("ids").len(), 4);
+        let i = r["index"].as_u64().expect("index") as usize;
+        let texts = ready_texts(&s, i);
+        assert!(texts.iter().any(|t| t == "Get Ready"), "{texts:?}");
+        for n in 1..=4 {
+            assert!(texts.iter().any(|t| t.starts_with(&format!("{n}.  "))), "question {n}: {texts:?}");
+        }
+        let st = s.doc().expect("doc");
+        let slide = st.doc.slides.get(i).expect("slide");
+        assert_eq!(slide.name, super::GET_READY_NAME);
+        assert!(slide.notes.paragraphs.iter().map(|p| p.text()).collect::<String>().contains("Answers:"));
+    }
+
+    #[test]
+    fn get_ready_filters_by_topic_and_difficulty_and_refuses_when_nothing_matches() {
+        let mut s = Session::with_new();
+        let r = s.execute("slide.getReady", &json!({"topic": "Algebra", "difficulty": 1, "count": 2})).expect("get ready");
+        assert!(r["questions"].as_array().expect("ids").iter().all(|q| q.as_str().is_some_and(|q| q.starts_with("alg-"))));
+        assert!(s.execute("slide.getReady", &json!({"topic": "Origami"})).is_err());
+        assert!(s.execute("slide.getReady", &json!({"difficulty": 7})).is_err());
+        assert!(s.execute("slide.getReady", &json!({"count": 0})).is_err());
+    }
+
+    #[test]
+    fn rerolling_replaces_the_get_ready_slide_and_leaves_other_slides_alone() {
+        let mut s = Session::with_new();
+        s.execute("slide.new", &json!({"layout": "titleOnly", "title": "Lesson"})).expect("slide");
+        s.execute("slide.getReady", &json!({"seed": 1})).expect("first");
+        let n = s.doc().expect("doc").doc.slides.len();
+        let first = ready_texts(&s, s.doc().expect("doc").selection.slide);
+        s.execute("slide.getReady", &json!({"seed": 2, "reroll": true})).expect("reroll");
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), n, "replaced, not added");
+        let again = ready_texts(&s, s.doc().expect("doc").selection.slide);
+        assert_ne!(first, again);
+        // Not on a Get Ready slide, a reroll inserts instead of overwriting.
+        s.execute("slide.go", &json!({"index": 0})).expect("go");
+        s.execute("slide.getReady", &json!({"reroll": true})).expect("insert");
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), n + 1);
+    }
+
+    #[test]
+    fn a_get_ready_slide_survives_a_pptx_round_trip_as_plain_text() {
+        let mut s = Session::with_new();
+        s.execute("slide.getReady", &json!({"seed": 3})).expect("get ready");
+        let before = ready_texts(&s, s.doc().expect("doc").selection.slide);
+        let dir = std::env::temp_dir().join(format!("deckcraft-getready-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).expect("dir");
+        let path = dir.join("starter.pptx");
+        s.execute("file.saveAs", &json!({"path": path.to_str().expect("utf8")})).expect("save");
+        let mut o = Session::new();
+        o.execute("file.open", &json!({"path": path.to_str().expect("utf8")})).expect("open");
+        let n = o.doc().expect("doc").doc.slides.len();
+        let idx = (0..n).find(|i| ready_texts(&o, *i).contains(&"Get Ready".to_string())).expect("the Get Ready slide reopened");
+        let after = ready_texts(&o, idx);
+        let _ = std::fs::remove_dir_all(&dir);
+        assert_eq!(after.len(), before.len());
+        assert!(before.iter().all(|t| after.contains(t)), "before {before:?} after {after:?}");
     }
 
     #[test]

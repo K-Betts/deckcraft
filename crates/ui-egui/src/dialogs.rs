@@ -57,6 +57,7 @@ fn title(id: &str) -> &'static str {
         "replaceFonts" => "Replace Font",
         "equation" => "Equation",
         "dateTime" => "Date and Time",
+        "getReady" => "Get Ready Starter",
         "spelling" => "Spelling",
         "pasteSpecial" => "Paste Special",
         "find" => "Find and Replace",
@@ -145,6 +146,9 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
     json!({
         "dark": app.ui.brightness == theme::Brightness::Dark,
         "uiScale": app.ui.ui_scale,
+        "packs": app.ui.packs,
+        "communityLinks": app.ui.show_community_links,
+        "drive": app.ui.drive_enabled,
         "prefs": serde_json::to_value(&app.session.prefs).unwrap_or(Value::Null),
     })
 }
@@ -159,6 +163,17 @@ fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
+    }
+    if let Some(on) = before.get("drive").and_then(Value::as_bool)
+        && on != app.ui.drive_enabled
+    {
+        let _ = app.run("app.drive", json!({"on": on}));
+    }
+    if let Some(on) = before.get("communityLinks").and_then(Value::as_bool) {
+        app.ui.show_community_links = on;
+    }
+    if let Some(packs) = before.get("packs").and_then(|p| serde_json::from_value(p.clone()).ok()) {
+        app.ui.packs = packs;
     }
     if let Some(prefs) = before.get("prefs").and_then(|p| serde_json::from_value(p.clone()).ok()) {
         app.session.prefs = prefs;
@@ -2158,6 +2173,28 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 }
                 d.fields.remove("uiScale");
             }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Subjects").font(theme::bold(13.0)));
+            for pack in crate::packs::PACKS {
+                let mut on = app.pack_on(pack.id);
+                if ui.checkbox(&mut on, format!("{} tools", pack.label)).on_hover_text(pack.blurb).changed() {
+                    let _ = app.run("app.pack", json!({"id": pack.id, "on": on}));
+                }
+                ui.label(egui::RichText::new(pack.blurb).size(11.0).color(Tokens::get(ui.ctx()).text_faint));
+            }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Google Drive").font(theme::bold(13.0)));
+            let mut drive = app.ui.drive_enabled;
+            if ui.checkbox(&mut drive, "Use Google Drive (optional; you sign in on File > Account)").changed() {
+                let _ = app.run("app.drive", json!({"on": drive}));
+            }
+            ui.add_space(4.0);
+            ui.label(egui::RichText::new("Links").font(theme::bold(13.0)));
+            let mut links = app.ui.show_community_links;
+            if ui.checkbox(&mut links, "Show community links (Discord, website, source) in Home and About").changed() {
+                let _ = app.run("app.communityLinks", json!({"on": links}));
+            }
+            ui.add_space(4.0);
             ui.label(egui::RichText::new("Editing").font(theme::bold(13.0)));
             ui.checkbox(&mut app.session.prefs.smart_guides, "Show smart guides");
             ui.checkbox(&mut app.session.prefs.snap_to_grid, "Snap objects to grid");
@@ -2185,6 +2222,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeColors" => theme_colors_dialog(app, ui, d),
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
+        "getReady" => get_ready_dialog(app, ui, d),
         _ => {
             ui.label(format!("“{}” is not available yet.", d.id));
             let (ok, cancel) = buttons(ui, "OK");
@@ -2523,6 +2561,87 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     cancel
 }
 
+/// A seed that differs every time the teacher asks, so Reroll gives different questions. The
+/// engine command stays deterministic: the clock is read here, in the UI.
+fn fresh_seed() -> u64 {
+    std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(1)
+}
+
+/// Get Ready Starter: pick a topic and difficulty, insert four questions as ordinary text boxes
+/// (they save to PowerPoint like any others), or reroll the starter already on this slide.
+fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    ui.set_min_width(380.0);
+    let topics = deckcraft_engine::questions::starter().map(|b| b.topics()).unwrap_or_default();
+    let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
+    let topic = d.get("topic", "");
+    let difficulty = d.get("difficulty", "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Topic:"));
+        egui::ComboBox::from_id_salt("getready-topic")
+            .selected_text(if topic.is_empty() { "Any topic" } else { topic.as_str() })
+            .width(220.0)
+            .show_ui(ui, |ui| {
+                if ui.selectable_label(topic.is_empty(), "Any topic").clicked() {
+                    d.fields.insert("topic".into(), String::new());
+                }
+                for t in &topics {
+                    if ui.selectable_label(&topic == t, t).clicked() {
+                        d.fields.insert("topic".into(), t.clone());
+                    }
+                }
+            });
+    });
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Difficulty:"));
+        for (value, label) in [("", "Any"), ("1", "Secure"), ("2", "Core"), ("3", "Stretch")] {
+            if ui.selectable_label(difficulty == value, label).clicked() {
+                d.fields.insert("difficulty".into(), value.into());
+            }
+        }
+    });
+    ui.label(
+        egui::RichText::new("Questions are placeholders until your own bank is added. Answers go in the speaker notes.")
+            .size(11.0)
+            .color(Tokens::get(ui.ctx()).text_dim),
+    );
+    let mut params = json!({"seed": fresh_seed()});
+    if !topic.is_empty() {
+        params["topic"] = json!(topic);
+    }
+    if let Ok(n) = difficulty.parse::<u8>() {
+        params["difficulty"] = json!(n);
+    }
+    let mut go = false;
+    let mut reroll = false;
+    ui.add_space(8.0);
+    ui.horizontal(|ui| {
+        let t = Tokens::get(ui.ctx());
+        go = ui.add(egui::Button::new(egui::RichText::new("Insert").color(t.accent_text)).fill(t.accent).min_size(vec2(96.0, 32.0))).clicked();
+        if on_starter {
+            reroll = ui.add(egui::Button::new("Reroll this slide").min_size(vec2(140.0, 32.0))).clicked();
+        }
+        if ui.add(egui::Button::new("Cancel").min_size(vec2(80.0, 32.0))).clicked() {
+            go = false;
+            reroll = false;
+            d.fields.insert("cancel".into(), "1".into());
+        }
+    });
+    if reroll {
+        params["reroll"] = json!(true);
+    }
+    if go || reroll {
+        if let Err(e) = app.run("slide.getReady", params) {
+            d.fields.insert("error".into(), e);
+            return false;
+        }
+        return true;
+    }
+    if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
+        ui.colored_label(Tokens::get(ui.ctx()).accent, e);
+    }
+    d.fields.contains_key("cancel")
+}
+
 fn format_spacing(v: f64) -> String {
     if !v.is_finite() {
         return "6".into();
@@ -2602,7 +2721,7 @@ fn pretty_equation(s: &str) -> String {
     out.replace("sqrt", "√").replace("<=", "≤").replace(">=", "≥").replace("!=", "≠").replace("pi", "π").replace("+-", "±")
 }
 
-pub fn about(_app: &mut SlideApp, ui: &mut Ui) {
+pub fn about(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
     ui.vertical_centered(|ui| {
         let (r, _) = ui.allocate_exact_size(vec2(64.0, 64.0), Sense::hover());
@@ -2613,9 +2732,11 @@ pub fn about(_app: &mut SlideApp, ui: &mut Ui) {
         ui.label("Presentations and slide shows, rebuilt from scratch in pure Rust.");
         ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
         ui.add_space(6.0);
-        ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
-        ui.hyperlink_to("getartcraft.com/apps/deckcraft", deckcraft_engine::links::APP_PAGE);
-        ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+        if app.ui.show_community_links {
+            ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
+            ui.hyperlink_to("getartcraft.com/apps/deckcraft", deckcraft_engine::links::APP_PAGE);
+            ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+        }
         ui.add_space(6.0);
         ui.label(egui::RichText::new("MIT OR Apache-2.0 · © 2026 ArtCraft Team and the DeckCraft contributors").size(11.0).color(t.text_faint));
     });

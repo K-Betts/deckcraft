@@ -17,6 +17,8 @@ mod audio;
 mod control_server;
 #[cfg(all(unix, not(target_os = "macos")))]
 mod display;
+#[cfg(not(target_arch = "wasm32"))]
+mod drive;
 #[cfg(any(target_os = "windows", test))]
 mod graphics;
 mod logging;
@@ -79,6 +81,7 @@ fn load_prefs(app: &mut SlideApp) {
     if let Some(prefs) = prefs {
         app.session.prefs = prefs;
     }
+    app.maths_tools = deckcraft_ui_egui::settings::load_maths_tools(&dir);
 }
 
 fn save_prefs(app: &SlideApp) {
@@ -87,6 +90,7 @@ fn save_prefs(app: &SlideApp) {
     }
     if let Some(dir) = config_dir() {
         deckcraft_ui_egui::settings::save(&dir, &app.ui, &app.session.prefs);
+        deckcraft_ui_egui::settings::save_maths_tools(&dir, &app.maths_tools);
     }
 }
 
@@ -113,6 +117,9 @@ fn services() -> Services {
         pick_save: Some(Box::new(|name: &str| rfd::FileDialog::new().set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string()))),
         read: Some(Box::new(|p: &str| std::fs::read(p).map_err(|e| e.to_string()))),
         write: Some(Box::new(|p: &str, b: &[u8]| std::fs::write(p, b).map_err(|e| e.to_string()))),
+        // Constructing the backend reads no keychain and opens no connection; that waits for
+        // Preferences ▸ Use Google Drive and the Sign in button.
+        drive: config_dir().map(|d| Box::new(drive::backend(d.join("drive-cache"))) as Box<dyn deckcraft_ui_egui::drive_ui::DriveBackend>),
         clipboard_image: Some(Box::new(pasteboard::image_png)),
         clipboard_html: Some(Box::new(pasteboard::html)),
         clipboard_set_html: Some(Box::new(pasteboard::set_html)),
