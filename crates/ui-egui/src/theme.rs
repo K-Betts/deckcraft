@@ -175,6 +175,8 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
         s.spacing.item_spacing = egui::vec2(space::S, 6.0);
         s.spacing.button_padding = egui::vec2(8.0, 5.0);
         s.spacing.interact_size.y = 26.0;
+        // Dialogs and floating panels: room around their contents.
+        s.spacing.window_margin = egui::Margin::same(20);
         s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(size::BODY));
         s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(size::BODY));
         s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(size::CAPTION));
