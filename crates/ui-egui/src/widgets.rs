@@ -52,12 +52,12 @@ pub fn big_button_ex(ui: &mut Ui, icon: Icon, label: &str, enabled: bool, split:
         if split { ui.interact(main_rect, resp.id.with("main"), if enabled { Sense::click() } else { Sense::hover() }) } else { resp.clone() };
     let arrow_resp = arrow_rect.map(|r| ui.interact(r, resp.id.with("arrow"), if enabled { Sense::click() } else { Sense::hover() }));
     if let Some(c) = bg(ui, &main_resp, selected, &t) {
-        painter.rect_filled(if split { main_rect } else { rect }, CornerRadius::same(4), c);
+        painter.rect_filled(if split { main_rect } else { rect }, CornerRadius::same(theme::radius::CONTROL), c);
     }
     if let (Some(ar), Some(a)) = (arrow_rect, &arrow_resp)
         && let Some(c) = bg(ui, a, false, &t)
     {
-        painter.rect_filled(ar, CornerRadius::same(4), c);
+        painter.rect_filled(ar, CornerRadius::same(theme::radius::CONTROL), c);
     }
     let icon_rect = Rect::from_center_size(pos2(rect.center().x, rect.min.y + 19.0), vec2(30.0, 30.0));
     icons::paint(&painter, icon_rect, icon, t.text, !enabled);
@@ -135,12 +135,12 @@ pub fn small_button_ex(ui: &mut Ui, icon: Icon, label: &str, enabled: bool, sele
         )
     });
     if let Some(c) = bg(ui, &main_resp, selected, &t) {
-        painter.rect_filled(main_rect, CornerRadius::same(4), c);
+        painter.rect_filled(main_rect, CornerRadius::same(theme::radius::CONTROL), c);
     }
     if let Some(a) = &arrow_resp
         && let Some(c) = bg(ui, a, false, &t)
     {
-        painter.rect_filled(Rect::from_min_max(pos2(rect.max.x - arrow_w, rect.min.y), rect.max), CornerRadius::same(4), c);
+        painter.rect_filled(Rect::from_min_max(pos2(rect.max.x - arrow_w, rect.min.y), rect.max), CornerRadius::same(theme::radius::CONTROL), c);
     }
     icons::paint(&painter, Rect::from_center_size(pos2(rect.min.x + 12.0, rect.center().y), vec2(17.0, 17.0)), icon, t.text, !enabled);
     if !label.is_empty() {
@@ -158,7 +158,7 @@ pub fn icon_toggle(ui: &mut Ui, icon: Icon, tip: &str, enabled: bool, on: bool) 
     let (rect, resp) = ui.allocate_exact_size(vec2(24.0, 22.0), if enabled { Sense::click() } else { Sense::hover() });
     let painter = ui.painter_at(rect);
     if let Some(c) = bg(ui, &resp, on, &t) {
-        painter.rect_filled(rect, CornerRadius::same(4), c);
+        painter.rect_filled(rect, CornerRadius::same(theme::radius::CONTROL), c);
     }
     icons::paint(&painter, rect.shrink(3.0), icon, t.text, !enabled);
     // Named for screen readers (and tests) by its tooltip.
@@ -178,10 +178,10 @@ pub fn color_split(ui: &mut Ui, icon: Icon, tip: &str, color: Color32, enabled: 
     );
     let painter = ui.painter_at(rect);
     if let Some(c) = bg(ui, &main, false, &t) {
-        painter.rect_filled(main.rect, CornerRadius::same(4), c);
+        painter.rect_filled(main.rect, CornerRadius::same(theme::radius::CONTROL), c);
     }
     if let Some(c) = bg(ui, &arrow, false, &t) {
-        painter.rect_filled(arrow.rect, CornerRadius::same(4), c);
+        painter.rect_filled(arrow.rect, CornerRadius::same(theme::radius::CONTROL), c);
     }
     icons::paint(&painter, Rect::from_min_size(rect.min + vec2(3.0, 1.0), vec2(17.0, 15.0)), icon, t.text, !enabled);
     painter.rect_filled(
@@ -193,7 +193,7 @@ pub fn color_split(ui: &mut Ui, icon: Icon, tip: &str, color: Color32, enabled: 
     (main.on_hover_text(tip), arrow)
 }
 
-/// A ribbon group: contents, then a thin vertical separator.
+/// A ribbon group: contents, then a gap that sets it apart from the next.
 pub fn group<R>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> R {
     let r = ui.horizontal_top(|ui| {
         ui.spacing_mut().item_spacing = vec2(1.0, 1.0);
@@ -205,8 +205,9 @@ pub fn group<R>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> R {
 
 pub fn separator(ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
-    let (rect, _) = ui.allocate_exact_size(vec2(13.0, RIBBON_H - 6.0), Sense::hover());
-    ui.painter().line_segment([pos2(rect.center().x, rect.min.y + 6.0), pos2(rect.center().x, rect.max.y - 4.0)], Stroke::new(1.0, t.separator));
+    // Groups are told apart by space, not a rule: a quiet 12pt gap (the design system's "roomy ribbon").
+    let _ = t;
+    ui.allocate_exact_size(vec2(12.0, RIBBON_H - 6.0), Sense::hover());
 }
 
 /// Two or three rows of small controls stacked in one ribbon column.
@@ -226,7 +227,7 @@ pub fn dropdown(ui: &mut Ui, id: &str, current: &str, width: f32, enabled: bool,
     let painter = ui.painter_at(rect);
     painter.rect(
         rect,
-        CornerRadius::same(4),
+        CornerRadius::same(theme::radius::CONTROL),
         t.field_bg,
         Stroke::new(1.0, if resp.hovered() { t.text_faint } else { t.border }),
         egui::StrokeKind::Inside,
@@ -390,11 +391,11 @@ pub fn gallery(
         let painter = ui.painter_at(rect.expand(2.0));
         let sel = selected == Some(i);
         if sel || resp.hovered() {
-            painter.rect_filled(rect.expand(1.0), CornerRadius::same(4), if sel { t.selected } else { t.hover });
+            painter.rect_filled(rect.expand(1.0), CornerRadius::same(theme::radius::CONTROL), if sel { t.selected } else { t.hover });
         }
         paint_tile(&painter, rect.shrink(3.0), i);
         if sel {
-            painter.rect_stroke(rect.expand(1.0), CornerRadius::same(4), Stroke::new(1.5, t.accent), egui::StrokeKind::Inside);
+            painter.rect_stroke(rect.expand(1.0), CornerRadius::same(theme::radius::CONTROL), Stroke::new(1.5, t.accent), egui::StrokeKind::Inside);
         }
         if resp.on_hover_text(tip(i)).clicked() {
             clicked = Some(i);

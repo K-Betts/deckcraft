@@ -509,6 +509,8 @@ pub struct SlideApp {
     /// Maths tools available to the current local teacher account.
     pub maths_tools: maths_tools::MathsToolsSettings,
     pub drive: drive_ui::DriveUi,
+    /// How far (points) the current ribbon tab runs past the right edge of its card; 0 when it fits.
+    pub ribbon_hidden: f32,
     pub(crate) update_started: bool,
     /// An update was installed and the teacher chose Restart: close the window on the next frame.
     pub(crate) pending_quit: bool,
@@ -613,6 +615,7 @@ impl SlideApp {
             ui: UiState::default(),
             maths_tools: maths_tools::MathsToolsSettings::default(),
             drive: Default::default(),
+            ribbon_hidden: 0.0,
             update_started: false,
             pending_quit: false,
             textures: textures::Textures::default(),

@@ -658,21 +658,28 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         if !(1..=8).contains(&slots.len()) {
             return Err(bad("slide.getReady", "`slots` must have 1 to 8 entries"));
         }
-        let mut used: Vec<String> = vec![];
-        let mut out = vec![];
+        let mut filters = vec![];
         for (i, slot) in slots.iter().enumerate() {
             let topic = slot.get("topic").and_then(Value::as_str).filter(|t| !t.is_empty()).map(String::from);
             let difficulty = level(slot.get("difficulty"), &format!("question {}: `difficulty`", i + 1))?;
-            let filter = Filter { topic: topic.clone(), difficulty };
-            let q = bank.pick_one(&filter, seed.wrapping_add((i as u64 + 1).wrapping_mul(0x9E37_79B9)), &used).ok_or_else(|| {
-                let what = topic.as_deref().unwrap_or("any topic");
-                let at = difficulty.map(|d| format!(" at level {d}")).unwrap_or_default();
-                bad("slide.getReady", format!("question {}: no more questions for {what}{at}", i + 1))
-            })?;
-            used.push(q.id.clone());
-            out.push(q.clone());
+            filters.push(Filter { topic, difficulty });
         }
-        out
+        match bank.assign(&filters, seed) {
+            Some(qs) => qs.into_iter().cloned().collect(),
+            None => {
+                // Say which question is the problem: one with nothing to pick from, else the first
+                // whose choice cannot be met alongside the others.
+                let at = |i: usize| {
+                    let f = &filters[i];
+                    let what = f.topic.as_deref().unwrap_or("any topic");
+                    let lvl = f.difficulty.map(|d| format!(" at level {d}")).unwrap_or_default();
+                    format!("{what}{lvl}")
+                };
+                let empty = (0..filters.len()).find(|&i| bank.candidates(&filters[i]).is_empty());
+                let culprit = empty.unwrap_or_else(|| (0..filters.len()).min_by_key(|&i| bank.candidates(&filters[i]).len()).unwrap_or(0));
+                return Err(bad("slide.getReady", format!("question {}: no more different questions for {}", culprit + 1, at(culprit))));
+            }
+        }
     } else {
         let difficulty = level(p.get("difficulty"), "`difficulty`")?;
         let count = usize_param(p, "count").unwrap_or(4);
@@ -836,6 +843,38 @@ mod tests {
         assert!(bad.contains("question 1") && bad.contains("difficulty"), "{bad}");
         assert!(s.execute("slide.getReady", &json!({"slots": []})).is_err());
         assert!(s.execute("slide.getReady", &json!({"slots": "Algebra"})).is_err());
+    }
+
+    #[test]
+    fn a_question_left_on_any_cannot_starve_one_that_needs_a_specific_topic_and_level() {
+        // Regression: with slots [any, Algebra level 3, …] the loose first slot could draw the
+        // bank's only Algebra stretch question, and the command then failed for the second.
+        let slots = json!([{}, {"topic": "Algebra", "difficulty": 3}, {}, {"topic": "Number", "difficulty": 1}]);
+        for seed in 0..300u64 {
+            let mut s = Session::with_new();
+            let r = s.execute("slide.getReady", &json!({"slots": slots, "seed": seed})).unwrap_or_else(|e| panic!("seed {seed}: {e}"));
+            assert_eq!(r["questions"][1], "alg-005", "seed {seed}");
+        }
+    }
+
+    #[test]
+    fn every_starter_question_reaches_the_slide_text_unchanged() {
+        // Many seeds, so every question gets drawn: the text on the slide must be the bank's text.
+        let bank = crate::questions::starter().expect("bank");
+        let mut seen = std::collections::HashSet::new();
+        for seed in 0..400u64 {
+            let mut s = Session::with_new();
+            let r = s.execute("slide.getReady", &json!({"seed": seed, "count": 6})).expect("get ready");
+            let i = r["index"].as_u64().expect("index") as usize;
+            let texts = ready_texts(&s, i);
+            for id in r["questions"].as_array().expect("ids") {
+                let q = bank.questions.iter().find(|q| Some(q.id.as_str()) == id.as_str()).expect("question");
+                assert!(texts.iter().any(|t| t.ends_with(&q.text)), "seed {seed}: {:?} is not on the slide: {texts:?}", q.text);
+                seen.insert(q.id.clone());
+            }
+        }
+        let usable = bank.questions.iter().filter(|q| !q.needs_diagram).count();
+        assert_eq!(seen.len(), usable, "every usable question was drawn at least once");
     }
 
     #[test]

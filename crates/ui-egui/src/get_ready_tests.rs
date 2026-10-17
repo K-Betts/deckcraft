@@ -78,7 +78,7 @@ fn the_dialog_has_a_topic_and_level_for_every_question_and_uses_them() {
     let texts = slide_texts(&h);
     let find = |n: usize| {
         let t = texts.iter().find(|t| t.starts_with(&format!("{n}.  "))).unwrap();
-        bank.questions.iter().find(|q| t.ends_with(&q.text)).unwrap().clone()
+        bank.questions.iter().find(|q| t.ends_with(&q.text)).unwrap_or_else(|| panic!("no bank question matches the slide text {t:?}")).clone()
     };
     assert_eq!((find(2).topic.as_str(), find(2).difficulty), ("Algebra", 3));
     assert_eq!((find(4).topic.as_str(), find(4).difficulty), ("Number", 1));

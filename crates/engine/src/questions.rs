@@ -146,6 +146,50 @@ impl Bank {
     }
 }
 
+impl Bank {
+    /// Every usable question matching `filter` (figure questions are skipped).
+    pub fn candidates(&self, filter: &Filter) -> Vec<&Question> {
+        self.questions
+            .iter()
+            .filter(|q| !q.needs_diagram)
+            .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
+            .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
+            .collect()
+    }
+
+    /// One different question for each filter, in the filters' order, chosen by `seed`, or `None`
+    /// when no such set exists. It fills the most tightly constrained slots first and backtracks,
+    /// so a slot left on "any" can never take the only question another slot needs.
+    pub fn assign(&self, filters: &[Filter], seed: u64) -> Option<Vec<&Question>> {
+        let mut pools: Vec<Vec<&Question>> = filters.iter().map(|f| self.candidates(f)).collect();
+        let mut rng = seed;
+        for pool in &mut pools {
+            for i in (1..pool.len()).rev() {
+                let j = (splitmix(&mut rng) % (i as u64 + 1)) as usize;
+                pool.swap(i, j);
+            }
+        }
+        let mut order: Vec<usize> = (0..filters.len()).collect();
+        order.sort_by_key(|&i| (pools[i].len(), i));
+        let mut chosen: Vec<Option<&Question>> = vec![None; filters.len()];
+        fn go<'a>(k: usize, order: &[usize], pools: &[Vec<&'a Question>], chosen: &mut Vec<Option<&'a Question>>) -> bool {
+            let Some(&slot) = order.get(k) else { return true };
+            for q in pools.get(slot).map(|p| p.as_slice()).unwrap_or_default() {
+                if chosen.iter().flatten().any(|c| c.id == q.id) {
+                    continue;
+                }
+                chosen[slot] = Some(q);
+                if go(k + 1, order, pools, chosen) {
+                    return true;
+                }
+                chosen[slot] = None;
+            }
+            false
+        }
+        go(0, &order, &pools, &mut chosen).then(|| chosen.into_iter().flatten().collect())
+    }
+}
+
 fn splitmix(state: &mut u64) -> u64 {
     *state = state.wrapping_add(0x9E37_79B9_7F4A_7C15);
     let mut z = *state;
@@ -209,6 +253,23 @@ mod tests {
         }
         assert!(!used.is_empty(), "there are algebra level-1 questions");
         assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None }, 1, &[]).is_none());
+    }
+
+    #[test]
+    fn a_loose_slot_never_takes_the_only_question_a_strict_slot_needs() {
+        let bank = starter().unwrap();
+        let strict = Filter { topic: Some("Algebra".into()), difficulty: Some(3) };
+        assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one algebra stretch question");
+        for seed in 0..300 {
+            let got = bank.assign(&[Filter::default(), strict.clone(), Filter::default(), Filter::default()], seed).expect("a set exists");
+            assert_eq!(got[1].id, "alg-005");
+            let mut ids: Vec<_> = got.iter().map(|q| q.id.clone()).collect();
+            ids.sort();
+            ids.dedup();
+            assert_eq!(ids.len(), 4, "all different");
+        }
+        let impossible = bank.assign(&[strict.clone(), strict], 1);
+        assert!(impossible.is_none(), "two questions cannot both be the one algebra stretch question");
     }
 
     #[test]

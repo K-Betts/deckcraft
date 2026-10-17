@@ -153,6 +153,12 @@ fn contextual(app: &SlideApp) -> Vec<&'static str> {
 
 const TABS: [&str; 10] = ["Home", "Insert", "Draw", "Design", "Transitions", "Animations", "Slide Show", "Record", "Review", "View"];
 
+/// Height of the tab row, the card's inner padding, its side margin, and the gap under it.
+const TAB_ROW: f32 = 40.0;
+const CARD_PAD: f32 = 12.0;
+const CARD_MARGIN: f32 = 12.0;
+const CARD_GAP: f32 = 8.0;
+
 /// Tab row and the ribbon card.
 pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
@@ -160,22 +166,37 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     if !TABS.contains(&app.ui.tab.as_str()) && !ctx_tabs.contains(&app.ui.tab.as_str()) {
         app.ui.tab = "Home".into();
     }
-    let h = 28.0 + if app.ui.ribbon_collapsed { 4.0 } else { RIBBON_H + 20.0 };
+    // The tab row, then a floating card with room around its contents (the design system's
+    // "roomy ribbon": space between groups instead of rules, rounded, softly raised).
+    let h = TAB_ROW + if app.ui.ribbon_collapsed { 6.0 } else { CARD_PAD * 2.0 + RIBBON_H + CARD_GAP };
     egui::Panel::top("ribbon").exact_size(h).frame(egui::Frame::NONE.fill(t.chrome)).show(ui, |ui| {
         let rect = ui.max_rect();
-        // Tabs. File comes first and opens the File tab's full-window view (Backstage), as in
-        // PowerPoint.
-        let mut x = rect.min.x + 12.0;
-        let y = rect.min.y + 2.0;
-        {
-            let w = ui.fonts_mut(|f| f.layout_no_wrap("File".to_string(), theme::font(13.0), t.text).size().x) + 18.0;
-            let r = Rect::from_min_size(pos2(x, y), vec2(w, 24.0));
-            let resp = ui.interact(r, ui.id().with("tab_file"), Sense::click());
-            resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, "File"));
-            if resp.hovered() {
-                ui.painter().rect_filled(r.shrink2(vec2(2.0, 2.0)), CornerRadius::same(4), t.hover);
+        // Tabs: text in a row of pills, the current one a white raised pill with the accent
+        // colour as its text. File comes first and opens the File tab's full-window view
+        // (Backstage), as in PowerPoint.
+        let mut x = rect.min.x + CARD_MARGIN;
+        let y = rect.min.y + 5.0;
+        let pill = |ui: &mut Ui, x: f32, label: &str, id: egui::Id, active: bool, ink: egui::Color32| -> (egui::Response, f32) {
+            let font = if active { theme::bold(13.5) } else { theme::font(13.5) };
+            let w = ui.fonts_mut(|f| f.layout_no_wrap(label.to_string(), font.clone(), t.text).size().x) + 26.0;
+            let r = Rect::from_min_size(pos2(x, y), vec2(w, 30.0));
+            let resp = ui.interact(r, id, Sense::click());
+            // Only File is named for screen readers and tests (as before): naming every tab
+            // would make a tab and a dialog button of the same name ("Insert") ambiguous.
+            if label == "File" {
+                resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, label));
             }
-            ui.painter().text(r.center(), Align2::CENTER_CENTER, "File", theme::font(13.0), t.text);
+            if active {
+                ui.painter().add(egui::epaint::Shadow { offset: [0, 1], blur: 6, spread: 0, color: t.shadow }.as_shape(r, CornerRadius::same(15)));
+                ui.painter().rect_filled(r, CornerRadius::same(15), t.card);
+            } else if resp.hovered() {
+                ui.painter().rect_filled(r, CornerRadius::same(15), t.hover);
+            }
+            ui.painter().text(r.center(), Align2::CENTER_CENTER, label, font, ink);
+            (resp, w)
+        };
+        {
+            let (resp, w) = pill(ui, x, "File", ui.id().with("tab_file"), false, t.text);
             if resp.on_hover_text("File (Alt+F)").clicked() {
                 app.open_backstage(crate::backstage::Page::Home);
             }
@@ -183,21 +204,9 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         }
         let all: Vec<(&str, bool)> = TABS.iter().map(|s| (*s, false)).chain(ctx_tabs.iter().map(|s| (*s, true))).collect();
         for (name, contextual) in all {
-            let font = theme::font(13.0);
-            let w = ui.fonts_mut(|f| f.layout_no_wrap(name.to_string(), font.clone(), t.text).size().x) + 18.0;
-            let r = Rect::from_min_size(pos2(x, y), vec2(w, 24.0));
-            let resp = ui.interact(r, ui.id().with(("tab", name)), Sense::click());
             let active = app.ui.tab == name;
-            if resp.hovered() && !active {
-                ui.painter().rect_filled(r.shrink2(vec2(2.0, 2.0)), CornerRadius::same(4), t.hover);
-            }
-            let col = if contextual { t.contextual } else { t.text };
-            let f = if active { theme::bold(13.0) } else { font };
-            ui.painter().text(r.center(), Align2::CENTER_CENTER, name, f, col);
-            if active {
-                let uw = (w - 20.0).max(16.0);
-                ui.painter().rect_filled(Rect::from_center_size(pos2(r.center().x, r.max.y - 1.0), vec2(uw, 3.0)), CornerRadius::same(1), t.accent);
-            }
+            let ink = if active || contextual { if contextual { t.contextual } else { t.accent } } else { t.text_dim };
+            let (resp, w) = pill(ui, x, name, ui.id().with(("tab", name)), active, ink);
             if resp.clicked() {
                 if active {
                     app.ui.ribbon_collapsed = !app.ui.ribbon_collapsed;
@@ -214,39 +223,50 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         if app.ui.ribbon_collapsed {
             return;
         }
-        // The white card.
-        let card = Rect::from_min_max(pos2(rect.min.x + 8.0, rect.min.y + 30.0), pos2(rect.max.x - 8.0, rect.min.y + 30.0 + RIBBON_H + 10.0));
-        ui.painter().rect_filled(card.translate(vec2(0.0, 1.0)), CornerRadius::same(10), t.card_border);
-        ui.painter().rect_filled(card, CornerRadius::same(10), t.card);
-        let inner = Rect::from_min_size(pos2(card.min.x + 10.0, card.min.y + 5.0), vec2(card.width() - 20.0, RIBBON_H));
+        // The card: white, 16 radius, a hairline and a soft shadow.
+        let card = Rect::from_min_max(
+            pos2(rect.min.x + CARD_MARGIN, rect.min.y + TAB_ROW),
+            pos2(rect.max.x - CARD_MARGIN, rect.min.y + TAB_ROW + CARD_PAD * 2.0 + RIBBON_H),
+        );
+        let corner = CornerRadius::same(theme::radius::SURFACE);
+        ui.painter().add(egui::epaint::Shadow { offset: [0, 4], blur: 18, spread: 0, color: t.shadow }.as_shape(card, corner));
+        ui.painter().rect_filled(card, corner, t.card);
+        ui.painter().rect_stroke(card, corner, egui::Stroke::new(1.0, t.card_border), egui::StrokeKind::Inside);
+        let inner =
+            Rect::from_min_size(pos2(card.min.x + CARD_MARGIN - 2.0, card.min.y + CARD_PAD), vec2(card.width() - CARD_MARGIN * 2.0 + 4.0, RIBBON_H));
         let mut cui = ui.new_child(egui::UiBuilder::new().max_rect(inner).layout(egui::Layout::left_to_right(egui::Align::Min)));
         cui.set_clip_rect(inner.expand2(vec2(0.0, 3.0)));
         cui.spacing_mut().item_spacing.x = 1.0;
-        let ui = &mut cui;
-        let tab = app.ui.tab.clone();
-        match tab.as_str() {
-            "Home" => home(app, ui),
-            "Insert" => insert(app, ui),
-            "Draw" => draw(app, ui),
-            "Design" => design(app, ui),
-            "Transitions" => transitions(app, ui),
-            "Animations" => animations(app, ui),
-            "Slide Show" => slide_show(app, ui),
-            "Record" => record(app, ui),
-            "Review" => review(app, ui),
-            "View" => view(app, ui),
-            "Shape Format" => shape_format(app, ui),
-            "Picture Format" => picture_format(app, ui),
-            "Table Design" => table_design(app, ui),
-            "Layout" => table_layout(app, ui),
-            "Chart Design" => chart_design(app, ui),
-            "SmartArt Design" => smartart_design(app, ui),
-            "Playback" => playback(app, ui),
-            "Slide Master" => slide_master(app, ui),
-            "Handout Master" => handout_master(app, ui),
-            "Notes Master" => notes_master(app, ui),
-            _ => {}
+        {
+            let ui = &mut cui;
+            let tab = app.ui.tab.clone();
+            match tab.as_str() {
+                "Home" => home(app, ui),
+                "Insert" => insert(app, ui),
+                "Draw" => draw(app, ui),
+                "Design" => design(app, ui),
+                "Transitions" => transitions(app, ui),
+                "Animations" => animations(app, ui),
+                "Slide Show" => slide_show(app, ui),
+                "Record" => record(app, ui),
+                "Review" => review(app, ui),
+                "View" => view(app, ui),
+                "Shape Format" => shape_format(app, ui),
+                "Picture Format" => picture_format(app, ui),
+                "Table Design" => table_design(app, ui),
+                "Layout" => table_layout(app, ui),
+                "Chart Design" => chart_design(app, ui),
+                "SmartArt Design" => smartart_design(app, ui),
+                "Playback" => playback(app, ui),
+                "Slide Master" => slide_master(app, ui),
+                "Handout Master" => handout_master(app, ui),
+                "Notes Master" => notes_master(app, ui),
+                _ => {}
+            }
         }
+        // How far the tab's contents run past the card's right edge (0 when they fit): shown in
+        // `ui.inspect` so a layout change can be checked against the real window width.
+        app.ribbon_hidden = (cui.min_rect().max.x - inner.max.x).max(0.0);
     });
 }
 
@@ -484,7 +504,7 @@ fn font_group(app: &mut SlideApp, ui: &mut Ui, st: &Value) {
                 let size = st.get("size").and_then(Value::as_f64);
                 let fams = font_families(app);
                 let theme_fonts: Vec<String> = fams.iter().take(2).cloned().collect();
-                dropdown(ui, "font", &font, 150.0, en, |ui| {
+                dropdown(ui, "font", &font, 124.0, en, |ui| {
                     for (k, f) in fams.iter().enumerate() {
                         let label = if k == 0 && theme_fonts.len() == 2 {
                             format!("{f} (Headings)")

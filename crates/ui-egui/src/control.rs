@@ -91,6 +91,7 @@ pub fn inspect(app: &SlideApp, ctx: &egui::Context) -> Value {
         "ui": serde_json::to_value(&app.ui).unwrap_or_default(),
         "tool": serde_json::to_value(&app.session.tool.kind).unwrap_or_default(),
         "window": [r.width(), r.height()],
+        "ribbonHidden": app.ribbon_hidden,
         "canvasRect": app.canvas_rect.map(|c| json!([c.left(), c.top(), c.width(), c.height()])),
         "slideRect": app.slide_rect.map(|c| json!([c.left(), c.top(), c.width(), c.height()])),
         "canvasScale": app.canvas_scale,
