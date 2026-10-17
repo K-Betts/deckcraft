@@ -59,6 +59,20 @@ These are the practical things to keep in mind and fix over time.
 - **Sandboxed renderer.** The render and pptx crates never read or write files; only the
   CLI/UI layer touches the filesystem.
 
+### Updates from GitHub (optional, off by default)
+`crates/update` (native builds only). Off until the teacher turns on *Options ▸ Updates ▸ Check for a
+newer version when DeckCraft starts*, or presses *Check for updates now…*.
+
+| When | Host | What is sent |
+| --- | --- | --- |
+| Only on that switch or button | `api.github.com` | One GET for this fork's latest release. No id, no version, no account (the usual HTTP headers only). |
+| Only after the teacher presses *Update now* | `github.com` (release download, which redirects to GitHub's storage) | Two GETs: the app zip and its `.sha256` file. |
+
+The zip is kept only if its SHA-256 matches the checksum file; the new app's code signature is
+checked before it replaces the old one; if any step fails the old app stays. The checksum guards
+against a damaged download, not a hostile release: trust rests on HTTPS and on who can publish
+releases to this repository. Downloads are only accepted from `github.com`. See `docs/updating.md`.
+
 ### Google Drive (optional, off by default)
 Added in `crates/drive` (native builds only; never in the web build). What it talks to, when, and
 what it sends:
@@ -172,6 +186,7 @@ directly without duplication.
 | 2026-10-16 | Equations imported from PowerPoint: each equation of a display group is its own line (`y = 2x + 1` over `y = 3 − 2x`, not run together), and relations and binary operators are spaced as PowerPoint draws them. Checked on slides 10 and 12 of a real 54-slide deck against PowerPoint's own PDF export; shapes and pictures already matched. Fractions, powers and roots are not yet checked. | `fix/equation-spacing-and-breaks` |
 | 2026-10-17 | UX review and build (`docs/design/ux-review.md`): neutral install with maths as an opt-in subject pack (Preferences, Home card); upstream Discord/website/source links hidden by default; Teacher Mode palette regrouped with 44pt targets and a tile-based maths panel; timer reads as big digits only while running (the HH:MM:SS row used to wrap), amber at 30 s and red at 10 s; Insert > Get Ready Starter inserts four questions as plain text boxes (answers in the notes; 20 PLACEHOLDER questions in `assets/questions/bank.json`, to be replaced by Kieran's bank); optional Google Drive (off by default, `drive.file` scope only; see Security posture). Not checked: projector, touch hardware, PowerPoint opening a Get Ready slide, Drive against real Google, `cargo audit`. Diagram questions are a follow-up. | `feat/ux-review` |
 | 2026-10-17 | Get Ready starter: each question now has its own topic and level (Secure / Core / Stretch), 2 to 6 questions, a "Set all to" row, and the last choices are remembered; `slide.getReady` takes `slots`. Not checked: opening the slide in PowerPoint. | `feat/get-ready-per-question` |
+| 2026-10-17 | In-app updates (Mac): *Update available* pill in the status bar and a Home card; *Update now* downloads, checks and swaps the app, then *Restart now* (refuses with unsaved work). Off by default (Options ▸ Updates). New workflow `mac-update.yml` publishes a release on a manual run. Not checked: a real update end to end (no release exists yet), Intel Macs, Windows/Linux. | `feat/in-app-update` |
 
 ## Known gaps
 

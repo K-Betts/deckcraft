@@ -39,6 +39,7 @@ pub mod theme;
 pub mod thumbs;
 pub mod toast;
 pub mod uifonts;
+pub mod update_ui;
 pub mod widgets;
 
 use std::collections::HashMap;
@@ -226,6 +227,8 @@ pub struct Services {
     pub audio_out: Option<Box<dyn deckcraft_media::AudioOut>>,
     /// Google Drive, when the host was built with it (desktop only). See [`drive_ui`].
     pub drive: Option<Box<dyn drive_ui::DriveBackend>>,
+    /// Updating from inside the app, when the host can (installed Mac app). See [`update_ui`].
+    pub updates: Option<Box<dyn update_ui::UpdateBackend>>,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -291,6 +294,9 @@ pub struct UiState {
     pub subjects_hint_dismissed: bool,
     /// Google Drive features are switched on (Preferences). Off by default: signed out, silent.
     pub drive_enabled: bool,
+    /// Ask GitHub for a newer version when DeckCraft starts. Off by default: nothing contacts the
+    /// network until the teacher turns this on or presses Check now.
+    pub check_for_updates: bool,
     /// The Get Ready starter's last choices, one `(topic, level)` per question; topic "" and level 0 mean any.
     pub get_ready_slots: Vec<(String, u8)>,
 }
@@ -330,6 +336,7 @@ impl Default for UiState {
             packs: Default::default(),
             subjects_hint_dismissed: false,
             drive_enabled: false,
+            check_for_updates: false,
             get_ready_slots: vec![(String::new(), 0); 4],
         }
     }
@@ -420,6 +427,10 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
     ("app.dismissSubjectsHint", "Dismiss the Subjects Hint", None, "{}: stop showing the Home card that offers subject tools"),
+    ("app.updates", "Check for Updates at Start", None, "{on?: bool}: ask GitHub for a newer version when DeckCraft starts (off by default)"),
+    ("update.check", "Check for Updates", None, "{}: ask GitHub whether a newer version exists"),
+    ("update.install", "Update DeckCraft", None, "{}: download and install the version `update.check` found"),
+    ("update.restart", "Restart to Finish Update", None, "{}: restart into the installed update (refuses while there are unsaved changes)"),
     ("app.drive", "Google Drive Features", None, "{on?: bool}: switch the optional Google Drive features on or off (off by default)"),
     ("drive.signIn", "Sign in to Google Drive", None, "{}: opens your browser; asks only for files DeckCraft saves"),
     ("drive.cancel", "Cancel Google Sign-in", None, "{}"),
@@ -498,6 +509,9 @@ pub struct SlideApp {
     /// Maths tools available to the current local teacher account.
     pub maths_tools: maths_tools::MathsToolsSettings,
     pub drive: drive_ui::DriveUi,
+    pub(crate) update_started: bool,
+    /// An update was installed and the teacher chose Restart: close the window on the next frame.
+    pub(crate) pending_quit: bool,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -599,6 +613,8 @@ impl SlideApp {
             ui: UiState::default(),
             maths_tools: maths_tools::MathsToolsSettings::default(),
             drive: Default::default(),
+            update_started: false,
+            pending_quit: false,
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),
@@ -1042,6 +1058,8 @@ impl SlideApp {
                     self.ui.packs.remove(id);
                 }
             }
+            "app.updates" => self.ui.check_for_updates = self.flag(p, self.ui.check_for_updates),
+            "update.check" | "update.install" | "update.restart" => return self.run_update(id),
             "app.drive" => {
                 self.ui.drive_enabled = self.flag(p, self.ui.drive_enabled);
                 if !self.ui.drive_enabled {
@@ -1646,6 +1664,11 @@ impl SlideApp {
         self.drain_control(ctx);
         self.poll_opening();
         self.poll_drive();
+        self.poll_updates();
+        if self.pending_quit {
+            self.pending_quit = false;
+            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
+        }
         if self.fonts_ready {
             self.drain_inbox();
         }
@@ -2150,6 +2173,8 @@ mod teacher_tests;
 mod texture_limit_tests;
 #[cfg(test)]
 mod ui_soak_tests;
+#[cfg(test)]
+mod update_tests;
 
 #[cfg(test)]
 #[path = "datetime_tests.rs"]

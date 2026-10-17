@@ -58,6 +58,7 @@ fn title(id: &str) -> &'static str {
         "equation" => "Equation",
         "dateTime" => "Date and Time",
         "getReady" => "Get Ready Starter",
+        "update" => "Update DeckCraft",
         "spelling" => "Spelling",
         "pasteSpecial" => "Paste Special",
         "find" => "Find and Replace",
@@ -149,6 +150,7 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
         "packs": app.ui.packs,
         "communityLinks": app.ui.show_community_links,
         "drive": app.ui.drive_enabled,
+        "updates": app.ui.check_for_updates,
         "prefs": serde_json::to_value(&app.session.prefs).unwrap_or(Value::Null),
     })
 }
@@ -168,6 +170,9 @@ fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
         && on != app.ui.drive_enabled
     {
         let _ = app.run("app.drive", json!({"on": on}));
+    }
+    if let Some(on) = before.get("updates").and_then(Value::as_bool) {
+        app.ui.check_for_updates = on;
     }
     if let Some(on) = before.get("communityLinks").and_then(Value::as_bool) {
         app.ui.show_community_links = on;
@@ -2182,6 +2187,18 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 }
                 ui.label(egui::RichText::new(pack.blurb).size(11.0).color(Tokens::get(ui.ctx()).text_faint));
             }
+            if app.services.updates.is_some() {
+                ui.add_space(4.0);
+                ui.label(egui::RichText::new("Updates").font(theme::bold(13.0)));
+                let mut auto = app.ui.check_for_updates;
+                if ui.checkbox(&mut auto, "Check for a newer version when DeckCraft starts (contacts github.com)").changed() {
+                    let _ = app.run("app.updates", json!({"on": auto}));
+                }
+                if ui.button("Check for updates now…").clicked() {
+                    let _ = app.run("update.check", json!({}));
+                    app.dialog = Some(Dialog::new("update"));
+                }
+            }
             ui.add_space(4.0);
             ui.label(egui::RichText::new("Google Drive").font(theme::bold(13.0)));
             let mut drive = app.ui.drive_enabled;
@@ -2223,6 +2240,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
         "getReady" => get_ready_dialog(app, ui, d),
+        "update" => crate::update_ui::dialog(app, ui),
         _ => {
             ui.label(format!("“{}” is not available yet.", d.id));
             let (ok, cancel) = buttons(ui, "OK");
