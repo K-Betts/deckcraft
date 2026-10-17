@@ -24,6 +24,8 @@ mod graphics;
 mod logging;
 #[cfg(not(target_arch = "wasm32"))]
 mod pasteboard;
+#[cfg(not(target_arch = "wasm32"))]
+mod update;
 
 use deckcraft_engine::Session;
 use deckcraft_ui_egui::{Services, SlideApp};
@@ -119,6 +121,7 @@ fn services() -> Services {
         write: Some(Box::new(|p: &str, b: &[u8]| std::fs::write(p, b).map_err(|e| e.to_string()))),
         // Constructing the backend reads no keychain and opens no connection; that waits for
         // Preferences ▸ Use Google Drive and the Sign in button.
+        updates: config_dir().map(|d| Box::new(update::backend(d.join("updates"))) as Box<dyn deckcraft_ui_egui::update_ui::UpdateBackend>),
         drive: config_dir().map(|d| Box::new(drive::backend(d.join("drive-cache"))) as Box<dyn deckcraft_ui_egui::drive_ui::DriveBackend>),
         clipboard_image: Some(Box::new(pasteboard::image_png)),
         clipboard_html: Some(Box::new(pasteboard::html)),

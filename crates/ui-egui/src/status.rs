@@ -32,6 +32,9 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
             p.text(pos2(rect.min.x + 290.0, rect.center().y), Align2::LEFT_CENTER, &msg, theme::font(12.0), t.accent);
             ui.ctx().request_repaint_after(std::time::Duration::from_millis(500));
         }
+        if crate::update_ui::status_chip(app, ui, rect) {
+            app.dialog = Some(crate::dialogs::Dialog::new("update"));
+        }
         let mut right = ui.new_child(
             egui::UiBuilder::new()
                 .max_rect(Rect::from_min_max(pos2(rect.max.x - 560.0, rect.min.y), pos2(rect.max.x - 8.0, rect.max.y)))

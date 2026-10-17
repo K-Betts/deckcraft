@@ -1018,6 +1018,7 @@ dependencies = [
  "deckcraft-engine",
  "deckcraft-media",
  "deckcraft-ui-egui",
+ "deckcraft-update",
  "eframe",
  "egui",
  "image",
@@ -1313,6 +1314,17 @@ dependencies = [
  "serde",
  "serde_json",
  "toml",
+]
+
+[[package]]
+name = "deckcraft-update"
+version = "0.7.0"
+dependencies = [
+ "log",
+ "serde",
+ "serde_json",
+ "sha2",
+ "ureq",
 ]
 
 [[package]]

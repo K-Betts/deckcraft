@@ -1,0 +1,17 @@
+[package]
+name = "deckcraft-update"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "In-app updates for DeckCraft: look for a newer GitHub release, download it, check it, swap the app. Native only; never built for wasm."
+
+[lints]
+workspace = true
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+log = { workspace = true }
+# Already used by deckcraft-drive; no new packages enter Cargo.lock.
+ureq = "3"
+sha2 = "0.10"

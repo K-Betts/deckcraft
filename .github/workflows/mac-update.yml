@@ -1,0 +1,74 @@
+name: Publish Mac update
+
+# Builds DeckCraft for Apple Silicon Macs and publishes it as a GitHub Release that the app's
+# "Update available" check finds. NOTHING runs automatically: you start it yourself from
+# GitHub > Actions > "Publish Mac update" > Run workflow. Until you do, no build is public.
+#
+# What the app looks for (crates/update/src/release.rs): the latest release must contain
+#   DeckCraft-macos-aarch64-<7 character commit>.zip   and   <same name>.sha256
+#
+# The app is ad-hoc signed (no Apple Developer account): fine for the Mac that builds and
+# updates itself; another Mac's Gatekeeper will warn on a first manual download.
+on:
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: "What's new (shown in the app's update dialog)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: mac-update
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+  # Same craft-fonts commit as ci.yml and release.yml (Latin presentation fonts).
+  CRAFT_FONTS_REF: 43913056ce82a3fdad0ef69f6b88d1dc922a8104
+
+jobs:
+  mac:
+    runs-on: macos-14 # Apple Silicon
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out craft-fonts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: storytold/craft-fonts
+          ref: ${{ env.CRAFT_FONTS_REF }}
+          path: craft-fonts
+      - uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable
+        with:
+          targets: aarch64-apple-darwin
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: mac-update
+      - name: Build the app
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: packaging/macos/package.sh --arch aarch64
+      - name: Zip the app and write its checksum
+        id: pack
+        run: |
+          SHA7="$(git rev-parse --short=7 HEAD)"
+          NAME="DeckCraft-macos-aarch64-${SHA7}.zip"
+          mkdir -p out
+          ditto -c -k --keepParent target/macos-package/DeckCraft.app "out/${NAME}"
+          (cd out && shasum -a 256 "${NAME}" > "${NAME}.sha256")
+          echo "sha7=${SHA7}" >> "$GITHUB_OUTPUT"
+          echo "name=${NAME}" >> "$GITHUB_OUTPUT"
+          ls -l out
+      - name: Publish the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          NOTES: ${{ inputs.notes }}
+        run: |
+          TAG="build-${{ steps.pack.outputs.sha7 }}"
+          BODY="${NOTES:-Built from $(git log -1 --pretty=%s).}"
+          gh release create "${TAG}" \
+            "out/${{ steps.pack.outputs.name }}" "out/${{ steps.pack.outputs.name }}.sha256" \
+            --title "DeckCraft ${TAG}" --notes "${BODY}" --latest
