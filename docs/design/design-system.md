@@ -115,8 +115,8 @@ as above. Nothing is hover-only. Targets as above.
 
 ## Rollout order
 
-1. **Foundation** (this PR): colour, shape, space and type tokens; global widget style; this document.
-2. **Chrome:** title bar, tabs, the floating roomy ribbon, status bar.
+1. **Foundation** (done): colour, shape, space and type tokens; global widget style; this document.
+2. **Chrome** (done): tab pills, the floating roomy ribbon card, group gaps instead of rules. Still to do here: a *responsive* ribbon (groups folding into a "more" menu in narrow windows) and group labels under each group.
 3. **Panes and Home:** thumbnails, notes, task panes, the start screen, dialogs.
 4. **Teacher Mode:** palette, timer, maths tiles restyled to the system.
 5. **Icons and polish:** icon weight and any Figtree upgrade; dark-mode pass; system light/dark.
