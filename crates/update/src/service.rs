@@ -122,6 +122,7 @@ mod tests {
     use super::*;
     use crate::net::fake::Fake;
 
+    #[cfg(target_os = "macos")]
     const URL: &str = "https://api.github.com/repos/K-Betts/deckcraft/releases/latest";
 
     fn wait(u: &mut Updater, done: impl Fn(&State) -> bool) {
@@ -135,6 +136,7 @@ mod tests {
         }
     }
 
+    #[cfg(target_os = "macos")]
     fn json(sha: &str) -> String {
         let z = format!("DeckCraft-macos-{}-{sha}.zip", std::env::consts::ARCH);
         format!(
