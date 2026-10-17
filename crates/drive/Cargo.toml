@@ -30,5 +30,7 @@ keyring = { version = "3", default-features = false, features = ["apple-native"]
 [target.'cfg(windows)'.dependencies]
 keyring = { version = "3", default-features = false, features = ["windows-native"] }
 
+# Linux and the BSDs: the kernel keyring. (The desktop Secret Service store needs the system
+# libdbus-1-dev package to build, which broke CI and every Linux build for a feature nobody ships there.)
 [target.'cfg(all(unix, not(target_os = "macos")))'.dependencies]
-keyring = { version = "3", default-features = false, features = ["sync-secret-service", "crypto-rust"] }
+keyring = { version = "3", default-features = false, features = ["linux-native"] }

@@ -610,13 +610,6 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        assert!(harness.query_by_label("Open Compass").is_none());
-        harness.get_by_label("Compass").click();
-        harness.run_steps(2);
-        assert!(harness.query_by_label("Open Compass").is_some());
-        harness.get_by_label("Ruler").click();
-        harness.run_steps(2);
-        assert!(harness.query_by_label("Open Ruler").is_none());
         assert_eq!(harness.query_all_by_label("Compass").count(), 0, "not chosen, so no tile");
         harness.get_by_label("Choose tools").click();
         harness.run_steps(2);
@@ -637,9 +630,6 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        assert!(harness.query_by_label("Open Ruler").is_some());
-        assert!(harness.query_by_label("Open Number line").is_none());
-        assert!(harness.query_by_label("Open Compass").is_none());
         assert!(harness.query_by_label("Ruler").is_some());
         assert!(harness.query_by_label("Number line").is_none());
         assert!(harness.query_by_label("Compass").is_none());
@@ -658,7 +648,6 @@ mod tests {
             state,
         );
         harness.run_steps(2);
-        harness.get_by_label("Open Ruler").click();
         harness.get_by_label("Ruler").click();
         harness.run_steps(2);
         assert!(harness.query_by_label("Centimetres").is_some());
@@ -678,8 +667,6 @@ mod tests {
         );
         harness.run_steps(2);
         for tool in MathsTool::ALL {
-            let label = format!("Open {}", tool.label());
-            harness.get_by_label(&label).click();
             harness.get_by_label(tool.label()).click();
             harness.run_steps(2);
         }
