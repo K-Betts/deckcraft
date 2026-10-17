@@ -189,11 +189,9 @@ pub fn home_card(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
     ui.add_space(12.0);
     egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
-        ui.horizontal(|ui| {
-            ui.label(format!("A new version of DeckCraft is available ({sha})."));
-            if ui.button("See what's new").clicked() {
-                app.dialog = Some(crate::dialogs::Dialog::new("update"));
-            }
-        });
+        ui.add(egui::Label::new(format!("A new version of DeckCraft is available ({sha}).")).wrap());
+        if ui.button("See what's new").clicked() {
+            app.dialog = Some(crate::dialogs::Dialog::new("update"));
+        }
     });
 }

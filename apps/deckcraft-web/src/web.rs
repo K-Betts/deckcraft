@@ -38,18 +38,23 @@ pub fn start() {
                     }
                     let inbox: Inbox = Inbox::default();
                     let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone()));
+                    let saved = load_settings(&mut app);
                     let q = query();
-                    if !q.contains("blank") {
+                    // A teacher opens the app to make or open a deck, so it starts on the Home
+                    // screen with an empty presentation behind it; `?sample` loads the demo deck.
+                    if q.contains("sample") {
                         if let Err(e) = deckcraft_engine::sample::open_sample(&mut app.session) {
                             log::error!("sample deck: {e}");
                         }
                     } else if let Err(e) = app.run("file.new", serde_json::json!({})) {
                         log::error!("new presentation: {e}");
+                    } else if !q.contains("show") {
+                        let _ = app.run("app.home", serde_json::json!({"on": true}));
                     }
                     if q.contains("show") {
                         app.start_show(0, false);
                     }
-                    Ok(Box::new(WebShell { app, inbox }))
+                    Ok(Box::new(WebShell { app, inbox, saved, last_save: 0.0 }))
                 }),
             )
             .await;
@@ -71,6 +76,62 @@ fn query() -> String {
 struct WebShell {
     app: SlideApp,
     inbox: Inbox,
+    /// The settings text as last written to local storage, to write only when something changed.
+    saved: [String; 3],
+    last_save: f64,
+}
+
+const SETTINGS_KEYS: [&str; 3] = ["deckcraft.ui", "deckcraft.prefs", "deckcraft.mathsTools"];
+/// The most often (seconds) the settings are written to local storage.
+const SAVE_EVERY: f64 = 1.0;
+
+fn storage() -> Option<web_sys::Storage> {
+    web_sys::window()?.local_storage().ok().flatten()
+}
+
+/// Read the saved settings into `app` (a missing, blocked or damaged store leaves the defaults:
+/// private windows and locked-down school browsers can refuse local storage).
+fn load_settings(app: &mut SlideApp) -> [String; 3] {
+    use deckcraft_ui_egui::settings::text;
+    let Some(s) = storage() else { return Default::default() };
+    let get = |i: usize| s.get_item(SETTINGS_KEYS[i]).ok().flatten().unwrap_or_default();
+    let saved = [get(0), get(1), get(2)];
+    if let Some(ui) = text::parse_ui(&saved[0]) {
+        app.ui = ui;
+    }
+    if let Some(prefs) = text::parse_prefs(&saved[1]) {
+        app.session.prefs = prefs;
+    }
+    if let Some(m) = text::parse_maths_tools(&saved[2]) {
+        app.maths_tools = m;
+    }
+    saved
+}
+
+impl WebShell {
+    /// Keep the three settings in local storage up to date. They are compared every frame (three
+    /// small JSON strings), and written when they differ, at most once a `SAVE_EVERY` seconds. A
+    /// change held back by that limit asks for one more frame when the wait is over, because the
+    /// app only runs a frame when something happens. A refused write is ignored; nothing depends on it.
+    fn save_settings(&mut self, ctx: &egui::Context) {
+        use deckcraft_ui_egui::settings::text;
+        let Some(s) = storage() else { return };
+        let now = ctx.input(|i| i.time);
+        let now_text = [text::ui(&self.app.ui), text::prefs(&self.app.session.prefs), text::maths_tools(&self.app.maths_tools)];
+        if now_text == self.saved {
+            return;
+        }
+        if now - self.last_save < SAVE_EVERY {
+            ctx.request_repaint_after(std::time::Duration::from_secs_f64(SAVE_EVERY - (now - self.last_save) + 0.05));
+            return;
+        }
+        self.last_save = now;
+        for i in 0..3 {
+            if now_text[i] != self.saved[i] && s.set_item(SETTINGS_KEYS[i], &now_text[i]).is_ok() {
+                self.saved[i] = now_text[i].clone();
+            }
+        }
+    }
 }
 
 impl eframe::App for WebShell {
@@ -98,6 +159,7 @@ impl eframe::App for WebShell {
             });
         }
         self.app.logic(ctx);
+        self.save_settings(ctx);
     }
 
     fn raw_input_hook(&mut self, _ctx: &egui::Context, raw: &mut egui::RawInput) {

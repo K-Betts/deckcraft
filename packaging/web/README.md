@@ -64,8 +64,10 @@ Local test: `python3 -m http.server 8765` inside the folder, then open http://lo
 
 - The app fills the iframe and follows its size, so size the iframe and not the app.
 - Keyboard shortcuts go to the iframe after the user clicks into it, as with any embedded app.
-- **Cross-origin embeds** work. The web build keeps no preferences between visits; it starts
-  with the sample deck (or `?blank`) every time.
+- **Cross-origin embeds** work. The web build keeps the teacher's preferences (for example which
+  subject tools are on) in the browser's local storage, per site; decks are never stored: they live
+  in the files the teacher opens and saves. It starts on the Home screen with an empty
+  presentation (or `?sample` for the demo deck).
 - **Sandboxed iframes** need at least
   `sandbox="allow-scripts allow-same-origin allow-downloads allow-popups"`. Without `allow-downloads`, Save and Export (browser
   downloads) are blocked.
@@ -80,7 +82,7 @@ DeckCraft renders with wgpu. It uses **WebGPU** when the browser has it and fall
 |---|---|
 | *(none)* | WebGPU if available, otherwise WebGL2 |
 | `?webgl` | Force the WebGL2 backend (useful when a WebGPU driver misbehaves) |
-| `?blank` | Start with an empty presentation instead of the sample deck |
+| `?sample` | Start with the demo deck instead of an empty presentation |
 | `?show` | Start the slide show immediately (kiosk/embedded decks) |
 
 For example: `<iframe src="https://example.com/deckcraft/?webgl" ...>`.

@@ -147,3 +147,26 @@ fn a_downloaded_deck_opens_and_is_linked_but_not_opened_twice() {
     assert!(app.drive.message.as_ref().is_some_and(|(err, m)| *err && m.contains("already open")));
     let _ = std::fs::remove_file(&path);
 }
+
+fn prefs_harness(app: SlideApp) -> egui_kittest::Harness<'static, SlideApp> {
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.state_mut().run("app.preferences", json!({})).unwrap();
+    h.run_steps(3);
+    h
+}
+
+#[test]
+fn only_builds_with_drive_offer_the_drive_switch_in_preferences() {
+    use egui_kittest::kittest::Queryable;
+    let with = prefs_harness(app().0);
+    assert!(with.query_by_label_contains("Use Google Drive").is_some());
+    let without = prefs_harness(SlideApp::new(Session::with_new(), Services::default()));
+    assert!(without.query_by_label_contains("Use Google Drive").is_none(), "the web version has no Drive, so it does not offer it");
+    assert!(without.query_by_label_contains("Maths tools").is_some(), "the rest of Preferences is still there");
+}
