@@ -118,7 +118,7 @@ impl Tokens {
             pressed: Color32::from_rgb(0x2F, 0x36, 0x50),
             selected: Color32::from_rgb(0x27, 0x30, 0x4F),
             accent: Color32::from_rgb(0x6C, 0x8C, 0xFF),
-            accent_text: Color32::WHITE,
+            accent_text: Color32::from_rgb(0x0E, 0x12, 0x24),
             contextual: Color32::from_rgb(0x8F, 0xA8, 0xFF),
             selection: Color32::from_rgb(0xAA, 0xAA, 0xAA),
             handle_fill: Color32::WHITE,
@@ -141,6 +141,32 @@ impl Tokens {
     }
 }
 
+/// `"system"`, `"light"` or `"dark"`: how the appearance is being chosen.
+pub fn appearance_mode(follow_system: bool, b: Brightness) -> &'static str {
+    match (follow_system, b) {
+        (true, _) => "system",
+        (false, Brightness::Dark) => "dark",
+        (false, Brightness::Light) => "light",
+    }
+}
+
+/// The Appearance drop-down shared by Preferences and the File page.
+pub fn appearance_picker(app: &mut crate::SlideApp, ui: &mut egui::Ui, salt: &str) {
+    let now = appearance_mode(app.ui.follow_system, app.ui.brightness);
+    let name = |m: &str| match m {
+        "system" => "Match this computer",
+        "dark" => "Dark",
+        _ => "Light",
+    };
+    egui::ComboBox::from_id_salt(salt).width(200.0).selected_text(name(now)).show_ui(ui, |ui| {
+        for mode in ["system", "light", "dark"] {
+            if ui.selectable_label(now == mode, name(mode)).clicked() {
+                let _ = app.run("view.appearance", serde_json::json!({ "mode": mode }));
+            }
+        }
+    });
+}
+
 /// Apply tokens to egui's style.
 pub fn apply(ctx: &egui::Context, t: &Tokens) {
     let mut v = if t.dark { Visuals::dark() } else { Visuals::light() };
@@ -160,8 +186,9 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     }
     v.widgets.noninteractive.bg_stroke = Stroke::new(1.0, t.separator);
     v.widgets.inactive.weak_bg_fill = Color32::TRANSPARENT;
-    v.widgets.inactive.bg_fill = t.field_bg;
-    v.widgets.inactive.bg_stroke = Stroke::NONE;
+    v.widgets.inactive.bg_fill = t.pressed;
+    // Fields, checkboxes and slider rails need an outline at rest, or they vanish on a white card.
+    v.widgets.inactive.bg_stroke = Stroke::new(1.0, t.border);
     v.widgets.hovered.weak_bg_fill = t.hover;
     v.widgets.hovered.bg_fill = t.hover;
     v.widgets.hovered.bg_stroke = Stroke::NONE;
@@ -300,9 +327,10 @@ mod tests {
             ok("text on pressed", t.text, t.pressed, 7.0);
             ok("text on a field", t.text, t.field_bg, 7.0);
         }
-        // White on the accent is the Present button and every primary button.
-        let light = Tokens::light();
-        assert!(contrast(light.accent_text, light.accent) >= 4.5);
+        // Text on the accent is the Present button and every primary button.
+        for t in [Tokens::light(), Tokens::dark()] {
+            assert!(contrast(t.accent_text, t.accent) >= 4.5, "dark={}", t.dark);
+        }
     }
 
     /// Each character of `text` laid out in the interface fonts at interface sizes, and whether it

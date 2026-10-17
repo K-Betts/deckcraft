@@ -145,6 +145,7 @@ fn buttons(ui: &mut Ui, ok_label: &str) -> (bool, bool) {
 /// What the Preferences dialog can change, as it was when the dialog opened.
 fn preferences_snapshot(app: &SlideApp) -> Value {
     json!({
+        "appearance": theme::appearance_mode(app.ui.follow_system, app.ui.brightness),
         "dark": app.ui.brightness == theme::Brightness::Dark,
         "uiScale": app.ui.ui_scale,
         "packs": app.ui.packs,
@@ -158,10 +159,14 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
 /// Puts back the settings the Preferences dialog opened with (Cancel, Esc, the close button).
 fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     let Some(before) = d.params.get("before") else { return };
-    if let Some(dark) = before.get("dark").and_then(Value::as_bool)
-        && dark != (app.ui.brightness == theme::Brightness::Dark)
+    if let Some(mode) = before.get("appearance").and_then(Value::as_str)
+        && mode != theme::appearance_mode(app.ui.follow_system, app.ui.brightness)
     {
-        let _ = app.run("view.dark", json!({ "on": dark }));
+        let _ = app.run("view.appearance", json!({ "mode": mode }));
+        // "Match this computer" has no colour of its own: put back the one it had.
+        if let Some(dark) = before.get("dark").and_then(Value::as_bool) {
+            app.ui.brightness = if dark { theme::Brightness::Dark } else { theme::Brightness::Light };
+        }
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
@@ -2158,10 +2163,10 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 d.params = json!({ "before": preferences_snapshot(app) });
             }
             ui.label(egui::RichText::new("General").font(theme::bold(13.0)));
-            let mut dark = app.ui.brightness == theme::Brightness::Dark;
-            if ui.checkbox(&mut dark, "Dark appearance").changed() {
-                let _ = app.run("view.dark", json!({"on": dark}));
-            }
+            ui.horizontal(|ui| {
+                ui.label("Appearance");
+                crate::theme::appearance_picker(app, ui, "prefs_appearance");
+            });
             // While the pointer holds the slider its value only waits in the dialog: applying it
             // would rescale the slider under the pointer and run it to an end (#767). It applies
             // on release, and at once from the keyboard.

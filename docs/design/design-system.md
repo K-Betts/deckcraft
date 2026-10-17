@@ -40,7 +40,7 @@ Light is the default; dark is the same system, darker.
 | `hover` | `#EEF2FF` | `#262B3A` | Hover wash: a faint tint of the accent |
 | `pressed` | `#E0E7FF` | `#2F3650` | Pressed |
 | `selected` | `#E3EAFF` | `#27304F` | Selected tab, thumbnail, tile |
-| `accent` | `#2B59FF` | `#6C8CFF` | Primary buttons, active tab text, selection ring, links (white text on it is 5.6:1) |
+| `accent` | `#2B59FF` | `#6C8CFF` | Primary buttons, active tab text, selection ring, links (text on it: white in light, `#0E1224` in dark, both above 4.5:1) |
 | `contextual` | `#1F3FBF` | `#8FA8FF` | Contextual tab text |
 | `field_bg` | `#FFFFFF` | `#1A1D24` | Text fields |
 | `shadow` | black 7% | black 35% | Elevation |
@@ -119,7 +119,7 @@ as above. Nothing is hover-only. Targets as above.
 2. **Chrome** (done): tab pills, the floating roomy ribbon card, group gaps instead of rules. The ribbon is also *responsive*: whole groups that do not fit fold into a **More** menu (nothing becomes unreachable in a narrow window). Still to do: group labels under each group.
 3. **Panes and Home:** thumbnails, notes, task panes, the start screen, dialogs.
 4. **Teacher Mode** (done): palette, timer and maths tiles restyled to the system (ink, accent, danger and success constants; 28pt floating surfaces; 44pt targets kept).
-5. **Icons and polish:** icon weight and any Figtree upgrade; dark-mode pass; system light/dark.
+5. **Polish** (done): the appearance follows the computer's light/dark setting by default (Preferences and File > Account > Appearance: Match this computer / Light / Dark); dark-mode pass (fields, checkboxes and slider rails have a resting outline, dark accent buttons use dark text for 4.5:1). Still open: icon weight, the Figtree upgrade, group labels.
 
 ## Not changing
 
