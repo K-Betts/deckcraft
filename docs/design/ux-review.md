@@ -176,8 +176,12 @@ trade the brief allows: you cannot reroll in PowerPoint itself, but you can in D
 saves the slide as .pptx, reopens it, and checks all four questions survive
 (`a_get_ready_slide_survives_a_pptx_round_trip_as_plain_text`).
 
-**Topic and difficulty** are choosable in the dialog; with no topic chosen the four are spread
-across four different topics (a retrieval starter should revisit, not drill). **Reroll** replaces
+**Topic and level are chosen per question.** The dialog has a row for each question (2 to 6 of
+them) with its own topic and Secure / Core / Stretch level, a "Set all to" row for the common case,
+and it remembers your last choices. No question repeats on one slide. A question left on "Any"
+stays random (and with every row on Any the four are spread across different topics: a retrieval
+starter should revisit, not drill). The command takes `slots: [{topic?, difficulty?}, …]`
+(`screenshot: get-ready-dialog-after.png`). **Reroll** replaces
 the Get Ready slide in place with a new random pick (it replaces the whole slide, so edits you made
 to it are lost: reroll before you tidy up).
 

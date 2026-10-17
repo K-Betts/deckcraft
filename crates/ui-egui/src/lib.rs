@@ -291,6 +291,8 @@ pub struct UiState {
     pub subjects_hint_dismissed: bool,
     /// Google Drive features are switched on (Preferences). Off by default: signed out, silent.
     pub drive_enabled: bool,
+    /// The Get Ready starter's last choices, one `(topic, level)` per question; topic "" and level 0 mean any.
+    pub get_ready_slots: Vec<(String, u8)>,
 }
 
 impl Default for UiState {
@@ -328,6 +330,7 @@ impl Default for UiState {
             packs: Default::default(),
             subjects_hint_dismissed: false,
             drive_enabled: false,
+            get_ready_slots: vec![(String::new(), 0); 4],
         }
     }
 }
@@ -369,6 +372,14 @@ impl UiState {
         }
         self.pane = self.pane.filter(short);
         self.packs = packs::sanitized(std::mem::take(&mut self.packs));
+        self.get_ready_slots.truncate(6);
+        if self.get_ready_slots.len() < 2 {
+            self.get_ready_slots = d.get_ready_slots.clone();
+        }
+        for (topic, level) in &mut self.get_ready_slots {
+            topic.truncate(60);
+            *level = (*level).min(3);
+        }
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);

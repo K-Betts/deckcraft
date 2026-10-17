@@ -55,3 +55,68 @@ fn the_dialog_inserts_a_starter_and_rerolls_it_in_place() {
     h.run_steps(3);
     assert_eq!(slides(&h), before + 1, "reroll replaces, it does not add");
 }
+
+fn slide_texts(h: &egui_kittest::Harness<'static, SlideApp>) -> Vec<String> {
+    let st = h.state().session.active().unwrap();
+    let slide = st.doc.slides.get(st.selection.slide).unwrap();
+    slide.shapes.iter().filter_map(|s| s.text.as_ref().map(|t| t.paragraphs.iter().map(|p| p.text()).collect::<Vec<_>>().join(" "))).collect()
+}
+
+#[test]
+fn the_dialog_has_a_topic_and_level_for_every_question_and_uses_them() {
+    let mut h = harness();
+    h.state_mut().ui.get_ready_slots = vec![(String::new(), 0), ("Algebra".into(), 3), (String::new(), 0), ("Number".into(), 1)];
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    for n in 1..=4 {
+        assert!(h.query_by_label(&format!("Question {n}")).is_some(), "a row for question {n}");
+    }
+    assert!(h.query_by_label("Question 5").is_none());
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    let bank = deckcraft_engine::questions::starter().unwrap();
+    let texts = slide_texts(&h);
+    let find = |n: usize| {
+        let t = texts.iter().find(|t| t.starts_with(&format!("{n}.  "))).unwrap();
+        bank.questions.iter().find(|q| t.ends_with(&q.text)).unwrap().clone()
+    };
+    assert_eq!((find(2).topic.as_str(), find(2).difficulty), ("Algebra", 3));
+    assert_eq!((find(4).topic.as_str(), find(4).difficulty), ("Number", 1));
+}
+
+#[test]
+fn choosing_a_level_for_one_question_changes_only_that_question_and_is_remembered() {
+    let mut h = harness();
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    // The first "Stretch" is the Set-all button; the next four are questions 1 to 4.
+    h.query_all_by_label("Stretch").nth(2).unwrap().click();
+    h.run_steps(3);
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    let slots = h.state().ui.get_ready_slots.clone();
+    assert_eq!(slots.iter().map(|s| s.1).collect::<Vec<_>>(), [0, 3, 0, 0], "only question 2 is Stretch");
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    h.get_by_label("Reroll this slide").click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.get_ready_slots.iter().map(|s| s.1).collect::<Vec<_>>(), [0, 3, 0, 0], "reopening starts from the last choices");
+}
+
+#[test]
+fn set_all_and_the_question_count_work() {
+    let mut h = harness();
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    h.query_all_by_label("Core").next().unwrap().click();
+    h.run_steps(3);
+    h.get_by_label("6").click();
+    h.run_steps(3);
+    assert!(h.query_by_label("Question 6").is_some());
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    let slots = h.state().ui.get_ready_slots.clone();
+    assert_eq!(slots.len(), 6);
+    assert!(slots.iter().all(|s| s.1 == 2), "{slots:?}");
+    assert_eq!(slide_texts(&h).iter().filter(|t| t.contains(".  ")).count(), 6);
+}

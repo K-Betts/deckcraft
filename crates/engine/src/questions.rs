@@ -128,6 +128,24 @@ impl Bank {
     }
 }
 
+impl Bank {
+    /// One question matching `filter` that is not in `exclude`, chosen by `seed`.
+    pub fn pick_one(&self, filter: &Filter, seed: u64, exclude: &[String]) -> Option<&Question> {
+        let pool: Vec<&Question> = self
+            .questions
+            .iter()
+            .filter(|q| !q.needs_diagram && !exclude.contains(&q.id))
+            .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
+            .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
+            .collect();
+        if pool.is_empty() {
+            return None;
+        }
+        let mut rng = seed;
+        pool.get((splitmix(&mut rng) % pool.len() as u64) as usize).copied()
+    }
+}
+
 fn splitmix(state: &mut u64) -> u64 {
     *state = state.wrapping_add(0x9E37_79B9_7F4A_7C15);
     let mut z = *state;
@@ -177,6 +195,20 @@ mod tests {
             topics.dedup();
             assert_eq!(topics.len(), 4, "seed {seed}");
         }
+    }
+
+    #[test]
+    fn pick_one_honours_its_filter_and_never_repeats_an_excluded_question() {
+        let bank = starter().unwrap();
+        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1) };
+        let mut used: Vec<String> = vec![];
+        while let Some(q) = bank.pick_one(&f, used.len() as u64, &used) {
+            assert!(q.topic == "Algebra" && q.difficulty == 1);
+            assert!(!used.contains(&q.id));
+            used.push(q.id.clone());
+        }
+        assert!(!used.is_empty(), "there are algebra level-1 questions");
+        assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None }, 1, &[]).is_none());
     }
 
     #[test]

@@ -2567,50 +2567,86 @@ fn fresh_seed() -> u64 {
     std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(1)
 }
 
-/// Get Ready Starter: pick a topic and difficulty, insert four questions as ordinary text boxes
-/// (they save to PowerPoint like any others), or reroll the starter already on this slide.
+/// Get Ready Starter: each question gets its own topic and level; Insert makes the slide (plain
+/// text boxes that save to PowerPoint like any others), Reroll swaps the starter already on
+/// this slide for new questions with the same choices. The choices are remembered.
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
-    ui.set_min_width(380.0);
+    const LEVELS: [(u8, &str); 4] = [(0, "Any"), (1, "Secure"), (2, "Core"), (3, "Stretch")];
+    ui.set_min_width(520.0);
     let topics = deckcraft_engine::questions::starter().map(|b| b.topics()).unwrap_or_default();
     let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
-    let topic = d.get("topic", "");
-    let difficulty = d.get("difficulty", "");
+    // Start from what was chosen last time.
+    if !d.fields.contains_key("count") {
+        let saved = app.ui.get_ready_slots.clone();
+        d.fields.insert("count".into(), saved.len().clamp(2, 6).to_string());
+        for (i, (topic, level)) in saved.iter().enumerate() {
+            d.fields.insert(format!("topic{i}"), topic.clone());
+            d.fields.insert(format!("level{i}"), level.to_string());
+        }
+    }
+    let count: usize = d.get("count", "4").parse().unwrap_or(4).clamp(2, 6);
     ui.horizontal(|ui| {
-        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Topic:"));
-        egui::ComboBox::from_id_salt("getready-topic")
-            .selected_text(if topic.is_empty() { "Any topic" } else { topic.as_str() })
-            .width(220.0)
-            .show_ui(ui, |ui| {
-                if ui.selectable_label(topic.is_empty(), "Any topic").clicked() {
-                    d.fields.insert("topic".into(), String::new());
-                }
-                for t in &topics {
-                    if ui.selectable_label(&topic == t, t).clicked() {
-                        d.fields.insert("topic".into(), t.clone());
-                    }
-                }
-            });
-    });
-    ui.horizontal(|ui| {
-        ui.add_sized(vec2(90.0, 28.0), egui::Label::new("Difficulty:"));
-        for (value, label) in [("", "Any"), ("1", "Secure"), ("2", "Core"), ("3", "Stretch")] {
-            if ui.selectable_label(difficulty == value, label).clicked() {
-                d.fields.insert("difficulty".into(), value.into());
+        ui.add_sized(vec2(110.0, 28.0), egui::Label::new("Questions:"));
+        for n in 2..=6usize {
+            if ui.selectable_label(count == n, n.to_string()).clicked() {
+                d.fields.insert("count".into(), n.to_string());
             }
         }
     });
+    ui.separator();
+    let topic_combo = |ui: &mut Ui, id: String, current: &str| -> Option<String> {
+        let mut picked = None;
+        egui::ComboBox::from_id_salt(id).selected_text(if current.is_empty() { "Any topic" } else { current }).width(150.0).show_ui(ui, |ui| {
+            if ui.selectable_label(current.is_empty(), "Any topic").clicked() {
+                picked = Some(String::new());
+            }
+            for t in &topics {
+                if ui.selectable_label(current == t, t).clicked() {
+                    picked = Some(t.clone());
+                }
+            }
+        });
+        picked
+    };
+    // One row sets every question, then each can still be changed.
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(110.0, 28.0), egui::Label::new(egui::RichText::new("Set all to:").strong()));
+        if let Some(t) = topic_combo(ui, "getready-all".into(), "") {
+            for i in 0..6 {
+                d.fields.insert(format!("topic{i}"), t.clone());
+            }
+        }
+        for (value, label) in LEVELS {
+            if ui.button(label).clicked() {
+                for i in 0..6 {
+                    d.fields.insert(format!("level{i}"), value.to_string());
+                }
+            }
+        }
+    });
+    ui.add_space(4.0);
+    for i in 0..count {
+        ui.horizontal(|ui| {
+            ui.add_sized(vec2(110.0, 28.0), egui::Label::new(format!("Question {}", i + 1)));
+            let topic = d.get(&format!("topic{i}"), "");
+            if let Some(t) = topic_combo(ui, format!("getready-topic{i}"), &topic) {
+                d.fields.insert(format!("topic{i}"), t);
+            }
+            let level: u8 = d.get(&format!("level{i}"), "0").parse().unwrap_or(0);
+            for (value, label) in LEVELS {
+                if ui.selectable_label(level == value, label).clicked() {
+                    d.fields.insert(format!("level{i}"), value.to_string());
+                }
+            }
+        });
+    }
     ui.label(
         egui::RichText::new("Questions are placeholders until your own bank is added. Answers go in the speaker notes.")
             .size(11.0)
             .color(Tokens::get(ui.ctx()).text_dim),
     );
-    let mut params = json!({"seed": fresh_seed()});
-    if !topic.is_empty() {
-        params["topic"] = json!(topic);
-    }
-    if let Ok(n) = difficulty.parse::<u8>() {
-        params["difficulty"] = json!(n);
-    }
+    let slots: Vec<(String, u8)> =
+        (0..count).map(|i| (d.get(&format!("topic{i}"), ""), d.get(&format!("level{i}"), "0").parse().unwrap_or(0))).collect();
     let mut go = false;
     let mut reroll = false;
     ui.add_space(8.0);
@@ -2626,10 +2662,25 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             d.fields.insert("cancel".into(), "1".into());
         }
     });
-    if reroll {
-        params["reroll"] = json!(true);
-    }
     if go || reroll {
+        let spec: Vec<Value> = slots
+            .iter()
+            .map(|(topic, level)| {
+                let mut s = json!({});
+                if !topic.is_empty() {
+                    s["topic"] = json!(topic);
+                }
+                if *level > 0 {
+                    s["difficulty"] = json!(level);
+                }
+                s
+            })
+            .collect();
+        let mut params = json!({"seed": fresh_seed(), "slots": spec});
+        if reroll {
+            params["reroll"] = json!(true);
+        }
+        app.ui.get_ready_slots = slots;
         if let Err(e) = app.run("slide.getReady", params) {
             d.fields.insert("error".into(), e);
             return false;
@@ -2637,7 +2688,7 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         return true;
     }
     if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
-        ui.colored_label(Tokens::get(ui.ctx()).accent, e);
+        ui.colored_label(egui::Color32::from_rgb(200, 60, 60), e);
     }
     d.fields.contains_key("cancel")
 }
