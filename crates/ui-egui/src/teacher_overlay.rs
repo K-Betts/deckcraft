@@ -475,7 +475,6 @@ impl TeacherOverlay {
     }
 
     /// One frame: timers, pointer tools, painting and the palette. Returns what the palette asked for.
-    pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64, settings: &mut crate::maths_tools::MathsToolsSettings) -> Vec<Action> {
     pub fn ui(&mut self, ui: &mut Ui, full: Rect, now: f64, settings: &mut crate::maths_tools::MathsToolsSettings, maths: bool) -> Vec<Action> {
         self.maths = maths;
         let ctx = ui.ctx().clone();
@@ -518,7 +517,6 @@ impl TeacherOverlay {
             }
         }
         self.timers.retain(|t| !dead.contains(&t.id));
-        self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
         if self.maths {
             self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
         }
