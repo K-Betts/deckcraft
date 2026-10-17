@@ -246,6 +246,30 @@ impl MathsToolsPanel {
             let shown = egui::Window::new("Maths tools")
                 .id(Id::new("maths_tools_panel"))
                 .order(Order::Foreground)
+                .default_pos(canvas.min + vec2(24.0, 84.0))
+                .default_width(260.0)
+                .resizable(false)
+                .open(&mut open)
+                .show(ctx, |ui| {
+                    ui.label("Enabled tools");
+                    ui.horizontal_wrapped(|ui| {
+                        for tool in MathsTool::ALL {
+                            if settings.is_enabled(tool) && ui.button(format!("Open {}", tool.label())).clicked() {
+                                self.open_tools.insert(tool);
+                            }
+                        }
+                    });
+                    ui.separator();
+                    ui.label("Choose which tools are available");
+                    for tool in MathsTool::ALL {
+                        let mut enabled = settings.is_enabled(tool);
+                        if ui.checkbox(&mut enabled, tool.label()).changed() {
+                            settings.set_enabled(tool, enabled);
+                            if !enabled {
+                                self.open_tools.remove(&tool);
+                            }
+                        }
+                    }
                 // Beside the palette (docked on the left by default), clear of the timers.
                 .default_pos(canvas.min + vec2(88.0, canvas.height() * 0.25))
                 .resizable(false)
@@ -610,6 +634,13 @@ mod tests {
             state,
         );
         harness.run_steps(2);
+        assert!(harness.query_by_label("Open Compass").is_none());
+        harness.get_by_label("Compass").click();
+        harness.run_steps(2);
+        assert!(harness.query_by_label("Open Compass").is_some());
+        harness.get_by_label("Ruler").click();
+        harness.run_steps(2);
+        assert!(harness.query_by_label("Open Ruler").is_none());
         assert_eq!(harness.query_all_by_label("Compass").count(), 0, "not chosen, so no tile");
         harness.get_by_label("Choose tools").click();
         harness.run_steps(2);
@@ -630,6 +661,9 @@ mod tests {
             state,
         );
         harness.run_steps(2);
+        assert!(harness.query_by_label("Open Ruler").is_some());
+        assert!(harness.query_by_label("Open Number line").is_none());
+        assert!(harness.query_by_label("Open Compass").is_none());
         assert!(harness.query_by_label("Ruler").is_some());
         assert!(harness.query_by_label("Number line").is_none());
         assert!(harness.query_by_label("Compass").is_none());
@@ -648,6 +682,7 @@ mod tests {
             state,
         );
         harness.run_steps(2);
+        harness.get_by_label("Open Ruler").click();
         harness.get_by_label("Ruler").click();
         harness.run_steps(2);
         assert!(harness.query_by_label("Centimetres").is_some());
@@ -667,6 +702,8 @@ mod tests {
         );
         harness.run_steps(2);
         for tool in MathsTool::ALL {
+            let label = format!("Open {}", tool.label());
+            harness.get_by_label(&label).click();
             harness.get_by_label(tool.label()).click();
             harness.run_steps(2);
         }
