@@ -1,4 +1,5 @@
-//! Design tokens (light and dark: calm, Mac-like greys with a blue accent) and fonts for the UI.
+//! Design tokens (light and dark: "Fresh Paper", airy neutrals with one cobalt accent) and fonts
+//! for the UI. The system is written down in `docs/design/design-system.md`; this file is its code.
 
 use egui::{Color32, CornerRadius, FontData, FontDefinitions, FontFamily, Stroke, Visuals};
 use serde::{Deserialize, Serialize};
@@ -9,6 +10,34 @@ pub enum Brightness {
     #[default]
     Light,
     Dark,
+}
+
+/// Corner radii (points). See the design system: small controls, buttons and fields, ribbon
+/// buttons and cards, and the big floating surfaces.
+pub mod radius {
+    pub const SMALL: u8 = 6;
+    pub const CONTROL: u8 = 8;
+    pub const CARD: u8 = 12;
+    pub const SURFACE: u8 = 16;
+}
+
+/// The spacing scale (points): 4, 8, 12, 16, 24, 32.
+pub mod space {
+    pub const XS: f32 = 4.0;
+    pub const S: f32 = 8.0;
+    pub const M: f32 = 12.0;
+    pub const L: f32 = 16.0;
+    pub const XL: f32 = 24.0;
+    pub const XXL: f32 = 32.0;
+}
+
+/// Type sizes (points) for the chrome.
+pub mod size {
+    pub const DISPLAY: f32 = 22.0;
+    pub const HEADING: f32 = 16.0;
+    pub const BODY: f32 = 13.0;
+    pub const LABEL: f32 = 12.0;
+    pub const CAPTION: f32 = 11.0;
 }
 
 /// Every colour the chrome uses.
@@ -48,21 +77,21 @@ impl Tokens {
     pub fn light() -> Self {
         Tokens {
             dark: false,
-            chrome: Color32::from_rgb(0xF7, 0xF7, 0xF8),
+            chrome: Color32::from_rgb(0xF6, 0xF7, 0xF9),
             card: Color32::WHITE,
-            card_border: Color32::from_rgb(0xE4, 0xE4, 0xE8),
-            canvas: Color32::from_rgb(0xEC, 0xED, 0xF0),
-            text: Color32::from_rgb(0x1D, 0x1D, 0x1F),
-            text_dim: Color32::from_rgb(0x5E, 0x5E, 0x66),
-            text_faint: Color32::from_rgb(0x9A, 0x9A, 0xA2),
-            border: Color32::from_rgb(0xD8, 0xD8, 0xDE),
-            separator: Color32::from_rgb(0xE6, 0xE6, 0xEA),
-            hover: Color32::from_rgb(0xEC, 0xEC, 0xF0),
-            pressed: Color32::from_rgb(0xDF, 0xE1, 0xE8),
-            selected: Color32::from_rgb(0xE3, 0xEB, 0xFA),
-            accent: Color32::from_rgb(0x2B, 0x63, 0xC6),
+            card_border: Color32::from_rgb(0xE6, 0xE8, 0xEE),
+            canvas: Color32::from_rgb(0xF6, 0xF7, 0xF9),
+            text: Color32::from_rgb(0x14, 0x16, 0x1C),
+            text_dim: Color32::from_rgb(0x5B, 0x60, 0x70),
+            text_faint: Color32::from_rgb(0x6A, 0x70, 0x82),
+            border: Color32::from_rgb(0xD8, 0xDC, 0xE6),
+            separator: Color32::from_rgb(0xE6, 0xE8, 0xEE),
+            hover: Color32::from_rgb(0xEE, 0xF2, 0xFF),
+            pressed: Color32::from_rgb(0xE0, 0xE7, 0xFF),
+            selected: Color32::from_rgb(0xE3, 0xEA, 0xFF),
+            accent: Color32::from_rgb(0x2B, 0x59, 0xFF),
             accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0x1F, 0x4F, 0xA3),
+            contextual: Color32::from_rgb(0x1F, 0x3F, 0xBF),
             selection: Color32::from_rgb(0x7A, 0x7A, 0x7A),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
@@ -70,34 +99,34 @@ impl Tokens {
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
             field_bg: Color32::WHITE,
-            shadow: Color32::from_black_alpha(22),
+            shadow: Color32::from_black_alpha(18),
         }
     }
     pub fn dark() -> Self {
         Tokens {
             dark: true,
-            chrome: Color32::from_rgb(0x24, 0x24, 0x27),
-            card: Color32::from_rgb(0x2F, 0x2F, 0x33),
-            card_border: Color32::from_rgb(0x42, 0x42, 0x47),
-            canvas: Color32::from_rgb(0x1B, 0x1B, 0x1E),
-            text: Color32::from_rgb(0xEE, 0xEE, 0xEE),
-            text_dim: Color32::from_rgb(0xBB, 0xBB, 0xBB),
-            text_faint: Color32::from_rgb(0x88, 0x88, 0x88),
-            border: Color32::from_rgb(0x4A, 0x4A, 0x4A),
-            separator: Color32::from_rgb(0x48, 0x48, 0x48),
-            hover: Color32::from_rgb(0x40, 0x40, 0x40),
-            pressed: Color32::from_rgb(0x4C, 0x4C, 0x4C),
-            selected: Color32::from_rgb(0x2C, 0x3B, 0x57),
-            accent: Color32::from_rgb(0x5B, 0x8D, 0xEF),
+            chrome: Color32::from_rgb(0x16, 0x18, 0x1D),
+            card: Color32::from_rgb(0x1F, 0x22, 0x2A),
+            card_border: Color32::from_rgb(0x2E, 0x32, 0x3D),
+            canvas: Color32::from_rgb(0x10, 0x12, 0x16),
+            text: Color32::from_rgb(0xEC, 0xEE, 0xF3),
+            text_dim: Color32::from_rgb(0xB3, 0xB8, 0xC6),
+            text_faint: Color32::from_rgb(0x8B, 0x91, 0xA1),
+            border: Color32::from_rgb(0x3A, 0x3F, 0x4C),
+            separator: Color32::from_rgb(0x2E, 0x32, 0x3D),
+            hover: Color32::from_rgb(0x26, 0x2B, 0x3A),
+            pressed: Color32::from_rgb(0x2F, 0x36, 0x50),
+            selected: Color32::from_rgb(0x27, 0x30, 0x4F),
+            accent: Color32::from_rgb(0x6C, 0x8C, 0xFF),
             accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0x7F, 0xA6, 0xF2),
+            contextual: Color32::from_rgb(0x8F, 0xA8, 0xFF),
             selection: Color32::from_rgb(0xAA, 0xAA, 0xAA),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
             guide: Color32::from_rgb(0xF2, 0x8A, 0x4B),
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
-            field_bg: Color32::from_rgb(0x2A, 0x2A, 0x2A),
+            field_bg: Color32::from_rgb(0x1A, 0x1D, 0x24),
             shadow: Color32::from_black_alpha(90),
         }
     }
@@ -120,14 +149,14 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.extreme_bg_color = t.field_bg;
     v.faint_bg_color = t.hover;
     v.window_stroke = Stroke::new(1.0, t.card_border);
-    v.window_corner_radius = CornerRadius::same(10);
-    v.menu_corner_radius = CornerRadius::same(8);
+    v.window_corner_radius = CornerRadius::same(radius::SURFACE);
+    v.menu_corner_radius = CornerRadius::same(radius::CARD);
     v.selection.bg_fill = t.accent.gamma_multiply(0.85);
     v.selection.stroke = Stroke::new(1.0, t.accent_text);
     v.hyperlink_color = t.accent;
     v.override_text_color = Some(t.text);
     for w in [&mut v.widgets.noninteractive, &mut v.widgets.inactive, &mut v.widgets.hovered, &mut v.widgets.active, &mut v.widgets.open] {
-        w.corner_radius = CornerRadius::same(5);
+        w.corner_radius = CornerRadius::same(radius::CONTROL);
     }
     v.widgets.noninteractive.bg_stroke = Stroke::new(1.0, t.separator);
     v.widgets.inactive.weak_bg_fill = Color32::TRANSPARENT;
@@ -139,17 +168,17 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.widgets.active.weak_bg_fill = t.pressed;
     v.widgets.active.bg_fill = t.pressed;
     v.widgets.open.weak_bg_fill = t.pressed;
-    v.window_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 18, spread: 0, color: t.shadow };
-    v.popup_shadow = egui::epaint::Shadow { offset: [0, 3], blur: 12, spread: 0, color: t.shadow };
+    v.window_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 28, spread: 0, color: t.shadow };
+    v.popup_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 16, spread: 0, color: t.shadow };
     ctx.set_visuals(v);
     ctx.global_style_mut(|s| {
-        s.spacing.item_spacing = egui::vec2(8.0, 5.0);
-        s.spacing.button_padding = egui::vec2(8.0, 4.0);
-        s.spacing.interact_size.y = 24.0;
-        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(13.0));
-        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(13.0));
-        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(11.0));
-        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(18.0));
+        s.spacing.item_spacing = egui::vec2(space::S, 6.0);
+        s.spacing.button_padding = egui::vec2(8.0, 5.0);
+        s.spacing.interact_size.y = 26.0;
+        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(size::CAPTION));
+        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(size::HEADING + 2.0));
     });
 }
 
@@ -234,6 +263,48 @@ pub fn to_color32(c: deckcraft_color::Rgba) -> Color32 {
 
 #[cfg(test)]
 mod tests {
+    use super::{Color32, Tokens};
+
+    /// WCAG relative luminance and contrast ratio.
+    fn luminance(c: Color32) -> f64 {
+        let f = |v: u8| {
+            let v = f64::from(v) / 255.0;
+            if v <= 0.03928 { v / 12.92 } else { ((v + 0.055) / 1.055).powf(2.4) }
+        };
+        0.2126 * f(c.r()) + 0.7152 * f(c.g()) + 0.0722 * f(c.b())
+    }
+
+    fn contrast(a: Color32, b: Color32) -> f64 {
+        let (la, lb) = (luminance(a), luminance(b));
+        (la.max(lb) + 0.05) / (la.min(lb) + 0.05)
+    }
+
+    /// The design system's promise (docs/design/design-system.md): text is readable in both modes.
+    #[test]
+    fn tokens_keep_the_contrast_the_design_system_promises() {
+        for t in [Tokens::light(), Tokens::dark()] {
+            let mode = if t.dark { "dark" } else { "light" };
+            let ok = |what: &str, fg: Color32, bg: Color32, min: f64| {
+                let c = contrast(fg, bg);
+                assert!(c >= min, "{mode}: {what} is {c:.2}:1, needs {min}:1");
+            };
+            for bg in [t.chrome, t.card, t.canvas] {
+                ok("text", t.text, bg, 7.0);
+                ok("text_dim", t.text_dim, bg, 4.5);
+                ok("text_faint", t.text_faint, bg, 4.5);
+                ok("accent as text", t.accent, bg, 4.5);
+                ok("contextual as text", t.contextual, bg, 4.5);
+            }
+            ok("text on hover", t.text, t.hover, 7.0);
+            ok("text on selected", t.text, t.selected, 7.0);
+            ok("text on pressed", t.text, t.pressed, 7.0);
+            ok("text on a field", t.text, t.field_bg, 7.0);
+        }
+        // White on the accent is the Present button and every primary button.
+        let light = Tokens::light();
+        assert!(contrast(light.accent_text, light.accent) >= 4.5);
+    }
+
     /// Each character of `text` laid out in the interface fonts at interface sizes, and whether it
     /// has ink (a glyph image).
     fn drawn(text: &str) -> Vec<(char, f32, bool)> {
