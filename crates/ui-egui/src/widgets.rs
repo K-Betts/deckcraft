@@ -193,14 +193,75 @@ pub fn color_split(ui: &mut Ui, icon: Icon, tip: &str, color: Color32, enabled: 
     (main.on_hover_text(tip), arrow)
 }
 
+/// Which pass of the responsive ribbon is laying out groups right now (see `ribbon::show`).
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum FoldPass {
+    /// An ordinary layout: every group is drawn (dialogs, tests, anything outside the ribbon).
+    #[default]
+    Off,
+    /// The visible ribbon: groups before `cut` are drawn (and their widths recorded), the rest are skipped.
+    Show,
+    /// The "More" menu: groups from `cut` on are drawn, the earlier ones are skipped.
+    Overflow,
+}
+
+/// The responsive ribbon's state for the pass in progress, kept in egui's temporary memory so the
+/// tab functions need no extra parameter: they just call [`group`] in order.
+#[derive(Clone, Debug, Default)]
+pub struct Fold {
+    pub pass: FoldPass,
+    /// How many groups `group` has seen so far in this pass (at the end: how many the tab has).
+    pub index: usize,
+    /// `(group index, width in points)` of the groups drawn in this pass.
+    pub measured: Vec<(usize, f32)>,
+    pub cut: usize,
+}
+
+fn fold_id() -> egui::Id {
+    egui::Id::new("deckcraft.ribbon.fold")
+}
+
+pub fn set_fold(ctx: &egui::Context, fold: Fold) {
+    ctx.data_mut(|d| d.insert_temp(fold_id(), fold));
+}
+
+pub fn take_fold(ctx: &egui::Context) -> Fold {
+    ctx.data_mut(|d| d.remove_temp::<Fold>(fold_id())).unwrap_or_default()
+}
+
 /// A ribbon group: contents, then a gap that sets it apart from the next.
-pub fn group<R>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> R {
-    let r = ui.horizontal_top(|ui| {
-        ui.spacing_mut().item_spacing = vec2(1.0, 1.0);
-        add(ui)
+///
+/// Inside the responsive ribbon a group may be drawn or skipped according to the current
+/// [`FoldPass`]; anywhere else it is simply drawn.
+pub fn group<R: Default>(ui: &mut Ui, add: impl FnOnce(&mut Ui) -> R) -> R {
+    let ctx = ui.ctx().clone();
+    let (pass, index, cut) = ctx.data_mut(|d| match d.get_temp_mut_or_default::<Fold>(fold_id()) {
+        f if f.pass == FoldPass::Off => (FoldPass::Off, 0, 0),
+        f => {
+            let i = f.index;
+            f.index += 1;
+            (f.pass, i, f.cut)
+        }
     });
-    separator(ui);
-    r.inner
+    let draw = |ui: &mut Ui| {
+        let x0 = ui.cursor().min.x;
+        let r = ui.horizontal_top(|ui| {
+            ui.spacing_mut().item_spacing = vec2(1.0, 1.0);
+            add(ui)
+        });
+        separator(ui);
+        (r.inner, ui.cursor().min.x - x0)
+    };
+    match pass {
+        FoldPass::Off => draw(ui).0,
+        FoldPass::Show if index < cut => {
+            let (r, w) = draw(ui);
+            ctx.data_mut(|d| d.get_temp_mut_or_default::<Fold>(fold_id()).measured.push((index, w)));
+            r
+        }
+        FoldPass::Overflow if index >= cut => draw(ui).0,
+        _ => R::default(),
+    }
 }
 
 pub fn separator(ui: &mut Ui) {
