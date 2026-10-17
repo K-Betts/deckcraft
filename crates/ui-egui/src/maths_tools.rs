@@ -261,13 +261,14 @@ impl MathsToolsPanel {
                         ui.horizontal(|ui| {
                             for tool in row {
                                 let on = self.open_tools.contains(tool);
-                                let (fill, ink) = if on {
-                                    (Color32::from_rgb(52, 112, 214), Color32::WHITE)
-                                } else {
-                                    (Color32::from_gray(233), Color32::from_gray(30))
-                                };
+                                let tokens = crate::theme::Tokens::get(ui.ctx());
+                                let (fill, ink) = if on { (tokens.accent, tokens.accent_text) } else { (tokens.hover, tokens.text) };
                                 let label = egui::RichText::new(tool.label()).size(15.0).strong().color(ink);
-                                let tile = egui::Button::new(label).min_size(vec2(TILE_W, TILE_H)).fill(fill).corner_radius(10).wrap();
+                                let tile = egui::Button::new(label)
+                                    .min_size(vec2(TILE_W, TILE_H))
+                                    .fill(fill)
+                                    .corner_radius(crate::theme::radius::CARD)
+                                    .wrap();
                                 if ui.add(tile).clicked() {
                                     if on {
                                         self.open_tools.remove(tool);

@@ -200,3 +200,4 @@ directly without duplication.
   corpus; it compares imported models, not rendered pixels.
 - STIX Two Math isn't bundled yet: macOS has it installed, other systems may not. Bundling it means
   adding it to a fork of `storytold/craft-fonts` (fonts never live in this repo, AGENTS.md §1.3).
+| 2026-10-17 | UI redesign, step 4 of 5: Teacher Mode on the design system. Palette, timer and maths tiles use named ink, accent, danger and success colours instead of one-off RGB values, 28pt rounded floating surfaces, the accent for the active tool and quick-time chip, a darker success green so white text stays readable. Touch targets stay 44pt. No behaviour change. Checked in the app (palette) and a rendered test (timer); not checked on a projector, interactive board or touch screen. | `feat/ui-teacher-mode` |
