@@ -99,9 +99,9 @@ right as a filled accent button, secondary as plain text.
 **Home.** White left rail with the app mark, a friendly greeting, theme and template cards with a
 soft shadow (hover lifts), the subject card as a quiet accent-tinted banner.
 
-**Teacher Mode.** Floating dark palette (92% ink, 28pt radius, 52pt buttons, hairline group
+**Teacher Mode.** Floating dark palette (92% ink, 28pt radius, 44pt buttons, hairline group
 separators, accent for the active tool, red exit); timer is digits only on an ink pill; the maths
-panel is large white tiles; Maths tiles use the accent when open.
+panel is large rounded tiles; Maths tiles use the accent when open.
 
 ## Motion
 
@@ -118,7 +118,7 @@ as above. Nothing is hover-only. Targets as above.
 1. **Foundation** (done): colour, shape, space and type tokens; global widget style; this document.
 2. **Chrome** (done): tab pills, the floating roomy ribbon card, group gaps instead of rules. The ribbon is also *responsive*: whole groups that do not fit fold into a **More** menu (nothing becomes unreachable in a narrow window). Still to do: group labels under each group.
 3. **Panes and Home:** thumbnails, notes, task panes, the start screen, dialogs.
-4. **Teacher Mode:** palette, timer, maths tiles restyled to the system.
+4. **Teacher Mode** (done): palette, timer and maths tiles restyled to the system (ink, accent, danger and success constants; 28pt floating surfaces; 44pt targets kept).
 5. **Icons and polish:** icon weight and any Figtree upgrade; dark-mode pass; system light/dark.
 
 ## Not changing

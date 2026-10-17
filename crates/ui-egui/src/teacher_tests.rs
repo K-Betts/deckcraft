@@ -359,3 +359,13 @@ fn timer_digits_stay_on_one_line_for_every_value() {
     let later = h.ctx.memory(|m| m.area_rect(id)).unwrap().height();
     assert_eq!(tall, later, "5:00 and 0:48 occupy the same box (the old row wrapped to two lines)");
 }
+
+#[test]
+#[ignore = "writes screenshots for review"]
+fn screenshot_timer() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(4);
+    h.render().unwrap().save("/Users/kieranbetts/maths-office/deckcraft-ui/docs/design/img/teacher-after-timer.png").unwrap();
+}
