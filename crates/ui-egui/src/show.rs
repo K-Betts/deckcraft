@@ -305,7 +305,7 @@ impl Show {
                 self.media_clock = None;
                 self.strokes.clear();
                 if let Some(t) = self.teacher.as_mut() {
-                    t.on_slide_change();
+                    t.on_slide_change(i);
                 }
                 if self.preview_only {
                     return false;
