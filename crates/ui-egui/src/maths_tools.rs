@@ -246,30 +246,6 @@ impl MathsToolsPanel {
             let shown = egui::Window::new("Maths tools")
                 .id(Id::new("maths_tools_panel"))
                 .order(Order::Foreground)
-                .default_pos(canvas.min + vec2(24.0, 84.0))
-                .default_width(260.0)
-                .resizable(false)
-                .open(&mut open)
-                .show(ctx, |ui| {
-                    ui.label("Enabled tools");
-                    ui.horizontal_wrapped(|ui| {
-                        for tool in MathsTool::ALL {
-                            if settings.is_enabled(tool) && ui.button(format!("Open {}", tool.label())).clicked() {
-                                self.open_tools.insert(tool);
-                            }
-                        }
-                    });
-                    ui.separator();
-                    ui.label("Choose which tools are available");
-                    for tool in MathsTool::ALL {
-                        let mut enabled = settings.is_enabled(tool);
-                        if ui.checkbox(&mut enabled, tool.label()).changed() {
-                            settings.set_enabled(tool, enabled);
-                            if !enabled {
-                                self.open_tools.remove(&tool);
-                            }
-                        }
-                    }
                 // Beside the palette (docked on the left by default), clear of the timers.
                 .default_pos(canvas.min + vec2(88.0, canvas.height() * 0.25))
                 .resizable(false)
