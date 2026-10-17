@@ -698,8 +698,15 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
     if app.ui.packs.is_empty() && !app.ui.subjects_hint_dismissed {
         ui.add_space(12.0);
         egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
-            ui.horizontal(|ui| {
-                ui.label("Teaching a subject? Switch on its tools (Teacher Mode aids, starter slides). You can change this any time in Preferences.");
+            // The text wraps and the buttons sit under it, so the card fits a narrow window (iPad
+            // upright, a small laptop) instead of pushing its buttons off the edge.
+            ui.add(
+                egui::Label::new(
+                    "Teaching a subject? Switch on its tools (Teacher Mode aids, starter slides). You can change this any time in Preferences.",
+                )
+                .wrap(),
+            );
+            ui.horizontal_wrapped(|ui| {
                 for pack in crate::packs::PACKS {
                     if ui.button(format!("Turn on {}", pack.label)).clicked() {
                         let _ = app.run("app.pack", json!({"id": pack.id, "on": true}));

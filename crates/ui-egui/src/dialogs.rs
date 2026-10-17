@@ -2199,11 +2199,14 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     app.dialog = Some(Dialog::new("update"));
                 }
             }
-            ui.add_space(4.0);
-            ui.label(egui::RichText::new("Google Drive").font(theme::bold(13.0)));
-            let mut drive = app.ui.drive_enabled;
-            if ui.checkbox(&mut drive, "Use Google Drive (optional; you sign in on File > Account)").changed() {
-                let _ = app.run("app.drive", json!({"on": drive}));
+            // Only builds that have Drive (the desktop app) offer the switch.
+            if app.services.drive.is_some() {
+                ui.add_space(4.0);
+                ui.label(egui::RichText::new("Google Drive").font(theme::bold(13.0)));
+                let mut drive = app.ui.drive_enabled;
+                if ui.checkbox(&mut drive, "Use Google Drive (optional; you sign in on File > Account)").changed() {
+                    let _ = app.run("app.drive", json!({"on": drive}));
+                }
             }
             ui.add_space(4.0);
             ui.label(egui::RichText::new("Links").font(theme::bold(13.0)));

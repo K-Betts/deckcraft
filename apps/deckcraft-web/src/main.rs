@@ -11,10 +11,11 @@
 //!   that started the pick (a dismissed picker or a closed document drops the file);
 //! - Save and Export trigger a browser download;
 //! - dropped files are read asynchronously by `web::WebShell` and delivered through the inbox;
-//! - preferences are not persisted.
+//! - preferences (including which subject packs are on) are kept in the browser's local storage;
+//!   decks are never stored by the app: they live in files the teacher opens and saves.
 //!
-//! URL query flags: `?webgl` forces the WebGL2 backend instead of WebGPU; `?blank` starts with an
-//! empty presentation instead of the sample deck; `?show` starts the slide show.
+//! URL query flags: `?webgl` forces the WebGL2 backend instead of WebGPU; `?sample` starts with the
+//! demo deck instead of an empty presentation; `?show` starts the slide show.
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 #![forbid(unsafe_code)]
 
