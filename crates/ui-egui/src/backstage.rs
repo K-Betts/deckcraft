@@ -694,6 +694,23 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
         crate::dialogs::paint_logo(ui.painter(), r);
         ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
     });
+    if app.ui.packs.is_empty() && !app.ui.subjects_hint_dismissed {
+        ui.add_space(12.0);
+        egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
+            ui.horizontal(|ui| {
+                ui.label("Teaching a subject? Switch on its tools (Teacher Mode aids, starter slides). You can change this any time in Preferences.");
+                for pack in crate::packs::PACKS {
+                    if ui.button(format!("Turn on {}", pack.label)).clicked() {
+                        let _ = app.run("app.pack", json!({"id": pack.id, "on": true}));
+                        let _ = app.run("app.dismissSubjectsHint", json!({}));
+                    }
+                }
+                if ui.button("Not now").clicked() {
+                    let _ = app.run("app.dismissSubjectsHint", json!({}));
+                }
+            });
+        });
+    }
     ui.add_space(18.0);
     ui.horizontal(|ui| {
         ui.label(RichText::new("New").font(theme::bold(16.0)).color(t.text));
@@ -733,8 +750,10 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
             }
         });
     }
-    ui.add_space(30.0);
-    ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
+    if app.ui.show_community_links {
+        ui.add_space(30.0);
+        ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
+    }
 }
 
 /// New: a blank presentation, then every theme and starter template, with a search box.
@@ -1348,7 +1367,10 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             });
             ui.add_space(16.0);
             heading(ui, "User Information");
-            dim(ui, "DeckCraft has no accounts: there is nothing to sign in to, and your presentations stay on your device.");
+            dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
+            if app.ui.drive_enabled {
+                crate::drive_ui::section(app, ui);
+            }
         });
         ui.add_space(40.0);
         ui.vertical(|ui| {
@@ -1371,8 +1393,10 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             ) {
                 let _ = app.run("app.about", json!({}));
             }
-            ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
-            ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+            if app.ui.show_community_links {
+                ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
+                ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+            }
         });
     });
 }

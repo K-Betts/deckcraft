@@ -52,11 +52,39 @@ The app is local-first and is designed to handle no pupil data, so the attack su
 These are the practical things to keep in mind and fix over time.
 
 ### Already good
-- **No network calls from the app.** DeckCraft (and this fork) makes no HTTP requests during normal
-  use. Fonts load from disk; decks open and save locally.
+- **No network calls unless the teacher switches Google Drive on and signs in.** DeckCraft (and this
+  fork) makes no HTTP requests during normal use. Fonts load from disk; decks open and save
+  locally. The one exception is the optional Google Drive feature, below.
 - **No telemetry or analytics.** The app collects nothing.
 - **Sandboxed renderer.** The render and pptx crates never read or write files; only the
   CLI/UI layer touches the filesystem.
+
+### Google Drive (optional, off by default)
+Added in `crates/drive` (native builds only; never in the web build). What it talks to, when, and
+what it sends:
+
+| When | Host | What is sent |
+| --- | --- | --- |
+| Only after Preferences ▸ Use Google Drive is on **and** the teacher presses *Sign in with Google* | `accounts.google.com` (in the teacher's own browser) | The sign-in request: the OAuth client ID, a PKCE challenge, a random `state`, scope `drive.file`. The browser redirects back to a one-shot listener on `127.0.0.1` (random port, loopback only). |
+| Right after sign-in, and when a token is about to expire | `oauth2.googleapis.com` | The one-time code and PKCE verifier; later the refresh token. Signing out also sends a revoke request. |
+| Only when the teacher presses *Refresh list*, *Open* or *Save to Google Drive* | `www.googleapis.com` | File list / download requests; on save, the presentation as .pptx bytes plus its name. |
+
+- **Scope is `drive.file` only:** DeckCraft sees only files it saved to Drive (in a folder it creates
+  called "DeckCraft") or files the teacher explicitly picks. It cannot read the rest of a Drive.
+- **Signed out on a fresh install.** Nothing contacts Google, and the keychain is not read, until the
+  switch is on and the button pressed.
+- **Tokens are in the system keychain** (macOS Keychain), never in `prefs.json`. Signing out deletes
+  them and asks Google to revoke the grant.
+- **Nothing is uploaded silently.** Uploads happen only from the *Save to Google Drive* button. A
+  save to a file that changed in Drive since it was opened is refused (no overwriting a colleague).
+- **Client ID is configuration**, never compiled in: `DECKCRAFT_GOOGLE_CLIENT_ID` or
+  `~/.config/deckcraft/drive.toml`. Google's Desktop-app client also has a secret that cannot be
+  kept confidential in an installed app; it is optional config, protected by PKCE not secrecy.
+- **No pupil data** is read or sent by DeckCraft itself; what goes to Drive is the deck the teacher
+  chose to save, so the rule "no pupil data in decks" applies to what is uploaded.
+- Dependencies added for this: `ureq` (HTTPS client, rustls), `sha2` (PKCE), `base64`, `getrandom`,
+  `keyring` (system credential store). Run `cargo audit` before sharing a build (not run in the
+  overnight build: the tool is not installed on this Mac).
 
 ### To do before sharing builds
 - **Apple notarization.** Without a signed, notarised `.dmg`, macOS Gatekeeper blocks the app for
@@ -142,6 +170,7 @@ directly without duplication.
 | 2026-10-16 | `packaging/macos/update-local.sh` brings the installed app up to date with `main` in one command (`--check` only reports). It builds in a temporary checkout, so your own branch is untouched. This is a manual update, not automatic; in-app auto-update needs signed releases and a host (planned with the rebrand). | `feat/update-local-app` |
 | 2026-10-16 | Added a local Windows GNU-target build script and documented the supported build targets. | `feat/update-local-app` |
 | 2026-10-16 | Equations imported from PowerPoint: each equation of a display group is its own line (`y = 2x + 1` over `y = 3 − 2x`, not run together), and relations and binary operators are spaced as PowerPoint draws them. Checked on slides 10 and 12 of a real 54-slide deck against PowerPoint's own PDF export; shapes and pictures already matched. Fractions, powers and roots are not yet checked. | `fix/equation-spacing-and-breaks` |
+| 2026-10-17 | UX review and build (`docs/design/ux-review.md`): neutral install with maths as an opt-in subject pack (Preferences, Home card); upstream Discord/website/source links hidden by default; Teacher Mode palette regrouped with 44pt targets and a tile-based maths panel; timer reads as big digits only while running (the HH:MM:SS row used to wrap), amber at 30 s and red at 10 s; Insert > Get Ready Starter inserts four questions as plain text boxes (answers in the notes; 20 PLACEHOLDER questions in `assets/questions/bank.json`, to be replaced by Kieran's bank); optional Google Drive (off by default, `drive.file` scope only; see Security posture). Not checked: projector, touch hardware, PowerPoint opening a Get Ready slide, Drive against real Google, `cargo audit`. Diagram questions are a follow-up. | `feat/ux-review` |
 
 ## Known gaps
 
