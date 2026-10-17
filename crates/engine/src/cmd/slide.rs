@@ -25,7 +25,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Get Ready Starter",
             ["Insert", "Slides From"],
             None,
-            "{topic?: text, difficulty?: 1|2|3, count?: 1-8 (default 4), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank (default: the built-in one), at?: index} → {index, questions: [ids]}",
+            "{slots?: [{topic?: text, difficulty?: 1|2|3}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank (default: the built-in one), at?: index} → {index, questions: [ids]}",
             has_doc,
             get_ready
         ),
@@ -640,25 +640,53 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         None => questions::starter(),
     }
     .map_err(|e| bad("slide.getReady", e))?;
-    let difficulty = match p.get("difficulty") {
-        None | Some(Value::Null) => None,
-        Some(v) => Some(
-            v.as_u64()
+    let level = |v: Option<&Value>, what: &str| -> Result<Option<u8>> {
+        match v {
+            None | Some(Value::Null) => Ok(None),
+            Some(v) => v
+                .as_u64()
                 .and_then(|d| u8::try_from(d).ok())
                 .filter(|d| questions::DIFFICULTIES.contains(d))
-                .ok_or_else(|| bad("slide.getReady", "`difficulty` must be 1, 2 or 3"))?,
-        ),
+                .map(Some)
+                .ok_or_else(|| bad("slide.getReady", format!("{what} must be 1, 2 or 3"))),
+        }
     };
-    let count = usize_param(p, "count").unwrap_or(4);
-    if !(1..=8).contains(&count) {
-        return Err(bad("slide.getReady", "`count` must be 1 to 8"));
-    }
-    let filter = Filter { topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from), difficulty };
     let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
-    let picked: Vec<_> = bank.pick(&filter, seed, count).into_iter().cloned().collect();
-    if picked.is_empty() {
-        return Err(bad("slide.getReady", "no questions match that topic and difficulty"));
-    }
+    let picked: Vec<_> = if let Some(slots) = p.get("slots") {
+        // One topic and level per question; a question never repeats another on the slide.
+        let slots = slots.as_array().ok_or_else(|| bad("slide.getReady", "`slots` must be a list"))?;
+        if !(1..=8).contains(&slots.len()) {
+            return Err(bad("slide.getReady", "`slots` must have 1 to 8 entries"));
+        }
+        let mut used: Vec<String> = vec![];
+        let mut out = vec![];
+        for (i, slot) in slots.iter().enumerate() {
+            let topic = slot.get("topic").and_then(Value::as_str).filter(|t| !t.is_empty()).map(String::from);
+            let difficulty = level(slot.get("difficulty"), &format!("question {}: `difficulty`", i + 1))?;
+            let filter = Filter { topic: topic.clone(), difficulty };
+            let q = bank.pick_one(&filter, seed.wrapping_add((i as u64 + 1).wrapping_mul(0x9E37_79B9)), &used).ok_or_else(|| {
+                let what = topic.as_deref().unwrap_or("any topic");
+                let at = difficulty.map(|d| format!(" at level {d}")).unwrap_or_default();
+                bad("slide.getReady", format!("question {}: no more questions for {what}{at}", i + 1))
+            })?;
+            used.push(q.id.clone());
+            out.push(q.clone());
+        }
+        out
+    } else {
+        let difficulty = level(p.get("difficulty"), "`difficulty`")?;
+        let count = usize_param(p, "count").unwrap_or(4);
+        if !(1..=8).contains(&count) {
+            return Err(bad("slide.getReady", "`count` must be 1 to 8"));
+        }
+        let filter = Filter { topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from), difficulty };
+        let picked: Vec<_> = bank.pick(&filter, seed, count).into_iter().cloned().collect();
+        if picked.is_empty() {
+            return Err(bad("slide.getReady", "no questions match that topic and difficulty"));
+        }
+        picked
+    };
+    let count = picked.len();
     // Where it goes: after the current slide, or in place of the current Get Ready slide.
     let (cur, replace) = {
         let st = s.doc()?;
@@ -766,6 +794,48 @@ mod tests {
         assert!(s.execute("slide.getReady", &json!({"topic": "Origami"})).is_err());
         assert!(s.execute("slide.getReady", &json!({"difficulty": 7})).is_err());
         assert!(s.execute("slide.getReady", &json!({"count": 0})).is_err());
+    }
+
+    #[test]
+    fn each_question_can_have_its_own_topic_and_level() {
+        let mut s = Session::with_new();
+        let slots = json!([
+            {"topic": "Number", "difficulty": 1},
+            {"topic": "Algebra", "difficulty": 3},
+            {"topic": "Geometry"},
+            {"difficulty": 2}
+        ]);
+        let r = s.execute("slide.getReady", &json!({"slots": slots, "seed": 4})).expect("get ready");
+        let ids: Vec<String> = r["questions"].as_array().expect("ids").iter().map(|v| v.as_str().expect("id").to_string()).collect();
+        assert_eq!(ids.len(), 4);
+        assert!(ids[0].starts_with("num-") && ids[1].starts_with("alg-") && ids[2].starts_with("geo-"), "{ids:?}");
+        let bank = crate::questions::starter().expect("bank");
+        let find = |id: &str| bank.questions.iter().find(|q| q.id == id).expect("question").clone();
+        assert_eq!(find(&ids[0]).difficulty, 1);
+        assert_eq!(find(&ids[1]).difficulty, 3);
+        assert_eq!(find(&ids[3]).difficulty, 2);
+        let mut distinct = ids.clone();
+        distinct.sort();
+        distinct.dedup();
+        assert_eq!(distinct.len(), 4, "no question twice on one slide");
+    }
+
+    #[test]
+    fn two_slots_with_the_same_narrow_filter_never_repeat_and_run_out_with_a_clear_error() {
+        let mut s = Session::with_new();
+        let same = json!({"topic": "Ratio", "difficulty": 1});
+        let enough = s.execute("slide.getReady", &json!({"slots": [same, same], "seed": 1}));
+        let err = enough.err().map(|e| e.to_string()).unwrap_or_default();
+        assert!(err.contains("question 1") || err.contains("question 2"), "{err}");
+        let before = s.doc().expect("doc").doc.slides.len();
+        let many = json!({"topic": "Algebra", "difficulty": 1});
+        let r = s.execute("slide.getReady", &json!({"slots": [many, many]}));
+        assert!(r.is_ok(), "two different algebra level-1 questions exist");
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), before + 1);
+        let bad = s.execute("slide.getReady", &json!({"slots": [{"difficulty": 9}]})).err().map(|e| e.to_string()).unwrap_or_default();
+        assert!(bad.contains("question 1") && bad.contains("difficulty"), "{bad}");
+        assert!(s.execute("slide.getReady", &json!({"slots": []})).is_err());
+        assert!(s.execute("slide.getReady", &json!({"slots": "Algebra"})).is_err());
     }
 
     #[test]
