@@ -237,37 +237,110 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         let mut cui = ui.new_child(egui::UiBuilder::new().max_rect(inner).layout(egui::Layout::left_to_right(egui::Align::Min)));
         cui.set_clip_rect(inner.expand2(vec2(0.0, 3.0)));
         cui.spacing_mut().item_spacing.x = 1.0;
-        {
-            let ui = &mut cui;
-            let tab = app.ui.tab.clone();
-            match tab.as_str() {
-                "Home" => home(app, ui),
-                "Insert" => insert(app, ui),
-                "Draw" => draw(app, ui),
-                "Design" => design(app, ui),
-                "Transitions" => transitions(app, ui),
-                "Animations" => animations(app, ui),
-                "Slide Show" => slide_show(app, ui),
-                "Record" => record(app, ui),
-                "Review" => review(app, ui),
-                "View" => view(app, ui),
-                "Shape Format" => shape_format(app, ui),
-                "Picture Format" => picture_format(app, ui),
-                "Table Design" => table_design(app, ui),
-                "Layout" => table_layout(app, ui),
-                "Chart Design" => chart_design(app, ui),
-                "SmartArt Design" => smartart_design(app, ui),
-                "Playback" => playback(app, ui),
-                "Slide Master" => slide_master(app, ui),
-                "Handout Master" => handout_master(app, ui),
-                "Notes Master" => notes_master(app, ui),
-                _ => {}
-            }
-        }
-        // How far the tab's contents run past the card's right edge (0 when they fit): shown in
-        // `ui.inspect` so a layout change can be checked against the real window width.
-        app.ribbon_hidden = (cui.min_rect().max.x - inner.max.x).max(0.0);
+        responsive_tab(app, &mut cui, inner);
     });
+}
+
+/// The width reserved at the right of the card for the "More" button.
+const MORE_W: f32 = 66.0;
+
+/// Draw the current tab's groups, folding the ones that do not fit into a "More" menu.
+///
+/// The tab functions just call `group` in order. Each group's width is recorded when it is drawn
+/// and remembered per tab, so the next frame can keep whole groups left to right while they fit
+/// and put the rest behind a More button; its menu runs the same tab function again drawing only
+/// the groups that were left out. The first time a tab is shown (widths unknown) every group is
+/// drawn once, clipped as the ribbon always was, which teaches the widths; one frame later it
+/// folds. Nothing is lost in a narrow window, and nothing invisible is ever built (so no phantom
+/// controls for screen readers).
+fn responsive_tab(app: &mut SlideApp, cui: &mut Ui, inner: Rect) {
+    if !app.ribbon_fold {
+        app.ribbon_folded = 0;
+        render_tab(app, cui);
+        return;
+    }
+    let ctx = cui.ctx().clone();
+    let tab = app.ui.tab.clone();
+    let known: Vec<f32> = app.ribbon_widths.get(&tab).cloned().unwrap_or_default();
+    // Decide how many whole groups fit, from what was learned earlier (everything when unknown).
+    let n_known = known.len();
+    let complete = n_known > 0 && known.iter().all(|w| *w > 0.0);
+    let cut = if complete { groups_that_fit(&known, inner.width()) } else { usize::MAX };
+    app.ribbon_folded = if complete { n_known - cut } else { 0 };
+    widgets::set_fold(&ctx, widgets::Fold { pass: widgets::FoldPass::Show, cut, ..Default::default() });
+    render_tab(app, cui);
+    let seen = widgets::take_fold(&ctx);
+    // Learn the widths of the groups just drawn; a change in the number of groups starts over.
+    let mut learned = if seen.index == n_known { known.clone() } else { vec![0.0; seen.index] };
+    for (i, w) in &seen.measured {
+        if let Some(slot) = learned.get_mut(*i) {
+            *slot = *w;
+        }
+    }
+    if learned != known {
+        app.ribbon_widths.insert(tab, learned.clone());
+        ctx.request_repaint();
+    }
+    if complete && cut < n_known {
+        let more = widgets::big_button(cui, Icon::More, "More", true);
+        more.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, "More tools"));
+        let more = more.on_hover_text("More tools");
+        // The folded groups, in a menu.
+        egui::Popup::menu(&more).width(640.0).show(|ui| {
+            ui.set_max_width(640.0);
+            ui.spacing_mut().item_spacing = vec2(1.0, 6.0);
+            widgets::set_fold(&ctx, widgets::Fold { pass: widgets::FoldPass::Overflow, cut, ..Default::default() });
+            ui.horizontal_wrapped(|ui| render_tab(app, ui));
+            widgets::take_fold(&ctx);
+        });
+    }
+}
+
+/// How many leading groups fit in `available` points, leaving room for a More button when some do not.
+pub(crate) fn groups_that_fit(widths: &[f32], available: f32) -> usize {
+    let total: f32 = widths.iter().sum();
+    if total <= available {
+        return widths.len();
+    }
+    let room = available - MORE_W;
+    let mut used = 0.0;
+    let mut n = 0;
+    for w in widths {
+        if used + w > room {
+            break;
+        }
+        used += w;
+        n += 1;
+    }
+    n
+}
+
+/// The groups of the current ribbon tab.
+fn render_tab(app: &mut SlideApp, ui: &mut Ui) {
+    let tab = app.ui.tab.clone();
+    match tab.as_str() {
+        "Home" => home(app, ui),
+        "Insert" => insert(app, ui),
+        "Draw" => draw(app, ui),
+        "Design" => design(app, ui),
+        "Transitions" => transitions(app, ui),
+        "Animations" => animations(app, ui),
+        "Slide Show" => slide_show(app, ui),
+        "Record" => record(app, ui),
+        "Review" => review(app, ui),
+        "View" => view(app, ui),
+        "Shape Format" => shape_format(app, ui),
+        "Picture Format" => picture_format(app, ui),
+        "Table Design" => table_design(app, ui),
+        "Layout" => table_layout(app, ui),
+        "Chart Design" => chart_design(app, ui),
+        "SmartArt Design" => smartart_design(app, ui),
+        "Playback" => playback(app, ui),
+        "Slide Master" => slide_master(app, ui),
+        "Handout Master" => handout_master(app, ui),
+        "Notes Master" => notes_master(app, ui),
+        _ => {}
+    }
 }
 
 fn big(app: &mut SlideApp, ui: &mut Ui, icon: Icon, label: &str, id: &str, p: Value) {
