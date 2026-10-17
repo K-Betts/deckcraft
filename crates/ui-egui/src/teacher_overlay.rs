@@ -240,6 +240,14 @@ enum Draft {
     Shape(DrawnShape),
 }
 
+/// What was drawn on a slide that is not showing.
+#[derive(Default)]
+struct Parked {
+    strokes: Vec<Stroke>,
+    shapes: Vec<DrawnShape>,
+    revealer: Option<Revealer>,
+}
+
 pub struct TeacherOverlay {
     pub tool: Tool,
     pub strokes: Vec<Stroke>,
@@ -255,6 +263,9 @@ pub struct TeacherOverlay {
     pub timers: Vec<Timer>,
     /// Keep marks and the revealer when the slide changes (the Preferences setting).
     pub keep_on_advance: bool,
+    /// The slide the live marks belong to, and the marks of the slides left behind.
+    slide: Option<usize>,
+    parked: std::collections::HashMap<usize, Parked>,
     next_id: u64,
     seq: u64,
     /// Where the middle of the hand was last frame while wiping, so a fast rub leaves no gaps.
@@ -291,6 +302,8 @@ impl Default for TeacherOverlay {
             erase_mode: EraseMode::Pixel,
             timers: vec![],
             keep_on_advance: false,
+            slide: None,
+            parked: Default::default(),
             next_id: 0,
             seq: 0,
             palm_last: None,
@@ -345,12 +358,28 @@ impl TeacherOverlay {
         }
     }
 
-    /// The slide changed: marks go, and so does the revealer, unless the
-    /// teacher chose to keep annotations. Timers always carry on.
-    pub fn on_slide_change(&mut self) {
-        if !self.keep_on_advance {
+    /// The show moved to slide `to`. Marks stay with the slide they were drawn on: they are put
+    /// away here and come back when the teacher returns. Unless the teacher chose to keep
+    /// annotations, in which case they ride along. Timers always carry on.
+    pub fn on_slide_change(&mut self, to: usize) {
+        let from = self.slide.replace(to);
+        if self.keep_on_advance || from == Some(to) {
+            return;
+        }
+        if let Some(from) = from {
+            let saved =
+                Parked { strokes: std::mem::take(&mut self.strokes), shapes: std::mem::take(&mut self.shapes), revealer: self.revealer.take() };
+            self.parked.insert(from, saved);
+        } else {
             self.clear();
             self.revealer = None;
+        }
+        self.draft = None;
+        self.revealer_drag = false;
+        if let Some(back) = self.parked.remove(&to) {
+            self.strokes = back.strokes;
+            self.shapes = back.shapes;
+            self.revealer = back.revealer;
         }
     }
 
@@ -1516,9 +1545,25 @@ mod tests {
         stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
         o.add_timer();
         o.set_tool(Tool::Revealer);
-        o.on_slide_change();
+        o.on_slide_change(0);
+        o.on_slide_change(1);
         assert!(o.strokes.is_empty() && o.revealer.is_none());
         assert_eq!(o.timers.len(), 1);
+    }
+
+    #[test]
+    fn marks_stay_on_their_slide_and_return_when_you_go_back() {
+        let mut o = TeacherOverlay::new();
+        o.on_slide_change(0);
+        stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
+        o.on_slide_change(1);
+        assert!(o.strokes.is_empty());
+        stroke(&mut o, &[(2.0, 2.0), (3.0, 3.0)]);
+        stroke(&mut o, &[(4.0, 4.0), (5.0, 5.0)]);
+        o.on_slide_change(0);
+        assert_eq!(o.strokes.len(), 1);
+        o.on_slide_change(1);
+        assert_eq!(o.strokes.len(), 2);
     }
 
     #[test]
@@ -1527,7 +1572,8 @@ mod tests {
         o.keep_on_advance = true;
         stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
         o.set_tool(Tool::Revealer);
-        o.on_slide_change();
+        o.on_slide_change(0);
+        o.on_slide_change(1);
         assert_eq!(o.strokes.len(), 1);
         assert!(o.revealer.is_some());
     }

@@ -752,6 +752,10 @@ fn pointer(app: &mut SlideApp, ui: &Ui, resp: &egui::Response, xf: Xf) {
     };
     if let Err(e) = r {
         app.set_status(e.to_string());
+    } else if resp.double_clicked() && app.session.execute("equation.source", &serde_json::json!({})).is_ok_and(|v| !v.is_null()) {
+        // An equation opens in the Equation dialog, not in the text editor.
+        let _ = app.run("text.exit", serde_json::json!({}));
+        app.dialog = Some(crate::dialogs::Dialog::new("equation"));
     }
     // Cursor.
     let cursor = match (&app.session.tool.kind, &app.session.tool.hover) {

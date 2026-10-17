@@ -14,6 +14,7 @@ pub mod credits;
 pub mod dialogs;
 pub mod doc_window;
 pub mod drive_ui;
+pub mod equation_view;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
@@ -2153,6 +2154,8 @@ mod cleanup_tests;
 mod compare_tests;
 #[cfg(test)]
 mod drive_tests;
+#[cfg(test)]
+mod equation_tests;
 #[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]
