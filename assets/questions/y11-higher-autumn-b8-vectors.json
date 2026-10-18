@@ -1,0 +1,883 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Autumn Block 8 Vectors: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hau8-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with vectors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S1 Solve problems with vectors",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "vectors",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$OAB$ is a triangle with $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. Write $\\overrightarrow{AB}$ in terms of $\\mathbf{[[u]]}$ and $\\mathbf{[[v]]}$.",
+   "answer": "$\\mathbf{[[v]]} - \\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y11hau8-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with vectors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S1 Solve problems with vectors",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "vectors",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $M$ is the midpoint of $OA$. Write $\\overrightarrow{MB}$.",
+   "answer": "$\\mathbf{[[v]]} - \\frac{1}{2}\\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y11hau8-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with vectors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S1 Solve problems with vectors",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "vectors",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $P$ lies on $AB$ with $AP : PB = 1 : [[k]]$. Write $\\overrightarrow{OP}$.",
+   "answer": "$\\mathbf{[[u]]} + \\frac{1}{[[k + 1]]}(\\mathbf{[[v]]} - \\mathbf{[[u]]})$"
+  },
+  {
+   "id": "y11hau8-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with vectors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S1 Solve problems with vectors",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "vectors",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = [[m]]\\mathbf{[[u]]}$ and $\\overrightarrow{OB} = [[n]]\\mathbf{[[v]]}$. $M$ is the midpoint of $AB$. Show that $\\overrightarrow{OM} = \\frac{[[m]]}{2}\\mathbf{[[u]]} + \\frac{[[n]]}{2}\\mathbf{[[v]]}$. (3 marks)",
+   "answer": "$\\overrightarrow{AB} = [[n]]\\mathbf{[[v]]} - [[m]]\\mathbf{[[u]]}$; $\\overrightarrow{OM} = [[m]]\\mathbf{[[u]]} + \\frac{1}{2}([[n]]\\mathbf{[[v]]} - [[m]]\\mathbf{[[u]]}) = \\frac{[[m]]}{2}\\mathbf{[[u]]} + \\frac{[[n]]}{2}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y11hau8-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Ratios with vectors (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S2 Ratios with vectors (E)",
+   "keywords": [
+    "ratios",
+    "with",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $P$ is on $AB$ with $AP : PB = 1 : 2$. Write $\\overrightarrow{AP}$ and $\\overrightarrow{OP}$.",
+   "answer": "$\\overrightarrow{AP} = \\frac{1}{3}(\\mathbf{[[v]]} - \\mathbf{[[u]]})$; $\\overrightarrow{OP} = \\frac{2}{3}\\mathbf{[[u]]} + \\frac{1}{3}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y11hau8-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Ratios with vectors (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S2 Ratios with vectors (E)",
+   "keywords": [
+    "ratios",
+    "with",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $P$ is on $AB$ with $AP : PB = [[m]] : [[n]]$. Write $\\overrightarrow{OP}$.",
+   "answer": "$\\overrightarrow{OP} = \\frac{[[n]]}{[[m + n]]}\\mathbf{[[u]]} + \\frac{[[m]]}{[[m + n]]}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y11hau8-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Ratios with vectors (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S2 Ratios with vectors (E)",
+   "keywords": [
+    "ratios",
+    "with",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$\\overrightarrow{OA} = [[m]]\\mathbf{[[u]]}$ and $\\overrightarrow{OB} = [[n]]\\mathbf{[[v]]}$. $M$ divides $AB$ in the ratio 1 : 1. Find $\\overrightarrow{OM}$.",
+   "answer": "$\\frac{[[m]]}{2}\\mathbf{[[u]]} + \\frac{[[n]]}{2}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y11hau8-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Ratios with vectors (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S2 Ratios with vectors (E)",
+   "keywords": [
+    "ratios",
+    "with",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $P$ divides $OA$ in the ratio 2 : 1 and $Q$ divides $OB$ in the ratio 2 : 1. Write $\\overrightarrow{PQ}$ and compare it with $\\overrightarrow{AB}$. (4 marks)",
+   "answer": "$\\overrightarrow{PQ} = \\frac{2}{3}(\\mathbf{[[v]]} - \\mathbf{[[u]]}) = \\frac{2}{3}\\overrightarrow{AB}$: parallel, and $\\frac{2}{3}$ the length"
+  },
+  {
+   "id": "y11hau8-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Collinear points using vectors (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S3 Collinear points using vectors (E)",
+   "keywords": [
+    "collinear",
+    "points",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\overrightarrow{AB} = [[p]]\\mathbf{[[u]]} + [[q]]\\mathbf{[[v]]}$ and $\\overrightarrow{BC} = [[p * k]]\\mathbf{[[u]]} + [[q * k]]\\mathbf{[[v]]}$. Show that $A$, $B$ and $C$ are collinear.",
+   "answer": "$\\overrightarrow{BC} = [[k]]\\overrightarrow{AB}$, parallel and sharing the point $B$, so $A$, $B$, $C$ are on one line"
+  },
+  {
+   "id": "y11hau8-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Collinear points using vectors (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S3 Collinear points using vectors (E)",
+   "keywords": [
+    "collinear",
+    "points",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\overrightarrow{PQ} = \\mathbf{[[u]]} + [[q]]\\mathbf{[[v]]}$ and $\\overrightarrow{QR} = [[k]]\\mathbf{[[u]]} + [[k * q]]\\mathbf{[[v]]}$. Are $P$, $Q$, $R$ collinear? Explain.",
+   "answer": "Yes: $\\overrightarrow{QR} = [[k]]\\overrightarrow{PQ}$"
+  },
+  {
+   "id": "y11hau8-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Collinear points using vectors (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S3 Collinear points using vectors (E)",
+   "keywords": [
+    "collinear",
+    "points",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(p + 1) * q != (q + 1) * p"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "$\\overrightarrow{AB} = [[p]]\\mathbf{[[u]]} + [[q]]\\mathbf{[[v]]}$ and $\\overrightarrow{BC} = [[p + 1]]\\mathbf{[[u]]} + [[q + 1]]\\mathbf{[[v]]}$. Are $A$, $B$, $C$ collinear? Explain.",
+   "answer": "No: $\\overrightarrow{BC}$ is not a multiple of $\\overrightarrow{AB}$ (the multiples [[(p + 1) / p|dp:2]] and [[(q + 1) / q|dp:2]] differ)"
+  },
+  {
+   "id": "y11hau8-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Collinear points using vectors (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S3 Collinear points using vectors (E)",
+   "keywords": [
+    "collinear",
+    "points",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\overrightarrow{OA} = \\mathbf{[[u]]}$, $\\overrightarrow{OB} = \\mathbf{[[v]]}$ and $\\overrightarrow{OC} = [[k + 1]]\\mathbf{[[v]]} - [[k]]\\mathbf{[[u]]}$. Show that $A$, $B$ and $C$ are collinear. (4 marks)",
+   "answer": "$\\overrightarrow{AB} = \\mathbf{[[v]]} - \\mathbf{[[u]]}$; $\\overrightarrow{AC} = [[k + 1]]\\mathbf{[[v]]} - [[k + 1]]\\mathbf{[[u]]} = [[k + 1]]\\overrightarrow{AB}$, so collinear"
+  },
+  {
+   "id": "y11hau8-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Geometric arguments and proofs using vectors (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S4 Geometric arguments and proofs using vectors (E)",
+   "keywords": [
+    "geometric",
+    "arguments",
+    "and",
+    "proofs",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$ABCD$ is a parallelogram with $\\overrightarrow{AB} = \\mathbf{[[u]]}$ and $\\overrightarrow{AD} = \\mathbf{[[v]]}$. $M$ is the midpoint of $BC$. Write $\\overrightarrow{AM}$.",
+   "answer": "$\\mathbf{[[u]]} + \\frac{1}{2}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y11hau8-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Geometric arguments and proofs using vectors (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S4 Geometric arguments and proofs using vectors (E)",
+   "keywords": [
+    "geometric",
+    "arguments",
+    "and",
+    "proofs",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$OAB$ is a triangle with $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $M$ and $N$ are the midpoints of $OA$ and $OB$. Show that $\\overrightarrow{MN} = \\frac{1}{2}\\overrightarrow{AB}$.",
+   "answer": "$\\overrightarrow{MN} = \\frac{1}{2}\\mathbf{[[v]]} - \\frac{1}{2}\\mathbf{[[u]]} = \\frac{1}{2}(\\mathbf{[[v]]} - \\mathbf{[[u]]}) = \\frac{1}{2}\\overrightarrow{AB}$"
+  },
+  {
+   "id": "y11hau8-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Geometric arguments and proofs using vectors (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S4 Geometric arguments and proofs using vectors (E)",
+   "keywords": [
+    "geometric",
+    "arguments",
+    "and",
+    "proofs",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$ABCD$ is a quadrilateral. $P$, $Q$, $R$, $S$ are the midpoints of $AB$, $BC$, $CD$, $DA$. Let $\\overrightarrow{AC} = \\mathbf{[[u]]}$ and $\\overrightarrow{BD} = \\mathbf{[[v]]}$. Show that $\\overrightarrow{PQ} = \\overrightarrow{SR}$ using $\\overrightarrow{PQ} = \\frac{1}{2}\\overrightarrow{AC}$.",
+   "answer": "$\\overrightarrow{PQ} = \\frac{1}{2}\\overrightarrow{AC}$ and $\\overrightarrow{SR} = \\frac{1}{2}\\overrightarrow{AC}$, so $PQRS$ is a parallelogram"
+  },
+  {
+   "id": "y11hau8-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Geometric arguments and proofs using vectors (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B8 Vectors · S4 Geometric arguments and proofs using vectors (E)",
+   "keywords": [
+    "geometric",
+    "arguments",
+    "and",
+    "proofs",
+    "using",
+    "vectors",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = [[2]]\\mathbf{[[u]]}$ and $\\overrightarrow{OB} = [[2]]\\mathbf{[[v]]}$. $M$ is the midpoint of $AB$. Prove that $OM$ is a median and find $\\overrightarrow{OM}$. (4 marks)",
+   "answer": "$\\overrightarrow{AB} = 2\\mathbf{[[v]]} - 2\\mathbf{[[u]]}$; $\\overrightarrow{OM} = 2\\mathbf{[[u]]} + \\mathbf{[[v]]} - \\mathbf{[[u]]} = \\mathbf{[[u]]} + \\mathbf{[[v]]}$"
+  }
+ ]
+}

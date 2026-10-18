@@ -1,0 +1,1897 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Autumn Block 2 Area and volume: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fau2-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Isometric drawings",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S1 Isometric drawings",
+   "keywords": [
+    "isometric",
+    "drawings",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A solid is a cuboid made from [[l]] by [[w]] by [[h]] cubes. How many cubes are there?",
+   "answer": "[[l * w * h]]"
+  },
+  {
+   "id": "y11fau2-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Isometric drawings",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S1 Isometric drawings",
+   "keywords": [
+    "isometric",
+    "drawings",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "On isometric paper a cuboid is drawn [[l]] units long, [[w]] units wide and [[h]] units high. How many cubes would it be made from, and how many of its 6 faces are visible in the drawing?",
+   "answer": "[[l * w * h]] cubes; 3 faces are visible (top, front and side)"
+  },
+  {
+   "id": "y11fau2-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Isometric drawings",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S1 Isometric drawings",
+   "keywords": [
+    "isometric",
+    "drawings",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "An L-shaped solid is made from a [[a]] by [[b]] by [[c]] cuboid with a [[d]] by [[b]] by [[c]] cuboid joined on its end. How many cubes are in the solid?",
+   "answer": "[[(a + d) * b * c]]"
+  },
+  {
+   "id": "y11fau2-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Isometric drawings",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S1 Isometric drawings",
+   "keywords": [
+    "isometric",
+    "drawings",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A model is built from [[n]] cubes of side [[s]] cm. Work out its volume and the surface area if it is a single row of cubes. (3 marks)",
+   "answer": "Volume [[n * s * s * s]] cm³; surface area [[2 * s * s + 4 * n * s * s]] cm²"
+  },
+  {
+   "id": "y11fau2-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Plans and elevations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S2 Plans and elevations",
+   "keywords": [
+    "plans",
+    "and",
+    "elevations",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "l != w"
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm long, [[w]] cm wide and [[h]] cm tall. What shape is its plan view and what are its dimensions?",
+   "answer": "A rectangle [[l]] cm by [[w]] cm"
+  },
+  {
+   "id": "y11fau2-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Plans and elevations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S2 Plans and elevations",
+   "keywords": [
+    "plans",
+    "and",
+    "elevations",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "l != w",
+    "w != h"
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm long, [[w]] cm wide and [[h]] cm tall. Write the dimensions of its front elevation and its side elevation.",
+   "answer": "Front [[l]] cm by [[h]] cm; side [[w]] cm by [[h]] cm"
+  },
+  {
+   "id": "y11fau2-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Plans and elevations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S2 Plans and elevations",
+   "keywords": [
+    "plans",
+    "and",
+    "elevations",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cylinder has radius [[r]] cm and height [[h]] cm. Describe its plan view and its front elevation and give their areas in terms of $\\pi$ and as numbers.",
+   "answer": "Plan: a circle, area $[[r * r]]\\pi$ cm²; front: a rectangle [[2 * r]] cm by [[h]] cm, area [[2 * r * h]] cm²"
+  },
+  {
+   "id": "y11fau2-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Plans and elevations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S2 Plans and elevations",
+   "keywords": [
+    "plans",
+    "and",
+    "elevations",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s * h % 2 == 0"
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A square-based pyramid has base [[s]] cm and height [[h]] cm. Describe its plan and its front elevation, and give the area of the front elevation. (3 marks)",
+   "answer": "Plan: a square with its diagonals; front: a triangle with base [[s]] cm and height [[h]] cm, area [[s * h / 2]] cm²"
+  },
+  {
+   "id": "y11fau2-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Volume of a cylinder",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S3 Volume of a cylinder",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "cylinder",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the volume of a cylinder with radius [[r]] cm and height [[h]] cm. Give your answer in terms of $\\pi$.",
+   "answer": "$[[r * r * h]]\\pi$ cm³"
+  },
+  {
+   "id": "y11fau2-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Volume of a cylinder",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S3 Volume of a cylinder",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "cylinder",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the volume of a cylinder with radius [[r]] cm and height [[h]] cm to 1 decimal place.",
+   "answer": "[[r * r * h * 3.14159265|dp:1]] cm³"
+  },
+  {
+   "id": "y11fau2-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Volume of a cylinder",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S3 Volume of a cylinder",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "cylinder",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cylinder has a diameter of [[2 * r]] cm and a volume of $[[r * r * h]]\\pi$ cm³. Work out its height.",
+   "answer": "[[h]] cm"
+  },
+  {
+   "id": "y11fau2-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Volume of a cylinder",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S3 Volume of a cylinder",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "cylinder",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A water tank is a cylinder with radius [[r]] m and height [[h]] m. (a) Work out its volume to 1 decimal place. (b) 1 m³ = 1000 litres. How many litres does it hold? (3 marks)",
+   "answer": "(a) [[r * r * h * 3.14159265|dp:1]] m³  (b) [[r * r * h * 3.14159265 * 1000|dp:0]] litres"
+  },
+  {
+   "id": "y11fau2-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Volume of cones and pyramids",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S4 Volume of cones and pyramids",
+   "keywords": [
+    "volume",
+    "of",
+    "cones",
+    "and",
+    "pyramids",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the volume of a cone with radius [[r]] cm and height [[3 * k]] cm. Give your answer in terms of $\\pi$.",
+   "answer": "$[[r * r * k]]\\pi$ cm³"
+  },
+  {
+   "id": "y11fau2-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Volume of cones and pyramids",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S4 Volume of cones and pyramids",
+   "keywords": [
+    "volume",
+    "of",
+    "cones",
+    "and",
+    "pyramids",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Work out the volume of a sphere with radius [[3 * k]] cm. Give your answer in terms of $\\pi$.",
+   "answer": "$[[4 * 9 * k * k * k]]\\pi$ cm³"
+  },
+  {
+   "id": "y11fau2-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Volume of cones and pyramids",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S4 Volume of cones and pyramids",
+   "keywords": [
+    "volume",
+    "of",
+    "cones",
+    "and",
+    "pyramids",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A square-based pyramid has a base of side [[s]] cm and a height of [[3 * k]] cm. Work out its volume.",
+   "answer": "[[s * s * k]] cm³"
+  },
+  {
+   "id": "y11fau2-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Volume of cones and pyramids",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S4 Volume of cones and pyramids",
+   "keywords": [
+    "volume",
+    "of",
+    "cones",
+    "and",
+    "pyramids",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A solid is a hemisphere of radius [[3 * k]] cm. Work out its volume in terms of $\\pi$ and its total surface area in terms of $\\pi$. (4 marks)",
+   "answer": "Volume $[[2 * 9 * k * k * k]]\\pi$ cm³; surface area $[[3 * 9 * k * k]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Volume of a sphere",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S5 Volume of a sphere",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Work out the volume of a sphere with radius [[3 * k]] cm. Give your answer in terms of $\\pi$.",
+   "answer": "$[[36 * k * k * k]]\\pi$ cm³"
+  },
+  {
+   "id": "y11fau2-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Volume of a sphere",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S5 Volume of a sphere",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the volume of a sphere of radius [[r]] cm to 1 decimal place.",
+   "answer": "[[4 / 3 * 3.14159265 * r * r * r|dp:1]] cm³"
+  },
+  {
+   "id": "y11fau2-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Volume of a sphere",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S5 Volume of a sphere",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A hemisphere has radius [[3 * k]] cm. Work out its volume in terms of $\\pi$.",
+   "answer": "$[[18 * k * k * k]]\\pi$ cm³"
+  },
+  {
+   "id": "y11fau2-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Volume of a sphere",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S5 Volume of a sphere",
+   "keywords": [
+    "volume",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A spherical ball of radius [[r]] cm fits exactly inside a cube. Work out the volume of the cube not filled by the ball to 1 decimal place. (3 marks)",
+   "answer": "[[8 * r * r * r - 4 / 3 * 3.14159265 * r * r * r|dp:1]] cm³"
+  },
+  {
+   "id": "y11fau2-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cylinder (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S6 Surface area of a cylinder (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cylinder",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cylinder has radius [[r]] cm and height [[h]] cm. Work out the area of its curved surface in terms of $\\pi$.",
+   "answer": "$[[2 * r * h]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cylinder (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S6 Surface area of a cylinder (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cylinder",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cylinder has radius [[r]] cm and height [[h]] cm. Work out its total surface area in terms of $\\pi$.",
+   "answer": "$[[2 * r * r + 2 * r * h]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cylinder (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S6 Surface area of a cylinder (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cylinder",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cylinder has radius [[r]] cm and height [[h]] cm. Work out its total surface area to 1 decimal place.",
+   "answer": "[[(2 * r * r + 2 * r * h) * 3.14159265|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau2-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cylinder (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S6 Surface area of a cylinder (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cylinder",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       8,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A can is a cylinder with radius [[r]] cm and height [[h]] cm. A label covers the curved surface. (a) Work out the area of the label in terms of $\\pi$. (b) The top and bottom are metal. Work out the metal area. (4 marks)",
+   "answer": "(a) $[[2 * r * h]]\\pi$ cm²  (b) $[[2 * r * r]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a sphere",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S7 Surface area of a sphere",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the surface area of a sphere with radius [[r]] cm. Give your answer in terms of $\\pi$.",
+   "answer": "$[[4 * r * r]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a sphere",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S7 Surface area of a sphere",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sphere has radius [[r]] cm. Work out its surface area to 1 decimal place.",
+   "answer": "[[4 * 3.14159265 * r * r|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau2-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a sphere",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S7 Surface area of a sphere",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A sphere has surface area $[[4 * k * k]]\\pi$ cm². Work out its radius. .",
+   "answer": "Radius [[k]] cm"
+  },
+  {
+   "id": "y11fau2-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a sphere",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S7 Surface area of a sphere",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "sphere",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A hemispherical dome has radius [[r]] m. Work out the curved surface area and the total surface area including the flat base, in terms of $\\pi$. (3 marks)",
+   "answer": "Curved $[[2 * r * r]]\\pi$ m²; total $[[3 * r * r]]\\pi$ m²"
+  },
+  {
+   "id": "y11fau2-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a pyramid (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S8 Surface area of a pyramid (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "pyramid",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s * l % 2 == 0"
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A square-based pyramid has base [[s]] cm and sloping face height [[l]] cm. Work out the area of one triangular face.",
+   "answer": "[[s * l / 2]] cm²"
+  },
+  {
+   "id": "y11fau2-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a pyramid (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S8 Surface area of a pyramid (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "pyramid",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A square-based pyramid has base [[s]] cm and sloping face height [[l]] cm. Work out its total surface area.",
+   "answer": "[[s * s + 2 * s * l]] cm²"
+  },
+  {
+   "id": "y11fau2-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a pyramid (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S8 Surface area of a pyramid (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "pyramid",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A square-based pyramid has base [[2 * a]] cm and height [[h]] cm. Work out the sloping height and the total surface area.",
+   "answer": "Slant height [[sqrt(a * a + h * h)|dp:2]] cm; surface area [[4 * a * a + 4 * a * sqrt(a * a + h * h)|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau2-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a pyramid (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S8 Surface area of a pyramid (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "pyramid",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A tent is a square-based pyramid with base [[2 * a]] m and sloping height [[l]] m with no floor. Canvas costs £[[p]] per m². Work out the cost. (3 marks)",
+   "answer": "£[[4 * a * l * p]]"
+  },
+  {
+   "id": "y11fau2-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cone (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S9 Surface area of a cone (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cone",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cone has radius [[r]] cm and slant height [[l]] cm. Work out its curved surface area in terms of $\\pi$.",
+   "answer": "$[[r * l]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cone (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S9 Surface area of a cone (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cone",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A cone has radius [[r]] cm and slant height [[l]] cm. Work out its total surface area in terms of $\\pi$.",
+   "answer": "$[[r * l + r * r]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cone (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S9 Surface area of a cone (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cone",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A cone has radius [[3 * k]] cm and height [[4 * k]] cm. Work out its slant height and curved surface area in terms of $\\pi$.",
+   "answer": "Slant height [[5 * k]] cm; curved surface $[[15 * k * k]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau2-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Surface area of a cone (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S9 Surface area of a cone (E)",
+   "keywords": [
+    "surface",
+    "area",
+    "of",
+    "a",
+    "cone",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       14,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A party hat is a cone with no base, radius [[r]] cm and slant height [[l]] cm. Work out the area of card needed to 1 decimal place. (3 marks)",
+   "answer": "[[3.14159265 * r * l|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau2-s10-l1",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of area (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S10 Convert metric units of area (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "area",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Convert [[a]] m² to cm².",
+   "answer": "[[a * 10000|group]] cm²"
+  },
+  {
+   "id": "y11fau2-s10-l2",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of area (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S10 Convert metric units of area (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "area",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Convert [[a * 100]] mm² to cm².",
+   "answer": "[[a]] cm²"
+  },
+  {
+   "id": "y11fau2-s10-l3",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of area (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S10 Convert metric units of area (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "area",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A box has a volume of [[a * 1000000|group]] cm³. Write its volume in m³. How many litres is this?",
+   "answer": "[[a]] m³; [[a * 1000|group]] litres"
+  },
+  {
+   "id": "y11fau2-s10-l4",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of area (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S10 Convert metric units of area (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "area",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       100,
+       200,
+       250,
+       500
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l * w * h > 0"
+   ],
+   "text": "A tank is [[l]] m long, [[w]] m wide and [[h]] m deep. Work out its volume in m³ and in litres. A pump removes [[p]] litres a minute. How long to empty it, in minutes? (4 marks)",
+   "answer": "[[l * w * h]] m³ = [[l * w * h * 1000|group]] litres; [[l * w * h * 1000 / p|dp:1]] minutes"
+  },
+  {
+   "id": "y11fau2-s11-l1",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of volume (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S11 Convert metric units of volume (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "volume",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Convert [[a]] m² to cm².",
+   "answer": "[[a * 10000|group]] cm²"
+  },
+  {
+   "id": "y11fau2-s11-l2",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of volume (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S11 Convert metric units of volume (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "volume",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Convert [[a * 100]] mm² to cm².",
+   "answer": "[[a]] cm²"
+  },
+  {
+   "id": "y11fau2-s11-l3",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of volume (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S11 Convert metric units of volume (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "volume",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A box has a volume of [[a * 1000000|group]] cm³. Write its volume in m³. How many litres is this?",
+   "answer": "[[a]] m³; [[a * 1000|group]] litres"
+  },
+  {
+   "id": "y11fau2-s11-l4",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of volume (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B2 Area and volume · S11 Convert metric units of volume (E)",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "volume",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       100,
+       200,
+       250,
+       500
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l * w * h > 0"
+   ],
+   "text": "A tank is [[l]] m long, [[w]] m wide and [[h]] m deep. Work out its volume in m³ and in litres. A pump removes [[p]] litres a minute. How long to empty it, in minutes? (4 marks)",
+   "answer": "[[l * w * h]] m³ = [[l * w * h * 1000|group]] litres; [[l * w * h * 1000 / p|dp:1]] minutes"
+  }
+ ]
+}

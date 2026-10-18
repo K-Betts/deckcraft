@@ -1,0 +1,1380 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Autumn Block 4 Sequences and proof: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hau4-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Write the next two terms of the sequence [[s]], [[s + d]], [[s + 2 * d]], [[s + 3 * d]], …",
+   "answer": "[[s + 4 * d]], [[s + 5 * d]] (add [[d]] each time)"
+  },
+  {
+   "id": "y11hau4-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the next two terms of the sequence [[s]], [[s * m]], [[s * m * m]], [[s * m * m * m]], …",
+   "answer": "[[s * m * m * m * m]], [[s * m * m * m * m * m]] (multiply by [[m]] each time)"
+  },
+  {
+   "id": "y11hau4-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Is the sequence [[s]], [[s + d]], [[s + 3 * d]], [[s + 6 * d]] arithmetic, geometric or neither? Explain.",
+   "answer": "Neither: the differences are [[d]], [[2 * d]], [[3 * d]], which are not constant, and there is no common multiplier"
+  },
+  {
+   "id": "y11hau4-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A sequence starts [[s]], [[s * 2]], [[s * 4]]. (a) What type of sequence is this? (b) Find the 6th term. (c) Which term is [[s * 64]]? (3 marks)",
+   "answer": "(a) geometric (multiply by 2)  (b) [[s * 32]]  (c) the 7th term"
+  },
+  {
+   "id": "y11hau4-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Explore sequences with algebraic terms",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S2 Explore sequences with algebraic terms",
+   "keywords": [
+    "explore",
+    "sequences",
+    "with",
+    "algebraic",
+    "terms",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "The first terms of a sequence are $a$, $a + [[d]]$, $a + [[2 * d]]$. Write the 4th term and the $n$th term.",
+   "answer": "$a + [[3 * d]]$; $a + [[d]](n - 1)$"
+  },
+  {
+   "id": "y11hau4-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Explore sequences with algebraic terms",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S2 Explore sequences with algebraic terms",
+   "keywords": [
+    "explore",
+    "sequences",
+    "with",
+    "algebraic",
+    "terms",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A sequence is $x$, $x + [[d]]$, $x + [[2 * d]]$, … The 5th term is [[x0 + 4 * d]]. Find $x$.",
+   "answer": "$x + [[4 * d]] = [[x0 + 4 * d]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y11hau4-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Explore sequences with algebraic terms",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S2 Explore sequences with algebraic terms",
+   "keywords": [
+    "explore",
+    "sequences",
+    "with",
+    "algebraic",
+    "terms",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "The 3rd term of an arithmetic sequence is [[a + 2 * d]] and the 6th term is [[a + 5 * d]]. Find the first term and the common difference.",
+   "answer": "$3d = [[3 * d]]$, so $d = [[d]]$; first term [[a]]"
+  },
+  {
+   "id": "y11hau4-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Explore sequences with algebraic terms",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S2 Explore sequences with algebraic terms",
+   "keywords": [
+    "explore",
+    "sequences",
+    "with",
+    "algebraic",
+    "terms",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "A sequence has the $n$th term $[[p]]n + k$. The 4th term is [[4 * p + k0]]. Find $k$ and the 10th term. (3 marks)",
+   "answer": "$k = [[k0]]$; 10th term [[10 * p + k0]]"
+  },
+  {
+   "id": "y11hau4-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences involving surds (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S3 Describe and continue sequences involving surds (E)",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "involving",
+    "surds",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Find the next two terms of $\\sqrt{[[b]]}$, $2\\sqrt{[[b]]}$, $3\\sqrt{[[b]]}$, …",
+   "answer": "$4\\sqrt{[[b]]}$, $5\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y11hau4-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences involving surds (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S3 Describe and continue sequences involving surds (E)",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "involving",
+    "surds",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A sequence starts $[[a]]$, $[[a]]\\sqrt{[[b]]}$, $[[a * b]]$, … What type of sequence is it and what are the next two terms?",
+   "answer": "Geometric (× $\\sqrt{[[b]]}$): $[[a * b]]\\sqrt{[[b]]}$, $[[a * b * b]]$"
+  },
+  {
+   "id": "y11hau4-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences involving surds (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S3 Describe and continue sequences involving surds (E)",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "involving",
+    "surds",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Find the common difference of $[[a]]\\sqrt{[[b]]}$, $[[a + d]]\\sqrt{[[b]]}$, $[[a + 2 * d]]\\sqrt{[[b]]}$ and the 10th term.",
+   "answer": "$d\\sqrt{[[b]]}$ with $d = [[d]]$: common difference $[[d]]\\sqrt{[[b]]}$; 10th term $[[a + 9 * d]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y11hau4-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences involving surds (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S3 Describe and continue sequences involving surds (E)",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "involving",
+    "surds",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A geometric sequence has first term [[a]] and second term $[[a]]\\sqrt{[[b]]}$. Show that the 3rd term is [[a * b]] and find the 5th term. (3 marks)",
+   "answer": "Ratio $\\sqrt{[[b]]}$; 3rd term [[a * b]]; 5th term [[a * b * b]]"
+  },
+  {
+   "id": "y11hau4-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given an algebraic rule",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S4 Generate a sequence given an algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "an",
+    "algebraic",
+    "rule",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n^2 + [[c]]$. Write down the first four terms.",
+   "answer": "[[1 + c]], [[4 + c]], [[9 + c]], [[16 + c]]"
+  },
+  {
+   "id": "y11hau4-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given an algebraic rule",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S4 Generate a sequence given an algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "an",
+    "algebraic",
+    "rule",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > c"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n^2 - [[c]]$. Work out the 1st, 2nd and 5th terms.",
+   "answer": "[[m - c]], [[4 * m - c]], [[25 * m - c]]"
+  },
+  {
+   "id": "y11hau4-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given an algebraic rule",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S4 Generate a sequence given an algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "an",
+    "algebraic",
+    "rule",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       4,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n^2 + [[c]]$. Which term is equal to [[k * k + c]]?",
+   "answer": "Term number [[k]] (since [[k * k + c]] − [[c]] = [[k * k]] and $[[k]]^2 = [[k * k]]$)"
+  },
+  {
+   "id": "y11hau4-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given an algebraic rule",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S4 Generate a sequence given an algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "an",
+    "algebraic",
+    "rule",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n(n + [[c]])$. (a) Write down the first four terms. (b) Is [[(k) * (k + c)]] a term? Show how you know. (3 marks)",
+   "answer": "(a) [[1 + c]], [[2 * (2 + c)]], [[3 * (3 + c)]], [[4 * (4 + c)]]  (b) Yes: term number [[k]], since [[k]] × [[k + c]] = [[k * (k + c)]]"
+  },
+  {
+   "id": "y11hau4-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S5 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s != d"
+   ],
+   "check": [
+    "s + d > s"
+   ],
+   "text": "Find the $n$th term of the sequence [[s]], [[s + d]], [[s + 2 * d]], [[s + 3 * d]], ...",
+   "answer": "$[[d]]n[[s - d|signed]]$"
+  },
+  {
+   "id": "y11hau4-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S5 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > d"
+   ],
+   "text": "Find the $n$th term of the sequence [[s]], [[s - d]], [[s - 2 * d]], [[s - 3 * d]], ...",
+   "answer": "$[[0 - d|term:n]] + [[s + d]]$"
+  },
+  {
+   "id": "y11hau4-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S5 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       -5,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       40,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != 0"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A sequence has the $n$th term $[[d]]n[[c|signed]]$. Find the 20th term. Then use the $n$th term to say whether [[t]] is in the sequence.",
+   "answer": "20th term: [[20 * d + c]]; [[t]] [[(t - c) % d == 0|if:is/is not]] in the sequence"
+  },
+  {
+   "id": "y11hau4-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S5 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s != d"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Matchstick patterns are made: pattern 1 uses [[s]] sticks, pattern 2 uses [[s + d]], pattern 3 uses [[s + 2 * d]]. (a) Find the $n$th term. (b) How many sticks are in pattern [[k]]? (c) Which pattern uses [[s + (k + 4) * d]] sticks? (3 marks)",
+   "answer": "(a) $[[d]]n[[s - d|signed]]$  (b) [[d * k + s - d]]  (c) pattern [[k + 5]]"
+  },
+  {
+   "id": "y11hau4-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "nth term of a quadratic sequence (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S6 nth term of a quadratic sequence (E)",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "quadratic",
+    "sequence",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Find the $n$th term of the quadratic sequence [[p + q + r]], [[4 * p + 2 * q + r]], [[9 * p + 3 * q + r]], [[16 * p + 4 * q + r]], …",
+   "answer": "$[[p|coef]]n^2[[q|sterm:n]][[r|signed]]$"
+  },
+  {
+   "id": "y11hau4-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "nth term of a quadratic sequence (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S6 nth term of a quadratic sequence (E)",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "quadratic",
+    "sequence",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "A sequence has the $n$th term $n^2 + [[q]]n + [[r]]$. Write the first four terms and the second differences.",
+   "answer": "[[1 + q + r]], [[4 + 2 * q + r]], [[9 + 3 * q + r]], [[16 + 4 * q + r]]; second difference 2"
+  },
+  {
+   "id": "y11hau4-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "nth term of a quadratic sequence (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S6 nth term of a quadratic sequence (E)",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "quadratic",
+    "sequence",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "Find the $n$th term of [[2 + q + r]], [[8 + 2 * q + r]], [[18 + 3 * q + r]], [[32 + 4 * q + r]], …",
+   "answer": "$2n^2[[q|sterm:n]][[r|signed]]$"
+  },
+  {
+   "id": "y11hau4-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "nth term of a quadratic sequence (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S6 nth term of a quadratic sequence (E)",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "quadratic",
+    "sequence",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "The $n$th term of a sequence is $[[p]]n^2 + [[q]]n + [[r]]$. Show that the second difference is [[2 * p]] and find the 20th term. (3 marks)",
+   "answer": "Differences between terms increase by [[2 * p]]; 20th term [[400 * p + 20 * q + r]]"
+  },
+  {
+   "id": "y11hau4-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Represent numbers algebraically",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S7 Represent numbers algebraically",
+   "keywords": [
+    "represent",
+    "numbers",
+    "algebraically",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "$n$ is [[k == 0|if:an even number/]][[k == 1|if:an odd number/]][[k == 2|if:a multiple of 3/]]. Write an expression for the next number of the same type.",
+   "answer": "$n + [[k == 2|if:3/2]]$"
+  },
+  {
+   "id": "y11hau4-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Represent numbers algebraically",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S7 Represent numbers algebraically",
+   "keywords": [
+    "represent",
+    "numbers",
+    "algebraically",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write an expression for (a) any multiple of [[k]] (b) any number that is 1 more than a multiple of [[k]].",
+   "answer": "(a) $[[k]]n$  (b) $[[k]]n + 1$"
+  },
+  {
+   "id": "y11hau4-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Represent numbers algebraically",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S7 Represent numbers algebraically",
+   "keywords": [
+    "represent",
+    "numbers",
+    "algebraically",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Show that the sum of two consecutive numbers $n$ and $n + 1$ is always odd. Check with $n = [[n]]$.",
+   "answer": "$n + (n + 1) = 2n + 1$ is odd; [[n]] + [[n + 1]] = [[2 * n + 1]]"
+  },
+  {
+   "id": "y11hau4-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Represent numbers algebraically",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S7 Represent numbers algebraically",
+   "keywords": [
+    "represent",
+    "numbers",
+    "algebraically",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Prove that the sum of three consecutive integers is a multiple of 3. Check with [[n]], [[n + 1]], [[n + 2]]. (3 marks)",
+   "answer": "$n + (n + 1) + (n + 2) = 3n + 3 = 3(n + 1)$; [[n]] + [[n + 1]] + [[n + 2]] = [[3 * n + 3]] = 3 × [[n + 1]]"
+  },
+  {
+   "id": "y11hau4-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Algebraic arguments and proof",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S8 Algebraic arguments and proof",
+   "keywords": [
+    "algebraic",
+    "arguments",
+    "and",
+    "proof",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Prove that $(n + [[a]])^2 - n^2$ can be written as $[[a]](2n + [[a]])$.",
+   "answer": "$(n + [[a]])^2 - n^2 = [[2 * a]]n + [[a * a]] = [[a]]([[2]]n + [[a]])$"
+  },
+  {
+   "id": "y11hau4-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Algebraic arguments and proof",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S8 Algebraic arguments and proof",
+   "keywords": [
+    "algebraic",
+    "arguments",
+    "and",
+    "proof",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Prove that the sum of two consecutive odd numbers is a multiple of 4. Check with [[2 * n + 1]] and [[2 * n + 3]].",
+   "answer": "$(2n + 1) + (2n + 3) = 4n + 4 = 4(n + 1)$; [[2 * n + 1]] + [[2 * n + 3]] = [[4 * n + 4]]"
+  },
+  {
+   "id": "y11hau4-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Algebraic arguments and proof",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S8 Algebraic arguments and proof",
+   "keywords": [
+    "algebraic",
+    "arguments",
+    "and",
+    "proof",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Prove that $n^2 + n$ is always even. Check with $n = [[n]]$.",
+   "answer": "$n^2 + n = n(n + 1)$, a product of consecutive integers, so one factor is even; [[n * n + n]] is even"
+  },
+  {
+   "id": "y11hau4-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Algebraic arguments and proof",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B4 Sequences and proof · S8 Algebraic arguments and proof",
+   "keywords": [
+    "algebraic",
+    "arguments",
+    "and",
+    "proof",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Prove that the difference between the squares of two consecutive integers $n$ and $n + 1$ is $2n + 1$, and use it to find $[[n + 1]]^2 - [[n]]^2$. (3 marks)",
+   "answer": "$(n + 1)^2 - n^2 = 2n + 1$; [[n + 1]]² − [[n]]² = [[2 * n + 1]]"
+  }
+ ]
+}

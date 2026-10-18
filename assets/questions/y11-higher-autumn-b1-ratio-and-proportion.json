@@ -1,0 +1,2181 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Autumn Block 1 Ratio and proportion: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hau1-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S1 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m + b * m == (a + b) * m"
+   ],
+   "text": "Share £[[(a + b) * m]] in the ratio [[a]] : [[b]].",
+   "answer": "£[[a * m]] and £[[b * m]]"
+  },
+  {
+   "id": "y11hau1-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S1 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "The ratio of boys to girls is [[a]] : [[b]]. There are [[a * m]] boys. How many pupils are there?",
+   "answer": "[[(a + b) * m]]"
+  },
+  {
+   "id": "y11hau1-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S1 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "b < c"
+   ],
+   "check": [
+    "(c - a) * m / (c - a) == m"
+   ],
+   "text": "Red : blue : green counters are in the ratio [[a]] : [[b]] : [[c]]. There are [[(c - a) * m]] more green than red counters. How many counters are there altogether?",
+   "answer": "[[(a + b + c) * m]]"
+  },
+  {
+   "id": "y11hau1-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S1 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "b < c"
+   ],
+   "check": [
+    "(c - a) * m / (c - a) == m"
+   ],
+   "text": "Amy, Ben and Cara share money in the ratio [[a]] : [[b]] : [[c]]. Cara gets £[[(c - a) * m]] more than Amy. (a) How much does each get? (b) What fraction of the total does Ben get? (4 marks)",
+   "answer": "(a) Amy £[[a * m]], Ben £[[b * m]], Cara £[[c * m]]  (b) $[[b / (a + b + c)|frac]]$"
+  },
+  {
+   "id": "y11hau1-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Exchange rates",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S2 Exchange rates",
+   "keywords": [
+    "exchange",
+    "rates",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       105,
+       135
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80,
+       100,
+       150,
+       200
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 * 100 == x * r"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Change £[[x]] into euros.",
+   "answer": "€[[x * r / 100|dp:2]]"
+  },
+  {
+   "id": "y11hau1-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Exchange rates",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S2 Exchange rates",
+   "keywords": [
+    "exchange",
+    "rates",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       105,
+       135
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80,
+       100,
+       150,
+       200
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 * 100 == x * r"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Sam has €[[x * r / 100|dp:2]]. How many pounds is this worth?",
+   "answer": "£[[x|dp:2]]"
+  },
+  {
+   "id": "y11hau1-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Exchange rates",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S2 Exchange rates",
+   "keywords": [
+    "exchange",
+    "rates",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       125,
+       130,
+       125,
+       140
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       200,
+       300,
+       400,
+       500
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       25,
+       50,
+       75,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 - s > 0"
+   ],
+   "text": "Anna changes £[[x]] into euros at £1 = €[[r / 100|dp:2]]. She spends €[[s]] and changes the rest back to pounds at the same rate. How much does she get?",
+   "answer": "£[[(x * r / 100 - s) * 100 / r|dp:2]]"
+  },
+  {
+   "id": "y11hau1-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Exchange rates",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S2 Exchange rates",
+   "keywords": [
+    "exchange",
+    "rates",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       110,
+       120,
+       125
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "choose": [
+       110,
+       120,
+       150,
+       180
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       80,
+       160
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "abs(y * 100 / r - p) > 0.5"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. A coat costs €[[y]] in Paris and £[[p]] in London. Which is cheaper and by how much, in pounds? (3 marks)",
+   "answer": "Paris coat is £[[y * 100 / r|dp:2]]; the [[y * 100 / r < p|if:Paris/London]] coat is cheaper by £[[abs(y * 100 / r - p)|dp:2]]"
+  },
+  {
+   "id": "y11hau1-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph to change £[[x]] into euros.",
+   "answer": "€[[x * r / 10]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph to change €[[x * r / 10]] into pounds.",
+   "answer": "£[[x]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "y != x * r / 10"
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the graph. A hotel in France costs €[[y]] a night and a hotel in the UK costs £[[x]] a night. Which is cheaper?",
+   "answer": "£[[x]] is €[[x * r / 10]], so the [[y < x * r / 10|if:French/UK]] hotel is cheaper",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "step": [
+       15,
+       45,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph. (a) Change £[[x]] to euros. (b) Explain how the graph shows that the exchange rate is constant. (2 marks)",
+   "answer": "(a) €[[x * r / 10]]  (b) it is a straight line through the origin, so euros are directly proportional to pounds",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Best buy problems",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S4 Best buy problems",
+   "keywords": [
+    "best",
+    "buy",
+    "problems",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       200,
+       250,
+       300
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       400,
+       500,
+       600
+      ]
+     }
+    ],
+    [
+     "p1",
+     {
+      "int": [
+       150,
+       300
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "int": [
+       280,
+       620
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p1 * n2 != p2 * n1"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "A [[n1]] g jar costs £[[p1 / 100|dp:2]] and a [[n2]] g jar costs £[[p2 / 100|dp:2]]. Which is the better buy?",
+   "answer": "[[p1 * n2 < p2 * n1|if:the smaller jar/the larger jar]]"
+  },
+  {
+   "id": "y11hau1-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Best buy problems",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S4 Best buy problems",
+   "keywords": [
+    "best",
+    "buy",
+    "problems",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       8,
+       10,
+       12
+      ]
+     }
+    ],
+    [
+     "p1",
+     {
+      "int": [
+       180,
+       300
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "int": [
+       300,
+       600
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p1 * n2 != p2 * n1"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "Shop A sells [[n1]] apples for £[[p1 / 100|dp:2]]. Shop B sells [[n2]] apples for £[[p2 / 100|dp:2]]. Work out the cost of one apple in each shop and say which is cheaper.",
+   "answer": "A: [[p1 / n1|dp:1]]p; B: [[p2 / n2|dp:1]]p; [[p1 * n2 < p2 * n1|if:Shop A/Shop B]] is cheaper"
+  },
+  {
+   "id": "y11hau1-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Best buy problems",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S4 Best buy problems",
+   "keywords": [
+    "best",
+    "buy",
+    "problems",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       250,
+       300
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       500,
+       600
+      ]
+     }
+    ],
+    [
+     "p1",
+     {
+      "int": [
+       180,
+       300
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "int": [
+       300,
+       520
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       10,
+       20,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p2 / (n2 * (100 + x) / 100) != p1 / n1"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "Cereal: a [[n1]] g box costs £[[p1 / 100|dp:2]]; a [[n2]] g box costs £[[p2 / 100|dp:2]] but has [[x]]% extra free. Which is the better value?",
+   "answer": "The big box holds [[n2 * (100 + x) / 100|dp:0]] g for £[[p2 / 100|dp:2]]: [[p2 / (n2 * (100 + x) / 100) < p1 / n1|if:the big box/the small box]] is the better buy"
+  },
+  {
+   "id": "y11hau1-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Best buy problems",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S4 Best buy problems",
+   "keywords": [
+    "best",
+    "buy",
+    "problems",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       250,
+       330
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       500,
+       750
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "choose": [
+       1000,
+       1500
+      ]
+     }
+    ],
+    [
+     "p1",
+     {
+      "int": [
+       80,
+       140
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "int": [
+       120,
+       220
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "int": [
+       180,
+       320
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p1 * 100 / n1 != p2 * 100 / n2",
+    "p2 * 100 / n2 != p3 * 100 / n3"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "Three sizes of juice: [[n1]] ml for £[[p1 / 100|dp:2]], [[n2]] ml for £[[p2 / 100|dp:2]] and [[n3]] ml for £[[p3 / 100|dp:2]]. Work out the cost per 100 ml of each and say which is the best buy. (3 marks)",
+   "answer": "[[p1 * 100 / n1|dp:1]]p, [[p2 * 100 / n2|dp:1]]p, [[p3 * 100 / n3|dp:1]]p per 100 ml"
+  },
+  {
+   "id": "y11hau1-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S5 Direct proportion equations",
+   "keywords": [
+    "direct",
+    "proportion",
+    "equations",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$y$ is directly proportional to $x$. When $x = [[k]]$, $y = [[m * k]]$. Write the equation connecting $y$ and $x$.",
+   "answer": "$y = [[m]]x$"
+  },
+  {
+   "id": "y11hau1-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S5 Direct proportion equations",
+   "keywords": [
+    "direct",
+    "proportion",
+    "equations",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       9,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$y$ is directly proportional to $x$ and $y = [[m * k]]$ when $x = [[k]]$. Find $y$ when $x = [[j]]$.",
+   "answer": "[[m * j]]"
+  },
+  {
+   "id": "y11hau1-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S5 Direct proportion equations",
+   "keywords": [
+    "direct",
+    "proportion",
+    "equations",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       9,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$P$ is directly proportional to $q$. $P = [[m * k]]$ when $q = [[k]]$. Find the equation and the value of $q$ when $P = [[m * j]]$.",
+   "answer": "$P = [[m]]q$; $q = [[j]]$"
+  },
+  {
+   "id": "y11hau1-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S5 Direct proportion equations",
+   "keywords": [
+    "direct",
+    "proportion",
+    "equations",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       9,
+       20
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       21,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The cost $C$ of a taxi is directly proportional to the distance $d$. A [[k]] km journey costs £[[m * k]]. (a) Write $C = kd$. (b) Find the cost of [[j]] km. (c) Find the distance for £[[m * j2]]. (3 marks)",
+   "answer": "(a) $C = [[m]]d$  (b) £[[m * j]]  (c) [[j2]] km"
+  },
+  {
+   "id": "y11hau1-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Complex direct proportion equations (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S6 Complex direct proportion equations (E)",
+   "keywords": [
+    "complex",
+    "direct",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$y$ is directly proportional to $x^2$. When $x = [[k]]$, $y = [[m * k * k]]$. Find the equation.",
+   "answer": "$y = [[m]]x^2$"
+  },
+  {
+   "id": "y11hau1-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Complex direct proportion equations (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S6 Complex direct proportion equations (E)",
+   "keywords": [
+    "complex",
+    "direct",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$y$ is directly proportional to $x^2$ and $y = [[m * k * k]]$ when $x = [[k]]$. Find $y$ when $x = [[j]]$.",
+   "answer": "[[m * j * j]]"
+  },
+  {
+   "id": "y11hau1-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Complex direct proportion equations (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S6 Complex direct proportion equations (E)",
+   "keywords": [
+    "complex",
+    "direct",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$y$ is directly proportional to $\\sqrt{x}$. When $x = [[k * k]]$, $y = [[m * k]]$. Find $y$ when $x = [[j * j]]$.",
+   "answer": "$y = [[m]]\\sqrt{x}$; $y = [[m * j]]$"
+  },
+  {
+   "id": "y11hau1-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Complex direct proportion equations (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S6 Complex direct proportion equations (E)",
+   "keywords": [
+    "complex",
+    "direct",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "choose": [
+       5,
+       4,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       7,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The distance $s$ a stone falls is directly proportional to the square of the time $t$. It falls [[m * k * k]] m in [[k]] s. (a) Find $s$ in terms of $t$. (b) How far in [[j]] s? (c) How long to fall [[m * j2 * j2]] m? (4 marks)",
+   "answer": "(a) $s = [[m]]t^2$  (b) [[m * j * j]] m  (c) [[j2]] s"
+  },
+  {
+   "id": "y11hau1-s07-l1",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S7 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       9,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       3,
+       12,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(n * d / m)",
+    "m != n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "[[n]] workers build a wall in [[d]] days. How long would [[m]] workers take?",
+   "answer": "[[n * d / m]] days"
+  },
+  {
+   "id": "y11hau1-s07-l2",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S7 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(t * n / m)",
+    "m != n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A tank empties in [[t]] hours using [[n]] identical pumps. How long with [[m]] pumps?",
+   "answer": "[[t * n / m]] hours"
+  },
+  {
+   "id": "y11hau1-s07-l3",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S7 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       50,
+       300
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Say whether each is direct or inverse proportion: (a) the cost of [[n]] tickets (b) the time to drive [[d]] km at different speeds (c) the number of pizzas and the cost.",
+   "answer": "(a) direct  (b) inverse  (c) direct"
+  },
+  {
+   "id": "y11hau1-s07-l4",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S7 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       1,
+       12,
+       24
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       1,
+       2,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(a * b / c)",
+    "isint(a * b / e)",
+    "c != a",
+    "e != b"
+   ],
+   "check": [
+    "a * b > 0"
+   ],
+   "text": "y is inversely proportional to x. When x = [[a]], y = [[b]]. (a) Find the constant k in y = k/x. (b) Find y when x = [[c]]. (c) Find x when y = [[e]]. (3 marks)",
+   "answer": "(a) k = [[a * b]]  (b) [[a * b / c]]  (c) [[a * b / e]]"
+  },
+  {
+   "id": "y11hau1-s08-l1",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion equations (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S8 Inverse proportion equations (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y$ is inversely proportional to $x$. When $x = [[a]]$, $y = [[b]]$. Write $y$ in terms of $x$.",
+   "answer": "$y = \\frac{[[a * b]]}{x}$"
+  },
+  {
+   "id": "y11hau1-s08-l2",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion equations (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S8 Inverse proportion equations (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       9,
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       6,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y$ is inversely proportional to $x^2$. When $x = [[a]]$, $y = [[b]]$. Find $y$ when $x = [[c]]$.",
+   "answer": "$y = \\frac{[[a * a * b]]}{x^2}$; $y = [[a * a * b / (c * c)|frac]]$"
+  },
+  {
+   "id": "y11hau1-s08-l3",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion equations (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S8 Inverse proportion equations (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y$ is inversely proportional to $\\sqrt{x}$. When $x = [[a * a]]$, $y = [[b]]$. Find the equation and $y$ when $x = [[c * c]]$.",
+   "answer": "$y = \\frac{[[a * b]]}{\\sqrt{x}}$; $y = [[a * b / c|frac]]$"
+  },
+  {
+   "id": "y11hau1-s08-l4",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion equations (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S8 Inverse proportion equations (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "equations",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       16,
+       20,
+       36
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The intensity $I$ of light is inversely proportional to the square of the distance $d$ from the source. $I = [[b]]$ when $d = [[a]]$. Find $I$ when $d = [[c]]$ and the distance where $I = [[b / 4|dp:2]]$. (4 marks)",
+   "answer": "$I = \\frac{[[a * a * b]]}{d^2}$; $I = [[a * a * b / (c * c)|frac]]$ at $d = [[c]]$; $d = [[2 * a]]$"
+  },
+  {
+   "id": "y11hau1-s09-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct and inverse proportion graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S9 Direct and inverse proportion graphs",
+   "keywords": [
+    "direct",
+    "and",
+    "inverse",
+    "proportion",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The graph shows y inversely proportional to x. Read off the value of y when x = [[x1]].",
+   "answer": "[[12 * m / x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s09-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct and inverse proportion graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S9 Direct and inverse proportion graphs",
+   "keywords": [
+    "direct",
+    "and",
+    "inverse",
+    "proportion",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "y is inversely proportional to x, shown in the graph. Find the value of $xy$ from a point on the graph.",
+   "answer": "[[12 * m]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s09-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct and inverse proportion graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S9 Direct and inverse proportion graphs",
+   "keywords": [
+    "direct",
+    "and",
+    "inverse",
+    "proportion",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The graph shows y inversely proportional to x. Find the equation connecting y and x, and the value of y when x = [[x1]].",
+   "answer": "y = [[12 * m]]/x; y = [[12 * m / x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hau1-s09-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct and inverse proportion graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B1 Ratio and proportion · S9 Direct and inverse proportion graphs",
+   "keywords": [
+    "direct",
+    "and",
+    "inverse",
+    "proportion",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the graph, explain how you know y is not directly proportional to x, and find x when y = [[12 * m / x1]]. (3 marks)",
+   "answer": "The graph is a curve, not a straight line through the origin (as x increases, y decreases); x = [[x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  }
+ ]
+}

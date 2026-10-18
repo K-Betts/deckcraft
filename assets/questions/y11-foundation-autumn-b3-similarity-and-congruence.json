@@ -1,0 +1,1806 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Autumn Block 3 Similarity and congruence: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fau3-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Identify similar shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S1 Identify similar shapes",
+   "keywords": [
+    "identify",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A [[a]] cm by [[b]] cm rectangle is enlarged by scale factor [[k]]. What are the new dimensions?",
+   "answer": "[[a * k]] cm by [[b * k]] cm"
+  },
+  {
+   "id": "y11fau3-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Identify similar shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S1 Identify similar shapes",
+   "keywords": [
+    "identify",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Are the rectangles [[a]] cm by [[b]] cm and [[a * k]] cm by [[b * k]] cm similar? What is the scale factor?",
+   "answer": "Yes: the sides are in the same ratio; scale factor [[k]]"
+  },
+  {
+   "id": "y11fau3-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Identify similar shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S1 Identify similar shapes",
+   "keywords": [
+    "identify",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       18
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != b * c || 1 == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Are the rectangles [[a]] cm by [[b]] cm and [[c]] cm by [[d]] cm similar? Show your working.",
+   "answer": "[[a / b|dp:2]] and [[c / d|dp:2]]: [[a * d == b * c|if:similar/not similar]]"
+  },
+  {
+   "id": "y11fau3-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Identify similar shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S1 Identify similar shapes",
+   "keywords": [
+    "identify",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       16
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A photo is [[a]] cm by [[b]] cm. It is enlarged so that the longer side is [[b * k]] cm. (a) Work out the scale factor. (b) Work out the other side. (c) Work out the ratio of the areas. (3 marks)",
+   "answer": "(a) [[k]]  (b) [[a * k]] cm  (c) 1 : [[k * k]]"
+  },
+  {
+   "id": "y11fau3-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in similar shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S2 Find unknown lengths and angles in similar shapes",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$.",
+   "answer": "$x = [[k * c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in similar shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S2 Find unknown lengths and angles in similar shapes",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / k == c"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$ on the smaller triangle.",
+   "answer": "$x = [[c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     null,
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     "[[k * c]] cm",
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in similar shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S2 Find unknown lengths and angles in similar shapes",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "The two triangles are similar. Find the scale factor and the length marked $x$.",
+   "answer": "Scale factor [[k]]/2 = [[k / 2]]; $x$ = [[k * c / 2]] cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[b * k / 2]] cm",
+     null,
+     "[[d * k / 2]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in similar shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S2 Find unknown lengths and angles in similar shapes",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       12,
+       30
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Two similar shapes have a scale factor of [[k]]. The smaller has a perimeter of [[p]] cm and an area of [[A]] cm². Work out the perimeter and the area of the larger shape. (3 marks)",
+   "answer": "Perimeter [[p * k]] cm; area [[A * k * k]] cm²"
+  },
+  {
+   "id": "y11fau3-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Identify similar triangles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S3 Identify similar triangles",
+   "keywords": [
+    "identify",
+    "similar",
+    "triangles",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "choose": [
+       1.5,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "S",
+     "s * k"
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A [[h]] m pole casts a shadow of [[s]] m. At the same time a tree casts a shadow of [[S]] m. How tall is the tree?",
+   "answer": "[[h * S / s]] m"
+  },
+  {
+   "id": "y11fau3-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Identify similar triangles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S3 Identify similar triangles",
+   "keywords": [
+    "identify",
+    "similar",
+    "triangles",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangle $ABC$ is similar to triangle $ADE$ with $B$ on $AD$ and $C$ on $AE$ and $BC$ parallel to $DE$. $AB$ = [[a]] cm, $AD$ = [[a * k]] cm and $BC$ = [[c]] cm. Find $DE$.",
+   "answer": "[[c * k]] cm"
+  },
+  {
+   "id": "y11fau3-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Identify similar triangles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S3 Identify similar triangles",
+   "keywords": [
+    "identify",
+    "similar",
+    "triangles",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In the same diagram, $AB$ = [[a]] cm, $BD$ = [[a * (k - 1)]] cm and $DE$ = [[c * k]] cm. Find $BC$ and explain which angles are equal.",
+   "answer": "$BC$ = [[c]] cm; angle $ABC$ = angle $ADE$ (corresponding angles) and angle $A$ is common"
+  },
+  {
+   "id": "y11fau3-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Identify similar triangles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S3 Identify similar triangles",
+   "keywords": [
+    "identify",
+    "similar",
+    "triangles",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "choose": [
+       1.5,
+       1.6,
+       1.8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A [[h]] m person stands [[d]] m from a lamp post. Their shadow is [[s]] m long. Work out the height of the lamp. (4 marks)",
+   "answer": "[[h * (d + s) / s|dp:2]] m"
+  },
+  {
+   "id": "y11fau3-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with similar shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S4 Solve problems with similar shapes",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$.",
+   "answer": "$x = [[k * c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with similar shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S4 Solve problems with similar shapes",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. (a) Write the scale factor of the enlargement. (b) Find $x$.",
+   "answer": "(a) [[k]]  (b) $x = [[k * c]]$",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with similar shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S4 Solve problems with similar shapes",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / k == c"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$ on the smaller triangle.",
+   "answer": "$x = [[c]]$",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     null,
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     "[[k * c]] cm",
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y11fau3-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with similar shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S4 Solve problems with similar shapes",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "shapes",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * w / w == k"
+   ],
+   "text": "A photo is [[w]] cm by [[h]] cm. It is enlarged so that its longer side is [[k * w]] cm. (a) Work out the scale factor. (b) Work out the length of the shorter side of the enlargement. (c) What is the ratio of the area of the photo to the area of the enlargement? (3 marks)",
+   "answer": "(a) [[k]]  (b) [[k * h]] cm  (c) 1 : [[k * k]]"
+  },
+  {
+   "id": "y11fau3-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are similar (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S5 Prove a pair of triangles are similar (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "similar",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       35,
+       80
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       35,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x + y < 150"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Triangles $ABC$ and $PQR$ have angle $A$ = angle $P$ = [[x]]° and angle $B$ = angle $Q$ = [[y]]°. Are they similar? Give a reason.",
+   "answer": "Yes: two pairs of equal angles (AA), so the third angles are also equal ([[180 - x - y]]°)"
+  },
+  {
+   "id": "y11fau3-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are similar (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S5 Prove a pair of triangles are similar (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "similar",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "pick": [
+       "ABC",
+       "PQR",
+       "XYZ",
+       "LMN"
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "pick": [
+       "DEF",
+       "STU",
+       "UVW",
+       "GHJ"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangles $A[[t1]]$ and $A[[t2]]$ the line $[[t2]]$ is parallel to the base. Explain why the triangles are similar.",
+   "answer": "Angle $A$ is common; angle $ADE$ = angle $ABC$ and angle $AED$ = angle $ACB$ (corresponding angles): all three angles equal, so similar"
+  },
+  {
+   "id": "y11fau3-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are similar (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S5 Prove a pair of triangles are similar (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "similar",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Prove that triangles $ABC$ and $PQR$ are similar when $AB = [[2 * a]]$, $BC = [[2 * b]]$, $AC = [[2 * c]]$ and $PQ = [[a]]$, $QR = [[b]]$, $PR = [[c]]$.",
+   "answer": "The ratios of the sides are 2 : 1 for every pair ([[2 * a]]/[[a]], [[2 * b]]/[[b]], [[2 * c]]/[[c]]), so the triangles are similar with scale factor 2"
+  },
+  {
+   "id": "y11fau3-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are similar (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S5 Prove a pair of triangles are similar (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "similar",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$ABC$ is a triangle. $PQ$ is parallel to $BC$ with $P$ on $AB$ and $Q$ on $AC$. $AP$ = [[a]] cm, $PB$ = [[b]] cm and $PQ$ = [[c]] cm. Prove the triangles $APQ$ and $ABC$ are similar and find $BC$. (4 marks)",
+   "answer": "Equal corresponding angles so similar; scale factor [[a + b]] ÷ [[a]]; $BC$ = [[c * (a + b) / a|dp:2]] cm"
+  },
+  {
+   "id": "y11fau3-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Congruent triangles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S6 Congruent triangles",
+   "keywords": [
+    "congruent",
+    "triangles",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Two triangles have [[k == 0|if:three pairs of equal sides/]][[k == 1|if:two sides and the angle between them/]][[k == 2|if:two angles and a corresponding side/]][[k == 3|if:a right angle, the hypotenuse and one other side/]][[k == 4|if:three pairs of equal angles/]] equal. What does this prove?",
+   "answer": "[[k == 0|if:SSS/]][[k == 1|if:SAS/]][[k == 2|if:ASA/]][[k == 3|if:RHS/]][[k == 4|if:not enough to prove congruence/]]"
+  },
+  {
+   "id": "y11fau3-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Congruent triangles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S6 Congruent triangles",
+   "keywords": [
+    "congruent",
+    "triangles",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x + y < 150"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangles $ABC$ and $DEF$ are congruent with $AB$ = $DE$ = [[a]] cm and angle $A$ = angle $D$ = [[x]]°. Angle $B$ = [[y]]°. What is angle $E$ and why?",
+   "answer": "[[y]]°: corresponding angles in congruent triangles are equal"
+  },
+  {
+   "id": "y11fau3-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Congruent triangles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S6 Congruent triangles",
+   "keywords": [
+    "congruent",
+    "triangles",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "In triangles $ABC$ and $ADC$, $AB$ = $AD$ = [[p]] cm, $BC$ = $DC$ = [[q]] cm and $AC$ is common. Prove they are congruent and say what angle is equal to angle $B$.",
+   "answer": "SSS: $AB = AD$, $BC = DC$, $AC = AC$. So the triangles are congruent and angle $B$ = angle $D$"
+  },
+  {
+   "id": "y11fau3-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Congruent triangles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S6 Congruent triangles",
+   "keywords": [
+    "congruent",
+    "triangles",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$ABCD$ is a rectangle with $AB$ = [[3 * k]] cm and $AD$ = [[4 * k]] cm. Prove that triangles $ABD$ and $CDB$ are congruent, and find the length of $BD$. (4 marks)",
+   "answer": "$AB = CD$, $AD = CB$ (opposite sides), $BD$ common: SSS. $BD$ = [[5 * k]] cm by Pythagoras"
+  },
+  {
+   "id": "y11fau3-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Similarity and congruence",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S7 Similarity and congruence",
+   "keywords": [
+    "similarity",
+    "and",
+    "congruence",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Two triangles both have sides [[a]] cm, [[b]] cm and [[c]] cm. Are they similar, congruent or both?",
+   "answer": "Both: congruent (SSS), and congruent triangles are also similar with scale factor 1"
+  },
+  {
+   "id": "y11fau3-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Similarity and congruence",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S7 Similarity and congruence",
+   "keywords": [
+    "similarity",
+    "and",
+    "congruence",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x + y < 150"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Two triangles have all three angles equal ([[x]]°, [[y]]° and [[180 - x - y]]°) but different sizes. Are they similar or congruent?",
+   "answer": "Similar but not congruent"
+  },
+  {
+   "id": "y11fau3-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Similarity and congruence",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S7 Similarity and congruence",
+   "keywords": [
+    "similarity",
+    "and",
+    "congruence",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangle $A$ has sides [[a]], [[b]], [[c]] cm. Triangle $B$ has sides [[2 * a]], [[2 * b]], [[2 * c]] cm. Triangle $C$ has sides [[a]], [[b]], [[c]] cm. Which pairs are similar and which are congruent?",
+   "answer": "$A$ and $C$ are congruent (and similar); $A$ and $B$ (and $B$ and $C$) are similar but not congruent"
+  },
+  {
+   "id": "y11fau3-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Similarity and congruence",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S7 Similarity and congruence",
+   "keywords": [
+    "similarity",
+    "and",
+    "congruence",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Explain the difference between similar and congruent shapes using a [[a]] cm by [[b]] cm rectangle and a [[2 * a]] cm by [[2 * b]] cm rectangle. (2 marks)",
+   "answer": "The rectangles are similar (same shape, scale factor 2) but not congruent (different sizes)"
+  },
+  {
+   "id": "y11fau3-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are congruent (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S8 Prove a pair of triangles are congruent (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "congruent",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "pick": [
+       "ABC",
+       "PQR",
+       "XYZ",
+       "LMN"
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "pick": [
+       "DEF",
+       "STU",
+       "UVW",
+       "GHJ"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangles $[[t1]]$ and $[[t2]]$ the sides and included angle are equal: two sides and the angle between them. Which condition proves they are congruent?",
+   "answer": "SAS (two sides and the included angle)"
+  },
+  {
+   "id": "y11fau3-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are congruent (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S8 Prove a pair of triangles are congruent (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "congruent",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "pick": [
+       "ABC",
+       "PQR",
+       "XYZ",
+       "LMN"
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "pick": [
+       "DEF",
+       "STU",
+       "UVW",
+       "GHJ"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangles $[[t1]]$ and $[[t2]]$ two angles and a corresponding side are equal. Which condition proves they are congruent?",
+   "answer": "ASA (two angles and a corresponding side)"
+  },
+  {
+   "id": "y11fau3-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are congruent (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S8 Prove a pair of triangles are congruent (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "congruent",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "pick": [
+       "ABC",
+       "PQR",
+       "XYZ",
+       "LMN"
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "pick": [
+       "DEF",
+       "STU",
+       "UVW",
+       "GHJ"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$[[t1]]D$ is a parallelogram (also called $[[t2]]$). Prove that the two triangles made by the diagonal are congruent.",
+   "answer": "$AB = CD$ and $BC = DA$ (opposite sides), $AC$ is common: SSS, so congruent"
+  },
+  {
+   "id": "y11fau3-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Prove a pair of triangles are congruent (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B3 Similarity and congruence · S8 Prove a pair of triangles are congruent (E)",
+   "keywords": [
+    "prove",
+    "a",
+    "pair",
+    "of",
+    "triangles",
+    "are",
+    "congruent",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "pick": [
+       "ABC",
+       "PQR",
+       "XYZ",
+       "LMN"
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "pick": [
+       "DEF",
+       "STU",
+       "UVW",
+       "GHJ"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$[[t1]]$ and $[[t2]]$ are two sets of labels for a kite with $PQ = PS$ and $RQ = RS$. Prove triangles $PQR$ and $PSR$ are congruent and state one pair of equal angles. (3 marks)",
+   "answer": "$PQ = PS$, $QR = SR$, $PR$ common: SSS; so angle $PQR$ = angle $PSR$"
+  }
+ ]
+}

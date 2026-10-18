@@ -1,0 +1,643 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Autumn Block 7 Set notation and Venn diagrams: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fau7-s01-l1",
+   "topic": "Probability",
+   "subtopic": "Venn diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S1 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "3 * lcm(a, b) < 70"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ = multiples of [[a]] up to [[3 * lcm(a, b)]] and $B$ = multiples of [[b]] up to [[3 * lcm(a, b)]]. List $A \\cap B$.",
+   "answer": "$A \\cap B = {[[lcm(a, b)]], [[2 * lcm(a, b)]], [[3 * lcm(a, b)]]}$"
+  },
+  {
+   "id": "y11fau7-s01-l2",
+   "topic": "Probability",
+   "subtopic": "Venn diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S1 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "floor(N / lcm(a, b)) > 0"
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]], $B$ = multiples of [[b]]. How many elements are in $A \\cap B$?",
+   "answer": "[[floor(N / lcm(a, b))]]"
+  },
+  {
+   "id": "y11fau7-s01-l3",
+   "topic": "Probability",
+   "subtopic": "Venn diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S1 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$A \\cap B = \\emptyset$ means no common elements. $A$ = even numbers and $B$ = odd numbers up to [[N]]. Is $A \\cap B$ empty? Explain.",
+   "answer": "Yes: a number cannot be both even and odd, so $A \\cap B = \\emptyset$"
+  },
+  {
+   "id": "y11fau7-s01-l4",
+   "topic": "Probability",
+   "subtopic": "Venn diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S1 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       28,
+       32
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "In a class of [[T]], [[a]] study French, [[b]] study Spanish and [[c]] study both. Write down $n(F \\cap S)$ and how many study only French. (2 marks)",
+   "answer": "$n(F \\cap S) = [[c]]$; only French [[a - c]]"
+  },
+  {
+   "id": "y11fau7-s02-l1",
+   "topic": "Probability",
+   "subtopic": "Set notation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S2 Set notation",
+   "keywords": [
+    "set",
+    "notation",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$A = {x : x$ is a multiple of [[k]] and $x \\leq [[4 * k]]}$. List the elements of $A$.",
+   "answer": "$A = {[[k]], [[2 * k]], [[3 * k]], [[4 * k]]}$"
+  },
+  {
+   "id": "y11fau7-s02-l2",
+   "topic": "Probability",
+   "subtopic": "Set notation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S2 Set notation",
+   "keywords": [
+    "set",
+    "notation",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$A = {[[k]], [[2 * k]], [[3 * k]], [[4 * k]]}$. Is [[t]] in $A$? Write your answer using $\\in$ or $∉$.",
+   "answer": "$[[t]] [[t % k == 0 && t <= 4 * k|if:\\in/∉]] A$"
+  },
+  {
+   "id": "y11fau7-s02-l3",
+   "topic": "Probability",
+   "subtopic": "Set notation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S2 Set notation",
+   "keywords": [
+    "set",
+    "notation",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       12,
+       18,
+       20,
+       24,
+       30,
+       36
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, 3, \\dots, [[N]]}$. $A$ is the set of factors of [[N]]. Write down $n(A)$.",
+   "answer": "[[ndiv(N)]]"
+  },
+  {
+   "id": "y11fau7-s02-l4",
+   "topic": "Probability",
+   "subtopic": "Set notation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S2 Set notation",
+   "keywords": [
+    "set",
+    "notation",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]] and $B$ = multiples of [[b]]. Find $n(A)$ and $n(B)$. (2 marks)",
+   "answer": "$n(A) = [[floor(N / a)]]$, $n(B) = [[floor(N / b)]]$"
+  },
+  {
+   "id": "y11fau7-s03-l1",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S3 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "The Venn diagram shows the number of pupils in each region. A pupil is chosen at random. Work out P(A).",
+   "answer": "$[[(x + y) / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y11fau7-s03-l2",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S3 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. Work out P(A and B).",
+   "answer": "$[[y / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y11fau7-s03-l3",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S3 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. Work out P(A or B) and P(neither).",
+   "answer": "$[[(x + y + z) / (x + y + z + w)|frac]]$; $[[w / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y11fau7-s03-l4",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B7 Set notation and Venn diagrams · S3 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. A pupil in A is chosen. Work out the probability that they are also in B. (3 marks)",
+   "answer": "$[[y / (x + y)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  }
+ ]
+}

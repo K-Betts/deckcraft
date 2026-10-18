@@ -1,0 +1,1685 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Autumn Block 6 Circle theorems: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hau6-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in circles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S1 Angles in circles",
+   "keywords": [
+    "angles",
+    "in",
+    "circles",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x % 2 == 0"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$O$ is the centre of a circle. Triangle $OAB$ has $OA$ and $OB$ as radii and angle $AOB$ = [[x]]°. Find angle $OAB$.",
+   "answer": "[[(180 - x) / 2]]° (isosceles triangle)"
+  },
+  {
+   "id": "y11hau6-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in circles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S1 Angles in circles",
+   "keywords": [
+    "angles",
+    "in",
+    "circles",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "y",
+     {
+      "int": [
+       20,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "y > 0"
+   ],
+   "text": "A chord $AB$ of a circle centre $O$ has angle $OAB$ = [[y]]°. Find angle $AOB$.",
+   "answer": "[[180 - 2 * y]]° (triangle $OAB$ is isosceles)"
+  },
+  {
+   "id": "y11hau6-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in circles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S1 Angles in circles",
+   "keywords": [
+    "angles",
+    "in",
+    "circles",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has radius [[r]] cm. Chord $AB$ subtends angle [[x]]° at the centre $O$. Name the type of triangle $OAB$ and find the other two angles.",
+   "answer": "Isosceles ($OA = OB$ radii); both base angles [[(180 - x) / 2]]°"
+  },
+  {
+   "id": "y11hau6-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in circles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S1 Angles in circles",
+   "keywords": [
+    "angles",
+    "in",
+    "circles",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       60,
+       140
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       50,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x % 2 == 0",
+    "y % 2 == 0"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$ and $C$ are on a circle centre $O$. Angle $AOB$ = [[x]]° and angle $BOC$ = [[y]]°. Find angles $OAB$ and $OBC$ and explain why. (3 marks)",
+   "answer": "$OAB$ = [[(180 - x) / 2]]°; $OBC$ = [[(180 - y) / 2]]° (isosceles triangles with two radii)"
+  },
+  {
+   "id": "y11hau6-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles at the centre and circumference)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S2 Circle theorem (angles at the centre and circumference)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "at",
+    "the",
+    "centre",
+    "and",
+    "circumference",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$ and $C$ are on a circle centre $O$. Angle $ACB$ = [[x]]° at the circumference. Find angle $AOB$ at the centre.",
+   "answer": "[[2 * x]]° (angle at the centre is twice the angle at the circumference)"
+  },
+  {
+   "id": "y11hau6-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles at the centre and circumference)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S2 Circle theorem (angles at the centre and circumference)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "at",
+    "the",
+    "centre",
+    "and",
+    "circumference",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Angle $AOB$ at the centre of a circle is [[2 * x]]°. Find the angle at the circumference on the same arc $AB$.",
+   "answer": "[[x]]°"
+  },
+  {
+   "id": "y11hau6-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles at the centre and circumference)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S2 Circle theorem (angles at the centre and circumference)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "at",
+    "the",
+    "centre",
+    "and",
+    "circumference",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(2 * b - a) % 2 == 0",
+    "2 * b > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The angle at the centre standing on an arc is $(4x + [[a]])°$ and the angle at the circumference is $(x + [[b]])°$. Find $x$.",
+   "answer": "$4x + [[a]] = 2(x + [[b]])$, so $x = [[(2 * b - a) / 2]]$"
+  },
+  {
+   "id": "y11hau6-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles at the centre and circumference)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S2 Circle theorem (angles at the centre and circumference)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "at",
+    "the",
+    "centre",
+    "and",
+    "circumference",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       25,
+       65
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$, $C$ are on a circle centre $O$ with angle $ACB$ = [[x]]°. Find angle $OAB$ and justify each step. (4 marks)",
+   "answer": "Angle $AOB$ = [[2 * x]]° (centre = 2 × circumference); triangle $OAB$ isosceles so angle $OAB$ = [[(180 - 2 * x) / 2]]°"
+  },
+  {
+   "id": "y11hau6-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a semicircle)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S3 Circle theorem (angles in a semicircle)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "semicircle",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "pick": [
+       "A",
+       "P",
+       "X"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "pick": [
+       "B",
+       "Q",
+       "Y"
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "pick": [
+       "C",
+       "R",
+       "Z"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$[[p]][[q]]$ is a diameter of a circle and $[[c]]$ is on the circumference. What is angle $[[p]][[c]][[q]]$?",
+   "answer": "90° (angle in a semicircle)"
+  },
+  {
+   "id": "y11hau6-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a semicircle)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S3 Circle theorem (angles in a semicircle)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "semicircle",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       20,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$AB$ is a diameter and $C$ is on the circle. Angle $CAB$ = [[x]]°. Find angle $CBA$.",
+   "answer": "[[90 - x]]°"
+  },
+  {
+   "id": "y11hau6-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a semicircle)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S3 Circle theorem (angles in a semicircle)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "semicircle",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(90 - a - b) % 3 == 0"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$AB$ is a diameter. Angle $ABC$ = $(2x + [[a]])°$ and angle $BAC$ = $(x + [[b]])°$. Find $x$.",
+   "answer": "$90 + 3x + [[a + b]] = 180$, so $x = [[(90 - a - b) / 3]]$"
+  },
+  {
+   "id": "y11hau6-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a semicircle)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S3 Circle theorem (angles in a semicircle)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "semicircle",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < 2 * r"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "$AB$ is a diameter of length [[2 * r]] cm and $C$ is on the circle with $AC$ = [[a]] cm. Find $BC$ and the area of triangle $ABC$ to 1 decimal place. (3 marks)",
+   "answer": "$BC$ = [[sqrt(4 * r * r - a * a)|dp:1]] cm; area [[0.5 * a * sqrt(4 * r * r - a * a)|dp:1]] cm²"
+  },
+  {
+   "id": "y11hau6-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in the same segment)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S4 Circle theorem (angles in the same segment)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "the",
+    "same",
+    "segment",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       25,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$, $C$, $D$ are on a circle. Angle $ACB$ = [[x]]°. Find angle $ADB$ (same segment).",
+   "answer": "[[x]]° (angles in the same segment are equal)"
+  },
+  {
+   "id": "y11hau6-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in the same segment)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S4 Circle theorem (angles in the same segment)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "the",
+    "same",
+    "segment",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Angles $ACB$ and $ADB$ stand on the same arc $AB$. Angle $ACB$ = $(2x + [[a]])°$ and angle $ADB$ = $(3x - [[b]])°$. Find $x$.",
+   "answer": "$2x + [[a]] = 3x - [[b]]$, so $x = [[a + b]]$"
+  },
+  {
+   "id": "y11hau6-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in the same segment)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S4 Circle theorem (angles in the same segment)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "the",
+    "same",
+    "segment",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Two chords $AC$ and $BD$ meet inside a circle. Angle $ACB$ = [[x]]° and angle $CAD$ = [[y]]°. Find angle $ADB$ and angle $CBD$.",
+   "answer": "Angle $ADB$ = [[x]]° (same segment as $ACB$); angle $CBD$ = [[y]]° (same segment as $CAD$)"
+  },
+  {
+   "id": "y11hau6-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in the same segment)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S4 Circle theorem (angles in the same segment)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "the",
+    "same",
+    "segment",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$, $C$, $D$ lie on a circle. Angle $ABD$ = [[x]]° and angle $BAC$ = [[y]]°. Use circle theorems to find angle $ACD$ and angle $BCD$ if angle $ABC$ = [[z]]°. (4 marks)",
+   "answer": "Angle $ACD$ = [[x]]° (angles in the same segment); angle $BDC$ = [[y]]° (same segment as $BAC$)"
+  },
+  {
+   "id": "y11hau6-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a cyclic quadrilateral)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S5 Circle theorem (angles in a cyclic quadrilateral)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "cyclic",
+    "quadrilateral",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       50,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$ABCD$ is a cyclic quadrilateral. Angle $A$ = [[x]]°. Find angle $C$.",
+   "answer": "[[180 - x]]° (opposite angles of a cyclic quadrilateral add to 180°)"
+  },
+  {
+   "id": "y11hau6-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a cyclic quadrilateral)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S5 Circle theorem (angles in a cyclic quadrilateral)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "cyclic",
+    "quadrilateral",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       50,
+       120
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x != y"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$ABCD$ is a cyclic quadrilateral with angle $B$ = [[x]]° and angle $C$ = [[y]]°. Find angles $D$ and $A$.",
+   "answer": "$D$ = [[180 - x]]°; $A$ = [[180 - y]]°"
+  },
+  {
+   "id": "y11hau6-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a cyclic quadrilateral)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S5 Circle theorem (angles in a cyclic quadrilateral)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "cyclic",
+    "quadrilateral",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(180 - a + b) % 5 == 0"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$ABCD$ is cyclic. Angle $A$ = $(3x + [[a]])°$ and angle $C$ = $(2x - [[b]])°$. Find $x$ and angle $A$.",
+   "answer": "$5x[[a - b|signed]] = 180$, so $x = [[(180 - a + b) / 5]]$; angle $A$ = [[3 * (180 - a + b) / 5 + a]]°"
+  },
+  {
+   "id": "y11hau6-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angles in a cyclic quadrilateral)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S5 Circle theorem (angles in a cyclic quadrilateral)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angles",
+    "in",
+    "a",
+    "cyclic",
+    "quadrilateral",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       50,
+       110
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$ABCD$ is cyclic and $AB$ is extended to $E$. Angle $CBE$ = [[x]]°. Find angle $ADC$ and explain. (3 marks)",
+   "answer": "Angle $ADC$ = [[x]]° (the exterior angle of a cyclic quadrilateral equals the opposite interior angle)"
+  },
+  {
+   "id": "y11hau6-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angle between radius and tangent)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S6 Circle theorem (angle between radius and tangent)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angle",
+    "between",
+    "radius",
+    "and",
+    "tangent",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "pick": [
+       "A",
+       "P",
+       "X",
+       "T"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "A tangent touches a circle at $[[p]]$ and $O$ is the centre. What is the angle between the tangent and the radius $O[[p]]$?",
+   "answer": "90°"
+  },
+  {
+   "id": "y11hau6-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angle between radius and tangent)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S6 Circle theorem (angle between radius and tangent)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angle",
+    "between",
+    "radius",
+    "and",
+    "tangent",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "In triangle $OAT$, $AT$ is a tangent at $A$ and $O$ is the centre. Angle $AOT$ = [[x]]°. Find angle $ATO$.",
+   "answer": "[[90 - x]]° (angle $OAT$ is 90°)"
+  },
+  {
+   "id": "y11hau6-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angle between radius and tangent)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S6 Circle theorem (angle between radius and tangent)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angle",
+    "between",
+    "radius",
+    "and",
+    "tangent",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > r"
+   ],
+   "text": "$AT$ is a tangent to a circle centre $O$ with radius [[r]] cm and $OT$ = [[t]] cm. Find the length $AT$ to 1 decimal place.",
+   "answer": "$AT$ = [[sqrt(t * t - r * r)|dp:1]] cm (right angle at $A$)"
+  },
+  {
+   "id": "y11hau6-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (angle between radius and tangent)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S6 Circle theorem (angle between radius and tangent)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "angle",
+    "between",
+    "radius",
+    "and",
+    "tangent",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A tangent $PT$ touches a circle centre $O$ at $T$. $OT$ = [[3 * k]] cm and $PT$ = [[4 * k]] cm. Find $OP$ and angle $TOP$ to 1 decimal place. (3 marks)",
+   "answer": "$OP$ = [[5 * k]] cm; angle $TOP$ = [[atan(4 / 3)|dp:1]]°"
+  },
+  {
+   "id": "y11hau6-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (perpendicular from the centre to a chord)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S7 Circle theorem (perpendicular from the centre to a chord)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "perpendicular",
+    "from",
+    "the",
+    "centre",
+    "to",
+    "a",
+    "chord",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A perpendicular from the centre of a circle to a chord $AB$ meets it at $M$. $AB$ = [[2 * a]] cm. Find $AM$.",
+   "answer": "[[a]] cm (the perpendicular from the centre bisects the chord)"
+  },
+  {
+   "id": "y11hau6-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (perpendicular from the centre to a chord)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S7 Circle theorem (perpendicular from the centre to a chord)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "perpendicular",
+    "from",
+    "the",
+    "centre",
+    "to",
+    "a",
+    "chord",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       8,
+       13
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > a"
+   ],
+   "text": "The radius of a circle is [[r]] cm. A chord is [[2 * a]] cm long. Find the distance from the centre to the chord to 1 decimal place.",
+   "answer": "[[sqrt(r * r - a * a)|dp:1]] cm"
+  },
+  {
+   "id": "y11hau6-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (perpendicular from the centre to a chord)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S7 Circle theorem (perpendicular from the centre to a chord)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "perpendicular",
+    "from",
+    "the",
+    "centre",
+    "to",
+    "a",
+    "chord",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A chord of length [[2 * a]] cm is [[d]] cm from the centre of a circle. Find the radius to 1 decimal place.",
+   "answer": "[[sqrt(a * a + d * d)|dp:1]] cm"
+  },
+  {
+   "id": "y11hau6-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (perpendicular from the centre to a chord)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S7 Circle theorem (perpendicular from the centre to a chord)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "perpendicular",
+    "from",
+    "the",
+    "centre",
+    "to",
+    "a",
+    "chord",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A circle of radius [[5 * k]] cm has a chord [[8 * k]] cm long. Find the distance of the chord from the centre and the area of triangle $OAB$. (3 marks)",
+   "answer": "Distance [[3 * k]] cm; area [[12 * k * k]] cm²"
+  },
+  {
+   "id": "y11hau6-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (two tangents from a point)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S8 Circle theorem (two tangents from a point)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "two",
+    "tangents",
+    "from",
+    "a",
+    "point",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Two tangents $PA$ and $PB$ are drawn from $P$ to a circle. $PA$ = [[a]] cm. Find $PB$.",
+   "answer": "[[a]] cm (tangents from a point are equal)"
+  },
+  {
+   "id": "y11hau6-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (two tangents from a point)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S8 Circle theorem (two tangents from a point)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "two",
+    "tangents",
+    "from",
+    "a",
+    "point",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       40,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x % 2 == 0"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Tangents $PA$ and $PB$ meet at $P$. Angle $APB$ = [[x]]°. Find angle $PAB$.",
+   "answer": "[[(180 - x) / 2]]° (triangle $PAB$ is isosceles)"
+  },
+  {
+   "id": "y11hau6-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (two tangents from a point)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S8 Circle theorem (two tangents from a point)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "two",
+    "tangents",
+    "from",
+    "a",
+    "point",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       40,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Tangents $PA$ and $PB$ touch a circle centre $O$ at $A$ and $B$. Angle $APB$ = [[x]]°. Find angle $AOB$.",
+   "answer": "[[180 - x]]° (angles $OAP$ and $OBP$ are 90° and angles in a quadrilateral add to 360°)"
+  },
+  {
+   "id": "y11hau6-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (two tangents from a point)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S8 Circle theorem (two tangents from a point)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "two",
+    "tangents",
+    "from",
+    "a",
+    "point",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Tangents $PA$ and $PB$ to a circle centre $O$ of radius [[3 * k]] cm. $OP$ = [[5 * k]] cm. Find $PA$ and the area of quadrilateral $OAPB$. (4 marks)",
+   "answer": "$PA$ = [[4 * k]] cm; area [[2 * 6 * k * k]] cm²"
+  },
+  {
+   "id": "y11hau6-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (alternate segment theorem) (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S9 Circle theorem (alternate segment theorem) (E)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "alternate",
+    "segment",
+    "e",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A tangent at $A$ and a chord $AB$ make an angle of [[x]]°. State the alternate segment theorem and find the angle in the alternate segment.",
+   "answer": "The angle between a tangent and a chord equals the angle in the alternate segment: [[x]]°"
+  },
+  {
+   "id": "y11hau6-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (alternate segment theorem) (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S9 Circle theorem (alternate segment theorem) (E)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "alternate",
+    "segment",
+    "e",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "The angle between a tangent and chord $AB$ is [[x]]°. Find the angle $ACB$ where $C$ is in the alternate segment.",
+   "answer": "[[x]]°"
+  },
+  {
+   "id": "y11hau6-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (alternate segment theorem) (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S9 Circle theorem (alternate segment theorem) (E)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "alternate",
+    "segment",
+    "e",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x + y < 150"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A tangent at $T$ meets chord $TA$ at [[x]]° and chord $TB$ at [[y]]° on the other side. Find angles $TBA$ and $TAB$ in the alternate segments and angle $ATB$.",
+   "answer": "$TBA$ = [[x]]°; $TAB$ = [[y]]°; $ATB$ = [[180 - x - y]]°"
+  },
+  {
+   "id": "y11hau6-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle theorem (alternate segment theorem) (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S9 Circle theorem (alternate segment theorem) (E)",
+   "keywords": [
+    "circle",
+    "theorem",
+    "alternate",
+    "segment",
+    "e",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x + y < 150"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A tangent $PQ$ touches a circle at $A$. $B$ and $C$ are on the circle. Angle $PAB$ = [[x]]° and angle $QAC$ = [[y]]°. Find angle $BAC$ and angles $ACB$, $ABC$. (4 marks)",
+   "answer": "Angle $BAC$ = [[180 - x - y]]°; $ACB$ = [[x]]° (alternate segment); $ABC$ = [[y]]°"
+  },
+  {
+   "id": "y11hau6-s10-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circle theorems",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S10 Solve problems with circle theorems",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circle",
+    "theorems",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       50,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$, $C$ are on a circle centre $O$ and angle $ABC$ = [[x]]°. Find reflex angle $AOC$.",
+   "answer": "[[360 - 2 * x]]° (obtuse angle $AOC$ = [[2 * x]]°)"
+  },
+  {
+   "id": "y11hau6-s10-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circle theorems",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S10 Solve problems with circle theorems",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circle",
+    "theorems",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       25,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$AB$ is a diameter and $T$ is such that $TA$ is a tangent. Angle $ABC$ = [[x]]° for $C$ on the circle. Find angle $TAC$.",
+   "answer": "[[x]]° (alternate segment theorem)"
+  },
+  {
+   "id": "y11hau6-s10-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circle theorems",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S10 Solve problems with circle theorems",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circle",
+    "theorems",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "pick": [
+       "A",
+       "P",
+       "X"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "pick": [
+       "B",
+       "Q",
+       "Y"
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "pick": [
+       "C",
+       "R",
+       "Z"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "A circle theorem proof: explain why angle $[[p]][[c]][[q]]$ = 90° when $[[p]][[q]]$ is a diameter, using the centre $O$ and radii $O[[p]]$, $O[[q]]$, $O[[c]]$.",
+   "answer": "Triangles $O[[p]][[c]]$ and $O[[q]][[c]]$ are isosceles: angle $O[[p]][[c]]$ = $a$, $O[[q]][[c]]$ = $b$; angles in the triangle: $a + b + (a + b) = 180$, so $a + b = 90°$"
+  },
+  {
+   "id": "y11hau6-s10-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circle theorems",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Autumn B6 Circle theorems · S10 Solve problems with circle theorems",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circle",
+    "theorems",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       40,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "$A$, $B$, $C$, $D$ are on a circle centre $O$. Angle $AOC$ = [[2 * x]]° and $B$ is on the major arc. Find angle $ABC$ and angle $ADC$ ($D$ on the minor arc). (3 marks)",
+   "answer": "$ABC$ = [[x]]°; $ADC$ = [[180 - x]]° (cyclic quadrilateral)"
+  }
+ ]
+}
