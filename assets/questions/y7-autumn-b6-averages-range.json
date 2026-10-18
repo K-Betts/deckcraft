@@ -84,7 +84,8 @@
     "v4 < v5"
    ],
    "text": "Write down the mode of these numbers: [[v3]], [[v1]], [[v3]], [[v5]], [[v2]], [[v3]], [[v4]]",
-   "answer": "[[v3]]"
+   "answer": "[[v3]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s01-l2",
@@ -167,7 +168,8 @@
     "v2 < v4"
    ],
    "text": "Write down the mode(s) of these numbers: [[v4]], [[v1]], [[v2]], [[v4]], [[v3]], [[v2]], [[v5]]",
-   "answer": "[[v2]] and [[v4]]"
+   "answer": "[[v2]] and [[v4]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s01-l3",
@@ -301,7 +303,8 @@
       "[[f4]]"
      ]
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a6-s01-l4",
@@ -384,7 +387,8 @@
     "v5 - v1 == g1 + g2 + g3 + g4"
    ],
    "text": "The numbers of goals scored in 9 matches are [[v4]], [[v1]], [[v3]], [[v3]], [[v5]], [[v3]], [[v2]], [[v3]], [[v4]]. (a) Write down the mode. (b) Write down the range. (2 marks)",
-   "answer": "(a) [[v3]]  (b) [[v5 - v1]]"
+   "answer": "(a) [[v3]]  (b) [[v5 - v1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s02-l1",
@@ -450,7 +454,8 @@
     "(x1 + x2 + x3 + x4) / 4 == m"
    ],
    "text": "Work out the mean of [[x1]], [[x2]], [[x3]] and [[x4]].",
-   "answer": "[[m]]"
+   "answer": "[[m]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s02-l2",
@@ -525,7 +530,8 @@
     "(x1 + x2 + x3 + x4 + x5) / 5 == m"
    ],
    "text": "Work out the mean of [[x1]], [[x2]], [[x3]], [[x4]] and [[x5]].",
-   "answer": "[[m]]"
+   "answer": "[[m]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s02-l3",
@@ -602,7 +608,8 @@
     "abs((x1 + x2 + x3 + x4 + x5 + x6) / 6 * 6 - (x1 + x2 + x3 + x4 + x5 + x6)) < 0.0001"
    ],
    "text": "Work out the mean of [[x1]], [[x2]], [[x3]], [[x4]], [[x5]] and [[x6]]. Give your answer to 1 decimal place.",
-   "answer": "[[(x1 + x2 + x3 + x4 + x5 + x6) / 6|dp:1]]"
+   "answer": "[[(x1 + x2 + x3 + x4 + x5 + x6) / 6|dp:1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s02-l4",
@@ -677,7 +684,8 @@
     "(x1 + x2 + x3 + x4) / 4 == m"
    ],
    "text": "Sam scored [[x1]], [[x2]], [[x3]] and [[x4]] in four tests. (a) Work out the mean score. (b) Sam scores [[y]] in a fifth test. Work out the new mean. (3 marks)",
-   "answer": "(a) [[m]]  (b) [[(4 * m + y) / 5]]"
+   "answer": "(a) [[m]]  (b) [[(4 * m + y) / 5]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s03-l1",
@@ -761,7 +769,8 @@
     "v3 < v5"
    ],
    "text": "Work out the median of [[v4]], [[v1]], [[v5]], [[v3]], [[v2]]",
-   "answer": "[[v3]]"
+   "answer": "[[v3]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s03-l2",
@@ -858,7 +867,8 @@
     "(v3 + v4) / 2 > v3"
    ],
    "text": "Work out the median of [[v5]], [[v2]], [[v6]], [[v1]], [[v4]], [[v3]]",
-   "answer": "[[(v3 + v4) / 2]]"
+   "answer": "[[(v3 + v4) / 2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s03-l3",
@@ -971,7 +981,8 @@
     "w4 <= w5"
    ],
    "text": "Work out the median of [[w5]], [[w2]], [[w7]], [[w1]], [[w4]], [[w6]], [[w3]]",
-   "answer": "[[w4]]"
+   "answer": "[[w4]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s03-l4",
@@ -1067,7 +1078,8 @@
     "v6 - v1 == g1 + g2 + g3 + g4 + g5"
    ],
    "text": "The ages of 6 pupils in a club are [[v5]], [[v2]], [[v6]], [[v1]], [[v4]], [[v3]]. (a) Work out the median age. (b) Work out the range. (3 marks)",
-   "answer": "(a) [[(v3 + v4) / 2]]  (b) [[v6 - v1]]"
+   "answer": "(a) [[(v3 + v4) / 2]]  (b) [[v6 - v1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s04-l1",
@@ -1150,7 +1162,8 @@
     "v5 > v1"
    ],
    "text": "Work out the range of [[v4]], [[v1]], [[v5]], [[v3]], [[v2]]",
-   "answer": "[[v5 - v1]]"
+   "answer": "[[v5 - v1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s04-l2",
@@ -1236,7 +1249,8 @@
     "v5 > v1"
    ],
    "text": "Work out the range of these times in seconds: [[v4 / 10]], [[v1 / 10]], [[v5 / 10]], [[v3 / 10]], [[v2 / 10]]",
-   "answer": "[[(v5 - v1) / 10]]"
+   "answer": "[[(v5 - v1) / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s04-l3",
@@ -1274,7 +1288,8 @@
     "hi - r + r == hi"
    ],
    "text": "The highest temperature one week was [[hi]]°C. The range of the temperatures was [[r]]°C. What was the lowest temperature?",
-   "answer": "[[hi - r]]°C"
+   "answer": "[[hi - r]]°C",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s04-l4",
@@ -1422,7 +1437,8 @@
     "u5 > u1"
    ],
    "text": "Class A scores: [[v3]], [[v1]], [[v5]], [[v2]], [[v4]]. Class B scores: [[u1]], [[u3]], [[u2]], [[u4]], [[u5]]. Which class has the more consistent scores? Use the range to explain. (3 marks)",
-   "answer": "[[v5 - v1 < u5 - u1|if:Class A/Class B]]: the ranges are [[v5 - v1]] and [[u5 - u1]]"
+   "answer": "[[v5 - v1 < u5 - u1|if:Class A/Class B]]: the ranges are [[v5 - v1]] and [[u5 - u1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s05-l1",
@@ -1486,7 +1502,8 @@
     "(x1 + x2 + x3 + (4 * m - x1 - x2 - x3)) / 4 == m"
    ],
    "text": "The mean of four numbers is [[m]]. Three of the numbers are [[x1]], [[x2]] and [[x3]]. Work out the fourth number.",
-   "answer": "[[4 * m - x1 - x2 - x3]]"
+   "answer": "[[4 * m - x1 - x2 - x3]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s05-l2",
@@ -1539,7 +1556,8 @@
     "(5 * m + n) / 6 == q"
    ],
    "text": "Five numbers have a mean of [[m]]. A sixth number, [[n]], is added. Work out the mean of all six numbers.",
-   "answer": "[[(5 * m + n) / 6]]"
+   "answer": "[[(5 * m + n) / 6]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s05-l3",
@@ -1623,7 +1641,8 @@
     "lo + r > c"
    ],
    "text": "The smallest of five numbers is [[lo]] and their range is [[r]]. (a) What is the largest number? (b) The middle three numbers, in order, are [[a]], [[b]] and [[c]]. What is the median?",
-   "answer": "(a) [[lo + r]]  (b) [[b]]"
+   "answer": "(a) [[lo + r]]  (b) [[b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a6-s05-l4",
@@ -1688,7 +1707,8 @@
     "(x1 + x2 + x3 + (4 * m - x1 - x2 - x3)) / 4 == m"
    ],
    "text": "Maya scores [[x1]], [[x2]] and [[x3]] in three tests. She wants a mean of [[m]] after four tests. What score does she need in the fourth test? Is this possible if the maximum is 100? (2 marks)",
-   "answer": "[[4 * m - x1 - x2 - x3]]. [[(4 * m - x1 - x2 - x3 <= 100)|if:Yes/No]]"
+   "answer": "[[4 * m - x1 - x2 - x3]]. [[(4 * m - x1 - x2 - x3 <= 100)|if:Yes/No]]",
+   "year": "Y7"
   }
  ]
 }

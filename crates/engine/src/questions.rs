@@ -733,6 +733,17 @@ mod tests {
     }
 
     #[test]
+    fn every_scheme_of_work_question_is_tagged_with_its_year_group() {
+        let bank = starter().unwrap();
+        for t in &bank.templates {
+            let first = t.source.split_whitespace().next().unwrap_or("");
+            if first.strip_prefix('Y').is_some_and(|d| !d.is_empty() && d.chars().all(|c| c.is_ascii_digit())) {
+                assert_eq!(t.year, first, "{} is from {first} but is tagged {:?}", t.id, t.year);
+            }
+        }
+    }
+
+    #[test]
     fn every_scheme_of_work_step_has_questions_at_all_four_levels() {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();

@@ -134,6 +134,11 @@ pub fn to_linear(src: &str) -> String {
                         let b = group_at(&chars, &mut i);
                         out.push_str(&format!("({})/({})", to_linear(&a), to_linear(&b)));
                     }
+                    "binom" => {
+                        let a = group_at(&chars, &mut i);
+                        let b = group_at(&chars, &mut i);
+                        out.push_str(&format!("vec({},{})", to_linear(&a), to_linear(&b)));
+                    }
                     "sqrt" => {
                         let mut deg = String::new();
                         if chars.get(i) == Some(&'[') {
@@ -217,6 +222,7 @@ mod tests {
     #[test]
     fn fractions_roots_and_powers_become_linear_syntax() {
         assert_eq!(to_linear(r"\frac{3}{4} + \frac{1}{8}"), "(3)/(4) + (1)/(8)");
+        assert_eq!(to_linear(r"\binom{3}{-2}"), "vec(3,-2)");
         assert_eq!(to_linear(r"\sqrt{50}"), "sqrt(50)");
         assert_eq!(to_linear(r"x^{2} + 3"), "x^(2) + 3");
         assert_eq!(to_linear(r"3 \times 4"), "3 ×4");

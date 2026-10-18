@@ -41,7 +41,8 @@
     "(a + b) - b == a"
    ],
    "text": "Work out [[a]] + [[b]]",
-   "answer": "[[a + b]]"
+   "answer": "[[a + b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s01-l2",
@@ -82,7 +83,8 @@
     "(a - b) + b == a"
    ],
    "text": "Work out [[a|group]] − [[b|group]]",
-   "answer": "[[a - b|group]]"
+   "answer": "[[a - b|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s01-l3",
@@ -135,7 +137,8 @@
     "(a + b - c) + c == a + b"
    ],
    "text": "Work out [[a|group]] + [[b|group]] − [[c|group]]",
-   "answer": "[[a + b - c|group]]"
+   "answer": "[[a + b - c|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s01-l4",
@@ -176,7 +179,8 @@
     "(a + b) - a == b"
    ],
    "text": "A shop sells [[a|group]] newspapers on Monday and [[b|group]] on Tuesday. (a) How many does it sell altogether? (b) How many more does it sell on Tuesday than on Monday? (2 marks)",
-   "answer": "(a) [[a + b|group]]  (b) [[b - a|group]]"
+   "answer": "(a) [[a + b|group]]  (b) [[b - a|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s02-l1",
@@ -221,7 +225,8 @@
     "(a + b) / 10 - b / 10 == a / 10"
    ],
    "text": "Work out [[a / 10]] + [[b / 10]]",
-   "answer": "[[(a + b) / 10]]"
+   "answer": "[[(a + b) / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s02-l2",
@@ -266,7 +271,8 @@
     "(a + 10 * b) / 100 - b / 10 == a / 100"
    ],
    "text": "Work out [[a / 100]] + [[b / 10]]",
-   "answer": "[[(a + 10 * b) / 100]]"
+   "answer": "[[(a + 10 * b) / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s02-l3",
@@ -310,7 +316,8 @@
     "(100 * w - b) / 100 + b / 100 == w"
    ],
    "text": "Work out [[w]] − [[b / 100]]",
-   "answer": "[[(100 * w - b) / 100]]"
+   "answer": "[[(100 * w - b) / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s02-l4",
@@ -355,7 +362,8 @@
     "(2000 - a - b) / 100 + (a + b) / 100 == 20"
    ],
    "text": "A book costs £[[a / 100]] and a pen costs £[[b / 100]]. Maria pays with a £20 note. How much change does she get? (2 marks)",
-   "answer": "£[[(2000 - a - b) / 100|dp:2]]"
+   "answer": "£[[(2000 - a - b) / 100|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s03-l1",
@@ -400,7 +408,8 @@
     "n * f / f == n"
    ],
    "text": "Work out [[n]] × [[f]]",
-   "answer": "[[n * f|group]]"
+   "answer": "[[n * f|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s03-l2",
@@ -448,7 +457,8 @@
     "n / f * f == n"
    ],
    "text": "Work out [[n]] ÷ [[f]]",
-   "answer": "[[n / f]]"
+   "answer": "[[n / f]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s03-l3",
@@ -496,7 +506,8 @@
     "a * f / 100 / f == a / 100"
    ],
    "text": "Work out [[a / 100]] × [[f]]",
-   "answer": "[[a * f / 100]]"
+   "answer": "[[a * f / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s03-l4",
@@ -543,7 +554,8 @@
     "a * f / 100 / f == a / 100"
    ],
    "text": "One pencil costs £[[a / 100]]. Work out the cost of [[f]] pencils. (1 mark)",
-   "answer": "£[[a * f / 100|dp:2]]"
+   "answer": "£[[a * f / 100|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s04-l1",
@@ -580,7 +592,8 @@
     "n / 10 * 10 == n"
    ],
    "text": "Work out [[n]] × 0.1",
-   "answer": "[[n / 10]]"
+   "answer": "[[n / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s04-l2",
@@ -617,7 +630,8 @@
     "n / 100 * 100 == n"
    ],
    "text": "Work out [[n]] × 0.01",
-   "answer": "[[n / 100]]"
+   "answer": "[[n / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s04-l3",
@@ -654,7 +668,8 @@
     "a / 1000 * 1000 == a"
    ],
    "text": "Work out [[a / 10]] × 0.01",
-   "answer": "[[a / 1000]]"
+   "answer": "[[a / 1000]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s04-l4",
@@ -701,7 +716,8 @@
     "n / 10 * 10 == n"
    ],
    "text": "(a) Work out [[n]] × 0.1. (b) Work out [[m]] × 0.01. (2 marks)",
-   "answer": "(a) [[n / 10]]  (b) [[m / 100]]"
+   "answer": "(a) [[n / 10]]  (b) [[m / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s05-l1",
@@ -740,7 +756,8 @@
     "a * b / b == a"
    ],
    "text": "Work out [[a]] × [[b]]",
-   "answer": "[[a * b]]"
+   "answer": "[[a * b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s05-l2",
@@ -779,7 +796,8 @@
     "a * b / b == a"
    ],
    "text": "Work out [[a]] × [[b]]",
-   "answer": "[[a * b]]"
+   "answer": "[[a * b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s05-l3",
@@ -818,7 +836,8 @@
     "a * b / b == a"
    ],
    "text": "Work out [[a]] × [[b]]",
-   "answer": "[[a * b|group]]"
+   "answer": "[[a * b|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s05-l4",
@@ -857,7 +876,8 @@
     "a * b / b == a"
    ],
    "text": "A box holds [[a]] pencils. A school buys [[b]] boxes. How many pencils does it buy? (2 marks)",
-   "answer": "[[a * b|group]]"
+   "answer": "[[a * b|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s06-l1",
@@ -896,7 +916,8 @@
     "a * b / b == a"
    ],
    "text": "Work out [[a * b]] ÷ [[b]]",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s06-l2",
@@ -935,7 +956,8 @@
     "a * b / b == a"
    ],
    "text": "Work out [[a * b]] ÷ [[b]]",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s06-l3",
@@ -977,7 +999,8 @@
     "floor(n / d) * d + n % d == n"
    ],
    "text": "Work out [[n]] ÷ [[d]]. Give your answer with a remainder.",
-   "answer": "[[floor(n / d)]] remainder [[n % d]]"
+   "answer": "[[floor(n / d)]] remainder [[n % d]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s06-l4",
@@ -1020,7 +1043,8 @@
     "(ceil(n / d) - 1) * d < n"
    ],
    "text": "[[n]] pupils go on a trip. Each coach holds [[d]] pupils. How many coaches are needed? (2 marks)",
-   "answer": "[[ceil(n / d)]]"
+   "answer": "[[ceil(n / d)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s07-l1",
@@ -1062,7 +1086,8 @@
     "a * b / 10 / b == a / 10"
    ],
    "text": "Work out [[a / 10]] × [[b]]",
-   "answer": "[[a * b / 10]]"
+   "answer": "[[a * b / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s07-l2",
@@ -1105,7 +1130,8 @@
     "a * b / 100 * 100 == a * b"
    ],
    "text": "Work out [[a / 10]] × [[b / 10]]",
-   "answer": "[[a * b / 100]]"
+   "answer": "[[a * b / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s07-l3",
@@ -1148,7 +1174,8 @@
     "a * b / 1000 * 1000 == a * b"
    ],
    "text": "Work out [[a / 100]] × [[b / 10]]",
-   "answer": "[[a * b / 1000]]"
+   "answer": "[[a * b / 1000]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s07-l4",
@@ -1190,7 +1217,8 @@
     "a * b / 100 / b == a / 100"
    ],
    "text": "One book costs £[[a / 100]]. Work out the cost of [[b]] books. (2 marks)",
-   "answer": "£[[a * b / 100|dp:2]]"
+   "answer": "£[[a * b / 100|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s08-l1",
@@ -1234,7 +1262,8 @@
     "q / 10 * d == q * d / 10"
    ],
    "text": "Work out [[q * d / 10]] ÷ [[d]]",
-   "answer": "[[q / 10]]"
+   "answer": "[[q / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s08-l2",
@@ -1278,7 +1307,8 @@
     "q / 100 * d == q * d / 100"
    ],
    "text": "Work out [[q * d / 100]] ÷ [[d]]",
-   "answer": "[[q / 100]]"
+   "answer": "[[q / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s08-l3",
@@ -1324,7 +1354,8 @@
     "n / (10 * d) * d == n / 10"
    ],
    "text": "Work out [[n / 10]] ÷ [[d]]",
-   "answer": "[[n / (10 * d)]]"
+   "answer": "[[n / (10 * d)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s08-l4",
@@ -1368,7 +1399,8 @@
     "q / 100 * d == q * d / 100"
    ],
    "text": "£[[q * d / 100]] is shared equally between [[d]] people. How much does each person get? (2 marks)",
-   "answer": "£[[q / 100|dp:2]]"
+   "answer": "£[[q / 100|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s09-l1",
@@ -1401,7 +1433,8 @@
     "a * 2 * 0.5 == a"
    ],
    "text": "Work out [[a]] ÷ 0.5",
-   "answer": "[[a * 2]]"
+   "answer": "[[a * 2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s09-l2",
@@ -1447,7 +1480,8 @@
     "a * 10 / d * d / 10 == a"
    ],
    "text": "Work out [[a]] ÷ [[d / 10]]",
-   "answer": "[[a * 10 / d]]"
+   "answer": "[[a * 10 / d]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s09-l3",
@@ -1498,7 +1532,8 @@
     "a / d * d == a"
    ],
    "text": "Work out [[a / 10]] ÷ [[d / 10]]",
-   "answer": "[[a / d]]"
+   "answer": "[[a / d]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s09-l4",
@@ -1547,7 +1582,8 @@
     "a * 10 / d == k"
    ],
    "text": "A jug holds [[a / 10]] litres. Each glass holds [[d / 100]] litres. How many glasses can be filled from the jug? (2 marks)",
-   "answer": "[[a * 10 / d]]"
+   "answer": "[[a * 10 / d]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s10-l1",
@@ -1596,7 +1632,8 @@
     "a + b * c == a + c * b"
    ],
    "text": "Work out [[a]] + [[b]] × [[c]]",
-   "answer": "[[a + b * c]]"
+   "answer": "[[a + b * c]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s10-l2",
@@ -1645,7 +1682,8 @@
     "(a + b) * c == a * c + b * c"
    ],
    "text": "Work out ([[a]] + [[b]]) × [[c]]",
-   "answer": "[[(a + b) * c]]"
+   "answer": "[[(a + b) * c]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s10-l3",
@@ -1694,7 +1732,8 @@
     "a + b * b * c == a + (b * b) * c"
    ],
    "text": "Work out [[a]] + [[b]]² × [[c]]",
-   "answer": "[[a + b * b * c]]"
+   "answer": "[[a + b * b * c]]",
+   "year": "Y7"
   },
   {
    "id": "y7a5-s10-l4",
@@ -1764,7 +1803,8 @@
     "q * e / e == q"
    ],
    "text": "Work out (a) [[a]] + [[b]] × [[c]] − [[q * e]] ÷ [[e]]  (b) ([[a]] + [[b]]) × [[c]] (2 marks)",
-   "answer": "(a) [[a + b * c - q]]  (b) [[(a + b) * c]]"
+   "answer": "(a) [[a + b * c - q]]  (b) [[(a + b) * c]]",
+   "year": "Y7"
   }
  ]
 }
