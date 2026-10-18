@@ -1,0 +1,1508 @@
+{
+ "version": 1,
+ "note": "Y9 Spring Block 3 Ratio and proportion: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9sp3-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "choose": [
+       45,
+       60,
+       75,
+       90,
+       120
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * u / n == u"
+   ],
+   "text": "[[n]] notebooks cost £[[n * u / 100|dp:2]]. How much do [[m]] notebooks cost?",
+   "answer": "£[[m * u / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp3-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "choose": [
+       40,
+       50,
+       75
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       10,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q != p"
+   ],
+   "check": [
+    "p * u / p == u"
+   ],
+   "text": "A recipe for [[p]] people uses [[p * u]] g of rice. How much rice is needed for [[q]] people?",
+   "answer": "[[q * u]] g"
+  },
+  {
+   "id": "y9sp3-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       140,
+       150,
+       160
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       0,
+       0,
+       50,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Is the cost of petrol directly proportional to the litres bought? [[a]] litres cost £[[a * p / 100|dp:2]] and [[b]] litres cost £[[b * p / 100 + e / 100|dp:2]]. Explain.",
+   "answer": "[[e == 0|if:Yes: the cost per litre is the same each time/No: the cost per litre is not constant, so it is not directly proportional]]"
+  },
+  {
+   "id": "y9sp3-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       8,
+       15
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       16,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * k / k == m"
+   ],
+   "text": "y is directly proportional to x. When x = [[k]], y = [[m * k]]. (a) Write y in terms of x. (b) Find y when x = [[j]]. (c) Find x when y = [[m * j2]]. (3 marks)",
+   "answer": "(a) y = [[m]]x  (b) [[m * j]]  (c) [[j2]]"
+  },
+  {
+   "id": "y9sp3-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion and conversion graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S2 Direct proportion and conversion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "and",
+    "conversion",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * k / k == m"
+   ],
+   "text": "The graph shows the cost of fabric. How much do [[k]] metres cost?",
+   "answer": "£[[m * k]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * m|n]]",
+    "xstep": 1,
+    "ystep": "[[m|n]]",
+    "xlabel": "Metres",
+    "ylabel": "Cost (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion and conversion graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S2 Direct proportion and conversion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "and",
+    "conversion",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * k / k == m"
+   ],
+   "text": "The graph shows the cost of fabric. Work out the cost per metre and the cost of [[k]] metres.",
+   "answer": "£[[m]] per metre; £[[m * k]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * m|n]]",
+    "xstep": 1,
+    "ystep": "[[m|n]]",
+    "xlabel": "Metres",
+    "ylabel": "Cost (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion and conversion graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S2 Direct proportion and conversion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "and",
+    "conversion",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       110,
+       125
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       30,
+       90
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A conversion graph links pounds and euros. £[[x]] converts to €[[x * r / 100|dp:2]]. Write the rule connecting euros and pounds. How many euros for £[[y]]?",
+   "answer": "euros = pounds × [[r / 100|dp:2]]; €[[y * r / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp3-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion and conversion graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S2 Direct proportion and conversion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "and",
+    "conversion",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The graph shows $y = [[m]]x$. (a) Write down the gradient. (b) What does it represent if y is the cost in £ of x kg of cheese? (c) Find the cost of [[j]] kg. (3 marks)",
+   "answer": "(a) [[m]]  (b) the cost per kg, £[[m]]  (c) £[[m * j]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * m|n]]",
+    "xstep": 1,
+    "ystep": "[[m|n]]",
+    "xlabel": "x (kg)",
+    "ylabel": "y (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S3 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       9,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       3,
+       12,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(n * d / m)",
+    "m != n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "[[n]] workers build a wall in [[d]] days. How long would [[m]] workers take?",
+   "answer": "[[n * d / m]] days"
+  },
+  {
+   "id": "y9sp3-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S3 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(t * n / m)",
+    "m != n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A tank empties in [[t]] hours using [[n]] identical pumps. How long with [[m]] pumps?",
+   "answer": "[[t * n / m]] hours"
+  },
+  {
+   "id": "y9sp3-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S3 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       50,
+       300
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Say whether each is direct or inverse proportion: (a) the cost of [[n]] tickets (b) the time to drive [[d]] km at different speeds (c) the number of pizzas and the cost.",
+   "answer": "(a) direct  (b) inverse  (c) direct"
+  },
+  {
+   "id": "y9sp3-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S3 Inverse proportion",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       6,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       1,
+       12,
+       24
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       1,
+       2,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(a * b / c)",
+    "isint(a * b / e)",
+    "c != a",
+    "e != b"
+   ],
+   "check": [
+    "a * b > 0"
+   ],
+   "text": "y is inversely proportional to x. When x = [[a]], y = [[b]]. (a) Find the constant k in y = k/x. (b) Find y when x = [[c]]. (c) Find x when y = [[e]]. (3 marks)",
+   "answer": "(a) k = [[a * b]]  (b) [[a * b / c]]  (c) [[a * b / e]]"
+  },
+  {
+   "id": "y9sp3-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S4 Inverse proportion graphs (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "graphs",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The graph shows y inversely proportional to x. Read off the value of y when x = [[x1]].",
+   "answer": "[[12 * m / x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S4 Inverse proportion graphs (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "graphs",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "y is inversely proportional to x, shown in the graph. Find the value of $xy$ from a point on the graph.",
+   "answer": "[[12 * m]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S4 Inverse proportion graphs (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "graphs",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The graph shows y inversely proportional to x. Find the equation connecting y and x, and the value of y when x = [[x1]].",
+   "answer": "y = [[12 * m]]/x; y = [[12 * m / x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Inverse proportion graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S4 Inverse proportion graphs (E)",
+   "keywords": [
+    "inverse",
+    "proportion",
+    "graphs",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the graph, explain how you know y is not directly proportional to x, and find x when y = [[12 * m / x1]]. (3 marks)",
+   "answer": "The graph is a curve, not a straight line through the origin (as x increases, y decreases); x = [[x1]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 12,
+    "ymin": 0,
+    "ymax": "[[12 * m|n]]",
+    "xstep": 2,
+    "ystep": "[[2 * m|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      1,
+      "[[12 * m|n]]"
+     ],
+     [
+      2,
+      "[[6 * m|n]]"
+     ],
+     [
+      3,
+      "[[4 * m|n]]"
+     ],
+     [
+      4,
+      "[[3 * m|n]]"
+     ],
+     [
+      6,
+      "[[2 * m|n]]"
+     ],
+     [
+      12,
+      "[[m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9sp3-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole or a part given)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S5 Ratio problems (whole or a part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "or",
+    "a",
+    "part",
+    "given",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m + b * m == (a + b) * m"
+   ],
+   "text": "Share £[[(a + b) * m]] in the ratio [[a]] : [[b]].",
+   "answer": "£[[a * m]] and £[[b * m]]"
+  },
+  {
+   "id": "y9sp3-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole or a part given)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S5 Ratio problems (whole or a part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "or",
+    "a",
+    "part",
+    "given",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "The ratio of boys to girls is [[a]] : [[b]]. There are [[a * m]] boys. How many pupils are there?",
+   "answer": "[[(a + b) * m]]"
+  },
+  {
+   "id": "y9sp3-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole or a part given)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S5 Ratio problems (whole or a part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "or",
+    "a",
+    "part",
+    "given",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "b < c"
+   ],
+   "check": [
+    "(c - a) * m / (c - a) == m"
+   ],
+   "text": "Red : blue : green counters are in the ratio [[a]] : [[b]] : [[c]]. There are [[(c - a) * m]] more green than red counters. How many counters are there altogether?",
+   "answer": "[[(a + b + c) * m]]"
+  },
+  {
+   "id": "y9sp3-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole or a part given)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S5 Ratio problems (whole or a part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "or",
+    "a",
+    "part",
+    "given",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "b < c"
+   ],
+   "check": [
+    "(c - a) * m / (c - a) == m"
+   ],
+   "text": "Amy, Ben and Cara share money in the ratio [[a]] : [[b]] : [[c]]. Cara gets £[[(c - a) * m]] more than Amy. (a) How much does each get? (b) What fraction of the total does Ben get? (4 marks)",
+   "answer": "(a) Amy £[[a * m]], Ben £[[b * m]], Cara £[[c * m]]  (b) $[[b / (a + b + c)|frac]]$"
+  },
+  {
+   "id": "y9sp3-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio and algebra (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S6 Solve problems with ratio and algebra (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "and",
+    "algebra",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m + b * m == (a + b) * m"
+   ],
+   "text": "The ratio of x to y is [[a]] : [[b]] and x + y = [[(a + b) * m]]. Work out x and y.",
+   "answer": "x = [[a * m]], y = [[b * m]]"
+  },
+  {
+   "id": "y9sp3-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio and algebra (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S6 Solve problems with ratio and algebra (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "and",
+    "algebra",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "The sides of a rectangle are in the ratio [[a]] : [[b]]. The perimeter is [[2 * (a + b) * m]] cm. Work out the length and width.",
+   "answer": "[[b * m]] cm by [[a * m]] cm"
+  },
+  {
+   "id": "y9sp3-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio and algebra (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S6 Solve problems with ratio and algebra (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "and",
+    "algebra",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(c - b) * m"
+    ]
+   ],
+   "where": [
+    "c > b",
+    "a < b"
+   ],
+   "check": [
+    "(a + b) * m == (a + b) * d / (c - b)"
+   ],
+   "text": "The ratio of boys to girls in a club is [[a]] : [[b]]. After [[d]] more girls join, the ratio becomes [[a]] : [[c]]. How many pupils were in the club at first?",
+   "answer": "[[(a + b) * d / (c - b)|dp:0]]"
+  },
+  {
+   "id": "y9sp3-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio and algebra (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B3 Ratio and proportion · S6 Solve problems with ratio and algebra (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "and",
+    "algebra",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Two numbers are in the ratio [[a]] : [[b]]. Their sum is [[(a + b) * m]] and their difference is [[(b - a) * m]]. Show this is consistent and find both numbers. (3 marks)",
+   "answer": "$[[a|coef]]x + [[b|coef]]x = [[(a + b) * m]]$, so $x = [[m]]$; the numbers are [[a * m]] and [[b * m]]"
+  }
+ ]
+}
