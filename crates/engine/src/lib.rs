@@ -28,6 +28,7 @@ pub mod recovery;
 pub mod sample;
 pub mod sounds;
 pub mod spell;
+pub mod template;
 pub mod templates;
 pub mod thesaurus;
 pub mod tools;

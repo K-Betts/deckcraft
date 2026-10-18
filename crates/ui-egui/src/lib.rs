@@ -304,6 +304,10 @@ pub struct UiState {
     pub get_ready_slots: Vec<(String, u8)>,
     /// Questions the teacher has added to the Get Ready bank (Manage Questions).
     pub my_questions: Vec<deckcraft_engine::questions::Question>,
+    /// Question templates the teacher imported from a file (Manage Questions ▸ Import).
+    pub my_templates: Vec<deckcraft_engine::template::Template>,
+    /// What each Get Ready question was last searched for (words in the topic, keywords or text).
+    pub get_ready_search: Vec<String>,
     /// Ids of built-in questions the teacher has taken out of the bank.
     pub removed_questions: Vec<String>,
 }
@@ -347,6 +351,8 @@ impl Default for UiState {
             check_for_updates: false,
             get_ready_slots: vec![(String::new(), 0); 4],
             my_questions: vec![],
+            my_templates: vec![],
+            get_ready_search: vec![String::new(); 4],
             removed_questions: vec![],
         }
     }
@@ -400,6 +406,12 @@ impl UiState {
         self.my_questions
             .retain(|q| !q.id.is_empty() && !q.text.trim().is_empty() && deckcraft_engine::questions::DIFFICULTIES.contains(&q.difficulty));
         self.my_questions.truncate(5_000);
+        self.my_templates.retain(|t| t.check().is_ok());
+        self.my_templates.truncate(2_000);
+        self.get_ready_search.resize(4, String::new());
+        for w in &mut self.get_ready_search {
+            w.truncate(80);
+        }
         self.removed_questions.truncate(5_000);
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();

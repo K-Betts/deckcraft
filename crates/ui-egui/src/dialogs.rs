@@ -2591,7 +2591,7 @@ const GET_READY_QUESTIONS: usize = 4;
 /// The question bank in use: the built-in questions less any the teacher removed, plus their own.
 fn question_bank(app: &SlideApp) -> Result<deckcraft_engine::questions::Bank, String> {
     let starter = deckcraft_engine::questions::starter()?;
-    Ok(deckcraft_engine::questions::Bank::merged(starter, &app.ui.removed_questions, &app.ui.my_questions))
+    Ok(deckcraft_engine::questions::Bank::merged(starter, &app.ui.removed_questions, &app.ui.my_questions, &app.ui.my_templates))
 }
 
 /// Manage Questions: look through the bank, add a question of your own, and remove any question
@@ -2608,7 +2608,16 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
     };
     let topics = bank.topics();
     let t = Tokens::get(ui.ctx());
-    ui.label(egui::RichText::new(format!("{} questions in your bank", bank.questions.len())).font(theme::bold(13.0)));
+    // Each recipe is listed once, with the numbers of one example; it makes new ones every time.
+    let listing = bank.instantiate(0);
+    ui.label(
+        egui::RichText::new(format!(
+            "{} questions in your bank ({} of them make new numbers every time)",
+            listing.questions.len(),
+            bank.templates.len()
+        ))
+        .font(theme::bold(13.0)),
+    );
     ui.horizontal(|ui| {
         let topic = d.get("filter", "");
         egui::ComboBox::from_id_salt("qb-filter").selected_text(if topic.is_empty() { "All topics" } else { topic.as_str() }).width(150.0).show_ui(
@@ -2625,25 +2634,34 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
             },
         );
         let mut search = d.get("search", "");
-        ui.add(egui::TextEdit::singleline(&mut search).hint_text("Search questions").desired_width(220.0));
+        ui.add(egui::TextEdit::singleline(&mut search).hint_text("Search: e.g. both sides, pythagoras").desired_width(260.0));
         d.fields.insert("search".into(), search);
     });
     let topic = d.get("filter", "");
-    let search = d.get("search", "").to_lowercase();
+    let search = d.get("search", "");
     let mut remove: Option<String> = None;
     egui::ScrollArea::vertical().max_height(220.0).min_scrolled_height(220.0).auto_shrink([false, false]).id_salt("qb-list").show(ui, |ui| {
-        for q in &bank.questions {
+        for q in &listing.questions {
             let shown = deckcraft_engine::latex::plain(&q.text);
-            if (!topic.is_empty() && !q.topic.eq_ignore_ascii_case(&topic)) || (!search.is_empty() && !shown.to_lowercase().contains(&search)) {
+            if (!topic.is_empty() && !q.topic.eq_ignore_ascii_case(&topic))
+                || (!search.trim().is_empty() && !deckcraft_engine::questions::matches_words(q, &search))
+            {
                 continue;
             }
-            let mine = app.ui.my_questions.iter().any(|m| m.id == q.id);
+            let generated = bank.templates.iter().any(|t| t.id == q.id);
+            let mine = app.ui.my_questions.iter().any(|m| m.id == q.id) || app.ui.my_templates.iter().any(|m| m.id == q.id);
             ui.horizontal(|ui| {
                 let level = LEVELS.get(usize::from(q.difficulty).saturating_sub(1)).copied().unwrap_or("");
-                let head = format!("{} · {}{}", q.topic, level, if q.needs_diagram { " · figure" } else { "" });
-                ui.add_sized(vec2(150.0, 20.0), egui::Label::new(egui::RichText::new(head).size(11.0).color(t.text_dim)));
+                let head = format!(
+                    "{} · {}{}{}",
+                    q.topic,
+                    level,
+                    if q.needs_diagram { " · figure" } else { "" },
+                    if generated { " · new numbers each time" } else { "" }
+                );
+                ui.add_sized(vec2(210.0, 20.0), egui::Label::new(egui::RichText::new(head).size(11.0).color(t.text_dim)).truncate());
                 let line: String = shown.chars().take(70).collect();
-                ui.add_sized(vec2(360.0, 20.0), egui::Label::new(line).truncate());
+                ui.add_sized(vec2(300.0, 20.0), egui::Label::new(line).truncate());
                 if ui.small_button(if mine { "Delete" } else { "Remove" }).clicked() {
                     remove = Some(q.id.clone());
                 }
@@ -2651,8 +2669,9 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
         }
     });
     if let Some(id) = remove {
-        if app.ui.my_questions.iter().any(|m| m.id == id) {
+        if app.ui.my_questions.iter().any(|m| m.id == id) || app.ui.my_templates.iter().any(|m| m.id == id) {
             app.ui.my_questions.retain(|m| m.id != id);
+            app.ui.my_templates.retain(|m| m.id != id);
         } else if !app.ui.removed_questions.contains(&id) {
             app.ui.removed_questions.push(id);
         }
@@ -2662,6 +2681,17 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
             ui.label(egui::RichText::new(format!("{} built-in questions removed.", app.ui.removed_questions.len())).size(11.0).color(t.text_dim));
             if ui.small_button("Restore them").clicked() {
                 app.ui.removed_questions.clear();
+            }
+        });
+    }
+    if app.services.pick_open.is_some() && app.services.read.is_some() {
+        ui.horizontal(|ui| {
+            if ui.button("Import questions from a file…").on_hover_text("A question file (.json) made for DeckCraft").clicked() {
+                let msg = import_questions(app);
+                d.fields.insert("import".into(), msg);
+            }
+            if let Some(m) = d.fields.get("import").filter(|m| !m.is_empty()) {
+                ui.label(egui::RichText::new(m).size(11.0).color(t.text_dim));
             }
         });
     }
@@ -2723,6 +2753,7 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
                 id: bank.new_id(&app.ui.my_questions),
                 topic: topic.chars().take(40).collect(),
                 subtopic: d.get("nq_sub", "").trim().chars().take(60).collect(),
+                keywords: vec![],
                 difficulty: d.get("nq_level", "2").parse().ok().filter(|l| DIFFICULTIES.contains(l)).unwrap_or(2),
                 text: text.trim().to_string(),
                 answer: d.get("nq_answer", "").trim().to_string(),
@@ -2745,6 +2776,44 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
         }
     });
     done
+}
+
+/// Asks for a question file and adds what is in it to the teacher's own bank. Returns what to tell
+/// them: how many were added, or what is wrong with the file.
+fn import_questions(app: &mut SlideApp) -> String {
+    let Some(path) = app.services.pick_open.as_mut().and_then(|pick| pick("questions")) else { return String::new() };
+    let Some(bytes) = app.services.read.as_mut().map(|read| read(&path)) else { return String::new() };
+    let text = match bytes.map_err(|e| e.to_string()).and_then(|b| String::from_utf8(b).map_err(|_| "that file is not text".to_string())) {
+        Ok(t) => t,
+        Err(e) => return format!("Could not read the file: {e}"),
+    };
+    let incoming = match deckcraft_engine::questions::parse(&text) {
+        Ok(b) => b,
+        Err(e) => return format!("Not added. {e}"),
+    };
+    let existing = match question_bank(app) {
+        Ok(b) => b,
+        Err(e) => return e,
+    };
+    let taken = |id: &str| existing.questions.iter().any(|q| q.id == id) || existing.templates.iter().any(|t| t.id == id);
+    let (mut added, mut skipped) = (0, 0);
+    for q in incoming.questions {
+        if taken(&q.id) {
+            skipped += 1;
+        } else {
+            app.ui.my_questions.push(q);
+            added += 1;
+        }
+    }
+    for t in incoming.templates {
+        if taken(&t.id) {
+            skipped += 1;
+        } else {
+            app.ui.my_templates.push(t);
+            added += 1;
+        }
+    }
+    if skipped > 0 { format!("Added {added}. Skipped {skipped} whose id is already in your bank.") } else { format!("Added {added}.") }
 }
 
 fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
@@ -2776,11 +2845,22 @@ fn fresh_seed() -> u64 {
 /// this slide for new questions with the same choices. The choices are remembered.
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     const LEVELS: [(u8, &str); 4] = [(0, "Any"), (1, "Secure"), (2, "Core"), (3, "Stretch")];
-    ui.set_min_width(520.0);
-    let topics = question_bank(app).map(|b| b.topics()).unwrap_or_default();
+    ui.set_min_width(760.0);
+    let bank = question_bank(app).ok();
+    let topics = bank.as_ref().map(|b| b.topics()).unwrap_or_default();
+    // The bank with each recipe made once, to count what a search finds.
+    let listing = bank.map(|b| b.instantiate(0)).unwrap_or_else(|| deckcraft_engine::questions::Bank {
+        version: 1,
+        note: String::new(),
+        questions: vec![],
+        templates: vec![],
+    });
     let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
     // Start from what was chosen last time.
     if !d.fields.contains_key("count") {
+        for (i, w) in app.ui.get_ready_search.iter().enumerate() {
+            d.fields.insert(format!("search{i}"), w.clone());
+        }
         let saved = app.ui.get_ready_slots.clone();
         d.fields.insert("count".into(), saved.len().clamp(2, 6).to_string());
         for (i, (topic, level)) in saved.iter().enumerate() {
@@ -2835,6 +2915,20 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                     d.fields.insert(format!("level{i}"), value.to_string());
                 }
             }
+            // Search for a topic: "both sides", "pythagoras", "angles in a triangle".
+            let mut words = d.get(&format!("search{i}"), "");
+            ui.add(egui::TextEdit::singleline(&mut words).hint_text("Search a topic…").desired_width(150.0));
+            if !words.trim().is_empty() {
+                let filter = deckcraft_engine::questions::Filter {
+                    topic: Some(topic).filter(|t| !t.is_empty()),
+                    difficulty: Some(level).filter(|l| *l > 0),
+                    query: Some(words.clone()),
+                };
+                let found = listing.candidates(&filter).len();
+                let tone = if found == 0 { egui::Color32::from_rgb(200, 60, 60) } else { Tokens::get(ui.ctx()).text_dim };
+                ui.label(egui::RichText::new(if found == 0 { "none".to_string() } else { format!("{found} found") }).size(11.0).color(tone));
+            }
+            d.fields.insert(format!("search{i}"), words);
         });
     }
     ui.add_space(4.0);
@@ -2872,10 +2966,15 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         return true;
     }
     if go || reroll {
+        let searches: Vec<String> = (0..count).map(|i| d.get(&format!("search{i}"), "").trim().to_string()).collect();
         let spec: Vec<Value> = slots
             .iter()
-            .map(|(topic, level)| {
+            .zip(&searches)
+            .map(|((topic, level), words)| {
                 let mut s = json!({});
+                if !words.is_empty() {
+                    s["search"] = json!(words);
+                }
                 if !topic.is_empty() {
                     s["topic"] = json!(topic);
                 }
@@ -2886,7 +2985,8 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             })
             .collect();
         let mut params = json!({"seed": fresh_seed(), "slots": spec, "expand": expand, "headings": headings});
-        if !app.ui.my_questions.is_empty() || !app.ui.removed_questions.is_empty() {
+        app.ui.get_ready_search = searches;
+        if !app.ui.my_questions.is_empty() || !app.ui.my_templates.is_empty() || !app.ui.removed_questions.is_empty() {
             match question_bank(app) {
                 Ok(bank) => params["bankJson"] = json!(bank.to_json()),
                 Err(e) => {

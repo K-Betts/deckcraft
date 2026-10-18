@@ -157,6 +157,18 @@ impl Fig<'_> {
         self.d.get(key).and_then(Value::as_array).map(|v| v.iter().map(|x| x.as_str().map(str::to_string)).collect()).unwrap_or_default()
     }
 
+    /// `sizes`: the true sizes in degrees to draw the angles at, as numbers or numeric strings.
+    fn sizes(&self) -> Option<Vec<f64>> {
+        let v: Vec<f64> = self
+            .d
+            .get("sizes")?
+            .as_array()?
+            .iter()
+            .filter_map(|x| x.as_f64().or_else(|| x.as_str().and_then(|s| s.trim().trim_end_matches('°').parse().ok())))
+            .collect();
+        (!v.is_empty() && v.iter().all(|x| *x > 0.0)).then_some(v)
+    }
+
     fn num(&self, key: &str, default: f64) -> f64 {
         self.d.get(key).and_then(Value::as_f64).unwrap_or(default)
     }
@@ -171,16 +183,36 @@ impl Fig<'_> {
 
     // ── triangles ────────────────────────────────────────────────────────────────────────────
 
-    /// `angles`: three labels, `null` the unknown (`unknown`: the letter to write there).
+    /// `angles`: three labels, `null` the unknown (`unknown`: the letter to write there). With
+    /// `sizes` (the three true angles) the triangle is drawn to those angles, so what pupils see
+    /// agrees with the numbers.
     fn triangle_angles(&self, s: &mut Session) -> Result<()> {
-        let [x, y, w, h] = self.fit(1.5, 22.0);
-        let (a, b, c) = ([x, y + h], [x + w, y + h], [x + w * 0.66, y]);
+        let [x, y, w, h] = self.fit(1.5, 36.0);
+        let (a, b, c) = match self.sizes().filter(|v| v.len() == 3 && (v.iter().sum::<f64>() - 180.0).abs() < 1.0) {
+            Some(v) => {
+                // Base from A (bottom left) to B; the apex follows from the angles at A and B.
+                let (ta, tb) = (v[0].to_radians(), v[1].to_radians());
+                let apex_x = (tb.tan() / (ta.tan() + tb.tan())) * 1.0;
+                let height = apex_x * ta.tan();
+                // Unit base: fit the shape in the area.
+                let scale = (w / 1.0).min(h / height.max(0.05));
+                let (bw, bh) = (scale, height * scale);
+                let (ox, oy) = (x + (w - bw) / 2.0, y + (h - bh) / 2.0 + bh);
+                ([ox, oy], [ox + bw, oy], [ox + apex_x * bw, oy - bh])
+            }
+            None => ([x, y + h], [x + w, y + h], [x + w * 0.66, y]),
+        };
         poly(s, &[a, b, c])?;
         let unknown = self.unknown();
         let angles: Vec<String> = self.list("angles").into_iter().map(|v| v.unwrap_or_else(|| unknown.clone())).collect();
-        let spots = [pt(a, 40.0, -12.0), pt(b, -40.0, -12.0), pt(c, 0.0, 34.0)];
-        for (t, at) in angles.iter().zip(spots) {
-            label(s, t, at)?;
+        // Each label sits just outside its corner, away from the middle, so they never crowd.
+        let centre = [(a[0] + b[0] + c[0]) / 3.0, (a[1] + b[1] + c[1]) / 3.0];
+        for (t, v) in angles.iter().zip([a, b, c]) {
+            let (dx, dy) = (v[0] - centre[0], v[1] - centre[1]);
+            let n = (dx * dx + dy * dy).sqrt().max(1.0);
+            let chars = crate::latex::plain(t).chars().count() as f64;
+            let out = (14.0 + chars * 4.5) * k();
+            label(s, t, [v[0] + dx / n * out, v[1] + dy / n * out * 0.8])?;
         }
         Ok(())
     }
@@ -255,10 +287,13 @@ impl Fig<'_> {
         let c = if total > 200.0 { [x + w / 2.0, y + h / 2.0] } else { [x + w / 2.0, y + h] };
         let unknown = self.unknown();
         let labels = self.list("angles");
-        let known: Vec<Option<f64>> = labels
-            .iter()
-            .map(|l| l.as_ref().and_then(|t| t.trim().trim_end_matches('°').trim_end_matches("\\circ").trim().parse::<f64>().ok()))
-            .collect();
+        let known: Vec<Option<f64>> = match self.sizes() {
+            Some(sizes) => sizes.into_iter().map(Some).collect(),
+            None => labels
+                .iter()
+                .map(|l| l.as_ref().and_then(|t| t.trim().trim_end_matches('°').trim_end_matches("\\circ").trim().parse::<f64>().ok()))
+                .collect(),
+        };
         let used: f64 = known.iter().flatten().sum();
         let open = known.iter().filter(|k| k.is_none()).count().max(1) as f64;
         let share = ((total - used) / open).max(total / 12.0);

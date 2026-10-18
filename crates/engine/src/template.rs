@@ -1,0 +1,775 @@
+//! Question templates: a question written once as a recipe, made new each time it is asked.
+//!
+//! A template names some variables and the numbers they may take (`"a": {"int": [2, 9]}`), works
+//! out others from them (`"calc"`), says what must be true of the result (`"where"`) and then
+//! fills `[[placeholders]]` in its text, answer and diagram. Asking again with a new seed gives
+//! new numbers; the same seed always gives the same question. The format is documented for
+//! question writers in `docs/question-writing-guide.md`.
+//!
+//! Nothing here runs code from the file: expressions are read by the small evaluator below, which
+//! knows arithmetic, comparisons and a few maths functions, and nothing else.
+
+use std::collections::HashMap;
+
+use serde::{Deserialize, Serialize};
+use serde_json::{Map, Value};
+
+use crate::questions::Question;
+
+const MAX_TRIES: usize = 300;
+const MAX_EXPR: usize = 300;
+const EPS: f64 = 1e-9;
+
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+#[serde(rename_all = "camelCase")]
+pub struct Template {
+    pub id: String,
+    pub topic: String,
+    #[serde(default)]
+    pub subtopic: String,
+    /// 1 = secure, 2 = core, 3 = stretch.
+    pub difficulty: u8,
+    /// Words a teacher might search for ("both sides", "simultaneous"); topic and subtopic are searched too.
+    #[serde(default)]
+    pub keywords: Vec<String>,
+    /// The variables, in the order they are chosen. A later one's range may use an earlier one.
+    #[serde(default)]
+    pub vars: Vec<(String, VarSpec)>,
+    /// Values worked out from the variables, in order: `["d", "(a - c) * x + b"]`.
+    #[serde(default)]
+    pub calc: Vec<(String, String)>,
+    /// Every one must be true for the numbers to be used: `"a != c"`, `"d > 0"`.
+    #[serde(default, rename = "where")]
+    pub conditions: Vec<String>,
+    pub text: String,
+    pub answer: String,
+    /// A figure whose strings may hold `[[placeholders]]`; see `cmd/figures.rs` for the kinds.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub diagram: Option<Value>,
+}
+
+/// What a variable can be. Exactly one of the choices is given.
+#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
+#[serde(default, deny_unknown_fields)]
+pub struct VarSpec {
+    /// A whole number from `[low, high]` inclusive; each end a number or an expression.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub int: Option<Vec<Value>>,
+    /// With `int`: numbers it must not be.
+    #[serde(skip_serializing_if = "Vec::is_empty")]
+    pub not: Vec<f64>,
+    /// One of these numbers.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub choose: Option<Vec<f64>>,
+    /// `[low, high, step]`: 0.5, 1, 1.5 … (for decimals).
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub step: Option<Vec<f64>>,
+    /// One of these words or letters, used as `[[name]]` in text.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub pick: Option<Vec<String>>,
+}
+
+#[derive(Clone, Debug, PartialEq)]
+enum Val {
+    Num(f64),
+    Text(String),
+}
+
+type Scope = HashMap<String, Val>;
+
+// ── choosing numbers ─────────────────────────────────────────────────────────────────────────
+
+fn splitmix(state: &mut u64) -> u64 {
+    *state = state.wrapping_add(0x9E37_79B9_7F4A_7C15);
+    let mut z = *state;
+    z = (z ^ (z >> 30)).wrapping_mul(0xBF58_476D_1CE4_E5B9);
+    z = (z ^ (z >> 27)).wrapping_mul(0x94D0_49BB_1331_11EB);
+    z ^ (z >> 31)
+}
+
+fn bound(v: &Value, scope: &Scope) -> Result<f64, String> {
+    match v {
+        Value::Number(n) => n.as_f64().ok_or_else(|| "a range end is not a number".to_string()),
+        Value::String(s) => eval(s, scope),
+        _ => Err("a range end must be a number or an expression".into()),
+    }
+}
+
+fn draw(name: &str, spec: &VarSpec, scope: &Scope, rng: &mut u64) -> Result<Val, String> {
+    let kinds = [spec.int.is_some(), spec.choose.is_some(), spec.step.is_some(), spec.pick.is_some()].iter().filter(|k| **k).count();
+    if kinds != 1 {
+        return Err(format!("variable {name}: give exactly one of int, choose, step or pick"));
+    }
+    if let Some(r) = &spec.int {
+        let [lo, hi] = r.as_slice() else { return Err(format!("variable {name}: int needs [low, high]")) };
+        let (lo, hi) = (bound(lo, scope)?.round() as i64, bound(hi, scope)?.round() as i64);
+        if hi < lo {
+            return Err(format!("variable {name}: the range {lo} to {hi} is empty"));
+        }
+        let span = (hi - lo + 1) as u64;
+        for _ in 0..50 {
+            let v = lo + (splitmix(rng) % span) as i64;
+            if !spec.not.iter().any(|n| (n - v as f64).abs() < EPS) {
+                return Ok(Val::Num(v as f64));
+            }
+        }
+        return Err(format!("variable {name}: every number in its range is excluded"));
+    }
+    if let Some(c) = &spec.choose {
+        if c.is_empty() {
+            return Err(format!("variable {name}: choose is empty"));
+        }
+        return Ok(Val::Num(c[(splitmix(rng) % c.len() as u64) as usize]));
+    }
+    if let Some(s) = &spec.step {
+        let [lo, hi, st] = s.as_slice() else { return Err(format!("variable {name}: step needs [low, high, step]")) };
+        if *st <= 0.0 || hi < lo {
+            return Err(format!("variable {name}: step needs low <= high and a positive step"));
+        }
+        let n = ((hi - lo) / st + EPS).floor() as u64 + 1;
+        let v = lo + (splitmix(rng) % n) as f64 * st;
+        return Ok(Val::Num((v * 1e9).round() / 1e9));
+    }
+    let p = spec.pick.as_deref().unwrap_or_default();
+    if p.is_empty() {
+        return Err(format!("variable {name}: pick is empty"));
+    }
+    Ok(Val::Text(p[(splitmix(rng) % p.len() as u64) as usize].clone()))
+}
+
+// ── the expression evaluator ─────────────────────────────────────────────────────────────────
+
+#[derive(Clone, Debug, PartialEq)]
+enum Tok {
+    Num(f64),
+    Id(String),
+    Op(&'static str),
+}
+
+fn lex(src: &str) -> Result<Vec<Tok>, String> {
+    if src.len() > MAX_EXPR {
+        return Err("an expression is too long".into());
+    }
+    let c: Vec<char> = src.chars().collect();
+    let mut out = vec![];
+    let mut i = 0;
+    while i < c.len() {
+        let ch = c[i];
+        if ch.is_whitespace() {
+            i += 1;
+        } else if ch.is_ascii_digit() || (ch == '.' && c.get(i + 1).is_some_and(char::is_ascii_digit)) {
+            let s = i;
+            while i < c.len() && (c[i].is_ascii_digit() || c[i] == '.') {
+                i += 1;
+            }
+            let t: String = c[s..i].iter().collect();
+            out.push(Tok::Num(t.parse().map_err(|_| format!("`{t}` is not a number"))?));
+        } else if ch.is_ascii_alphabetic() || ch == '_' {
+            let s = i;
+            while i < c.len() && (c[i].is_ascii_alphanumeric() || c[i] == '_') {
+                i += 1;
+            }
+            out.push(Tok::Id(c[s..i].iter().collect()));
+        } else {
+            let two: String = c[i..(i + 2).min(c.len())].iter().collect();
+            let op = ["==", "!=", "<=", ">=", "&&", "||"].into_iter().find(|o| *o == two);
+            if let Some(o) = op {
+                out.push(Tok::Op(o));
+                i += 2;
+            } else {
+                let one = ["+", "-", "*", "/", "%", "^", "(", ")", ",", "<", ">", "!"].into_iter().find(|o| o.starts_with(ch));
+                out.push(Tok::Op(one.ok_or_else(|| format!("unexpected `{ch}` in `{src}`"))?));
+                i += 1;
+            }
+        }
+    }
+    Ok(out)
+}
+
+struct Parser<'a> {
+    t: Vec<Tok>,
+    i: usize,
+    scope: &'a Scope,
+    depth: usize,
+}
+
+fn eval(src: &str, scope: &Scope) -> Result<f64, String> {
+    let mut p = Parser { t: lex(src)?, i: 0, scope, depth: 0 };
+    let v = p.or()?;
+    if p.i != p.t.len() {
+        return Err(format!("`{src}` has something left over after the end"));
+    }
+    if !v.is_finite() {
+        return Err(format!("`{src}` is not a finite number"));
+    }
+    Ok(v)
+}
+
+impl Parser<'_> {
+    fn eat(&mut self, op: &str) -> bool {
+        if matches!(self.t.get(self.i), Some(Tok::Op(o)) if *o == op) {
+            self.i += 1;
+            true
+        } else {
+            false
+        }
+    }
+
+    fn or(&mut self) -> Result<f64, String> {
+        let mut v = self.and()?;
+        while self.eat("||") {
+            let r = self.and()?;
+            v = f64::from(v != 0.0 || r != 0.0);
+        }
+        Ok(v)
+    }
+
+    fn and(&mut self) -> Result<f64, String> {
+        let mut v = self.cmp()?;
+        while self.eat("&&") {
+            let r = self.cmp()?;
+            v = f64::from(v != 0.0 && r != 0.0);
+        }
+        Ok(v)
+    }
+
+    fn cmp(&mut self) -> Result<f64, String> {
+        let l = self.sum()?;
+        for op in ["==", "!=", "<=", ">=", "<", ">"] {
+            if self.eat(op) {
+                let r = self.sum()?;
+                let same = (l - r).abs() < EPS;
+                return Ok(f64::from(match op {
+                    "==" => same,
+                    "!=" => !same,
+                    "<=" => l < r || same,
+                    ">=" => l > r || same,
+                    "<" => l < r && !same,
+                    _ => l > r && !same,
+                }));
+            }
+        }
+        Ok(l)
+    }
+
+    fn sum(&mut self) -> Result<f64, String> {
+        let mut v = self.product()?;
+        loop {
+            if self.eat("+") {
+                v += self.product()?;
+            } else if self.eat("-") {
+                v -= self.product()?;
+            } else {
+                return Ok(v);
+            }
+        }
+    }
+
+    fn product(&mut self) -> Result<f64, String> {
+        let mut v = self.unary()?;
+        loop {
+            if self.eat("*") {
+                v *= self.unary()?;
+            } else if self.eat("/") {
+                let r = self.unary()?;
+                if r.abs() < EPS {
+                    return Err("divides by zero".into());
+                }
+                v /= r;
+            } else if self.eat("%") {
+                let r = self.unary()?;
+                if r.abs() < EPS {
+                    return Err("divides by zero".into());
+                }
+                v = v.rem_euclid(r);
+            } else {
+                return Ok(v);
+            }
+        }
+    }
+
+    fn unary(&mut self) -> Result<f64, String> {
+        if self.eat("-") {
+            return Ok(-self.unary()?);
+        }
+        if self.eat("+") {
+            return self.unary();
+        }
+        if self.eat("!") {
+            return Ok(f64::from(self.unary()? == 0.0));
+        }
+        self.power()
+    }
+
+    fn power(&mut self) -> Result<f64, String> {
+        let base = self.primary()?;
+        if self.eat("^") {
+            let e = self.unary()?;
+            return Ok(base.powf(e));
+        }
+        Ok(base)
+    }
+
+    fn primary(&mut self) -> Result<f64, String> {
+        self.depth += 1;
+        if self.depth > 40 {
+            return Err("an expression is nested too deeply".into());
+        }
+        let r = self.primary_inner();
+        self.depth -= 1;
+        r
+    }
+
+    fn primary_inner(&mut self) -> Result<f64, String> {
+        match self.t.get(self.i).cloned() {
+            Some(Tok::Num(n)) => {
+                self.i += 1;
+                Ok(n)
+            }
+            Some(Tok::Op("(")) => {
+                self.i += 1;
+                let v = self.or()?;
+                if !self.eat(")") {
+                    return Err("a bracket is not closed".into());
+                }
+                Ok(v)
+            }
+            Some(Tok::Id(name)) => {
+                self.i += 1;
+                if self.eat("(") {
+                    let mut args = vec![];
+                    if !self.eat(")") {
+                        loop {
+                            args.push(self.or()?);
+                            if self.eat(")") {
+                                break;
+                            }
+                            if !self.eat(",") {
+                                return Err(format!("`{name}(` is missing a bracket or comma"));
+                            }
+                        }
+                    }
+                    return call(&name, &args);
+                }
+                match self.scope.get(&name) {
+                    Some(Val::Num(n)) => Ok(*n),
+                    Some(Val::Text(_)) => Err(format!("`{name}` is a word, not a number")),
+                    None => Err(format!("`{name}` is not a variable of this template")),
+                }
+            }
+            _ => Err("an expression ends too soon".into()),
+        }
+    }
+}
+
+fn gcd(a: i64, b: i64) -> i64 {
+    let (mut a, mut b) = (a.abs(), b.abs());
+    while b != 0 {
+        (a, b) = (b, a % b);
+    }
+    a
+}
+
+fn call(name: &str, a: &[f64]) -> Result<f64, String> {
+    let one = |f: fn(f64) -> f64| match a {
+        [x] => Ok(f(*x)),
+        _ => Err(format!("{name}() takes one number")),
+    };
+    match name {
+        "abs" => one(f64::abs),
+        "sqrt" => match a {
+            [x] if *x >= 0.0 => Ok(x.sqrt()),
+            _ => Err("sqrt() of a negative number".into()),
+        },
+        "sin" => one(|x| x.to_radians().sin()),
+        "cos" => one(|x| x.to_radians().cos()),
+        "tan" => one(|x| x.to_radians().tan()),
+        "asin" => one(|x| x.asin().to_degrees()),
+        "acos" => one(|x| x.acos().to_degrees()),
+        "atan" => one(|x| x.atan().to_degrees()),
+        "round" => one(f64::round),
+        "floor" => one(f64::floor),
+        "ceil" => one(f64::ceil),
+        "isint" => one(|x| f64::from((x - x.round()).abs() < EPS)),
+        "min" if !a.is_empty() => Ok(a.iter().cloned().fold(f64::INFINITY, f64::min)),
+        "max" if !a.is_empty() => Ok(a.iter().cloned().fold(f64::NEG_INFINITY, f64::max)),
+        "gcd" => match a {
+            [x, y] => Ok(gcd(x.round() as i64, y.round() as i64) as f64),
+            _ => Err("gcd() takes two numbers".into()),
+        },
+        "lcm" => match a {
+            [x, y] => {
+                let (x, y) = (x.round() as i64, y.round() as i64);
+                let g = gcd(x, y).max(1);
+                Ok((x / g * y).abs() as f64)
+            }
+            _ => Err("lcm() takes two numbers".into()),
+        },
+        _ => Err(format!("`{name}` is not a function a template can use")),
+    }
+}
+
+// ── writing numbers into text ────────────────────────────────────────────────────────────────
+
+fn is_int(x: f64) -> bool {
+    (x - x.round()).abs() < EPS
+}
+
+fn int_text(x: f64) -> String {
+    format!("{}", x.round() as i64)
+}
+
+/// `n/d` for `x` when it is a ratio with a small denominator.
+fn fraction(x: f64) -> Option<(i64, i64)> {
+    (1..=1000i64).find_map(|d| {
+        let n = x * d as f64;
+        is_int(n).then(|| (n.round() as i64, d))
+    })
+}
+
+fn plain(x: f64) -> String {
+    if is_int(x) {
+        return int_text(x);
+    }
+    let s = format!("{:.6}", x);
+    let t = s.trim_end_matches('0').trim_end_matches('.');
+    if (t.parse::<f64>().unwrap_or(f64::NAN) - x).abs() < 1e-7 { t.to_string() } else { frac_text(x) }
+}
+
+fn frac_text(x: f64) -> String {
+    match fraction(x) {
+        Some((n, 1)) => format!("{n}"),
+        Some((n, d)) => format!("{}\\frac{{{}}}{{{d}}}", if n < 0 { "-" } else { "" }, n.abs()),
+        None => plain(x),
+    }
+}
+
+fn coef(x: f64) -> String {
+    if (x - 1.0).abs() < EPS {
+        String::new()
+    } else if (x + 1.0).abs() < EPS {
+        "-".into()
+    } else {
+        plain(x)
+    }
+}
+
+/// One placeholder's `expr` or `expr|filter[:argument]` as text, or as a number for `|n`.
+fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
+    let (expr, filter) = match inner.split_once('|') {
+        Some((e, f)) => (e.trim(), Some(f.trim())),
+        None => (inner.trim(), None),
+    };
+    if let Some(Val::Text(t)) = scope.get(expr) {
+        return Ok((t.clone(), None));
+    }
+    let x = eval(expr, scope)?;
+    let (name, arg) = match filter.map(|f| f.split_once(':').map_or((f, ""), |(a, b)| (a.trim(), b.trim()))) {
+        Some((n, a)) => (n, a),
+        None => ("", ""),
+    };
+    let text = match name {
+        "" | "n" => plain(x),
+        "coef" => coef(x),
+        "abs" => plain(x.abs()),
+        "signed" => match x {
+            v if v.abs() < EPS => String::new(),
+            v if v > 0.0 => format!(" + {}", plain(v)),
+            v => format!(" - {}", plain(-v)),
+        },
+        "term" => {
+            if x.abs() < EPS {
+                "0".into()
+            } else {
+                format!("{}{arg}", coef(x))
+            }
+        }
+        "sterm" => match x {
+            v if v.abs() < EPS => String::new(),
+            v if v > 0.0 => format!(" + {}{arg}", coef(v)),
+            v => format!(" - {}{arg}", coef(-v)),
+        },
+        "frac" => frac_text(x),
+        "mixed" => match fraction(x) {
+            Some((n, d)) if d > 1 && n.abs() > d => format!("{}{}\\frac{{{}}}{{{d}}}", if n < 0 { "-" } else { "" }, n.abs() / d, n.abs() % d),
+            _ => frac_text(x),
+        },
+        "dec" => plain(x),
+        "dp" => {
+            let places: usize = arg.parse().map_err(|_| format!("dp needs a number of places, like dp:1 (in `{inner}`)"))?;
+            if places > 8 {
+                return Err("dp: at most 8 places".into());
+            }
+            format!("{x:.places$}")
+        }
+        other => return Err(format!("`{other}` is not a filter (use coef, signed, term:x, sterm:x, frac, mixed, dec, dp:N, abs, n)")),
+    };
+    Ok((text, (name == "n").then_some(x)))
+}
+
+/// `text` with every `[[…]]` replaced; the number when the whole string is one `|n` placeholder.
+fn fill_all(text: &str, scope: &Scope) -> Result<Value, String> {
+    let mut out = String::new();
+    let mut rest = text;
+    let mut only: Option<f64> = None;
+    let mut parts = 0;
+    while let Some(a) = rest.find("[[") {
+        out.push_str(&rest[..a]);
+        let after = &rest[a + 2..];
+        let b = after.find("]]").ok_or_else(|| format!("`[[` is never closed in `{text}`"))?;
+        let (t, n) = fill(&after[..b], scope)?;
+        out.push_str(&t);
+        only = n;
+        parts += 1;
+        rest = &after[b + 2..];
+    }
+    out.push_str(rest);
+    if parts == 1
+        && text.trim().starts_with("[[")
+        && text.trim().ends_with("]]")
+        && let Some(n) = only
+    {
+        return Ok(serde_json::json!(if is_int(n) { n.round() } else { n }));
+    }
+    if out.contains("]]") {
+        return Err(format!("a stray `]]` in `{text}`"));
+    }
+    Ok(Value::String(out))
+}
+
+fn fill_json(v: &Value, scope: &Scope) -> Result<Value, String> {
+    Ok(match v {
+        Value::String(s) if s.contains("[[") => fill_all(s, scope)?,
+        Value::Array(a) => Value::Array(a.iter().map(|x| fill_json(x, scope)).collect::<Result<_, _>>()?),
+        Value::Object(o) => {
+            let mut m = Map::new();
+            for (k, x) in o {
+                m.insert(k.clone(), fill_json(x, scope)?);
+            }
+            Value::Object(m)
+        }
+        other => other.clone(),
+    })
+}
+
+// ── making a question ────────────────────────────────────────────────────────────────────────
+
+impl Template {
+    /// The question for `seed`: the same seed always gives the same numbers.
+    pub fn instantiate(&self, seed: u64) -> Result<Question, String> {
+        let mut rng = seed ^ fnv(&self.id);
+        let mut last = String::new();
+        for _ in 0..MAX_TRIES {
+            match self.attempt(&mut rng) {
+                Ok(Some(q)) => return Ok(q),
+                Ok(None) => last = "the conditions in `where` were never all true".into(),
+                Err(e) => return Err(format!("template {}: {e}", self.id)),
+            }
+        }
+        Err(format!("template {}: {MAX_TRIES} tries found no numbers that satisfy it ({last}); loosen the ranges or `where`", self.id))
+    }
+
+    /// One try. `None` when its numbers break a `where` rule or a calculation fails in a way a
+    /// different choice of numbers could fix (division by zero, the root of a negative).
+    fn attempt(&self, rng: &mut u64) -> Result<Option<Question>, String> {
+        let mut scope = Scope::new();
+        for (name, spec) in &self.vars {
+            scope.insert(name.clone(), draw(name, spec, &scope, rng)?);
+        }
+        for (name, expr) in &self.calc {
+            match eval(expr, &scope) {
+                Ok(v) => {
+                    scope.insert(name.clone(), Val::Num(v));
+                }
+                Err(e) if e.contains("not a variable") || e.contains("not a function") || e.contains("left over") || e.contains("ends too soon") => {
+                    return Err(format!("`{name}`: {e}"));
+                }
+                Err(_) => return Ok(None),
+            }
+        }
+        for cond in &self.conditions {
+            match eval(cond, &scope) {
+                Ok(v) if v != 0.0 => {}
+                Ok(_) => return Ok(None),
+                Err(e) if e.contains("not a variable") || e.contains("not a function") || e.contains("left over") || e.contains("ends too soon") => {
+                    return Err(format!("where `{cond}`: {e}"));
+                }
+                Err(_) => return Ok(None),
+            }
+        }
+        let text = fill_all(&self.text, &scope)?;
+        let answer = fill_all(&self.answer, &scope)?;
+        let diagram = self.diagram.as_ref().map(|d| fill_json(d, &scope)).transpose()?;
+        let (Value::String(text), Value::String(answer)) = (text, answer) else {
+            return Err("text and answer must be words, not a bare number".into());
+        };
+        Ok(Some(Question {
+            id: self.id.clone(),
+            topic: self.topic.clone(),
+            subtopic: self.subtopic.clone(),
+            difficulty: self.difficulty,
+            keywords: self.keywords.clone(),
+            text,
+            answer,
+            needs_diagram: diagram.is_some(),
+            diagram,
+        }))
+    }
+
+    /// Everything wrong with the template itself, found by making questions from it.
+    pub fn check(&self) -> Result<(), String> {
+        if self.id.trim().is_empty() {
+            return Err("a template has no id".into());
+        }
+        if !crate::questions::DIFFICULTIES.contains(&self.difficulty) {
+            return Err(format!("template {}: difficulty must be 1, 2 or 3", self.id));
+        }
+        if self.text.trim().is_empty() || self.answer.trim().is_empty() {
+            return Err(format!("template {}: needs both text and answer", self.id));
+        }
+        for seed in 0..25u64 {
+            let q = self.instantiate(seed.wrapping_mul(7919))?;
+            if q.text.chars().count() > 600 {
+                return Err(format!("template {}: the question comes out over 600 characters", self.id));
+            }
+            if let Some(d) = &q.diagram
+                && !crate::questions::is_drawable(d)
+            {
+                return Err(format!("template {}: the diagram kind is not one of the drawable kinds", self.id));
+            }
+            if q.text.contains("[[") || q.answer.contains("[[") {
+                return Err(format!("template {}: a placeholder was left unfilled", self.id));
+            }
+        }
+        Ok(())
+    }
+}
+
+fn fnv(s: &str) -> u64 {
+    s.bytes().fold(0xcbf2_9ce4_8422_2325, |h, b| (h ^ u64::from(b)).wrapping_mul(0x0100_0000_01b3))
+}
+
+#[cfg(test)]
+mod tests {
+    #![allow(clippy::unwrap_used)]
+    use super::*;
+
+    fn t(json: &str) -> Template {
+        serde_json::from_str(json).unwrap()
+    }
+
+    const BOTH_SIDES: &str = r#"{
+        "id": "alg-t-001", "topic": "Algebra", "subtopic": "Solving equations: unknown on both sides", "difficulty": 2,
+        "keywords": ["solve", "both sides"],
+        "vars": [["a", {"int": [3, 9]}], ["c", {"int": [1, 8]}], ["x", {"int": [-9, 12], "not": [0]}],
+                 ["b", {"int": [1, 20]}], ["v", {"pick": ["x", "y", "n"]}]],
+        "calc": [["d", "(a - c) * x + b"]],
+        "where": ["a > c"],
+        "text": "Solve $[[a|coef]][[v]] + [[b]] = [[c|coef]][[v]][[d|signed]]$",
+        "answer": "$[[v]] = [[x]]$"
+    }"#;
+
+    #[test]
+    fn the_same_seed_gives_the_same_question_and_a_new_seed_new_numbers() {
+        let tpl = t(BOTH_SIDES);
+        assert_eq!(tpl.instantiate(5).unwrap(), tpl.instantiate(5).unwrap());
+        assert!((0..20).any(|s| tpl.instantiate(s).unwrap().text != tpl.instantiate(5).unwrap().text));
+    }
+
+    #[test]
+    fn generated_equations_are_true_and_their_answer_is_the_stated_number() {
+        let tpl = t(BOTH_SIDES);
+        for seed in 0..200 {
+            let q = tpl.instantiate(seed).unwrap();
+            // Pull the numbers back out of the text and check the answer solves the equation.
+            let v = q.answer.trim_matches('$').split(" = ").next().unwrap().to_string();
+            let x: f64 = q.answer.trim_matches('$').split(" = ").nth(1).unwrap().parse().unwrap();
+            let body = q.text.trim_start_matches("Solve $").trim_end_matches('$');
+            let (l, r) = body.split_once(" = ").unwrap();
+            let side = |s: &str| -> f64 {
+                let s = s.replace(&v, "*X").replace(' ', "");
+                let mut total = 0.0;
+                let mut cur = String::new();
+                let mut sign = 1.0;
+                let flush = |cur: &mut String, sign: f64, total: &mut f64| {
+                    if cur.is_empty() {
+                        return;
+                    }
+                    let term = if let Some(c) = cur.strip_suffix("*X") {
+                        let c = c.trim();
+                        (if c.is_empty() { 1.0 } else { c.parse().unwrap() }) * x
+                    } else {
+                        cur.parse().unwrap()
+                    };
+                    *total += sign * term;
+                    cur.clear();
+                };
+                for ch in s.chars() {
+                    if ch == '+' || ch == '-' {
+                        flush(&mut cur, sign, &mut total);
+                        sign = if ch == '+' { 1.0 } else { -1.0 };
+                    } else {
+                        cur.push(ch);
+                    }
+                }
+                flush(&mut cur, sign, &mut total);
+                total
+            };
+            assert!((side(l) - side(r)).abs() < 1e-9, "seed {seed}: {} -> {}", q.text, q.answer);
+        }
+    }
+
+    #[test]
+    fn check_accepts_a_good_template_and_names_the_problem_in_a_bad_one() {
+        assert!(t(BOTH_SIDES).check().is_ok());
+        let bad = BOTH_SIDES.replace("(a - c) * x + b", "(a - c) * z + b");
+        assert!(t(&bad).check().unwrap_err().contains("`z` is not a variable"));
+        let impossible = BOTH_SIDES.replace("\"a > c\"", "\"a > 50\"");
+        assert!(t(&impossible).check().unwrap_err().contains("no numbers"));
+        let unknown_filter = BOTH_SIDES.replace("|coef]][[v]] + ", "|wibble]][[v]] + ");
+        assert!(t(&unknown_filter).check().unwrap_err().contains("not a filter"));
+        let junk = r#"{"id":"x","topic":"T","difficulty":1,"vars":[["a",{"int":[1,2],"wrong":1}]],"text":"t","answer":"a"}"#;
+        assert!(serde_json::from_str::<Template>(junk).is_err(), "unknown variable settings are refused");
+    }
+
+    #[test]
+    fn filters_write_signs_fractions_and_places() {
+        let mut s = Scope::new();
+        for (k, v) in [("a", 1.0), ("b", -3.0), ("c", 0.0), ("r", 0.75), ("p", 22.6234)] {
+            s.insert(k.into(), Val::Num(v));
+        }
+        let f = |x: &str| fill_all(x, &s).unwrap().as_str().unwrap().to_string();
+        assert_eq!(f("[[a|coef]]x"), "x");
+        assert_eq!(f("[[b|coef]]x"), "-3x");
+        assert_eq!(f("x[[b|signed]]"), "x - 3");
+        assert_eq!(f("x[[c|signed]]"), "x");
+        assert_eq!(f("x[[b|sterm:y]]"), "x - 3y");
+        assert_eq!(f("[[r|frac]]"), "\\frac{3}{4}");
+        assert_eq!(f("[[p|dp:1]]"), "22.6");
+        assert_eq!(f("[[a + b * 2]]"), "-5");
+        assert_eq!(f("[[1/3|frac]]"), "\\frac{1}{3}");
+    }
+
+    #[test]
+    fn expressions_cannot_do_anything_but_maths() {
+        let s = Scope::new();
+        for bad in ["system(1)", "1 +", "2 $ 3", "((((((((((((((((((((((((((((((((((((((((((1))))))))))))))))))))))))))))))))))))))))))"] {
+            assert!(eval(bad, &s).is_err(), "{bad}");
+        }
+        assert_eq!(eval("gcd(12, 18) + 2^3 % 5", &s).unwrap(), 9.0);
+    }
+
+    #[test]
+    fn a_diagram_gets_numbers_and_labels() {
+        let tpl = t(r#"{"id":"geo-t","topic":"Geometry","difficulty":1,
+            "vars":[["a",{"int":[20,80]}]],
+            "text":"Find $x$.","answer":"$x = [[180 - a]]°$",
+            "diagram":{"kind":"angles-line","angles":["[[a]]°",null],"sizes":["[[a|n]]","[[180 - a|n]]"],"unknown":"x"}}"#);
+        let q = tpl.instantiate(3).unwrap();
+        let d = q.diagram.unwrap();
+        assert!(d["angles"][0].as_str().unwrap().ends_with('°'));
+        assert!(d["angles"][1].is_null());
+        assert!(d["sizes"][0].is_number(), "{d}");
+        assert!(q.needs_diagram);
+    }
+}

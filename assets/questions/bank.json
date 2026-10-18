@@ -1229,5 +1229,561 @@
         ]
       }
     }
+  ],
+  "templates": [
+    {
+      "id": "alg-t-001",
+      "topic": "Algebra",
+      "subtopic": "Solving equations: unknown on both sides",
+      "difficulty": 2,
+      "keywords": [
+        "solve",
+        "equation",
+        "both sides",
+        "variable on both sides",
+        "unknown on both sides",
+        "balance"
+      ],
+      "vars": [
+        [
+          "a",
+          {
+            "int": [
+              3,
+              9
+            ]
+          }
+        ],
+        [
+          "c",
+          {
+            "int": [
+              1,
+              8
+            ]
+          }
+        ],
+        [
+          "x",
+          {
+            "int": [
+              -9,
+              12
+            ],
+            "not": [
+              0
+            ]
+          }
+        ],
+        [
+          "b",
+          {
+            "int": [
+              1,
+              20
+            ]
+          }
+        ],
+        [
+          "v",
+          {
+            "pick": [
+              "x",
+              "y",
+              "n",
+              "p"
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "d",
+          "(a - c) * x + b"
+        ]
+      ],
+      "where": [
+        "a > c",
+        "d != 0"
+      ],
+      "text": "Solve $[[a|coef]][[v]] + [[b]] = [[c|coef]][[v]][[d|signed]]$",
+      "answer": "$[[v]] = [[x]]$"
+    },
+    {
+      "id": "alg-t-002",
+      "topic": "Algebra",
+      "subtopic": "Solving equations: two steps",
+      "difficulty": 1,
+      "keywords": [
+        "solve",
+        "equation",
+        "two-step",
+        "inverse operations"
+      ],
+      "vars": [
+        [
+          "a",
+          {
+            "int": [
+              2,
+              9
+            ]
+          }
+        ],
+        [
+          "x",
+          {
+            "int": [
+              -8,
+              12
+            ],
+            "not": [
+              0
+            ]
+          }
+        ],
+        [
+          "b",
+          {
+            "int": [
+              1,
+              20
+            ]
+          }
+        ],
+        [
+          "v",
+          {
+            "pick": [
+              "x",
+              "y",
+              "n",
+              "m"
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "c",
+          "a * x + b"
+        ]
+      ],
+      "text": "Solve $[[a]][[v]] + [[b]] = [[c]]$",
+      "answer": "$[[v]] = [[x]]$"
+    },
+    {
+      "id": "alg-t-003",
+      "topic": "Algebra",
+      "subtopic": "Expanding brackets",
+      "difficulty": 2,
+      "keywords": [
+        "expand",
+        "brackets",
+        "multiply out",
+        "single bracket"
+      ],
+      "vars": [
+        [
+          "a",
+          {
+            "int": [
+              2,
+              9
+            ]
+          }
+        ],
+        [
+          "b",
+          {
+            "int": [
+              1,
+              6
+            ]
+          }
+        ],
+        [
+          "c",
+          {
+            "int": [
+              -9,
+              9
+            ],
+            "not": [
+              0
+            ]
+          }
+        ],
+        [
+          "v",
+          {
+            "pick": [
+              "x",
+              "y",
+              "n",
+              "t"
+            ]
+          }
+        ]
+      ],
+      "text": "Expand $[[a]]([[b|coef]][[v]][[c|signed]])$",
+      "answer": "$[[a*b|coef]][[v]][[a*c|signed]]$"
+    },
+    {
+      "id": "geo-t-001",
+      "topic": "Geometry",
+      "subtopic": "Forming and solving equations: angles on a straight line",
+      "difficulty": 3,
+      "keywords": [
+        "angles",
+        "straight line",
+        "form an equation",
+        "solve",
+        "algebra",
+        "180"
+      ],
+      "vars": [
+        [
+          "p",
+          {
+            "int": [
+              2,
+              4
+            ]
+          }
+        ],
+        [
+          "x",
+          {
+            "int": [
+              "ceil(120 / (p + 1))",
+              "floor(175 / (p + 1))"
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "q",
+          "180 - (p + 1) * x"
+        ],
+        [
+          "first",
+          "p * x"
+        ],
+        [
+          "second",
+          "x + q"
+        ]
+      ],
+      "where": [
+        "q >= 5",
+        "q <= 60",
+        "first >= 25",
+        "second >= 25",
+        "first != 90",
+        "second != 90",
+        "abs(first - 90) >= 12",
+        "abs(second - 90) >= 12"
+      ],
+      "text": "The angles lie on a straight line. Form and solve an equation to find $x$.",
+      "answer": "$[[p+1|coef]]x + [[q]] = 180$, so $x = [[x]]$",
+      "diagram": {
+        "kind": "angles-line",
+        "angles": [
+          "$[[p|coef]]x$°",
+          "$x + [[q]]$°"
+        ],
+        "sizes": [
+          "[[first|n]]",
+          "[[second|n]]"
+        ],
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-t-002",
+      "topic": "Geometry",
+      "subtopic": "Forming and solving equations: angles in a triangle",
+      "difficulty": 3,
+      "keywords": [
+        "angles",
+        "triangle",
+        "form an equation",
+        "solve",
+        "algebra",
+        "180"
+      ],
+      "vars": [
+        [
+          "p",
+          {
+            "int": [
+              2,
+              4
+            ]
+          }
+        ],
+        [
+          "x",
+          {
+            "int": [
+              10,
+              30
+            ]
+          }
+        ],
+        [
+          "q",
+          {
+            "int": [
+              5,
+              30
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "first",
+          "p * x"
+        ],
+        [
+          "second",
+          "x + q"
+        ],
+        [
+          "third",
+          "180 - first - second"
+        ]
+      ],
+      "where": [
+        "third >= 25",
+        "first >= 25",
+        "second >= 25",
+        "first <= 110",
+        "second <= 110",
+        "third <= 110"
+      ],
+      "text": "Form and solve an equation to find $x$.",
+      "answer": "$[[p+1|coef]]x + [[q]] + [[third]] = 180$, so $x = [[x]]$",
+      "diagram": {
+        "kind": "triangle-angles",
+        "angles": [
+          "$[[p|coef]]x$°",
+          "$x + [[q]]$°",
+          "[[third]]°"
+        ],
+        "sizes": [
+          "[[first|n]]",
+          "[[second|n]]",
+          "[[third|n]]"
+        ],
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-t-003",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras: finding the hypotenuse",
+      "difficulty": 2,
+      "keywords": [
+        "pythagoras",
+        "right-angled triangle",
+        "hypotenuse",
+        "length"
+      ],
+      "vars": [
+        [
+          "m",
+          {
+            "int": [
+              2,
+              5
+            ]
+          }
+        ],
+        [
+          "n",
+          {
+            "int": [
+              1,
+              "m - 1"
+            ]
+          }
+        ],
+        [
+          "k",
+          {
+            "int": [
+              1,
+              3
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "a",
+          "k * (m * m - n * n)"
+        ],
+        [
+          "b",
+          "k * 2 * m * n"
+        ],
+        [
+          "c",
+          "k * (m * m + n * n)"
+        ]
+      ],
+      "where": [
+        "gcd(m, n) == 1",
+        "c <= 60",
+        "a != b"
+      ],
+      "text": "Find the length $x$.",
+      "answer": "$x = [[c]]\\text{ cm}$",
+      "diagram": {
+        "kind": "right-triangle",
+        "base": "[[b]] cm",
+        "height": "[[a]] cm",
+        "hyp": null,
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-t-004",
+      "topic": "Geometry",
+      "subtopic": "Circles: area",
+      "difficulty": 2,
+      "keywords": [
+        "circle",
+        "area",
+        "pi",
+        "radius"
+      ],
+      "vars": [
+        [
+          "r",
+          {
+            "int": [
+              2,
+              12
+            ]
+          }
+        ]
+      ],
+      "text": "Find the area of the circle. Give your answer in terms of $\\pi$.",
+      "answer": "$[[r*r]]\\pi\\text{ cm}^2$",
+      "diagram": {
+        "kind": "circle",
+        "radius": "[[r]] cm",
+        "centre": "O"
+      }
+    },
+    {
+      "id": "num-t-001",
+      "topic": "Number",
+      "subtopic": "Percentages of an amount",
+      "difficulty": 1,
+      "keywords": [
+        "percentage",
+        "percent",
+        "amount",
+        "of"
+      ],
+      "vars": [
+        [
+          "p",
+          {
+            "choose": [
+              5,
+              10,
+              15,
+              20,
+              25,
+              30,
+              40,
+              60,
+              75
+            ]
+          }
+        ],
+        [
+          "n",
+          {
+            "int": [
+              2,
+              40
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "amt",
+          "n * 20"
+        ],
+        [
+          "ans",
+          "p * amt / 100"
+        ]
+      ],
+      "text": "Find [[p]]% of £[[amt]].",
+      "answer": "£[[ans|dp:2]]"
+    },
+    {
+      "id": "rat-t-001",
+      "topic": "Ratio",
+      "subtopic": "Sharing in a ratio",
+      "difficulty": 2,
+      "keywords": [
+        "ratio",
+        "share",
+        "divide",
+        "parts"
+      ],
+      "vars": [
+        [
+          "a",
+          {
+            "int": [
+              1,
+              5
+            ]
+          }
+        ],
+        [
+          "b",
+          {
+            "int": [
+              2,
+              7
+            ]
+          }
+        ],
+        [
+          "k",
+          {
+            "int": [
+              2,
+              12
+            ]
+          }
+        ]
+      ],
+      "calc": [
+        [
+          "total",
+          "(a + b) * k * 5"
+        ]
+      ],
+      "where": [
+        "a != b",
+        "gcd(a, b) == 1"
+      ],
+      "text": "Share £[[total]] in the ratio $[[a]] : [[b]]$.",
+      "answer": "£[[a*k*5]] and £[[b*k*5]]"
+    }
   ]
 }

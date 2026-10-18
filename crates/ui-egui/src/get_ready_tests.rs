@@ -75,17 +75,21 @@ fn the_dialog_has_a_topic_and_level_for_every_question_and_uses_them() {
     h.get_by_label("Insert").click();
     h.run_steps(3);
     let bank = deckcraft_engine::questions::starter().unwrap();
-    let texts = slide_texts(&h);
-    let find = |n: usize| {
-        // The question text follows its number badge on the slide.
-        let squash = |t: &str| t.split_whitespace().collect::<String>();
-        let is = |q: &deckcraft_engine::questions::Question, t: &str| squash(&deckcraft_engine::latex::plain(&q.text)) == squash(t);
-        let at = texts.iter().position(|t| *t == n.to_string()).unwrap();
-        let t = texts.iter().skip(at + 1).find(|t| bank.questions.iter().any(|q| is(q, t))).unwrap();
-        bank.questions.iter().find(|q| is(q, t)).unwrap().clone()
+    // The question text follows its number badge on the slide. A fixed question is found in the
+    // bank; one made from a template has new numbers, so it is checked against the templates.
+    let squash = |t: &str| t.split_whitespace().collect::<String>();
+    let check = |n: usize, topic: &str, level: u8| {
+        let st = h.state().session.active().unwrap();
+        let slide = st.doc.slides.get(st.selection.slide).unwrap();
+        let shape = slide.shapes.iter().find(|s| s.name == format!("Question {n} text")).unwrap();
+        let t = &shape.text.as_ref().unwrap().paragraphs.iter().map(|p| p.text()).collect::<Vec<_>>().join(" ");
+        match bank.questions.iter().find(|q| squash(&deckcraft_engine::latex::plain(&q.text)) == squash(t)) {
+            Some(q) => assert_eq!((q.topic.as_str(), q.difficulty), (topic, level), "question {n}: {t}"),
+            None => assert!(bank.templates.iter().any(|x| x.topic == topic && x.difficulty == level), "question {n} is from no template: {t}"),
+        }
     };
-    assert_eq!((find(2).topic.as_str(), find(2).difficulty), ("Algebra", 3));
-    assert_eq!((find(4).topic.as_str(), find(4).difficulty), ("Number", 1));
+    check(2, "Algebra", 3);
+    check(4, "Number", 1);
 }
 
 #[test]
@@ -129,12 +133,20 @@ fn removing_and_adding_questions_changes_what_the_starter_can_pick() {
     let mut h = harness();
     // Take every built-in Ratio question out and add one of our own: Ratio now has just that one.
     let starter = deckcraft_engine::questions::starter().unwrap();
-    h.state_mut().ui.removed_questions = starter.questions.iter().filter(|q| q.topic == "Ratio").map(|q| q.id.clone()).collect();
+    h.state_mut().ui.removed_questions = starter
+        .questions
+        .iter()
+        .map(|q| (&q.topic, &q.id))
+        .chain(starter.templates.iter().map(|t| (&t.topic, &t.id)))
+        .filter(|(topic, _)| *topic == "Ratio")
+        .map(|(_, id)| id.clone())
+        .collect();
     h.state_mut().ui.my_questions = vec![Question {
         id: "my-001".into(),
         topic: "Ratio".into(),
         subtopic: String::new(),
         difficulty: 2,
+        keywords: vec![],
         text: "Share 20 in the ratio $2 : 3$".into(),
         answer: "8 and 12".into(),
         needs_diagram: false,
@@ -161,4 +173,47 @@ fn the_manage_dialog_adds_a_question_and_removes_a_built_in_one() {
     h.get_by_label("Restore them").click();
     h.run_steps(3);
     assert!(h.state().ui.removed_questions.is_empty());
+}
+
+#[test]
+fn a_search_word_picks_questions_on_that_topic() {
+    let mut h = harness();
+    h.state_mut().ui.get_ready_search = vec!["both sides".into(), String::new(), String::new(), String::new()];
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("found").is_some(), "the box says how many questions match");
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    let texts = slide_texts(&h);
+    assert!(texts.iter().any(|t| t.starts_with("Solve")), "question 1 is the both-sides equation: {texts:?}");
+    assert_eq!(h.state().ui.get_ready_search[0], "both sides", "the search is remembered");
+}
+
+#[test]
+fn importing_a_question_file_adds_templates_and_skips_repeats() {
+    let file = r#"{"version":1,"templates":[{"id":"my-t-001","topic":"Number","subtopic":"Halving","difficulty":1,
+        "vars":[["n",{"int":[2,30]}]],"calc":[["d","n * 2"]],"text":"Halve [[d]].","answer":"[[n]]"}],
+        "questions":[{"id":"alg-001","topic":"Algebra","difficulty":1,"text":"Already here","answer":"1"}]}"#;
+    let services = Services {
+        pick_open: Some(Box::new(|_: &str| Some("questions.json".to_string()))),
+        read: Some(Box::new(move |_: &str| Ok(file.as_bytes().to_vec()))),
+        ..Default::default()
+    };
+    let mut app = SlideApp::new(Session::with_new(), services);
+    app.ui.tab = "Insert".into();
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(3);
+    h.state_mut().run("app.dialog", json!({"id": "questionBank"})).unwrap();
+    h.run_steps(3);
+    h.get_by_label_contains("Import questions").click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.my_templates.len(), 1);
+    assert!(h.state().ui.my_questions.is_empty(), "the repeated id was skipped");
+    assert!(h.query_by_label_contains("Skipped 1").is_some());
 }

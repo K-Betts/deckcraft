@@ -51,7 +51,7 @@ impl Question {
 
 pub const DIFFICULTIES: std::ops::RangeInclusive<u8> = 1..=3;
 
-#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
+#[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     pub id: String,
@@ -60,6 +60,9 @@ pub struct Question {
     pub subtopic: String,
     /// 1 = secure, 2 = core, 3 = stretch.
     pub difficulty: u8,
+    /// Words a teacher might search for, besides the topic and subtopic.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub keywords: Vec<String>,
     pub text: String,
     /// Shown in the slide's speaker notes, never on the slide.
     /// May contain LaTeX between `$…$` that is rendered as a real equation.
@@ -79,13 +82,37 @@ pub struct Bank {
     pub version: u32,
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub note: String,
+    #[serde(default)]
     pub questions: Vec<Question>,
+    /// Questions written as recipes: new numbers every time (see `template.rs`).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub templates: Vec<crate::template::Template>,
 }
 
 #[derive(Clone, Debug, Default)]
 pub struct Filter {
     pub topic: Option<String>,
     pub difficulty: Option<u8>,
+    /// Words to look for in the topic, subtopic, keywords and text; every word must be found.
+    pub query: Option<String>,
+}
+
+impl Filter {
+    fn allows(&self, q: &Question) -> bool {
+        self.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t))
+            && self.difficulty.is_none_or(|d| q.difficulty == d)
+            && self.query.as_deref().is_none_or(|w| matches_words(q, w))
+    }
+}
+
+/// Whether every word of `words` appears in the question's searchable text (case and a plural
+/// "s" do not matter).
+pub fn matches_words(q: &Question, words: &str) -> bool {
+    let hay = format!("{} {} {} {}", q.topic, q.subtopic, q.keywords.join(" "), crate::latex::plain(&q.text)).to_lowercase();
+    words.to_lowercase().split_whitespace().all(|w| {
+        let stem = w.trim_end_matches('s');
+        hay.contains(w) || (stem.len() >= 3 && hay.contains(stem))
+    })
 }
 
 pub fn parse(json: &str) -> Result<Bank, String> {
@@ -111,6 +138,13 @@ pub fn parse(json: &str) -> Result<Bank, String> {
             return Err(format!("question {} has difficulty {} (use 1, 2 or 3)", q.id, q.difficulty));
         }
     }
+    let mut seen_t = std::collections::HashSet::new();
+    for tpl in &bank.templates {
+        if !seen_t.insert(tpl.id.as_str()) || seen.contains(tpl.id.as_str()) {
+            return Err(format!("template id “{}” is empty or repeated", tpl.id));
+        }
+        tpl.check()?;
+    }
     Ok(bank)
 }
 
@@ -122,23 +156,38 @@ impl Bank {
     /// Distinct topics in the order they first appear.
     pub fn topics(&self) -> Vec<String> {
         let mut out: Vec<String> = Vec::new();
-        for q in &self.questions {
-            if !out.contains(&q.topic) {
-                out.push(q.topic.clone());
+        let topics = self.questions.iter().map(|q| &q.topic).chain(self.templates.iter().map(|t| &t.topic));
+        for t in topics {
+            if !out.contains(t) {
+                out.push(t.clone());
             }
         }
         out
     }
 
+    /// The bank as a plain list of questions for `seed`: every template made into one question
+    /// (new numbers for each seed). A template that cannot be made is left out.
+    pub fn instantiate(&self, seed: u64) -> Bank {
+        let mut questions = self.questions.clone();
+        questions.extend(self.templates.iter().filter_map(|t| t.instantiate(seed).ok()));
+        Bank { version: self.version, note: self.note.clone(), questions, templates: vec![] }
+    }
+
     /// The starter bank without the questions in `removed`, followed by the teacher's own.
-    pub fn merged(starter: Bank, removed: &[String], mine: &[Question]) -> Bank {
+    pub fn merged(starter: Bank, removed: &[String], mine: &[Question], mine_templates: &[crate::template::Template]) -> Bank {
+        let mut templates: Vec<crate::template::Template> = starter.templates.into_iter().filter(|t| !removed.contains(&t.id)).collect();
+        for t in mine_templates {
+            if !templates.iter().any(|o| o.id == t.id) {
+                templates.push(t.clone());
+            }
+        }
         let mut questions: Vec<Question> = starter.questions.into_iter().filter(|q| !removed.contains(&q.id)).collect();
         for q in mine {
             if !questions.iter().any(|o| o.id == q.id) {
                 questions.push(q.clone());
             }
         }
-        Bank { version: 1, note: starter.note, questions }
+        Bank { version: 1, note: starter.note, questions, templates }
     }
 
     /// An id for a new question of the teacher's own that no question in the bank has.
@@ -166,13 +215,7 @@ impl Bank {
     /// new seed is a reroll). With no topic asked for, the pick spreads across topics first so a
     /// starter revisits several areas rather than one. Questions that need a figure are skipped.
     pub fn pick(&self, filter: &Filter, seed: u64, n: usize) -> Vec<&Question> {
-        let mut pool: Vec<&Question> = self
-            .questions
-            .iter()
-            .filter(|q| q.usable())
-            .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
-            .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
-            .collect();
+        let mut pool: Vec<&Question> = self.questions.iter().filter(|q| q.usable()).filter(|q| filter.allows(q)).collect();
         let mut rng = seed;
         for i in (1..pool.len()).rev() {
             let j = (splitmix(&mut rng) % (i as u64 + 1)) as usize;
@@ -202,13 +245,7 @@ impl Bank {
 impl Bank {
     /// One question matching `filter` that is not in `exclude`, chosen by `seed`.
     pub fn pick_one(&self, filter: &Filter, seed: u64, exclude: &[String]) -> Option<&Question> {
-        let pool: Vec<&Question> = self
-            .questions
-            .iter()
-            .filter(|q| q.usable() && !exclude.contains(&q.id))
-            .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
-            .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
-            .collect();
+        let pool: Vec<&Question> = self.questions.iter().filter(|q| q.usable() && !exclude.contains(&q.id)).filter(|q| filter.allows(q)).collect();
         if pool.is_empty() {
             return None;
         }
@@ -220,12 +257,7 @@ impl Bank {
 impl Bank {
     /// Every usable question matching `filter` (figure questions are skipped).
     pub fn candidates(&self, filter: &Filter) -> Vec<&Question> {
-        self.questions
-            .iter()
-            .filter(|q| q.usable())
-            .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
-            .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
-            .collect()
+        self.questions.iter().filter(|q| q.usable()).filter(|q| filter.allows(q)).collect()
     }
 
     /// One different question for each filter, in the filters' order, chosen by `seed`, or `None`
@@ -303,7 +335,7 @@ mod tests {
     #[test]
     fn topic_and_difficulty_narrow_the_pick_and_figures_are_skipped() {
         let bank = starter().unwrap();
-        let f = Filter { topic: Some("geometry".into()), difficulty: Some(1) };
+        let f = Filter { topic: Some("geometry".into()), difficulty: Some(1), query: None };
         let got = bank.pick(&f, 3, 4);
         assert!(!got.is_empty());
         assert!(got.iter().all(|q| q.topic == "Geometry" && q.difficulty == 1 && q.usable()));
@@ -325,7 +357,7 @@ mod tests {
     #[test]
     fn pick_one_honours_its_filter_and_never_repeats_an_excluded_question() {
         let bank = starter().unwrap();
-        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1) };
+        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1), query: None };
         let mut used: Vec<String> = vec![];
         while let Some(q) = bank.pick_one(&f, used.len() as u64, &used) {
             assert!(q.topic == "Algebra" && q.difficulty == 1);
@@ -333,13 +365,13 @@ mod tests {
             used.push(q.id.clone());
         }
         assert!(!used.is_empty(), "there are algebra level-1 questions");
-        assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None }, 1, &[]).is_none());
+        assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None, query: None }, 1, &[]).is_none());
     }
 
     #[test]
     fn a_loose_slot_never_takes_the_only_question_a_strict_slot_needs() {
         let bank = starter().unwrap();
-        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3) };
+        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3), query: None };
         assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one ratio stretch question");
         for seed in 0..300 {
             let got = bank.assign(&[Filter::default(), strict.clone(), Filter::default(), Filter::default()], seed).expect("a set exists");
@@ -363,12 +395,13 @@ mod tests {
             topic: "Number".into(),
             subtopic: String::new(),
             difficulty: 2,
+            keywords: vec![],
             text: "Work out $\\frac{1}{2} + \\frac{1}{3}$".into(),
             answer: "$\\frac{5}{6}$".into(),
             needs_diagram: false,
             diagram: None,
         };
-        let merged = Bank::merged(starter, std::slice::from_ref(&first), std::slice::from_ref(&mine));
+        let merged = Bank::merged(starter, std::slice::from_ref(&first), std::slice::from_ref(&mine), &[]);
         assert_eq!(merged.questions.len(), n);
         assert!(merged.questions.iter().all(|q| q.id != first));
         assert_eq!(merged.questions.last().unwrap().id, "my-001");
