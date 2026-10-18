@@ -34,6 +34,7 @@ EACH TEMPLATE HAS THESE FIELDS
                wording, context and marks, e.g. "(2 marks)"; original questions, never copied)
   "qtype"      fluency (practise the method), reasoning (explain / spot / compare) or problem
                (apply in a new context or several steps)
+  "year"       the year group: "Y7", "Y8" … "Y11"
   "source"     where it sits in the scheme of work, e.g. "Y7 Autumn B3 Expressions and equations
                · S7 Solve 2-step equations" (teachers can search it)
   "keywords"   5 to 8 words a teacher might SEARCH for: synonyms and phrases, e.g.

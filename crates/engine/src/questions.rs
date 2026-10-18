@@ -58,6 +58,22 @@ pub fn is_drawable(d: &serde_json::Value) -> bool {
 }
 
 impl Question {
+    /// The year group (`Y7`…): the question's own, else the one its `source` starts with, else empty.
+    pub fn year_group(&self) -> String {
+        if !self.year.is_empty() {
+            return self.year.clone();
+        }
+        let first = self.source.split_whitespace().next().unwrap_or("");
+        let digits = first.strip_prefix('Y').unwrap_or("");
+        if !digits.is_empty() && digits.chars().all(|c| c.is_ascii_digit()) { first.to_string() } else { String::new() }
+    }
+
+    /// What identifies the skill (small step) the question practises: its scheme-of-work step when
+    /// it has one, else its topic and subtopic.
+    pub fn skill_key(&self) -> String {
+        if self.source.is_empty() { format!("{} · {}", self.topic, self.subtopic) } else { self.source.clone() }
+    }
+
     /// Usable on a slide: it needs no figure, or its figure can be drawn.
     pub fn usable(&self) -> bool {
         !self.needs_diagram || self.diagram.as_ref().is_some_and(is_drawable)
@@ -90,6 +106,9 @@ pub struct Question {
     /// Where it sits in a scheme of work, e.g. “Y7 Autumn B3 S7 Solve 2-step equations”.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub source: String,
+    /// The year group it is for: `Y7` to `Y11`. Empty falls back to the year at the start of `source`.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub year: String,
     pub text: String,
     /// Shown in the slide's speaker notes, never on the slide.
     /// May contain LaTeX between `$…$` that is rendered as a real equation.
@@ -120,6 +139,10 @@ pub struct Bank {
 pub struct Filter {
     pub topic: Option<String>,
     pub difficulty: Option<u8>,
+    /// One skill (small step): its `Question::skill_key`.
+    pub skill: Option<String>,
+    /// One year group, e.g. `Y7`.
+    pub year: Option<String>,
     /// Words to look for in the topic, subtopic, keywords and text; every word must be found.
     pub query: Option<String>,
 }
@@ -128,6 +151,8 @@ impl Filter {
     fn allows(&self, q: &Question) -> bool {
         self.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t))
             && self.difficulty.is_none_or(|d| q.difficulty == d)
+            && self.skill.as_deref().is_none_or(|k| q.skill_key() == k)
+            && self.year.as_deref().is_none_or(|y| q.year_group().eq_ignore_ascii_case(y))
             && self.query.as_deref().is_none_or(|w| matches_words(q, w))
     }
 }
@@ -135,11 +160,55 @@ impl Filter {
 /// Whether every word of `words` appears in the question's searchable text (case and a plural
 /// "s" do not matter).
 pub fn matches_words(q: &Question, words: &str) -> bool {
-    let hay = format!("{} {} {} {} {} {}", q.topic, q.subtopic, q.keywords.join(" "), q.qtype, q.source, crate::latex::plain(&q.text)).to_lowercase();
+    let year = q.year_group();
+    let year_words = if year.is_empty() { String::new() } else { format!("{year} year {}", year.trim_start_matches('Y')) };
+    let hay = format!("{} {} {} {} {} {} {}", q.topic, q.subtopic, q.keywords.join(" "), q.qtype, q.source, year_words, crate::latex::plain(&q.text))
+        .to_lowercase();
     words.to_lowercase().split_whitespace().all(|w| {
         let stem = w.trim_end_matches('s');
         hay.contains(w) || (stem.len() >= 3 && hay.contains(stem))
     })
+}
+
+/// A skill a teacher can choose: one small step (or, for general questions, one subtopic), with
+/// how many questions there are for it at each level.
+#[derive(Clone, Debug, PartialEq)]
+pub struct Skill {
+    /// `Question::skill_key`, what a slot stores.
+    pub key: String,
+    pub name: String,
+    pub topic: String,
+    /// `Y7`… (empty for general questions).
+    pub year: String,
+    /// `Autumn`, `Spring`, `Summer` (empty when unknown).
+    pub term: String,
+    /// The block it belongs to, e.g. “Place value, ordering and rounding”.
+    pub block: String,
+    pub keywords: Vec<String>,
+    /// Questions at support, core, stretch and exam style.
+    pub counts: [usize; 4],
+}
+
+impl Skill {
+    /// Words for a search: every word must be in the skill's name, block, topic, keywords or year.
+    pub fn matches(&self, words: &str) -> bool {
+        let year = if self.year.is_empty() { String::new() } else { format!("{} year {}", self.year, self.year.trim_start_matches('Y')) };
+        let hay = format!("{} {} {} {} {} {}", self.name, self.block, self.topic, self.term, self.keywords.join(" "), year).to_lowercase();
+        words.to_lowercase().split_whitespace().all(|w| {
+            let stem = w.trim_end_matches('s');
+            hay.contains(w) || (stem.len() >= 3 && hay.contains(stem))
+        })
+    }
+
+    /// How well the search words fit the name: higher is better (used to put the likeliest first).
+    pub fn relevance(&self, words: &str) -> usize {
+        let name = self.name.to_lowercase();
+        words.to_lowercase().split_whitespace().filter(|w| name.contains(w.trim_end_matches('s'))).count()
+    }
+
+    pub fn total(&self) -> usize {
+        self.counts.iter().sum()
+    }
 }
 
 pub fn parse(json: &str) -> Result<Bank, String> {
@@ -253,6 +322,47 @@ impl Bank {
         for t in topics {
             if !out.contains(t) {
                 out.push(t.clone());
+            }
+        }
+        out
+    }
+
+    /// The skills of the questions in this bank (call it on `instantiate(…)`), in the order they
+    /// first appear, which for the built-in files is the order of the scheme of work.
+    pub fn skills(&self) -> Vec<Skill> {
+        let mut out: Vec<Skill> = vec![];
+        for q in self.questions.iter().filter(|q| q.usable()) {
+            let key = q.skill_key();
+            let at = match out.iter().position(|s| s.key == key) {
+                Some(i) => i,
+                None => {
+                    // “Y7 Autumn B4 Place value, ordering and rounding · S3 Compare…”
+                    let head = q.source.split(" · ").next().unwrap_or("");
+                    let mut words = head.split_whitespace();
+                    let (_, term, _) = (words.next(), words.next().unwrap_or(""), words.next());
+                    let block = words.collect::<Vec<_>>().join(" ");
+                    let (term, block) = if q.source.is_empty() { (String::new(), q.topic.clone()) } else { (term.to_string(), block) };
+                    out.push(Skill {
+                        key,
+                        name: q.subtopic.clone(),
+                        topic: q.topic.clone(),
+                        year: q.year_group(),
+                        term,
+                        block,
+                        keywords: vec![],
+                        counts: [0; 4],
+                    });
+                    out.len() - 1
+                }
+            };
+            let skill = &mut out[at];
+            if let Some(c) = skill.counts.get_mut(usize::from(q.difficulty).saturating_sub(1)) {
+                *c += 1;
+            }
+            for k in &q.keywords {
+                if !skill.keywords.contains(k) && skill.keywords.len() < 24 {
+                    skill.keywords.push(k.clone());
+                }
             }
         }
         out
@@ -428,7 +538,7 @@ mod tests {
     #[test]
     fn topic_and_difficulty_narrow_the_pick_and_figures_are_skipped() {
         let bank = starter().unwrap();
-        let f = Filter { topic: Some("geometry".into()), difficulty: Some(1), query: None };
+        let f = Filter { topic: Some("geometry".into()), difficulty: Some(1), query: None, ..Default::default() };
         let got = bank.pick(&f, 3, 4);
         assert!(!got.is_empty());
         assert!(got.iter().all(|q| q.topic == "Geometry" && q.difficulty == 1 && q.usable()));
@@ -450,7 +560,7 @@ mod tests {
     #[test]
     fn pick_one_honours_its_filter_and_never_repeats_an_excluded_question() {
         let bank = starter().unwrap();
-        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1), query: None };
+        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1), query: None, ..Default::default() };
         let mut used: Vec<String> = vec![];
         while let Some(q) = bank.pick_one(&f, used.len() as u64, &used) {
             assert!(q.topic == "Algebra" && q.difficulty == 1);
@@ -458,13 +568,13 @@ mod tests {
             used.push(q.id.clone());
         }
         assert!(!used.is_empty(), "there are algebra level-1 questions");
-        assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None, query: None }, 1, &[]).is_none());
+        assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None, query: None, ..Default::default() }, 1, &[]).is_none());
     }
 
     #[test]
     fn a_loose_slot_never_takes_the_only_question_a_strict_slot_needs() {
         let bank = starter().unwrap();
-        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3), query: None };
+        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3), query: None, ..Default::default() };
         assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one ratio stretch question");
         for seed in 0..300 {
             let got = bank.assign(&[Filter::default(), strict.clone(), Filter::default(), Filter::default()], seed).expect("a set exists");
@@ -488,6 +598,32 @@ mod tests {
                 assert!(q.text.chars().count() <= 600, "{} seed {seed}: too long", t.id);
             }
         }
+    }
+
+    #[test]
+    fn skills_group_the_questions_by_small_step_with_a_count_for_each_level() {
+        let bank = starter().unwrap().instantiate(0);
+        let skills = bank.skills();
+        let two_step = skills.iter().find(|s| s.name == "Solve 2-step equations").expect("a skill for the step");
+        assert_eq!(two_step.counts, [1, 1, 1, 1], "support, core, stretch and exam style");
+        assert_eq!((two_step.year.as_str(), two_step.term.as_str()), ("Y7", "Autumn"));
+        assert_eq!(two_step.block, "Expressions and equations");
+        // Skills come in the order of the scheme of work: sequences before equations.
+        let at = |n: &str| skills.iter().position(|s| s.name == n).unwrap();
+        assert!(at("Describe and continue sequences") < at("Solve 2-step equations"));
+        // General questions without a step are grouped by topic and subtopic.
+        assert!(skills.iter().any(|s| s.year.is_empty() && s.block == "Geometry"));
+        // Searching finds skills by name, block, keyword and year.
+        let find = |w: &str| skills.iter().filter(|s| s.matches(w)).map(|s| s.name.clone()).collect::<Vec<_>>();
+        assert!(find("equations").contains(&"Solve 2-step equations".to_string()));
+        assert!(find("year 7 rounding").contains(&"Round to decimal places".to_string()));
+        assert!(find("y7 mean").contains(&"Mean".to_string()));
+        assert!(find("origami").is_empty());
+        // A slot filter by skill and year keeps only that step.
+        let f = Filter { skill: Some(two_step.key.clone()), difficulty: Some(3), ..Default::default() };
+        assert_eq!(bank.candidates(&f).len(), 1);
+        let y = Filter { year: Some("Y7".into()), ..Default::default() };
+        assert!(bank.candidates(&y).iter().all(|q| q.year_group() == "Y7"));
     }
 
     #[test]
@@ -532,6 +668,7 @@ mod tests {
             keywords: vec![],
             qtype: String::new(),
             source: String::new(),
+            year: String::new(),
             text: "Work out $\\frac{1}{2} + \\frac{1}{3}$".into(),
             answer: "$\\frac{5}{6}$".into(),
             needs_diagram: false,

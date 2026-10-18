@@ -16,7 +16,7 @@ pub fn specs() -> Vec<CommandSpec> {
         "Get Ready Starter",
         ["Insert", "Slides From"],
         None,
-        "{slots?: [{topic?: text, difficulty?: 1|2|3, search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
+        "{slots?: [{topic?: text, difficulty?: 1|2|3|4, skill?: a skill key (see the skill picker), year?: Y7.., search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
         has_doc,
         get_ready
     )]
@@ -66,7 +66,8 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
             let topic = slot.get("topic").and_then(Value::as_str).filter(|t| !t.is_empty()).map(String::from);
             let difficulty = level(slot.get("difficulty"), &format!("question {}: `difficulty`", i + 1))?;
             let query = slot.get("search").and_then(Value::as_str).map(str::trim).filter(|t| !t.is_empty()).map(String::from);
-            filters.push(Filter { topic, difficulty, query });
+            let text = |key: &str| slot.get(key).and_then(Value::as_str).map(str::trim).filter(|t| !t.is_empty()).map(String::from);
+            filters.push(Filter { topic, difficulty, query, skill: text("skill"), year: text("year") });
         }
         match bank.assign(&filters, seed) {
             Some(qs) => qs.into_iter().cloned().collect(),
@@ -89,6 +90,8 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
             return Err(bad("slide.getReady", "`count` must be 1 to 8"));
         }
         let filter = Filter {
+            skill: str_param(p, "skill").filter(|t| !t.is_empty()).map(String::from),
+            year: str_param(p, "year").filter(|t| !t.is_empty()).map(String::from),
             topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from),
             difficulty,
             query: str_param(p, "search").map(str::trim).filter(|t| !t.is_empty()).map(String::from),
