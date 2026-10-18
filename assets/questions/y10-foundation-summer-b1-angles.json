@@ -1,0 +1,1871 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Summer Block 1 Angles: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsu1-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point, on a straight line and vertically opposite",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S1 Angles around a point, on a straight line and vertically opposite",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "on",
+    "straight",
+    "line",
+    "and",
+    "vertically",
+    "opposite",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 90"
+   ],
+   "check": [
+    "a + (180 - a) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - a]]°$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "[[a]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[180 - a|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point, on a straight line and vertically opposite",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S1 Angles around a point, on a straight line and vertically opposite",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "on",
+    "straight",
+    "line",
+    "and",
+    "vertically",
+    "opposite",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "180 - a - b > 20",
+    "abs(180 - a - b - 90) > 12"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Find angle $y$.",
+   "answer": "$y = [[180 - a - b]]°$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[180 - a - b|n]]"
+    ],
+    "unknown": "y"
+   }
+  },
+  {
+   "id": "y10fsu1-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point, on a straight line and vertically opposite",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S1 Angles around a point, on a straight line and vertically opposite",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "on",
+    "straight",
+    "line",
+    "and",
+    "vertically",
+    "opposite",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "q",
+     "180 - (p + 1) * x0"
+    ]
+   ],
+   "where": [
+    "q >= 5",
+    "q <= 60",
+    "p * x0 >= 25",
+    "abs(p * x0 - 90) >= 12",
+    "abs(x0 + q - 90) >= 12"
+   ],
+   "check": [
+    "(p + 1) * x0 + q == 180"
+   ],
+   "text": "The angles are on a straight line. Form and solve an equation to find $x$.",
+   "answer": "$[[p + 1]]x + [[q]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "$[[p|coef]]x$°",
+     "$x + [[q]]$°"
+    ],
+    "sizes": [
+     "[[p * x0|n]]",
+     "[[x0 + q|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point, on a straight line and vertically opposite",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S1 Angles around a point, on a straight line and vertically opposite",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "on",
+    "straight",
+    "line",
+    "and",
+    "vertically",
+    "opposite",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "180 - a - b > 20"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Angles of [[a]]°, [[b]]° and $x$ lie on a straight line. (a) Work out $x$. (b) Give a reason. (2 marks)",
+   "answer": "(a) $x = [[180 - a - b]]°$  (b) angles on a straight line add up to 180°"
+  },
+  {
+   "id": "y10fsu1-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S2 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 145",
+    "a != b",
+    "a + b > 70"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - a - b]]°$",
+   "diagram": {
+    "kind": "triangle-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[180 - a - b|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S2 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       20,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t % 2 == 0",
+    "t != 60"
+   ],
+   "check": [
+    "(180 - t) / 2 * 2 + t == 180"
+   ],
+   "text": "The triangle is isosceles. Find angle $x$.",
+   "answer": "$x = [[(180 - t) / 2]]°$",
+   "diagram": {
+    "kind": "isosceles-triangle",
+    "topAngle": "[[t]]°",
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S2 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       15,
+       30
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "r",
+     "180 - (p + 1) * x0 - q"
+    ]
+   ],
+   "where": [
+    "r >= 30",
+    "r <= 110",
+    "p * x0 >= 30",
+    "x0 + q >= 30",
+    "abs(r - 90) >= 8"
+   ],
+   "check": [
+    "(p + 1) * x0 + q + r == 180"
+   ],
+   "text": "Form and solve an equation to find $x$.",
+   "answer": "$[[p + 1]]x + [[q + r]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "triangle-angles",
+    "angles": [
+     "$[[p|coef]]x$°",
+     "$x + [[q]]$°",
+     "[[r]]°"
+    ],
+    "sizes": [
+     "[[p * x0|n]]",
+     "[[x0 + q|n]]",
+     "[[r|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S2 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(180 / (1 + m + n))",
+    "m != n"
+   ],
+   "check": [
+    "180 / (1 + m + n) * (1 + m + n) == 180"
+   ],
+   "text": "A triangle has angles in the ratio 1 : [[m]] : [[n]]. Work out the three angles. (3 marks)",
+   "answer": "[[180 / (1 + m + n)]]°, [[180 * m / (1 + m + n)]]°, [[180 * n / (1 + m + n)]]°"
+  },
+  {
+   "id": "y10fsu1-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S3 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       70,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 40",
+    "360 - a - b - c < 140"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[360 - a - b - c]]°$",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     "[[c]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[c|n]]",
+     "[[360 - a - b - c|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S3 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 40"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "A quadrilateral has angles [[a]]°, [[b]]°, [[c]]° and $y$. Find $y$.",
+   "answer": "$y = [[360 - a - b - c]]°$"
+  },
+  {
+   "id": "y10fsu1-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S3 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - 2 * a - b > 20"
+   ],
+   "check": [
+    "2 * a + b + (360 - 2 * a - b) == 360"
+   ],
+   "text": "A kite has two equal angles of [[a]]° and angles of [[b]]° and $x$. Find $x$.",
+   "answer": "$x = [[360 - 2 * a - b]]°$"
+  },
+  {
+   "id": "y10fsu1-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S3 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       30,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "360 - (p + 1) * x0 - a"
+    ]
+   ],
+   "where": [
+    "b > 40",
+    "b < 150"
+   ],
+   "check": [
+    "(p + 1) * x0 + a + b == 360"
+   ],
+   "text": "The angles of a quadrilateral are $x$, $[[p]]x$, [[a]]° and [[b]]°. Form and solve an equation to find $x$. (3 marks)",
+   "answer": "$[[p + 1]]x + [[a + b]] = 360$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y10fsu1-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S4 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(n - 2) * 180 / 180 == n - 2"
+   ],
+   "text": "Work out the sum of the interior angles of a polygon with [[n]] sides.",
+   "answer": "[[(n - 2) * 180]]°"
+  },
+  {
+   "id": "y10fsu1-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S4 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "540 - a - b - c - d > 50",
+    "540 - a - b - c - d < 170"
+   ],
+   "check": [
+    "a + b + c + d + (540 - a - b - c - d) == 540"
+   ],
+   "text": "Four of the angles in a pentagon are [[a]]°, [[b]]°, [[c]]° and [[d]]°. Find the fifth angle.",
+   "answer": "[[540 - a - b - c - d]]°"
+  },
+  {
+   "id": "y10fsu1-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S4 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "540 - a - b - c - d > 60",
+    "540 - a - b - c - d < 150"
+   ],
+   "check": [
+    "a + b + c + d + (540 - a - b - c - d) == 540"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[540 - a - b - c - d]]°$",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     "[[c]]°",
+     "[[d]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[c|n]]",
+     "[[d|n]]",
+     "[[540 - a - b - c - d|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y10fsu1-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S4 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       100,
+       130
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       100,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(720 - a - b - 2 * c - d) % 3 == 0",
+    "(720 - a - b - 2 * c - d) / 3 > 60"
+   ],
+   "check": [
+    "3 * ((720 - a - b - 2 * c - d) / 3) == 720 - a - b - 2 * c - d"
+   ],
+   "text": "The interior angles of a hexagon are $x$, $x + [[a]]$, $x + [[b]]$, $[[c]]$, $[[c]]$ and $[[d]]$ (all in degrees). Find $x$. (3 marks)",
+   "answer": "$3x + [[a + b + 2 * c + d]] = 720$, so $x = [[(720 - a - b - 2 * c - d) / 3]]$"
+  },
+  {
+   "id": "y10fsu1-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S5 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "Work out the size of one exterior angle of a regular polygon with [[n]] sides.",
+   "answer": "[[360 / n]]°"
+  },
+  {
+   "id": "y10fsu1-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S5 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20,
+       24
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "One exterior angle of a regular polygon is [[360 / n]]°. How many sides does it have?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y10fsu1-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S5 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c - d > 20"
+   ],
+   "check": [
+    "a + b + c + d + (360 - a - b - c - d) == 360"
+   ],
+   "text": "A pentagon has exterior angles of [[a]]°, [[b]]°, [[c]]° and [[d]]° and one other. Work out the fifth exterior angle.",
+   "answer": "[[360 - a - b - c - d]]°"
+  },
+  {
+   "id": "y10fsu1-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S5 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "A regular polygon has exterior angles of [[360 / n]]°. (a) How many sides does it have? (b) What is the size of each interior angle? (3 marks)",
+   "answer": "(a) [[n]]  (b) [[180 - 360 / n]]°"
+  },
+  {
+   "id": "y10fsu1-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S6 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the alternate angle and give a reason.",
+   "answer": "[[p]]°: alternate angles are equal"
+  },
+  {
+   "id": "y10fsu1-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S6 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the corresponding angle and give a reason.",
+   "answer": "[[p]]°: corresponding angles are equal"
+  },
+  {
+   "id": "y10fsu1-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S6 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Angle $a$ = [[p]]° between two parallel lines. Angle $b$ is alternate to $a$ and angle $c$ is on a straight line with $b$. Find $b$ and $c$, with reasons.",
+   "answer": "$b = [[p]]°$ (alternate angles); $c = [[180 - p]]°$ (angles on a straight line)"
+  },
+  {
+   "id": "y10fsu1-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S6 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(m - n) * x0 + c"
+    ]
+   ],
+   "where": [
+    "d > 0",
+    "m * x0 + c < 170"
+   ],
+   "check": [
+    "m * x0 + c == n * x0 + d"
+   ],
+   "text": "Two alternate angles between parallel lines are $([[m]]x + [[c]])°$ and $([[n]]x + [[d]])°$. Find $x$ and the size of the angles. (3 marks)",
+   "answer": "$[[m]]x + [[c]] = [[n]]x + [[d]]$, so $x = [[x0]]$; the angles are [[m * x0 + c]]°"
+  },
+  {
+   "id": "y10fsu1-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S7 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "v",
+     "p + floor(k / 2) * (180 - 2 * p)"
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the size of the angle that is [[k == 0|if:alternate/]][[k == 1|if:corresponding/]][[k == 2|if:co-interior/]] to $a$ and say which rule you used.",
+   "answer": "[[v]]°, because [[k == 0|if:alternate angles are equal/]][[k == 1|if:corresponding angles are equal/]][[k == 2|if:co-interior angles add up to 180°/]]"
+  },
+  {
+   "id": "y10fsu1-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S7 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Lines $AB$ and $CD$ are parallel. Angle $a$ is [[p]]°. Find angles $b$ (alternate to $a$), $c$ (corresponding to $a$) and $d$ (co-interior to $a$).",
+   "answer": "$b = [[p]]°$, $c = [[p]]°$, $d = [[180 - p]]°$"
+  },
+  {
+   "id": "y10fsu1-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S7 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       40,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(d - c) % 2 == 0",
+    "d > c",
+    "3 * (d - c) / 2 + c < 170"
+   ],
+   "check": [
+    "d > c"
+   ],
+   "text": "Two angles between parallel lines are $(3x + [[c]])°$ and $(x + [[d]])°$ and they are alternate angles. Find $x$ and the size of each angle.",
+   "answer": "$3x + [[c]] = x + [[d]]$, so $x = [[(d - c) / 2]]$; each angle is [[3 * (d - c) / 2 + c]]°"
+  },
+  {
+   "id": "y10fsu1-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S7 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(180 - c - d) % 4 == 0"
+   ],
+   "check": [
+    "(180 - c - d) / 4 * 4 == 180 - c - d"
+   ],
+   "text": "Two angles between parallel lines are $(3x + [[c]])°$ and $(x + [[d]])°$ and they are co-interior angles. Find $x$ and the size of each angle. (4 marks)",
+   "answer": "$4x + [[c + d]] = 180$, so $x = [[(180 - c - d) / 4]]$; the angles are [[3 * (180 - c - d) / 4 + c]]° and [[(180 - c - d) / 4 + d]]°"
+  },
+  {
+   "id": "y10fsu1-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in polygons (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S8 Solve problems with angles in polygons (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "polygons",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "$ABCD$ is a trapezium with $AB$ parallel to $DC$. Angle $A$ is [[p]]°. Find angle $D$.",
+   "answer": "[[180 - p]]° (co-interior angles)"
+  },
+  {
+   "id": "y10fsu1-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in polygons (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S8 Solve problems with angles in polygons (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "polygons",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p + q < 150"
+   ],
+   "check": [
+    "p + q + (180 - p - q) == 180"
+   ],
+   "text": "A triangle $PQR$ lies between two parallel lines. The angle at $P$ with the top line is [[p]]° and at $Q$ with the bottom line is [[q]]° (alternate angles inside the triangle). Find angle $R$.",
+   "answer": "[[180 - p - q]]° (angles in a triangle, using alternate angles)"
+  },
+  {
+   "id": "y10fsu1-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in polygons (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S8 Solve problems with angles in polygons (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "polygons",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(180 - c - d) % 3 == 0"
+   ],
+   "check": [
+    "(180 - c - d) / 3 * 3 == 180 - c - d"
+   ],
+   "text": "$ABCD$ is a trapezium with $AB$ parallel to $DC$. Angle $A$ = $(2x + [[c]])°$ and angle $D$ = $(x + [[d]])°$. Find $x$ and angle $D$.",
+   "answer": "$3x + [[c + d]] = 180$, so $x = [[(180 - c - d) / 3]]$ and angle $D$ = [[(180 - c - d) / 3 + d]]°"
+  },
+  {
+   "id": "y10fsu1-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in polygons (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S8 Solve problems with angles in polygons (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "polygons",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p + q > 0"
+   ],
+   "text": "$AB$ and $CD$ are parallel. $E$ is a point between them. Angle $BAE$ is [[p]]° and angle $ECD$ is [[q]]°. Find angle $AEC$ by drawing a line through $E$ parallel to $AB$. (3 marks)",
+   "answer": "[[p + q]]° (alternate angles on each side of the parallel line added together)"
+  },
+  {
+   "id": "y10fsu1-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Prove geometric facts (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S9 Prove geometric facts (E)",
+   "keywords": [
+    "prove",
+    "geometric",
+    "facts",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "$AB$ and $CD$ are parallel. Angle $a$ = [[p]]°. Work out angle $b$ (alternate to $a$) and angle $c$ (on a straight line with $b$), giving a reason for each step.",
+   "answer": "$b = [[p]]°$ (alternate angles are equal); $c = [[180 - p]]°$ (angles on a straight line add up to 180°)"
+  },
+  {
+   "id": "y10fsu1-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Prove geometric facts (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S9 Prove geometric facts (E)",
+   "keywords": [
+    "prove",
+    "geometric",
+    "facts",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Prove that the opposite angles of a parallelogram are equal. In parallelogram $ABCD$, angle $A$ is [[p]]°. Show that angle $C$ is also [[p]]°.",
+   "answer": "Angle $B$ = 180 − [[p]] = [[180 - p]]° (co-interior angles); angle $C$ = 180 − [[180 - p]] = [[p]]° (co-interior angles)"
+  },
+  {
+   "id": "y10fsu1-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Prove geometric facts (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S9 Prove geometric facts (E)",
+   "keywords": [
+    "prove",
+    "geometric",
+    "facts",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 150"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "A triangle has angles [[a]]° and [[b]]° inside it. Prove that its exterior angle at the third vertex is [[a + b]]°.",
+   "answer": "The third angle is 180 − [[a]] − [[b]] = [[180 - a - b]]° (angles in a triangle). The exterior angle is 180 − [[180 - a - b]] = [[a + b]]° (angles on a straight line)"
+  },
+  {
+   "id": "y10fsu1-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Prove geometric facts (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B1 Angles · S9 Prove geometric facts (E)",
+   "keywords": [
+    "prove",
+    "geometric",
+    "facts",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(n - 2) * 180 / 180 == n - 2"
+   ],
+   "text": "Prove that the interior angles of a [[n]]-sided polygon add up to [[(n - 2) * 180]]°. (3 marks)",
+   "answer": "Split the polygon into [[n - 2]] triangles from one vertex. Each triangle has angles adding to 180°, so the total is [[n - 2]] × 180 = [[(n - 2) * 180]]°"
+  }
+ ]
+}

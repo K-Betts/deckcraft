@@ -67,7 +67,8 @@
     "n > 1000"
    ],
    "text": "Write [[n|words]] in figures.",
-   "answer": "[[n|group]]"
+   "answer": "[[n|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s01-l2",
@@ -104,7 +105,8 @@
     "n > 1000"
    ],
    "text": "Write [[n|group]] in words.",
-   "answer": "[[n|words]]"
+   "answer": "[[n|words]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s01-l3",
@@ -162,7 +164,8 @@
     "n >= 10000"
    ],
    "text": "Write [[n|words]] in figures.",
-   "answer": "[[n|group]]"
+   "answer": "[[n|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s01-l4",
@@ -210,7 +213,8 @@
     "n > 9999"
    ],
    "text": "(a) Write [[n|words]] in figures. (b) Write [[m|group]] in words. (2 marks)",
-   "answer": "(a) [[n|group]]  (b) [[m|words]]"
+   "answer": "(a) [[n|group]]  (b) [[m|words]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s02-l1",
@@ -274,7 +278,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s02-l2",
@@ -350,7 +355,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s02-l3",
@@ -427,7 +433,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s02-l4",
@@ -508,7 +515,8 @@
       "label": "B"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s03-l1",
@@ -568,7 +576,8 @@
     "left != right"
    ],
    "text": "Write < or > in the space: [[left]] ? [[right]]",
-   "answer": "[[left < right|if:</>]]"
+   "answer": "[[left < right|if:</>]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s03-l2",
@@ -643,7 +652,8 @@
     "n3 < n4"
    ],
    "text": "Write these numbers in order, smallest first: [[n3]], [[n1]], [[n4]], [[n2]]",
-   "answer": "[[n1]], [[n2]], [[n3]], [[n4]]"
+   "answer": "[[n1]], [[n2]], [[n3]], [[n4]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s03-l3",
@@ -720,7 +730,8 @@
     "d3 < d4"
    ],
    "text": "Use the digits [[d3]], [[d1]], [[d4]], [[d2]] once each. Write the smallest and the largest 4-digit number you can make.",
-   "answer": "Smallest [[d1 * 1000 + d2 * 100 + d3 * 10 + d4]], largest [[d4 * 1000 + d3 * 100 + d2 * 10 + d1]]"
+   "answer": "Smallest [[d1 * 1000 + d2 * 100 + d3 * 10 + d4]], largest [[d4 * 1000 + d3 * 100 + d2 * 10 + d1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s03-l4",
@@ -795,7 +806,8 @@
     "n3 < n4"
    ],
    "text": "The populations of four towns are A [[n3]], B [[n1]], C [[n4]] and D [[n2]]. Write the towns in order, starting with the largest population. (2 marks)",
-   "answer": "C, A, D, B"
+   "answer": "C, A, D, B",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s04-l1",
@@ -850,7 +862,8 @@
     "b / 10 * 10 == b"
    ],
    "text": "What is the value of the digit [[b]] in [[a]].[[b]][[c]]?",
-   "answer": "[[b]] tenths, or [[b / 10]]"
+   "answer": "[[b]] tenths, or [[b / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s04-l2",
@@ -905,7 +918,8 @@
     "c / 100 * 100 == c"
    ],
    "text": "What is the value of the digit [[c]] in [[a]].[[b]][[c]]?",
-   "answer": "[[c]] hundredths, or [[c / 100]]"
+   "answer": "[[c]] hundredths, or [[c / 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s04-l3",
@@ -946,7 +960,8 @@
     "x * 10 + y > 10"
    ],
    "text": "Write [[x]] tenths and [[y]] hundredths as a decimal.",
-   "answer": "0.[[x]][[y]]"
+   "answer": "0.[[x]][[y]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s04-l4",
@@ -999,7 +1014,8 @@
     "a + b / 10 + c / 100 + 0.1 > a + b / 10 + c / 100"
    ],
    "text": "(a) What is the value of the digit [[c]] in [[a]].[[b]][[c]]? (b) Write the number that is 0.1 more than [[a]].[[b]][[c]]. (2 marks)",
-   "answer": "(a) [[c / 100]]  (b) [[a + b / 10 + c / 100 + 0.1]]"
+   "answer": "(a) [[c / 100]]  (b) [[a + b / 10 + c / 100 + 0.1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s05-l1",
@@ -1051,7 +1067,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s05-l2",
@@ -1112,7 +1129,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s05-l3",
@@ -1173,7 +1191,8 @@
       "label": "A"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s05-l4",
@@ -1244,7 +1263,8 @@
       "label": "B"
      }
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a4-s06-l1",
@@ -1313,7 +1333,8 @@
     "q < p"
    ],
    "text": "Write < or > in the space: [[left]] ? [[right]]",
-   "answer": "[[left < right|if:</>]]"
+   "answer": "[[left < right|if:</>]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s06-l2",
@@ -1374,7 +1395,8 @@
     "p < r"
    ],
    "text": "Write these in order, smallest first: [[p]], [[s]], [[r]], [[q]]",
-   "answer": "[[s]], [[q]], [[p]], [[r]]"
+   "answer": "[[s]], [[q]], [[p]], [[r]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s06-l3",
@@ -1417,7 +1439,8 @@
     "w + d / 100 + 0.001 < w + d / 10"
    ],
    "text": "Write these in order, smallest first: [[w + d / 100]], [[w + d / 10]], [[w + d / 1000]], [[w + d / 100 + 0.001]]",
-   "answer": "[[w + d / 1000]], [[w + d / 100]], [[w + d / 100 + 0.001]], [[w + d / 10]]"
+   "answer": "[[w + d / 1000]], [[w + d / 100]], [[w + d / 100 + 0.001]], [[w + d / 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s06-l4",
@@ -1478,7 +1501,8 @@
     "p < r"
    ],
    "text": "Four runners have these times in seconds: A [[p]], B [[s]], C [[r]] and D [[q]]. Who finished first, second, third and fourth? (2 marks)",
-   "answer": "B, D, A, C"
+   "answer": "B, D, A, C",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s07-l1",
@@ -1514,7 +1538,8 @@
     "round(n / 10) * 10 - n < 5.5"
    ],
    "text": "Round [[n]] to the nearest 10.",
-   "answer": "[[round(n / 10) * 10]]"
+   "answer": "[[round(n / 10) * 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s07-l2",
@@ -1551,7 +1576,8 @@
     "abs(round(n / 100) * 100 - n) < 51"
    ],
    "text": "Round [[n]] to the nearest 100.",
-   "answer": "[[round(n / 100) * 100]]"
+   "answer": "[[round(n / 100) * 100]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s07-l3",
@@ -1588,7 +1614,8 @@
     "abs(round(n / 1000) * 1000 - n) < 501"
    ],
    "text": "Round [[n|group]] to the nearest 1000.",
-   "answer": "[[round(n / 1000) * 1000|group]]"
+   "answer": "[[round(n / 1000) * 1000|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s07-l4",
@@ -1626,7 +1653,8 @@
     "abs(round(n / 100) * 100 - n) < 51"
    ],
    "text": "A stadium holds [[n|group]] people. (a) Round [[n|group]] to the nearest 100. (b) Round [[n|group]] to the nearest 1000. (2 marks)",
-   "answer": "(a) [[round(n / 100) * 100|group]]  (b) [[round(n / 1000) * 1000|group]]"
+   "answer": "(a) [[round(n / 100) * 100|group]]  (b) [[round(n / 1000) * 1000|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s08-l1",
@@ -1663,7 +1691,8 @@
     "abs(round(n / 10) - n / 10) < 0.51"
    ],
    "text": "Round [[n / 10]] to the nearest whole number.",
-   "answer": "[[round(n / 10)]]"
+   "answer": "[[round(n / 10)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s08-l2",
@@ -1700,7 +1729,8 @@
     "abs(round(n / 100) - n / 100) < 0.51"
    ],
    "text": "Round [[n / 100]] to the nearest whole number.",
-   "answer": "[[round(n / 100)]]"
+   "answer": "[[round(n / 100)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s08-l3",
@@ -1751,7 +1781,8 @@
     "round(m + 0.5 + (2 * f - 1) * d / 1000) == m + f"
    ],
    "text": "Round [[m + 0.5 + (2 * f - 1) * d / 1000]] to the nearest whole number.",
-   "answer": "[[m + f]]"
+   "answer": "[[m + f]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s08-l4",
@@ -1798,7 +1829,8 @@
     "abs(round(n / 100) - n / 100) < 0.51"
    ],
    "text": "(a) Round [[n / 100]] to the nearest whole number. (b) Round [[k]] to the nearest ten. (2 marks)",
-   "answer": "(a) [[round(n / 100)]]  (b) [[round(k / 10) * 10]]"
+   "answer": "(a) [[round(n / 100)]]  (b) [[round(k / 10) * 10]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s09-l1",
@@ -1834,7 +1866,8 @@
     "abs(round(n / 10) / 10 - n / 100) < 0.051"
    ],
    "text": "Round [[n / 100]] to 1 decimal place.",
-   "answer": "[[(n / 100)|dp:1]]"
+   "answer": "[[(n / 100)|dp:1]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s09-l2",
@@ -1870,7 +1903,8 @@
     "abs(round(n / 10) / 100 - n / 1000) < 0.0051"
    ],
    "text": "Round [[n / 1000]] to 2 decimal places.",
-   "answer": "[[(n / 1000)|dp:2]]"
+   "answer": "[[(n / 1000)|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s09-l3",
@@ -1911,7 +1945,8 @@
     "abs((w + 1) - (w + 0.99 + t / 1000)) < 0.005"
    ],
    "text": "Round [[w + 0.99 + t / 1000]] to 2 decimal places.",
-   "answer": "[[(w + 1)|dp:2]]"
+   "answer": "[[(w + 1)|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s09-l4",
@@ -1948,7 +1983,8 @@
     "abs(round(n / 100) / 10 - n / 1000) < 0.051"
    ],
    "text": "A calculator shows [[n / 1000]]. (a) Round this to 1 decimal place. (b) Round this to 2 decimal places. (2 marks)",
-   "answer": "(a) [[(n / 1000)|dp:1]]  (b) [[(n / 1000)|dp:2]]"
+   "answer": "(a) [[(n / 1000)|dp:1]]  (b) [[(n / 1000)|dp:2]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s10-l1",
@@ -1980,7 +2016,8 @@
     "10^k == 10 * 10^(k - 1)"
    ],
    "text": "Work out $10^{[[k]]}$",
-   "answer": "[[10^k|group]]"
+   "answer": "[[10^k|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s10-l2",
@@ -2021,7 +2058,8 @@
     "m * 10^k == m * 10 * 10^(k - 1)"
    ],
    "text": "Work out $[[m]] \\times 10^{[[k]]}$",
-   "answer": "[[m * 10^k|group]]"
+   "answer": "[[m * 10^k|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s10-l3",
@@ -2053,7 +2091,8 @@
     "10^k == 10^(k - 1) * 10"
    ],
    "text": "Write [[10^k|group]] as a power of 10.",
-   "answer": "$10^{[[k]]}$"
+   "answer": "$10^{[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s10-l4",
@@ -2103,7 +2142,8 @@
     "m * 10^j == m * 10 * 10^(j - 1)"
    ],
    "text": "(a) Write $10^{[[k]]}$ as an ordinary number. (b) Work out $[[m]] \\times 10^{[[j]]}$. (2 marks)",
-   "answer": "(a) [[10^k|group]]  (b) [[m * 10^j|group]]"
+   "answer": "(a) [[10^k|group]]  (b) [[m * 10^j|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s11-l1",
@@ -2148,7 +2188,8 @@
     "m * 10^k / 10^k == m"
    ],
    "text": "Write [[m * 10^k|group]] in standard form.",
-   "answer": "$[[m]] \\times 10^{[[k]]}$"
+   "answer": "$[[m]] \\times 10^{[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s11-l2",
@@ -2199,7 +2240,8 @@
     "m < 10"
    ],
    "text": "Write [[m * 10^k|group]] in standard form.",
-   "answer": "$[[m]] \\times 10^{[[k]]}$"
+   "answer": "$[[m]] \\times 10^{[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s11-l3",
@@ -2248,7 +2290,8 @@
     "m * 10^k / 10^k == m"
    ],
    "text": "Write $[[m]] \\times 10^{[[k]]}$ as an ordinary number.",
-   "answer": "[[m * 10^k|group]]"
+   "answer": "[[m * 10^k|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s11-l4",
@@ -2317,7 +2360,8 @@
     "m < 10"
    ],
    "text": "(a) A star is [[m * 10^k|group]] km from Earth. Write this in standard form. (b) Write $[[n]] \\times 10^{[[j]]}$ as an ordinary number. (2 marks)",
-   "answer": "(a) $[[m]] \\times 10^{[[k]]}$  (b) [[n * 10^j|group]]"
+   "answer": "(a) $[[m]] \\times 10^{[[k]]}$  (b) [[n * 10^j|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s12-l1",
@@ -2350,7 +2394,8 @@
     "10^-k * 10^k == 1"
    ],
    "text": "Write $10^{-[[k]]}$ as a decimal.",
-   "answer": "[[10^-k]]"
+   "answer": "[[10^-k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s12-l2",
@@ -2392,7 +2437,8 @@
     "m * 10^-k * 10^k == m"
    ],
    "text": "Write $[[m]] \\times 10^{-[[k]]}$ as a decimal.",
-   "answer": "[[m * 10^-k]]"
+   "answer": "[[m * 10^-k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s12-l3",
@@ -2425,7 +2471,8 @@
     "10^-k * 10^k == 1"
    ],
    "text": "Write [[10^-k]] as a power of 10.",
-   "answer": "$10^{-[[k]]}$"
+   "answer": "$10^{-[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s12-l4",
@@ -2476,7 +2523,8 @@
     "m * 10^-j * 10^j == m"
    ],
    "text": "(a) Write $10^{-[[k]]}$ as a decimal. (b) Write $[[m]] \\times 10^{-[[j]]}$ as a decimal. (2 marks)",
-   "answer": "(a) [[10^-k]]  (b) [[m * 10^-j]]"
+   "answer": "(a) [[10^-k]]  (b) [[m * 10^-j]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s13-l1",
@@ -2522,7 +2570,8 @@
     "m * 10^-k * 10^k == m"
    ],
    "text": "Write [[m * 10^-k]] in standard form.",
-   "answer": "$[[m]] \\times 10^{-[[k]]}$"
+   "answer": "$[[m]] \\times 10^{-[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s13-l2",
@@ -2573,7 +2622,8 @@
     "m < 10"
    ],
    "text": "Write [[m * 10^-k]] in standard form.",
-   "answer": "$[[m]] \\times 10^{-[[k]]}$"
+   "answer": "$[[m]] \\times 10^{-[[k]]}$",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s13-l3",
@@ -2623,7 +2673,8 @@
     "m * 10^-k * 10^k == m"
    ],
    "text": "Write $[[m]] \\times 10^{-[[k]]}$ as an ordinary number.",
-   "answer": "[[m * 10^-k]]"
+   "answer": "[[m * 10^-k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a4-s13-l4",
@@ -2693,7 +2744,8 @@
     "m < 10"
    ],
    "text": "A cell is [[m * 10^-k]] m wide. (a) Write this in standard form. (b) Write $[[n]] \\times 10^{-[[j]]}$ as an ordinary number. (2 marks)",
-   "answer": "(a) $[[m]] \\times 10^{-[[k]]}$  (b) [[n * 10^-j]]"
+   "answer": "(a) $[[m]] \\times 10^{-[[k]]}$  (b) [[n * 10^-j]]",
+   "year": "Y7"
   }
  ]
 }

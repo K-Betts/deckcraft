@@ -90,6 +90,18 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y10-higher-spring-b5-perimeter-area-volume.json"),
     include_str!("../../../assets/questions/y10-higher-spring-b6-interpret-represent-data.json"),
     include_str!("../../../assets/questions/y10-higher-spring-b7-non-linear-graphs.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b1-angles.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b2-graphs-and-diagrams.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b3-vectors.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b4-factors-powers-surds.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b5-pythagoras-trigonometry.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b6-simultaneous-equations.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b1-angles.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b2-graphs-and-diagrams.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b3-vectors.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b4-factors-powers-surds.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b5-pythagoras-trigonometry.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b6-simultaneous-equations.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -733,6 +745,17 @@ mod tests {
     }
 
     #[test]
+    fn every_scheme_of_work_question_is_tagged_with_its_year_group() {
+        let bank = starter().unwrap();
+        for t in &bank.templates {
+            let first = t.source.split_whitespace().next().unwrap_or("");
+            if first.strip_prefix('Y').is_some_and(|d| !d.is_empty() && d.chars().all(|c| c.is_ascii_digit())) {
+                assert_eq!(t.year, first, "{} is from {first} but is tagged {:?}", t.id, t.year);
+            }
+        }
+    }
+
+    #[test]
     fn every_scheme_of_work_step_has_questions_at_all_four_levels() {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
@@ -741,7 +764,7 @@ mod tests {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 520, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 600, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }

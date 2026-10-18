@@ -52,7 +52,8 @@
     "(a + b - c) + c == a + b"
    ],
    "text": "Write the missing number: [[a]] + [[b]] = ? + [[c]]",
-   "answer": "[[a + b - c]]"
+   "answer": "[[a + b - c]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s01-l2",
@@ -119,7 +120,8 @@
     "(a + b == c + d) == (f == 1)"
    ],
    "text": "Is this equation true or false? [[a]] + [[b]] = [[c]] + [[d]]",
-   "answer": "[[(a + b == c + d)|if:True/False]]: the sides are [[a + b]] and [[c + d]]"
+   "answer": "[[(a + b == c + d)|if:True/False]]: the sides are [[a + b]] and [[c + d]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s01-l3",
@@ -172,7 +174,8 @@
     "(a * b / c) * c == a * b"
    ],
    "text": "Write the missing number: [[a]] × [[b]] = [[a * b / c]] × ?",
-   "answer": "[[c]]"
+   "answer": "[[c]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s01-l4",
@@ -248,7 +251,8 @@
     "(a + b + c == d + e) == (f == 1)"
    ],
    "text": "Amy says that [[a]] + [[b]] + [[c]] = [[d]] + [[e]]. Is Amy correct? You must show your working. (2 marks)",
-   "answer": "[[(a + b + c == d + e)|if:Yes/No]]: [[a + b + c]] and [[d + e]]"
+   "answer": "[[(a + b + c == d + e)|if:Yes/No]]: [[a + b + c]] and [[d + e]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s02-l1",
@@ -287,7 +291,8 @@
     "(a + b) - a == b"
    ],
    "text": "[[a]] + [[b]] = [[a + b]]. Write down [[a + b]] − [[a]].",
-   "answer": "[[b]]"
+   "answer": "[[b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s02-l2",
@@ -326,7 +331,8 @@
     "a * b / b == a"
    ],
    "text": "[[a]] × [[b]] = [[a * b]]. Write down [[a * b]] ÷ [[b]].",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s02-l3",
@@ -369,7 +375,8 @@
     "a * b / 100 * 100 == a * b"
    ],
    "text": "Use [[a]] × [[b]] = [[a * b]] to work out [[a / 10|dec]] × [[b / 10|dec]].",
-   "answer": "[[a * b / 100|dec]]"
+   "answer": "[[a * b / 100|dec]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s02-l4",
@@ -411,7 +418,8 @@
     "a * b / a == b"
    ],
    "text": "Given that [[a]] × [[b]] = [[a * b]], work out (a) [[a * b]] ÷ [[a]] (b) [[a / 10|dec]] × [[b]]. (2 marks)",
-   "answer": "(a) [[b]]  (b) [[a * b / 10|dec]]"
+   "answer": "(a) [[b]]  (b) [[a * b / 10|dec]]",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s03-l1",
@@ -494,7 +502,8 @@
     "c != 0"
    ],
    "text": "Write down the term that is like $[[a]][[v]]$ from this list: $[[b]]w$, $[[c]][[v]]$, $[[d]]$.",
-   "answer": "$[[c]][[v]]$"
+   "answer": "$[[c]][[v]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s03-l2",
@@ -577,7 +586,8 @@
     "a != c"
    ],
    "text": "Which two of these terms are like terms? $[[a]][[v]]$, $[[b]]w$, $[[c]][[v]]$, $[[d]]w^2$",
-   "answer": "$[[a]][[v]]$ and $[[c]][[v]]$"
+   "answer": "$[[a]][[v]]$ and $[[c]][[v]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s03-l3",
@@ -669,7 +679,8 @@
     "b != 0"
    ],
    "text": "Sort these into like terms: $[[a]][[v]]$, $[[b]]w$, $[[c]][[v]]$, $[[d]]w$, $[[e]]$. Which terms are like $[[b]]w$?",
-   "answer": "$[[b]]w$ and $[[d]]w$"
+   "answer": "$[[b]]w$ and $[[d]]w$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s03-l4",
@@ -712,7 +723,8 @@
     "a > 1"
    ],
    "text": "Ali says $[[a]][[v]]$ and $[[a]][[v]]^2$ are like terms. Is he right? Explain. (1 mark)",
-   "answer": "No: $[[v]]$ and $[[v]]^2$ are different, so they are unlike terms"
+   "answer": "No: $[[v]]$ and $[[v]]^2$ are different, so they are unlike terms",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s04-l1",
@@ -763,7 +775,8 @@
     "(a + b) - b == a"
    ],
    "text": "Simplify $[[a]][[v]] + [[b]][[v]]$",
-   "answer": "$[[a + b]][[v]]$"
+   "answer": "$[[a + b]][[v]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s04-l2",
@@ -832,7 +845,8 @@
     "(a + c) + (b + d) == a + b + c + d"
    ],
    "text": "Simplify $[[a]][[v]] + [[b]] + [[c]][[v]] + [[d]]$",
-   "answer": "$[[a + c]][[v]] + [[b + d]]$"
+   "answer": "$[[a + c]][[v]] + [[b + d]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s04-l3",
@@ -915,7 +929,8 @@
     "(b + d) - d == b"
    ],
    "text": "Simplify $[[a]][[v]] + [[b]][[w]] - [[c]][[v]] + [[d]][[w]]$",
-   "answer": "$[[a - c|coef]][[v]][[b + d|sterm:]][[w]]$"
+   "answer": "$[[a - c|coef]][[v]][[b + d|sterm:]][[w]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s04-l4",
@@ -982,7 +997,8 @@
     "(a + c + d) - a - c == d"
    ],
    "text": "The sides of a triangle are $[[a]]x + [[b]]$, $[[c]]x$ and $[[d]]x + [[e]]$. Write a simplified expression for the perimeter. (2 marks)",
-   "answer": "$[[a + c + d]]x + [[b + e]]$"
+   "answer": "$[[a + c + d]]x + [[b + e]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s05-l1",
@@ -1034,7 +1050,8 @@
     "(a + x) - a == x"
    ],
    "text": "Solve $[[v]] + [[a]] = [[a + x]]$",
-   "answer": "$[[v]] = [[x]]$"
+   "answer": "$[[v]] = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s05-l2",
@@ -1086,7 +1103,8 @@
     "(a + x) - a == x"
    ],
    "text": "Solve $[[v]] - [[a]] = [[x]]$",
-   "answer": "$[[v]] = [[a + x]]$"
+   "answer": "$[[v]] = [[a + x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s05-l3",
@@ -1140,7 +1158,8 @@
     "(a + x) - a == x"
    ],
    "text": "Solve $[[a]] + [[v]] = [[a + x]]$",
-   "answer": "$[[v]] = [[x]]$"
+   "answer": "$[[v]] = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s05-l4",
@@ -1199,7 +1218,8 @@
     "(c + d) - c == d"
    ],
    "text": "Solve (a) $x + [[a]] = [[a + b]]$ (b) $y - [[c]] = [[d]]$ (2 marks)",
-   "answer": "(a) $x = [[b]]$  (b) $y = [[c + d]]$"
+   "answer": "(a) $x = [[b]]$  (b) $y = [[c + d]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s06-l1",
@@ -1251,7 +1271,8 @@
     "a * x / a == x"
    ],
    "text": "Solve $[[a]][[v]] = [[a * x]]$",
-   "answer": "$[[v]] = [[x]]$"
+   "answer": "$[[v]] = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s06-l2",
@@ -1303,7 +1324,8 @@
     "a * x / a == x"
    ],
    "text": "Solve $\\frac{[[v]]}{[[a]]} = [[x]]$",
-   "answer": "$[[v]] = [[a * x]]$"
+   "answer": "$[[v]] = [[a * x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s06-l3",
@@ -1360,7 +1382,8 @@
     "p / a * a == p"
    ],
    "text": "Solve $[[a]][[v]] = [[p]]$",
-   "answer": "$[[v]] = [[p / a]]$"
+   "answer": "$[[v]] = [[p / a]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s06-l4",
@@ -1401,7 +1424,8 @@
     "n * x / n == x"
    ],
    "text": "A regular shape has [[n]] equal sides. Its perimeter is [[n * x]] cm. Each side is $x$ cm long. Form and solve an equation to find $x$. (2 marks)",
-   "answer": "$[[n]]x = [[n * x]]$, so $x = [[x]]$"
+   "answer": "$[[n]]x = [[n * x]]$, so $x = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s07-l1",
@@ -1462,7 +1486,8 @@
     "a * x + b - b == a * x"
    ],
    "text": "Solve $[[a]][[v]] + [[b]] = [[a * x + b]]$",
-   "answer": "$[[v]] = [[x]]$"
+   "answer": "$[[v]] = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s07-l2",
@@ -1526,7 +1551,8 @@
     "a * x - b + b == a * x"
    ],
    "text": "Solve $[[a]][[v]] - [[b]] = [[a * x - b]]$",
-   "answer": "$[[v]] = [[x]]$"
+   "answer": "$[[v]] = [[x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s07-l3",
@@ -1587,7 +1613,8 @@
     "(x + b) - b == x"
    ],
    "text": "Solve $\\frac{[[v]]}{[[a]]} + [[b]] = [[x + b]]$",
-   "answer": "$[[v]] = [[a * x]]$"
+   "answer": "$[[v]] = [[a * x]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a3-s07-l4",
@@ -1637,7 +1664,8 @@
     "a * x + b - b == a * x"
    ],
    "text": "A taxi costs £[[b]] plus £[[a]] for each mile. A journey costs £[[a * x + b]]. Form and solve an equation to work out how many miles $m$ the journey was. (3 marks)",
-   "answer": "$[[a]]m + [[b]] = [[a * x + b]]$, so $m = [[x]]$"
+   "answer": "$[[a]]m + [[b]] = [[a * x + b]]$, so $m = [[x]]$",
+   "year": "Y7"
   }
  ]
 }

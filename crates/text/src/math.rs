@@ -65,7 +65,7 @@ impl MathBox {
 pub fn is_complex(e: &Expr) -> bool {
     match e {
         Expr::Row(r) => r.iter().any(is_complex),
-        Expr::Frac(..) | Expr::Script { .. } | Expr::Sqrt { .. } | Expr::Nary { .. } => true,
+        Expr::Frac(..) | Expr::Stack(..) | Expr::Script { .. } | Expr::Sqrt { .. } | Expr::Nary { .. } => true,
         Expr::Delim { body, .. } => is_complex(body),
         Expr::Var(_) | Expr::Text(_) | Expr::Func(_) | Expr::Empty => false,
     }
@@ -219,6 +219,19 @@ fn lay(cx: &Ctx, e: &Expr, size: f64, depth: usize) -> MathBox {
             out.w = w;
             out
         }
+        Expr::Stack(n, den) => {
+            let (n, den) = (lay(cx, n, size, d), lay(cx, den, size, d));
+            let gap = 0.18 * size;
+            let w = n.w.max(den.w);
+            let (nw, dw) = (n.w, den.w);
+            let ny = -(AXIS * size + gap / 2.0 + n.desc);
+            let dy = -AXIS * size + gap / 2.0 + den.asc;
+            let mut inner = MathBox::default();
+            inner.put(n, (w - nw) / 2.0, ny);
+            inner.put(den, (w - dw) / 2.0, dy);
+            inner.w = w;
+            wrap_in_brackets(cx, inner, '(', ')', size)
+        }
         Expr::Script { base, sub, sup } => {
             let b = lay(cx, base, size, d);
             let small = size * SCRIPT;
@@ -347,21 +360,26 @@ fn lay(cx: &Ctx, e: &Expr, size: f64, depth: usize) -> MathBox {
         }
         Expr::Delim { open, close, body } => {
             let b = lay(cx, body, size, d);
-            let h = b.asc + b.desc;
-            // The middle of the body, above the baseline.
-            let centre = (b.asc - b.desc) / 2.0;
-            let grown = if h > 1.15 * size { (size * h / (size * 0.95)).min(size * 3.5) } else { size };
-            let mark = |c: char| cx.centred(c, grown, centre).unwrap_or_else(|| cx.text(&c.to_string(), size, false));
-            let (o, c) = (mark(*open), mark(*close));
-            let mut out = MathBox::default();
-            let (ow, bw, cw) = (o.w, b.w, c.w);
-            out.put(o, 0.0, 0.0);
-            out.put(b, ow, 0.0);
-            out.put(c, ow + bw, 0.0);
-            out.w = ow + bw + cw;
-            out
+            wrap_in_brackets(cx, b, *open, *close, size)
         }
     }
+}
+
+/// `b` between a pair of brackets that grow with its height.
+fn wrap_in_brackets(cx: &Ctx, b: MathBox, open: char, close: char, size: f64) -> MathBox {
+    let h = b.asc + b.desc;
+    // The middle of the body, above the baseline.
+    let centre = (b.asc - b.desc) / 2.0;
+    let grown = if h > 1.15 * size { (size * h / (size * 0.95)).min(size * 3.5) } else { size };
+    let mark = |c: char| cx.centred(c, grown, centre).unwrap_or_else(|| cx.text(&c.to_string(), size, false));
+    let (o, c) = (mark(open), mark(close));
+    let mut out = MathBox::default();
+    let (ow, bw, cw) = (o.w, b.w, c.w);
+    out.put(o, 0.0, 0.0);
+    out.put(b, ow, 0.0);
+    out.put(c, ow + bw, 0.0);
+    out.w = ow + bw + cw;
+    out
 }
 
 #[cfg(test)]
@@ -392,6 +410,15 @@ mod tests {
         let (n, d) = (mid(&b.glyphs[0]), mid(&b.glyphs[1]));
         assert!((n - d).abs() < 1.0, "the two digits are centred on each other: {n} {d}");
         assert!(b.asc > 20.0 && b.desc > 5.0);
+    }
+
+    #[test]
+    fn a_column_vector_stacks_two_numbers_in_brackets_with_no_bar() {
+        let b = lay_out("vec(3,-2)");
+        assert!(b.rules.is_empty(), "no bar");
+        let ys: Vec<f64> = b.glyphs.iter().map(|g| g.y).collect();
+        assert!(ys.iter().any(|y| *y < -2.0) && ys.iter().any(|y| *y > 2.0), "one number above the other: {ys:?}");
+        assert!(crate::equation::to_omml(&parse("vec(3,-2)")).contains("noBar"));
     }
 
     #[test]

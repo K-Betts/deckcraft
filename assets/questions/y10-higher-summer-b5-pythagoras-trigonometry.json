@@ -1,0 +1,2239 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Summer Block 5 Pythagoras and trigonometry: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsu5-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "Work out the length $x$.",
+   "answer": "$x = [[a]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "x cm",
+    "height": "[[b]] cm",
+    "hyp": "[[c]] cm",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[b|n]]"
+   }
+  },
+  {
+   "id": "y10hsu5-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(c * c - p * p))"
+   ],
+   "check": [
+    "c > p"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[sqrt(c * c - p * p)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[p]] cm",
+    "height": "x cm",
+    "hyp": "[[c]] cm",
+    "baseLength": "[[p|n]]",
+    "heightLength": "[[sqrt(c * c - p * p)|n]]"
+   }
+  },
+  {
+   "id": "y10hsu5-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "A ladder [[c]] m long reaches [[b]] m up a wall. How far is the foot of the ladder from the wall?",
+   "answer": "[[a]] m"
+  },
+  {
+   "id": "y10hsu5-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "An isosceles triangle has two equal sides of [[c]] cm and a base of [[2 * a]] cm. Work out its height and its area. (4 marks)",
+   "answer": "Height [[b]] cm; area [[a * b]] cm²"
+  },
+  {
+   "id": "y10hsu5-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S2 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "In a right-angled triangle you know the [[k == 0|if:opposite and hypotenuse/]][[k == 1|if:adjacent and hypotenuse/]][[k == 2|if:opposite and adjacent/]] and want an angle. Which ratio do you use?",
+   "answer": "[[k == 0|if:sin/]][[k == 1|if:cos/]][[k == 2|if:tan/]]"
+  },
+  {
+   "id": "y10hsu5-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S2 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       35,
+       45,
+       55
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "You know the hypotenuse and an angle and want the side adjacent to the angle. Which ratio do you use? Write the equation for a hypotenuse of [[h]] cm and angle [[t]]°.",
+   "answer": "cos: $x = [[h]] \\cos [[t]]°$"
+  },
+  {
+   "id": "y10hsu5-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S2 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       30,
+       35,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "A right-angled triangle has an angle of [[t]]° and the side opposite it is [[o]] cm. Find (a) the hypotenuse (b) the adjacent side, to 1 decimal place.",
+   "answer": "(a) [[o / sin(t)|dp:1]] cm  (b) [[o / tan(t)|dp:1]] cm"
+  },
+  {
+   "id": "y10hsu5-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S2 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A kite flies on a string of [[l]] m at an angle of [[t]]° to the ground. Find the height of the kite and how far along the ground the person is from the point under it. Give answers to 1 decimal place. (4 marks)",
+   "answer": "Height [[l * sin(t)|dp:1]] m; distance [[l * cos(t)|dp:1]] m"
+  },
+  {
+   "id": "y10hsu5-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S3 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[atan(o / a)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "height": "[[o]] cm",
+    "angle": "θ",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[o|n]]"
+   }
+  },
+  {
+   "id": "y10hsu5-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S3 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > o"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[asin(o / h)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "height": "[[o]] cm",
+    "hyp": "[[h]] cm",
+    "angle": "θ"
+   }
+  },
+  {
+   "id": "y10hsu5-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S3 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > a"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[acos(a / h)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "hyp": "[[h]] cm",
+    "angle": "θ"
+   }
+  },
+  {
+   "id": "y10hsu5-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S3 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "o",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > o"
+   ],
+   "text": "A ramp is [[l]] m long and rises [[o]] m. Work out the angle it makes with the horizontal to 1 decimal place. A second ramp is [[l]] m long and rises [[o + 1]] m. How much steeper is it? (3 marks)",
+   "answer": "[[asin(o / l)|dp:1]]°; second [[asin((o + 1) / l)|dp:1]]°; [[(asin((o + 1) / l) * 1000 - asin(o / l) * 1000) / 1000|dp:1]]° steeper"
+  },
+  {
+   "id": "y10hsu5-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S4 Exact trigonometric values",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       45,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "Write down the exact value of $\\sin [[t]]°$.",
+   "answer": "[[t == 30|if:$\\frac{1}{2}$/]][[t == 45|if:$\\frac{\\sqrt{2}}{2}$/]][[t == 60|if:$\\frac{\\sqrt{3}}{2}$/]]"
+  },
+  {
+   "id": "y10hsu5-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S4 Exact trigonometric values",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled triangle has a hypotenuse of [[2 * k]] cm and an angle of 30°. Find the side opposite the 30° angle.",
+   "answer": "[[k]] cm (since $\\sin 30° = \\frac{1}{2}$)"
+  },
+  {
+   "id": "y10hsu5-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S4 Exact trigonometric values",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled isosceles triangle has equal sides of [[k]] cm. State the angles and $\\tan$ of the acute angles. Find the hypotenuse as a surd.",
+   "answer": "45° and 45°; $\\tan 45° = 1$; hypotenuse $[[k]]\\sqrt{2}$ cm"
+  },
+  {
+   "id": "y10hsu5-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S4 Exact trigonometric values",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "An equilateral triangle has sides of [[2 * k]] cm. Split it in half to find its height as a surd and the exact value of $\\tan 60°$. (3 marks)",
+   "answer": "Height $[[k]]\\sqrt{3}$ cm; $\\tan 60° = \\frac{[[k]]\\sqrt{3}}{[[k]]} = \\sqrt{3}$"
+  },
+  {
+   "id": "y10hsu5-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Trigonometry in 3-D shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S5 Trigonometry in 3-D shapes",
+   "keywords": [
+    "trigonometry",
+    "in",
+    "3",
+    "d",
+    "shapes",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "l != w"
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm by [[w]] cm by [[h]] cm. Work out the length of the diagonal of the base to 1 decimal place.",
+   "answer": "[[sqrt(l * l + w * w)|dp:1]] cm",
+   "diagram": {
+    "kind": "cuboid",
+    "length": "[[l]] cm",
+    "width": "[[w]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y10hsu5-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Trigonometry in 3-D shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S5 Trigonometry in 3-D shapes",
+   "keywords": [
+    "trigonometry",
+    "in",
+    "3",
+    "d",
+    "shapes",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "l != w"
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm by [[w]] cm by [[h]] cm. Work out the angle between the space diagonal and the base, to 1 decimal place.",
+   "answer": "[[atan(h / sqrt(l * l + w * w))|dp:1]]°",
+   "diagram": {
+    "kind": "cuboid",
+    "length": "[[l]] cm",
+    "width": "[[w]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y10hsu5-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Trigonometry in 3-D shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S5 Trigonometry in 3-D shapes",
+   "keywords": [
+    "trigonometry",
+    "in",
+    "3",
+    "d",
+    "shapes",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A square-based pyramid has a base of side [[s]] cm and a height of [[h]] cm. Work out the angle between a sloping edge and the base. Give your answer to 1 decimal place.",
+   "answer": "[[atan(h / (s * sqrt(2) / 2))|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Trigonometry in 3-D shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S5 Trigonometry in 3-D shapes",
+   "keywords": [
+    "trigonometry",
+    "in",
+    "3",
+    "d",
+    "shapes",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "l != w"
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A box is [[l]] cm by [[w]] cm by [[h]] cm. A rod goes from one bottom corner to the opposite top corner. Find its length and the angle it makes with the base. (4 marks)",
+   "answer": "Length [[sqrt(l * l + w * w + h * h)|dp:1]] cm; angle [[atan(h / sqrt(l * l + w * w))|dp:1]]°",
+   "diagram": {
+    "kind": "cuboid",
+    "length": "[[l]] cm",
+    "width": "[[w]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y10hsu5-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a non-right-angled triangle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S6 Area of a non-right-angled triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "non",
+    "right",
+    "angled",
+    "triangle",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       70,
+       110,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangle $ABC$ has $AB$ = [[a]] cm, $AC$ = [[b]] cm and angle $A$ = [[t]]°. Work out its area to 1 decimal place.",
+   "answer": "[[0.5 * a * b * sin(t)|dp:1]] cm²"
+  },
+  {
+   "id": "y10hsu5-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a non-right-angled triangle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S6 Area of a non-right-angled triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "non",
+    "right",
+    "angled",
+    "triangle",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       35,
+       45,
+       55,
+       65,
+       125
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has two sides of [[a]] cm and [[b]] cm with an angle of [[t]]° between them. Find its area to 3 significant figures.",
+   "answer": "[[sf(0.5 * a * b * sin(t), 3)]] cm²"
+  },
+  {
+   "id": "y10hsu5-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a non-right-angled triangle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S6 Area of a non-right-angled triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "non",
+    "right",
+    "angled",
+    "triangle",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * A < a * b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The area of a triangle is [[A]] cm². Two sides are [[a]] cm and [[b]] cm. Find the acute angle between them to 1 decimal place.",
+   "answer": "[[asin(2 * A / (a * b))|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a non-right-angled triangle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S6 Area of a non-right-angled triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "non",
+    "right",
+    "angled",
+    "triangle",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       30,
+       45,
+       55
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       40,
+       50,
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A field is a triangle with two sides of [[a]] m and [[b]] m meeting at [[t]]°. Grass seed costs £[[p]] per m². Work out the cost to the nearest pound. (3 marks)",
+   "answer": "£[[0.5 * a * b * sin(t) * p|dp:0]]"
+  },
+  {
+   "id": "y10hsu5-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S7 Use the sine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       45,
+       55,
+       65,
+       75
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $ABC$, angle $A$ = [[A]]°, angle $B$ = [[B]]° and $BC$ = [[a]] cm. Use the sine rule to find $AC$ to 1 decimal place.",
+   "answer": "[[a * sin(B) / sin(A)|dp:1]] cm"
+  },
+  {
+   "id": "y10hsu5-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S7 Use the sine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       35,
+       42,
+       48,
+       58
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       52,
+       62,
+       72,
+       82
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       7,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $PQR$, angle $P$ = [[A]]°, angle $Q$ = [[B]]° and $QR$ = [[a]] cm. Find $PR$ to 3 significant figures.",
+   "answer": "[[sf(a * sin(B) / sin(A), 3)]] cm"
+  },
+  {
+   "id": "y10hsu5-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S7 Use the sine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       45,
+       55,
+       65,
+       75
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has angles of [[A]]° and [[B]]°. The side opposite [[A]]° is [[a]] cm. Work out the third angle and the side opposite [[B]]°.",
+   "answer": "Third angle [[180 - A - B]]°; side [[a * sin(B) / sin(A)|dp:1]] cm"
+  },
+  {
+   "id": "y10hsu5-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S7 Use the sine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       30,
+       35,
+       40,
+       45
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "From a point $A$ the bearing of $B$ is 060° and of $C$ is 120°; $AB$ = [[a]] km and angle $ABC$ = [[B]]°. Use the sine rule to find $AC$ to 1 decimal place. (4 marks)",
+   "answer": "Angle $ACB$ = [[180 - 60 - B]]°; $AC$ = [[a * sin(B) / sin(120 - B)|dp:1]] km"
+  },
+  {
+   "id": "y10hsu5-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown angle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S8 Use the sine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b * sin(A) < a"
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "In triangle $ABC$, $a$ = [[a]] cm, $b$ = [[b]] cm and angle $A$ = [[A]]°. Use the sine rule to find angle $B$ to 1 decimal place.",
+   "answer": "[[asin(b * sin(A) / a)|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown angle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S8 Use the sine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       35,
+       45,
+       55,
+       65
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b * sin(A) < a",
+    "a > b"
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "In triangle $PQR$, $p$ = [[a]] cm, $q$ = [[b]] cm and angle $P$ = [[A]]°. Find angle $Q$ to 3 significant figures.",
+   "answer": "[[sf(asin(b * sin(A) / a), 3)]]°"
+  },
+  {
+   "id": "y10hsu5-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown angle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S8 Use the sine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a > b"
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "A triangle has sides [[a]] cm and [[b]] cm. The angle opposite the [[a]] cm side is [[A]]°. Find the angle opposite the [[b]] cm side.",
+   "answer": "[[asin(b * sin(A) / a)|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the sine rule to find an unknown angle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S8 Use the sine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       16
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * sin(A) < b"
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "In triangle $ABC$, $AB$ = [[a]] cm, $BC$ = [[b]] cm and angle $A$ = [[A]]°. Find angle $C$ and angle $B$. (4 marks)",
+   "answer": "Angle $C$ = [[asin(a * sin(A) / b)|dp:1]]°; angle $B$ = [[180 - A - asin(a * sin(A) / b)|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S9 Use the cosine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       11
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       70,
+       100,
+       110
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "In triangle $ABC$, $b$ = [[b]] cm, $c$ = [[c]] cm and angle $A$ = [[A]]°. Use the cosine rule to find $a$ to 1 decimal place.",
+   "answer": "[[sqrt(b * b + c * c - 2 * b * c * cos(A))|dp:1]] cm"
+  },
+  {
+   "id": "y10hsu5-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S9 Use the cosine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       11
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       35,
+       45,
+       55,
+       65,
+       95,
+       115
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A triangle has sides [[b]] cm and [[c]] cm with an angle of [[A]]° between them. Find the third side to 3 significant figures.",
+   "answer": "[[sf(sqrt(b * b + c * c - 2 * b * c * cos(A)), 3)]] cm"
+  },
+  {
+   "id": "y10hsu5-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S9 Use the cosine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       22
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       100,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Two ships leave a port. One sails [[b]] km and the other [[c]] km, with [[A]]° between their directions. How far apart are they to 1 decimal place?",
+   "answer": "[[sqrt(b * b + c * c - 2 * b * c * cos(A))|dp:1]] km"
+  },
+  {
+   "id": "y10hsu5-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S9 Use the cosine rule to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       11
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       50,
+       60,
+       70,
+       80,
+       110
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $ABC$, $AB$ = [[c]] cm, $BC$ = [[a]] cm and angle $B$ = [[B]]°. Find $AC$ and then the area of the triangle. Give answers to 1 decimal place. (4 marks)",
+   "answer": "$AC$ = [[sqrt(a * a + c * c - 2 * a * c * cos(B))|dp:1]] cm; area [[0.5 * a * c * sin(B)|dp:1]] cm²"
+  },
+  {
+   "id": "y10hsu5-s10-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown angle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S10 Use the cosine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       7,
+       10
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       11
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has sides [[a]] cm, [[b]] cm and [[c]] cm. Use the cosine rule to find the angle opposite the [[a]] cm side to 1 decimal place.",
+   "answer": "[[acos((b * b + c * c - a * a) / (2 * b * c))|dp:1]]°"
+  },
+  {
+   "id": "y10hsu5-s10-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown angle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S10 Use the cosine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       7,
+       10
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       13
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "c > a",
+    "c > b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has sides [[a]] cm, [[b]] cm and [[c]] cm. Find the largest angle to 3 significant figures.",
+   "answer": "[[sf(acos((a * a + b * b - c * c) / (2 * a * b)), 3)]]°"
+  },
+  {
+   "id": "y10hsu5-s10-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown angle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S10 Use the cosine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       7,
+       10
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       11
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In a triangle with sides [[a]] cm, [[b]] cm and [[c]] cm, find all three angles to 1 decimal place and check they sum to 180°.",
+   "answer": "[[acos((b * b + c * c - a * a) / (2 * b * c))|dp:1]]°, [[acos((a * a + c * c - b * b) / (2 * a * c))|dp:1]]°, [[acos((a * a + b * b - c * c) / (2 * a * b))|dp:1]]° (sum 180°)"
+  },
+  {
+   "id": "y10hsu5-s10-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the cosine rule to find an unknown angle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B5 Pythagoras and trigonometry · S10 Use the cosine rule to find an unknown angle",
+   "keywords": [
+    "use",
+    "the",
+    "cosine",
+    "rule",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       25,
+       35
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       40,
+       55
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "c > a",
+    "c > b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangular plot has sides [[a]] m, [[b]] m and [[c]] m. Find its largest angle and its area to 1 decimal place. (4 marks)",
+   "answer": "Largest angle [[acos((a * a + b * b - c * c) / (2 * a * b))|dp:1]]°; area [[0.5 * a * b * sin(acos((a * a + b * b - c * c) / (2 * a * b)))|dp:1]] m²"
+  }
+ ]
+}

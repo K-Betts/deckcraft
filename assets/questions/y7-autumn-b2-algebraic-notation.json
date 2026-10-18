@@ -50,7 +50,8 @@
      "+ [[k]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s01-l2",
@@ -100,7 +101,8 @@
      "× [[m]]"
     ],
     "output": "[[x * m]]"
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s01-l3",
@@ -151,7 +153,8 @@
     "(b + k) - k == b"
    ],
    "text": "A function machine subtracts [[k]]. An input of [[a]] gives an output of [[a - k]]. What is the input when the output is [[b]]?",
-   "answer": "[[b + k]]"
+   "answer": "[[b + k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s01-l4",
@@ -202,7 +205,8 @@
     "y * m / m == y"
    ],
    "text": "A function machine divides by [[m]]. (a) What is the output when the input is [[x * m]]? (b) The output is [[y]]. What was the input? (2 marks)",
-   "answer": "(a) [[x]]  (b) [[y * m]]"
+   "answer": "(a) [[x]]  (b) [[y * m]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s02-l1",
@@ -254,7 +258,8 @@
      "+ [[k]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s02-l2",
@@ -306,7 +311,8 @@
      "× [[m]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s02-l3",
@@ -358,7 +364,8 @@
      "÷ [[m]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s02-l4",
@@ -411,7 +418,8 @@
     "a - k > 0"
    ],
    "text": "A function machine subtracts [[k]] from the input $[[v]]$. (a) Write the output in terms of $[[v]]$. (b) Work out the output when $[[v]] = [[a]]$. (2 marks)",
-   "answer": "(a) $[[v]] - [[k]]$  (b) [[a - k]]"
+   "answer": "(a) $[[v]] - [[k]]$  (b) [[a - k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s03-l1",
@@ -461,7 +469,8 @@
      null
     ],
     "output": "[[a + k]]"
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s03-l2",
@@ -511,7 +520,8 @@
      null
     ],
     "output": "[[a * m]]"
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s03-l3",
@@ -562,7 +572,8 @@
     "(b - k) - (a - k) == b - a"
    ],
    "text": "When the input to a one-step function machine is [[a]], the output is [[a - k]]. When the input is [[b]], the output is [[b - k]]. What does the function machine do?",
-   "answer": "Subtracts [[k]]"
+   "answer": "Subtracts [[k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s03-l4",
@@ -613,7 +624,8 @@
     "a * m / a == m"
    ],
    "text": "A function machine has one step. Input [[a]] gives output [[a * m]]. (a) What does the function machine do? (b) What is the output when the input is [[b]]? (2 marks)",
-   "answer": "(a) Multiplies by [[m]]  (b) [[b * m]]"
+   "answer": "(a) Multiplies by [[m]]  (b) [[b * m]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s04-l1",
@@ -664,7 +676,8 @@
     "a + k > a"
    ],
    "text": "Work out $[[v]] + [[k]]$ when $[[v]] = [[a]]$.",
-   "answer": "[[a + k]]"
+   "answer": "[[a + k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s04-l2",
@@ -715,7 +728,8 @@
     "m * a / a == m"
    ],
    "text": "Work out $[[m]][[v]]$ when $[[v]] = [[a]]$.",
-   "answer": "[[m * a]]"
+   "answer": "[[m * a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s04-l3",
@@ -766,7 +780,8 @@
     "a * m / m == a"
    ],
    "text": "Work out $\\frac{[[v]]}{[[m]]}$ when $[[v]] = [[a * m]]$.",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s04-l4",
@@ -815,7 +830,8 @@
     "(k + b) - (k + a) == b - a"
    ],
    "text": "$P = [[k]] + w$. (a) Work out $P$ when $w = [[a]]$. (b) Work out $P$ when $w = [[b]]$. (2 marks)",
-   "answer": "(a) [[k + a]]  (b) [[k + b]]"
+   "answer": "(a) [[k + a]]  (b) [[k + b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s05-l1",
@@ -875,7 +891,8 @@
      "+ [[k]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s05-l2",
@@ -935,7 +952,8 @@
      "+ [[k]]"
     ],
     "output": "[[a * m + k]]"
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s05-l3",
@@ -986,7 +1004,8 @@
     "((a * m - k) + k) / m == a"
    ],
    "text": "A two-step function machine multiplies by [[m]] then subtracts [[k]]. The output is [[a * m - k]]. What was the input?",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s05-l4",
@@ -1046,7 +1065,8 @@
     "(((b + k) * m) / m) - k == b"
    ],
    "text": "A function machine adds [[k]] then multiplies by [[m]]. (a) Work out the output when the input is [[a]]. (b) The output is [[(b + k) * m]]. Work out the input. (3 marks)",
-   "answer": "(a) [[(a + k) * m]]  (b) [[b]]"
+   "answer": "(a) [[(a + k) * m]]  (b) [[b]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s06-l1",
@@ -1108,7 +1128,8 @@
      "+ [[k]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s06-l2",
@@ -1170,7 +1191,8 @@
      "− [[k]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s06-l3",
@@ -1232,7 +1254,8 @@
      "× [[m]]"
     ],
     "output": null
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s06-l4",
@@ -1294,7 +1317,8 @@
     "m * a + k - k == m * a"
    ],
    "text": "A function machine multiplies by [[m]] then adds [[k]]. The input is $[[v]]$. (a) Write the output in terms of $[[v]]$. (b) Work out the output when $[[v]] = [[a]]$. (2 marks)",
-   "answer": "(a) $[[m]][[v]] + [[k]]$  (b) [[m * a + k]]"
+   "answer": "(a) $[[m]][[v]] + [[k]]$  (b) [[m * a + k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s07-l1",
@@ -1354,7 +1378,8 @@
      null
     ],
     "output": "[[a * m + k]]"
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s07-l2",
@@ -1417,7 +1442,8 @@
       "[[3 * m + k]]"
      ]
     ]
-   }
+   },
+   "year": "Y7"
   },
   {
    "id": "y7a2-s07-l3",
@@ -1471,7 +1497,8 @@
     "((m * a - k) + k) / m == a"
    ],
    "text": "A two-step function machine multiplies by [[m]] then subtracts [[k]]. Which of these inputs gives an output of [[m * a - k]]: [[a]], [[a + 1]] or [[a - 1]]?",
-   "answer": "[[a]]"
+   "answer": "[[a]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s07-l4",
@@ -1531,7 +1558,8 @@
     "(b * m + k) - (a * m + k) == (b - a) * m"
    ],
    "text": "Input [[a]] gives output [[a * m + k]] and input [[b]] gives output [[b * m + k]] in a two-step function machine. The first step is ‘multiply by [[m]]’. What is the second step? (2 marks)",
-   "answer": "Add [[k]]"
+   "answer": "Add [[k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s08-l1",
@@ -1591,7 +1619,8 @@
     "(m * a + k - k) / m == a"
    ],
    "text": "Work out $[[m]][[v]] + [[k]]$ when $[[v]] = [[a]]$.",
-   "answer": "[[m * a + k]]"
+   "answer": "[[m * a + k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s08-l2",
@@ -1654,7 +1683,8 @@
     "(m * a - k + k) / m == a"
    ],
    "text": "Work out $[[m]][[v]] - [[k]]$ when $[[v]] = [[a]]$.",
-   "answer": "[[m * a - k]]"
+   "answer": "[[m * a - k]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s08-l3",
@@ -1714,7 +1744,8 @@
     "m * (a + k) == m * a + m * k"
    ],
    "text": "Work out $[[m]]([[v]] + [[k]])$ when $[[v]] = [[a]]$.",
-   "answer": "[[m * (a + k)]]"
+   "answer": "[[m * (a + k)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a2-s08-l4",
@@ -1772,7 +1803,8 @@
     "(m * b + k) - (m * a + k) == m * (b - a)"
    ],
    "text": "$T = [[m]]n + [[k]]$. (a) Work out $T$ when $n = [[a]]$. (b) Work out $T$ when $n = [[b]]$. (3 marks)",
-   "answer": "(a) [[m * a + k]]  (b) [[m * b + k]]"
+   "answer": "(a) [[m * a + k]]  (b) [[m * b + k]]",
+   "year": "Y7"
   }
  ]
 }

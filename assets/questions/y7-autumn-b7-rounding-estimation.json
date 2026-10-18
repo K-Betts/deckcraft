@@ -37,7 +37,8 @@
     "abs(sf(n, 1) - n) <= n / 2 + 0.5"
    ],
    "text": "Round [[n|group]] to 1 significant figure.",
-   "answer": "[[sf(n, 1)|group]]"
+   "answer": "[[sf(n, 1)|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s01-l2",
@@ -74,7 +75,8 @@
     "abs(sf(n / 1000, 1) - n / 1000) < 0.005"
    ],
    "text": "Round [[n / 1000]] to 1 significant figure.",
-   "answer": "[[sf(n / 1000, 1)]]"
+   "answer": "[[sf(n / 1000, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s01-l3",
@@ -111,7 +113,8 @@
     "abs(sf(n / 100, 1) - n / 100) <= n / 200"
    ],
    "text": "Round [[n / 100]] to 1 significant figure.",
-   "answer": "[[sf(n / 100, 1)]]"
+   "answer": "[[sf(n / 100, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s01-l4",
@@ -159,7 +162,8 @@
     "abs(sf(n, 1) - n) <= n / 2 + 0.5"
    ],
    "text": "A crowd at a match is [[n|group]]. (a) Round the crowd to 1 significant figure. (b) Round [[m / 1000]] to 1 significant figure. (2 marks)",
-   "answer": "(a) [[sf(n, 1)|group]]  (b) [[sf(m / 1000, 1)]]"
+   "answer": "(a) [[sf(n, 1)|group]]  (b) [[sf(m / 1000, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s02-l1",
@@ -198,7 +202,8 @@
     "abs(sf(n, 2) - n) <= 5"
    ],
    "text": "Round [[n]] to 2 significant figures.",
-   "answer": "[[sf(n, 2)]]"
+   "answer": "[[sf(n, 2)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s02-l2",
@@ -237,7 +242,8 @@
     "abs(sf(n / 100000, 2) - n / 100000) < 0.0005"
    ],
    "text": "Round [[n / 100000]] to 2 significant figures.",
-   "answer": "[[sf(n / 100000, 2)]]"
+   "answer": "[[sf(n / 100000, 2)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s02-l3",
@@ -276,7 +282,8 @@
     "abs(sf(n, 3) - n) <= n / 200 + 1"
    ],
    "text": "Round [[n|group]] to 3 significant figures.",
-   "answer": "[[sf(n, 3)|group]]"
+   "answer": "[[sf(n, 3)|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s02-l4",
@@ -326,7 +333,8 @@
     "abs(sf(n / 100, 2) - n / 100) < 0.5"
    ],
    "text": "The distance from a town to the coast is [[n / 100]] km. (a) Round this to 2 significant figures. (b) Round [[m|group]] to 3 significant figures. (2 marks)",
-   "answer": "(a) [[sf(n / 100, 2)]]  (b) [[sf(m, 3)|group]]"
+   "answer": "(a) [[sf(n / 100, 2)]]  (b) [[sf(m, 3)|group]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s03-l1",
@@ -373,7 +381,8 @@
     "sf(a, 1) * sf(b, 1) > 0"
    ],
    "text": "Estimate [[a]] × [[b]] by rounding each number to 1 significant figure.",
-   "answer": "[[sf(a, 1) * sf(b, 1)]]"
+   "answer": "[[sf(a, 1) * sf(b, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s03-l2",
@@ -420,7 +429,8 @@
     "sf(a / 10, 1) * sf(b, 1) > 0"
    ],
    "text": "Estimate [[a / 10]] × [[b]] by rounding each number to 1 significant figure.",
-   "answer": "[[sf(a / 10, 1) * sf(b, 1)]]"
+   "answer": "[[sf(a / 10, 1) * sf(b, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s03-l3",
@@ -468,7 +478,8 @@
     "sf(a, 1) / sf(b, 1) * sf(b, 1) == sf(a, 1)"
    ],
    "text": "Estimate [[a]] ÷ [[b]] by rounding each number to 1 significant figure.",
-   "answer": "[[sf(a, 1) / sf(b, 1)]]"
+   "answer": "[[sf(a, 1) / sf(b, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s03-l4",
@@ -527,7 +538,8 @@
     "sf(a, 1) * sf(b / 10, 1) / sf(c, 1) * sf(c, 1) == sf(a, 1) * sf(b / 10, 1)"
    ],
    "text": "Estimate the value of ([[a]] × [[b / 10]]) ÷ [[c]] by rounding each number to 1 significant figure. (3 marks)",
-   "answer": "[[sf(a, 1) * sf(b / 10, 1) / sf(c, 1)]]"
+   "answer": "[[sf(a, 1) * sf(b / 10, 1) / sf(c, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s04-l1",
@@ -574,7 +586,8 @@
     "sf(n, 1) * sf(p / 100, 1) > 0"
    ],
    "text": "A pen costs £[[p / 100]]. Estimate the cost of [[n]] pens by rounding each number to 1 significant figure.",
-   "answer": "About £[[sf(n, 1) * sf(p / 100, 1)]]"
+   "answer": "About £[[sf(n, 1) * sf(p / 100, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s04-l2",
@@ -630,7 +643,8 @@
     "f == 0 || f == 1"
    ],
    "text": "Ali works out [[a]] × [[b]] = [[(a * b) * (f + (1 - f) * 10)]]. Use estimation to decide whether his answer is sensible.",
-   "answer": "[[f|if:Sensible/Not sensible]]: the estimate is [[sf(a, 1) * sf(b, 1)]]"
+   "answer": "[[f|if:Sensible/Not sensible]]: the estimate is [[sf(a, 1) * sf(b, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s04-l3",
@@ -676,7 +690,8 @@
     "sf(b, 1) > b"
    ],
    "text": "[[a]] × [[b]] is estimated as [[sf(a, 1) * sf(b, 1)]]. Is this an over-estimate or an under-estimate? Explain.",
-   "answer": "Over-estimate: both numbers were rounded up"
+   "answer": "Over-estimate: both numbers were rounded up",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s04-l4",
@@ -743,7 +758,8 @@
     "f == 0 || f == 1"
    ],
    "text": "A school buys [[n]] books at £[[p / 100]] each. It has £[[budget]]. Use estimation to decide whether it has enough money. You must show your working. (3 marks)",
-   "answer": "[[budget >= sf(n, 1) * sf(p / 100, 1)|if:Yes/No]]: estimate £[[sf(n, 1) * sf(p / 100, 1)]]"
+   "answer": "[[budget >= sf(n, 1) * sf(p / 100, 1)|if:Yes/No]]: estimate £[[sf(n, 1) * sf(p / 100, 1)]]",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s05-l1",
@@ -778,7 +794,8 @@
     "n - 0.5 < n"
    ],
    "text": "A number is [[n]] to the nearest integer. Write the error interval.",
-   "answer": "$[[n - 0.5]] \\leq x < [[n + 0.5]]$"
+   "answer": "$[[n - 0.5]] \\leq x < [[n + 0.5]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s05-l2",
@@ -813,7 +830,8 @@
     "n * 10 - 5 < n * 10"
    ],
    "text": "A number is [[n * 10]] to the nearest 10. Write the error interval.",
-   "answer": "$[[n * 10 - 5]] \\leq x < [[n * 10 + 5]]$"
+   "answer": "$[[n * 10 - 5]] \\leq x < [[n * 10 + 5]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s05-l3",
@@ -851,7 +869,8 @@
     "n / 10 - 0.05 < n / 10"
    ],
    "text": "A length is [[n / 10]] cm to 1 decimal place. Write the error interval.",
-   "answer": "$[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$"
+   "answer": "$[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$",
+   "year": "Y7"
   },
   {
    "id": "y7a7-s05-l4",
@@ -889,7 +908,8 @@
     "n / 10 - 0.05 < n / 10"
    ],
    "text": "A plank is [[n / 10]] m long to 1 decimal place. (a) Write the error interval. (b) Could the length be [[n / 10 + 0.05]] m? Explain. (3 marks)",
-   "answer": "(a) $[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$  (b) No: the upper limit is not included"
+   "answer": "(a) $[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$  (b) No: the upper limit is not included",
+   "year": "Y7"
   }
  ]
 }

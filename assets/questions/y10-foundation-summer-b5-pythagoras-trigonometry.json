@@ -1,0 +1,1896 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Summer Block 5 Pythagoras and trigonometry: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsu5-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find the hypotenuse)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find the hypotenuse)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "the",
+    "hypotenuse",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "Work out the length of the hypotenuse.",
+   "answer": "$x = [[c]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "height": "[[b]] cm",
+    "hyp": "x cm",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[b|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find the hypotenuse)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find the hypotenuse)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "the",
+    "hypotenuse",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q",
+    "!isint(sqrt(p * p + q * q))"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Work out the length of the hypotenuse. Give your answer to 1 decimal place.",
+   "answer": "$x = [[sqrt(p * p + q * q)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[p]] cm",
+    "height": "[[q]] cm",
+    "hyp": "x cm",
+    "baseLength": "[[p|n]]",
+    "heightLength": "[[q|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find the hypotenuse)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find the hypotenuse)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "the",
+    "hypotenuse",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "Show that a right-angled triangle with shorter sides [[a]] cm and [[b]] cm has a hypotenuse of [[c]] cm.",
+   "answer": "[[a]]² + [[b]]² = [[a * a]] + [[b * b]] = [[c * c]], and $\\sqrt{[[c * c]]} = [[c]]$"
+  },
+  {
+   "id": "y10fsu5-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find the hypotenuse)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S1 Pythagoras' theorem (find the hypotenuse)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "the",
+    "hypotenuse",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       20,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w > h",
+    "!isint(sqrt(w * w + h * h))"
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A rectangular screen is [[w]] cm wide and [[h]] cm high. Work out the length of its diagonal to 1 decimal place. (3 marks)",
+   "answer": "[[sqrt(w * w + h * h)|dp:1]] cm"
+  },
+  {
+   "id": "y10fsu5-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S2 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "Work out the length $x$.",
+   "answer": "$x = [[a]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "x cm",
+    "height": "[[b]] cm",
+    "hyp": "[[c]] cm",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[b|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S2 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(c * c - p * p))"
+   ],
+   "check": [
+    "c > p"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[sqrt(c * c - p * p)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[p]] cm",
+    "height": "x cm",
+    "hyp": "[[c]] cm",
+    "baseLength": "[[p|n]]",
+    "heightLength": "[[sqrt(c * c - p * p)|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S2 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "A ladder [[c]] m long reaches [[b]] m up a wall. How far is the foot of the ladder from the wall?",
+   "answer": "[[a]] m"
+  },
+  {
+   "id": "y10fsu5-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Pythagoras' theorem (find any side)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S2 Pythagoras' theorem (find any side)",
+   "keywords": [
+    "pythagoras'",
+    "theorem",
+    "find",
+    "any",
+    "side",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * m - n * n"
+    ],
+    [
+     "b",
+     "2 * m * n"
+    ],
+    [
+     "c",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "a * a + b * b == c * c"
+   ],
+   "text": "An isosceles triangle has two equal sides of [[c]] cm and a base of [[2 * a]] cm. Work out its height and its area. (4 marks)",
+   "answer": "Height [[b]] cm; area [[a * b]] cm²"
+  },
+  {
+   "id": "y10fsu5-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Identify hypotenuse, opposite and adjacent sides",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S3 Identify hypotenuse, opposite and adjacent sides",
+   "keywords": [
+    "identify",
+    "hypotenuse",
+    "opposite",
+    "and",
+    "adjacent",
+    "sides",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "For the angle marked $\\theta$, which side is the opposite?",
+   "answer": "[[k == 0|if:p/]][[k == 1|if:x/]][[k == 2|if:a/]][[k == 3|if:d/]]",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[k == 0|if:q/]][[k == 1|if:y/]][[k == 2|if:b/]][[k == 3|if:e/]]",
+    "height": "[[k == 0|if:p/]][[k == 1|if:x/]][[k == 2|if:a/]][[k == 3|if:d/]]",
+    "hyp": "[[k == 0|if:r/]][[k == 1|if:z/]][[k == 2|if:c/]][[k == 3|if:f/]]",
+    "angle": "θ",
+    "baseLength": 4,
+    "heightLength": 3
+   }
+  },
+  {
+   "id": "y10fsu5-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Identify hypotenuse, opposite and adjacent sides",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S3 Identify hypotenuse, opposite and adjacent sides",
+   "keywords": [
+    "identify",
+    "hypotenuse",
+    "opposite",
+    "and",
+    "adjacent",
+    "sides",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "For the angle marked $\\theta$, which side is the adjacent?",
+   "answer": "[[k == 0|if:q/]][[k == 1|if:y/]][[k == 2|if:b/]][[k == 3|if:e/]]",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[k == 0|if:q/]][[k == 1|if:y/]][[k == 2|if:b/]][[k == 3|if:e/]]",
+    "height": "[[k == 0|if:p/]][[k == 1|if:x/]][[k == 2|if:a/]][[k == 3|if:d/]]",
+    "hyp": "[[k == 0|if:r/]][[k == 1|if:z/]][[k == 2|if:c/]][[k == 3|if:f/]]",
+    "angle": "θ",
+    "baseLength": 4,
+    "heightLength": 3
+   }
+  },
+  {
+   "id": "y10fsu5-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Identify hypotenuse, opposite and adjacent sides",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S3 Identify hypotenuse, opposite and adjacent sides",
+   "keywords": [
+    "identify",
+    "hypotenuse",
+    "opposite",
+    "and",
+    "adjacent",
+    "sides",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Which ratio is [[k == 0|if:opposite ÷ hypotenuse/]][[k == 1|if:adjacent ÷ hypotenuse/]][[k == 2|if:opposite ÷ adjacent/]]? Choose sin, cos or tan.",
+   "answer": "[[k == 0|if:sin/]][[k == 1|if:cos/]][[k == 2|if:tan/]]"
+  },
+  {
+   "id": "y10fsu5-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Identify hypotenuse, opposite and adjacent sides",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S3 Identify hypotenuse, opposite and adjacent sides",
+   "keywords": [
+    "identify",
+    "hypotenuse",
+    "opposite",
+    "and",
+    "adjacent",
+    "sides",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "o",
+     "m * m - n * n"
+    ],
+    [
+     "a",
+     "2 * m * n"
+    ],
+    [
+     "h",
+     "m * m + n * n"
+    ]
+   ],
+   "where": [
+    "n < m"
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "In a right-angled triangle the hypotenuse is [[h]] cm, the side opposite angle $x$ is [[o]] cm and the adjacent side is [[a]] cm. Write $\\sin x$, $\\cos x$ and $\\tan x$ as fractions. (3 marks)",
+   "answer": "$\\sin x = \\frac{[[o]]}{[[h]]}$, $\\cos x = \\frac{[[a]]}{[[h]]}$, $\\tan x = \\frac{[[o]]}{[[a]]}$"
+  },
+  {
+   "id": "y10fsu5-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Ratios in right-angled triangles (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S4 Ratios in right-angled triangles (E)",
+   "keywords": [
+    "ratios",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled triangle has sides [[3]], [[4]] and [[5]]. A similar triangle has its shortest side equal to [[3 * k]]. Find the other two sides.",
+   "answer": "[[4 * k]] and [[5 * k]]"
+  },
+  {
+   "id": "y10fsu5-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Ratios in right-angled triangles (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S4 Ratios in right-angled triangles (E)",
+   "keywords": [
+    "ratios",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != d"
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "In a right-angled triangle the side opposite angle $x$ is [[o]] and the adjacent side is [[d]]. Write the ratio opposite : adjacent in its simplest form.",
+   "answer": "[[o / gcd(o, d)]] : [[d / gcd(o, d)]]"
+  },
+  {
+   "id": "y10fsu5-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Ratios in right-angled triangles (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S4 Ratios in right-angled triangles (E)",
+   "keywords": [
+    "ratios",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != d"
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "Two right-angled triangles have the same angle $x$. The first has opposite [[o]] and adjacent [[d]]. In the second the adjacent side is [[d * k]]. Find its opposite side and explain why.",
+   "answer": "[[o * k]]: the triangles are similar so the ratio opposite : adjacent stays the same"
+  },
+  {
+   "id": "y10fsu5-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Ratios in right-angled triangles (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S4 Ratios in right-angled triangles (E)",
+   "keywords": [
+    "ratios",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       8,
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "A ramp rises [[o]] m over a horizontal distance of [[d]] m. A longer ramp with the same angle covers [[d * k]] m horizontally. (a) How high does it rise? (b) What is the ratio rise : horizontal as a decimal? (3 marks)",
+   "answer": "(a) [[o * k]] m  (b) [[o / d|dp:2]]"
+  },
+  {
+   "id": "y10fsu5-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the tangent ratio to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S5 Use the tangent ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "tangent",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[a * tan(t)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "height": "x cm",
+    "angle": "[[t]]°",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[a * tan(t)|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the tangent ratio to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S5 Use the tangent ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "tangent",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[o / tan(t)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "x cm",
+    "height": "[[o]] cm",
+    "angle": "[[t]]°",
+    "baseLength": "[[o / tan(t)|n]]",
+    "heightLength": "[[o|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the tangent ratio to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S5 Use the tangent ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "tangent",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       30,
+       35,
+       40,
+       45,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A tree casts a shadow of [[a]] m when the sun is at [[t]]° above the horizontal. How tall is the tree to 1 decimal place?",
+   "answer": "[[a * tan(t)|dp:1]] m"
+  },
+  {
+   "id": "y10fsu5-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the tangent ratio to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S5 Use the tangent ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "tangent",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       30,
+       35,
+       40,
+       45
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       1.5,
+       1.6,
+       1.7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "From a point [[d]] m from the base of a building the angle of elevation of the top is [[t]]°. The observer's eyes are [[e]] m above the ground. How tall is the building? Give your answer to 1 decimal place. (3 marks)",
+   "answer": "[[d * tan(t) + e|dp:1]] m"
+  },
+  {
+   "id": "y10fsu5-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Use the sine and cosine ratio to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S6 Use the sine and cosine ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[h * sin(t)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "",
+    "height": "x cm",
+    "hyp": "[[h]] cm",
+    "angle": "[[t]]°"
+   }
+  },
+  {
+   "id": "y10fsu5-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Use the sine and cosine ratio to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S6 Use the sine and cosine ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "Work out the length $x$. Give your answer to 1 decimal place.",
+   "answer": "$x = [[h * cos(t)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "x cm",
+    "hyp": "[[h]] cm",
+    "angle": "[[t]]°"
+   }
+  },
+  {
+   "id": "y10fsu5-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Use the sine and cosine ratio to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S6 Use the sine and cosine ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "Work out the length of the hypotenuse $x$ when the side opposite the [[t]]° angle is [[o]] cm. Give your answer to 1 decimal place.",
+   "answer": "$x = [[o / sin(t)|dp:1]]$ cm",
+   "diagram": {
+    "kind": "right-triangle",
+    "height": "[[o]] cm",
+    "hyp": "x cm",
+    "angle": "[[t]]°"
+   }
+  },
+  {
+   "id": "y10fsu5-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Use the sine and cosine ratio to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S6 Use the sine and cosine ratio to find an unknown side length",
+   "keywords": [
+    "use",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "ratio",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       65,
+       70,
+       75
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "A ladder of length [[h]] m leans against a wall at [[t]]° to the ground. (a) How high up the wall does it reach? (b) How far is the foot from the wall? Give answers to 1 decimal place. (3 marks)",
+   "answer": "(a) [[h * sin(t)|dp:1]] m  (b) [[h * cos(t)|dp:1]] m"
+  },
+  {
+   "id": "y10fsu5-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S7 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "In a right-angled triangle you know the [[k == 0|if:opposite and hypotenuse/]][[k == 1|if:adjacent and hypotenuse/]][[k == 2|if:opposite and adjacent/]] and want an angle. Which ratio do you use?",
+   "answer": "[[k == 0|if:sin/]][[k == 1|if:cos/]][[k == 2|if:tan/]]"
+  },
+  {
+   "id": "y10fsu5-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S7 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       35,
+       45,
+       55
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "You know the hypotenuse and an angle and want the side adjacent to the angle. Which ratio do you use? Write the equation for a hypotenuse of [[h]] cm and angle [[t]]°.",
+   "answer": "cos: $x = [[h]] \\cos [[t]]°$"
+  },
+  {
+   "id": "y10fsu5-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S7 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       25,
+       30,
+       35,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "A right-angled triangle has an angle of [[t]]° and the side opposite it is [[o]] cm. Find (a) the hypotenuse (b) the adjacent side, to 1 decimal place.",
+   "answer": "(a) [[o / sin(t)|dp:1]] cm  (b) [[o / tan(t)|dp:1]] cm"
+  },
+  {
+   "id": "y10fsu5-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown side length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S7 Use trigonometric ratios to find an unknown side length",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "side",
+    "length",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A kite flies on a string of [[l]] m at an angle of [[t]]° to the ground. Find the height of the kite and how far along the ground the person is from the point under it. Give answers to 1 decimal place. (4 marks)",
+   "answer": "Height [[l * sin(t)|dp:1]] m; distance [[l * cos(t)|dp:1]] m"
+  },
+  {
+   "id": "y10fsu5-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S8 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[atan(o / a)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "height": "[[o]] cm",
+    "angle": "θ",
+    "baseLength": "[[a|n]]",
+    "heightLength": "[[o|n]]"
+   }
+  },
+  {
+   "id": "y10fsu5-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S8 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > o"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[asin(o / h)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "height": "[[o]] cm",
+    "hyp": "[[h]] cm",
+    "angle": "θ"
+   }
+  },
+  {
+   "id": "y10fsu5-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S8 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > a"
+   ],
+   "text": "Work out angle $\\theta$ to 1 decimal place.",
+   "answer": "$\\theta = [[acos(a / h)|dp:1]]°$",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[a]] cm",
+    "hyp": "[[h]] cm",
+    "angle": "θ"
+   }
+  },
+  {
+   "id": "y10fsu5-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Use trigonometric ratios to find an unknown angle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S8 Use trigonometric ratios to find an unknown angle",
+   "keywords": [
+    "use",
+    "trigonometric",
+    "ratios",
+    "to",
+    "find",
+    "an",
+    "unknown",
+    "angle",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "o",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > o"
+   ],
+   "text": "A ramp is [[l]] m long and rises [[o]] m. Work out the angle it makes with the horizontal to 1 decimal place. A second ramp is [[l]] m long and rises [[o + 1]] m. How much steeper is it? (3 marks)",
+   "answer": "[[asin(o / l)|dp:1]]°; second [[asin((o + 1) / l)|dp:1]]°; [[(asin((o + 1) / l) * 1000 - asin(o / l) * 1000) / 1000|dp:1]]° steeper"
+  },
+  {
+   "id": "y10fsu5-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S9 Exact trigonometric values (E)",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       45,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "Write down the exact value of $\\sin [[t]]°$.",
+   "answer": "[[t == 30|if:$\\frac{1}{2}$/]][[t == 45|if:$\\frac{\\sqrt{2}}{2}$/]][[t == 60|if:$\\frac{\\sqrt{3}}{2}$/]]"
+  },
+  {
+   "id": "y10fsu5-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S9 Exact trigonometric values (E)",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled triangle has a hypotenuse of [[2 * k]] cm and an angle of 30°. Find the side opposite the 30° angle.",
+   "answer": "[[k]] cm (since $\\sin 30° = \\frac{1}{2}$)"
+  },
+  {
+   "id": "y10fsu5-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S9 Exact trigonometric values (E)",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled isosceles triangle has equal sides of [[k]] cm. State the angles and $\\tan$ of the acute angles. Find the hypotenuse as a surd.",
+   "answer": "45° and 45°; $\\tan 45° = 1$; hypotenuse $[[k]]\\sqrt{2}$ cm"
+  },
+  {
+   "id": "y10fsu5-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Exact trigonometric values (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Summer B5 Pythagoras and trigonometry · S9 Exact trigonometric values (E)",
+   "keywords": [
+    "exact",
+    "trigonometric",
+    "values",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "An equilateral triangle has sides of [[2 * k]] cm. Split it in half to find its height as a surd and the exact value of $\\tan 60°$. (3 marks)",
+   "answer": "Height $[[k]]\\sqrt{3}$ cm; $\\tan 60° = \\frac{[[k]]\\sqrt{3}}{[[k]]} = \\sqrt{3}$"
+  }
+ ]
+}

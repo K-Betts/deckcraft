@@ -18,6 +18,8 @@ pub enum Expr {
     /// A box still to be filled in (`□`).
     Empty,
     Frac(Box<Expr>, Box<Expr>),
+    /// Two lines in brackets with no bar between them: a column vector.
+    Stack(Box<Expr>, Box<Expr>),
     Script {
         base: Box<Expr>,
         sub: Option<Box<Expr>>,
@@ -138,7 +140,7 @@ pub fn has_empty(e: &Expr) -> bool {
     match e {
         Expr::Empty => true,
         Expr::Row(r) => r.iter().any(has_empty),
-        Expr::Frac(a, b) => has_empty(a) || has_empty(b),
+        Expr::Frac(a, b) | Expr::Stack(a, b) => has_empty(a) || has_empty(b),
         Expr::Script { base, sub, sup } => has_empty(base) || any(sub) || any(sup),
         Expr::Sqrt { degree, body } => any(degree) || has_empty(body),
         Expr::Nary { sub, sup, body, .. } => any(sub) || any(sup) || has_empty(body),
@@ -370,6 +372,7 @@ impl Parser {
             return Expr::Var(c);
         }
         match word.as_str() {
+            "vec" => return self.stack(),
             "sqrt" => return self.root(None),
             "cbrt" => return self.root(Some(Expr::Text("3".into()))),
             "sum" => return self.nary('∑'),
@@ -387,6 +390,20 @@ impl Parser {
         // Not a word we know: one variable now, the rest next time.
         self.i = start + 1;
         Expr::Var(word.chars().next().unwrap_or(' '))
+    }
+
+    /// `vec(a, b)`: a column vector.
+    fn stack(&mut self) -> Expr {
+        self.skip_spaces();
+        if self.peek() != Some('(') || self.depth >= MAX_DEPTH {
+            return Expr::Text("vec".into());
+        }
+        self.i += 1;
+        let top = self.row(Some(','));
+        self.eat(',');
+        let bottom = self.row(Some(')'));
+        self.eat(')');
+        Expr::Stack(Box::new(top), Box::new(bottom))
     }
 
     fn root(&mut self, degree: Option<Expr>) -> Expr {
@@ -516,6 +533,12 @@ fn omml(e: &Expr, out: &mut String) {
             part(out, "num", n);
             part(out, "den", d);
             out.push_str("</m:f>");
+        }
+        Expr::Stack(n, d) => {
+            out.push_str("<m:d><m:e><m:f><m:fPr><m:type m:val=\"noBar\"/></m:fPr>");
+            part(out, "num", n);
+            part(out, "den", d);
+            out.push_str("</m:f></m:e></m:d>");
         }
         Expr::Script { base, sub, sup } => {
             let tag = match (sub.is_some(), sup.is_some()) {
@@ -717,6 +740,13 @@ fn plain(e: &Expr, out: &mut String) {
         Expr::Text(t) => out.push_str(t),
         Expr::Func(f) => out.push_str(f),
         Expr::Empty => {}
+        Expr::Stack(n, d) => {
+            out.push('(');
+            out.push_str(&to_plain(n));
+            out.push_str(", ");
+            out.push_str(&to_plain(d));
+            out.push(')');
+        }
         Expr::Frac(n, d) => {
             out.push_str(&bracket_if_long(to_plain(n)));
             out.push('/');
@@ -1040,6 +1070,13 @@ fn linear(e: &Expr, out: &mut String) {
             group_arg(n, out);
             out.push('/');
             group_arg(d, out);
+        }
+        Expr::Stack(n, d) => {
+            out.push_str("vec(");
+            linear(n, out);
+            out.push(',');
+            linear(d, out);
+            out.push(')');
         }
         Expr::Script { base, sub, sup } => {
             if is_simple(base) {
