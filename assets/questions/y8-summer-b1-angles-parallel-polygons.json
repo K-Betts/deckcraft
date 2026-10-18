@@ -1164,8 +1164,20 @@
    "text": "$ABCD$ is a parallelogram. Angle $A$ is [[p]]°. Find angles $B$, $C$ and $D$.",
    "answer": "$B = [[180 - p]]°$, $C = [[p]]°$, $D = [[180 - p]]°$",
    "diagram": {
-    "kind": "polygon-shape",
-    "shape": "parallelogram"
+    "kind": "polygon-angles",
+    "angles": [
+     "[[p]]°",
+     null,
+     null,
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[180 - p|n]]",
+     "[[p|n]]",
+     "[[180 - p|n]]"
+    ],
+    "unknown": "?"
    }
   },
   {
@@ -1217,8 +1229,20 @@
    "text": "A rhombus has sides of [[s]] cm. Find its perimeter. Its angle at $A$ is [[p]]°; find the angle at $B$.",
    "answer": "Perimeter [[4 * s]] cm; angle $B$ = [[180 - p]]°",
    "diagram": {
-    "kind": "polygon-shape",
-    "shape": "rhombus"
+    "kind": "polygon-angles",
+    "angles": [
+     "[[p]]°",
+     null,
+     null,
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[180 - p|n]]",
+     "[[p|n]]",
+     "[[180 - p|n]]"
+    ],
+    "unknown": "?"
    }
   },
   {
@@ -1262,7 +1286,8 @@
     ]
    ],
    "where": [
-    "360 - 2 * p - q > 20"
+    "360 - 2 * p - q > 25",
+    "abs(q - (360 - 2 * p - q)) > 15"
    ],
    "check": [
     "2 * p + q + (360 - 2 * p - q) == 360"
@@ -1270,8 +1295,20 @@
    "text": "A kite has two equal angles of [[p]]° and one angle of [[q]]°. Find the fourth angle.",
    "answer": "[[360 - 2 * p - q]]°",
    "diagram": {
-    "kind": "polygon-shape",
-    "shape": "kite"
+    "kind": "polygon-angles",
+    "angles": [
+     "[[q]]°",
+     "[[p]]°",
+     null,
+     "[[p]]°"
+    ],
+    "sizes": [
+     "[[q|n]]",
+     "[[p|n]]",
+     "[[360 - 2 * p - q|n]]",
+     "[[p|n]]"
+    ],
+    "unknown": "?"
    }
   },
   {
@@ -1309,11 +1346,7 @@
     "2 * p + (180 - 2 * p) == 180"
    ],
    "text": "The diagonals of a rhombus cross at right angles. One diagonal makes an angle of [[p]]° with a side. Find the four angles of the rhombus. (3 marks)",
-   "answer": "The angles are [[2 * p]]°, [[180 - 2 * p]]°, [[2 * p]]° and [[180 - 2 * p]]°",
-   "diagram": {
-    "kind": "polygon-shape",
-    "shape": "rhombus"
-   }
+   "answer": "The angles are [[2 * p]]°, [[180 - 2 * p]]°, [[2 * p]]° and [[180 - 2 * p]]°"
   },
   {
    "id": "y8su1-s08-l1",

@@ -372,11 +372,16 @@ impl Fig<'_> {
         }
         let on_t = |y: f64| {
             let t = ((y - ay) / ah - 0.04) / 0.92;
-            ax + aw * (0.28 + 0.44 * t)
+            ax + aw * (0.16 + 0.34 * t)
         };
-        ln(s, [ax + aw * 0.28, ay + ah * 0.04], [ax + aw * 0.72, ay + ah * 0.96])?;
-        label(s, &self.text("knownAngle").unwrap_or_default(), [on_t(y1) + 38.0, y1 + 22.0])?;
-        label(s, &format!("${}$", self.text("unknown").unwrap_or_else(|| "x".into())), [on_t(y2) + 30.0, y2 - 22.0])
+        ln(s, [ax + aw * 0.16, ay + ah * 0.04], [ax + aw * 0.5, ay + ah * 0.96])?;
+        // Longer labels are moved right, clear of the transversal.
+        let known = self.text("knownAngle").unwrap_or_default();
+        let unknown = self.text("unknown").unwrap_or_else(|| "x".into());
+        let reach = |t: &str| 22.0 + crate::latex::plain(t).chars().count() as f64 * 4.5;
+        let right = |y: f64, t: &str| (on_t(y) + reach(t)).min(ax + aw - reach(t) * 0.6);
+        label(s, &known, [right(y1, &known), y1 + 22.0])?;
+        label(s, &format!("${unknown}$"), [right(y2, &unknown), y2 - 22.0])
     }
 
     // ── circles and polygons ─────────────────────────────────────────────────────────────────
