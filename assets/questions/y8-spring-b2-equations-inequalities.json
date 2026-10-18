@@ -1,0 +1,2202 @@
+{
+ "version": 1,
+ "note": "Y8 Spring Block 2 Equations and inequalities: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8sp2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simple 1- and 2-step equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S1 Solve simple 1- and 2-step equations",
+   "keywords": [
+    "solve",
+    "simple",
+    "1",
+    "and",
+    "2",
+    "step",
+    "equations",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + x0 - a == x0"
+   ],
+   "text": "Solve $x + [[a]] = [[a + x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simple 1- and 2-step equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S1 Solve simple 1- and 2-step equations",
+   "keywords": [
+    "solve",
+    "simple",
+    "1",
+    "and",
+    "2",
+    "step",
+    "equations",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * x0 + b - b) / a == x0"
+   ],
+   "text": "Solve $[[a]]x + [[b]] = [[a * x0 + b]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simple 1- and 2-step equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S1 Solve simple 1- and 2-step equations",
+   "keywords": [
+    "solve",
+    "simple",
+    "1",
+    "and",
+    "2",
+    "step",
+    "equations",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * x0 > b"
+   ],
+   "check": [
+    "(a * x0 - b + b) / a == x0"
+   ],
+   "text": "Solve $[[a]]x - [[b]] = [[a * x0 - b]]$ and check your answer by substituting.",
+   "answer": "$x = [[x0]]$; check: [[a]] × [[x0]] − [[b]] = [[a * x0 - b]]"
+  },
+  {
+   "id": "y8sp2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simple 1- and 2-step equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S1 Solve simple 1- and 2-step equations",
+   "keywords": [
+    "solve",
+    "simple",
+    "1",
+    "and",
+    "2",
+    "step",
+    "equations",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * x0 / a == x0"
+   ],
+   "text": "Solve (a) $[[a]]x = [[a * x0]]$ (b) $\\frac{x}{[[b]]} = [[x1]]$ (c) $[[a]]x + [[c]] = [[a * x0 + c]]$. (3 marks)",
+   "answer": "(a) $x = [[x0]]$  (b) $x = [[b * x1]]$  (c) $x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S2 Solve more complex equations",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * (x0 + b) / a - b == x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) = [[a * (x0 + b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S2 Solve more complex equations",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 > b"
+   ],
+   "check": [
+    "a * (x0 - b) / a + b == x0"
+   ],
+   "text": "Solve $[[a]](x - [[b]]) = [[a * (x0 - b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S2 Solve more complex equations",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * (x0 + b) + c - c) / a - b == x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) + [[c]] = [[a * (x0 + b) + c]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S2 Solve more complex equations",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a - c) * x0 + a * b + c * d - a * b - c * d == (a - c) * x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) - [[c]](x - [[d]]) = [[(a - c) * x0 + a * b + c * d]]$. (4 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10,
+       12,
+       15,
+       18,
+       20,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 % a == 0"
+   ],
+   "check": [
+    "x0 / a * a == x0"
+   ],
+   "text": "Solve $\\frac{x}{[[a]]} + [[b]] = [[x0 / a + b]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * c > b"
+   ],
+   "check": [
+    "a * c - b + b == a * c"
+   ],
+   "text": "Solve $\\frac{x + [[b]]}{[[a]]} = [[c]]$.",
+   "answer": "$x = [[a * c - b]]$"
+  },
+  {
+   "id": "y8sp2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(a * x0 + b) / c"
+    ]
+   ],
+   "where": [
+    "isint(d)"
+   ],
+   "check": [
+    "a * x0 + b == c * d"
+   ],
+   "text": "Solve $\\frac{[[a]]x + [[b]]}{[[c]]} = [[d]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "x0",
+     "lcm(a, b) * k"
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "x0 / a + x0 / b - x0 / a - x0 / b == 0"
+   ],
+   "text": "Solve $\\frac{x}{[[a]]} + \\frac{x}{[[b]]} = [[x0 / a + x0 / b]]$. (3 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S4 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * x0 + b - b) / a == x0"
+   ],
+   "text": "I think of a number, multiply it by [[a]] and add [[b]]. The answer is [[a * x0 + b]]. Form an equation and solve it to find my number.",
+   "answer": "$[[a]]x + [[b]] = [[a * x0 + b]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S4 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(4 * x0 + 2 * d - 2 * d) / 4 == x0"
+   ],
+   "text": "A rectangle has width $x$ cm and length $(x + [[d]])$ cm. Its perimeter is [[4 * x0 + 2 * d]] cm. Form and solve an equation to find $x$.",
+   "answer": "$4x + [[2 * d]] = [[4 * x0 + 2 * d]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S4 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((180 - d) / (p + 2))",
+    "(p + 2) > 0"
+   ],
+   "check": [
+    "(180 - d) / (p + 2) * (p + 2) == 180 - d"
+   ],
+   "text": "The angles of a triangle are $x°$, $(x + [[d]])°$ and $([[p]]x)°$. Form and solve an equation to find $x$.",
+   "answer": "$[[p + 2]]x + [[d]] = 180$, so $x = [[(180 - d) / (p + 2)]]$"
+  },
+  {
+   "id": "y8sp2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S4 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(2 * c + a - a) / 2 == c"
+   ],
+   "text": "Ben is [[a]] years older than Cara. Their ages add up to [[2 * c + a]]. Form and solve an equation to find Cara's age and Ben's age. (3 marks)",
+   "answer": "$c + (c + [[a]]) = [[2 * c + a]]$, so Cara is [[c]] and Ben is [[c + a]]"
+  },
+  {
+   "id": "y8sp2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]]x + [[b]] = [[q]]x + [[b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p - q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p - q) * (p - q) == b + d"
+   ],
+   "text": "Solve $[[p]]x - [[b]] = [[q]]x + [[d]]$.",
+   "answer": "$x = [[(b + d) / (p - q)]]$"
+  },
+  {
+   "id": "y8sp2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]](x + [[b]]) = [[q]]x + [[p * b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       1
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "a + (p - q) * x0"
+    ]
+   ],
+   "where": [
+    "p > q"
+   ],
+   "check": [
+    "(b - a) / (p - q) * (p - q) == b - a"
+   ],
+   "text": "Taxi A charges £[[a]] plus £[[p]] per mile. Taxi B charges £[[b]] plus £[[q]] per mile. For what distance do both taxis cost the same? (4 marks)",
+   "answer": "$[[a]] + [[p]]m = [[b]] + [[q|coef]]m$, so $m = [[(b - a) / (p - q)]]$ miles"
+  },
+  {
+   "id": "y8sp2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Understand and use inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S6 Understand and use inequalities",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "inequalities",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "List the integers $n$ that satisfy $-[[a]] < n \\leq [[b]]$.",
+   "answer": "[[-a + 1]] to [[b]]"
+  },
+  {
+   "id": "y8sp2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Understand and use inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S6 Understand and use inequalities",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "inequalities",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "Write an inequality for: $x$ is greater than [[a]] and at most [[b]].",
+   "answer": "$[[a]] < x \\leq [[b]]$"
+  },
+  {
+   "id": "y8sp2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Understand and use inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S6 Understand and use inequalities",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "inequalities",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "How many integers satisfy $[[a]] \\leq n < [[b]]$? List them.",
+   "answer": "[[b - a]] integers: [[a]] to [[b - 1]]"
+  },
+  {
+   "id": "y8sp2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Understand and use inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S6 Understand and use inequalities",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "inequalities",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       -5,
+       -3,
+       -1,
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "$n$ is an integer. List all the values of $n$ for which $[[a]] < 2n \\leq [[2 * b]]$. (2 marks)",
+   "answer": "[[floor(a / 2) + 1]] to [[b]]"
+  },
+  {
+   "id": "y8sp2-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Inequalities on a number line",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S7 Inequalities on a number line",
+   "keywords": [
+    "inequalities",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       -5,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v == v"
+   ],
+   "text": "Write down the inequality shown on the number line.",
+   "answer": "$x > [[v]]$",
+   "diagram": {
+    "kind": "number-line",
+    "min": -8,
+    "max": 8,
+    "step": 1,
+    "labelEvery": 2,
+    "marks": [
+     {
+      "at": "[[v|n]]",
+      "open": true,
+      "to": "right"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y8sp2-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Inequalities on a number line",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S7 Inequalities on a number line",
+   "keywords": [
+    "inequalities",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       -5,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v == v"
+   ],
+   "text": "Write down the inequality shown on the number line.",
+   "answer": "$x \\leq [[v]]$",
+   "diagram": {
+    "kind": "number-line",
+    "min": -8,
+    "max": 8,
+    "step": 1,
+    "labelEvery": 2,
+    "marks": [
+     {
+      "at": "[[v|n]]",
+      "open": false,
+      "to": "left"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y8sp2-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Inequalities on a number line",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S7 Inequalities on a number line",
+   "keywords": [
+    "inequalities",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       -6,
+       0
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > p"
+   ],
+   "text": "Write down the inequality shown on the number line.",
+   "answer": "$[[p]] \\leq x < [[q]]$",
+   "diagram": {
+    "kind": "number-line",
+    "min": -8,
+    "max": 8,
+    "step": 1,
+    "labelEvery": 2,
+    "marks": [
+     {
+      "at": "[[p|n]]",
+      "open": false,
+      "end": "[[q|n]]"
+     },
+     {
+      "at": "[[q|n]]",
+      "open": true
+     }
+    ]
+   }
+  },
+  {
+   "id": "y8sp2-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Inequalities on a number line",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S7 Inequalities on a number line",
+   "keywords": [
+    "inequalities",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       -5,
+       0
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > p"
+   ],
+   "text": "(a) Write down the inequality shown on the number line. (b) List the integers that satisfy it. (3 marks)",
+   "answer": "(a) $[[p]] < x \\leq [[q]]$  (b) [[p + 1]] to [[q]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": -8,
+    "max": 8,
+    "step": 1,
+    "labelEvery": 2,
+    "marks": [
+     {
+      "at": "[[p|n]]",
+      "open": true,
+      "end": "[[q|n]]"
+     },
+     {
+      "at": "[[q|n]]",
+      "open": false
+     }
+    ]
+   }
+  },
+  {
+   "id": "y8sp2-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simple inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S8 Solve simple inequalities",
+   "keywords": [
+    "solve",
+    "simple",
+    "inequalities",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + x0 - a == x0"
+   ],
+   "text": "Solve $x + [[a]] > [[a + x0]]$.",
+   "answer": "$x > [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simple inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S8 Solve simple inequalities",
+   "keywords": [
+    "solve",
+    "simple",
+    "inequalities",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * x0 / a == x0"
+   ],
+   "text": "Solve $[[a]]x \\leq [[a * x0]]$.",
+   "answer": "$x \\leq [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simple inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S8 Solve simple inequalities",
+   "keywords": [
+    "solve",
+    "simple",
+    "inequalities",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * x0 > b"
+   ],
+   "check": [
+    "(a * x0 - b + b) / a == x0"
+   ],
+   "text": "Solve $[[a]]x - [[b]] \\geq [[a * x0 - b]]$ and write down the smallest integer solution.",
+   "answer": "$x \\geq [[x0]]$; smallest integer [[x0]]"
+  },
+  {
+   "id": "y8sp2-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simple inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S8 Solve simple inequalities",
+   "keywords": [
+    "solve",
+    "simple",
+    "inequalities",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * x0 / a == x0"
+   ],
+   "text": "Solve $-[[a]]x < [[a * x0]]$. Explain what happens to the inequality sign. (3 marks)",
+   "answer": "$x > -[[x0]]$: dividing by a negative number reverses the inequality sign"
+  },
+  {
+   "id": "y8sp2-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S9 Form and solve inequalities",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * x0 + b - b) / a == x0"
+   ],
+   "text": "I think of a number, multiply by [[a]] and add [[b]]. The answer is greater than [[a * x0 + b]]. Form and solve an inequality.",
+   "answer": "$[[a]]x + [[b]] > [[a * x0 + b]]$, so $x > [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S9 Form and solve inequalities",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       25,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % p != 0"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Ali has £[[m]]. Books cost £[[p]] each. Form and solve an inequality to find the most books he can buy.",
+   "answer": "$[[p]]n \\leq [[m]]$, so $n \\leq [[m / p|dp:2]]$: [[floor(m / p)]] books"
+  },
+  {
+   "id": "y8sp2-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S9 Form and solve inequalities",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2 * (w + x0 + d) == 2 * w + 2 * (x0 + d)"
+   ],
+   "text": "A rectangle has width [[w]] cm and length $(x + [[d]])$ cm. Its perimeter is at most [[2 * w + 2 * (x0 + d)]] cm. Form and solve an inequality for $x$.",
+   "answer": "$2([[w]] + x + [[d]]) \\leq [[2 * w + 2 * (x0 + d)]]$, so $x \\leq [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S9 Form and solve inequalities",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       18,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(m - a) % b != 0"
+   ],
+   "check": [
+    "m > a"
+   ],
+   "text": "A taxi costs £[[a]] plus £[[b]] per mile. Mia has £[[m]]. Form an inequality and work out the greatest whole number of miles she can travel. (3 marks)",
+   "answer": "$[[a]] + [[b]]x \\leq [[m]]$, so $x \\leq [[(m - a) / b|dp:2]]$: [[floor((m - a) / b)]] miles"
+  },
+  {
+   "id": "y8sp2-s10-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities with unknowns on both sides (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S10 Solve inequalities with unknowns on both sides (E)",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]]x + [[b]] > [[q]]x + [[b + (p - q) * x0]]$.",
+   "answer": "$x > [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s10-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities with unknowns on both sides (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S10 Solve inequalities with unknowns on both sides (E)",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p - q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p - q) * (p - q) == b + d"
+   ],
+   "text": "Solve $[[p]]x - [[b]] \\leq [[q]]x + [[d]]$.",
+   "answer": "$x \\leq [[(b + d) / (p - q)]]$"
+  },
+  {
+   "id": "y8sp2-s10-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities with unknowns on both sides (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S10 Solve inequalities with unknowns on both sides (E)",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p + q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p + q) * (p + q) == b + d"
+   ],
+   "text": "Solve $[[b]] - [[q]]x \\geq [[p]]x - [[d]]$.",
+   "answer": "$x \\leq [[x0]]$"
+  },
+  {
+   "id": "y8sp2-s10-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities with unknowns on both sides (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B2 Equations and inequalities · S10 Solve inequalities with unknowns on both sides (E)",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]](x + [[b]]) < [[q]]x + [[p * b + (p - q) * x0]]$ and list the positive integers that satisfy it. (4 marks)",
+   "answer": "$x < [[x0]]$; positive integers: 1 to [[x0 - 1]]"
+  }
+ ]
+}

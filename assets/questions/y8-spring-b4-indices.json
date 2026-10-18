@@ -1,0 +1,1659 @@
+{
+ "version": 1,
+ "note": "Y8 Spring Block 4 Indices: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8sp4-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Add and subtract expressions with indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S1 Add and subtract expressions with indices",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b - c > 0"
+   ],
+   "check": [
+    "a + b - c != 0"
+   ],
+   "text": "Simplify $[[a]]x^2 + [[b]]x^2 - [[c]]x^2$.",
+   "answer": "$[[a + b - c|term:x^2]]$"
+  },
+  {
+   "id": "y8sp4-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Add and subtract expressions with indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S1 Add and subtract expressions with indices",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Simplify $[[a]]x^2 + [[b]]x + [[c]]x^2 - [[d|coef]]x$.",
+   "answer": "$[[a + c]]x^2 [[b - d|sterm:x]]$"
+  },
+  {
+   "id": "y8sp4-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Add and subtract expressions with indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S1 Add and subtract expressions with indices",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - c != 0"
+   ],
+   "text": "Simplify $[[a]]y^3 + [[b]]y^2 - [[c|coef]]y^3 + [[d|coef]]y^2$. Explain why $y^3$ and $y^2$ terms cannot be added together.",
+   "answer": "$[[a - c|term:y^3]][[b + d|sterm:y^2]]$: they are different powers, so they are not like terms"
+  },
+  {
+   "id": "y8sp4-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Add and subtract expressions with indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S1 Add and subtract expressions with indices",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "A shape has sides $[[a]]x^2$ cm, $[[b]]x$ cm, $[[c]]x^2$ cm and $[[d]]x$ cm. Write a simplified expression for its perimeter. (2 marks)",
+   "answer": "$[[a + c|term:x^2]][[b + d|sterm:x]]$ cm"
+  },
+  {
+   "id": "y8sp4-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Multiply and divide expressions with indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S2 Multiply and divide expressions with indices",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Simplify $[[a]]x \\times [[b]]x$.",
+   "answer": "$[[a * b]]x^2$"
+  },
+  {
+   "id": "y8sp4-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Multiply and divide expressions with indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S2 Multiply and divide expressions with indices",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Simplify $[[a * b]]x^2 \\div [[a]]x$.",
+   "answer": "$[[b|coef]]x$"
+  },
+  {
+   "id": "y8sp4-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Multiply and divide expressions with indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S2 Multiply and divide expressions with indices",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Simplify (a) $[[a]]x^2y \\times [[b]]xy$ (b) $[[a * b]]x^3y^2 \\div [[a]]xy$.",
+   "answer": "(a) $[[a * b]]x^3y^2$  (b) $[[b|coef]]x^2y$"
+  },
+  {
+   "id": "y8sp4-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Multiply and divide expressions with indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S2 Multiply and divide expressions with indices",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "expressions",
+    "with",
+    "indices",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "A rectangle has an area of $[[a * b]]x^3$ cm² and a length of $[[a]]x^2$ cm. Work out its width. (2 marks)",
+   "answer": "$[[b|coef]]x$ cm"
+  },
+  {
+   "id": "y8sp4-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Addition law for indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S3 Addition law for indices",
+   "keywords": [
+    "addition",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - n == m"
+   ],
+   "text": "Write $x^{[[m]]} \\times x^{[[n]]}$ as a single power.",
+   "answer": "$x^{[[m + n]]}$"
+  },
+  {
+   "id": "y8sp4-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Addition law for indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S3 Addition law for indices",
+   "keywords": [
+    "addition",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - n == m"
+   ],
+   "text": "Write $[[b]]^{[[m]]} \\times [[b]]^{[[n]]}$ as a single power.",
+   "answer": "$[[b]]^{[[m + n]]}$"
+  },
+  {
+   "id": "y8sp4-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Addition law for indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S3 Addition law for indices",
+   "keywords": [
+    "addition",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - n == m"
+   ],
+   "text": "Simplify $[[a]]x^{[[m]]} \\times [[b]]x^{[[n]]}$.",
+   "answer": "$[[a * b]]x^{[[m + n]]}$"
+  },
+  {
+   "id": "y8sp4-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Addition law for indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S3 Addition law for indices",
+   "keywords": [
+    "addition",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "n0",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n0 - m == n0"
+   ],
+   "text": "$x^{[[m]]} \\times x^{n} = x^{[[m + n0]]}$. (a) Find the value of $n$. (b) Simplify $[[a]]y^{n} \\times y^{[[m]]}$. (2 marks)",
+   "answer": "(a) $n = [[n0]]$  (b) $[[a]]y^{[[m + n0]]}$"
+  },
+  {
+   "id": "y8sp4-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Subtraction law for indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S4 Subtraction law for indices",
+   "keywords": [
+    "subtraction",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - n == m"
+   ],
+   "text": "Write $x^{[[m + n]]} \\div x^{[[n]]}$ as a single power.",
+   "answer": "$x^{[[m]]}$"
+  },
+  {
+   "id": "y8sp4-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Subtraction law for indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S4 Subtraction law for indices",
+   "keywords": [
+    "subtraction",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - n == m"
+   ],
+   "text": "Write $[[b]]^{[[m + n]]} \\div [[b]]^{[[n]]}$ as a single power.",
+   "answer": "$[[b]]^{[[m]]}$"
+  },
+  {
+   "id": "y8sp4-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Subtraction law for indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S4 Subtraction law for indices",
+   "keywords": [
+    "subtraction",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Simplify $[[a * b]]x^{[[m + n]]} \\div [[a]]x^{[[n]]}$.",
+   "answer": "$[[b|coef]]x^{[[m]]}$"
+  },
+  {
+   "id": "y8sp4-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Subtraction law for indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S4 Subtraction law for indices",
+   "keywords": [
+    "subtraction",
+    "law",
+    "for",
+    "indices",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "n0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "$x^{[[m + n0]]} \\div x^{n} = x^{[[m]]}$. (a) Find the value of $n$. (b) Simplify $\\frac{[[a * b]]y^{[[m + n0]]}}{[[a]]y^{[[n0]]}}$. (2 marks)",
+   "answer": "(a) $n = [[n0]]$  (b) $[[b|coef]]y^{[[m]]}$"
+  },
+  {
+   "id": "y8sp4-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Addition and subtraction laws for indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S5 Addition and subtraction laws for indices",
+   "keywords": [
+    "addition",
+    "and",
+    "subtraction",
+    "laws",
+    "for",
+    "indices",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - k > 0"
+   ],
+   "text": "Simplify $x^{[[m]]} \\times x^{[[n]]} \\div x^{[[k]]}$.",
+   "answer": "$x^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y8sp4-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Addition and subtraction laws for indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S5 Addition and subtraction laws for indices",
+   "keywords": [
+    "addition",
+    "and",
+    "subtraction",
+    "laws",
+    "for",
+    "indices",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - k > 0"
+   ],
+   "text": "Write $\\frac{[[b]]^{[[m]]} \\times [[b]]^{[[n]]}}{[[b]]^{[[k]]}}$ as a single power.",
+   "answer": "$[[b]]^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y8sp4-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Addition and subtraction laws for indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S5 Addition and subtraction laws for indices",
+   "keywords": [
+    "addition",
+    "and",
+    "subtraction",
+    "laws",
+    "for",
+    "indices",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b != 1"
+   ],
+   "check": [
+    "a * c / c == a"
+   ],
+   "text": "Simplify $\\frac{[[a * c]]x^{[[m]]} \\times [[b]]x^{[[n]]}}{[[c]]x^{[[k]]}}$.",
+   "answer": "$[[a * b]]x^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y8sp4-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Addition and subtraction laws for indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S5 Addition and subtraction laws for indices",
+   "keywords": [
+    "addition",
+    "and",
+    "subtraction",
+    "laws",
+    "for",
+    "indices",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * c / c == a"
+   ],
+   "text": "Simplify $\\frac{[[a * c]]x^{[[m]]}y^{[[p]]} \\times x^{[[n]]}y}{[[c]]x^{[[k]]}y^{[[q]]}}$. (3 marks)",
+   "answer": "$[[a|coef]]x^{[[m + n - k]]}y^{[[p + 1 - q]]}$"
+  },
+  {
+   "id": "y8sp4-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Powers of powers (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S6 Powers of powers (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * n / n == m"
+   ],
+   "text": "Write $(x^{[[m]]})^{[[n]]}$ as a single power.",
+   "answer": "$x^{[[m * n]]}$"
+  },
+  {
+   "id": "y8sp4-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Powers of powers (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S6 Powers of powers (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * n / n == m"
+   ],
+   "text": "Simplify $(y^{[[m]]})^{[[n]]}$ and $(2^{[[m]]})^{[[n]]}$ as single powers.",
+   "answer": "$y^{[[m * n]]}$ and $2^{[[m * n]]}$"
+  },
+  {
+   "id": "y8sp4-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Powers of powers (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S6 Powers of powers (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * n / n == m"
+   ],
+   "text": "Simplify $([[a]]x^{[[m]]})^{[[n]]}$.",
+   "answer": "$[[a^n]]x^{[[m * n]]}$"
+  },
+  {
+   "id": "y8sp4-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Powers of powers (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S6 Powers of powers (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * n0 / m == n0"
+   ],
+   "text": "(a) Simplify $(x^{[[m]]})^{n}$ given that it equals $x^{[[m * n0]]}$. Find $n$. (b) Simplify $([[a]]y^{[[p]]})^{[[q]]}$. (3 marks)",
+   "answer": "(a) $n = [[n0]]$  (b) $[[a^q]]y^{[[p * q]]}$"
+  },
+  {
+   "id": "y8sp4-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Negative indices (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S7 Negative indices (E)",
+   "keywords": [
+    "negative",
+    "indices",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b^n > 0"
+   ],
+   "text": "Write $[[b]]^{-[[n]]}$ as a fraction.",
+   "answer": "$\\frac{1}{[[b^n]]}$"
+  },
+  {
+   "id": "y8sp4-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Negative indices (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S7 Negative indices (E)",
+   "keywords": [
+    "negative",
+    "indices",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Write $x^{-[[n]]}$ with a positive power.",
+   "answer": "$\\frac{1}{x^{[[n]]}}$"
+  },
+  {
+   "id": "y8sp4-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Negative indices (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S7 Negative indices (E)",
+   "keywords": [
+    "negative",
+    "indices",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b^m > 0"
+   ],
+   "text": "Write (a) $[[a]]x^{-[[n]]}$ (b) $\\frac{1}{[[b]]^{-[[m]]}}$ without negative powers.",
+   "answer": "(a) $\\frac{[[a]]}{x^{[[n]]}}$  (b) $[[b^m]]$"
+  },
+  {
+   "id": "y8sp4-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Negative indices (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S7 Negative indices (E)",
+   "keywords": [
+    "negative",
+    "indices",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > m"
+   ],
+   "check": [
+    "n - m > 0"
+   ],
+   "text": "Work out $[[b]]^{[[m]]} \\times [[b]]^{-[[n]]}$ and give your answer as a fraction. (2 marks)",
+   "answer": "$[[b]]^{[[m - n]]} = \\frac{1}{[[b^(n - m)]]}$"
+  },
+  {
+   "id": "y8sp4-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S8 Fractional indices (E)",
+   "keywords": [
+    "fractional",
+    "indices",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b]]^{\\frac{1}{2}}$.",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y8sp4-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S8 Fractional indices (E)",
+   "keywords": [
+    "fractional",
+    "indices",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b * b]]^{\\frac{1}{3}}$.",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y8sp4-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S8 Fractional indices (E)",
+   "keywords": [
+    "fractional",
+    "indices",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b * b]]^{\\frac{2}{3}}$.",
+   "answer": "[[b * b]]"
+  },
+  {
+   "id": "y8sp4-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Spring B4 Indices · S8 Fractional indices (E)",
+   "keywords": [
+    "fractional",
+    "indices",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out (a) $[[a * a]]^{\\frac{1}{2}} \\times [[b * b * b]]^{\\frac{1}{3}}$ (b) $[[c * c * c * c]]^{\\frac{3}{4}}$. (3 marks)",
+   "answer": "(a) [[a * b]]  (b) [[c * c * c]]"
+  }
+ ]
+}
