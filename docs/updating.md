@@ -19,13 +19,20 @@ terminal with `cargo run` says so and does nothing.
 
 ## For you: publishing an update
 
-1. Merge your changes to `main`.
-2. GitHub ▸ **Actions** ▸ **Publish Mac update** ▸ **Run workflow**. Type a line about what is new
-   (teachers see it in the update dialog). It builds on a free GitHub Mac and publishes a release
-   named `build-<commit>` with the zip and its checksum. About 10–20 minutes.
-3. Everyone who has update checks on sees *Update available* the next time they start DeckCraft.
+You do not run anything. Merging a pull request into `main` starts two GitHub workflows by itself:
 
-Nothing is published until you press that button. The release is public (the repository is).
+- **Publish Mac update** builds the Mac app on a free GitHub Mac and publishes a release named
+  `build-<commit>` with the zip and its checksum (about 10–20 minutes). Everyone with update checks
+  on sees *Update available* the next time they start DeckCraft.
+- **Publish web app** builds the web version and puts it on GitHub Pages. The installed web app
+  picks up the new version the next time it is opened online.
+
+Merges that only change Markdown files or `docs/` publish nothing. The release text is the pull
+request's title. To publish without a merge, or with your own wording, use GitHub ▸ **Actions** ▸
+the workflow ▸ **Run workflow**. Releases are public (the repository is).
+
+Check it worked: GitHub ▸ **Actions** shows both workflows going green, then **Releases** lists the
+new `build-…` entry.
 
 ## How the app decides
 

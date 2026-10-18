@@ -1,10 +1,16 @@
 name: Publish web app
 
 # Builds DeckCraft's web version and publishes it to GitHub Pages
-# (https://k-betts.github.io/deckcraft/). NOTHING runs automatically: start it yourself from
-# GitHub > Actions > "Publish web app" > Run workflow, after switching on
-# Settings > Pages > Source: GitHub Actions. See docs/web-hosting.md.
+# (https://k-betts.github.io/deckcraft/). It runs by itself whenever something is merged to main
+# (not for Markdown or docs/ changes), and can be started by hand from
+# GitHub > Actions > "Publish web app" > Run workflow. It needs Settings > Pages > Source:
+# GitHub Actions switched on once. See docs/web-hosting.md.
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
   workflow_dispatch:
 
 permissions:
