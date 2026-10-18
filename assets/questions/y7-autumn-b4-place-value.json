@@ -1,0 +1,2699 @@
+{
+ "version": 1,
+ "note": "Year 7 Autumn Block 4 Place value, ordering and rounding: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7a4-s01-l1",
+   "topic": "Number",
+   "subtopic": "Write integers in numerals and words",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S1 Write integers in numerals and words",
+   "keywords": [
+    "write",
+    "integers",
+    "in",
+    "numerals",
+    "and",
+    "words",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "th",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "th * 1000 + h * 100 + t * 10 + u"
+    ]
+   ],
+   "check": [
+    "n > 1000"
+   ],
+   "text": "Write [[n|words]] in figures.",
+   "answer": "[[n|group]]"
+  },
+  {
+   "id": "y7a4-s01-l2",
+   "topic": "Number",
+   "subtopic": "Write integers in numerals and words",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S1 Write integers in numerals and words",
+   "keywords": [
+    "write",
+    "integers",
+    "in",
+    "numerals",
+    "and",
+    "words",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1100,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0 || n % 100 != 0"
+   ],
+   "check": [
+    "n > 1000"
+   ],
+   "text": "Write [[n|group]] in words.",
+   "answer": "[[n|words]]"
+  },
+  {
+   "id": "y7a4-s01-l3",
+   "topic": "Number",
+   "subtopic": "Write integers in numerals and words",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S1 Write integers in numerals and words",
+   "keywords": [
+    "write",
+    "integers",
+    "in",
+    "numerals",
+    "and",
+    "words",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "a * 10000 + c + b * 3000"
+    ]
+   ],
+   "check": [
+    "n >= 10000"
+   ],
+   "text": "Write [[n|words]] in figures.",
+   "answer": "[[n|group]]"
+  },
+  {
+   "id": "y7a4-s01-l4",
+   "topic": "Number",
+   "subtopic": "Write integers in numerals and words",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S1 Write integers in numerals and words",
+   "keywords": [
+    "write",
+    "integers",
+    "in",
+    "numerals",
+    "and",
+    "words",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10000,
+       99999
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       10000,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 100 != 0",
+    "m % 100 != 0",
+    "n != m"
+   ],
+   "check": [
+    "n > 9999"
+   ],
+   "text": "(a) Write [[n|words]] in figures. (b) Write [[m|group]] in words. (2 marks)",
+   "answer": "(a) [[n|group]]  (b) [[m|words]]"
+  },
+  {
+   "id": "y7a4-s02-l1",
+   "topic": "Number",
+   "subtopic": "Intervals on a number line",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S2 Intervals on a number line",
+   "keywords": [
+    "intervals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       2,
+       5,
+       10,
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * s / s == k"
+   ],
+   "text": "What number does A show?",
+   "answer": "[[k * s]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": "[[10 * s|n]]",
+    "step": "[[s|n]]",
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[k * s|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s02-l2",
+   "topic": "Number",
+   "subtopic": "Intervals on a number line",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S2 Intervals on a number line",
+   "keywords": [
+    "intervals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       2,
+       5,
+       10,
+       20,
+       25,
+       50
+      ]
+     }
+    ],
+    [
+     "lo",
+     {
+      "choose": [
+       100,
+       200,
+       500,
+       1000
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(lo + k * s - lo) / s == k"
+   ],
+   "text": "What number does A show?",
+   "answer": "[[lo + k * s]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[lo|n]]",
+    "max": "[[lo + 10 * s|n]]",
+    "step": "[[s|n]]",
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[lo + k * s|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s02-l3",
+   "topic": "Number",
+   "subtopic": "Intervals on a number line",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S2 Intervals on a number line",
+   "keywords": [
+    "intervals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       12,
+       15,
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "lo",
+     {
+      "choose": [
+       0,
+       20,
+       60,
+       100
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(lo + k * s - lo) / s == k"
+   ],
+   "text": "The number line is split into 10 equal intervals. What number does A show?",
+   "answer": "[[lo + k * s]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[lo|n]]",
+    "max": "[[lo + 10 * s|n]]",
+    "step": "[[s|n]]",
+    "labelEvery": 10,
+    "dots": [
+     {
+      "at": "[[lo + k * s|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s02-l4",
+   "topic": "Number",
+   "subtopic": "Intervals on a number line",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S2 Intervals on a number line",
+   "keywords": [
+    "intervals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       10,
+       20,
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "lo",
+     {
+      "choose": [
+       0,
+       100,
+       500
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "choose": [
+       1,
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       7,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(lo + (j + k) * s / 2) - (lo + j * s) == (lo + k * s) - (lo + (j + k) * s / 2)"
+   ],
+   "text": "(a) What number does A show? (b) What number does B show? (c) What is halfway between A and B? (3 marks)",
+   "answer": "(a) [[lo + j * s]]  (b) [[lo + k * s]]  (c) [[lo + (j + k) * s / 2]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[lo|n]]",
+    "max": "[[lo + 10 * s|n]]",
+    "step": "[[s|n]]",
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[lo + j * s|n]]",
+      "label": "A"
+     },
+     {
+      "at": "[[lo + k * s|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s03-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S3 Compare and order integers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1000,
+       8999
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       100,
+       900
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "left",
+     "f * a + (1 - f) * (a + d)"
+    ],
+    [
+     "right",
+     "f * (a + d) + (1 - f) * a"
+    ]
+   ],
+   "check": [
+    "left != right"
+   ],
+   "text": "Write < or > in the space: [[left]] ? [[right]]",
+   "answer": "[[left < right|if:</>]]"
+  },
+  {
+   "id": "y7a4-s03-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S3 Compare and order integers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       1000,
+       5000
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       50,
+       900
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       50,
+       900
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       50,
+       900
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ],
+    [
+     "n4",
+     "n3 + g3"
+    ]
+   ],
+   "check": [
+    "n1 < n2",
+    "n2 < n3",
+    "n3 < n4"
+   ],
+   "text": "Write these numbers in order, smallest first: [[n3]], [[n1]], [[n4]], [[n2]]",
+   "answer": "[[n1]], [[n2]], [[n3]], [[n4]]"
+  },
+  {
+   "id": "y7a4-s03-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S3 Compare and order integers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d2",
+     "d1 + g1"
+    ],
+    [
+     "d3",
+     "d2 + g2"
+    ],
+    [
+     "d4",
+     "d3 + g3"
+    ]
+   ],
+   "where": [
+    "d4 <= 9"
+   ],
+   "check": [
+    "d1 < d2",
+    "d3 < d4"
+   ],
+   "text": "Use the digits [[d3]], [[d1]], [[d4]], [[d2]] once each. Write the smallest and the largest 4-digit number you can make.",
+   "answer": "Smallest [[d1 * 1000 + d2 * 100 + d3 * 10 + d4]], largest [[d4 * 1000 + d3 * 100 + d2 * 10 + d1]]"
+  },
+  {
+   "id": "y7a4-s03-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S3 Compare and order integers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       10000,
+       50000
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       500,
+       9000
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       500,
+       9000
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       500,
+       9000
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ],
+    [
+     "n4",
+     "n3 + g3"
+    ]
+   ],
+   "check": [
+    "n1 < n2",
+    "n2 < n3",
+    "n3 < n4"
+   ],
+   "text": "The populations of four towns are A [[n3]], B [[n1]], C [[n4]] and D [[n2]]. Write the towns in order, starting with the largest population. (2 marks)",
+   "answer": "C, A, D, B"
+  },
+  {
+   "id": "y7a4-s04-l1",
+   "topic": "Number",
+   "subtopic": "Place value for decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S4 Place value for decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "decimals",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "b / 10 * 10 == b"
+   ],
+   "text": "What is the value of the digit [[b]] in [[a]].[[b]][[c]]?",
+   "answer": "[[b]] tenths, or [[b / 10]]"
+  },
+  {
+   "id": "y7a4-s04-l2",
+   "topic": "Number",
+   "subtopic": "Place value for decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S4 Place value for decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "decimals",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "c / 100 * 100 == c"
+   ],
+   "text": "What is the value of the digit [[c]] in [[a]].[[b]][[c]]?",
+   "answer": "[[c]] hundredths, or [[c / 100]]"
+  },
+  {
+   "id": "y7a4-s04-l3",
+   "topic": "Number",
+   "subtopic": "Place value for decimals",
+   "difficulty": 3,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S4 Place value for decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "decimals",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * 10 + y > 10"
+   ],
+   "text": "Write [[x]] tenths and [[y]] hundredths as a decimal.",
+   "answer": "0.[[x]][[y]]"
+  },
+  {
+   "id": "y7a4-s04-l4",
+   "topic": "Number",
+   "subtopic": "Place value for decimals",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S4 Place value for decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "decimals",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "a + b / 10 + c / 100 + 0.1 > a + b / 10 + c / 100"
+   ],
+   "text": "(a) What is the value of the digit [[c]] in [[a]].[[b]][[c]]? (b) Write the number that is 0.1 more than [[a]].[[b]][[c]]. (2 marks)",
+   "answer": "(a) [[c / 100]]  (b) [[a + b / 10 + c / 100 + 0.1]]"
+  },
+  {
+   "id": "y7a4-s05-l1",
+   "topic": "Number",
+   "subtopic": "Decimals on a number line",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S5 Decimals on a number line",
+   "keywords": [
+    "decimals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 10 * 10 == k"
+   ],
+   "text": "What decimal does A show?",
+   "answer": "[[k / 10]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[k / 10|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s05-l2",
+   "topic": "Number",
+   "subtopic": "Decimals on a number line",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S5 Decimals on a number line",
+   "keywords": [
+    "decimals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w + k / 10 > w"
+   ],
+   "text": "What number does A show?",
+   "answer": "[[w + k / 10]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[w|n]]",
+    "max": "[[w + 1|n]]",
+    "step": 0.1,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[w + k / 10|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s05-l3",
+   "topic": "Number",
+   "subtopic": "Decimals on a number line",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S5 Decimals on a number line",
+   "keywords": [
+    "decimals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4,
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t / 10 + k / 100 > t / 10"
+   ],
+   "text": "What number does A show?",
+   "answer": "[[t / 10 + k / 100]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[t / 10|n]]",
+    "max": "[[t / 10 + 0.1|n]]",
+    "step": 0.01,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[t / 10 + k / 100|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s05-l4",
+   "topic": "Number",
+   "subtopic": "Decimals on a number line",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S5 Decimals on a number line",
+   "keywords": [
+    "decimals",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       6,
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(w + (j + k) / 20) - (w + j / 10) == (w + k / 10) - (w + (j + k) / 20)"
+   ],
+   "text": "(a) What number does A show? (b) What number does B show? (c) What number is halfway between A and B? (3 marks)",
+   "answer": "(a) [[w + j / 10]]  (b) [[w + k / 10]]  (c) [[w + (j + k) / 20]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[w|n]]",
+    "max": "[[w + 1|n]]",
+    "step": 0.1,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[w + j / 10|n]]",
+      "label": "A"
+     },
+     {
+      "at": "[[w + k / 10|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7a4-s06-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S6 Compare and order decimals",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "decimals",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100"
+    ],
+    [
+     "left",
+     "f * p + (1 - f) * q"
+    ],
+    [
+     "right",
+     "f * q + (1 - f) * p"
+    ]
+   ],
+   "check": [
+    "left != right",
+    "q < p"
+   ],
+   "text": "Write < or > in the space: [[left]] ? [[right]]",
+   "answer": "[[left < right|if:</>]]"
+  },
+  {
+   "id": "y7a4-s06-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S6 Compare and order decimals",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "decimals",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100"
+    ],
+    [
+     "r",
+     "k / 10 + e / 100"
+    ],
+    [
+     "s",
+     "k / 100"
+    ]
+   ],
+   "check": [
+    "s < q",
+    "q < p",
+    "p < r"
+   ],
+   "text": "Write these in order, smallest first: [[p]], [[s]], [[r]], [[q]]",
+   "answer": "[[s]], [[q]], [[p]], [[r]]"
+  },
+  {
+   "id": "y7a4-s06-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S6 Compare and order decimals",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "decimals",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w + d / 1000 < w + d / 100",
+    "w + d / 100 < w + d / 100 + 0.001",
+    "w + d / 100 + 0.001 < w + d / 10"
+   ],
+   "text": "Write these in order, smallest first: [[w + d / 100]], [[w + d / 10]], [[w + d / 1000]], [[w + d / 100 + 0.001]]",
+   "answer": "[[w + d / 1000]], [[w + d / 100]], [[w + d / 100 + 0.001]], [[w + d / 10]]"
+  },
+  {
+   "id": "y7a4-s06-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S6 Compare and order decimals",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "decimals",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10 + 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100 + 10"
+    ],
+    [
+     "r",
+     "k / 10 + e / 100 + 10"
+    ],
+    [
+     "s",
+     "k / 100 + 10"
+    ]
+   ],
+   "check": [
+    "s < q",
+    "q < p",
+    "p < r"
+   ],
+   "text": "Four runners have these times in seconds: A [[p]], B [[s]], C [[r]] and D [[q]]. Who finished first, second, third and fourth? (2 marks)",
+   "answer": "B, D, A, C"
+  },
+  {
+   "id": "y7a4-s07-l1",
+   "topic": "Number",
+   "subtopic": "Round to powers of 10",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S7 Round to powers of 10",
+   "keywords": [
+    "round",
+    "to",
+    "powers",
+    "of",
+    "10",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5"
+   ],
+   "check": [
+    "round(n / 10) * 10 - n < 5.5"
+   ],
+   "text": "Round [[n]] to the nearest 10.",
+   "answer": "[[round(n / 10) * 10]]"
+  },
+  {
+   "id": "y7a4-s07-l2",
+   "topic": "Number",
+   "subtopic": "Round to powers of 10",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S7 Round to powers of 10",
+   "keywords": [
+    "round",
+    "to",
+    "powers",
+    "of",
+    "10",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 100 != 50",
+    "n % 100 != 0"
+   ],
+   "check": [
+    "abs(round(n / 100) * 100 - n) < 51"
+   ],
+   "text": "Round [[n]] to the nearest 100.",
+   "answer": "[[round(n / 100) * 100]]"
+  },
+  {
+   "id": "y7a4-s07-l3",
+   "topic": "Number",
+   "subtopic": "Round to powers of 10",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S7 Round to powers of 10",
+   "keywords": [
+    "round",
+    "to",
+    "powers",
+    "of",
+    "10",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 1000 != 500",
+    "n % 1000 != 0"
+   ],
+   "check": [
+    "abs(round(n / 1000) * 1000 - n) < 501"
+   ],
+   "text": "Round [[n|group]] to the nearest 1000.",
+   "answer": "[[round(n / 1000) * 1000|group]]"
+  },
+  {
+   "id": "y7a4-s07-l4",
+   "topic": "Number",
+   "subtopic": "Round to powers of 10",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S7 Round to powers of 10",
+   "keywords": [
+    "round",
+    "to",
+    "powers",
+    "of",
+    "10",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10001,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 100 != 50",
+    "n % 1000 != 500",
+    "n % 100 != 0"
+   ],
+   "check": [
+    "abs(round(n / 100) * 100 - n) < 51"
+   ],
+   "text": "A stadium holds [[n|group]] people. (a) Round [[n|group]] to the nearest 100. (b) Round [[n|group]] to the nearest 1000. (2 marks)",
+   "answer": "(a) [[round(n / 100) * 100|group]]  (b) [[round(n / 1000) * 1000|group]]"
+  },
+  {
+   "id": "y7a4-s08-l1",
+   "topic": "Number",
+   "subtopic": "Round to the nearest integer",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S8 Round to the nearest integer",
+   "keywords": [
+    "round",
+    "to",
+    "the",
+    "nearest",
+    "integer",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       990
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 10) - n / 10) < 0.51"
+   ],
+   "text": "Round [[n / 10]] to the nearest whole number.",
+   "answer": "[[round(n / 10)]]"
+  },
+  {
+   "id": "y7a4-s08-l2",
+   "topic": "Number",
+   "subtopic": "Round to the nearest integer",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S8 Round to the nearest integer",
+   "keywords": [
+    "round",
+    "to",
+    "the",
+    "nearest",
+    "integer",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 100 != 50",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 100) - n / 100) < 0.51"
+   ],
+   "text": "Round [[n / 100]] to the nearest whole number.",
+   "answer": "[[round(n / 100)]]"
+  },
+  {
+   "id": "y7a4-s08-l3",
+   "topic": "Number",
+   "subtopic": "Round to the nearest integer",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S8 Round to the nearest integer",
+   "keywords": [
+    "round",
+    "to",
+    "the",
+    "nearest",
+    "integer",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       40
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "round(m + 0.5 + (2 * f - 1) * d / 1000) == m + f"
+   ],
+   "text": "Round [[m + 0.5 + (2 * f - 1) * d / 1000]] to the nearest whole number.",
+   "answer": "[[m + f]]"
+  },
+  {
+   "id": "y7a4-s08-l4",
+   "topic": "Number",
+   "subtopic": "Round to the nearest integer",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S8 Round to the nearest integer",
+   "keywords": [
+    "round",
+    "to",
+    "the",
+    "nearest",
+    "integer",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       3999
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       11,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 100 != 50",
+    "n % 10 != 0",
+    "k % 10 != 5"
+   ],
+   "check": [
+    "abs(round(n / 100) - n / 100) < 0.51"
+   ],
+   "text": "(a) Round [[n / 100]] to the nearest whole number. (b) Round [[k]] to the nearest ten. (2 marks)",
+   "answer": "(a) [[round(n / 100)]]  (b) [[round(k / 10) * 10]]"
+  },
+  {
+   "id": "y7a4-s09-l1",
+   "topic": "Number",
+   "subtopic": "Round to decimal places",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S9 Round to decimal places",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 10) / 10 - n / 100) < 0.051"
+   ],
+   "text": "Round [[n / 100]] to 1 decimal place.",
+   "answer": "[[(n / 100)|dp:1]]"
+  },
+  {
+   "id": "y7a4-s09-l2",
+   "topic": "Number",
+   "subtopic": "Round to decimal places",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S9 Round to decimal places",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 10) / 100 - n / 1000) < 0.0051"
+   ],
+   "text": "Round [[n / 1000]] to 2 decimal places.",
+   "answer": "[[(n / 1000)|dp:2]]"
+  },
+  {
+   "id": "y7a4-s09-l3",
+   "topic": "Number",
+   "subtopic": "Round to decimal places",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S9 Round to decimal places",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "abs((w + 1) - (w + 0.99 + t / 1000)) < 0.005"
+   ],
+   "text": "Round [[w + 0.99 + t / 1000]] to 2 decimal places.",
+   "answer": "[[(w + 1)|dp:2]]"
+  },
+  {
+   "id": "y7a4-s09-l4",
+   "topic": "Number",
+   "subtopic": "Round to decimal places",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S9 Round to decimal places",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 100 != 50",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 100) / 10 - n / 1000) < 0.051"
+   ],
+   "text": "A calculator shows [[n / 1000]]. (a) Round this to 1 decimal place. (b) Round this to 2 decimal places. (2 marks)",
+   "answer": "(a) [[(n / 1000)|dp:1]]  (b) [[(n / 1000)|dp:2]]"
+  },
+  {
+   "id": "y7a4-s10-l1",
+   "topic": "Number",
+   "subtopic": "Powers of 10 (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S10 Powers of 10 (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "10^k == 10 * 10^(k - 1)"
+   ],
+   "text": "Work out $10^{[[k]]}$",
+   "answer": "[[10^k|group]]"
+  },
+  {
+   "id": "y7a4-s10-l2",
+   "topic": "Number",
+   "subtopic": "Powers of 10 (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S10 Powers of 10 (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^k == m * 10 * 10^(k - 1)"
+   ],
+   "text": "Work out $[[m]] \\times 10^{[[k]]}$",
+   "answer": "[[m * 10^k|group]]"
+  },
+  {
+   "id": "y7a4-s10-l3",
+   "topic": "Number",
+   "subtopic": "Powers of 10 (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S10 Powers of 10 (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "10^k == 10^(k - 1) * 10"
+   ],
+   "text": "Write [[10^k|group]] as a power of 10.",
+   "answer": "$10^{[[k]]}$"
+  },
+  {
+   "id": "y7a4-s10-l4",
+   "topic": "Number",
+   "subtopic": "Powers of 10 (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S10 Powers of 10 (E)",
+   "keywords": [
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^j == m * 10 * 10^(j - 1)"
+   ],
+   "text": "(a) Write $10^{[[k]]}$ as an ordinary number. (b) Work out $[[m]] \\times 10^{[[j]]}$. (2 marks)",
+   "answer": "(a) [[10^k|group]]  (b) [[m * 10^j|group]]"
+  },
+  {
+   "id": "y7a4-s11-l1",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S11 Numbers greater than 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^k / 10^k == m"
+   ],
+   "text": "Write [[m * 10^k|group]] in standard form.",
+   "answer": "$[[m]] \\times 10^{[[k]]}$"
+  },
+  {
+   "id": "y7a4-s11-l2",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S11 Numbers greater than 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.1,
+       9.9,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(m * 10)",
+    "!isint(m)"
+   ],
+   "check": [
+    "m >= 1",
+    "m < 10"
+   ],
+   "text": "Write [[m * 10^k|group]] in standard form.",
+   "answer": "$[[m]] \\times 10^{[[k]]}$"
+  },
+  {
+   "id": "y7a4-s11-l3",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S11 Numbers greater than 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.1,
+       9.9,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(m)"
+   ],
+   "check": [
+    "m * 10^k / 10^k == m"
+   ],
+   "text": "Write $[[m]] \\times 10^{[[k]]}$ as an ordinary number.",
+   "answer": "[[m * 10^k|group]]"
+  },
+  {
+   "id": "y7a4-s11-l4",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S11 Numbers greater than 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.2,
+       9.8,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "step": [
+       1.2,
+       9.8,
+       0.1
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(m)",
+    "!isint(n)"
+   ],
+   "check": [
+    "m < 10"
+   ],
+   "text": "(a) A star is [[m * 10^k|group]] km from Earth. Write this in standard form. (b) Write $[[n]] \\times 10^{[[j]]}$ as an ordinary number. (2 marks)",
+   "answer": "(a) $[[m]] \\times 10^{[[k]]}$  (b) [[n * 10^j|group]]"
+  },
+  {
+   "id": "y7a4-s12-l1",
+   "topic": "Number",
+   "subtopic": "Negative powers of 10 (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S12 Negative powers of 10 (E)",
+   "keywords": [
+    "negative",
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "10^-k * 10^k == 1"
+   ],
+   "text": "Write $10^{-[[k]]}$ as a decimal.",
+   "answer": "[[10^-k]]"
+  },
+  {
+   "id": "y7a4-s12-l2",
+   "topic": "Number",
+   "subtopic": "Negative powers of 10 (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S12 Negative powers of 10 (E)",
+   "keywords": [
+    "negative",
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^-k * 10^k == m"
+   ],
+   "text": "Write $[[m]] \\times 10^{-[[k]]}$ as a decimal.",
+   "answer": "[[m * 10^-k]]"
+  },
+  {
+   "id": "y7a4-s12-l3",
+   "topic": "Number",
+   "subtopic": "Negative powers of 10 (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S12 Negative powers of 10 (E)",
+   "keywords": [
+    "negative",
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "10^-k * 10^k == 1"
+   ],
+   "text": "Write [[10^-k]] as a power of 10.",
+   "answer": "$10^{-[[k]]}$"
+  },
+  {
+   "id": "y7a4-s12-l4",
+   "topic": "Number",
+   "subtopic": "Negative powers of 10 (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S12 Negative powers of 10 (E)",
+   "keywords": [
+    "negative",
+    "powers",
+    "of",
+    "10",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^-j * 10^j == m"
+   ],
+   "text": "(a) Write $10^{-[[k]]}$ as a decimal. (b) Write $[[m]] \\times 10^{-[[j]]}$ as a decimal. (2 marks)",
+   "answer": "(a) [[10^-k]]  (b) [[m * 10^-j]]"
+  },
+  {
+   "id": "y7a4-s13-l1",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S13 Numbers between 0 and 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * 10^-k * 10^k == m"
+   ],
+   "text": "Write [[m * 10^-k]] in standard form.",
+   "answer": "$[[m]] \\times 10^{-[[k]]}$"
+  },
+  {
+   "id": "y7a4-s13-l2",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S13 Numbers between 0 and 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.1,
+       9.9,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(m)"
+   ],
+   "check": [
+    "m >= 1",
+    "m < 10"
+   ],
+   "text": "Write [[m * 10^-k]] in standard form.",
+   "answer": "$[[m]] \\times 10^{-[[k]]}$"
+  },
+  {
+   "id": "y7a4-s13-l3",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S13 Numbers between 0 and 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.1,
+       9.9,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(m)"
+   ],
+   "check": [
+    "m * 10^-k * 10^k == m"
+   ],
+   "text": "Write $[[m]] \\times 10^{-[[k]]}$ as an ordinary number.",
+   "answer": "[[m * 10^-k]]"
+  },
+  {
+   "id": "y7a4-s13-l4",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B4 Place value, ordering and rounding · S13 Numbers between 0 and 1 in standard form (E)",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "step": [
+       1.2,
+       9.8,
+       0.1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "step": [
+       1.2,
+       9.8,
+       0.1
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(m)",
+    "!isint(n)"
+   ],
+   "check": [
+    "m < 10"
+   ],
+   "text": "A cell is [[m * 10^-k]] m wide. (a) Write this in standard form. (b) Write $[[n]] \\times 10^{-[[j]]}$ as an ordinary number. (2 marks)",
+   "answer": "(a) $[[m]] \\times 10^{-[[k]]}$  (b) [[n * 10^-j]]"
+  }
+ ]
+}

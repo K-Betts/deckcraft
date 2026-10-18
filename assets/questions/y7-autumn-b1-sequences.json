@@ -1,0 +1,1265 @@
+{
+ "version": 1,
+ "note": "Year 7 Autumn Block 1 Sequences: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7a1-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 5 * d) - (a + 4 * d) == d"
+   ],
+   "text": "Write down the next two terms in the sequence: [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]], …",
+   "answer": "[[a + 4 * d]] and [[a + 5 * d]]"
+  },
+  {
+   "id": "y7a1-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 2,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       40,
+       90
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - 4 * d > 0",
+    "(a - d) - (a - 2 * d) == d"
+   ],
+   "text": "The sequence starts [[a]], [[a - d]], [[a - 2 * d]], [[a - 3 * d]], … Describe the rule in words.",
+   "answer": "Subtract [[d]] each time"
+  },
+  {
+   "id": "y7a1-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 3,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "hit",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "target",
+     "a + d * k + (1 - hit) * e"
+    ]
+   ],
+   "where": [
+    "target > a + 3 * d"
+   ],
+   "check": [
+    "hit == ((target - a) % d == 0)"
+   ],
+   "text": "A sequence starts [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]], … Will [[target]] be in the sequence? Explain.",
+   "answer": "[[hit|if:Yes/No]]. [[target - a]] [[hit|if:is/is not]] a multiple of [[d]]"
+  },
+  {
+   "id": "y7a1-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Describe and continue sequences",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S1 Describe and continue sequences",
+   "keywords": [
+    "describe",
+    "and",
+    "continue",
+    "sequences",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 4 * d) - (a + 3 * d) == d"
+   ],
+   "text": "The first four terms of a sequence are [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]]. (a) Write down the next term. (b) Describe the rule. (2 marks)",
+   "answer": "(a) [[a + 4 * d]]  (b) Add [[d]] each time"
+  },
+  {
+   "id": "y7a1-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Find the next term(s)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S2 Find the next term(s)",
+   "keywords": [
+    "find",
+    "the",
+    "next",
+    "term",
+    "s",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 3 * d) - (a + 2 * d) == d"
+   ],
+   "text": "The first term is [[a]]. The rule is ‘add [[d]]’. Write down the first four terms.",
+   "answer": "[[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]]"
+  },
+  {
+   "id": "y7a1-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Find the next term(s)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S2 Find the next term(s)",
+   "keywords": [
+    "find",
+    "the",
+    "next",
+    "term",
+    "s",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 4 * d) - (a + 3 * d) == d"
+   ],
+   "text": "Find the missing terms.",
+   "answer": "[[a + 3 * d]] and [[a + 4 * d]]",
+   "diagram": {
+    "kind": "sequence-arrows",
+    "terms": [
+     "[[a]]",
+     "[[a + d]]",
+     "[[a + 2 * d]]",
+     null,
+     null
+    ],
+    "rule": "+[[d]]"
+   }
+  },
+  {
+   "id": "y7a1-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Find the next term(s)",
+   "difficulty": 3,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S2 Find the next term(s)",
+   "keywords": [
+    "find",
+    "the",
+    "next",
+    "term",
+    "s",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       10,
+       80
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(t + 3 * d) - (t + 2 * d) == d"
+   ],
+   "text": "Two terms next to each other in a sequence are [[t]] and [[t + d]]. The sequence goes up by the same amount each time. Write down the next two terms.",
+   "answer": "[[t + 2 * d]] and [[t + 3 * d]]"
+  },
+  {
+   "id": "y7a1-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Find the next term(s)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S2 Find the next term(s)",
+   "keywords": [
+    "find",
+    "the",
+    "next",
+    "term",
+    "s",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(h + 3 * g) - (h + 2 * g) == g"
+   ],
+   "text": "A plant is [[h]] cm tall in week 1. It grows [[g]] cm each week. Write down its height in weeks 2, 3 and 4. (2 marks)",
+   "answer": "[[h + g]] cm, [[h + 2 * g]] cm, [[h + 3 * g]] cm"
+  },
+  {
+   "id": "y7a1-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Linear and non-linear sequences",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S3 Linear and non-linear sequences",
+   "keywords": [
+    "linear",
+    "and",
+    "non",
+    "sequences",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 3 * d) - (a + 2 * d) == (a + d) - a"
+   ],
+   "text": "Is this sequence linear or non-linear? [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]], …",
+   "answer": "Linear: it goes up by [[d]] each time"
+  },
+  {
+   "id": "y7a1-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Linear and non-linear sequences",
+   "difficulty": 2,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S3 Linear and non-linear sequences",
+   "keywords": [
+    "linear",
+    "and",
+    "non",
+    "sequences",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 3) - (a + 1) != (a + 1) - a"
+   ],
+   "text": "Is this sequence linear or non-linear? [[a]], [[a + 1]], [[a + 3]], [[a + 6]], … Give a reason.",
+   "answer": "Non-linear: the differences are 1, 2, 3 (not the same)"
+  },
+  {
+   "id": "y7a1-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Linear and non-linear sequences",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S3 Linear and non-linear sequences",
+   "keywords": [
+    "linear",
+    "and",
+    "non",
+    "sequences",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f == 1 || f == 0"
+   ],
+   "text": "A: [[a]], [[a + d * (f * 1 + (1 - f) * 1)]], [[a + d * (f * 2 + (1 - f) * 4)]], [[a + d * (f * 3 + (1 - f) * 9)]]   B: [[a]], [[a + d * ((1 - f) * 1 + f * 1)]], [[a + d * ((1 - f) * 2 + f * 4)]], [[a + d * ((1 - f) * 3 + f * 9)]]. Which sequence is linear? Give a reason.",
+   "answer": "[[f|if:A/B]] is linear: it goes up by [[d]] each time"
+  },
+  {
+   "id": "y7a1-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Linear and non-linear sequences",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S3 Linear and non-linear sequences",
+   "keywords": [
+    "linear",
+    "and",
+    "non",
+    "sequences",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(b + 4) - (b + 1) != (b + 1) - b"
+   ],
+   "text": "The first four terms of two sequences are P: [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]] and Q: [[b]], [[b + 1]], [[b + 4]], [[b + 9]]. (a) Which sequence is linear? (b) Write down the next term of the linear sequence. (2 marks)",
+   "answer": "(a) P  (b) [[a + 4 * d]]"
+  },
+  {
+   "id": "y7a1-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Continue linear sequences",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S4 Continue linear sequences",
+   "keywords": [
+    "continue",
+    "linear",
+    "sequences",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "4 * c == c + c + c + c"
+   ],
+   "text": "Pattern 1 has [[c]] squares. Each pattern has [[c]] more squares than the one before. How many squares will Pattern 4 have?",
+   "answer": "[[4 * c]]",
+   "diagram": {
+    "kind": "pattern",
+    "cells": [
+     [
+      1,
+      "[[c|n]]"
+     ],
+     [
+      2,
+      "[[c|n]]"
+     ],
+     [
+      3,
+      "[[c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7a1-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Continue linear sequences",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S4 Continue linear sequences",
+   "keywords": [
+    "continue",
+    "linear",
+    "sequences",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "step": [
+       0.5,
+       8,
+       0.5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "step": [
+       0.5,
+       3,
+       0.5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 5 * d) - (a + 4 * d) == d"
+   ],
+   "text": "Write down the next two terms in the sequence: [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]], …",
+   "answer": "[[a + 4 * d]] and [[a + 5 * d]]"
+  },
+  {
+   "id": "y7a1-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Continue linear sequences",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S4 Continue linear sequences",
+   "keywords": [
+    "continue",
+    "linear",
+    "sequences",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a - 3 * d > 0",
+    "a - 4 * d < 3"
+   ],
+   "check": [
+    "(a - 6 * d) - (a - 5 * d) == -d"
+   ],
+   "text": "The sequence [[a]], [[a - d]], [[a - 2 * d]], [[a - 3 * d]], … carries on. Write down the next three terms.",
+   "answer": "[[a - 4 * d]], [[a - 5 * d]], [[a - 6 * d]]"
+  },
+  {
+   "id": "y7a1-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Continue linear sequences",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S4 Continue linear sequences",
+   "keywords": [
+    "continue",
+    "linear",
+    "sequences",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 7 * d) - (a + 6 * d) == d"
+   ],
+   "text": "The first three terms of a sequence are [[a]], [[a + d]], [[a + 2 * d]]. (a) Write down the next two terms. (b) Write down the 8th term. (3 marks)",
+   "answer": "(a) [[a + 3 * d]], [[a + 4 * d]]  (b) [[a + 7 * d]]"
+  },
+  {
+   "id": "y7a1-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Continue non-linear sequences",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S5 Continue non-linear sequences",
+   "keywords": [
+    "continue",
+    "non",
+    "linear",
+    "sequences",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       0,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(36 + c) - (25 + c) == 11"
+   ],
+   "text": "Write down the next two terms in the sequence: [[1 + c]], [[4 + c]], [[9 + c]], [[16 + c]], …",
+   "answer": "[[25 + c]] and [[36 + c]]"
+  },
+  {
+   "id": "y7a1-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Continue non-linear sequences",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S5 Continue non-linear sequences",
+   "keywords": [
+    "continue",
+    "non",
+    "linear",
+    "sequences",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * r^5 == a * r^4 * r"
+   ],
+   "text": "Write down the next two terms in the sequence: [[a]], [[a * r]], [[a * r * r]], [[a * r * r * r]], …",
+   "answer": "[[a * r^4]] and [[a * r^5]]"
+  },
+  {
+   "id": "y7a1-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Continue non-linear sequences",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S5 Continue non-linear sequences",
+   "keywords": [
+    "continue",
+    "non",
+    "linear",
+    "sequences",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a + 5 * d + 10 * e) - (a + 4 * d + 6 * e)) - ((a + 4 * d + 6 * e) - (a + 3 * d + 3 * e)) == e"
+   ],
+   "text": "Write down the next two terms in the sequence: [[a]], [[a + d]], [[a + 2 * d + e]], [[a + 3 * d + 3 * e]], …",
+   "answer": "[[a + 4 * d + 6 * e]] and [[a + 5 * d + 10 * e]]"
+  },
+  {
+   "id": "y7a1-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Continue non-linear sequences",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S5 Continue non-linear sequences",
+   "keywords": [
+    "continue",
+    "non",
+    "linear",
+    "sequences",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "(a + b) + (a + 2 * b) == 2 * a + 3 * b"
+   ],
+   "text": "Each term of a sequence is the sum of the two terms before it. The first two terms are [[a]] and [[b]]. (a) Work out the next two terms. (b) Write down the 5th term. (3 marks)",
+   "answer": "(a) [[a + b]] and [[a + 2 * b]]  (b) [[2 * a + 3 * b]]"
+  },
+  {
+   "id": "y7a1-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Term-to-term rules",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S6 Term-to-term rules",
+   "keywords": [
+    "term",
+    "to",
+    "rules",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 2 * d) - (a + d) == d"
+   ],
+   "text": "What is the term-to-term rule for this sequence? [[a]], [[a + d]], [[a + 2 * d]], [[a + 3 * d]], …",
+   "answer": "Add [[d]]"
+  },
+  {
+   "id": "y7a1-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Term-to-term rules",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S6 Term-to-term rules",
+   "keywords": [
+    "term",
+    "to",
+    "rules",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * m^3 == a * m * m * m"
+   ],
+   "text": "Find the missing terms.",
+   "answer": "[[a * m * m]] and [[a * m * m * m]]",
+   "diagram": {
+    "kind": "sequence-arrows",
+    "terms": [
+     "[[a]]",
+     "[[a * m]]",
+     null,
+     null
+    ],
+    "rule": "× [[m]]"
+   }
+  },
+  {
+   "id": "y7a1-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Term-to-term rules",
+   "difficulty": 3,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S6 Term-to-term rules",
+   "keywords": [
+    "term",
+    "to",
+    "rules",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (m * a + k) + k == m * m * a + m * k + k"
+   ],
+   "text": "The first term of a sequence is [[a]]. The rule is ‘multiply by [[m]], then add [[k]]’. Write down the first four terms.",
+   "answer": "[[a]], [[m * a + k]], [[m * (m * a + k) + k]], [[m * (m * (m * a + k) + k) + k]]"
+  },
+  {
+   "id": "y7a1-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Term-to-term rules",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S6 Term-to-term rules",
+   "keywords": [
+    "term",
+    "to",
+    "rules",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * a - k > 0"
+   ],
+   "check": [
+    "m * (m * a - k) - k == m * m * a - m * k - k"
+   ],
+   "text": "The rule to find the next term of a sequence is ‘multiply by [[m]], then subtract [[k]]’. The first term is [[a]]. (a) Work out the 2nd and 3rd terms. (b) Work out the 4th term. (3 marks)",
+   "answer": "(a) [[m * a - k]] and [[m * (m * a - k) - k]]  (b) [[m * (m * (m * a - k) - k) - k]]"
+  },
+  {
+   "id": "y7a1-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Find missing terms (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S7 Find missing terms (E)",
+   "keywords": [
+    "find",
+    "missing",
+    "terms",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 3 * d) - (a + 2 * d) == d"
+   ],
+   "text": "Find the missing term.",
+   "answer": "[[a + 2 * d]]",
+   "diagram": {
+    "kind": "sequence-arrows",
+    "terms": [
+     "[[a]]",
+     "[[a + d]]",
+     null,
+     "[[a + 3 * d]]"
+    ],
+    "rule": "+[[d]]"
+   }
+  },
+  {
+   "id": "y7a1-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Find missing terms (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B1 Sequences · S7 Find missing terms (E)",
+   "keywords": [
+    "find",
+    "missing",
+    "terms",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 2 * d) - (a + d) == d"
+   ],
+   "text": "A linear sequence goes [[a]], ?, [[a + 2 * d]], [[a + 3 * d]], … Find the missing term.",
+   "answer": "[[a + d]]"
+  },
+  {
+   "id": "y7a1-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Find missing terms (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B1 Sequences · S7 Find missing terms (E)",
+   "keywords": [
+    "find",
+    "missing",
+    "terms",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + 3 * d) - (a + d) == 2 * d"
+   ],
+   "text": "A linear sequence goes [[a]], ?, ?, [[a + 3 * d]]. Find the two missing terms.",
+   "answer": "[[a + d]] and [[a + 2 * d]]"
+  },
+  {
+   "id": "y7a1-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Find missing terms (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B1 Sequences · S7 Find missing terms (E)",
+   "keywords": [
+    "find",
+    "missing",
+    "terms",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a + 4 * d) - (a + d)) / 3 == d"
+   ],
+   "text": "The 2nd term of a linear sequence is [[a + d]] and the 5th term is [[a + 4 * d]]. Work out the 3rd and 4th terms. (3 marks)",
+   "answer": "[[a + 2 * d]] and [[a + 3 * d]]"
+  }
+ ]
+}

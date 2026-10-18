@@ -30,7 +30,12 @@ EACH TEMPLATE HAS THESE FIELDS
                e.g. "alg-t-014". Continue the numbering I give you.
   "topic"      exactly one of: Number, Algebra, Ratio, Geometry, Statistics
   "subtopic"   a specific skill, e.g. "Solving equations: unknown on both sides"
-  "difficulty" 1 = secure (easy), 2 = core, 3 = stretch (GCSE grade 7+)
+  "difficulty" 1 = support (needs scaffolding), 2 = core, 3 = stretch, 4 = exam style (GCSE-style
+               wording, context and marks, e.g. "(2 marks)"; original questions, never copied)
+  "qtype"      fluency (practise the method), reasoning (explain / spot / compare) or problem
+               (apply in a new context or several steps)
+  "source"     where it sits in the scheme of work, e.g. "Y7 Autumn B3 Expressions and equations
+               · S7 Solve 2-step equations" (teachers can search it)
   "keywords"   5 to 8 words a teacher might SEARCH for: synonyms and phrases, e.g.
                ["solve","equation","both sides","variable on both sides","balance"]
   "vars"       the numbers/letters that change, as a list of [name, rule] pairs, chosen in order
@@ -57,6 +62,7 @@ RULES FOR vars (each name is a lowercase word or letter; use exactly ONE rule pe
 EXPRESSIONS (in "calc", "where", int ends, and inside [[ ]])
   + - * / % ^   brackets ( )   comparisons == != < <= > >=   && (and)  || (or)
   functions: abs sqrt gcd lcm min max round floor ceil isint sin cos tan asin acos atan
+  log10, and sf(x, n) = x rounded to n significant figures
   (trig uses DEGREES). Variables are used by name. NOTHING else is allowed.
   Work the ANSWER FIRST, then derive the rest: choose the answer x, then calculate the number
   that makes it come out. This guarantees whole-number answers.
@@ -69,6 +75,10 @@ WRITING NUMBERS INTO TEXT: put an expression in double square brackets: [[a + b]
     [[b|signed]]       " + 5" or " - 5" (and nothing for 0): "x[[b|signed]]" gives x + 5
     [[c|sterm:y]]      " + 3y" or " - y" (nothing for 0)
     [[c|term:y]]       "3y" or "-y" or "y" ("0" for 0)
+    [[d|sgn]]          "+4" or "-4" (no spaces)
+    [[cond|if:Yes/No]] the first word when the condition is true, otherwise the second
+    [[n|words]]        4032 -> "four thousand and thirty-two"
+    [[n|group]]        82000000 -> "82 000 000" (use for numbers of 5 or more digits)
     [[r|frac]]         \frac{3}{4}          [[r|mixed]]  1\frac{1}{2}
     [[p|dp:1]]         rounded to 1 decimal place, trailing zero kept     [[a|abs]]  positive
     [[v]]              a "pick" variable (a letter or word)
@@ -98,6 +108,12 @@ whole string "[[expr|n]]". Kinds and their fields:
   coordinate-grid   xmin,xmax,ymin,ymax, line:{"m":2,"c":1}, points:[[1,2,"A"]]
   venn              a, b, onlyA, both, onlyB, outside (null = unknown), unknown
   tree              first:[["Red","3/5"],...], second:[ [[...],[...]], [[...],[...]] ]
+  function-machine  input, steps:["× 3","+ 2"] (null step = hidden), output (null = ?)
+  sequence-arrows   terms:[3,7,11,null,19] (null = ?), rule:"+4" (or a list)
+  pattern           cells:[[rows, columns], ...] drawn as growing squares
+  bar-model         bars:[[{"label":"12","size":12},{"label":null,"size":8}], ...], total:"20"
+  table             headers:[...], rows:[[...],...]  (also place-value charts, frequency tables)
+  number-line       also: labelEvery, hideLabels, blank:[values shown as ?], dots:[{"at":0.3,"label":"A"}]
 DIAGRAM RULES (these are shown on a classroom screen, so they must not mislead):
   - Angles are drawn to the sizes in "sizes". ALWAYS give "sizes" for algebraic angle questions
     and make them the real values. Do not let an angle be within 12 degrees of 90 unless a

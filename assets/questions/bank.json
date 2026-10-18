@@ -1310,7 +1310,8 @@
       "answer": "$[[v]] = [[x]]$",
       "check": [
         "a * x + b == c * x + d"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "alg-t-002",
@@ -1376,7 +1377,8 @@
       "answer": "$[[v]] = [[x]]$",
       "check": [
         "a * x + b == c"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "alg-t-003",
@@ -1436,7 +1438,8 @@
       "answer": "$[[a*b|coef]][[v]][[a*c|signed]]$",
       "check": [
         "a * (b * 2 + c) == a * b * 2 + a * c"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "geo-t-001",
@@ -1511,7 +1514,8 @@
       },
       "check": [
         "(p + 1) * x + q == 180"
-      ]
+      ],
+      "qtype": "reasoning"
     },
     {
       "id": "geo-t-002",
@@ -1595,7 +1599,8 @@
       },
       "check": [
         "(p + 1) * x + q + third == 180"
-      ]
+      ],
+      "qtype": "reasoning"
     },
     {
       "id": "geo-t-003",
@@ -1667,7 +1672,8 @@
       },
       "check": [
         "a * a + b * b == c * c"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "geo-t-004",
@@ -1700,7 +1706,8 @@
       },
       "check": [
         "r > 0"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "num-t-001",
@@ -1754,7 +1761,8 @@
       "answer": "£[[ans|dp:2]]",
       "check": [
         "ans * 100 == p * amt"
-      ]
+      ],
+      "qtype": "fluency"
     },
     {
       "id": "rat-t-001",
@@ -1810,7 +1818,8 @@
       "answer": "£[[a*k*5]] and £[[b*k*5]]",
       "check": [
         "a * k * 5 + b * k * 5 == total"
-      ]
+      ],
+      "qtype": "fluency"
     }
   ]
 }

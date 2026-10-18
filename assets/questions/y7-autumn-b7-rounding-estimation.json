@@ -1,0 +1,895 @@
+{
+ "version": 1,
+ "note": "Year 7 Autumn Block 7 Rounding and estimation: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7a7-s01-l1",
+   "topic": "Number",
+   "subtopic": "Round to 1 significant figure",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S1 Round to 1 significant figure",
+   "keywords": [
+    "round",
+    "to",
+    "1",
+    "significant",
+    "figure",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       120,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n, 1) - n) <= n / 2 + 0.5"
+   ],
+   "text": "Round [[n|group]] to 1 significant figure.",
+   "answer": "[[sf(n, 1)|group]]"
+  },
+  {
+   "id": "y7a7-s01-l2",
+   "topic": "Number",
+   "subtopic": "Round to 1 significant figure",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S1 Round to 1 significant figure",
+   "keywords": [
+    "round",
+    "to",
+    "1",
+    "significant",
+    "figure",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n / 1000, 1) - n / 1000) < 0.005"
+   ],
+   "text": "Round [[n / 1000]] to 1 significant figure.",
+   "answer": "[[sf(n / 1000, 1)]]"
+  },
+  {
+   "id": "y7a7-s01-l3",
+   "topic": "Number",
+   "subtopic": "Round to 1 significant figure",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B7 Rounding and estimation · S1 Round to 1 significant figure",
+   "keywords": [
+    "round",
+    "to",
+    "1",
+    "significant",
+    "figure",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       99999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n / 100, 1) - n / 100) <= n / 200"
+   ],
+   "text": "Round [[n / 100]] to 1 significant figure.",
+   "answer": "[[sf(n / 100, 1)]]"
+  },
+  {
+   "id": "y7a7-s01-l4",
+   "topic": "Number",
+   "subtopic": "Round to 1 significant figure",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S1 Round to 1 significant figure",
+   "keywords": [
+    "round",
+    "to",
+    "1",
+    "significant",
+    "figure",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10001,
+       99999
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5",
+    "m % 10 != 0",
+    "m % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n, 1) - n) <= n / 2 + 0.5"
+   ],
+   "text": "A crowd at a match is [[n|group]]. (a) Round the crowd to 1 significant figure. (b) Round [[m / 1000]] to 1 significant figure. (2 marks)",
+   "answer": "(a) [[sf(n, 1)|group]]  (b) [[sf(m / 1000, 1)]]"
+  },
+  {
+   "id": "y7a7-s02-l1",
+   "topic": "Number",
+   "subtopic": "Round to 2 or more significant figures",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S2 Round to 2 or more significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "2",
+    "or",
+    "more",
+    "significant",
+    "figures",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n, 2) - n) <= 5"
+   ],
+   "text": "Round [[n]] to 2 significant figures.",
+   "answer": "[[sf(n, 2)]]"
+  },
+  {
+   "id": "y7a7-s02-l2",
+   "topic": "Number",
+   "subtopic": "Round to 2 or more significant figures",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S2 Round to 2 or more significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "2",
+    "or",
+    "more",
+    "significant",
+    "figures",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n / 100000, 2) - n / 100000) < 0.0005"
+   ],
+   "text": "Round [[n / 100000]] to 2 significant figures.",
+   "answer": "[[sf(n / 100000, 2)]]"
+  },
+  {
+   "id": "y7a7-s02-l3",
+   "topic": "Number",
+   "subtopic": "Round to 2 or more significant figures",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B7 Rounding and estimation · S2 Round to 2 or more significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "2",
+    "or",
+    "more",
+    "significant",
+    "figures",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10001,
+       999999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n, 3) - n) <= n / 200 + 1"
+   ],
+   "text": "Round [[n|group]] to 3 significant figures.",
+   "answer": "[[sf(n, 3)|group]]"
+  },
+  {
+   "id": "y7a7-s02-l4",
+   "topic": "Number",
+   "subtopic": "Round to 2 or more significant figures",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S2 Round to 2 or more significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "2",
+    "or",
+    "more",
+    "significant",
+    "figures",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       10001,
+       999999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "n % 10 != 5",
+    "m % 10 != 0",
+    "m % 10 != 5"
+   ],
+   "check": [
+    "abs(sf(n / 100, 2) - n / 100) < 0.5"
+   ],
+   "text": "The distance from a town to the coast is [[n / 100]] km. (a) Round this to 2 significant figures. (b) Round [[m|group]] to 3 significant figures. (2 marks)",
+   "answer": "(a) [[sf(n / 100, 2)]]  (b) [[sf(m, 3)|group]]"
+  },
+  {
+   "id": "y7a7-s03-l1",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S3 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "sf(a, 1) * sf(b, 1) > 0"
+   ],
+   "text": "Estimate [[a]] × [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a, 1) * sf(b, 1)]]"
+  },
+  {
+   "id": "y7a7-s03-l2",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S3 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "sf(a / 10, 1) * sf(b, 1) > 0"
+   ],
+   "text": "Estimate [[a / 10]] × [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a / 10, 1) * sf(b, 1)]]"
+  },
+  {
+   "id": "y7a7-s03-l3",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B7 Rounding and estimation · S3 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       120,
+       899
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "isint(sf(a, 1) / sf(b, 1))"
+   ],
+   "check": [
+    "sf(a, 1) / sf(b, 1) * sf(b, 1) == sf(a, 1)"
+   ],
+   "text": "Estimate [[a]] ÷ [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a, 1) / sf(b, 1)]]"
+  },
+  {
+   "id": "y7a7-s03-l4",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S3 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "c % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "c % 10 != 0",
+    "isint(sf(a, 1) * sf(b / 10, 1) / sf(c, 1) * 10)"
+   ],
+   "check": [
+    "sf(a, 1) * sf(b / 10, 1) / sf(c, 1) * sf(c, 1) == sf(a, 1) * sf(b / 10, 1)"
+   ],
+   "text": "Estimate the value of ([[a]] × [[b / 10]]) ÷ [[c]] by rounding each number to 1 significant figure. (3 marks)",
+   "answer": "[[sf(a, 1) * sf(b / 10, 1) / sf(c, 1)]]"
+  },
+  {
+   "id": "y7a7-s04-l1",
+   "topic": "Number",
+   "subtopic": "Solve problems with estimation",
+   "difficulty": 1,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S4 Solve problems with estimation",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "estimation",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       121,
+       489
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 10 != 5",
+    "n % 10 != 5",
+    "p % 10 != 0",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "sf(n, 1) * sf(p / 100, 1) > 0"
+   ],
+   "text": "A pen costs £[[p / 100]]. Estimate the cost of [[n]] pens by rounding each number to 1 significant figure.",
+   "answer": "About £[[sf(n, 1) * sf(p / 100, 1)]]"
+  },
+  {
+   "id": "y7a7-s04-l2",
+   "topic": "Number",
+   "subtopic": "Solve problems with estimation",
+   "difficulty": 2,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S4 Solve problems with estimation",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "estimation",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "f == 0 || f == 1"
+   ],
+   "text": "Ali works out [[a]] × [[b]] = [[(a * b) * (f + (1 - f) * 10)]]. Use estimation to decide whether his answer is sensible.",
+   "answer": "[[f|if:Sensible/Not sensible]]: the estimate is [[sf(a, 1) * sf(b, 1)]]"
+  },
+  {
+   "id": "y7a7-s04-l3",
+   "topic": "Number",
+   "subtopic": "Solve problems with estimation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B7 Rounding and estimation · S4 Solve problems with estimation",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "estimation",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 >= 6",
+    "b % 10 >= 6"
+   ],
+   "check": [
+    "sf(a, 1) > a",
+    "sf(b, 1) > b"
+   ],
+   "text": "[[a]] × [[b]] is estimated as [[sf(a, 1) * sf(b, 1)]]. Is this an over-estimate or an under-estimate? Explain.",
+   "answer": "Over-estimate: both numbers were rounded up"
+  },
+  {
+   "id": "y7a7-s04-l4",
+   "topic": "Number",
+   "subtopic": "Solve problems with estimation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S4 Solve problems with estimation",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "estimation",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       31,
+       89
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       401,
+       899
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "est",
+     "sf(n, 1) * sf(p / 100, 1)"
+    ],
+    [
+     "budget",
+     "round(est * (1 + (2 * f - 1) * 0.45) / 10) * 10"
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "p % 10 != 5",
+    "n % 10 != 0",
+    "p % 10 != 0",
+    "budget > 0"
+   ],
+   "check": [
+    "f == 0 || f == 1"
+   ],
+   "text": "A school buys [[n]] books at £[[p / 100]] each. It has £[[budget]]. Use estimation to decide whether it has enough money. You must show your working. (3 marks)",
+   "answer": "[[budget >= sf(n, 1) * sf(p / 100, 1)|if:Yes/No]]: estimate £[[sf(n, 1) * sf(p / 100, 1)]]"
+  },
+  {
+   "id": "y7a7-s05-l1",
+   "topic": "Number",
+   "subtopic": "Understand and use error interval notation (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S5 Understand and use error interval notation (E)",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "error",
+    "interval",
+    "notation",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n - 0.5 < n"
+   ],
+   "text": "A number is [[n]] to the nearest integer. Write the error interval.",
+   "answer": "$[[n - 0.5]] \\leq x < [[n + 0.5]]$"
+  },
+  {
+   "id": "y7a7-s05-l2",
+   "topic": "Number",
+   "subtopic": "Understand and use error interval notation (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B7 Rounding and estimation · S5 Understand and use error interval notation (E)",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "error",
+    "interval",
+    "notation",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * 10 - 5 < n * 10"
+   ],
+   "text": "A number is [[n * 10]] to the nearest 10. Write the error interval.",
+   "answer": "$[[n * 10 - 5]] \\leq x < [[n * 10 + 5]]$"
+  },
+  {
+   "id": "y7a7-s05-l3",
+   "topic": "Number",
+   "subtopic": "Understand and use error interval notation (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B7 Rounding and estimation · S5 Understand and use error interval notation (E)",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "error",
+    "interval",
+    "notation",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 10 - 0.05 < n / 10"
+   ],
+   "text": "A length is [[n / 10]] cm to 1 decimal place. Write the error interval.",
+   "answer": "$[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$"
+  },
+  {
+   "id": "y7a7-s05-l4",
+   "topic": "Number",
+   "subtopic": "Understand and use error interval notation (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B7 Rounding and estimation · S5 Understand and use error interval notation (E)",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "error",
+    "interval",
+    "notation",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 10 - 0.05 < n / 10"
+   ],
+   "text": "A plank is [[n / 10]] m long to 1 decimal place. (a) Write the error interval. (b) Could the length be [[n / 10 + 0.05]] m? Explain. (3 marks)",
+   "answer": "(a) $[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$  (b) No: the upper limit is not included"
+  }
+ ]
+}

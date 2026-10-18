@@ -27,11 +27,17 @@ pub struct Template {
     pub topic: String,
     #[serde(default)]
     pub subtopic: String,
-    /// 1 = secure, 2 = core, 3 = stretch.
+    /// 1 = support, 2 = core, 3 = stretch, 4 = exam style.
     pub difficulty: u8,
     /// Words a teacher might search for ("both sides", "simultaneous"); topic and subtopic are searched too.
     #[serde(default)]
     pub keywords: Vec<String>,
+    /// `fluency`, `reasoning` or `problem`: what the question asks of a pupil.
+    #[serde(default)]
+    pub qtype: String,
+    /// Where it sits in a scheme of work, e.g. “Y7 Autumn B3 S7 Solve 2-step equations”.
+    #[serde(default)]
+    pub source: String,
     /// The variables, in the order they are chosen. A later one's range may use an earlier one.
     #[serde(default)]
     pub vars: Vec<(String, VarSpec)>,
@@ -392,6 +398,22 @@ fn call(name: &str, a: &[f64]) -> Result<f64, String> {
         "acos" => one(|x| x.acos().to_degrees()),
         "atan" => one(|x| x.atan().to_degrees()),
         "round" => one(f64::round),
+        "log10" => match a {
+            [x] if *x > 0.0 => Ok(x.log10()),
+            _ => Err("log10() needs a positive number".into()),
+        },
+        // `sf(x, n)`: x to n significant figures.
+        "sf" => match a {
+            [x, n] if *n >= 1.0 && *n <= 12.0 => {
+                if x.abs() < EPS {
+                    return Ok(0.0);
+                }
+                let digits = x.abs().log10().floor() + 1.0;
+                let factor = 10f64.powf(n.round() - digits);
+                Ok((x * factor).round() / factor)
+            }
+            _ => Err("sf() takes a number and 1 to 12 significant figures".into()),
+        },
         "floor" => one(f64::floor),
         "ceil" => one(f64::ceil),
         "isint" => one(|x| f64::from((x - x.round()).abs() < EPS)),
@@ -415,8 +437,10 @@ fn call(name: &str, a: &[f64]) -> Result<f64, String> {
 
 // ── writing numbers into text ────────────────────────────────────────────────────────────────
 
+/// Whether `x` is a whole number, allowing for the rounding error of large values
+/// (9.8 × 10⁸ comes out as 980000000.0000001).
 fn is_int(x: f64) -> bool {
-    (x - x.round()).abs() < EPS
+    (x - x.round()).abs() < EPS * x.abs().max(1.0)
 }
 
 fn int_text(x: f64) -> String {
@@ -431,20 +455,25 @@ fn fraction(x: f64) -> Option<(i64, i64)> {
     })
 }
 
+/// `x` as a decimal with at most six places and no trailing zeros.
+fn trimmed(x: f64) -> String {
+    let s = format!("{x:.6}");
+    s.trim_end_matches('0').trim_end_matches('.').to_string()
+}
+
 fn plain(x: f64) -> String {
     if is_int(x) {
         return int_text(x);
     }
-    let s = format!("{:.6}", x);
-    let t = s.trim_end_matches('0').trim_end_matches('.');
-    if (t.parse::<f64>().unwrap_or(f64::NAN) - x).abs() < 1e-7 { t.to_string() } else { frac_text(x) }
+    let t = trimmed(x);
+    if (t.parse::<f64>().unwrap_or(f64::NAN) - x).abs() < 1e-7 * x.abs().max(1.0) { t } else { frac_text(x) }
 }
 
 fn frac_text(x: f64) -> String {
     match fraction(x) {
         Some((n, 1)) => format!("{n}"),
         Some((n, d)) => format!("{}\\frac{{{}}}{{{d}}}", if n < 0 { "-" } else { "" }, n.abs()),
-        None => plain(x),
+        None => trimmed(x),
     }
 }
 
@@ -456,6 +485,75 @@ fn coef(x: f64) -> String {
     } else {
         plain(x)
     }
+}
+
+/// A whole number in English, in the form a teacher writes it: “four thousand and thirty-two”.
+fn words(n: u64) -> String {
+    const ONES: [&str; 20] = [
+        "zero",
+        "one",
+        "two",
+        "three",
+        "four",
+        "five",
+        "six",
+        "seven",
+        "eight",
+        "nine",
+        "ten",
+        "eleven",
+        "twelve",
+        "thirteen",
+        "fourteen",
+        "fifteen",
+        "sixteen",
+        "seventeen",
+        "eighteen",
+        "nineteen",
+    ];
+    const TENS: [&str; 10] = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"];
+    fn below_1000(n: u64) -> String {
+        let (h, r) = (n / 100, n % 100);
+        let mut out = String::new();
+        if h > 0 {
+            out.push_str(&format!("{} hundred", ONES[h as usize]));
+        }
+        if r > 0 {
+            if h > 0 {
+                out.push_str(" and ");
+            }
+            if r < 20 {
+                out.push_str(ONES[r as usize]);
+            } else {
+                out.push_str(TENS[(r / 10) as usize]);
+                if r % 10 > 0 {
+                    out.push_str(&format!("-{}", ONES[(r % 10) as usize]));
+                }
+            }
+        }
+        out
+    }
+    if n == 0 {
+        return "zero".into();
+    }
+    let mut parts: Vec<String> = vec![];
+    for (size, name) in [(1_000_000_000u64, "billion"), (1_000_000, "million"), (1_000, "thousand")] {
+        if !(n / size).is_multiple_of(1000) {
+            parts.push(format!("{} {name}", below_1000(n / size % 1000)));
+        }
+    }
+    let rest = n % 1000;
+    let mut out = parts.join(" ");
+    if rest > 0 {
+        // “four thousand and thirty-two”, but “four thousand two hundred”.
+        if !out.is_empty() && rest < 100 {
+            out.push_str(" and ");
+        } else if !out.is_empty() {
+            out.push(' ');
+        }
+        out.push_str(&below_1000(rest));
+    }
+    out
 }
 
 /// One placeholder's `expr` or `expr|filter[:argument]` as text, or as a number for `|n`.
@@ -493,6 +591,46 @@ fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
             v if v > 0.0 => format!(" + {}{arg}", coef(v)),
             v => format!(" - {}{arg}", coef(-v)),
         },
+        "sgn" => {
+            if x < 0.0 {
+                format!("-{}", plain(-x))
+            } else {
+                format!("+{}", plain(x))
+            }
+        }
+        // `[[cond|if:Yes/No]]`: the first word when the expression is true (not 0), else the second.
+        "if" => {
+            let (yes, no) = arg.split_once('/').ok_or_else(|| format!("if needs two choices, like if:Yes/No (in `{inner}`)"))?;
+            (if x != 0.0 { yes } else { no }).to_string()
+        }
+        // Groups of three digits with a thin space, as UK schools write them: 10 000, 82 000 000.
+        "group" => {
+            let t = plain(x);
+            let (whole, rest) = t.split_once('.').map_or((t.as_str(), None), |(w, r)| (w, Some(r)));
+            let (sign, digits) = whole.strip_prefix('-').map_or(("", whole), |d| ("-", d));
+            let grouped = if digits.len() >= 5 {
+                let mut out = String::new();
+                for (i, c) in digits.chars().enumerate() {
+                    if i > 0 && (digits.len() - i) % 3 == 0 {
+                        out.push('\u{2009}');
+                    }
+                    out.push(c);
+                }
+                out
+            } else {
+                digits.to_string()
+            };
+            match rest {
+                Some(r) => format!("{sign}{grouped}.{r}"),
+                None => format!("{sign}{grouped}"),
+            }
+        }
+        "words" => {
+            if !is_int(x) || !(0.0..1e12).contains(&x) {
+                return Err(format!("words needs a whole number from 0 to a trillion (in `{inner}`)"));
+            }
+            words(x.round() as u64)
+        }
         "frac" => frac_text(x),
         "mixed" => match fraction(x) {
             Some((n, d)) if d > 1 && n.abs() > d => format!("{}{}\\frac{{{}}}{{{d}}}", if n < 0 { "-" } else { "" }, n.abs() / d, n.abs() % d),
@@ -506,7 +644,11 @@ fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
             }
             format!("{x:.places$}")
         }
-        other => return Err(format!("`{other}` is not a filter (use coef, signed, term:x, sterm:x, frac, mixed, dec, dp:N, abs, n)")),
+        other => {
+            return Err(format!(
+                "`{other}` is not a filter (use coef, signed, sgn, term:x, sterm:x, frac, mixed, dec, dp:N, abs, words, group, if:A/B, n)"
+            ));
+        }
     };
     Ok((text, (name == "n").then_some(x)))
 }
@@ -533,7 +675,8 @@ fn fill_all(text: &str, scope: &Scope) -> Result<Value, String> {
         && text.trim().ends_with("]]")
         && let Some(n) = only
     {
-        return Ok(serde_json::json!(if is_int(n) { n.round() } else { n }));
+        // A whole number is an integer in the JSON, so figures that count things can read it.
+        return Ok(if is_int(n) { serde_json::json!(n.round() as i64) } else { serde_json::json!(n) });
     }
     if out.contains("]]") {
         return Err(format!("a stray `]]` in `{text}`"));
@@ -620,6 +763,8 @@ impl Template {
             subtopic: self.subtopic.clone(),
             difficulty: self.difficulty,
             keywords: self.keywords.clone(),
+            qtype: self.qtype.clone(),
+            source: self.source.clone(),
             text,
             answer,
             needs_diagram: diagram.is_some(),
@@ -633,7 +778,7 @@ impl Template {
             return Err("a template has no id".into());
         }
         if !crate::questions::DIFFICULTIES.contains(&self.difficulty) {
-            return Err(format!("template {}: difficulty must be 1, 2 or 3", self.id));
+            return Err(format!("template {}: difficulty must be 1 (support), 2 (core), 3 (stretch) or 4 (exam style)", self.id));
         }
         if self.text.trim().is_empty() || self.answer.trim().is_empty() {
             return Err(format!("template {}: needs both text and answer", self.id));
@@ -692,10 +837,14 @@ impl Template {
         }
         let long_decimal = |t: &str| {
             let b: Vec<char> = t.chars().collect();
-            b.windows(5).any(|w| w[0].is_ascii_digit() && w[1] == '.' && w[2..5].iter().all(char::is_ascii_digit))
+            b.windows(6).any(|w| w[0].is_ascii_digit() && w[1] == '.' && w[2..6].iter().all(char::is_ascii_digit))
         };
-        if any(&long_decimal) {
-            out.push("a long decimal can appear: round it with a filter such as [[x|dp:2]]".into());
+        // Small decimals are the point of some topics (negative powers of 10, rounding, place value).
+        let on_purpose = ["power", "standard form", "decimal", "place value", "round", "significant", "error interval"]
+            .iter()
+            .any(|w| self.subtopic.to_lowercase().contains(w));
+        if !on_purpose && any(&long_decimal) {
+            out.push("a decimal with four or more places can appear: round it with a filter such as [[x|dp:2]]".into());
         }
         let mut used = format!("{} {} ", self.text, self.answer);
         for e in self.calc.iter().map(|(_, e)| e).chain(self.conditions.iter()).chain(self.checks.iter()) {
@@ -714,6 +863,9 @@ impl Template {
             if !has_word(name) {
                 out.push(format!("`{name}` is never used"));
             }
+        }
+        if !crate::questions::QUESTION_TYPES.contains(&self.qtype.as_str()) {
+            out.push("`qtype` must be fluency, reasoning or problem".into());
         }
         if self.checks.is_empty() {
             out.push("no \"check\": add one that puts the answer back into the question, so a wrong formula is caught".into());
@@ -825,6 +977,13 @@ mod tests {
         assert_eq!(f("x[[c|signed]]"), "x");
         assert_eq!(f("x[[b|sterm:y]]"), "x - 3y");
         assert_eq!(f("[[r|frac]]"), "\\frac{3}{4}");
+        assert_eq!(f("[[b|sgn]] and [[a|sgn]]"), "-3 and +1");
+        assert_eq!(f("[[b < 0|if:Subtract/Add]]"), "Subtract");
+        assert_eq!(f("[[4032|words]]"), "four thousand and thirty-two");
+        assert_eq!(f("[[82000000|group]] [[4000|group]] [[12345.5|group]]"), "82\u{2009}000\u{2009}000 4000 12\u{2009}345.5");
+        assert_eq!(f("[[56208|words]]"), "fifty-six thousand two hundred and eight");
+        assert_eq!(f("[[1500000|words]]"), "one million five hundred thousand");
+        assert_eq!(f("[[sf(4.862, 2)]] [[sf(0.003416, 1)]] [[sf(7260, 1)]]"), "4.9 0.003 7000");
         assert_eq!(f("[[p|dp:1]]"), "22.6");
         assert_eq!(f("[[a + b * 2]]"), "-5");
         assert_eq!(f("[[1/3|frac]]"), "\\frac{1}{3}");
@@ -859,6 +1018,35 @@ mod tests {
     }
 
     #[test]
+    fn large_numbers_with_rounding_error_are_written_not_looped_over() {
+        // 9.8 × 10^8 is 980000000.0000001 in floating point: it used to recurse for ever.
+        let s = Scope::new();
+        assert_eq!(fill_all("[[9.8 * 10^8|group]]", &s).unwrap(), "980\u{2009}000\u{2009}000");
+        assert_eq!(fill_all("[[4.7 * 10^-5]]", &s).unwrap(), "0.000047");
+        for m in 12..=98 {
+            for k in 3..=9 {
+                let t = Template {
+                    id: "x".into(),
+                    topic: "Number".into(),
+                    subtopic: String::new(),
+                    difficulty: 1,
+                    keywords: vec![],
+                    qtype: "fluency".into(),
+                    source: String::new(),
+                    vars: vec![],
+                    calc: vec![],
+                    conditions: vec![],
+                    checks: vec![],
+                    text: format!("[[{m} / 10 * 10^{k}|group]]"),
+                    answer: "a".into(),
+                    diagram: None,
+                };
+                assert!(t.instantiate(1).is_ok());
+            }
+        }
+    }
+
+    #[test]
     fn expressions_cannot_do_anything_but_maths() {
         let s = Scope::new();
         for bad in ["system(1)", "1 +", "2 $ 3", "((((((((((((((((((((((((((((((((((((((((((1))))))))))))))))))))))))))))))))))))))))))"] {
@@ -878,6 +1066,7 @@ mod tests {
         assert!(d["angles"][0].as_str().unwrap().ends_with('°'));
         assert!(d["angles"][1].is_null());
         assert!(d["sizes"][0].is_number(), "{d}");
+        assert!(d["sizes"][0].as_u64().is_some(), "whole numbers are integers: {d}");
         assert!(q.needs_diagram);
     }
 }

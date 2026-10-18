@@ -401,7 +401,7 @@ impl UiState {
         }
         for (topic, level) in &mut self.get_ready_slots {
             topic.truncate(60);
-            *level = (*level).min(3);
+            *level = (*level).min(4);
         }
         self.my_questions
             .retain(|q| !q.id.is_empty() && !q.text.trim().is_empty() && deckcraft_engine::questions::DIFFICULTIES.contains(&q.difficulty));
