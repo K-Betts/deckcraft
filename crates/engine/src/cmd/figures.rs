@@ -51,18 +51,45 @@ pub(crate) fn draw(s: &mut Session, d: &Value, area: [f64; 4], scale: f64) -> Re
         "tree" => f.tree(s),
         "regular-polygon" => f.polygon(s),
         "similar-triangles" => f.similar(s),
+        "function-machine" => f.function_machine(s),
+        "sequence-arrows" => f.sequence_arrows(s),
+        "pattern" => f.pattern(s),
+        "bar-model" => f.bar_model(s),
+        "table" => f.table(s),
         _ => Ok(()),
     }
 }
 
 /// Figures that want to be wider than tall, and so take more of a card.
 pub(crate) fn is_wide(d: &Value) -> bool {
-    matches!(d.get("kind").and_then(Value::as_str), Some("bar-chart" | "number-line" | "tree" | "similar-triangles" | "venn" | "l-shape" | "cuboid"))
+    matches!(
+        d.get("kind").and_then(Value::as_str),
+        Some(
+            "bar-chart"
+                | "number-line"
+                | "tree"
+                | "similar-triangles"
+                | "venn"
+                | "l-shape"
+                | "cuboid"
+                | "function-machine"
+                | "sequence-arrows"
+                | "pattern"
+                | "bar-model"
+                | "table"
+        )
+    )
 }
 
 struct Fig<'a> {
     d: &'a Value,
     area: [f64; 4],
+}
+
+/// A number without floating-point noise: `0.30000000000000004` is `0.3`.
+fn num_text(v: f64) -> String {
+    let r = (v * 1e6).round() / 1e6;
+    if (r - r.round()).abs() < 1e-9 { format!("{}", r.round() as i64) } else { format!("{r}") }
 }
 
 fn pt(a: P, dx: f64, dy: f64) -> P {
@@ -566,10 +593,12 @@ impl Fig<'_> {
     }
 
     /// `min`, `max`, `step`; `marks`: `{at, open, to: "left"|"right"|"none"}` for an inequality;
-    /// `dots`: plain values to mark.
+    /// `dots`: values to mark, each a number or `{at, label}` (a letter above the point);
+    /// `labelEvery`: label every nth tick; `hideLabels`: no tick numbers; `blank`: tick values to
+    /// show as `?`.
     fn number_line(&self, s: &mut Session) -> Result<()> {
         let [x, y, w, h] = self.fit(5.0, 8.0);
-        let (lo, hi, step) = (self.num("min", -5.0), self.num("max", 5.0), self.num("step", 1.0).max(0.1));
+        let (lo, hi, step) = (self.num("min", -5.0), self.num("max", 5.0), self.num("step", 1.0).max(1e-6));
         let (l, r, yy) = (x + 12.0, x + w - 12.0, y + h / 2.0);
         let at = |v: f64| l + (r - l) * (v - lo) / (hi - lo).max(1e-9);
         ln(s, [l - 8.0, yy], [r + 8.0, yy])?;
@@ -577,11 +606,19 @@ impl Fig<'_> {
         draw_line(s, [r + 8.0, yy], [r - 2.0, yy + 6.0], INK, 2.5)?;
         draw_line(s, [l - 8.0, yy], [l + 2.0, yy - 6.0], INK, 2.5)?;
         draw_line(s, [l - 8.0, yy], [l + 2.0, yy + 6.0], INK, 2.5)?;
-        let mut v = lo;
-        while v <= hi + 1e-9 {
-            draw_line(s, [at(v), yy - 6.0], [at(v), yy + 6.0], INK, 1.5)?;
-            label_sized(s, &format!("{v}"), [at(v), yy + 20.0], 12.0)?;
-            v += step;
+        let every = self.num("labelEvery", 1.0).max(1.0) as usize;
+        let hide = self.d.get("hideLabels").and_then(Value::as_bool).unwrap_or(false);
+        let blanks: Vec<f64> =
+            self.d.get("blank").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_f64).collect()).unwrap_or_default();
+        let n = ((hi - lo) / step + 1e-6).floor() as usize;
+        for i in 0..=n {
+            let v = lo + step * i as f64;
+            let big = i % every == 0;
+            draw_line(s, [at(v), yy - if big { 7.0 } else { 4.0 }], [at(v), yy + if big { 7.0 } else { 4.0 }], INK, 1.5)?;
+            if big && !hide {
+                let text = if blanks.iter().any(|b| (b - v).abs() < 1e-9) { "?".to_string() } else { num_text(v) };
+                label_sized(s, &text, [at(v), yy + 20.0], 12.0)?;
+            }
         }
         for m in self.d.get("marks").and_then(Value::as_array).into_iter().flatten() {
             let v = m.get("at").and_then(Value::as_f64).unwrap_or(0.0);
@@ -597,8 +634,243 @@ impl Fig<'_> {
             }
             draw_shape(s, "ellipse", [at(v) - 6.0, yy - 6.0, 12.0, 12.0], Some(if open { "#FFFFFF" } else { BLUE }), Some((BLUE, 2.5)))?;
         }
-        for v in self.d.get("dots").and_then(Value::as_array).into_iter().flatten().filter_map(Value::as_f64) {
+        for dot in self.d.get("dots").and_then(Value::as_array).into_iter().flatten() {
+            let (v, name) = match dot {
+                Value::Number(n) => (n.as_f64().unwrap_or(0.0), None),
+                o => (o.get("at").and_then(Value::as_f64).unwrap_or(0.0), o.get("label").and_then(Value::as_str).map(str::to_string)),
+            };
             draw_shape(s, "ellipse", [at(v) - 5.0, yy - 5.0, 10.0, 10.0], Some(BLUE), Some((BLUE, 1.5)))?;
+            if let Some(n) = name {
+                label(s, &n, [at(v), yy - 20.0])?;
+            }
+        }
+        Ok(())
+    }
+
+    // ── number work: function machines, sequences, bar models, tables ────────────────────────
+
+    /// `input`, `steps` (operations like `"× 3"`, `null` = hidden), `output`; `null` input or
+    /// output is the unknown (`?`). Boxes joined by arrows, left to right.
+    fn function_machine(&self, s: &mut Session) -> Result<()> {
+        let steps: Vec<Option<String>> = self.list("steps");
+        let n = steps.len() + 2;
+        let [x, y, w, h] = self.fit((n as f64 * 1.15).max(3.0), 6.0);
+        let slot = w / n as f64;
+        let bw = (slot * 0.62).min(120.0 * k());
+        let bh = (h * 0.6).min(70.0 * k());
+        let cy = y + h / 2.0;
+        let cell = |i: usize| x + slot * (i as f64 + 0.5);
+        let end_text = |key: &str| self.lab_or(key, "?");
+        let mut boxes: Vec<(String, &str, &str)> = vec![(end_text("input"), "#FFFFFF", "rect")];
+        for st in &steps {
+            boxes.push((st.clone().unwrap_or_else(|| "?".into()), "#FDE9B8", "rect"));
+        }
+        boxes.push((end_text("output"), "#FFFFFF", "rect"));
+        for (i, (text, fill, _)) in boxes.iter().enumerate() {
+            draw_shape(s, "rect", [cell(i) - bw / 2.0, cy - bh / 2.0, bw, bh], Some(fill), Some((INK, 2.5)))?;
+            label_sized(s, text, [cell(i), cy], 17.0)?;
+            if i + 1 < boxes.len() {
+                let id = draw_line(s, [cell(i) + bw / 2.0 + 3.0, cy], [cell(i + 1) - bw / 2.0 - 3.0, cy], INK, 2.5)?;
+                s.execute("shape.line", &json!({"ids": [id], "tail": "triangle"}))?;
+            }
+        }
+        Ok(())
+    }
+
+    /// A key's label, or `fallback` when it is `null` (the unknown); empty when the key is absent.
+    fn lab_or(&self, key: &str, fallback: &str) -> String {
+        match self.d.get(key) {
+            None | Some(Value::Null) => fallback.to_string(),
+            Some(v) => v.as_str().map(str::to_string).unwrap_or_else(|| v.to_string()),
+        }
+    }
+
+    /// `terms`: the numbers, `null` a gap (`?`); `rule`: a label for the step between terms, one
+    /// text for all or a list (`null` entries show `?`).
+    fn sequence_arrows(&self, s: &mut Session) -> Result<()> {
+        let terms: Vec<Option<String>> = self
+            .d
+            .get("terms")
+            .and_then(Value::as_array)
+            .map(|a| a.iter().map(|v| v.as_str().map(str::to_string).or_else(|| v.as_f64().map(num_text))).collect())
+            .unwrap_or_default();
+        let n = terms.len().max(2);
+        let [x, y, w, h] = self.fit((n as f64 * 1.0).max(3.0), 6.0);
+        let slot = w / n as f64;
+        let cy = y + h * 0.62;
+        let r = (slot * 0.34).min(h * 0.28).min(28.0 * k());
+        let rules: Vec<String> = match self.d.get("rule") {
+            Some(Value::Array(a)) => a.iter().map(|v| v.as_str().unwrap_or("?").to_string()).collect(),
+            Some(Value::String(t)) => vec![t.clone(); n.saturating_sub(1)],
+            _ => vec![],
+        };
+        for i in 0..n {
+            let cx = x + slot * (i as f64 + 0.5);
+            draw_shape(s, "ellipse", [cx - r, cy - r, 2.0 * r, 2.0 * r], Some("#FFFFFF"), Some((INK, 2.5)))?;
+            let text = terms.get(i).cloned().flatten().unwrap_or_else(|| "?".into());
+            label_sized(s, &text, [cx, cy], 17.0)?;
+            if i + 1 < n {
+                let nx = x + slot * (i as f64 + 1.5);
+                let (a, b) = ([cx + r * 0.8, cy - r * 0.6], [nx - r * 0.8, cy - r * 0.6]);
+                // An arc over the top: up, across, down.
+                let top = cy - r - 14.0 * k();
+                draw_line(s, a, [a[0] + 4.0, top], INK, 2.0)?;
+                draw_line(s, [a[0] + 4.0, top], [b[0] - 4.0, top], INK, 2.0)?;
+                let id = draw_line(s, [b[0] - 4.0, top], b, INK, 2.0)?;
+                s.execute("shape.line", &json!({"ids": [id], "tail": "triangle"}))?;
+                if let Some(rule) = rules.get(i) {
+                    label_sized(s, rule, [(a[0] + b[0]) / 2.0, top - 12.0 * k()], 13.0)?;
+                }
+            }
+        }
+        Ok(())
+    }
+
+    /// `cells`: for each pattern `[rows, columns]` (or a number of squares in a row), drawn as
+    /// squares side by side with a caption `Pattern 1`, `Pattern 2`… (`captions`: false to hide).
+    fn pattern(&self, s: &mut Session) -> Result<()> {
+        let shapes: Vec<(usize, usize)> = self
+            .d
+            .get("cells")
+            .and_then(Value::as_array)
+            .map(|a| {
+                a.iter()
+                    .map(|c| match c.as_array() {
+                        Some(rc) => {
+                            (rc.first().and_then(Value::as_u64).unwrap_or(1) as usize, rc.get(1).and_then(Value::as_u64).unwrap_or(1) as usize)
+                        }
+                        None => (1, c.as_u64().unwrap_or(1) as usize),
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        if shapes.is_empty() {
+            return Ok(());
+        }
+        let captions = self.d.get("captions").and_then(Value::as_bool).unwrap_or(true);
+        let [x, y, w, h] = self.fit(2.2, 6.0);
+        let widest: usize = shapes.iter().map(|c| c.1).sum::<usize>().max(1) + shapes.len().saturating_sub(1);
+        let tallest = shapes.iter().map(|c| c.0).max().unwrap_or(1);
+        let cap_h = if captions { 20.0 * k() } else { 0.0 };
+        let unit = (w / widest as f64).min((h - cap_h) / tallest as f64).min(34.0 * k());
+        let total_w = unit * widest as f64;
+        let mut left = x + (w - total_w) / 2.0;
+        let base = y + h - cap_h;
+        for (i, (rows, cols)) in shapes.iter().enumerate() {
+            for r in 0..*rows {
+                for c in 0..*cols {
+                    draw_shape(s, "rect", [left + unit * c as f64, base - unit * (r as f64 + 1.0), unit, unit], Some("#BFD4F6"), Some((INK, 1.8)))?;
+                }
+            }
+            if captions {
+                label_sized(s, &format!("Pattern {}", i + 1), [left + unit * *cols as f64 / 2.0, base + 11.0 * k()], 11.0)?;
+            }
+            left += unit * (*cols as f64 + 1.0);
+        }
+        Ok(())
+    }
+
+    /// `bars`: each bar a list of parts `{"label": text|null, "size": number}` drawn to scale as
+    /// side-by-side blocks; `total`: a label (or `null` for `?`) for a bracket over the first bar.
+    fn bar_model(&self, s: &mut Session) -> Result<()> {
+        let bars: Vec<Vec<(Option<String>, f64)>> = self
+            .d
+            .get("bars")
+            .and_then(Value::as_array)
+            .map(|rows| {
+                rows.iter()
+                    .map(|row| {
+                        row.as_array()
+                            .map(|parts| {
+                                parts
+                                    .iter()
+                                    .map(|p| {
+                                        (
+                                            p.get("label").and_then(|l| l.as_str().map(str::to_string).or_else(|| l.as_f64().map(num_text))),
+                                            p.get("size").and_then(Value::as_f64).unwrap_or(1.0).max(0.1),
+                                        )
+                                    })
+                                    .collect()
+                            })
+                            .unwrap_or_default()
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        if bars.is_empty() {
+            return Ok(());
+        }
+        let has_total = self.d.get("total").is_some();
+        let [x, y, w, h] = self.fit(2.6, 8.0);
+        let widest = bars.iter().map(|b| b.iter().map(|p| p.1).sum::<f64>()).fold(1.0, f64::max);
+        let top = if has_total { 26.0 * k() } else { 0.0 };
+        let row_h = ((h - top) / bars.len() as f64).min(52.0 * k());
+        for (ri, bar) in bars.iter().enumerate() {
+            let mut left = x;
+            let ty = y + top + row_h * ri as f64;
+            for (label, size) in bar {
+                let bw = w * size / widest;
+                draw_shape(s, "rect", [left, ty, bw, row_h * 0.8], Some("#FDE9B8"), Some((INK, 2.2)))?;
+                label_sized(s, &label.clone().unwrap_or_else(|| "?".into()), [left + bw / 2.0, ty + row_h * 0.4], 15.0)?;
+                left += bw;
+            }
+            if ri == 0 && has_total {
+                let end = x + w * bar.iter().map(|p| p.1).sum::<f64>() / widest;
+                let by = ty - 8.0;
+                draw_line(s, [x, by], [end, by], INK, 2.0)?;
+                draw_line(s, [x, by], [x, by + 6.0], INK, 2.0)?;
+                draw_line(s, [end, by], [end, by + 6.0], INK, 2.0)?;
+                label_sized(s, &self.lab_or("total", "?"), [(x + end) / 2.0, by - 12.0 * k()], 15.0)?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `headers` and `rows` (each cell a text or number; `null` is `?`); an optional `title`
+    /// above. Also used for place-value charts and frequency tables.
+    fn table(&self, s: &mut Session) -> Result<()> {
+        let headers: Vec<String> = self.list("headers").into_iter().map(|c| c.unwrap_or_else(|| "?".into())).collect();
+        let rows: Vec<Vec<String>> = self
+            .d
+            .get("rows")
+            .and_then(Value::as_array)
+            .map(|rs| {
+                rs.iter()
+                    .map(|r| {
+                        r.as_array()
+                            .map(|cs| {
+                                cs.iter()
+                                    .map(|c| c.as_str().map(str::to_string).or_else(|| c.as_f64().map(num_text)).unwrap_or_else(|| "?".into()))
+                                    .collect()
+                            })
+                            .unwrap_or_default()
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        let cols = headers.len().max(rows.iter().map(Vec::len).max().unwrap_or(0)).max(1);
+        let nrows = rows.len() + usize::from(!headers.is_empty());
+        let [x, y, w, h] = self.fit((cols as f64 * 0.7 + 0.8).max(1.6), 6.0);
+        let (cw, rh) = (w / cols as f64, (h / nrows.max(1) as f64).min(44.0 * k()));
+        let top = y + (h - rh * nrows as f64) / 2.0;
+        let mut row_i = 0usize;
+        let mut draw_row = |s: &mut Session, cells: &[String], fill: &str, bold: bool| -> Result<()> {
+            for c in 0..cols {
+                let ry = top + rh * row_i as f64;
+                draw_shape(s, "rect", [x + cw * c as f64, ry, cw, rh], Some(fill), Some((INK, 1.8)))?;
+                if let Some(t) = cells.get(c) {
+                    let t = if bold { format!("**{t}**") } else { t.clone() };
+                    label_sized(s, &t.replace("**", ""), [x + cw * (c as f64 + 0.5), ry + rh / 2.0], 15.0)?;
+                }
+            }
+            row_i += 1;
+            Ok(())
+        };
+        if !headers.is_empty() {
+            draw_row(s, &headers, "#D7E4FA", true)?;
+        }
+        for r in &rows {
+            draw_row(s, r, "#FFFFFF", false)?;
         }
         Ok(())
     }

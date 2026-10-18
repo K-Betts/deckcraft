@@ -2599,7 +2599,7 @@ fn question_bank(app: &SlideApp) -> Result<deckcraft_engine::questions::Bank, St
 /// app's other settings and used by the Get Ready starter at once.
 fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     use deckcraft_engine::questions::{DIFFICULTIES, Question};
-    const LEVELS: [&str; 3] = ["Secure", "Core", "Stretch"];
+    const LEVELS: [&str; 4] = deckcraft_engine::questions::LEVEL_NAMES;
     ui.set_min_width(640.0);
     let Ok(bank) = question_bank(app) else {
         ui.label("The built-in question bank could not be read.");
@@ -2755,6 +2755,8 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
                 topic: topic.chars().take(40).collect(),
                 subtopic: d.get("nq_sub", "").trim().chars().take(60).collect(),
                 keywords: vec![],
+                qtype: String::new(),
+                source: String::new(),
                 difficulty: d.get("nq_level", "2").parse().ok().filter(|l| DIFFICULTIES.contains(l)).unwrap_or(2),
                 text: text.trim().to_string(),
                 answer: d.get("nq_answer", "").trim().to_string(),
@@ -2970,7 +2972,7 @@ fn fresh_seed() -> u64 {
 /// text boxes that save to PowerPoint like any others), Reroll swaps the starter already on
 /// this slide for new questions with the same choices. The choices are remembered.
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
-    const LEVELS: [(u8, &str); 4] = [(0, "Any"), (1, "Secure"), (2, "Core"), (3, "Stretch")];
+    const LEVELS: [(u8, &str); 5] = [(0, "Any"), (1, "Support"), (2, "Core"), (3, "Stretch"), (4, "Exam style")];
     ui.set_min_width(760.0);
     let bank = question_bank(app).ok();
     let topics = bank.as_ref().map(|b| b.topics()).unwrap_or_default();

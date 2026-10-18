@@ -1,0 +1,1770 @@
+{
+ "version": 1,
+ "note": "Year 7 Autumn Block 5 Four operations: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7a5-s01-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S1 Add and subtract integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       120,
+       899
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       120,
+       899
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + b) - b == a"
+   ],
+   "text": "Work out [[a]] + [[b]]",
+   "answer": "[[a + b]]"
+  },
+  {
+   "id": "y7a5-s01-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S1 Add and subtract integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2500,
+       9999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1100,
+       2400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a - b) + b == a"
+   ],
+   "text": "Work out [[a|group]] − [[b|group]]",
+   "answer": "[[a - b|group]]"
+  },
+  {
+   "id": "y7a5-s01-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S1 Add and subtract integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12000,
+       59999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3000,
+       29999
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5000,
+       40000
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c"
+   ],
+   "check": [
+    "(a + b - c) + c == a + b"
+   ],
+   "text": "Work out [[a|group]] + [[b|group]] − [[c|group]]",
+   "answer": "[[a + b - c|group]]"
+  },
+  {
+   "id": "y7a5-s01-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S1 Add and subtract integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1200,
+       5000
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5100,
+       9800
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + b) - a == b"
+   ],
+   "text": "A shop sells [[a|group]] newspapers on Monday and [[b|group]] on Tuesday. (a) How many does it sell altogether? (b) How many more does it sell on Tuesday than on Monday? (2 marks)",
+   "answer": "(a) [[a + b|group]]  (b) [[b - a|group]]"
+  },
+  {
+   "id": "y7a5-s02-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S2 Add and subtract decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "decimals",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(a + b) / 10 - b / 10 == a / 10"
+   ],
+   "text": "Work out [[a / 10]] + [[b / 10]]",
+   "answer": "[[(a + b) / 10]]"
+  },
+  {
+   "id": "y7a5-s02-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S2 Add and subtract decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "decimals",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(a + 10 * b) / 100 - b / 10 == a / 100"
+   ],
+   "text": "Work out [[a / 100]] + [[b / 10]]",
+   "answer": "[[(a + 10 * b) / 100]]"
+  },
+  {
+   "id": "y7a5-s02-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S2 Add and subtract decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "decimals",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       111,
+       499
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(100 * w - b) / 100 + b / 100 == w"
+   ],
+   "text": "Work out [[w]] − [[b / 100]]",
+   "answer": "[[(100 * w - b) / 100]]"
+  },
+  {
+   "id": "y7a5-s02-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S2 Add and subtract decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "decimals",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       501,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       101,
+       499
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(2000 - a - b) / 100 + (a + b) / 100 == 20"
+   ],
+   "text": "A book costs £[[a / 100]] and a pen costs £[[b / 100]]. Maria pays with a £20 note. How much change does she get? (2 marks)",
+   "answer": "£[[(2000 - a - b) / 100|dp:2]]"
+  },
+  {
+   "id": "y7a5-s03-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide by 10, 100 and 1000",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S3 Multiply and divide by 10, 100 and 1000",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "by",
+    "10",
+    "100",
+    "1000",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       12,
+       99
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       10,
+       100,
+       1000
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * f / f == n"
+   ],
+   "text": "Work out [[n]] × [[f]]",
+   "answer": "[[n * f|group]]"
+  },
+  {
+   "id": "y7a5-s03-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide by 10, 100 and 1000",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S3 Multiply and divide by 10, 100 and 1000",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "by",
+    "10",
+    "100",
+    "1000",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       112,
+       9999
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       10,
+       100,
+       1000
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / f * f == n"
+   ],
+   "text": "Work out [[n]] ÷ [[f]]",
+   "answer": "[[n / f]]"
+  },
+  {
+   "id": "y7a5-s03-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide by 10, 100 and 1000",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S3 Multiply and divide by 10, 100 and 1000",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "by",
+    "10",
+    "100",
+    "1000",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       10,
+       100,
+       1000
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * f / 100 / f == a / 100"
+   ],
+   "text": "Work out [[a / 100]] × [[f]]",
+   "answer": "[[a * f / 100]]"
+  },
+  {
+   "id": "y7a5-s03-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide by 10, 100 and 1000",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S3 Multiply and divide by 10, 100 and 1000",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "by",
+    "10",
+    "100",
+    "1000",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       99
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       10,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * f / 100 / f == a / 100"
+   ],
+   "text": "One pencil costs £[[a / 100]]. Work out the cost of [[f]] pencils. (1 mark)",
+   "answer": "£[[a * f / 100|dp:2]]"
+  },
+  {
+   "id": "y7a5-s04-l1",
+   "topic": "Number",
+   "subtopic": "Multiply by 0.1 and 0.01 (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S4 Multiply by 0.1 and 0.01 (E)",
+   "keywords": [
+    "multiply",
+    "by",
+    "0.1",
+    "and",
+    "0.01",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       12,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 10 * 10 == n"
+   ],
+   "text": "Work out [[n]] × 0.1",
+   "answer": "[[n / 10]]"
+  },
+  {
+   "id": "y7a5-s04-l2",
+   "topic": "Number",
+   "subtopic": "Multiply by 0.1 and 0.01 (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S4 Multiply by 0.1 and 0.01 (E)",
+   "keywords": [
+    "multiply",
+    "by",
+    "0.1",
+    "and",
+    "0.01",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       112,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 100 * 100 == n"
+   ],
+   "text": "Work out [[n]] × 0.01",
+   "answer": "[[n / 100]]"
+  },
+  {
+   "id": "y7a5-s04-l3",
+   "topic": "Number",
+   "subtopic": "Multiply by 0.1 and 0.01 (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S4 Multiply by 0.1 and 0.01 (E)",
+   "keywords": [
+    "multiply",
+    "by",
+    "0.1",
+    "and",
+    "0.01",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a / 1000 * 1000 == a"
+   ],
+   "text": "Work out [[a / 10]] × 0.01",
+   "answer": "[[a / 1000]]"
+  },
+  {
+   "id": "y7a5-s04-l4",
+   "topic": "Number",
+   "subtopic": "Multiply by 0.1 and 0.01 (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S4 Multiply by 0.1 and 0.01 (E)",
+   "keywords": [
+    "multiply",
+    "by",
+    "0.1",
+    "and",
+    "0.01",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       112,
+       999
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       112,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "m % 10 != 0"
+   ],
+   "check": [
+    "n / 10 * 10 == n"
+   ],
+   "text": "(a) Work out [[n]] × 0.1. (b) Work out [[m]] × 0.01. (2 marks)",
+   "answer": "(a) [[n / 10]]  (b) [[m / 100]]"
+  },
+  {
+   "id": "y7a5-s05-l1",
+   "topic": "Number",
+   "subtopic": "Multiply integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S5 Multiply integers",
+   "keywords": [
+    "multiply",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out [[a]] × [[b]]",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y7a5-s05-l2",
+   "topic": "Number",
+   "subtopic": "Multiply integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S5 Multiply integers",
+   "keywords": [
+    "multiply",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       49
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       29
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out [[a]] × [[b]]",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y7a5-s05-l3",
+   "topic": "Number",
+   "subtopic": "Multiply integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S5 Multiply integers",
+   "keywords": [
+    "multiply",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       231,
+       879
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       23,
+       68
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out [[a]] × [[b]]",
+   "answer": "[[a * b|group]]"
+  },
+  {
+   "id": "y7a5-s05-l4",
+   "topic": "Number",
+   "subtopic": "Multiply integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S5 Multiply integers",
+   "keywords": [
+    "multiply",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       24,
+       96
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       15,
+       48
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "A box holds [[a]] pencils. A school buys [[b]] boxes. How many pencils does it buy? (2 marks)",
+   "answer": "[[a * b|group]]"
+  },
+  {
+   "id": "y7a5-s06-l1",
+   "topic": "Number",
+   "subtopic": "Divide integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S6 Divide integers",
+   "keywords": [
+    "divide",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out [[a * b]] ÷ [[b]]",
+   "answer": "[[a]]"
+  },
+  {
+   "id": "y7a5-s06-l2",
+   "topic": "Number",
+   "subtopic": "Divide integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S6 Divide integers",
+   "keywords": [
+    "divide",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       112,
+       499
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out [[a * b]] ÷ [[b]]",
+   "answer": "[[a]]"
+  },
+  {
+   "id": "y7a5-s06-l3",
+   "topic": "Number",
+   "subtopic": "Divide integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S6 Divide integers",
+   "keywords": [
+    "divide",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       100,
+       999
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % d != 0"
+   ],
+   "check": [
+    "floor(n / d) * d + n % d == n"
+   ],
+   "text": "Work out [[n]] ÷ [[d]]. Give your answer with a remainder.",
+   "answer": "[[floor(n / d)]] remainder [[n % d]]"
+  },
+  {
+   "id": "y7a5-s06-l4",
+   "topic": "Number",
+   "subtopic": "Divide integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S6 Divide integers",
+   "keywords": [
+    "divide",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       100,
+       300
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       25,
+       55
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % d != 0"
+   ],
+   "check": [
+    "ceil(n / d) * d >= n",
+    "(ceil(n / d) - 1) * d < n"
+   ],
+   "text": "[[n]] pupils go on a trip. Each coach holds [[d]] pupils. How many coaches are needed? (2 marks)",
+   "answer": "[[ceil(n / d)]]"
+  },
+  {
+   "id": "y7a5-s07-l1",
+   "topic": "Number",
+   "subtopic": "Multiply decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S7 Multiply decimals",
+   "keywords": [
+    "multiply",
+    "decimals",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * b / 10 / b == a / 10"
+   ],
+   "text": "Work out [[a / 10]] × [[b]]",
+   "answer": "[[a * b / 10]]"
+  },
+  {
+   "id": "y7a5-s07-l2",
+   "topic": "Number",
+   "subtopic": "Multiply decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S7 Multiply decimals",
+   "keywords": [
+    "multiply",
+    "decimals",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "a * b / 100 * 100 == a * b"
+   ],
+   "text": "Work out [[a / 10]] × [[b / 10]]",
+   "answer": "[[a * b / 100]]"
+  },
+  {
+   "id": "y7a5-s07-l3",
+   "topic": "Number",
+   "subtopic": "Multiply decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S7 Multiply decimals",
+   "keywords": [
+    "multiply",
+    "decimals",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       111,
+       499
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       49
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "a * b / 1000 * 1000 == a * b"
+   ],
+   "text": "Work out [[a / 100]] × [[b / 10]]",
+   "answer": "[[a * b / 1000]]"
+  },
+  {
+   "id": "y7a5-s07-l4",
+   "topic": "Number",
+   "subtopic": "Multiply decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S7 Multiply decimals",
+   "keywords": [
+    "multiply",
+    "decimals",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       301,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * b / 100 / b == a / 100"
+   ],
+   "text": "One book costs £[[a / 100]]. Work out the cost of [[b]] books. (2 marks)",
+   "answer": "£[[a * b / 100|dp:2]]"
+  },
+  {
+   "id": "y7a5-s08-l1",
+   "topic": "Number",
+   "subtopic": "Divide decimals by integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S8 Divide decimals by integers",
+   "keywords": [
+    "divide",
+    "decimals",
+    "by",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q % 10 != 0"
+   ],
+   "check": [
+    "q / 10 * d == q * d / 10"
+   ],
+   "text": "Work out [[q * d / 10]] ÷ [[d]]",
+   "answer": "[[q / 10]]"
+  },
+  {
+   "id": "y7a5-s08-l2",
+   "topic": "Number",
+   "subtopic": "Divide decimals by integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S8 Divide decimals by integers",
+   "keywords": [
+    "divide",
+    "decimals",
+    "by",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q % 10 != 0"
+   ],
+   "check": [
+    "q / 100 * d == q * d / 100"
+   ],
+   "text": "Work out [[q * d / 100]] ÷ [[d]]",
+   "answer": "[[q / 100]]"
+  },
+  {
+   "id": "y7a5-s08-l3",
+   "topic": "Number",
+   "subtopic": "Divide decimals by integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S8 Divide decimals by integers",
+   "keywords": [
+    "divide",
+    "decimals",
+    "by",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       21,
+       99
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0",
+    "isint(n * 100 / (10 * d))"
+   ],
+   "check": [
+    "n / (10 * d) * d == n / 10"
+   ],
+   "text": "Work out [[n / 10]] ÷ [[d]]",
+   "answer": "[[n / (10 * d)]]"
+  },
+  {
+   "id": "y7a5-s08-l4",
+   "topic": "Number",
+   "subtopic": "Divide decimals by integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S8 Divide decimals by integers",
+   "keywords": [
+    "divide",
+    "decimals",
+    "by",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       201,
+       999
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q % 10 != 0"
+   ],
+   "check": [
+    "q / 100 * d == q * d / 100"
+   ],
+   "text": "£[[q * d / 100]] is shared equally between [[d]] people. How much does each person get? (2 marks)",
+   "answer": "£[[q / 100|dp:2]]"
+  },
+  {
+   "id": "y7a5-s09-l1",
+   "topic": "Number",
+   "subtopic": "Divide by a decimal (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S9 Divide by a decimal (E)",
+   "keywords": [
+    "divide",
+    "by",
+    "a",
+    "decimal",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * 2 * 0.5 == a"
+   ],
+   "text": "Work out [[a]] ÷ 0.5",
+   "answer": "[[a * 2]]"
+  },
+  {
+   "id": "y7a5-s09-l2",
+   "topic": "Number",
+   "subtopic": "Divide by a decimal (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S9 Divide by a decimal (E)",
+   "keywords": [
+    "divide",
+    "by",
+    "a",
+    "decimal",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       4,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(a * 10 / d)"
+   ],
+   "check": [
+    "a * 10 / d * d / 10 == a"
+   ],
+   "text": "Work out [[a]] ÷ [[d / 10]]",
+   "answer": "[[a * 10 / d]]"
+  },
+  {
+   "id": "y7a5-s09-l3",
+   "topic": "Number",
+   "subtopic": "Divide by a decimal (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S9 Divide by a decimal (E)",
+   "keywords": [
+    "divide",
+    "by",
+    "a",
+    "decimal",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "d * q"
+    ]
+   ],
+   "where": [
+    "d != 10"
+   ],
+   "check": [
+    "a / d * d == a"
+   ],
+   "text": "Work out [[a / 10]] ÷ [[d / 10]]",
+   "answer": "[[a / d]]"
+  },
+  {
+   "id": "y7a5-s09-l4",
+   "topic": "Number",
+   "subtopic": "Divide by a decimal (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S9 Divide by a decimal (E)",
+   "keywords": [
+    "divide",
+    "by",
+    "a",
+    "decimal",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       20,
+       25,
+       50
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "d * k / 10"
+    ]
+   ],
+   "check": [
+    "a * 10 / d == k"
+   ],
+   "text": "A jug holds [[a / 10]] litres. Each glass holds [[d / 100]] litres. How many glasses can be filled from the jug? (2 marks)",
+   "answer": "[[a * 10 / d]]"
+  },
+  {
+   "id": "y7a5-s10-l1",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S10 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * c == a + c * b"
+   ],
+   "text": "Work out [[a]] + [[b]] × [[c]]",
+   "answer": "[[a + b * c]]"
+  },
+  {
+   "id": "y7a5-s10-l2",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B5 Four operations · S10 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + b) * c == a * c + b * c"
+   ],
+   "text": "Work out ([[a]] + [[b]]) × [[c]]",
+   "answer": "[[(a + b) * c]]"
+  },
+  {
+   "id": "y7a5-s10-l3",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B5 Four operations · S10 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * b * c == a + (b * b) * c"
+   ],
+   "text": "Work out [[a]] + [[b]]² × [[c]]",
+   "answer": "[[a + b * b * c]]"
+  },
+  {
+   "id": "y7a5-s10-l4",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B5 Four operations · S10 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b * c > q"
+   ],
+   "check": [
+    "q * e / e == q"
+   ],
+   "text": "Work out (a) [[a]] + [[b]] × [[c]] − [[q * e]] ÷ [[e]]  (b) ([[a]] + [[b]]) × [[c]] (2 marks)",
+   "answer": "(a) [[a + b * c - q]]  (b) [[(a + b) * c]]"
+  }
+ ]
+}
