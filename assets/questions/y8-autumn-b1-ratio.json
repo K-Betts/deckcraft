@@ -1,0 +1,1790 @@
+{
+ "version": 1,
+ "note": "Y8 Autumn Block 1 Ratio: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8au1-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Understand ratio",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S1 Understand ratio",
+   "keywords": [
+    "understand",
+    "ratio",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A bag has [[a]] red counters and [[b]] blue counters. Write the ratio of red to blue counters.",
+   "answer": "[[a]] : [[b]]"
+  },
+  {
+   "id": "y8au1-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Understand ratio",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S1 Understand ratio",
+   "keywords": [
+    "understand",
+    "ratio",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "A bowl has [[a]] apples and [[b]] bananas. Write (a) the ratio of bananas to apples (b) the ratio of apples to all the fruit.",
+   "answer": "(a) [[b]] : [[a]]  (b) [[a]] : [[a + b]]"
+  },
+  {
+   "id": "y8au1-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Understand ratio",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S1 Understand ratio",
+   "keywords": [
+    "understand",
+    "ratio",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "a != b"
+   ],
+   "check": [
+    "b / (a + b) * (a + b) == b"
+   ],
+   "text": "The ratio of boys to girls in a class is [[a]] : [[b]]. What fraction of the class are girls?",
+   "answer": "[[b / (a + b)|frac]]"
+  },
+  {
+   "id": "y8au1-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Understand ratio",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S1 Understand ratio",
+   "keywords": [
+    "understand",
+    "ratio",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "a != b"
+   ],
+   "check": [
+    "b / (a + b) * (a + b) == b"
+   ],
+   "text": "In a bag, for every [[a]] red sweets there are [[b]] green sweets. Ali says 'the fraction of sweets that are green is [[b]]/[[a]]'. (a) Explain his mistake. (b) What fraction are green? (2 marks)",
+   "answer": "(a) The fraction is out of all the sweets, [[a + b]], not just the red ones  (b) [[b / (a + b)|frac]]"
+  },
+  {
+   "id": "y8au1-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Simplify ratios",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S2 Simplify ratios",
+   "keywords": [
+    "simplify",
+    "ratios",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "a != b"
+   ],
+   "check": [
+    "k * a / k == a"
+   ],
+   "text": "Simplify the ratio [[k * a]] : [[k * b]].",
+   "answer": "[[a]] : [[b]]"
+  },
+  {
+   "id": "y8au1-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Simplify ratios",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S2 Simplify ratios",
+   "keywords": [
+    "simplify",
+    "ratios",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(gcd(a, b), c) == 1",
+    "a != b"
+   ],
+   "check": [
+    "k * a / k == a"
+   ],
+   "text": "Simplify the ratio [[k * a]] : [[k * b]] : [[k * c]].",
+   "answer": "[[a]] : [[b]] : [[c]]"
+  },
+  {
+   "id": "y8au1-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Simplify ratios",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S2 Simplify ratios",
+   "keywords": [
+    "simplify",
+    "ratios",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       25,
+       40,
+       50,
+       60,
+       75,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "100 * a / gcd(100 * a, b) * gcd(100 * a, b) == 100 * a"
+   ],
+   "text": "Simplify the ratio [[a]] m : [[b]] cm.",
+   "answer": "[[100 * a / gcd(100 * a, b)]] : [[b / gcd(100 * a, b)]]"
+  },
+  {
+   "id": "y8au1-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Simplify ratios",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S2 Simplify ratios",
+   "keywords": [
+    "simplify",
+    "ratios",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       8,
+       10,
+       15,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(p, q) == 1",
+    "p != q"
+   ],
+   "check": [
+    "p * k / 10 * 10 == p * k"
+   ],
+   "text": "(a) Simplify the ratio [[p * k / 10]] : [[q * k / 10]]. (b) Simplify £[[a]] : [[b * 10]]p. (3 marks)",
+   "answer": "(a) [[p]] : [[q]]  (b) [[100 * a / gcd(100 * a, b * 10)]] : [[b * 10 / gcd(100 * a, b * 10)]]"
+  },
+  {
+   "id": "y8au1-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Compare ratios and fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S3 Compare ratios and fractions",
+   "keywords": [
+    "compare",
+    "ratios",
+    "and",
+    "fractions",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "a != b"
+   ],
+   "check": [
+    "a / (a + b) * (a + b) == a"
+   ],
+   "text": "The ratio of cats to dogs at a vet is [[a]] : [[b]]. What fraction of the animals are cats?",
+   "answer": "[[a / (a + b)|frac]]"
+  },
+  {
+   "id": "y8au1-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Compare ratios and fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S3 Compare ratios and fractions",
+   "keywords": [
+    "compare",
+    "ratios",
+    "and",
+    "fractions",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "a != b"
+   ],
+   "check": [
+    "a / (a + b) * (a + b) == a"
+   ],
+   "text": "[[a / (a + b)|frac]] of a class are boys and the rest are girls. Write the ratio of boys to girls.",
+   "answer": "[[a]] : [[b]]"
+  },
+  {
+   "id": "y8au1-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Compare ratios and fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S3 Compare ratios and fractions",
+   "keywords": [
+    "compare",
+    "ratios",
+    "and",
+    "fractions",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * (c + d) != c * (a + b)"
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "In bag A the ratio of red to blue counters is [[a]] : [[b]]. In bag B it is [[c]] : [[d]]. Which bag has the larger fraction of red counters? Show your working.",
+   "answer": "Bag A: [[a / (a + b)|dp:3]], bag B: [[c / (c + d)|dp:3]], so [[a * (c + d) > c * (a + b)|if:bag A/bag B]]"
+  },
+  {
+   "id": "y8au1-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Compare ratios and fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S3 Compare ratios and fractions",
+   "keywords": [
+    "compare",
+    "ratios",
+    "and",
+    "fractions",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(p, p + d) == 1"
+   ],
+   "check": [
+    "(p + d) * m - p * m == d * m"
+   ],
+   "text": "[[p]]/[[p + d]] of the members of a club are girls. There are [[p * m]] girls. (a) Write the ratio of girls to boys. (b) How many members are there? (3 marks)",
+   "answer": "(a) [[p]] : [[d]]  (b) [[(p + d) * m]]"
+  },
+  {
+   "id": "y8au1-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole given)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S4 Ratio problems (whole given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "given",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m + b * m == (a + b) * m"
+   ],
+   "text": "Share £[[(a + b) * m]] in the ratio [[a]] : [[b]].",
+   "answer": "£[[a * m]] and £[[b * m]]"
+  },
+  {
+   "id": "y8au1-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole given)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S4 Ratio problems (whole given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "given",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c"
+   ],
+   "check": [
+    "a * m + b * m + c * m == (a + b + c) * m"
+   ],
+   "text": "Share [[(a + b + c) * m]] kg in the ratio [[a]] : [[b]] : [[c]].",
+   "answer": "[[a * m]] kg, [[b * m]] kg and [[c * m]] kg"
+  },
+  {
+   "id": "y8au1-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole given)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S4 Ratio problems (whole given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "given",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "abs(a - b) * m + 2 * min(a, b) * m == (a + b) * m"
+   ],
+   "text": "A [[(a + b) * m]] g bar of chocolate is shared between Ria and Sam in the ratio [[a]] : [[b]]. Who gets more and by how much?",
+   "answer": "[[a > b|if:Ria/Sam]] gets [[abs(a - b) * m]] g more"
+  },
+  {
+   "id": "y8au1-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (whole given)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S4 Ratio problems (whole given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "whole",
+    "given",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "a * m + b * m + c * m == (a + b + c) * m"
+   ],
+   "text": "Amy, Ben and Cara share £[[(a + b + c) * m]] in the ratio [[a]] : [[b]] : [[c]]. How much more does the person with the largest share get than the person with the smallest? (3 marks)",
+   "answer": "£[[(max(a, max(b, c)) - min(a, min(b, c))) * m]]"
+  },
+  {
+   "id": "y8au1-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (part given)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S5 Ratio problems (part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "part",
+    "given",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "The ratio of red to blue counters is [[a]] : [[b]]. There are [[a * m]] red counters. How many blue counters are there?",
+   "answer": "[[b * m]]"
+  },
+  {
+   "id": "y8au1-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (part given)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S5 Ratio problems (part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "part",
+    "given",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "b * m / b == m"
+   ],
+   "text": "The ratio of cats to dogs is [[a]] : [[b]]. There are [[b * m]] dogs. How many animals are there altogether?",
+   "answer": "[[(a + b) * m]]"
+  },
+  {
+   "id": "y8au1-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (part given)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S5 Ratio problems (part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "part",
+    "given",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "b * m / b == m"
+   ],
+   "text": "The ratio of red to blue to green sweets is [[a]] : [[b]] : [[c]]. There are [[b * m]] blue sweets. How many red and how many green sweets are there?",
+   "answer": "[[a * m]] red and [[c * m]] green"
+  },
+  {
+   "id": "y8au1-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (part given)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S5 Ratio problems (part given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "part",
+    "given",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "b * m / b == m"
+   ],
+   "text": "A recipe uses flour, sugar and butter in the ratio [[a]] : [[b]] : [[c]]. A baker uses [[b * m]] g of sugar. What is the total mass of the three ingredients? (3 marks)",
+   "answer": "[[(a + b + c) * m]] g"
+  },
+  {
+   "id": "y8au1-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (difference given)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S6 Ratio problems (difference given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "difference",
+    "given",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "a + d"
+    ]
+   ],
+   "check": [
+    "(b - a) * m == d * m"
+   ],
+   "text": "Ann and Ben share some sweets in the ratio [[a]] : [[b]]. Ben gets [[(b - a) * m]] more than Ann. How many sweets does each get?",
+   "answer": "Ann [[a * m]], Ben [[b * m]]"
+  },
+  {
+   "id": "y8au1-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (difference given)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S6 Ratio problems (difference given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "difference",
+    "given",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "a + d"
+    ]
+   ],
+   "check": [
+    "(b - a) * m == d * m"
+   ],
+   "text": "The ratio of girls to boys in a club is [[a]] : [[b]]. There are [[(b - a) * m]] more boys than girls. How many children are in the club?",
+   "answer": "[[(a + b) * m]]"
+  },
+  {
+   "id": "y8au1-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (difference given)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S6 Ratio problems (difference given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "difference",
+    "given",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "a + d"
+    ]
+   ],
+   "check": [
+    "(b - a) * m == d * m"
+   ],
+   "text": "Mia and Noah have money in the ratio [[a]] : [[b]]. Noah has £[[(b - a) * m]] more than Mia. How much do they have altogether?",
+   "answer": "£[[(a + b) * m]]"
+  },
+  {
+   "id": "y8au1-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Ratio problems (difference given)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S6 Ratio problems (difference given)",
+   "keywords": [
+    "ratio",
+    "problems",
+    "difference",
+    "given",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c",
+     "b + d"
+    ]
+   ],
+   "where": [
+    "a < b"
+   ],
+   "check": [
+    "(c - a) * m == (b + d - a) * m"
+   ],
+   "text": "Three friends share marbles in the ratio [[a]] : [[b]] : [[c]]. The largest share is [[(c - a) * m]] more than the smallest share. (a) How many marbles does each get? (b) How many marbles are there in total? (3 marks)",
+   "answer": "(a) [[a * m]], [[b * m]], [[c * m]]  (b) [[(a + b + c) * m]]"
+  },
+  {
+   "id": "y8au1-s07-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S7 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "Concrete is made from cement and sand in the ratio [[a]] : [[b]]. How much sand is needed for [[a * m]] kg of cement?",
+   "answer": "[[b * m]] kg"
+  },
+  {
+   "id": "y8au1-s07-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S7 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a * m + b * m == (a + b) * m"
+   ],
+   "text": "Paint is made from blue and yellow in the ratio [[a]] : [[b]]. How much blue is needed to make [[(a + b) * m]] litres of paint?",
+   "answer": "[[a * m]] litres"
+  },
+  {
+   "id": "y8au1-s07-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S7 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b * k != d"
+   ],
+   "check": [
+    "a * k / a == k"
+   ],
+   "text": "Red to blue is [[a]] : [[b]]. Blue to green is [[b * k]] : [[d]]. Write red : blue : green.",
+   "answer": "[[a * k]] : [[b * k]] : [[d]]"
+  },
+  {
+   "id": "y8au1-s07-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with ratio",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S7 Solve problems with ratio",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "ratio",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       2,
+       4,
+       6,
+       8,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a - b) * m / 2 * 2 == (a - b) * m"
+   ],
+   "text": "Sam and Tia share sweets in the ratio [[a]] : [[b]]. Sam gives Tia [[(a - b) * m / 2]] sweets and then they have the same number. How many sweets are there in total? (3 marks)",
+   "answer": "[[(a + b) * m]]"
+  },
+  {
+   "id": "y8au1-s08-l1",
+   "topic": "Ratio",
+   "subtopic": "Express ratios in the form 1 : n and n : 1 (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S8 Express ratios in the form 1 : n and n : 1 (E)",
+   "keywords": [
+    "express",
+    "ratios",
+    "in",
+    "the",
+    "form",
+    "1",
+    ":",
+    "n",
+    "and",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != a"
+   ],
+   "check": [
+    "b / a * a == b"
+   ],
+   "text": "Write the ratio [[a]] : [[b]] in the form 1 : n.",
+   "answer": "1 : [[b / a]]"
+  },
+  {
+   "id": "y8au1-s08-l2",
+   "topic": "Ratio",
+   "subtopic": "Express ratios in the form 1 : n and n : 1 (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S8 Express ratios in the form 1 : n and n : 1 (E)",
+   "keywords": [
+    "express",
+    "ratios",
+    "in",
+    "the",
+    "form",
+    "1",
+    ":",
+    "n",
+    "and",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       11,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != a"
+   ],
+   "check": [
+    "a / b * b == a"
+   ],
+   "text": "Write the ratio [[a]] : [[b]] in the form n : 1.",
+   "answer": "[[a / b]] : 1"
+  },
+  {
+   "id": "y8au1-s08-l3",
+   "topic": "Ratio",
+   "subtopic": "Express ratios in the form 1 : n and n : 1 (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S8 Express ratios in the form 1 : n and n : 1 (E)",
+   "keywords": [
+    "express",
+    "ratios",
+    "in",
+    "the",
+    "form",
+    "1",
+    ":",
+    "n",
+    "and",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       11,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a / b * b == a"
+   ],
+   "text": "The ratio of cats to dogs is [[a]] : [[b]]. Write the ratio of dogs to cats in the form 1 : n, and say whether there are more cats or dogs.",
+   "answer": "1 : [[a / b]]; there are more [[a > b|if:cats/dogs]]"
+  },
+  {
+   "id": "y8au1-s08-l4",
+   "topic": "Ratio",
+   "subtopic": "Express ratios in the form 1 : n and n : 1 (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B1 Ratio · S8 Express ratios in the form 1 : n and n : 1 (E)",
+   "keywords": [
+    "express",
+    "ratios",
+    "in",
+    "the",
+    "form",
+    "1",
+    ":",
+    "n",
+    "and",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       30
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b / a * a == b"
+   ],
+   "text": "Paint is made by mixing red and yellow in the ratio [[a]] : [[b]]. (a) Write this ratio in the form 1 : n. (b) How much yellow is needed with [[a * m]] litres of red? (3 marks)",
+   "answer": "(a) 1 : [[b / a]]  (b) [[b * m]] litres"
+  }
+ ]
+}

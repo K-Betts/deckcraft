@@ -1423,7 +1423,7 @@ impl Fig<'_> {
         let (ax, ay) = (px(0.0f64.clamp(x0, x1)), py(0.0f64.clamp(y0, y1)));
         draw_line(s, [x, ay], [x + w, ay], INK, 1.8)?;
         draw_line(s, [ax, y], [ax, y + h], INK, 1.8)?;
-        let step = if x1 - x0 > 12.0 { 2.0 } else { 1.0 };
+        let step = if x1 - x0 >= 12.0 { 2.0 } else { 1.0 };
         let mut v = (x0 / step).ceil() * step;
         while v <= x1 {
             if v.abs() > 1e-9 {
@@ -1438,26 +1438,69 @@ impl Fig<'_> {
             }
             v += step;
         }
-        if let Some(l) = self.d.get("line") {
-            let (m, c) = (l.get("m").and_then(Value::as_f64).unwrap_or(1.0), l.get("c").and_then(Value::as_f64).unwrap_or(0.0));
-            // Clip y = mx + c to the grid.
+        // Straight lines: `line` {m, c}, and `lines`, a list of {m, c}, {x} or {y} with an optional
+        // `color`, `label` and `dash`. Each is clipped to the grid.
+        let mut all: Vec<&Value> = self.d.get("line").into_iter().collect();
+        all.extend(self.d.get("lines").and_then(Value::as_array).into_iter().flatten());
+        for (i, l) in all.iter().enumerate() {
+            let g = |key: &str| l.get(key).and_then(Value::as_f64);
             let mut ends: Vec<P> = vec![];
-            for xv in [x0, x1] {
-                let yv = m * xv + c;
-                if (y0..=y1).contains(&yv) {
-                    ends.push([xv, yv]);
-                }
-            }
-            if m.abs() > 1e-9 {
-                for yv in [y0, y1] {
-                    let xv = (yv - c) / m;
-                    if (x0..=x1).contains(&xv) && !ends.iter().any(|e| (e[0] - xv).abs() < 1e-6) {
+            if let Some(xv) = g("x") {
+                ends = vec![[xv, y0], [xv, y1]];
+            } else if let Some(yv) = g("y") {
+                ends = vec![[x0, yv], [x1, yv]];
+            } else {
+                let (m, c) = (g("m").unwrap_or(1.0), g("c").unwrap_or(0.0));
+                for xv in [x0, x1] {
+                    let yv = m * xv + c;
+                    if (y0..=y1).contains(&yv) {
                         ends.push([xv, yv]);
+                    }
+                }
+                if m.abs() > 1e-9 {
+                    for yv in [y0, y1] {
+                        let xv = (yv - c) / m;
+                        if (x0..=x1).contains(&xv) && !ends.iter().any(|e| (e[0] - xv).abs() < 1e-6) {
+                            ends.push([xv, yv]);
+                        }
                     }
                 }
             }
             if let [a, b, ..] = ends[..] {
-                draw_line(s, [px(a[0]), py(a[1])], [px(b[0]), py(b[1])], "#D0453A", 3.0)?;
+                let color = l.get("color").and_then(Value::as_str).unwrap_or(["#D0453A", "#2F6FDB", "#2E9E5B"][i % 3]);
+                let id = draw_line(s, [px(a[0]), py(a[1])], [px(b[0]), py(b[1])], color, 3.0)?;
+                if l.get("dash").and_then(Value::as_bool).unwrap_or(false) {
+                    s.execute("shape.line", &json!({"ids": [id], "dash": "dash"}))?;
+                }
+                if let Some(t) = l.get("label").and_then(Value::as_str) {
+                    let e = if b[1] >= a[1] { b } else { a };
+                    label(s, t, [(px(e[0]) - 6.0).clamp(x + 24.0, x + w - 24.0), (py(e[1]) + 14.0).clamp(y + 10.0, y + h - 10.0)])?;
+                }
+            }
+        }
+        // Shapes: `segments` [[x1, y1, x2, y2]] and `polygons` [{points, color, label}].
+        for seg in self.d.get("segments").and_then(Value::as_array).into_iter().flatten() {
+            let v: Vec<f64> = seg.as_array().map(|a| a.iter().filter_map(Value::as_f64).collect()).unwrap_or_default();
+            if let [ax, ay, bx, by] = v[..] {
+                draw_line(s, [px(ax), py(ay)], [px(bx), py(by)], "#2F6FDB", 3.0)?;
+            }
+        }
+        for pg in self.d.get("polygons").and_then(Value::as_array).into_iter().flatten() {
+            let pts: Vec<P> = pg
+                .get("points")
+                .and_then(Value::as_array)
+                .map(|a| a.iter().filter_map(|p| Some([px(p.get(0)?.as_f64()?), py(p.get(1)?.as_f64()?)])).collect())
+                .unwrap_or_default();
+            if pts.len() < 3 {
+                continue;
+            }
+            let color = pg.get("color").and_then(Value::as_str).unwrap_or("#2F6FDB");
+            for i in 0..pts.len() {
+                draw_line(s, pts[i], pts[(i + 1) % pts.len()], color, 3.0)?;
+            }
+            if let Some(t) = pg.get("label").and_then(Value::as_str) {
+                let n = pts.len() as f64;
+                label(s, t, [pts.iter().map(|p| p[0]).sum::<f64>() / n, pts.iter().map(|p| p[1]).sum::<f64>() / n])?;
             }
         }
         for p in self.d.get("points").and_then(Value::as_array).into_iter().flatten() {

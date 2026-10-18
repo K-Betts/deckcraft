@@ -28,6 +28,12 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y7-summer-b1-speed-distance-time.json"),
     include_str!("../../../assets/questions/y7-summer-b2-properties-of-number.json"),
     include_str!("../../../assets/questions/y7-summer-b4-angles-polygons.json"),
+    include_str!("../../../assets/questions/y8-autumn-b1-ratio.json"),
+    include_str!("../../../assets/questions/y8-autumn-b2-proportion-scale.json"),
+    include_str!("../../../assets/questions/y8-autumn-b3-algebraic-manipulation.json"),
+    include_str!("../../../assets/questions/y8-autumn-b4-coordinates-graphs.json"),
+    include_str!("../../../assets/questions/y8-autumn-b5-multiply-divide-fractions.json"),
+    include_str!("../../../assets/questions/y8-autumn-b6-symmetry-reflection.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -663,11 +669,11 @@ mod tests {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
         for t in &bank.templates {
-            if t.source.starts_with("Y7 ") {
+            if t.source.starts_with("Y7 ") || t.source.starts_with("Y8 ") {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 120, "the Year 7 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 180, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }
