@@ -1,0 +1,2488 @@
+{
+ "version": 1,
+ "note": "Y9 Spring Block 1 Maths and money: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9sp1-s01-l1",
+   "topic": "Number",
+   "subtopic": "Understand a bank account",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S1 Understand a bank account",
+   "keywords": [
+    "understand",
+    "a",
+    "bank",
+    "account",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       120,
+       600
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       40,
+       300
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       20,
+       250
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A bank account has a balance of £[[b]]. £[[d]] is paid in and £[[w]] is taken out. What is the new balance?",
+   "answer": "£[[b + d - w|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s01-l2",
+   "topic": "Number",
+   "subtopic": "Understand a bank account",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S1 Understand a bank account",
+   "keywords": [
+    "understand",
+    "a",
+    "bank",
+    "account",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       40,
+       300
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       50,
+       400
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w > b"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Ali's account balance is £[[b]]. He pays £[[w]] by card and the bank allows this. What is his balance now? By how much is he overdrawn?",
+   "answer": "−£[[w - b]]; he is overdrawn by £[[w - b]]"
+  },
+  {
+   "id": "y9sp1-s01-l3",
+   "topic": "Number",
+   "subtopic": "Understand a bank account",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S1 Understand a bank account",
+   "keywords": [
+    "understand",
+    "a",
+    "bank",
+    "account",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       100,
+       500
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       30,
+       120
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       900,
+       1800
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       20,
+       200
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A statement shows a balance of £[[b]]. Then a direct debit of £[[d]], a salary payment of £[[s]] and a card payment of £[[c]]. Work out the final balance.",
+   "answer": "£[[b - d + s - c|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s01-l4",
+   "topic": "Number",
+   "subtopic": "Understand a bank account",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S1 Understand a bank account",
+   "keywords": [
+    "understand",
+    "a",
+    "bank",
+    "account",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1200,
+       1500,
+       2000
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       50,
+       100,
+       150
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > w * n"
+   ],
+   "text": "An account has £[[b]]. Interest of [[r]]% a year is paid on the final balance. £[[w]] is taken out each month for [[n]] months before interest is added at the end. Work out the balance after the interest. (3 marks)",
+   "answer": "£[[(b - w * n) * (1 + r / 100)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s02-l1",
+   "topic": "Number",
+   "subtopic": "Ways to save",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S2 Ways to save",
+   "keywords": [
+    "ways",
+    "to",
+    "save",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2500,
+       4000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is saved in an account that pays [[p]]% interest a year. How much interest is paid after one year?",
+   "answer": "£[[A * p / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s02-l2",
+   "topic": "Number",
+   "subtopic": "Ways to save",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S2 Ways to save",
+   "keywords": [
+    "ways",
+    "to",
+    "save",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "choose": [
+       25,
+       40,
+       50,
+       80,
+       100
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Jo saves £[[m]] a month. How much does she save in [[n]] years?",
+   "answer": "£[[m * 12 * n|group]]"
+  },
+  {
+   "id": "y9sp1-s02-l3",
+   "topic": "Number",
+   "subtopic": "Ways to save",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S2 Ways to save",
+   "keywords": [
+    "ways",
+    "to",
+    "save",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       1000,
+       2000,
+       3000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       40,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "A * p / 100 != f"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Account A pays [[p]]% interest on £[[A]]. Account B pays a fixed £[[f]] bonus. Which gives more after one year?",
+   "answer": "A pays £[[A * p / 100|dp:2]]; B pays £[[f]]; [[A * p / 100 > f|if:A/B]] gives more"
+  },
+  {
+   "id": "y9sp1-s02-l4",
+   "topic": "Number",
+   "subtopic": "Ways to save",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S2 Ways to save",
+   "keywords": [
+    "ways",
+    "to",
+    "save",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       400,
+       900
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       50,
+       200
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "T > s"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Sam wants to save £[[T]] for a bike. He has £[[s]] and saves £[[m]] a month. How many months will it take? (3 marks)",
+   "answer": "[[ceil((T - s) / m)]] months"
+  },
+  {
+   "id": "y9sp1-s03-l1",
+   "topic": "Number",
+   "subtopic": "Value added tax",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S3 Value added tax",
+   "keywords": [
+    "value",
+    "added",
+    "tax",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       20,
+       400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A bill is £[[A]] before VAT. VAT is 20%. Work out the VAT.",
+   "answer": "£[[A * 0.2|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s03-l2",
+   "topic": "Number",
+   "subtopic": "Value added tax",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S3 Value added tax",
+   "keywords": [
+    "value",
+    "added",
+    "tax",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       20,
+       400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A price including 20% VAT is £[[A * 1.2|dp:2]]. Work out the price before VAT.",
+   "answer": "£[[A|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s03-l3",
+   "topic": "Number",
+   "subtopic": "Value added tax",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S3 Value added tax",
+   "keywords": [
+    "value",
+    "added",
+    "tax",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       40,
+       200
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "int": [
+       10,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "A * 0.05 != B * 0.2"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A book costs £[[A]] with 5% VAT and a toy costs £[[B]] with 20% VAT. Which is the greater amount of VAT?",
+   "answer": "Book £[[A * 0.05|dp:2]], toy £[[B * 0.2|dp:2]]; the [[A * 0.05 > B * 0.2|if:book/toy]] has more VAT"
+  },
+  {
+   "id": "y9sp1-s03-l4",
+   "topic": "Number",
+   "subtopic": "Value added tax",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S3 Value added tax",
+   "keywords": [
+    "value",
+    "added",
+    "tax",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       100
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       120
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       80
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       60,
+       120,
+       180,
+       240
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "An invoice has items costing £[[a]], £[[b]] and £[[c]] before VAT at 20%. (a) Work out the total including VAT. (b) The business pays £[[d]] for materials including VAT. How much VAT is that? (4 marks)",
+   "answer": "(a) £[[(a + b + c) * 1.2|dp:2]]  (b) £[[d / 6|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s04-l1",
+   "topic": "Number",
+   "subtopic": "Ways to pay",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S4 Ways to pay",
+   "keywords": [
+    "ways",
+    "to",
+    "pay",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "int": [
+       300,
+       700
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       40,
+       100
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       6,
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A TV costs £[[P]] cash or a £[[d]] deposit plus [[n]] payments of £[[m]]. Work out the total on finance.",
+   "answer": "£[[d + n * m|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s04-l2",
+   "topic": "Number",
+   "subtopic": "Ways to pay",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S4 Ways to pay",
+   "keywords": [
+    "ways",
+    "to",
+    "pay",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "int": [
+       400,
+       700
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       18,
+       24
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       20,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d + n * m > P"
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A sofa costs £[[P]] cash. On finance it costs £[[d]] deposit plus [[n]] payments of £[[m]]. How much more is the finance price?",
+   "answer": "£[[d + n * m - P|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s04-l3",
+   "topic": "Number",
+   "subtopic": "Ways to pay",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S4 Ways to pay",
+   "keywords": [
+    "ways",
+    "to",
+    "pay",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "int": [
+       400,
+       800
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "ceil(P * 1.1 / n)"
+    ]
+   ],
+   "where": [
+    "n * m > P * (1 - p / 100)"
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A laptop costs £[[P]] cash, or a credit agreement of [[n]] payments of £[[m]]. Pay cash with a [[p]]% discount or finance: which is cheaper and by how much?",
+   "answer": "Cash £[[P * (1 - p / 100)|dp:2]]; finance £[[n * m|dp:2]]; cash is cheaper by £[[n * m - P * (1 - p / 100)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s04-l4",
+   "topic": "Number",
+   "subtopic": "Ways to pay",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S4 Ways to pay",
+   "keywords": [
+    "ways",
+    "to",
+    "pay",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "int": [
+       300,
+       600
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       20,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d + n * m > P"
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A bike costs £[[P]]. On credit, Mia pays a £[[d]] deposit and [[n]] payments of £[[m]]. (a) Work out the total paid. (b) Work out the extra paid as a percentage of the cash price, to 1 decimal place. (4 marks)",
+   "answer": "(a) £[[d + n * m|dp:2]]  (b) [[(d + n * m - P) * 100 / P|dp:1]]%"
+  },
+  {
+   "id": "y9sp1-s05-l1",
+   "topic": "Number",
+   "subtopic": "Jobs and pay",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S5 Jobs and pay",
+   "keywords": [
+    "jobs",
+    "and",
+    "pay",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       9,
+       18
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Jade earns £[[r]] an hour and works [[h]] hours. How much does she earn?",
+   "answer": "£[[r * h|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s05-l2",
+   "topic": "Number",
+   "subtopic": "Jobs and pay",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S5 Jobs and pay",
+   "keywords": [
+    "jobs",
+    "and",
+    "pay",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "choose": [
+       35,
+       38,
+       40
+      ]
+     }
+    ],
+    [
+     "o",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Sam earns £[[r]] an hour. Overtime is paid at time and a half. He works [[h]] normal hours and [[o]] overtime hours. Work out his pay.",
+   "answer": "£[[r * h + r * 1.5 * o|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s05-l3",
+   "topic": "Number",
+   "subtopic": "Jobs and pay",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S5 Jobs and pay",
+   "keywords": [
+    "jobs",
+    "and",
+    "pay",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "S",
+     {
+      "choose": [
+       24000,
+       27000,
+       30000,
+       36000,
+       42000
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "S > 0"
+   ],
+   "text": "A salary is £[[S]] a year. Work out the monthly pay before tax and the weekly pay to the nearest penny.",
+   "answer": "£[[S / 12|dp:2]] a month; £[[S / 52|dp:2]] a week"
+  },
+  {
+   "id": "y9sp1-s05-l4",
+   "topic": "Number",
+   "subtopic": "Jobs and pay",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S5 Jobs and pay",
+   "keywords": [
+    "jobs",
+    "and",
+    "pay",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1200,
+       1500,
+       1800
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       8000,
+       10000,
+       12000,
+       15000
+      ]
+     }
+    ],
+    [
+     "T",
+     {
+      "choose": [
+       2000,
+       2400,
+       2800
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "T > b"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A salesperson earns a basic £[[b]] a month plus [[p]]% commission on sales. Sales one month are £[[s]]. Work out the total pay. If she wants £[[T]], what sales are needed? (4 marks)",
+   "answer": "£[[b + s * p / 100|dp:2]]; sales of £[[(T - b) * 100 / p|group]]"
+  },
+  {
+   "id": "y9sp1-s06-l1",
+   "topic": "Number",
+   "subtopic": "Borrowing (buying a house)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S6 Borrowing (buying a house)",
+   "keywords": [
+    "borrowing",
+    "buying",
+    "a",
+    "house",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "choose": [
+       150000,
+       200000,
+       250000,
+       300000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A house costs £[[P]]. A [[p]]% deposit is needed. Work out the deposit.",
+   "answer": "£[[P * p / 100|group]]"
+  },
+  {
+   "id": "y9sp1-s06-l2",
+   "topic": "Number",
+   "subtopic": "Borrowing (buying a house)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S6 Borrowing (buying a house)",
+   "keywords": [
+    "borrowing",
+    "buying",
+    "a",
+    "house",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "choose": [
+       150000,
+       200000,
+       250000,
+       300000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A house costs £[[P]]. The deposit is [[p]]%. Work out the mortgage needed.",
+   "answer": "£[[P * (1 - p / 100)|group]]"
+  },
+  {
+   "id": "y9sp1-s06-l3",
+   "topic": "Number",
+   "subtopic": "Borrowing (buying a house)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S6 Borrowing (buying a house)",
+   "keywords": [
+    "borrowing",
+    "buying",
+    "a",
+    "house",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "M",
+     {
+      "choose": [
+       100000,
+       150000,
+       200000
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "choose": [
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "i",
+     {
+      "choose": [
+       30,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "M > 0"
+   ],
+   "text": "A mortgage of £[[M]] is repaid over [[y]] years with total interest of [[i]]% of the loan. How much is repaid in total and per month?",
+   "answer": "Total £[[M * (1 + i / 100)|group]]; per month £[[M * (1 + i / 100) / (12 * y)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s06-l4",
+   "topic": "Number",
+   "subtopic": "Borrowing (buying a house)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S6 Borrowing (buying a house)",
+   "keywords": [
+    "borrowing",
+    "buying",
+    "a",
+    "house",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "choose": [
+       180000,
+       220000,
+       260000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "choose": [
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "i",
+     {
+      "choose": [
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A flat costs £[[P]]. Eve pays a [[p]]% deposit. The rest is a mortgage over [[y]] years at a total interest of [[i]]%. Work out her monthly payment to the nearest pound. (4 marks)",
+   "answer": "£[[P * (1 - p / 100) * (1 + i / 100) / (12 * y)|dp:0]]"
+  },
+  {
+   "id": "y9sp1-s07-l1",
+   "topic": "Number",
+   "subtopic": "Investments",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S7 Investments",
+   "keywords": [
+    "investments",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100,
+       200,
+       500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Sam buys [[n]] shares at £[[p]] each. How much does he pay?",
+   "answer": "£[[n * p|group]]"
+  },
+  {
+   "id": "y9sp1-s07-l2",
+   "topic": "Number",
+   "subtopic": "Investments",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S7 Investments",
+   "keywords": [
+    "investments",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       9,
+       14
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > p"
+   ],
+   "text": "Shares bought for £[[p]] each are sold for £[[q]] each. Work out the profit on [[n]] shares.",
+   "answer": "£[[n * (q - p)|group]]"
+  },
+  {
+   "id": "y9sp1-s07-l3",
+   "topic": "Number",
+   "subtopic": "Investments",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S7 Investments",
+   "keywords": [
+    "investments",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       1000,
+       2000,
+       5000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested at [[p]]% compound interest a year. How much is it worth after [[n]] years?",
+   "answer": "£[[A * (1 + p / 100)^n|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s07-l4",
+   "topic": "Number",
+   "subtopic": "Investments",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S7 Investments",
+   "keywords": [
+    "investments",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       8,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Shares cost £[[p]] each. They rise by [[a]]% then fall by [[b]]%. Work out the final price and the overall percentage change. (3 marks)",
+   "answer": "£[[p * (1 + a / 100) * (1 - b / 100)|dp:2]]; overall [[(1 + a / 100) * (1 - b / 100) > 1|if:increase/decrease]] of [[abs((1 + a / 100) * (1 - b / 100) - 1) * 100|dp:1]]%"
+  },
+  {
+   "id": "y9sp1-s08-l1",
+   "topic": "Number",
+   "subtopic": "Borrowing (loans)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S8 Borrowing (loans)",
+   "keywords": [
+    "borrowing",
+    "loans",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "choose": [
+       1000,
+       2000,
+       3000,
+       5000
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "L > 0"
+   ],
+   "text": "A loan of £[[L]] has simple interest of [[r]]% a year for [[n]] years. Work out the interest.",
+   "answer": "£[[L * r * n / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s08-l2",
+   "topic": "Number",
+   "subtopic": "Borrowing (loans)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S8 Borrowing (loans)",
+   "keywords": [
+    "borrowing",
+    "loans",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "choose": [
+       1000,
+       2000,
+       3000,
+       5000
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "L > 0"
+   ],
+   "text": "A loan of £[[L]] has total interest of £[[L * r * n / 100|dp:2]] over [[n]] years. How much is repaid per month?",
+   "answer": "£[[L * (1 + r * n / 100) / (12 * n)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s08-l3",
+   "topic": "Number",
+   "subtopic": "Borrowing (loans)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S8 Borrowing (loans)",
+   "keywords": [
+    "borrowing",
+    "loans",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "choose": [
+       1000,
+       2000,
+       3000
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       5,
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       6,
+       9,
+       15
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "L > 0"
+   ],
+   "text": "Loan A: £[[L]] at [[a]]% simple interest for [[n]] years. Loan B: £[[L]] at [[b]]% simple interest for [[n]] years. How much more interest does the dearer loan cost?",
+   "answer": "£[[abs(a - b) * L * n / 100|dp:2]] more"
+  },
+  {
+   "id": "y9sp1-s08-l4",
+   "topic": "Number",
+   "subtopic": "Borrowing (loans)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S8 Borrowing (loans)",
+   "keywords": [
+    "borrowing",
+    "loans",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "choose": [
+       1000,
+       2000,
+       3000
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       24,
+       36
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       90,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n * m > L"
+   ],
+   "check": [
+    "L > 0"
+   ],
+   "text": "A loan of £[[L]] is repaid in [[n]] monthly payments of £[[m]]. (a) Work out the total repaid. (b) Work out the interest as a percentage of the loan. (3 marks)",
+   "answer": "(a) £[[n * m|group]]  (b) [[(n * m - L) * 100 / L|dp:1]]%"
+  },
+  {
+   "id": "y9sp1-s09-l1",
+   "topic": "Number",
+   "subtopic": "Running a house or a business",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S9 Running a house or a business",
+   "keywords": [
+    "running",
+    "a",
+    "house",
+    "or",
+    "business",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       500,
+       900
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       150
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A family's bills are £[[a]] rent, £[[b]] energy and £[[c]] water each month. Work out the total bills for a year.",
+   "answer": "£[[(a + b + c) * 12|group]]"
+  },
+  {
+   "id": "y9sp1-s09-l2",
+   "topic": "Number",
+   "subtopic": "Running a house or a business",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S9 Running a house or a business",
+   "keywords": [
+    "running",
+    "a",
+    "house",
+    "or",
+    "business",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "R",
+     {
+      "int": [
+       2000,
+       5000
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "int": [
+       1000,
+       1900
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "C < R"
+   ],
+   "check": [
+    "R > 0"
+   ],
+   "text": "A shop's takings in a week are £[[R]] and its costs are £[[C]]. Work out the profit and the profit as a percentage of the takings, to 1 decimal place.",
+   "answer": "Profit £[[R - C|group]]; [[(R - C) * 100 / R|dp:1]]%"
+  },
+  {
+   "id": "y9sp1-s09-l3",
+   "topic": "Number",
+   "subtopic": "Running a house or a business",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S9 Running a house or a business",
+   "keywords": [
+    "running",
+    "a",
+    "house",
+    "or",
+    "business",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       1,
+       1.5,
+       2
+      ]
+     }
+    ],
+    [
+     "F",
+     {
+      "choose": [
+       100,
+       200,
+       300,
+       500
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p > c"
+   ],
+   "check": [
+    "p > c"
+   ],
+   "text": "A cafe sells a cake for £[[p|dp:2]]. Each costs £[[c|dp:2]] to make and fixed costs are £[[F]] a week. How many cakes must be sold to break even?",
+   "answer": "[[ceil(F / (p - c))]] cakes"
+  },
+  {
+   "id": "y9sp1-s09-l4",
+   "topic": "Number",
+   "subtopic": "Running a house or a business",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S9 Running a house or a business",
+   "keywords": [
+    "running",
+    "a",
+    "house",
+    "or",
+    "business",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "F",
+     {
+      "choose": [
+       500,
+       800,
+       1000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       200,
+       300,
+       400
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n * p > F + n * c"
+   ],
+   "check": [
+    "p > c"
+   ],
+   "text": "A business has fixed costs of £[[F]] a month and sells items for £[[p]] that cost £[[c]] to make. In a month it sells [[n]] items. (a) Work out the profit. (b) Work out the percentage profit on total costs, to 1 decimal place. (4 marks)",
+   "answer": "(a) £[[n * p - F - n * c|group]]  (b) [[(n * p - F - n * c) * 100 / (F + n * c)|dp:1]]%"
+  },
+  {
+   "id": "y9sp1-s10-l1",
+   "topic": "Number",
+   "subtopic": "Budgeting",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S10 Budgeting",
+   "keywords": [
+    "budgeting",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "I",
+     {
+      "choose": [
+       1500,
+       2000,
+       2400,
+       3000
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       30,
+       35,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       15,
+       20,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "I > 0"
+   ],
+   "text": "Jo's monthly income is £[[I]]. She spends [[a]]% on rent and [[b]]% on food. How much is left?",
+   "answer": "£[[I * (1 - a / 100 - b / 100)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s10-l2",
+   "topic": "Number",
+   "subtopic": "Budgeting",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S10 Budgeting",
+   "keywords": [
+    "budgeting",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "I",
+     {
+      "int": [
+       1800,
+       2600
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       600,
+       900
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       150,
+       300
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       250,
+       400
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "I - a - b - c > 100"
+   ],
+   "check": [
+    "I > 0"
+   ],
+   "text": "A monthly budget of £[[I]] is split: rent £[[a]], bills £[[b]], food £[[c]]. How much is left for savings?",
+   "answer": "£[[I - a - b - c|group]]"
+  },
+  {
+   "id": "y9sp1-s10-l3",
+   "topic": "Number",
+   "subtopic": "Budgeting",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S10 Budgeting",
+   "keywords": [
+    "budgeting",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "I",
+     {
+      "choose": [
+       1800,
+       2200,
+       2600
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       250,
+       350,
+       500
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "I * (1 - (a + b + c) / 100) != s"
+   ],
+   "check": [
+    "I > 0"
+   ],
+   "text": "Sam's income is £[[I]] a month. Rent is [[a]]%, bills [[b]]% and food [[c]]%. He wants to save £[[s]]. Can he afford this?",
+   "answer": "Spending £[[I * (a + b + c) / 100|dp:2]]; left £[[I * (1 - (a + b + c) / 100)|dp:2]]; [[I * (1 - (a + b + c) / 100) >= s|if:yes/no]]"
+  },
+  {
+   "id": "y9sp1-s10-l4",
+   "topic": "Number",
+   "subtopic": "Budgeting",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S10 Budgeting",
+   "keywords": [
+    "budgeting",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "I",
+     {
+      "choose": [
+       2000,
+       2500,
+       3000
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       30,
+       35,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       8,
+       10,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "I > 0"
+   ],
+   "text": "A family has £[[I]] a month. They budget [[a]]% for housing, [[b]]% for food, [[c]]% for transport and the rest for savings. (a) Work out each amount. (b) How much is saved in a year? (4 marks)",
+   "answer": "(a) £[[I * a / 100|dp:2]], £[[I * b / 100|dp:2]], £[[I * c / 100|dp:2]]  (b) £[[I * (1 - (a + b + c) / 100) * 12|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s11-l1",
+   "topic": "Number",
+   "subtopic": "Spending overseas",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S11 Spending overseas",
+   "keywords": [
+    "spending",
+    "overseas",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       110,
+       125
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       50,
+       100,
+       200,
+       250,
+       400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Convert £[[x]] to euros.",
+   "answer": "€[[x * r / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s11-l2",
+   "topic": "Number",
+   "subtopic": "Spending overseas",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S11 Spending overseas",
+   "keywords": [
+    "spending",
+    "overseas",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       110,
+       125
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       50,
+       100,
+       200,
+       250,
+       400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Convert €[[x * r / 100|dp:2]] to pounds.",
+   "answer": "£[[x|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s11-l3",
+   "topic": "Number",
+   "subtopic": "Spending overseas",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S11 Spending overseas",
+   "keywords": [
+    "spending",
+    "overseas",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       200,
+       300,
+       500
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       110,
+       125
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Mia changes £[[x]] to euros at £1 = €[[r / 100|dp:2]]. The bureau charges a [[f]]% fee on the pounds. How many euros does she get?",
+   "answer": "€[[x * (1 - f / 100) * r / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s11-l4",
+   "topic": "Number",
+   "subtopic": "Spending overseas",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S11 Spending overseas",
+   "keywords": [
+    "spending",
+    "overseas",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "e",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       150
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       110,
+       125
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "e > 0"
+   ],
+   "text": "On holiday Ali pays €[[e]] for a meal. His bank charges [[f]]% on foreign card payments. £1 = €[[r / 100|dp:2]]. How much comes out of his account in pounds? (3 marks)",
+   "answer": "£[[e / (r / 100) * (1 + f / 100)|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s12-l1",
+   "topic": "Number",
+   "subtopic": "Insurance",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S12 Insurance",
+   "keywords": [
+    "insurance",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "y",
+     {
+      "choose": [
+       480,
+       600,
+       720,
+       840,
+       960
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "y > 0"
+   ],
+   "text": "Car insurance costs £[[y]] a year. How much is it per month?",
+   "answer": "£[[y / 12|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s12-l2",
+   "topic": "Number",
+   "subtopic": "Insurance",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S12 Insurance",
+   "keywords": [
+    "insurance",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       400,
+       2000
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       50,
+       100,
+       150,
+       250
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > e"
+   ],
+   "text": "A claim is £[[c]]. The policy has an excess of £[[e]]. How much does the insurer pay?",
+   "answer": "£[[c - e|group]]"
+  },
+  {
+   "id": "y9sp1-s12-l3",
+   "topic": "Number",
+   "subtopic": "Insurance",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S12 Insurance",
+   "keywords": [
+    "insurance",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "y",
+     {
+      "choose": [
+       400,
+       500,
+       600,
+       800
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "y > 0"
+   ],
+   "text": "An insurance premium is £[[y]]. A [[d]]% no-claims discount is applied. Work out the new premium and the saving.",
+   "answer": "£[[y * (1 - d / 100)|dp:2]]; saving £[[y * d / 100|dp:2]]"
+  },
+  {
+   "id": "y9sp1-s12-l4",
+   "topic": "Number",
+   "subtopic": "Insurance",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B1 Maths and money · S12 Insurance",
+   "keywords": [
+    "insurance",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "P",
+     {
+      "choose": [
+       300,
+       500,
+       700
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       50,
+       75,
+       100
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "P > 0"
+   ],
+   "text": "A phone costs £[[P]]. Insurance is £[[m]] a month with an excess of £[[e]]. The phone is lost after [[n]] months. (a) How much was paid in premiums? (b) How much does the insurer pay? (c) What is the net cost? (4 marks)",
+   "answer": "(a) £[[m * n]]  (b) £[[P - e]]  (c) £[[e + m * n]]"
+  }
+ ]
+}

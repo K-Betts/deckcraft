@@ -1,0 +1,942 @@
+{
+ "version": 1,
+ "note": "Y9 Spring Block 5 Similarity: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9sp5-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Recognise enlargement and similarity",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S1 Recognise enlargement and similarity",
+   "keywords": [
+    "recognise",
+    "enlargement",
+    "and",
+    "similarity",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A [[a]] cm by [[b]] cm rectangle is enlarged by scale factor [[k]]. What are the new dimensions?",
+   "answer": "[[a * k]] cm by [[b * k]] cm"
+  },
+  {
+   "id": "y9sp5-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Recognise enlargement and similarity",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S1 Recognise enlargement and similarity",
+   "keywords": [
+    "recognise",
+    "enlargement",
+    "and",
+    "similarity",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Are the rectangles [[a]] cm by [[b]] cm and [[a * k]] cm by [[b * k]] cm similar? What is the scale factor?",
+   "answer": "Yes: the sides are in the same ratio; scale factor [[k]]"
+  },
+  {
+   "id": "y9sp5-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Recognise enlargement and similarity",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S1 Recognise enlargement and similarity",
+   "keywords": [
+    "recognise",
+    "enlargement",
+    "and",
+    "similarity",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       18
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != b * c || 1 == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Are the rectangles [[a]] cm by [[b]] cm and [[c]] cm by [[d]] cm similar? Show your working.",
+   "answer": "[[a / b|dp:2]] and [[c / d|dp:2]]: [[a * d == b * c|if:similar/not similar]]"
+  },
+  {
+   "id": "y9sp5-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Recognise enlargement and similarity",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S1 Recognise enlargement and similarity",
+   "keywords": [
+    "recognise",
+    "enlargement",
+    "and",
+    "similarity",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       16
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A photo is [[a]] cm by [[b]] cm. It is enlarged so that the longer side is [[b * k]] cm. (a) Work out the scale factor. (b) Work out the other side. (c) Work out the ratio of the areas. (3 marks)",
+   "answer": "(a) [[k]]  (b) [[a * k]] cm  (c) 1 : [[k * k]]"
+  },
+  {
+   "id": "y9sp5-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Work out unknown lengths and angles in similar shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S2 Work out unknown lengths and angles in similar shapes",
+   "keywords": [
+    "work",
+    "out",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$.",
+   "answer": "$x = [[k * c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y9sp5-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Work out unknown lengths and angles in similar shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S2 Work out unknown lengths and angles in similar shapes",
+   "keywords": [
+    "work",
+    "out",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / k == c"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$ on the smaller triangle.",
+   "answer": "$x = [[c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     null,
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     "[[k * c]] cm",
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y9sp5-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Work out unknown lengths and angles in similar shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S2 Work out unknown lengths and angles in similar shapes",
+   "keywords": [
+    "work",
+    "out",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "The two triangles are similar. Find the scale factor and the length marked $x$.",
+   "answer": "Scale factor [[k]]/2 = [[k / 2]]; $x$ = [[k * c / 2]] cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[b * k / 2]] cm",
+     null,
+     "[[d * k / 2]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y9sp5-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Work out unknown lengths and angles in similar shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S2 Work out unknown lengths and angles in similar shapes",
+   "keywords": [
+    "work",
+    "out",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "similar",
+    "shapes",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       12,
+       30
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Two similar shapes have a scale factor of [[k]]. The smaller has a perimeter of [[p]] cm and an area of [[A]] cm². Work out the perimeter and the area of the larger shape. (3 marks)",
+   "answer": "Perimeter [[p * k]] cm; area [[A * k * k]] cm²"
+  },
+  {
+   "id": "y9sp5-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with similar triangles (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S3 Solve problems with similar triangles (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "triangles",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "choose": [
+       1.5,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "S",
+     "s * k"
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A [[h]] m pole casts a shadow of [[s]] m. At the same time a tree casts a shadow of [[S]] m. How tall is the tree?",
+   "answer": "[[h * S / s]] m"
+  },
+  {
+   "id": "y9sp5-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with similar triangles (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S3 Solve problems with similar triangles (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "triangles",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangle $ABC$ is similar to triangle $ADE$ with $B$ on $AD$ and $C$ on $AE$ and $BC$ parallel to $DE$. $AB$ = [[a]] cm, $AD$ = [[a * k]] cm and $BC$ = [[c]] cm. Find $DE$.",
+   "answer": "[[c * k]] cm"
+  },
+  {
+   "id": "y9sp5-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with similar triangles (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S3 Solve problems with similar triangles (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "triangles",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In the same diagram, $AB$ = [[a]] cm, $BD$ = [[a * (k - 1)]] cm and $DE$ = [[c * k]] cm. Find $BC$ and explain which angles are equal.",
+   "answer": "$BC$ = [[c]] cm; angle $ABC$ = angle $ADE$ (corresponding angles) and angle $A$ is common"
+  },
+  {
+   "id": "y9sp5-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with similar triangles (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S3 Solve problems with similar triangles (E)",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "similar",
+    "triangles",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "choose": [
+       1.5,
+       1.6,
+       1.8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A [[h]] m person stands [[d]] m from a lamp post. Their shadow is [[s]] m long. Work out the height of the lamp. (4 marks)",
+   "answer": "[[h * (d + s) / s|dp:2]] m"
+  },
+  {
+   "id": "y9sp5-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Ratio in right-angled triangles (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S4 Ratio in right-angled triangles (E)",
+   "keywords": [
+    "ratio",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A right-angled triangle has sides [[3]], [[4]] and [[5]]. A similar triangle has its shortest side equal to [[3 * k]]. Find the other two sides.",
+   "answer": "[[4 * k]] and [[5 * k]]"
+  },
+  {
+   "id": "y9sp5-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Ratio in right-angled triangles (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S4 Ratio in right-angled triangles (E)",
+   "keywords": [
+    "ratio",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != d"
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "In a right-angled triangle the side opposite angle $x$ is [[o]] and the adjacent side is [[d]]. Write the ratio opposite : adjacent in its simplest form.",
+   "answer": "[[o / gcd(o, d)]] : [[d / gcd(o, d)]]"
+  },
+  {
+   "id": "y9sp5-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Ratio in right-angled triangles (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S4 Ratio in right-angled triangles (E)",
+   "keywords": [
+    "ratio",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "o != d"
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "Two right-angled triangles have the same angle $x$. The first has opposite [[o]] and adjacent [[d]]. In the second the adjacent side is [[d * k]]. Find its opposite side and explain why.",
+   "answer": "[[o * k]]: the triangles are similar so the ratio opposite : adjacent stays the same"
+  },
+  {
+   "id": "y9sp5-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Ratio in right-angled triangles (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B5 Similarity · S4 Ratio in right-angled triangles (E)",
+   "keywords": [
+    "ratio",
+    "in",
+    "right",
+    "angled",
+    "triangles",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "o",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       8,
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "o > 0"
+   ],
+   "text": "A ramp rises [[o]] m over a horizontal distance of [[d]] m. A longer ramp with the same angle covers [[d * k]] m horizontally. (a) How high does it rise? (b) What is the ratio rise : horizontal as a decimal? (3 marks)",
+   "answer": "(a) [[o * k]] m  (b) [[o / d|dp:2]]"
+  }
+ ]
+}

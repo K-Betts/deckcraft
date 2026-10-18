@@ -1,0 +1,1570 @@
+{
+ "version": 1,
+ "note": "Y9 Spring Block 6 Algebraic manipulation: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9sp6-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand single brackets and simplify",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S1 Expand single brackets and simplify",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "and",
+    "simplify",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b != c * d"
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Expand and simplify $[[a]](x + [[b]]) + [[c]](x - [[d]])$.",
+   "answer": "$[[a + c]]x[[a * b - c * d|signed]]$"
+  },
+  {
+   "id": "y9sp6-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand single brackets and simplify",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S1 Expand single brackets and simplify",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "and",
+    "simplify",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a != c"
+   ],
+   "text": "Expand and simplify $[[a]](x + [[b]]) - [[c]](x - [[d]])$.",
+   "answer": "$[[a - c|term:x]][[a * b + c * d|signed]]$"
+  },
+  {
+   "id": "y9sp6-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand single brackets and simplify",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S1 Expand single brackets and simplify",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "and",
+    "simplify",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a != c"
+   ],
+   "text": "Expand and simplify $[[a]]x(x + [[b]]) - [[c]](x^2 - [[d]]x)$.",
+   "answer": "$[[a - c|term:x^2]][[a * b + c * d|sterm:x]]$"
+  },
+  {
+   "id": "y9sp6-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand single brackets and simplify",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S1 Expand single brackets and simplify",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "and",
+    "simplify",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "Show that $[[a]](x + [[b]]) - [[c]](x + [[d]])$ is the same as $[[a - c]]x[[a * b - c * d|signed]]$. Then find $x$ when it equals [[(a - c) * x0 + a * b - c * d]]. (3 marks)",
+   "answer": "Expanding: $[[a]]x + [[a * b]] - [[c]]x - [[c * d]] = [[a - c]]x[[a * b - c * d|signed]]$; $x = [[x0]]$"
+  },
+  {
+   "id": "y9sp6-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S2 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise $[[a * b]]x + [[a * c]]$.",
+   "answer": "$[[a]]([[b|coef]]x + [[c]])$"
+  },
+  {
+   "id": "y9sp6-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S2 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise fully $[[a * b]]x^2 + [[a * c]]x$.",
+   "answer": "$[[a]]x([[b|coef]]x + [[c]])$"
+  },
+  {
+   "id": "y9sp6-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S2 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1",
+    "b != c"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise fully $[[a * b]]x^2y + [[a * c]]xy^2$.",
+   "answer": "$[[a]]xy([[b|coef]]x + [[c|coef]]y)$"
+  },
+  {
+   "id": "y9sp6-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S2 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $[[a * a]]x^2 - [[a * b]]x$ and use it to work out the value when $x = [[x0]]$. (3 marks)",
+   "answer": "$[[a]]x([[a]]x - [[b]])$; value [[a * a * x0 * x0 - a * b * x0]]"
+  },
+  {
+   "id": "y9sp6-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S3 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x + [[a]])(x + [[b]])$.",
+   "answer": "$x^2 + [[a + b]]x + [[a * b]]$"
+  },
+  {
+   "id": "y9sp6-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S3 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a != b"
+   ],
+   "text": "Expand and simplify $(x - [[a]])(x + [[b]])$.",
+   "answer": "$x^2[[b - a|sterm:x]][[-a * b|signed]]$"
+  },
+  {
+   "id": "y9sp6-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S3 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x - [[a]])(x - [[b]])$ and $(x + [[a]])^2$.",
+   "answer": "$x^2 - [[a + b]]x + [[a * b]]$; $x^2 + [[2 * a]]x + [[a * a]]$"
+  },
+  {
+   "id": "y9sp6-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S3 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle has sides $(x + [[a]])$ cm and $(x + [[b]])$ cm. Show that its area is $x^2 + [[a + b]]x + [[a * b]]$. Find the area when $x = [[x0]]$. (3 marks)",
+   "answer": "Area = $(x + [[a]])(x + [[b]]) = x^2 + [[a + b]]x + [[a * b]]$; when $x$ = [[x0]] it is [[(x0 + a) * (x0 + b)]] cm²"
+  },
+  {
+   "id": "y9sp6-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand more complex double brackets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S4 Expand more complex double brackets",
+   "keywords": [
+    "expand",
+    "more",
+    "complex",
+    "double",
+    "brackets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Expand and simplify $([[p]]x + [[a]])(x + [[b]])$.",
+   "answer": "$[[p]]x^2 + [[p * b + a]]x + [[a * b]]$"
+  },
+  {
+   "id": "y9sp6-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand more complex double brackets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S4 Expand more complex double brackets",
+   "keywords": [
+    "expand",
+    "more",
+    "complex",
+    "double",
+    "brackets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q * a != p * b"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Expand and simplify $([[p]]x + [[a]])([[q]]x - [[b]])$.",
+   "answer": "$[[p * q]]x^2[[q * a - p * b|sterm:x]][[-a * b|signed]]$"
+  },
+  {
+   "id": "y9sp6-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand more complex double brackets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S4 Expand more complex double brackets",
+   "keywords": [
+    "expand",
+    "more",
+    "complex",
+    "double",
+    "brackets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Expand and simplify $([[p]]x - [[a]])^2$.",
+   "answer": "$[[p * p]]x^2 - [[2 * p * a]]x + [[a * a]]$"
+  },
+  {
+   "id": "y9sp6-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand more complex double brackets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S4 Expand more complex double brackets",
+   "keywords": [
+    "expand",
+    "more",
+    "complex",
+    "double",
+    "brackets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * q != c * d",
+    "q * a - p * b - c != 0"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Expand and simplify $([[p]]x + [[a]])([[q]]x - [[b]]) - [[c]]x([[d]]x + 1)$. (4 marks)",
+   "answer": "$[[p * q - c * d|term:x^2]][[q * a - p * b - c|sterm:x]][[-a * b|signed]]$"
+  },
+  {
+   "id": "y9sp6-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S5 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 + [[a + b]]x + [[a * b]]$.",
+   "answer": "$(x + [[a]])(x + [[b]])$"
+  },
+  {
+   "id": "y9sp6-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S5 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 - [[a + b]]x + [[a * b]]$.",
+   "answer": "$(x - [[a]])(x - [[b]])$"
+  },
+  {
+   "id": "y9sp6-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S5 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a != b"
+   ],
+   "text": "Factorise $x^2[[a - b|sterm:x]][[-a * b|signed]]$.",
+   "answer": "$(x + [[a]])(x - [[b]])$"
+  },
+  {
+   "id": "y9sp6-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S5 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 - [[a * a]]$ and $x^2 - [[a + b]]x + [[a * b]]$. Then solve $x^2 - [[a * a]] = 0$. (4 marks)",
+   "answer": "$(x - [[a]])(x + [[a]])$; $(x - [[a]])(x - [[b]])$; $x = \\pm [[a]]$"
+  },
+  {
+   "id": "y9sp6-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Use identities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S6 Use identities",
+   "keywords": [
+    "use",
+    "identities",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $(x + [[a]])^2 - (x - [[a]])^2 = [[4 * a]]x$.",
+   "answer": "$(x^2 + [[2 * a]]x + [[a * a]]) - (x^2 - [[2 * a]]x + [[a * a]]) = [[4 * a]]x$"
+  },
+  {
+   "id": "y9sp6-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Use identities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S6 Use identities",
+   "keywords": [
+    "use",
+    "identities",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $a^2 - b^2 = (a - b)(a + b)$ to work out [[a + 1]]² − [[a - 1]]² without a calculator.",
+   "answer": "([[a + 1]] − [[a - 1]])([[a + 1]] + [[a - 1]]) = 2 × [[2 * a]] = [[4 * a]]"
+  },
+  {
+   "id": "y9sp6-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Use identities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S6 Use identities",
+   "keywords": [
+    "use",
+    "identities",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $(x + [[a]])(x + [[b]]) - (x + [[b]])(x + [[a]])$ is zero, and explain why.",
+   "answer": "Both expand to $x^2 + [[a + b]]x + [[a * b]]$, so the difference is 0: multiplication of the brackets is commutative"
+  },
+  {
+   "id": "y9sp6-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Use identities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S6 Use identities",
+   "keywords": [
+    "use",
+    "identities",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Prove that the difference between the squares of two consecutive integers $n$ and $n + 1$ is always an odd number. Check with $n$ = [[n]]. (3 marks)",
+   "answer": "$(n + 1)^2 - n^2 = 2n + 1$, which is odd; check: [[(n + 1) * (n + 1) - n * n]] = 2 × [[n]] + 1"
+  },
+  {
+   "id": "y9sp6-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S7 Expand triple brackets (E)",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand $(x + [[a]])(x + [[b]])(x + [[c]])$ and write the $x^2$ coefficient.",
+   "answer": "The coefficient of $x^2$ is [[a + b + c]]"
+  },
+  {
+   "id": "y9sp6-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S7 Expand triple brackets (E)",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $x(x + [[a]])(x + [[b]])$.",
+   "answer": "$x^3 + [[a + b]]x^2 + [[a * b]]x$"
+  },
+  {
+   "id": "y9sp6-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S7 Expand triple brackets (E)",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x + [[a]])(x - [[a]])(x + [[b]])$.",
+   "answer": "$x^3 + [[b]]x^2 - [[a * a]]x - [[a * a * b]]$"
+  },
+  {
+   "id": "y9sp6-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S7 Expand triple brackets (E)",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A cuboid has sides $x$ cm, $(x + [[a]])$ cm and $(x + [[b]])$ cm. Show that its volume is $x^3 + [[a + b]]x^2 + [[a * b]]x$ and find the volume when $x$ = [[x0]]. (4 marks)",
+   "answer": "Volume = $x(x + [[a]])(x + [[b]]) = x^3 + [[a + b]]x^2 + [[a * b]]x$; when $x$ = [[x0]]: [[x0 * (x0 + a) * (x0 + b)]] cm³"
+  },
+  {
+   "id": "y9sp6-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S8 Solve quadratic equations (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 + [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = -[[a]]$ or $x = -[[b]]$"
+  },
+  {
+   "id": "y9sp6-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S8 Solve quadratic equations (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 - [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = [[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y9sp6-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S8 Solve quadratic equations (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 - [[a * a]] = 0$ and $x^2 - [[a]]x = 0$.",
+   "answer": "$x = \\pm [[a]]$; $x = 0$ or $x = [[a]]$"
+  },
+  {
+   "id": "y9sp6-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Spring B6 Algebraic manipulation · S8 Solve quadratic equations (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > 0"
+   ],
+   "text": "The area of a rectangle with sides $x$ cm and $(x + [[d]])$ cm is [[x0 * (x0 + d)]] cm². Form and solve a quadratic equation to find $x$. (4 marks)",
+   "answer": "$x(x + [[d]]) = [[x0 * (x0 + d)]]$, so $x^2 + [[d]]x - [[x0 * (x0 + d)]] = 0$, giving $(x - [[x0]])(x + [[x0 + d]]) = 0$; $x$ = [[x0]] (length is positive)"
+  }
+ ]
+}
