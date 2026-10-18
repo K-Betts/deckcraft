@@ -66,9 +66,12 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
             let max = ui.input(|i| i.viewport().maximized.unwrap_or(false));
             ui.ctx().send_viewport_cmd(egui::ViewportCommand::Maximized(!max));
         }
+        // A phone-width bar keeps only the quick-access buttons, Search and Present.
+        let compact = crate::is_compact(rect.width());
+        let left_end = if compact { rect.max.x - 140.0 } else { rect.min.x + 420.0 };
         let mut child = ui.new_child(
             egui::UiBuilder::new()
-                .max_rect(Rect::from_min_max(pos2(rect.min.x + left, rect.min.y), pos2(rect.min.x + 420.0, rect.max.y)))
+                .max_rect(Rect::from_min_max(pos2(rect.min.x + left, rect.min.y), pos2(left_end, rect.max.y)))
                 .layout(egui::Layout::left_to_right(egui::Align::Center)),
         );
         child.spacing_mut().item_spacing.x = 2.0;
@@ -77,7 +80,10 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
         crate::qat::show(app, &mut child);
         let title =
             app.session.active().map(|d| format!("{}{}", d.title(), if dirty { " — Edited" } else { "" })).unwrap_or_else(|| "DeckCraft".into());
-        ui.painter().text(rect.center(), Align2::CENTER_CENTER, title, theme::font(13.0), t.text);
+        // The title sits between the two button groups, so it needs the room for both.
+        if rect.width() >= 760.0 {
+            ui.painter().text(rect.center(), Align2::CENTER_CENTER, title, theme::font(13.0), t.text);
+        }
         // Right side.
         let mut right = ui.new_child(
             egui::UiBuilder::new()
@@ -98,17 +104,18 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
             let from = app.session.active().map(|d| d.selection.slide).unwrap_or(0);
             app.start_show(from, false);
         }
-        if icon_toggle(&mut right, Icon::CommentsBubble, "Comments", has_doc, app.ui.pane.as_deref() == Some("comments")).clicked() {
+        if !compact && icon_toggle(&mut right, Icon::CommentsBubble, "Comments", has_doc, app.ui.pane.as_deref() == Some("comments")).clicked() {
             let _ = app.run("view.pane", json!({"pane": "comments", "toggle": true}));
         }
-        if icon_toggle(
-            &mut right,
-            if app.ui.brightness == theme::Brightness::Dark { Icon::Sparkle } else { Icon::Palette },
-            "Light/Dark appearance",
-            true,
-            false,
-        )
-        .clicked()
+        if !compact
+            && icon_toggle(
+                &mut right,
+                if app.ui.brightness == theme::Brightness::Dark { Icon::Sparkle } else { Icon::Palette },
+                "Light/Dark appearance",
+                true,
+                false,
+            )
+            .clicked()
         {
             let _ = app.run("view.dark", json!({}));
         }

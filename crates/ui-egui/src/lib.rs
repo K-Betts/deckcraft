@@ -640,6 +640,13 @@ fn grid_flag(p: &Value, key: &str) -> Result<Option<bool>, String> {
     }
 }
 
+/// Narrower than this (in points) is a phone held upright: panels give way to the slide.
+pub const COMPACT_WIDTH: f32 = 640.0;
+
+pub fn is_compact(width: f32) -> bool {
+    width < COMPACT_WIDTH
+}
+
 impl SlideApp {
     pub fn new(session: Session, mut services: Services) -> Self {
         let audio_out = services.audio_out.take();
@@ -2025,8 +2032,13 @@ impl SlideApp {
                 ViewMode::Sorter => sorter::show(self, ui),
                 ViewMode::NotesPage => sorter::notes_page(self, ui),
                 ViewMode::Outline | ViewMode::Normal | ViewMode::Reading => {
+                    // On a phone-width window a task pane takes the whole screen (its close button
+                    // brings the slide back); thumbnails and notes shrink or step aside.
                     if self.ui.pane.is_some() {
                         panes::show(self, ui);
+                        if is_compact(ui.ctx().content_rect().width()) {
+                            return;
+                        }
                     }
                     if self.ui.view == ViewMode::Outline {
                         sorter::outline_pane(self, ui);
@@ -2034,7 +2046,7 @@ impl SlideApp {
                         thumbs::show(self, ui);
                     }
                     egui::CentralPanel::default().frame(egui::Frame::NONE.fill(t.canvas)).show(ui, |ui| {
-                        if self.ui.notes {
+                        if self.ui.notes && !is_compact(ui.ctx().content_rect().width()) {
                             status::notes_pane(self, ui);
                         }
                         canvas::show(self, ui);

@@ -18,17 +18,21 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
             deckcraft_engine::Target::Slides => format!("Slide {} of {}", (st.selection.slide + 1).min(n.max(1)), n),
             _ => "Slide Master".to_string(),
         };
+        let compact = crate::is_compact(rect.width());
         let p = ui.painter();
         p.text(pos2(rect.min.x + 14.0, rect.center().y), Align2::LEFT_CENTER, &left, theme::font(12.0), t.text_dim);
-        // The selection's proofing language; a click opens Review › Language.
-        let (lang, no_proof) = crate::dialogs::selected_language(app);
+        // The selection's proofing language; a click opens Review › Language. On a phone the
+        // bar keeps only the slide number and the view buttons.
+        let (lang, no_proof) = if compact { (String::new(), false) } else { crate::dialogs::selected_language(app) };
         let name = crate::squiggles::lang_name(&lang) + if no_proof { " (not checked)" } else { "" };
-        let lr = p.text(pos2(rect.min.x + 120.0, rect.center().y), Align2::LEFT_CENTER, &name, theme::font(12.0), t.text_dim);
-        if ui.interact(lr.expand(3.0), ui.id().with("status_lang"), Sense::click()).on_hover_text("Language").clicked() {
-            app.dialog = Some(crate::dialogs::Dialog::new("language"));
+        if !compact {
+            let lr = p.text(pos2(rect.min.x + 120.0, rect.center().y), Align2::LEFT_CENTER, &name, theme::font(12.0), t.text_dim);
+            if ui.interact(lr.expand(3.0), ui.id().with("status_lang"), Sense::click()).on_hover_text("Language").clicked() {
+                app.dialog = Some(crate::dialogs::Dialog::new("language"));
+            }
         }
         // Transient status message.
-        if let Some(msg) = app.fresh_status() {
+        if !compact && let Some(msg) = app.fresh_status() {
             p.text(pos2(rect.min.x + 290.0, rect.center().y), Align2::LEFT_CENTER, &msg, theme::font(12.0), t.accent);
             ui.ctx().request_repaint_after(std::time::Duration::from_millis(500));
         }
@@ -37,31 +41,33 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
         }
         let mut right = ui.new_child(
             egui::UiBuilder::new()
-                .max_rect(Rect::from_min_max(pos2(rect.max.x - 560.0, rect.min.y), pos2(rect.max.x - 8.0, rect.max.y)))
+                .max_rect(Rect::from_min_max(pos2((rect.max.x - 560.0).max(rect.min.x + 100.0), rect.min.y), pos2(rect.max.x - 8.0, rect.max.y)))
                 .layout(egui::Layout::right_to_left(egui::Align::Center)),
         );
         right.spacing_mut().item_spacing.x = 4.0;
-        if small_icon(&mut right, Icon::FitSmall, "Fit slide to current window", false).clicked() {
-            app.ui.zoom = None;
-        }
-        let pct = (app.canvas_scale * 100.0).round();
-        let lbl = right.add(egui::Label::new(egui::RichText::new(format!("{pct}%")).size(12.0).color(t.text_dim)).sense(Sense::click()));
-        if lbl.clicked() {
-            let _ = app.run("view.zoomDialog", json!({}));
-        }
-        if small_icon(&mut right, Icon::ZoomIn, "Zoom In", false).clicked() {
-            let _ = app.run("view.zoomIn", json!({}));
-        }
-        // Slider 10%–400% (log scale).
-        let mut z = app.ui.zoom.unwrap_or(app.canvas_scale).clamp(0.1, 4.0);
-        let mut lz = z.ln();
-        let s = right.add_sized(vec2(110.0, 18.0), egui::Slider::new(&mut lz, (0.1f32).ln()..=(4.0f32).ln()).show_value(false));
-        if s.changed() {
-            z = lz.exp();
-            app.ui.zoom = Some(z);
-        }
-        if small_icon(&mut right, Icon::ZoomOut, "Zoom Out", false).clicked() {
-            let _ = app.run("view.zoomOut", json!({}));
+        if !compact {
+            if small_icon(&mut right, Icon::FitSmall, "Fit slide to current window", false).clicked() {
+                app.ui.zoom = None;
+            }
+            let pct = (app.canvas_scale * 100.0).round();
+            let lbl = right.add(egui::Label::new(egui::RichText::new(format!("{pct}%")).size(12.0).color(t.text_dim)).sense(Sense::click()));
+            if lbl.clicked() {
+                let _ = app.run("view.zoomDialog", json!({}));
+            }
+            if small_icon(&mut right, Icon::ZoomIn, "Zoom In", false).clicked() {
+                let _ = app.run("view.zoomIn", json!({}));
+            }
+            // Slider 10%–400% (log scale).
+            let mut z = app.ui.zoom.unwrap_or(app.canvas_scale).clamp(0.1, 4.0);
+            let mut lz = z.ln();
+            let s = right.add_sized(vec2(110.0, 18.0), egui::Slider::new(&mut lz, (0.1f32).ln()..=(4.0f32).ln()).show_value(false));
+            if s.changed() {
+                z = lz.exp();
+                app.ui.zoom = Some(z);
+            }
+            if small_icon(&mut right, Icon::ZoomOut, "Zoom Out", false).clicked() {
+                let _ = app.run("view.zoomOut", json!({}));
+            }
         }
         right.add_space(8.0);
         let view = app.ui.view;
@@ -87,7 +93,7 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
             let _ = app.run("view.pane", json!({"pane": "comments", "toggle": true}));
         }
         let n_on = app.ui.notes;
-        if labeled(&mut right, Icon::NotesSmall, "Notes", n_on).clicked() {
+        if !compact && labeled(&mut right, Icon::NotesSmall, "Notes", n_on).clicked() {
             app.ui.notes = !n_on;
         }
         let _ = Stroke::NONE;

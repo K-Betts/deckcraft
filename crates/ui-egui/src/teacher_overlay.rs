@@ -715,11 +715,15 @@ impl TeacherOverlay {
                 ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
                 let has_options =
                     self.options_open && matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
+                // Room along the docked edge: the tools wrap onto a second line or column on a
+                // phone instead of running off the screen.
+                let limit = if horizontal { full.width() - 2.0 * PALETTE_MARGIN - 20.0 } else { full.height() - 2.0 * PALETTE_MARGIN - 12.0 }
+                    .max(TOUCH_TARGET * 2.0);
                 let mut body = |this: &mut Self, ui: &mut Ui| {
                     if has_options {
-                        lay(ui, horizontal, |ui| this.options(ui));
+                        lay(ui, horizontal, limit, |ui| this.options(ui));
                     }
-                    lay(ui, horizontal, |ui| this.main_row(ui, full, horizontal, actions));
+                    lay(ui, horizontal, limit, |ui| this.main_row(ui, full, horizontal, actions));
                 };
                 if horizontal {
                     ui.vertical_centered(|ui| body(self, ui));
@@ -893,11 +897,14 @@ fn group_gap(ui: &mut Ui, horizontal: bool) {
     }
 }
 
-fn lay(ui: &mut Ui, horizontal: bool, add: impl FnOnce(&mut Ui)) {
+/// A row (or column) of at most `limit` points along the docked edge; more wraps onto another line.
+fn lay(ui: &mut Ui, horizontal: bool, limit: f32, add: impl FnOnce(&mut Ui)) {
     if horizontal {
-        ui.horizontal(add);
+        ui.set_max_width(limit);
+        ui.horizontal_wrapped(add);
     } else {
-        ui.vertical(add);
+        ui.set_max_height(limit);
+        ui.with_layout(egui::Layout::top_down(egui::Align::Min).with_main_wrap(true), add);
     }
 }
 
@@ -1210,6 +1217,14 @@ pub fn timer_digit_size(screen_height: f32) -> f32 {
     (screen_height * 0.16).clamp(72.0, 200.0)
 }
 
+/// The digit size for `label` on this screen: as large as `timer_digit_size` allows, but never wider
+/// than the screen (a phone held upright is far narrower than it is tall).
+fn timer_digit_fit(full: Rect, label: &str) -> f32 {
+    let beside = if crate::is_compact(full.width()) { 90.0 } else { 0.0 };
+    let room = (full.width() - beside - 2.0 * 26.0 - 2.0 * PALETTE_MARGIN).max(100.0);
+    timer_digit_size(full.height()).min(room / run_width(label, 1.0).max(1.0)).max(28.0)
+}
+
 /// A drawn cross: the ✕ glyph is missing from the bundled fonts and shows as an empty box.
 fn close_button(ui: &mut Ui) -> Response {
     let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
@@ -1237,68 +1252,82 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
     let flash = t.expired && (now * 2.0) as i64 % 2 == 0;
     let fill = if flash { Color32::from_rgb(214, 48, 52) } else { INK };
     let setting = t.setup.is_some();
-    let size = if setting { 52.0 } else { timer_digit_size(full.height()) };
+    let compact = crate::is_compact(full.width());
+    // On a phone the toolbar takes the left edge, so the card opens beside it and fits what is left.
+    let beside_palette = if compact { 90.0 } else { 0.0 };
+    let pad_x: i8 = if compact { 12 } else { 26 };
+    let dial_room = (full.width() - beside_palette - 2.0 * f32::from(pad_x) - 8.0).max(120.0);
+    let size = if setting { 52.0f32.min(dial_room / run_width("00:00:00", 1.0)) } else { timer_digit_fit(full, &t.label()) };
     let id = Id::new(("teacher_timer", t.id));
     let last_rect: Option<Rect> = ctx.data(|d| d.get_temp(id.with("rect")));
     let hovered = last_rect.zip(ctx.pointer_hover_pos()).is_some_and(|(r, p)| r.expand(8.0).contains(p));
-    let digits_w = run_width("00:00:00", 52.0).max(run_width("00:00", size));
+    let digits_w = run_width("00:00:00", size.min(52.0)).max(run_width("00:00", size));
     let out = egui::Area::new(id)
         .order(Order::Foreground)
-        .default_pos(pos2(full.center().x - digits_w / 2.0 - 24.0, full.min.y + 24.0 + index as f32 * 90.0))
+        .default_pos(pos2(
+            if compact { full.min.x + beside_palette } else { full.center().x - digits_w / 2.0 - 24.0 },
+            full.min.y + 24.0 + index as f32 * 90.0,
+        ))
         .movable(true)
         .constrain(true)
         .show(ctx, |ui| {
-            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(26, 16)).show(ui, |ui| {
-                ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
-                if setting {
-                    let mut set = t.setup.unwrap_or_default();
-                    timer_dials(ui, &mut set, size);
-                    ui.horizontal(|ui| {
-                        for mins in TIMER_QUICK_MINS {
-                            let on = set == [0, mins, 0];
-                            let fill = if on { ACCENT } else { RAISED };
-                            if timer_button(ui, &format!("{mins}"), fill, TOUCH_TARGET + 6.0).on_hover_text(format!("{mins} minute(s)")).clicked() {
-                                set = [0, mins, 0];
-                            }
-                        }
-                        ui.label(egui::RichText::new("min").size(16.0).color(Color32::from_gray(200)));
-                    });
-                    t.setup = Some(set);
-                    ui.horizontal(|ui| {
-                        let go = egui::Button::new(egui::RichText::new("Start").size(22.0).strong().color(Color32::WHITE))
-                            .fill(SUCCESS)
-                            .min_size(vec2(150.0, 52.0));
-                        if ui.add_enabled(set != [0, 0, 0], go).clicked() {
-                            start = true;
-                        }
-                        if close_button(ui).on_hover_text("Dismiss").clicked() {
-                            remove = true;
-                        }
-                    });
-                } else {
-                    let text = t.label();
-                    let (r, resp) = ui.allocate_exact_size(vec2(run_width(&text, size), size * 1.15), Sense::click());
-                    paint_cells(ui.painter(), r.left_top(), &text, size, timer_ink(t.remaining, t.running));
-                    if resp.on_hover_text("Tap to pause or resume").clicked() {
-                        t.toggle();
-                    }
-                    if !t.running || hovered {
+            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(pad_x, 16)).show(
+                ui,
+                |ui| {
+                    ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
+                    if setting {
+                        let mut set = t.setup.unwrap_or_default();
+                        timer_dials(ui, &mut set, size);
                         ui.horizontal(|ui| {
-                            let (label, fill) = if t.running { ("Pause", RAISED) } else { ("Resume", SUCCESS) };
-                            if timer_button(ui, label, fill, 110.0).clicked() {
-                                t.toggle();
+                            for mins in TIMER_QUICK_MINS {
+                                let on = set == [0, mins, 0];
+                                let fill = if on { ACCENT } else { RAISED };
+                                if timer_button(ui, &format!("{mins}"), fill, if compact { TOUCH_TARGET - 4.0 } else { TOUCH_TARGET + 6.0 })
+                                    .on_hover_text(format!("{mins} minute(s)"))
+                                    .clicked()
+                                {
+                                    set = [0, mins, 0];
+                                }
                             }
-                            if timer_button(ui, "Reset", RAISED, 96.0).on_hover_text("Back to setting the time").clicked() {
-                                t.reset();
-                                t.begin_setup();
+                            ui.label(egui::RichText::new("min").size(16.0).color(Color32::from_gray(200)));
+                        });
+                        t.setup = Some(set);
+                        ui.horizontal(|ui| {
+                            let go = egui::Button::new(egui::RichText::new("Start").size(22.0).strong().color(Color32::WHITE))
+                                .fill(SUCCESS)
+                                .min_size(vec2(if compact { 120.0 } else { 150.0 }, 52.0));
+                            if ui.add_enabled(set != [0, 0, 0], go).clicked() {
+                                start = true;
                             }
                             if close_button(ui).on_hover_text("Dismiss").clicked() {
                                 remove = true;
                             }
                         });
+                    } else {
+                        let text = t.label();
+                        let (r, resp) = ui.allocate_exact_size(vec2(run_width(&text, size), size * 1.15), Sense::click());
+                        paint_cells(ui.painter(), r.left_top(), &text, size, timer_ink(t.remaining, t.running));
+                        if resp.on_hover_text("Tap to pause or resume").clicked() {
+                            t.toggle();
+                        }
+                        if !t.running || hovered {
+                            ui.horizontal(|ui| {
+                                let (label, fill) = if t.running { ("Pause", RAISED) } else { ("Resume", SUCCESS) };
+                                if timer_button(ui, label, fill, 110.0).clicked() {
+                                    t.toggle();
+                                }
+                                if timer_button(ui, "Reset", RAISED, 96.0).on_hover_text("Back to setting the time").clicked() {
+                                    t.reset();
+                                    t.begin_setup();
+                                }
+                                if close_button(ui).on_hover_text("Dismiss").clicked() {
+                                    remove = true;
+                                }
+                            });
+                        }
                     }
-                }
-            });
+                },
+            );
         });
     ctx.data_mut(|d| d.insert_temp(id.with("rect"), out.response.rect));
     if start {
@@ -1410,6 +1439,17 @@ mod tests {
         stroke(&mut o, &[(2.0, 2.0), (3.0, 3.0)]);
         o.undo();
         assert_eq!((o.strokes.len(), o.shapes.len()), (1, 1));
+    }
+
+    #[test]
+    fn timer_digits_fit_a_phone_held_upright_and_stay_big_on_a_wide_screen() {
+        let phone = Rect::from_min_size(Pos2::ZERO, vec2(390.0, 700.0));
+        let wide = Rect::from_min_size(Pos2::ZERO, vec2(1920.0, 1080.0));
+        for label in ["00:09", "04:04", "1:02:03"] {
+            let size = timer_digit_fit(phone, label);
+            assert!(run_width(label, size) + 52.0 + 90.0 <= phone.width(), "{label} fits a 390 pt wide screen");
+        }
+        assert_eq!(timer_digit_fit(wide, "04:04"), timer_digit_size(1080.0));
     }
 
     #[test]
