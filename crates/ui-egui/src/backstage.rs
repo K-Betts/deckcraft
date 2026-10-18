@@ -240,8 +240,9 @@ struct Outcome {
 
 /// Colours of the side menu and the page, from the theme: the menu sits a step darker than the
 /// page, as in PowerPoint.
+/// The side menu is the white card; the page beside it is the quiet window colour that cards sit on.
 fn colours(t: &Tokens) -> (Color32, Color32) {
-    (t.chrome, t.card)
+    (t.card, t.chrome)
 }
 
 /// Runs a side-menu action. Returns the page to show, or None to close the view (Some(current)
@@ -438,14 +439,17 @@ fn nav_item(ui: &mut Ui, nav: Nav, bs: &Backstage, index: usize, t: &Tokens) -> 
     let label = nav.label();
     resp.widget_info(|| egui::WidgetInfo::selected(egui::WidgetType::Button, true, selected, label));
     let p = ui.painter();
-    let row = rect.shrink2(vec2(6.0, 1.0));
-    if resp.hovered() {
-        p.rect_filled(row, CornerRadius::same(2), t.hover);
+    let row = rect.shrink2(vec2(8.0, 2.0));
+    let pill = CornerRadius::same(theme::radius::CARD);
+    if selected {
+        // The current page is a soft accent pill.
+        p.rect_filled(row, pill, t.selected);
+    } else if resp.hovered() {
+        p.rect_filled(row, pill, t.hover);
     }
-    if bs.focus == Some(index) || selected {
-        // The current page (and the keyboard focus) is outlined, as in PowerPoint.
-        let ink = if bs.focus == Some(index) { t.text } else { t.border };
-        p.rect_stroke(row, CornerRadius::same(2), Stroke::new(1.0, ink), StrokeKind::Inside);
+    if bs.focus == Some(index) {
+        // Keyboard focus is a clear ring.
+        p.rect_stroke(row, pill, Stroke::new(2.0, t.accent), StrokeKind::Inside);
     }
     let ink = if selected { t.accent } else { t.text };
     icons::paint(p, Rect::from_center_size(pos2(rect.left() + 26.0, rect.center().y), vec2(16.0, 16.0)), nav.icon(), ink, false);
@@ -492,19 +496,24 @@ fn tile(ui: &mut Ui, label: &str, theme: Option<&deckcraft_model::Theme>, big: b
     let (rect, resp) = ui.allocate_exact_size(vec2(thumb_w + 16.0, thumb_w * 9.0 / 16.0 + 44.0), Sense::click());
     resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, label));
     let p = ui.painter();
-    if resp.hovered() {
-        p.rect_filled(rect, CornerRadius::same(4), t.hover);
-    }
+    // A card: raised a little more when the pointer is over it.
+    let card = CornerRadius::same(theme::radius::CARD);
+    let lift = if resp.hovered() { 8 } else { 3 };
+    p.add(
+        egui::epaint::Shadow { offset: [0, lift / 2], blur: lift as u8 * 3, spread: 0, color: t.shadow }.as_shape(rect.shrink2(vec2(4.0, 4.0)), card),
+    );
+    p.rect_filled(rect.shrink2(vec2(4.0, 4.0)), card, t.card);
     let thumb = Rect::from_min_size(rect.min + vec2(8.0, 10.0), vec2(thumb_w, thumb_w * 9.0 / 16.0));
+    let inner = CornerRadius::same(theme::radius::SMALL);
     match theme {
         Some(th) => crate::ribbon::paint_theme_tile(p, thumb, th),
         None => {
-            p.rect_filled(thumb, CornerRadius::same(2), Color32::WHITE);
-            p.rect_stroke(thumb, CornerRadius::same(2), Stroke::new(1.0, Color32::from_gray(200)), StrokeKind::Inside);
+            p.rect_filled(thumb, inner, Color32::WHITE);
+            p.rect_stroke(thumb, inner, Stroke::new(1.0, t.border), StrokeKind::Inside);
         }
     }
     if resp.hovered() {
-        p.rect_stroke(thumb, CornerRadius::same(2), Stroke::new(2.0, t.accent), StrokeKind::Outside);
+        p.rect_stroke(rect.shrink2(vec2(4.0, 4.0)), card, Stroke::new(1.5, t.accent), StrokeKind::Inside);
     }
     let galley = p.layout(label.to_string(), theme::font(12.0), t.text, rect.width() - 8.0);
     p.galley(pos2(rect.center().x - galley.size().x / 2.0, thumb.bottom() + 8.0), galley, t.text);
@@ -597,7 +606,7 @@ fn recent_list(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize) {
         resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, &name));
         let p = ui.painter();
         if resp.hovered() {
-            p.rect_filled(rect, CornerRadius::same(3), t.hover);
+            p.rect_filled(rect, CornerRadius::same(theme::radius::CARD), t.card);
         }
         let ink = if missing { t.text_dim } else { t.text };
         // The row is as wide as the page's content, which a narrow window clips: keep the mark
@@ -697,7 +706,7 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
     crate::update_ui::home_card(app, ui);
     if app.ui.packs.is_empty() && !app.ui.subjects_hint_dismissed {
         ui.add_space(12.0);
-        egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
+        egui::Frame::new().fill(t.selected).corner_radius(theme::radius::SURFACE).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
             // The text wraps and the buttons sit under it, so the card fits a narrow window (iPad
             // upright, a small laptop) instead of pushing its buttons off the edge.
             ui.add(
@@ -708,7 +717,11 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
             );
             ui.horizontal_wrapped(|ui| {
                 for pack in crate::packs::PACKS {
-                    if ui.button(format!("Turn on {}", pack.label)).clicked() {
+                    let main = egui::Button::new(RichText::new(format!("Turn on {}", pack.label)).color(t.accent_text).font(theme::bold(13.0)))
+                        .fill(t.accent)
+                        .corner_radius(theme::radius::CONTROL)
+                        .min_size(vec2(0.0, 30.0));
+                    if ui.add(main).clicked() {
                         let _ = app.run("app.pack", json!({"id": pack.id, "on": true}));
                         let _ = app.run("app.dismissSubjectsHint", json!({}));
                     }

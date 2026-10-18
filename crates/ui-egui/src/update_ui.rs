@@ -188,9 +188,13 @@ pub fn home_card(app: &mut SlideApp, ui: &mut Ui) {
     let Some(UpdateState::Available { sha, .. }) = app.update_state() else { return };
     let t = Tokens::get(ui.ctx());
     ui.add_space(12.0);
-    egui::Frame::new().fill(t.hover).corner_radius(10).inner_margin(egui::Margin::symmetric(14, 10)).show(ui, |ui| {
+    egui::Frame::new().fill(t.selected).corner_radius(theme::radius::SURFACE).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
         ui.add(egui::Label::new(format!("A new version of DeckCraft is available ({sha}).")).wrap());
-        if ui.button("See what's new").clicked() {
+        let main = egui::Button::new(RichText::new("See what's new").color(t.accent_text).font(theme::bold(13.0)))
+            .fill(t.accent)
+            .corner_radius(theme::radius::CONTROL)
+            .min_size(vec2(0.0, 30.0));
+        if ui.add(main).clicked() {
             app.dialog = Some(crate::dialogs::Dialog::new("update"));
         }
     });
