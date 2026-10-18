@@ -58,6 +58,7 @@ fn title(id: &str) -> &'static str {
         "equation" => "Equation",
         "dateTime" => "Date and Time",
         "getReady" => "Get Ready Starter",
+        "chooseSkill" => "Choose a Skill",
         "questionBank" => "Manage Questions",
         "update" => "Update DeckCraft",
         "spelling" => "Spelling",
@@ -2245,6 +2246,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
         "getReady" => get_ready_dialog(app, ui, d),
+        "chooseSkill" => choose_skill_dialog(app, ui, d),
         "questionBank" => question_bank_dialog(app, ui, d),
         "update" => crate::update_ui::dialog(app, ui),
         _ => {
@@ -2585,6 +2587,115 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     cancel
 }
 
+/// The skill picker: search the small steps (by name, topic, keyword or year), narrow by year
+/// group, and choose the one skill a Get Ready question should practise.
+fn choose_skill_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    use deckcraft_engine::questions::LEVEL_NAMES;
+    ui.set_min_width(780.0);
+    let slot = d.params.get("slot").and_then(Value::as_u64).unwrap_or(0) as usize;
+    let t = Tokens::get(ui.ctx());
+    let skills: Vec<_> = question_bank(app).map(|b| b.instantiate(0).skills()).unwrap_or_default();
+    let mut years: Vec<String> = vec![];
+    for s in &skills {
+        let y = if s.year.is_empty() { "General".to_string() } else { s.year.clone() };
+        if !years.contains(&y) {
+            years.push(y);
+        }
+    }
+    ui.label(egui::RichText::new(format!("Choose the skill for question {}", slot + 1)).font(theme::bold(14.0)));
+    let mut words = d.get("q", "");
+    ui.horizontal(|ui| {
+        let edit = egui::TextEdit::singleline(&mut words).hint_text("Search: fractions, solving equations, angles, mean…").desired_width(420.0);
+        let resp = ui.add(edit);
+        if !d.fields.contains_key("focused") {
+            resp.request_focus();
+            d.fields.insert("focused".into(), "1".into());
+        }
+        if ui.button("Clear").clicked() {
+            words.clear();
+        }
+    });
+    d.fields.insert("q".into(), words.clone());
+    let year = d.get("year", "");
+    ui.horizontal_wrapped(|ui| {
+        ui.label(egui::RichText::new("Year group:").size(12.0).color(t.text_dim));
+        if ui.selectable_label(year.is_empty(), "All").clicked() {
+            d.fields.insert("year".into(), String::new());
+        }
+        for y in &years {
+            if ui.selectable_label(&year == y, y).clicked() {
+                d.fields.insert("year".into(), y.clone());
+            }
+        }
+    });
+    let mut found: Vec<&deckcraft_engine::questions::Skill> = skills
+        .iter()
+        .filter(|s| match year.as_str() {
+            "" => true,
+            "General" => s.year.is_empty(),
+            y => s.year == y,
+        })
+        .filter(|s| words.trim().is_empty() || s.matches(&words))
+        .collect();
+    found.sort_by_key(|s| std::cmp::Reverse(s.relevance(&words)));
+    ui.label(egui::RichText::new(format!("{} skill{}", found.len(), if found.len() == 1 { "" } else { "s" })).size(11.0).color(t.text_dim));
+    let mut chosen: Option<String> = None;
+    egui::ScrollArea::vertical().max_height(360.0).min_scrolled_height(360.0).auto_shrink([false, false]).id_salt("skill-list").show(ui, |ui| {
+        for s in found.iter().take(80) {
+            egui::Frame::new().inner_margin(egui::Margin::symmetric(6, 4)).show(ui, |ui| {
+                ui.horizontal(|ui| {
+                    ui.vertical(|ui| {
+                        ui.label(egui::RichText::new(&s.name).font(theme::bold(13.5)));
+                        let place = [
+                            if s.year.is_empty() { String::new() } else { format!("Year {}", s.year.trim_start_matches('Y')) },
+                            s.term.clone(),
+                            s.block.clone(),
+                            s.topic.clone(),
+                        ];
+                        let place: Vec<String> = place.into_iter().filter(|p| !p.is_empty()).collect();
+                        ui.label(egui::RichText::new(place.join("  ·  ")).size(11.5).color(t.text_dim));
+                        let counts: Vec<String> =
+                            LEVEL_NAMES.iter().zip(s.counts).filter(|(_, n)| *n > 0).map(|(name, n)| format!("{name} {n}")).collect();
+                        ui.label(egui::RichText::new(counts.join("   ")).size(11.0).color(t.text_dim));
+                    });
+                    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                        if ui
+                            .add(egui::Button::new(egui::RichText::new("Choose").color(t.accent_text)).fill(t.accent).min_size(vec2(80.0, 28.0)))
+                            .clicked()
+                        {
+                            chosen = Some(s.key.clone());
+                        }
+                    });
+                });
+            });
+            ui.separator();
+        }
+        if found.len() > 80 {
+            ui.label(egui::RichText::new("There are more: add a word to the search or pick a year group.").size(11.0).color(t.text_dim));
+        }
+    });
+    let mut back = false;
+    ui.horizontal(|ui| {
+        if ui.button("Any skill (no choice)").clicked() {
+            chosen = Some(String::new());
+        }
+        if ui.button("Back").clicked() {
+            back = true;
+        }
+    });
+    if let Some(key) = chosen {
+        if app.ui.get_ready_skill.len() <= slot {
+            app.ui.get_ready_skill.resize(slot + 1, String::new());
+        }
+        app.ui.get_ready_skill[slot] = key;
+        back = true;
+    }
+    if back {
+        *d = Dialog::new("getReady");
+    }
+    false
+}
+
 /// How many questions one Get Ready slide shows.
 const GET_READY_QUESTIONS: usize = 4;
 
@@ -2757,6 +2868,7 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
                 keywords: vec![],
                 qtype: String::new(),
                 source: String::new(),
+                year: String::new(),
                 difficulty: d.get("nq_level", "2").parse().ok().filter(|l| DIFFICULTIES.contains(l)).unwrap_or(2),
                 text: text.trim().to_string(),
                 answer: d.get("nq_answer", "").trim().to_string(),
@@ -2986,8 +3098,8 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
     // Start from what was chosen last time.
     if !d.fields.contains_key("count") {
-        for (i, w) in app.ui.get_ready_search.iter().enumerate() {
-            d.fields.insert(format!("search{i}"), w.clone());
+        for (i, k) in app.ui.get_ready_skill.iter().enumerate() {
+            d.fields.insert(format!("skill{i}"), k.clone());
         }
         let saved = app.ui.get_ready_slots.clone();
         d.fields.insert("count".into(), saved.len().clamp(2, 6).to_string());
@@ -3030,34 +3142,54 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         }
     });
     ui.add_space(4.0);
+    let skills = listing.skills();
+    let mut pick_for: Option<usize> = None;
     for i in 0..count {
         ui.horizontal(|ui| {
-            ui.add_sized(vec2(110.0, 28.0), egui::Label::new(format!("Question {}", i + 1)));
-            let topic = d.get(&format!("topic{i}"), "");
-            if let Some(t) = topic_combo(ui, format!("getready-topic{i}"), &topic) {
-                d.fields.insert(format!("topic{i}"), t);
-            }
+            ui.add_sized(vec2(90.0, 28.0), egui::Label::new(format!("Question {}", i + 1)));
+            let key = d.get(&format!("skill{i}"), "");
+            let chosen = skills.iter().find(|s| s.key == key);
             let level: u8 = d.get(&format!("level{i}"), "0").parse().unwrap_or(0);
+            // The skill: a button that opens the picker, so a teacher chooses what the question is about.
+            let label = match chosen {
+                Some(sk) => format!("{}  ·  {}", sk.name, if sk.year.is_empty() { sk.topic.clone() } else { sk.year.clone() }),
+                None => "Any skill: choose one…".to_string(),
+            };
+            let button = egui::Button::new(egui::RichText::new(label).size(13.0)).min_size(vec2(300.0, 28.0)).truncate();
+            if ui.add(button).on_hover_text("Search the skills and choose the one this question should practise").clicked() {
+                pick_for = Some(i);
+            }
+            if chosen.is_some() && ui.small_button("✕").on_hover_text("Back to any skill").clicked() {
+                d.fields.insert(format!("skill{i}"), String::new());
+            }
+            if chosen.is_none() {
+                let topic = d.get(&format!("topic{i}"), "");
+                if let Some(t) = topic_combo(ui, format!("getready-topic{i}"), &topic) {
+                    d.fields.insert(format!("topic{i}"), t);
+                }
+            }
             for (value, label) in LEVELS {
                 if ui.selectable_label(level == value, label).clicked() {
                     d.fields.insert(format!("level{i}"), value.to_string());
                 }
             }
-            // Search for a topic: "both sides", "pythagoras", "angles in a triangle".
-            let mut words = d.get(&format!("search{i}"), "");
-            ui.add(egui::TextEdit::singleline(&mut words).hint_text("Search a topic…").desired_width(150.0));
-            if !words.trim().is_empty() {
-                let filter = deckcraft_engine::questions::Filter {
-                    topic: Some(topic).filter(|t| !t.is_empty()),
-                    difficulty: Some(level).filter(|l| *l > 0),
-                    query: Some(words.clone()),
-                };
-                let found = listing.candidates(&filter).len();
-                let tone = if found == 0 { egui::Color32::from_rgb(200, 60, 60) } else { Tokens::get(ui.ctx()).text_dim };
-                ui.label(egui::RichText::new(if found == 0 { "none".to_string() } else { format!("{found} found") }).size(11.0).color(tone));
+            // Say when the chosen skill has nothing at the chosen level.
+            if let Some(sk) = chosen
+                && level > 0
+                && sk.counts.get(usize::from(level) - 1).copied().unwrap_or(0) == 0
+            {
+                ui.label(egui::RichText::new("none at this level").size(11.0).color(egui::Color32::from_rgb(200, 60, 60)));
             }
-            d.fields.insert(format!("search{i}"), words);
         });
+    }
+    if let Some(i) = pick_for {
+        // Keep what has been chosen so far, then open the picker for this question.
+        app.ui.get_ready_slots =
+            (0..count).map(|k| (d.get(&format!("topic{k}"), ""), d.get(&format!("level{k}"), "0").parse().unwrap_or(0))).collect();
+        app.ui.get_ready_skill = (0..count).map(|k| d.get(&format!("skill{k}"), "")).collect();
+        *d = Dialog::new("chooseSkill");
+        d.params = json!({"slot": i});
+        return false;
     }
     ui.add_space(4.0);
     let expand = check(ui, d, "Add a full-screen slide for each question (the Expand buttons)", "expand", true);
@@ -3094,16 +3226,15 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         return true;
     }
     if go || reroll {
-        let searches: Vec<String> = (0..count).map(|i| d.get(&format!("search{i}"), "").trim().to_string()).collect();
+        let skill_keys: Vec<String> = (0..count).map(|i| d.get(&format!("skill{i}"), "")).collect();
         let spec: Vec<Value> = slots
             .iter()
-            .zip(&searches)
-            .map(|((topic, level), words)| {
+            .zip(&skill_keys)
+            .map(|((topic, level), skill)| {
                 let mut s = json!({});
-                if !words.is_empty() {
-                    s["search"] = json!(words);
-                }
-                if !topic.is_empty() {
+                if !skill.is_empty() {
+                    s["skill"] = json!(skill);
+                } else if !topic.is_empty() {
                     s["topic"] = json!(topic);
                 }
                 if *level > 0 {
@@ -3113,7 +3244,7 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             })
             .collect();
         let mut params = json!({"seed": fresh_seed(), "slots": spec, "expand": expand, "headings": headings});
-        app.ui.get_ready_search = searches;
+        app.ui.get_ready_skill = skill_keys;
         if !app.ui.my_questions.is_empty() || !app.ui.my_templates.is_empty() || !app.ui.removed_questions.is_empty() {
             match question_bank(app) {
                 Ok(bank) => params["bankJson"] = json!(bank.to_json()),

@@ -149,6 +149,7 @@ fn removing_and_adding_questions_changes_what_the_starter_can_pick() {
         keywords: vec![],
         qtype: String::new(),
         source: String::new(),
+        year: String::new(),
         text: "Share 20 in the ratio $2 : 3$".into(),
         answer: "8 and 12".into(),
         needs_diagram: false,
@@ -177,18 +178,53 @@ fn the_manage_dialog_adds_a_question_and_removes_a_built_in_one() {
     assert!(h.state().ui.removed_questions.is_empty());
 }
 
+const TWO_STEP: &str = "Y7 Autumn B3 Expressions and equations · S7 Solve 2-step equations";
+
 #[test]
-fn a_search_word_picks_questions_on_that_topic() {
+fn a_teacher_searches_the_skills_chooses_one_and_the_question_is_about_it() {
     let mut h = harness();
-    h.state_mut().ui.get_ready_search = vec!["both sides".into(), String::new(), String::new(), String::new()];
+    h.state_mut().ui.get_ready_slots = vec![(String::new(), 3), (String::new(), 0), (String::new(), 0), (String::new(), 0)];
     h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
     h.run_steps(3);
-    assert!(h.query_by_label_contains("found").is_some(), "the box says how many questions match");
+    // Question 1: open the picker, search, and see the skills that match.
+    h.query_all_by_label_contains("Any skill").next().unwrap().click();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("Choose the skill for question 1").is_some());
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("q".into(), "2-step equations".into());
+    h.run_steps(3);
+    assert!(h.query_by_label("Solve 2-step equations").is_some(), "the small step is listed by name");
+    assert!(h.query_by_label_contains("Year 7").is_some(), "with its year group and block");
+    h.query_all_by_label("Choose").next().unwrap().click();
+    h.run_steps(3);
+    // Back on the Get Ready dialog with the skill chosen for question 1 only.
+    assert_eq!(h.state().ui.get_ready_skill[0], TWO_STEP);
+    assert!(h.state().ui.get_ready_skill[1].is_empty());
+    assert!(h.query_by_label_contains("Solve 2-step equations").is_some());
     h.get_by_label("Insert").click();
     h.run_steps(3);
-    let texts = slide_texts(&h);
-    assert!(texts.iter().any(|t| t.starts_with("Solve")), "question 1 is the both-sides equation: {texts:?}");
-    assert_eq!(h.state().ui.get_ready_search[0], "both sides", "the search is remembered");
+    // The stretch question for that step is a fraction-in-an-equation: it starts with "Solve".
+    let st = h.state().session.active().unwrap();
+    let slide = st.doc.slides.get(st.selection.slide).unwrap();
+    let q1 = slide.shapes.iter().find(|s| s.name == "Question 1 text").unwrap();
+    let text: String = q1.text.as_ref().unwrap().paragraphs.iter().map(|p| p.text()).collect();
+    assert!(text.starts_with("Solve"), "{text}");
+}
+
+#[test]
+fn the_picker_narrows_by_year_and_can_go_back_to_any_skill() {
+    let mut h = harness();
+    h.state_mut().ui.get_ready_skill = vec![TWO_STEP.into(), String::new(), String::new(), String::new()];
+    h.state_mut().run("app.dialog", json!({"id": "chooseSkill", "slot": 1})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("Choose the skill for question 2").is_some());
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("year".into(), "General".into());
+    h.run_steps(3);
+    assert!(h.query_by_label("Solve 2-step equations").is_none(), "year 7 steps are hidden under General");
+    h.get_by_label("Any skill (no choice)").click();
+    h.run_steps(3);
+    assert!(h.state().ui.get_ready_skill[1].is_empty());
+    assert_eq!(h.state().ui.get_ready_skill[0], TWO_STEP, "the other questions keep their skill");
+    assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("getReady"), "back on the Get Ready dialog");
 }
 
 #[test]

@@ -38,6 +38,9 @@ pub struct Template {
     /// Where it sits in a scheme of work, e.g. “Y7 Autumn B3 S7 Solve 2-step equations”.
     #[serde(default)]
     pub source: String,
+    /// The year group it is for: `Y7` to `Y11` (empty: the year at the start of `source`).
+    #[serde(default)]
+    pub year: String,
     /// The variables, in the order they are chosen. A later one's range may use an earlier one.
     #[serde(default)]
     pub vars: Vec<(String, VarSpec)>,
@@ -765,6 +768,7 @@ impl Template {
             keywords: self.keywords.clone(),
             qtype: self.qtype.clone(),
             source: self.source.clone(),
+            year: self.year.clone(),
             text,
             answer,
             needs_diagram: diagram.is_some(),
@@ -1033,6 +1037,7 @@ mod tests {
                     keywords: vec![],
                     qtype: "fluency".into(),
                     source: String::new(),
+                    year: String::new(),
                     vars: vec![],
                     calc: vec![],
                     conditions: vec![],
