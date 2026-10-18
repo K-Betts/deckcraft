@@ -85,6 +85,7 @@ WRITING NUMBERS INTO TEXT: put an expression in double square brackets: [[a + b]
     [[v]]              a "pick" variable (a letter or word)
   Maths in text is LaTeX between dollar signs: "Solve $[[a|coef]]x + [[b]] = [[c]]$".
   Remember JSON needs every backslash doubled: \\frac \\times \\sqrt \\pi \\text{ cm}.
+  Column vectors: \\binom{3}{-2}; vector names: \\overrightarrow{AB}, \\mathbf{a}.
   Allowed LaTeX: \\frac{}{} \\sqrt{} ^{} _{} \\times \\div \\pi \\theta \\geq \\leq \\neq \\pm
   \\cdot \\text{}. Write % as plain text outside the dollars ("Find 15% of £80"), never inside.
   Units go inside \\text{}: $12\\text{ cm}^2$.

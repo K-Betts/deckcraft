@@ -282,8 +282,9 @@ fn draw_card(s: &mut Session, q: &questions::Question, i: usize, rect: [f64; 4],
         (true, false) => 0.45,
     };
     let col_w = card_w * (1.0 - share) - 2.0 * pad;
-    let stacked =
-        crate::latex::segments(&q.answer).into_iter().any(|g| matches!(g, crate::latex::Segment::Math(m) if m.contains(")/(") || m.contains("sqrt")));
+    let stacked = crate::latex::segments(&q.answer)
+        .into_iter()
+        .any(|g| matches!(g, crate::latex::Segment::Math(m) if m.contains(")/(") || m.contains("sqrt") || m.contains("vec(")));
     let answer_text = plain_answer(&q.answer);
     let a_len = answer_text.chars().count().max(1) as f64;
     let a_h = if stacked { 62.0 * k.min(1.6) } else { 40.0 * k.min(1.8) };
@@ -300,7 +301,7 @@ fn draw_card(s: &mut Session, q: &questions::Question, i: usize, rect: [f64; 4],
     let text_h = (a_rect[1] - body_top - 6.0).max(20.0);
     // The largest size whose lines (with an allowance for a stacked fraction) fit the space.
     let len = plain_answer(&q.text).chars().count() as f64;
-    let stacked_q = q.text.contains("\\frac") || q.text.contains("\\sqrt");
+    let stacked_q = q.text.contains("\\frac") || q.text.contains("\\sqrt") || q.text.contains("\\binom");
     let size = [26.0, 24.0, 22.0, 20.0, 18.0, 16.0, 15.0, 14.0, 13.0, 12.0]
         .into_iter()
         .map(|c| c * k)

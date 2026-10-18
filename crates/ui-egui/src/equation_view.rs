@@ -230,8 +230,31 @@ fn layout(p: &Painter, ink: &Ink, e: &Expr, size: f32) -> Lay {
             out.w = w + size * 0.15 + bw;
             out
         }
+        Expr::Stack(n, d) => {
+            // A column vector: two lines with no bar, in brackets.
+            let (n, d) = (layout(p, ink, n, size), layout(p, ink, d, size));
+            let (axis, gap) = (size * 0.3, size * 0.16);
+            let w = n.w.max(d.w);
+            let mut b = Lay::blank();
+            let (nw, dw) = (n.w, d.w);
+            let ny = -(axis + gap + n.desc);
+            let dy = -axis + gap + d.asc;
+            b.put(n, (w - nw) / 2.0, ny);
+            b.put(d, (w - dw) / 2.0, dy);
+            b.w = w;
+            brackets(p, ink, b, '(', ')', size)
+        }
         Expr::Delim { open, close, body } => {
             let b = layout(p, ink, body, size);
+            brackets(p, ink, b, *open, *close, size)
+        }
+    }
+}
+
+/// `b` between a pair of brackets as tall as it is.
+fn brackets(p: &Painter, ink: &Ink, b: Lay, open: char, close: char, size: f32) -> Lay {
+    {
+        {
             let h = (b.asc + b.desc).max(size);
             let mark = |c: char| {
                 let mut l = text(p, ink, &c.to_string(), (h * 1.02).max(size), false);
@@ -247,7 +270,7 @@ fn layout(p: &Painter, ink: &Ink, e: &Expr, size: f32) -> Lay {
                 l.desc = l.desc.max(b.desc);
                 l
             };
-            let (o, c) = (mark(*open), mark(*close));
+            let (o, c) = (mark(open), mark(close));
             let mut out = Lay::blank();
             let (ow, bw) = (o.w, b.w);
             out.put(o, 0.0, 0.0);

@@ -90,6 +90,18 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y10-higher-spring-b5-perimeter-area-volume.json"),
     include_str!("../../../assets/questions/y10-higher-spring-b6-interpret-represent-data.json"),
     include_str!("../../../assets/questions/y10-higher-spring-b7-non-linear-graphs.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b1-angles.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b2-graphs-and-diagrams.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b3-vectors.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b4-factors-powers-surds.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b5-pythagoras-trigonometry.json"),
+    include_str!("../../../assets/questions/y10-foundation-summer-b6-simultaneous-equations.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b1-angles.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b2-graphs-and-diagrams.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b3-vectors.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b4-factors-powers-surds.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b5-pythagoras-trigonometry.json"),
+    include_str!("../../../assets/questions/y10-higher-summer-b6-simultaneous-equations.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -752,7 +764,7 @@ mod tests {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 520, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 600, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }

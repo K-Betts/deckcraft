@@ -1,0 +1,3860 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Summer Block 2 Graphs and diagrams: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsu2-s01-l1",
+   "topic": "Statistics",
+   "subtopic": "Pie charts",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S1 Pie charts",
+   "keywords": [
+    "pie",
+    "charts",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       24,
+       30,
+       36,
+       40,
+       45,
+       60
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "[[n]] pupils chose their favourite sport. Work out the angle for 1 pupil on a pie chart, and the angle for [[f]] pupils.",
+   "answer": "[[360 / n]]° for 1 pupil; [[f * 360 / n]]° for [[f]] pupils"
+  },
+  {
+   "id": "y10hsu2-s01-l2",
+   "topic": "Statistics",
+   "subtopic": "Pie charts",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S1 Pie charts",
+   "keywords": [
+    "pie",
+    "charts",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       24,
+       30,
+       36,
+       40,
+       45,
+       60
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "f4",
+     "n - f1 - f2 - f3"
+    ]
+   ],
+   "where": [
+    "f4 > 1",
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 + f2 + f3 + f4 == n"
+   ],
+   "text": "The table shows the favourite sports of [[f1 + f2 + f3 + f4]] pupils. Work out the angle for each sport on a pie chart.",
+   "answer": "Football [[f1 * 360 / n]]°, rugby [[f2 * 360 / n]]°, tennis [[f3 * 360 / n]]°, hockey [[f4 * 360 / n]]°",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Sport",
+     "Football",
+     "Rugby",
+     "Tennis",
+     "Hockey"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f1|n]]",
+      "[[f2|n]]",
+      "[[f3|n]]",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s01-l3",
+   "topic": "Statistics",
+   "subtopic": "Pie charts",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S1 Pie charts",
+   "keywords": [
+    "pie",
+    "charts",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       24,
+       30,
+       40,
+       45,
+       60
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f * 10 != f * 360 / n"
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "A pie chart is to be drawn for [[n]] pupils. Ben says the angle for [[f]] pupils is [[f * 10]]°. Is he right? Work out the correct angle.",
+   "answer": "No: 360 ÷ [[n]] = [[360 / n]]° per pupil, so [[f]] pupils is [[f * 360 / n]]°"
+  },
+  {
+   "id": "y10hsu2-s01-l4",
+   "topic": "Statistics",
+   "subtopic": "Pie charts",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S1 Pie charts",
+   "keywords": [
+    "pie",
+    "charts",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       24,
+       36,
+       40,
+       45,
+       60
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       "floor(n / 8)",
+       "floor(n / 4)"
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "f4",
+     "n - f1 - f2 - f3"
+    ]
+   ],
+   "where": [
+    "f4 > 2",
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 + f2 + f3 + f4 == n"
+   ],
+   "text": "The table shows how [[n]] pupils travel to school. Work out the angles for a pie chart and check they add up to 360°. (4 marks)",
+   "answer": "Angles: [[f1 * 360 / n]]°, [[f2 * 360 / n]]°, [[f3 * 360 / n]]°, [[f4 * 360 / n]]°; total [[(f1 + f2 + f3 + f4) * 360 / n]]°",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Travel",
+     "Walk",
+     "Bus",
+     "Car",
+     "Cycle"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f1|n]]",
+      "[[f2|n]]",
+      "[[f3|n]]",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s02-l1",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S2 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the temperature in month [[k]]?",
+   "answer": "[[(k == 1) * p1 + (k == 2) * p2 + (k == 3) * p3 + (k == 4) * p4 + (k == 5) * p5 + (k == 6) * p6]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s02-l2",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S2 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ],
+    [
+     "mx",
+     "max(p1, p2, p3, p4, p5, p6)"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "(p1 == mx) + (p2 == mx) + (p3 == mx) + (p4 == mx) + (p5 == mx) + (p6 == mx) == 1"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the highest temperature, and in which month did it happen?",
+   "answer": "[[mx]]°C in month [[(p1 == mx) * 1 + (p2 == mx) * 2 + (p3 == mx) * 3 + (p4 == mx) * 4 + (p5 == mx) * 5 + (p6 == mx) * 6]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s02-l3",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S2 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "max(p1, p2, p3, p4, p5, p6) > min(p1, p2, p3, p4, p5, p6)"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the range of the temperatures?",
+   "answer": "[[max(p1, p2, p3, p4, p5, p6) - min(p1, p2, p3, p4, p5, p6)]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s02-l4",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S2 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "(p2 - p1 > 0 || p3 - p2 > 0 || p4 - p3 > 0 || p5 - p4 > 0 || p6 - p5 > 0)",
+    "(p2 - p1 != p3 - p2)",
+    "(p2 - p1 != p4 - p3)",
+    "(p2 - p1 != p5 - p4)",
+    "(p2 - p1 != p6 - p5)",
+    "(p3 - p2 != p4 - p3)",
+    "(p3 - p2 != p5 - p4)",
+    "(p3 - p2 != p6 - p5)",
+    "(p4 - p3 != p5 - p4)",
+    "(p4 - p3 != p6 - p5)",
+    "(p5 - p4 != p6 - p5)",
+    "max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5) > 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. (a) Between which two months was the biggest rise? (b) What was the rise? (3 marks)",
+   "answer": "(a) months [[(p2 - p1) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:1 and 2/]][[(p3 - p2) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:2 and 3/]][[(p4 - p3) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:3 and 4/]][[(p5 - p4) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:4 and 5/]][[(p6 - p5) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:5 and 6/]]  (b) [[max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s03-l1",
+   "topic": "Statistics",
+   "subtopic": "Frequency polygons",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S3 Frequency polygons",
+   "keywords": [
+    "frequency",
+    "polygons",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The table shows the times (t minutes) that [[f1 + f2 + f3 + f4]] people waited: 0 ≤ t < 10: [[f1]], 10 ≤ t < 20: [[f2]], 20 ≤ t < 30: [[f3]], 30 ≤ t < 40: [[f4]]. A frequency polygon is drawn. At what $x$ value is the first point plotted?",
+   "answer": "5 (the midpoint of 0 to 10)"
+  },
+  {
+   "id": "y10hsu2-s03-l2",
+   "topic": "Statistics",
+   "subtopic": "Frequency polygons",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S3 Frequency polygons",
+   "keywords": [
+    "frequency",
+    "polygons",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "A frequency polygon is drawn for waiting times in the classes 0 ≤ t < 10, 10 ≤ t < 20, 20 ≤ t < 30 and 30 ≤ t < 40 with frequencies [[f1]], [[f2]], [[f3]] and [[f4]]. Write down the coordinates of the four points.",
+   "answer": "(5, [[f1]]), (15, [[f2]]), (25, [[f3]]), (35, [[f4]])"
+  },
+  {
+   "id": "y10hsu2-s03-l3",
+   "topic": "Statistics",
+   "subtopic": "Frequency polygons",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S3 Frequency polygons",
+   "keywords": [
+    "frequency",
+    "polygons",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The frequency polygon shows waiting times. How many people waited between 20 and 30 minutes? How many people are there in total?",
+   "answer": "[[f3]]; [[f1 + f2 + f3 + f4]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 40,
+    "ymin": 0,
+    "ymax": "[[max(f1, max(f2, max(f3, f4))) + 2|n]]",
+    "xstep": 10,
+    "ystep": "[[2 * ceil((max(f1, max(f2, max(f3, f4))) + 2) / 10)|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Frequency",
+    "points": [
+     [
+      5,
+      "[[f1|n]]"
+     ],
+     [
+      15,
+      "[[f2|n]]"
+     ],
+     [
+      25,
+      "[[f3|n]]"
+     ],
+     [
+      35,
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s03-l4",
+   "topic": "Statistics",
+   "subtopic": "Frequency polygons",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S3 Frequency polygons",
+   "keywords": [
+    "frequency",
+    "polygons",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f1 != f3",
+    "f1 != f4",
+    "f2 != f3",
+    "f2 != f4",
+    "f3 != f4"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The frequency polygon shows waiting times. (a) Which is the modal class? (b) Work out an estimate of the mean waiting time. (3 marks)",
+   "answer": "(a) [[f1 > f2 && f1 > f3 && f1 > f4|if:0 ≤ t < 10/]][[f2 > f1 && f2 > f3 && f2 > f4|if:10 ≤ t < 20/]][[f3 > f1 && f3 > f2 && f3 > f4|if:20 ≤ t < 30/]][[f4 > f1 && f4 > f2 && f4 > f3|if:30 ≤ t < 40/]]  (b) [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4)|dp:1]] minutes",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 40,
+    "ymin": 0,
+    "ymax": "[[max(f1, max(f2, max(f3, f4))) + 2|n]]",
+    "xstep": 10,
+    "ystep": "[[2 * ceil((max(f1, max(f2, max(f3, f4))) + 2) / 10)|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Frequency",
+    "points": [
+     [
+      5,
+      "[[f1|n]]"
+     ],
+     [
+      15,
+      "[[f2|n]]"
+     ],
+     [
+      25,
+      "[[f3|n]]"
+     ],
+     [
+      35,
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s04-l1",
+   "topic": "Statistics",
+   "subtopic": "Stem-and-leaf diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S4 Stem-and-leaf diagrams",
+   "keywords": [
+    "stem",
+    "and",
+    "leaf",
+    "diagrams",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h3",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x4",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g4",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g1 > 0"
+   ],
+   "text": "The stem-and-leaf diagram shows 12 values (key: 1 | 2 means 12). Write down the smallest and the largest value.",
+   "answer": "Smallest [[10 + x1]]; largest [[40 + x4 + g4 + h4]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stem",
+     "Leaf"
+    ],
+    "rows": [
+     [
+      "1",
+      "[[x1]]  [[x1 + g1]]  [[x1 + g1 + h1]]"
+     ],
+     [
+      "2",
+      "[[x2]]  [[x2 + g2]]  [[x2 + g2 + h2]]"
+     ],
+     [
+      "3",
+      "[[x3]]  [[x3 + g3]]  [[x3 + g3 + h3]]"
+     ],
+     [
+      "4",
+      "[[x4]]  [[x4 + g4]]  [[x4 + g4 + h4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s04-l2",
+   "topic": "Statistics",
+   "subtopic": "Stem-and-leaf diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S4 Stem-and-leaf diagrams",
+   "keywords": [
+    "stem",
+    "and",
+    "leaf",
+    "diagrams",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h3",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x4",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g4",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g1 > 0"
+   ],
+   "text": "The stem-and-leaf diagram shows 12 values (key: 1 | 2 means 12). Work out the range.",
+   "answer": "[[40 + x4 + g4 + h4 - 10 - x1]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stem",
+     "Leaf"
+    ],
+    "rows": [
+     [
+      "1",
+      "[[x1]]  [[x1 + g1]]  [[x1 + g1 + h1]]"
+     ],
+     [
+      "2",
+      "[[x2]]  [[x2 + g2]]  [[x2 + g2 + h2]]"
+     ],
+     [
+      "3",
+      "[[x3]]  [[x3 + g3]]  [[x3 + g3 + h3]]"
+     ],
+     [
+      "4",
+      "[[x4]]  [[x4 + g4]]  [[x4 + g4 + h4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s04-l3",
+   "topic": "Statistics",
+   "subtopic": "Stem-and-leaf diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S4 Stem-and-leaf diagrams",
+   "keywords": [
+    "stem",
+    "and",
+    "leaf",
+    "diagrams",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h3",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x4",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g4",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g1 > 0"
+   ],
+   "text": "The stem-and-leaf diagram shows 12 values (key: 1 | 2 means 12). Work out the median.",
+   "answer": "[[(20 + x2 + g2 + h2 + 30 + x3) / 2]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stem",
+     "Leaf"
+    ],
+    "rows": [
+     [
+      "1",
+      "[[x1]]  [[x1 + g1]]  [[x1 + g1 + h1]]"
+     ],
+     [
+      "2",
+      "[[x2]]  [[x2 + g2]]  [[x2 + g2 + h2]]"
+     ],
+     [
+      "3",
+      "[[x3]]  [[x3 + g3]]  [[x3 + g3 + h3]]"
+     ],
+     [
+      "4",
+      "[[x4]]  [[x4 + g4]]  [[x4 + g4 + h4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s04-l4",
+   "topic": "Statistics",
+   "subtopic": "Stem-and-leaf diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S4 Stem-and-leaf diagrams",
+   "keywords": [
+    "stem",
+    "and",
+    "leaf",
+    "diagrams",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h3",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x4",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "g4",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "h4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g1 > 0"
+   ],
+   "text": "The stem-and-leaf diagram shows 12 values (key: 1 | 2 means 12). (a) How many values are greater than 30? (b) Work out the mean to 1 decimal place. (3 marks)",
+   "answer": "(a) 6  (b) [[(10 * 3 + 20 * 3 + 30 * 3 + 40 * 3 + x1 + x1 + g1 + x1 + g1 + h1 + x2 + x2 + g2 + x2 + g2 + h2 + x3 + x3 + g3 + x3 + g3 + h3 + x4 + x4 + g4 + x4 + g4 + h4) / 12|dp:1]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stem",
+     "Leaf"
+    ],
+    "rows": [
+     [
+      "1",
+      "[[x1]]  [[x1 + g1]]  [[x1 + g1 + h1]]"
+     ],
+     [
+      "2",
+      "[[x2]]  [[x2 + g2]]  [[x2 + g2 + h2]]"
+     ],
+     [
+      "3",
+      "[[x3]]  [[x3 + g3]]  [[x3 + g3 + h3]]"
+     ],
+     [
+      "4",
+      "[[x4]]  [[x4 + g4]]  [[x4 + g4 + h4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s05-l1",
+   "topic": "Statistics",
+   "subtopic": "Draw histograms",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S5 Draw histograms",
+   "keywords": [
+    "draw",
+    "histograms",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "choose": [
+       10,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "choose": [
+       20,
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f2 > 0"
+   ],
+   "text": "A histogram is drawn for the table. Work out the frequency density for the class 10 < h ≤ 30.",
+   "answer": "[[f2 / 20]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Height (h cm)",
+     "Frequency",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < h ≤ 10",
+      "[[f1]]",
+      "10",
+      "?"
+     ],
+     [
+      "10 < h ≤ 30",
+      "[[f2]]",
+      "20",
+      "?"
+     ],
+     [
+      "30 < h ≤ 40",
+      "[[f3]]",
+      "10",
+      "?"
+     ],
+     [
+      "40 < h ≤ 60",
+      "[[f4]]",
+      "20",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s05-l2",
+   "topic": "Statistics",
+   "subtopic": "Draw histograms",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S5 Draw histograms",
+   "keywords": [
+    "draw",
+    "histograms",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "choose": [
+       10,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "choose": [
+       20,
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "A histogram is drawn for the table. Work out the frequency densities for all four classes.",
+   "answer": "[[f1 / 10]], [[f2 / 20]], [[f3 / 10]], [[f4 / 20]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Height (h cm)",
+     "Frequency",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < h ≤ 10",
+      "[[f1]]",
+      "10",
+      "?"
+     ],
+     [
+      "10 < h ≤ 30",
+      "[[f2]]",
+      "20",
+      "?"
+     ],
+     [
+      "30 < h ≤ 40",
+      "[[f3]]",
+      "10",
+      "?"
+     ],
+     [
+      "40 < h ≤ 60",
+      "[[f4]]",
+      "20",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s05-l3",
+   "topic": "Statistics",
+   "subtopic": "Draw histograms",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S5 Draw histograms",
+   "keywords": [
+    "draw",
+    "histograms",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "choose": [
+       10,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "choose": [
+       20,
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "Explain why a histogram uses frequency density instead of frequency, and work out the height of the tallest bar for the table.",
+   "answer": "Class widths are unequal, so the area of each bar must show the frequency; the tallest bar has frequency density [[max(max(f1 / 10, f2 / 20), max(f3 / 10, f4 / 20))]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Height (h cm)",
+     "Frequency",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < h ≤ 10",
+      "[[f1]]",
+      "10",
+      "?"
+     ],
+     [
+      "10 < h ≤ 30",
+      "[[f2]]",
+      "20",
+      "?"
+     ],
+     [
+      "30 < h ≤ 40",
+      "[[f3]]",
+      "10",
+      "?"
+     ],
+     [
+      "40 < h ≤ 60",
+      "[[f4]]",
+      "20",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s05-l4",
+   "topic": "Statistics",
+   "subtopic": "Draw histograms",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S5 Draw histograms",
+   "keywords": [
+    "draw",
+    "histograms",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "choose": [
+       10,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "choose": [
+       20,
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "A histogram is drawn for the table. (a) Work out the frequency densities. (b) The total frequency is how many? (3 marks)",
+   "answer": "(a) [[f1 / 10]], [[f2 / 20]], [[f3 / 10]], [[f4 / 20]]  (b) [[f1 + f2 + f3 + f4]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Height (h cm)",
+     "Frequency",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < h ≤ 10",
+      "[[f1]]",
+      "10",
+      "?"
+     ],
+     [
+      "10 < h ≤ 30",
+      "[[f2]]",
+      "20",
+      "?"
+     ],
+     [
+      "30 < h ≤ 40",
+      "[[f3]]",
+      "10",
+      "?"
+     ],
+     [
+      "40 < h ≤ 60",
+      "[[f4]]",
+      "20",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s06-l1",
+   "topic": "Statistics",
+   "subtopic": "Interpret histograms",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S6 Interpret histograms",
+   "keywords": [
+    "interpret",
+    "histograms",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "A histogram has the frequency densities shown. Work out the frequency of the class 10 < a ≤ 30.",
+   "answer": "[[d2 * 20]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Age (a years)",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < a ≤ 10",
+      "10",
+      "[[d1]]"
+     ],
+     [
+      "10 < a ≤ 30",
+      "20",
+      "[[d2]]"
+     ],
+     [
+      "30 < a ≤ 40",
+      "10",
+      "[[d3]]"
+     ],
+     [
+      "40 < a ≤ 60",
+      "20",
+      "[[d4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s06-l2",
+   "topic": "Statistics",
+   "subtopic": "Interpret histograms",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S6 Interpret histograms",
+   "keywords": [
+    "interpret",
+    "histograms",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "Use the histogram data to work out the frequency of each class.",
+   "answer": "[[d1 * 10]], [[d2 * 20]], [[d3 * 10]], [[d4 * 20]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Age (a years)",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < a ≤ 10",
+      "10",
+      "[[d1]]"
+     ],
+     [
+      "10 < a ≤ 30",
+      "20",
+      "[[d2]]"
+     ],
+     [
+      "30 < a ≤ 40",
+      "10",
+      "[[d3]]"
+     ],
+     [
+      "40 < a ≤ 60",
+      "20",
+      "[[d4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s06-l3",
+   "topic": "Statistics",
+   "subtopic": "Interpret histograms",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S6 Interpret histograms",
+   "keywords": [
+    "interpret",
+    "histograms",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "Use the histogram data to work out the total frequency and the percentage in the class 40 < a ≤ 60 to 1 decimal place.",
+   "answer": "Total [[d1 * 10 + d2 * 20 + d3 * 10 + d4 * 20]]; [[d4 * 20 * 100 / (d1 * 10 + d2 * 20 + d3 * 10 + d4 * 20)|dp:1]]%",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Age (a years)",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < a ≤ 10",
+      "10",
+      "[[d1]]"
+     ],
+     [
+      "10 < a ≤ 30",
+      "20",
+      "[[d2]]"
+     ],
+     [
+      "30 < a ≤ 40",
+      "10",
+      "[[d3]]"
+     ],
+     [
+      "40 < a ≤ 60",
+      "20",
+      "[[d4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s06-l4",
+   "topic": "Statistics",
+   "subtopic": "Interpret histograms",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S6 Interpret histograms",
+   "keywords": [
+    "interpret",
+    "histograms",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "Use the histogram data to estimate how many people are aged between 20 and 40. (3 marks)",
+   "answer": "[[d2 * 10 + d3 * 10]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Age (a years)",
+     "Class width",
+     "Frequency density"
+    ],
+    "rows": [
+     [
+      "0 < a ≤ 10",
+      "10",
+      "[[d1]]"
+     ],
+     [
+      "10 < a ≤ 30",
+      "20",
+      "[[d2]]"
+     ],
+     [
+      "30 < a ≤ 40",
+      "10",
+      "[[d3]]"
+     ],
+     [
+      "40 < a ≤ 60",
+      "20",
+      "[[d4]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s07-l1",
+   "topic": "Statistics",
+   "subtopic": "Draw cumulative frequency diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S7 Draw cumulative frequency diagrams",
+   "keywords": [
+    "draw",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The cumulative frequency table has total frequency [[4 * m]] and upper class bounds [[w]], [[2 * w]], [[3 * w]] and [[4 * w]] with cumulative frequencies [[m]], [[2 * m]], [[3 * m]] and [[4 * m]]. Write down the first point you plot.",
+   "answer": "([[w]], [[m]])"
+  },
+  {
+   "id": "y10hsu2-s07-l2",
+   "topic": "Statistics",
+   "subtopic": "Draw cumulative frequency diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S7 Draw cumulative frequency diagrams",
+   "keywords": [
+    "draw",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: A cumulative frequency graph is plotted from the table above. What is the median class boundary the graph reaches at [[2 * m]] (half of [[4 * m]])?",
+   "answer": "[[2 * w]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s07-l3",
+   "topic": "Statistics",
+   "subtopic": "Draw cumulative frequency diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S7 Draw cumulative frequency diagrams",
+   "keywords": [
+    "draw",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: Explain why the points of a cumulative frequency graph are plotted at the upper class boundaries, and write down the point plotted for the class ending at [[3 * w]].",
+   "answer": "It shows the total up to that boundary; the point is ([[3 * w]], [[3 * m]])",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s07-l4",
+   "topic": "Statistics",
+   "subtopic": "Draw cumulative frequency diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S7 Draw cumulative frequency diagrams",
+   "keywords": [
+    "draw",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Cumulative frequencies at [[w]], [[2 * w]], [[3 * w]] and [[4 * w]] minutes are [[m]], [[2 * m]], [[3 * m]] and [[4 * m]]. Plot the graph and estimate the median, lower quartile and upper quartile. (4 marks)",
+   "answer": "Median [[2 * w]]; LQ [[w]]; UQ [[3 * w]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s08-l1",
+   "topic": "Statistics",
+   "subtopic": "Interpret cumulative frequency diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S8 Interpret cumulative frequency diagrams",
+   "keywords": [
+    "interpret",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: Use the cumulative frequency graph to estimate the median.",
+   "answer": "[[2 * w]] minutes",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s08-l2",
+   "topic": "Statistics",
+   "subtopic": "Interpret cumulative frequency diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S8 Interpret cumulative frequency diagrams",
+   "keywords": [
+    "interpret",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: Use the cumulative frequency graph to work out how many took less than [[3 * w]] minutes.",
+   "answer": "[[3 * m]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s08-l3",
+   "topic": "Statistics",
+   "subtopic": "Interpret cumulative frequency diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S8 Interpret cumulative frequency diagrams",
+   "keywords": [
+    "interpret",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: Use the cumulative frequency graph to estimate the interquartile range.",
+   "answer": "UQ [[3 * w]] − LQ [[w]] = [[2 * w]] minutes",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s08-l4",
+   "topic": "Statistics",
+   "subtopic": "Interpret cumulative frequency diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S8 Interpret cumulative frequency diagrams",
+   "keywords": [
+    "interpret",
+    "cumulative",
+    "frequency",
+    "diagrams",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "times taken to run a lap",
+       "ages of club members",
+       "journey times to school",
+       "waiting times at a clinic"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "For the [[who]]: Use the graph to estimate how many people took more than [[2 * w]] minutes, and the percentage of the group that is. (3 marks)",
+   "answer": "[[2 * m]] people; 50%",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[4 * w|n]]",
+    "ymin": 0,
+    "ymax": "[[4 * m|n]]",
+    "xstep": "[[w|n]]",
+    "ystep": "[[m|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Cumulative frequency",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[w|n]]",
+      "[[m|n]]"
+     ],
+     [
+      "[[2 * w|n]]",
+      "[[2 * m|n]]"
+     ],
+     [
+      "[[3 * w|n]]",
+      "[[3 * m|n]]"
+     ],
+     [
+      "[[4 * w|n]]",
+      "[[4 * m|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu2-s09-l1",
+   "topic": "Statistics",
+   "subtopic": "Box plots",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S9 Box plots",
+   "keywords": [
+    "box",
+    "plots",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "mn",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       11,
+       20
+      ]
+     }
+    ],
+    [
+     "md",
+     {
+      "int": [
+       21,
+       30
+      ]
+     }
+    ],
+    [
+     "q3",
+     {
+      "int": [
+       31,
+       40
+      ]
+     }
+    ],
+    [
+     "mx",
+     {
+      "int": [
+       41,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "mx > mn"
+   ],
+   "text": "A box plot has minimum [[mn]], lower quartile [[q1]], median [[md]], upper quartile [[q3]] and maximum [[mx]]. Work out the range.",
+   "answer": "[[mx - mn]]"
+  },
+  {
+   "id": "y10hsu2-s09-l2",
+   "topic": "Statistics",
+   "subtopic": "Box plots",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S9 Box plots",
+   "keywords": [
+    "box",
+    "plots",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "mn",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       11,
+       20
+      ]
+     }
+    ],
+    [
+     "md",
+     {
+      "int": [
+       21,
+       30
+      ]
+     }
+    ],
+    [
+     "q3",
+     {
+      "int": [
+       31,
+       40
+      ]
+     }
+    ],
+    [
+     "mx",
+     {
+      "int": [
+       41,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "mx > mn"
+   ],
+   "text": "A box plot has minimum [[mn]], lower quartile [[q1]], median [[md]], upper quartile [[q3]] and maximum [[mx]]. Work out the interquartile range.",
+   "answer": "[[q3 - q1]]"
+  },
+  {
+   "id": "y10hsu2-s09-l3",
+   "topic": "Statistics",
+   "subtopic": "Box plots",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S9 Box plots",
+   "keywords": [
+    "box",
+    "plots",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "mn",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       11,
+       20
+      ]
+     }
+    ],
+    [
+     "md",
+     {
+      "int": [
+       21,
+       30
+      ]
+     }
+    ],
+    [
+     "q3",
+     {
+      "int": [
+       31,
+       40
+      ]
+     }
+    ],
+    [
+     "mx",
+     {
+      "int": [
+       41,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "mx > mn"
+   ],
+   "text": "A box plot has minimum [[mn]], lower quartile [[q1]], median [[md]], upper quartile [[q3]] and maximum [[mx]]. Say what fraction of the data lies between the median and the upper quartile and between the minimum and the lower quartile.",
+   "answer": "$\\frac{1}{4}$ and $\\frac{1}{4}$"
+  },
+  {
+   "id": "y10hsu2-s09-l4",
+   "topic": "Statistics",
+   "subtopic": "Box plots",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S9 Box plots",
+   "keywords": [
+    "box",
+    "plots",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "mn",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       11,
+       20
+      ]
+     }
+    ],
+    [
+     "md",
+     {
+      "int": [
+       21,
+       30
+      ]
+     }
+    ],
+    [
+     "q3",
+     {
+      "int": [
+       31,
+       40
+      ]
+     }
+    ],
+    [
+     "mx",
+     {
+      "int": [
+       41,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "mx > mn"
+   ],
+   "text": "Draw a box plot for data with minimum [[mn]], lower quartile [[q1]], median [[md]], upper quartile [[q3]] and maximum [[mx]]. State the range, the IQR and the value that [[50]]% of the data are below. (3 marks)",
+   "answer": "Range [[mx - mn]]; IQR [[q3 - q1]]; 50% of the data are below [[md]]"
+  },
+  {
+   "id": "y10hsu2-s10-l1",
+   "topic": "Statistics",
+   "subtopic": "Compare distributions using box plots (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S10 Compare distributions using box plots (E)",
+   "keywords": [
+    "compare",
+    "distributions",
+    "using",
+    "box",
+    "plots",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "md1",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "md2",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "md1 != md2"
+   ],
+   "check": [
+    "md1 > 0"
+   ],
+   "text": "Class A has median [[md1]] and class B has median [[md2]]. Which class did better on average?",
+   "answer": "Class [[md1 > md2|if:A/B]] (higher median)"
+  },
+  {
+   "id": "y10hsu2-s10-l2",
+   "topic": "Statistics",
+   "subtopic": "Compare distributions using box plots (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S10 Compare distributions using box plots (E)",
+   "keywords": [
+    "compare",
+    "distributions",
+    "using",
+    "box",
+    "plots",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "q11",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "q31",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ],
+    [
+     "q12",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "q32",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q31 - q11 != q32 - q12"
+   ],
+   "check": [
+    "q11 > 0"
+   ],
+   "text": "Class A has interquartile range [[q31 - q11]] and class B has [[q32 - q12]]. Which class's results are more consistent?",
+   "answer": "Class [[q31 - q11 < q32 - q12|if:A/B]] (smaller IQR)"
+  },
+  {
+   "id": "y10hsu2-s10-l3",
+   "topic": "Statistics",
+   "subtopic": "Compare distributions using box plots (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S10 Compare distributions using box plots (E)",
+   "keywords": [
+    "compare",
+    "distributions",
+    "using",
+    "box",
+    "plots",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "mn1",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "q11",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "md1",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "q31",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ],
+    [
+     "mx1",
+     {
+      "int": [
+       45,
+       55
+      ]
+     }
+    ],
+    [
+     "mn2",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "q12",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "md2",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "q32",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ],
+    [
+     "mx2",
+     {
+      "int": [
+       45,
+       55
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "md1 != md2",
+    "q31 - q11 != q32 - q12"
+   ],
+   "check": [
+    "mx1 > mn1"
+   ],
+   "text": "Compare two box plots: A has median [[md1]], IQR [[q31 - q11]] and range [[mx1 - mn1]]; B has median [[md2]], IQR [[q32 - q12]] and range [[mx2 - mn2]]. Write two comparisons.",
+   "answer": "The class with the higher median is class [[md1 > md2|if:A/B]]; the class with the smaller IQR (more consistent) is class [[q31 - q11 < q32 - q12|if:A/B]]"
+  },
+  {
+   "id": "y10hsu2-s10-l4",
+   "topic": "Statistics",
+   "subtopic": "Compare distributions using box plots (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B2 Graphs and diagrams · S10 Compare distributions using box plots (E)",
+   "keywords": [
+    "compare",
+    "distributions",
+    "using",
+    "box",
+    "plots",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "md1",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "md2",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "q11",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "q31",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ],
+    [
+     "q12",
+     {
+      "int": [
+       15,
+       22
+      ]
+     }
+    ],
+    [
+     "q32",
+     {
+      "int": [
+       33,
+       38
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "md1 != md2",
+    "q31 - q11 != q32 - q12"
+   ],
+   "check": [
+    "md1 > 0"
+   ],
+   "text": "Two box plots show test results. A: median [[md1]], IQR [[q31 - q11]]. B: median [[md2]], IQR [[q32 - q12]]. Which class would you say did better and why? Mention an average and a spread. (3 marks)",
+   "answer": "Compare medians ([[md1]] and [[md2]]) and IQRs ([[q31 - q11]] and [[q32 - q12]]): the higher median shows better typical performance and the smaller IQR shows more consistent results"
+  }
+ ]
+}

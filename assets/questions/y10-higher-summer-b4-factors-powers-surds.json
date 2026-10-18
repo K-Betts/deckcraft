@@ -1,0 +1,1978 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Summer Block 4 Factors, powers and surds: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsu4-s01-l1",
+   "topic": "Number",
+   "subtopic": "Prime factorisation, HCF and LCM",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S1 Prime factorisation, HCF and LCM",
+   "keywords": [
+    "prime",
+    "factorisation",
+    "hcf",
+    "and",
+    "lcm",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "2^min(a, c) * 3^min(b, d) > 0"
+   ],
+   "text": "$A = 2^{[[a]]} \\times 3^{[[b]]}$ and $B = 2^{[[c]]} \\times 3^{[[d]]}$. Work out the HCF of $A$ and $B$.",
+   "answer": "[[2^min(a, c) * 3^min(b, d)]]"
+  },
+  {
+   "id": "y10hsu4-s01-l2",
+   "topic": "Number",
+   "subtopic": "Prime factorisation, HCF and LCM",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S1 Prime factorisation, HCF and LCM",
+   "keywords": [
+    "prime",
+    "factorisation",
+    "hcf",
+    "and",
+    "lcm",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "2^max(a, c) * 3^max(b, d) > 0"
+   ],
+   "text": "$A = 2^{[[a]]} \\times 3^{[[b]]}$ and $B = 2^{[[c]]} \\times 3^{[[d]]}$. Work out the LCM of $A$ and $B$.",
+   "answer": "[[2^max(a, c) * 3^max(b, d)]]"
+  },
+  {
+   "id": "y10hsu4-s01-l3",
+   "topic": "Number",
+   "subtopic": "Prime factorisation, HCF and LCM",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S1 Prime factorisation, HCF and LCM",
+   "keywords": [
+    "prime",
+    "factorisation",
+    "hcf",
+    "and",
+    "lcm",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "gcd(2^a * 3^b, 2^c * 3^d) == 2^min(a, c) * 3^min(b, d)"
+   ],
+   "text": "Write [[2^a * 3^b]] and [[2^c * 3^d]] as products of prime factors. Use them to find the HCF and the LCM.",
+   "answer": "$2^{[[a]]} \\times 3^{[[b]]}$ and $2^{[[c]]} \\times 3^{[[d]]}$; HCF = [[2^min(a, c) * 3^min(b, d)]], LCM = [[2^max(a, c) * 3^max(b, d)]]"
+  },
+  {
+   "id": "y10hsu4-s01-l4",
+   "topic": "Number",
+   "subtopic": "Prime factorisation, HCF and LCM",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S1 Prime factorisation, HCF and LCM",
+   "keywords": [
+    "prime",
+    "factorisation",
+    "hcf",
+    "and",
+    "lcm",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a % 2) + (b % 2) + (c % 2) > 0"
+   ],
+   "check": [
+    "2^a * 3^b * 5^c > 0"
+   ],
+   "text": "$n = 2^{[[a]]} \\times 3^{[[b]]} \\times 5^{[[c]]}$. Find the smallest whole number that $n$ can be multiplied by to give a square number. (3 marks)",
+   "answer": "[[2^(a % 2) * 3^(b % 2) * 5^(c % 2)]]"
+  },
+  {
+   "id": "y10hsu4-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Powers, roots and negative indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S2 Powers, roots and negative indices",
+   "keywords": [
+    "powers",
+    "roots",
+    "and",
+    "negative",
+    "indices",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b^n > 0"
+   ],
+   "text": "Write $[[b]]^{-[[n]]}$ as a fraction.",
+   "answer": "$\\frac{1}{[[b^n]]}$"
+  },
+  {
+   "id": "y10hsu4-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Powers, roots and negative indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S2 Powers, roots and negative indices",
+   "keywords": [
+    "powers",
+    "roots",
+    "and",
+    "negative",
+    "indices",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Write $x^{-[[n]]}$ with a positive power.",
+   "answer": "$\\frac{1}{x^{[[n]]}}$"
+  },
+  {
+   "id": "y10hsu4-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Powers, roots and negative indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S2 Powers, roots and negative indices",
+   "keywords": [
+    "powers",
+    "roots",
+    "and",
+    "negative",
+    "indices",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b^m > 0"
+   ],
+   "text": "Write (a) $[[a]]x^{-[[n]]}$ (b) $\\frac{1}{[[b]]^{-[[m]]}}$ without negative powers.",
+   "answer": "(a) $\\frac{[[a]]}{x^{[[n]]}}$  (b) $[[b^m]]$"
+  },
+  {
+   "id": "y10hsu4-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Powers, roots and negative indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S2 Powers, roots and negative indices",
+   "keywords": [
+    "powers",
+    "roots",
+    "and",
+    "negative",
+    "indices",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > m"
+   ],
+   "check": [
+    "n - m > 0"
+   ],
+   "text": "Work out $[[b]]^{[[m]]} \\times [[b]]^{-[[n]]}$ and give your answer as a fraction. (2 marks)",
+   "answer": "$[[b]]^{[[m - n]]} = \\frac{1}{[[b^(n - m)]]}$"
+  },
+  {
+   "id": "y10hsu4-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S3 Fractional indices",
+   "keywords": [
+    "fractional",
+    "indices",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b]]^{\\frac{1}{2}}$.",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y10hsu4-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S3 Fractional indices",
+   "keywords": [
+    "fractional",
+    "indices",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b * b]]^{\\frac{1}{3}}$.",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y10hsu4-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S3 Fractional indices",
+   "keywords": [
+    "fractional",
+    "indices",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Work out $[[b * b * b]]^{\\frac{2}{3}}$.",
+   "answer": "[[b * b]]"
+  },
+  {
+   "id": "y10hsu4-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Fractional indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S3 Fractional indices",
+   "keywords": [
+    "fractional",
+    "indices",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out (a) $[[a * a]]^{\\frac{1}{2}} \\times [[b * b * b]]^{\\frac{1}{3}}$ (b) $[[c * c * c * c]]^{\\frac{3}{4}}$. (3 marks)",
+   "answer": "(a) [[a * b]]  (b) [[c * c * c]]"
+  },
+  {
+   "id": "y10hsu4-s04-l1",
+   "topic": "Number",
+   "subtopic": "Simplify surds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S4 Simplify surds",
+   "keywords": [
+    "simplify",
+    "surds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\sqrt{[[a * a * b]]}$ in the form $a\\sqrt{b}$ where $b$ is as small as possible.",
+   "answer": "$[[a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s04-l2",
+   "topic": "Number",
+   "subtopic": "Simplify surds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S4 Simplify surds",
+   "keywords": [
+    "simplify",
+    "surds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * k > 0"
+   ],
+   "text": "Simplify $\\sqrt{[[p]]} \\times \\sqrt{[[p * k * k]]}$.",
+   "answer": "[[p * k]]"
+  },
+  {
+   "id": "y10hsu4-s04-l3",
+   "topic": "Number",
+   "subtopic": "Simplify surds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S4 Simplify surds",
+   "keywords": [
+    "simplify",
+    "surds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\sqrt{[[a * a * b]]} + \\sqrt{[[b]]}$.",
+   "answer": "$[[a + 1]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s04-l4",
+   "topic": "Number",
+   "subtopic": "Simplify surds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S4 Simplify surds",
+   "keywords": [
+    "simplify",
+    "surds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A square has an area of [[a * a * b]] cm². Write the side length and the perimeter as surds in their simplest form. (3 marks)",
+   "answer": "Side $[[a]]\\sqrt{[[b]]}$ cm; perimeter $[[4 * a]]\\sqrt{[[b]]}$ cm"
+  },
+  {
+   "id": "y10hsu4-s05-l1",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S5 Rationalise the denominator",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Rationalise the denominator of $\\frac{[[a]]}{\\sqrt{[[b]]}}$.",
+   "answer": "$\\frac{[[a]]\\sqrt{[[b]]}}{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s05-l2",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S5 Rationalise the denominator",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Rationalise the denominator of $\\frac{[[a * b]]}{\\sqrt{[[b]]}}$.",
+   "answer": "$[[a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s05-l3",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S5 Rationalise the denominator",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Rationalise the denominator of $\\frac{[[a]]}{[[c]]\\sqrt{[[b]]}}$ and simplify.",
+   "answer": "$\\frac{[[a]]\\sqrt{[[b]]}}{[[c * b]]}$"
+  },
+  {
+   "id": "y10hsu4-s05-l4",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S5 Rationalise the denominator",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle has area [[a]] cm² and width $\\sqrt{[[b]]}$ cm. Show that its length is $\\frac{[[a]]\\sqrt{[[b]]}}{[[b]]}$ cm. (3 marks)",
+   "answer": "Length = $\\frac{[[a]]}{\\sqrt{[[b]]}} = \\frac{[[a]]\\sqrt{[[b]]}}{[[b]]}$ cm"
+  },
+  {
+   "id": "y10hsu4-s06-l1",
+   "topic": "Number",
+   "subtopic": "Four operations with surds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S6 Four operations with surds",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $[[a]]\\sqrt{[[b]]} + [[c]]\\sqrt{[[b]]}$.",
+   "answer": "$[[a + c]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s06-l2",
+   "topic": "Number",
+   "subtopic": "Four operations with surds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S6 Four operations with surds",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $[[a]]\\sqrt{[[b]]} \\times [[c]]\\sqrt{[[b]]}$.",
+   "answer": "[[a * c * b]]"
+  },
+  {
+   "id": "y10hsu4-s06-l3",
+   "topic": "Number",
+   "subtopic": "Four operations with surds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S6 Four operations with surds",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Simplify $\\sqrt{[[4 * b]]} + \\sqrt{[[9 * b]]}$.",
+   "answer": "$[[2 + 3]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s06-l4",
+   "topic": "Number",
+   "subtopic": "Four operations with surds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S6 Four operations with surds",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{\\sqrt{[[a * a * b]]} + [[c]]\\sqrt{[[b]]}}{\\sqrt{[[b]]}}$. (3 marks)",
+   "answer": "[[a + c]]"
+  },
+  {
+   "id": "y10hsu4-s07-l1",
+   "topic": "Number",
+   "subtopic": "Expand single brackets with surds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S7 Expand single brackets with surds",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $\\sqrt{[[b]]}(\\sqrt{[[b]]} + [[a]])$.",
+   "answer": "$[[b]] + [[a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s07-l2",
+   "topic": "Number",
+   "subtopic": "Expand single brackets with surds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S7 Expand single brackets with surds",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $([[a]] + \\sqrt{[[b]]})([[a]] - \\sqrt{[[b]]})$.",
+   "answer": "[[a * a - b]]"
+  },
+  {
+   "id": "y10hsu4-s07-l3",
+   "topic": "Number",
+   "subtopic": "Expand single brackets with surds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S7 Expand single brackets with surds",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(\\sqrt{[[b]]} + [[a]])^2$.",
+   "answer": "$[[b + a * a]] + [[2 * a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s07-l4",
+   "topic": "Number",
+   "subtopic": "Expand single brackets with surds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S7 Expand single brackets with surds",
+   "keywords": [
+    "expand",
+    "single",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $(\\sqrt{[[b]]} + [[a]])(\\sqrt{[[b]]} - [[a]])$ is an integer and find its value. (3 marks)",
+   "answer": "$[[b]] - [[a * a]] = [[b - a * a]]$, an integer"
+  },
+  {
+   "id": "y10hsu4-s08-l1",
+   "topic": "Number",
+   "subtopic": "Expand double brackets with surds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S8 Expand double brackets with surds",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "Expand and simplify $([[a]] + \\sqrt{[[b]]})([[c]] - \\sqrt{[[b]]})$.",
+   "answer": "$[[a * c - b]] + [[c - a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s08-l2",
+   "topic": "Number",
+   "subtopic": "Expand double brackets with surds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S8 Expand double brackets with surds",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "Expand and simplify $(\\sqrt{[[b]]} + [[a]])(\\sqrt{[[b]]} - [[c]])$.",
+   "answer": "$[[b - a * c]] + [[a - c]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s08-l3",
+   "topic": "Number",
+   "subtopic": "Expand double brackets with surds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S8 Expand double brackets with surds",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $([[a]] + [[c]]\\sqrt{[[b]]})^2$.",
+   "answer": "$[[a * a + c * c * b]] + [[2 * a * c]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s08-l4",
+   "topic": "Number",
+   "subtopic": "Expand double brackets with surds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S8 Expand double brackets with surds",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $([[a]] + \\sqrt{[[b]]})([[a]] - \\sqrt{[[b]]})$ is rational and find its value. (3 marks)",
+   "answer": "$[[a * a]] - [[b]] = [[a * a - b]]$, a rational number"
+  },
+  {
+   "id": "y10hsu4-s09-l1",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator with more complex denominators (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S9 Rationalise the denominator with more complex denominators (E)",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "with",
+    "more",
+    "complex",
+    "denominators",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c * c > b"
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Rationalise the denominator of $\\frac{1}{[[c]] + \\sqrt{[[b]]}}$.",
+   "answer": "$\\frac{[[c]] - \\sqrt{[[b]]}}{[[c * c - b]]}$"
+  },
+  {
+   "id": "y10hsu4-s09-l2",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator with more complex denominators (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S9 Rationalise the denominator with more complex denominators (E)",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "with",
+    "more",
+    "complex",
+    "denominators",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c * c > b"
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Rationalise the denominator of $\\frac{[[a]]}{[[c]] - \\sqrt{[[b]]}}$.",
+   "answer": "$\\frac{[[a]]([[c]] + \\sqrt{[[b]]})}{[[c * c - b]]}$"
+  },
+  {
+   "id": "y10hsu4-s09-l3",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator with more complex denominators (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S9 Rationalise the denominator with more complex denominators (E)",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "with",
+    "more",
+    "complex",
+    "denominators",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "Rationalise the denominator of $\\frac{[[a]] + \\sqrt{[[b]]}}{[[c]] + \\sqrt{[[b]]}}$.",
+   "answer": "$\\frac{([[a]] + \\sqrt{[[b]]})([[c]] - \\sqrt{[[b]]})}{[[c * c - b]]} = \\frac{[[a * c - b]] + [[c - a]]\\sqrt{[[b]]}}{[[c * c - b]]}$"
+  },
+  {
+   "id": "y10hsu4-s09-l4",
+   "topic": "Number",
+   "subtopic": "Rationalise the denominator with more complex denominators (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S9 Rationalise the denominator with more complex denominators (E)",
+   "keywords": [
+    "rationalise",
+    "the",
+    "denominator",
+    "with",
+    "more",
+    "complex",
+    "denominators",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c * c > b"
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{[[c]] - \\sqrt{[[b]]}}$ in the form $p + q\\sqrt{[[b]]}$. (3 marks)",
+   "answer": "$[[a * c / (c * c - b)|frac]] + [[a / (c * c - b)|frac]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y10hsu4-s10-l1",
+   "topic": "Number",
+   "subtopic": "Solve problems with surds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S10 Solve problems with surds",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A right-angled triangle has shorter sides $\\sqrt{[[a]]}$ and $\\sqrt{[[b]]}$. Find the hypotenuse as a surd.",
+   "answer": "$\\sqrt{[[a + b]]}$"
+  },
+  {
+   "id": "y10hsu4-s10-l2",
+   "topic": "Number",
+   "subtopic": "Solve problems with surds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S10 Solve problems with surds",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A square has side $[[a]]\\sqrt{[[b]]}$ cm. Find its area and perimeter.",
+   "answer": "Area [[a * a * b]] cm²; perimeter $[[4 * a]]\\sqrt{[[b]]}$ cm"
+  },
+  {
+   "id": "y10hsu4-s10-l3",
+   "topic": "Number",
+   "subtopic": "Solve problems with surds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S10 Solve problems with surds",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b > a * a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has base $(\\sqrt{[[b]]} + [[a]])$ cm and height $(\\sqrt{[[b]]} - [[a]])$ cm. Show that its area is a rational number and find it.",
+   "answer": "Area = $\\frac{1}{2}([[b]] - [[a * a]]) = [[(b - a * a) / 2|frac]]$ cm²"
+  },
+  {
+   "id": "y10hsu4-s10-l4",
+   "topic": "Number",
+   "subtopic": "Solve problems with surds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B4 Factors, powers and surds · S10 Solve problems with surds",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "surds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b > a * a"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle has sides $(\\sqrt{[[b]]} + [[a]])$ cm and $(\\sqrt{[[b]]} - [[a]])$ cm. Show that the area is rational and find the perimeter in the form $p\\sqrt{[[b]]}$. (4 marks)",
+   "answer": "Area [[b - a * a]] cm²; perimeter $2(2\\sqrt{[[b]]}) = 4\\sqrt{[[b]]}$ cm"
+  }
+ ]
+}

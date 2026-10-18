@@ -1,0 +1,2162 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Summer Block 6 Simultaneous equations: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsu6-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S1 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "The graph shows two lines. Write down the solution of the simultaneous equations.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y10hsu6-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S1 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5",
+    "y0 - m1 * x0 != 0",
+    "y0 - m2 * x0 != 0",
+    "m2 != 0.5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "The lines $y = [[m1|coef]]x[[y0 - m1 * x0|signed]]$ and $y = [[m2|coef]]x[[y0 - m2 * x0|signed]]$ are drawn. Where do they cross?",
+   "answer": "([[x0]], [[y0]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y10hsu6-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S1 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Explain why the simultaneous equations $y = [[m]]x + [[c]]$ and $y = [[m]]x + [[c + d]]$ have no solution.",
+   "answer": "The lines are parallel (same gradient [[m]]) so they never cross"
+  },
+  {
+   "id": "y10hsu6-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S1 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "Use the graph to solve the equations and check your answer by substituting into both. (3 marks)",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$; check: [[m1 * x0 + y0 - m1 * x0]] = [[y0]]",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y10hsu6-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S2 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Solve $x + y = [[x0 + y0]]$ and $x - y = [[x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S2 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + y = [[a * x0 + y0]]$ and $[[a]]x - y = [[a * x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S2 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[b]]y = [[c * x0 - b * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S2 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Two numbers add to [[x0 + y0]] and differ by [[x0 - y0]]. Form simultaneous equations and find the numbers. Then find their product. (3 marks)",
+   "answer": "$x + y = [[x0 + y0]]$, $x - y = [[x0 - y0]]$: [[x0]] and [[y0]]; product [[x0 * y0]]"
+  },
+  {
+   "id": "y10hsu6-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S3 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * p != r"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p]]x + [[q]]y = [[p * x0 + q * y0]]$ and $[[r]]x + [[2 * q]]y = [[r * x0 + 2 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S3 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != 3"
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "Solve $x + [[q]]y = [[x0 + q * y0]]$ and $[[r]]x + [[3 * q]]y = [[r * x0 + 3 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S3 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * p + r != 0"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p]]x + [[q]]y = [[p * x0 + q * y0]]$ and $[[r]]x - [[2 * q]]y = [[r * x0 - 2 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S3 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "[[a]] teas and [[b]] coffees cost £[[a * t + b * c]]. [[a + 1]] teas and [[2 * b]] coffees cost £[[(a + 1) * t + 2 * b * c]]. Find the price of a tea and of a coffee. (4 marks)",
+   "answer": "Tea £[[t]], coffee £[[c]]"
+  },
+  {
+   "id": "y10hsu6-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S4 Solve simultaneous equations by substitution",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $y = [[m]]x$ and $x + y = [[(m + 1) * x0]]$ by substitution.",
+   "answer": "$x + [[m]]x = [[(m + 1) * x0]]$, so $x = [[x0]]$ and $y = [[m * x0]]$"
+  },
+  {
+   "id": "y10hsu6-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S4 Solve simultaneous equations by substitution",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Solve $y = x + [[c]]$ and $[[p]]x + y = [[p * x0 + x0 + c]]$.",
+   "answer": "$x = [[x0]]$, $y = [[x0 + c]]$"
+  },
+  {
+   "id": "y10hsu6-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S4 Solve simultaneous equations by substitution",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * x0 > c"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $y = [[m]]x - [[c]]$ and $[[p]]x + [[q]]y = [[p * x0 + q * (m * x0 - c)]]$ by substitution.",
+   "answer": "$x = [[x0]]$, $y = [[m * x0 - c]]$"
+  },
+  {
+   "id": "y10hsu6-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S4 Solve simultaneous equations by substitution",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The line $y = [[m]]x + [[c]]$ meets the line $[[p]]x + y = [[p * x0 + m * x0 + c]]$. Find the point of intersection. (4 marks)",
+   "answer": "([[x0]], [[m * x0 + c]])"
+  },
+  {
+   "id": "y10hsu6-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S5 Solve simultaneous equations (adjust both)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x + [[d]]y = [[c * x0 + d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S5 Solve simultaneous equations (adjust both)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * (-d) != b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[d]]y = [[c * x0 - d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S5 Solve simultaneous equations (adjust both)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != -b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x - [[b]]y = [[a * x0 - b * y0]]$ and $[[c]]x + [[d]]y = [[c * x0 + d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y10hsu6-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S5 Solve simultaneous equations (adjust both)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Three adult and two child tickets cost £[[3 * a + 2 * c]]; two adult and three child tickets cost £[[2 * a + 3 * c]]. Find both prices and the cost of 4 adults and 1 child. (4 marks)",
+   "answer": "Adult £[[a]], child £[[c]]; 4 adults and 1 child cost £[[4 * a + c]]"
+  },
+  {
+   "id": "y10hsu6-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S6 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "[[a]] pens and [[b]] pencils cost £[[a * p + b * q]]. [[c]] pens and [[b]] pencils cost £[[c * p + b * q]]. Find the price of a pen and a pencil.",
+   "answer": "Pen £[[p]], pencil £[[q]]"
+  },
+  {
+   "id": "y10hsu6-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S6 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Two adults and [[b]] children pay £[[2 * A + b * C]] for tickets. [[3]] adults and [[b]] children pay £[[3 * A + b * C]]. Find the adult and child prices.",
+   "answer": "Adult £[[A]], child £[[C]]"
+  },
+  {
+   "id": "y10hsu6-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S6 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       8,
+       15
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > w"
+   ],
+   "text": "A rectangle has perimeter [[2 * (l + w)]] cm and its length is [[l - w]] cm more than its width. Form simultaneous equations and find the dimensions.",
+   "answer": "$l + w = [[l + w]]$ and $l - w = [[l - w]]$: length [[l]] cm, width [[w]] cm"
+  },
+  {
+   "id": "y10hsu6-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S6 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d > n"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Sam is [[d]] years older than Tia. In [[n]] years Sam will be twice as old as Tia. Find their ages now. (4 marks)",
+   "answer": "Tia is [[d - n]] and Sam is [[2 * d - n]]"
+  },
+  {
+   "id": "y10hsu6-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S7 Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The graphs of $y = x^2$ and $y = [[a + b]]x - [[a * b]]$ are drawn. At which $x$ values do they cross?",
+   "answer": "$x = [[a]]$ and $x = [[b]]$"
+  },
+  {
+   "id": "y10hsu6-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S7 Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use the graphs of $y = x^2$ and $y = [[a + b]]x - [[a * b]]$ to write down the solutions of $x^2 = [[a + b]]x - [[a * b]]$.",
+   "answer": "$x = [[a]]$ or $x = [[b]]$; the points are ([[a]], [[a * a]]) and ([[b]], [[b * b]])"
+  },
+  {
+   "id": "y10hsu6-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S7 Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A circle $x^2 + y^2 = [[25 * k * k]]$ and the line $y = x + [[k]]$ are drawn. Write down the coordinates of the points where they meet.",
+   "answer": "([[3 * k]], [[4 * k]]) and (-[[4 * k]], -[[3 * k]])"
+  },
+  {
+   "id": "y10hsu6-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S7 Solve simultaneous equations (one linear, one non-linear) using graphs (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The graph of $y = x^2 - [[c]]$ and the line $y = [[m]]x$ are drawn. Estimate their intersection points by reading from graphs. State how many solutions the simultaneous equations have. (3 marks)",
+   "answer": "The line crosses the parabola at two points, $x \\approx [[(m + sqrt(m * m + 4 * c)) / 2|dp:1]]$ and $x \\approx [[(m - sqrt(m * m + 4 * c)) / 2|dp:1]]$; two solutions"
+  },
+  {
+   "id": "y10hsu6-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S8 Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "by",
+    "equating",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $y = x^2$ and $y = [[a + b]]x - [[a * b]]$ by equating the expressions.",
+   "answer": "$x^2 = [[a + b]]x - [[a * b]]$ gives $x = [[a]]$ or $x = [[b]]$; ([[a]], [[a * a]]) and ([[b]], [[b * b]])"
+  },
+  {
+   "id": "y10hsu6-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S8 Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "by",
+    "equating",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $y = x^2 + [[c]]$ and $y = [[a + b]]x[[c - a * b|signed]]$ by equating the expressions.",
+   "answer": "$x^2 - [[a + b]]x + [[a * b]] = 0$ gives $x = [[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y10hsu6-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S8 Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "by",
+    "equating",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $y = x^2 - [[c]]x$ and $y = [[a]]x - [[a * c]]$ by equating the expressions.",
+   "answer": "$x^2 - [[c + a]]x + [[a * c]] = 0$, so $x = [[a]]$ or $x = [[c]]$"
+  },
+  {
+   "id": "y10hsu6-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S8 Solve simultaneous equations (one linear, one non-linear) by equating expressions (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "by",
+    "equating",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $y = x^2 + [[m]]$ and $y = [[a + b]]x[[m - a * b|signed]]$. (4 marks)",
+   "answer": "$x^2 - [[a + b]]x + [[a * b]] = 0$, so $x = [[a]]$ or $x = [[b]]$; the points are ([[a]], [[a * a + m]]) and ([[b]], [[b * b + m]])"
+  },
+  {
+   "id": "y10hsu6-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S9 Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "substitution",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $x^2 + y^2 = [[25 * k * k]]$ and $y = [[3 * k]]$ by substitution.",
+   "answer": "$x^2 = [[16 * k * k]]$, so $x = \\pm [[4 * k]]$; points (-[[4 * k]], [[3 * k]]) and ([[4 * k]], [[3 * k]])"
+  },
+  {
+   "id": "y10hsu6-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S9 Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "substitution",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $y = x + [[k]]$ and $x^2 + y^2 = [[25 * k * k]]$ by substitution.",
+   "answer": "$x^2 + (x + [[k]])^2 = [[25 * k * k]]$ gives $x = [[3 * k]]$ or $x = -[[4 * k]]$; points ([[3 * k]], [[4 * k]]) and (-[[4 * k]], -[[3 * k]])"
+  },
+  {
+   "id": "y10hsu6-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S9 Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "substitution",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $x + y = [[7 * k]]$ and $x^2 + y^2 = [[25 * k * k]]$.",
+   "answer": "$y = [[7 * k]] - x$; $2x^2 - [[14 * k]]x + [[24 * k * k]] = 0$, so $x = [[3 * k]]$ or $x = [[4 * k]]$; points ([[3 * k]], [[4 * k]]) and ([[4 * k]], [[3 * k]])"
+  },
+  {
+   "id": "y10hsu6-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B6 Simultaneous equations · S9 Solve simultaneous equations (one linear, one non-linear) using substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "non",
+    "using",
+    "substitution",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "a + b"
+    ],
+    [
+     "c",
+     "a * b + d"
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $y = [[m]]x - [[c]]$ and $y = x^2 - [[d]]$ by substitution. (4 marks)",
+   "answer": "$x^2 - [[m]]x + [[c - d]] = 0$; $x = [[a]]$ or $x = [[b]]$"
+  }
+ ]
+}

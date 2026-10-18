@@ -134,6 +134,16 @@ pub fn to_linear(src: &str) -> String {
                         let b = group_at(&chars, &mut i);
                         out.push_str(&format!("({})/({})", to_linear(&a), to_linear(&b)));
                     }
+                    // Bold and vector marks are dropped: the letter stays.
+                    "mathbf" | "boldsymbol" => {
+                        let a = group_at(&chars, &mut i);
+                        out.push_str(&to_linear(&a));
+                    }
+                    "overrightarrow" | "vec" => {
+                        let a = group_at(&chars, &mut i);
+                        out.push_str(&to_linear(&a));
+                        out.push('\u{20D7}');
+                    }
                     "binom" => {
                         let a = group_at(&chars, &mut i);
                         let b = group_at(&chars, &mut i);

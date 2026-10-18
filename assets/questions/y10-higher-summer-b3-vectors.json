@@ -1,0 +1,1900 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Summer Block 3 Vectors: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsu3-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Understand and represent vectors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S1 Understand and represent vectors",
+   "keywords": [
+    "understand",
+    "and",
+    "represent",
+    "vectors",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write the column vector for a move of [[a]] right and [[b]] up.",
+   "answer": "$\\binom{[[a]]}{[[b]]}$"
+  },
+  {
+   "id": "y10hsu3-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Understand and represent vectors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S1 Understand and represent vectors",
+   "keywords": [
+    "understand",
+    "and",
+    "represent",
+    "vectors",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write the column vector for a move of [[a]] left and [[b]] down.",
+   "answer": "$\\binom{-[[a]]}{-[[b]]}$"
+  },
+  {
+   "id": "y10hsu3-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Understand and represent vectors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S1 Understand and represent vectors",
+   "keywords": [
+    "understand",
+    "and",
+    "represent",
+    "vectors",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Describe in words the move given by the vector $\\binom{[[a]]}{-[[b]]}$.",
+   "answer": "[[a]] right and [[b]] down"
+  },
+  {
+   "id": "y10hsu3-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Understand and represent vectors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S1 Understand and represent vectors",
+   "keywords": [
+    "understand",
+    "and",
+    "represent",
+    "vectors",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A boat moves $\\binom{[[a]]}{[[b]]}$ then $\\binom{-[[c]]}{[[d]]}$. Describe each move in words and the position after both if it started at the origin. (3 marks)",
+   "answer": "[[a]] right [[b]] up, then [[c]] left [[d]] up; finishes at ([[a - c]], [[b + d]])"
+  },
+  {
+   "id": "y10hsu3-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Vector notation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S2 Vector notation",
+   "keywords": [
+    "vector",
+    "notation",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ is ([[x1]], [[y1]]) and $B$ is ([[x1 + a]], [[y1 + b]]). Write the vector from $A$ to $B$ as a column vector.",
+   "answer": "$\\binom{[[a]]}{[[b]]}$",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 9,
+    "ymin": -1,
+    "ymax": 9,
+    "points": [
+     [
+      "[[x1|n]]",
+      "[[y1|n]]",
+      "A"
+     ],
+     [
+      "[[x1 + a|n]]",
+      "[[y1 + b|n]]",
+      "B"
+     ]
+    ],
+    "segments": [
+     [
+      "[[x1|n]]",
+      "[[y1|n]]",
+      "[[x1 + a|n]]",
+      "[[y1 + b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu3-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Vector notation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S2 Vector notation",
+   "keywords": [
+    "vector",
+    "notation",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ is ([[x1]], [[y1]]) and $B$ is ([[x1 + a]], [[y1 + b]]). Write the vector from $B$ to $A$.",
+   "answer": "$\\binom{-[[a]]}{-[[b]]}$",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 9,
+    "ymin": -1,
+    "ymax": 9,
+    "points": [
+     [
+      "[[x1|n]]",
+      "[[y1|n]]",
+      "A"
+     ],
+     [
+      "[[x1 + a|n]]",
+      "[[y1 + b|n]]",
+      "B"
+     ]
+    ],
+    "segments": [
+     [
+      "[[x1|n]]",
+      "[[y1|n]]",
+      "[[x1 + a|n]]",
+      "[[y1 + b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsu3-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Vector notation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S2 Vector notation",
+   "keywords": [
+    "vector",
+    "notation",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The vector from $P$ to $Q$ is $\\binom{[[a]]}{[[b]]}$. $P$ is ([[x1]], [[y1]]). Find the coordinates of $Q$.",
+   "answer": "([[x1 + a]], [[y1 + b]])"
+  },
+  {
+   "id": "y10hsu3-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Vector notation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S2 Vector notation",
+   "keywords": [
+    "vector",
+    "notation",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$. The vector from $A$ to $B$ is $\\mathbf{a}$ and $B$ is ([[x1 + a]], [[y1 + b]]). Find $A$, and the vector from $B$ to $A$. (3 marks)",
+   "answer": "$A$ = ([[x1]], [[y1]]); $\\binom{-[[a]]}{-[[b]]}$"
+  },
+  {
+   "id": "y10hsu3-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Add vectors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S3 Add vectors",
+   "keywords": [
+    "add",
+    "vectors",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $\\binom{[[a]]}{[[b]]} + \\binom{[[c]]}{[[d]]}$.",
+   "answer": "$\\binom{[[a + c]]}{[[b + d]]}$"
+  },
+  {
+   "id": "y10hsu3-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Add vectors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S3 Add vectors",
+   "keywords": [
+    "add",
+    "vectors",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $\\binom{[[a]]}{-[[b]]} + \\binom{-[[c]]}{[[d]]}$.",
+   "answer": "$\\binom{[[a - c]]}{[[d - b]]}$"
+  },
+  {
+   "id": "y10hsu3-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Add vectors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S3 Add vectors",
+   "keywords": [
+    "add",
+    "vectors",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$ and $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$. Work out $\\mathbf{a} + \\mathbf{b}$ and $\\mathbf{b} + \\mathbf{a}$. What do you notice?",
+   "answer": "Both are $\\binom{[[a + c]]}{[[b + d]]}$: adding vectors in either order gives the same result"
+  },
+  {
+   "id": "y10hsu3-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Add vectors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S3 Add vectors",
+   "keywords": [
+    "add",
+    "vectors",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + c - e > 0 || b - d + f > 0"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A walker goes $\\binom{[[a]]}{[[b]]}$ then $\\binom{[[c]]}{-[[d]]}$ then $\\binom{-[[e]]}{[[f]]}$. Work out the total displacement and the distance from the start to 1 decimal place. (4 marks)",
+   "answer": "Displacement $\\binom{[[a + c - e]]}{[[b - d + f]]}$; distance [[sqrt((a + c - e) * (a + c - e) + (b - d + f) * (b - d + f))|dp:1]]"
+  },
+  {
+   "id": "y10hsu3-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Vectors multiplied by a scalar",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S4 Vectors multiplied by a scalar",
+   "keywords": [
+    "vectors",
+    "multiplied",
+    "by",
+    "a",
+    "scalar",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$. Work out $[[k]]\\mathbf{a}$.",
+   "answer": "$\\binom{[[k * a]]}{[[k * b]]}$"
+  },
+  {
+   "id": "y10hsu3-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Vectors multiplied by a scalar",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S4 Vectors multiplied by a scalar",
+   "keywords": [
+    "vectors",
+    "multiplied",
+    "by",
+    "a",
+    "scalar",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{-[[b]]}$. Work out $-[[k]]\\mathbf{a}$.",
+   "answer": "$\\binom{-[[k * a]]}{[[k * b]]}$"
+  },
+  {
+   "id": "y10hsu3-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Vectors multiplied by a scalar",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S4 Vectors multiplied by a scalar",
+   "keywords": [
+    "vectors",
+    "multiplied",
+    "by",
+    "a",
+    "scalar",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$. Write $\\binom{[[k * a]]}{[[k * b]]}$ as a multiple of $\\mathbf{a}$.",
+   "answer": "[[k]]$\\mathbf{a}$"
+  },
+  {
+   "id": "y10hsu3-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Vectors multiplied by a scalar",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S4 Vectors multiplied by a scalar",
+   "keywords": [
+    "vectors",
+    "multiplied",
+    "by",
+    "a",
+    "scalar",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$ and $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$. Work out $[[k]]\\mathbf{a} - \\mathbf{b}$ and its length to 1 decimal place. (3 marks)",
+   "answer": "$\\binom{[[k * a - c]]}{[[k * b - d]]}$; length [[sqrt((k * a - c) * (k * a - c) + (k * b - d) * (k * b - d))|dp:1]]"
+  },
+  {
+   "id": "y10hsu3-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Add and subtract vectors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S5 Add and subtract vectors",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "vectors",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$ and $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$. Work out $\\mathbf{a} - \\mathbf{b}$.",
+   "answer": "$\\binom{[[a - c]]}{[[b - d]]}$"
+  },
+  {
+   "id": "y10hsu3-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Add and subtract vectors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S5 Add and subtract vectors",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "vectors",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$ and $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$. Work out $[[p]]\\mathbf{a} + [[q]]\\mathbf{b}$.",
+   "answer": "$\\binom{[[p * a + q * c]]}{[[p * b + q * d]]}$"
+  },
+  {
+   "id": "y10hsu3-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Add and subtract vectors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S5 Add and subtract vectors",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "vectors",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$ and $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$. Work out $[[p]]\\mathbf{a} - [[q]]\\mathbf{b}$.",
+   "answer": "$\\binom{[[p * a - q * c]]}{[[p * b - q * d]]}$"
+  },
+  {
+   "id": "y10hsu3-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Add and subtract vectors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S5 Add and subtract vectors",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "vectors",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$\\mathbf{a} = \\binom{[[a]]}{[[b]]}$, $\\mathbf{b} = \\binom{[[c]]}{[[d]]}$ and $\\mathbf{c} = \\binom{[[e]]}{[[f]]}$. Work out $\\mathbf{a} + \\mathbf{b} - \\mathbf{c}$. Is it parallel to $\\mathbf{a}$? (3 marks)",
+   "answer": "$\\binom{[[a + c - e]]}{[[b + d - f]]}$; [[(a + c - e) * b == (b + d - f) * a|if:yes, it is parallel to a/no, it is not parallel to a]]"
+  },
+  {
+   "id": "y10hsu3-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Vector journeys in shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S6 Vector journeys in shapes",
+   "keywords": [
+    "vector",
+    "journeys",
+    "in",
+    "shapes",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$OAB$ is a triangle with $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. Write $\\overrightarrow{AB}$ in terms of $\\mathbf{[[u]]}$ and $\\mathbf{[[v]]}$.",
+   "answer": "$\\mathbf{[[v]]} - \\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y10hsu3-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Vector journeys in shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S6 Vector journeys in shapes",
+   "keywords": [
+    "vector",
+    "journeys",
+    "in",
+    "shapes",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $M$ is the midpoint of $OA$. Write $\\overrightarrow{MB}$.",
+   "answer": "$\\mathbf{[[v]]} - \\frac{1}{2}\\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y10hsu3-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Vector journeys in shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S6 Vector journeys in shapes",
+   "keywords": [
+    "vector",
+    "journeys",
+    "in",
+    "shapes",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OB} = \\mathbf{[[v]]}$. $P$ lies on $AB$ with $AP : PB = 1 : [[k]]$. Write $\\overrightarrow{OP}$.",
+   "answer": "$\\mathbf{[[u]]} + \\frac{1}{[[k + 1]]}(\\mathbf{[[v]]} - \\mathbf{[[u]]})$"
+  },
+  {
+   "id": "y10hsu3-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Vector journeys in shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S6 Vector journeys in shapes",
+   "keywords": [
+    "vector",
+    "journeys",
+    "in",
+    "shapes",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "In triangle $OAB$, $\\overrightarrow{OA} = [[m]]\\mathbf{[[u]]}$ and $\\overrightarrow{OB} = [[n]]\\mathbf{[[v]]}$. $M$ is the midpoint of $AB$. Show that $\\overrightarrow{OM} = \\frac{[[m]]}{2}\\mathbf{[[u]]} + \\frac{[[n]]}{2}\\mathbf{[[v]]}$. (3 marks)",
+   "answer": "$\\overrightarrow{AB} = [[n]]\\mathbf{[[v]]} - [[m]]\\mathbf{[[u]]}$; $\\overrightarrow{OM} = [[m]]\\mathbf{[[u]]} + \\frac{1}{2}([[n]]\\mathbf{[[v]]} - [[m]]\\mathbf{[[u]]}) = \\frac{[[m]]}{2}\\mathbf{[[u]]} + \\frac{[[n]]}{2}\\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y10hsu3-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Vectors in quadrilaterals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S7 Vectors in quadrilaterals",
+   "keywords": [
+    "vectors",
+    "in",
+    "quadrilaterals",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$OABC$ is a parallelogram with $\\overrightarrow{OA} = \\mathbf{[[u]]}$ and $\\overrightarrow{OC} = \\mathbf{[[v]]}$. Write $\\overrightarrow{OB}$.",
+   "answer": "$\\mathbf{[[u]]} + \\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y10hsu3-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Vectors in quadrilaterals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S7 Vectors in quadrilaterals",
+   "keywords": [
+    "vectors",
+    "in",
+    "quadrilaterals",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$ABCD$ is a parallelogram with $\\overrightarrow{AB} = \\mathbf{[[u]]}$ and $\\overrightarrow{AD} = \\mathbf{[[v]]}$. Write $\\overrightarrow{AC}$ and $\\overrightarrow{BD}$.",
+   "answer": "$\\overrightarrow{AC} = \\mathbf{[[u]]} + \\mathbf{[[v]]}$; $\\overrightarrow{BD} = \\mathbf{[[v]]} - \\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y10hsu3-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Vectors in quadrilaterals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S7 Vectors in quadrilaterals",
+   "keywords": [
+    "vectors",
+    "in",
+    "quadrilaterals",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$ABCD$ is a trapezium with $AB$ parallel to $DC$, $\\overrightarrow{AB} = [[k]]\\mathbf{[[u]]}$ and $\\overrightarrow{DC} = [[k + 1]]\\mathbf{[[u]]}$, and $\\overrightarrow{AD} = \\mathbf{[[v]]}$. Write $\\overrightarrow{BC}$.",
+   "answer": "$\\overrightarrow{BC} = \\overrightarrow{BA} + \\overrightarrow{AD} + \\overrightarrow{DC} = -[[k]]\\mathbf{[[u]]} + \\mathbf{[[v]]} + [[k + 1]]\\mathbf{[[u]]} = \\mathbf{[[u]]} + \\mathbf{[[v]]}$"
+  },
+  {
+   "id": "y10hsu3-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Vectors in quadrilaterals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S7 Vectors in quadrilaterals",
+   "keywords": [
+    "vectors",
+    "in",
+    "quadrilaterals",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "$ABCD$ is a parallelogram. $E$ is the midpoint of $DC$. $\\overrightarrow{AB} = \\mathbf{[[u]]}$ and $\\overrightarrow{AD} = \\mathbf{[[v]]}$. Write $\\overrightarrow{AE}$ and $\\overrightarrow{BE}$. (4 marks)",
+   "answer": "$\\overrightarrow{AE} = \\mathbf{[[v]]} + \\frac{1}{2}\\mathbf{[[u]]}$; $\\overrightarrow{BE} = \\mathbf{[[v]]} - \\frac{1}{2}\\mathbf{[[u]]}$"
+  },
+  {
+   "id": "y10hsu3-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Parallel vectors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S8 Parallel vectors",
+   "keywords": [
+    "parallel",
+    "vectors",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Are $\\binom{[[a]]}{[[b]]}$ and $\\binom{[[k * a]]}{[[k * b]]}$ parallel? Explain.",
+   "answer": "Yes: the second is [[k]] times the first"
+  },
+  {
+   "id": "y10hsu3-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Parallel vectors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S8 Parallel vectors",
+   "keywords": [
+    "parallel",
+    "vectors",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Are $\\binom{[[a]]}{[[b]]}$ and $\\binom{[[a + 1]]}{[[b + 1]]}$ parallel? Explain.",
+   "answer": "[[a * (b + 1) == b * (a + 1)|if:Yes: one is a multiple of the other/No: neither is a multiple of the other]]"
+  },
+  {
+   "id": "y10hsu3-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Parallel vectors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S8 Parallel vectors",
+   "keywords": [
+    "parallel",
+    "vectors",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\overrightarrow{AB} = [[p]]\\mathbf{[[u]]} + [[q]]\\mathbf{[[v]]}$ and $\\overrightarrow{CD} = [[p * k]]\\mathbf{[[u]]} + [[q * k]]\\mathbf{[[v]]}$. Show that $AB$ is parallel to $CD$ and compare their lengths.",
+   "answer": "$\\overrightarrow{CD} = [[k]]\\overrightarrow{AB}$, so they are parallel and $CD$ is [[k]] times as long"
+  },
+  {
+   "id": "y10hsu3-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Parallel vectors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Summer B3 Vectors · S8 Parallel vectors",
+   "keywords": [
+    "parallel",
+    "vectors",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "pick": [
+       "a",
+       "p",
+       "x"
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "pick": [
+       "c",
+       "q",
+       "y"
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$\\overrightarrow{PQ} = [[p]]\\mathbf{[[u]]} + [[q]]\\mathbf{[[v]]}$ and $\\overrightarrow{RS} = [[p * k]]\\mathbf{[[u]]} + [[q * k + 1]]\\mathbf{[[v]]}$. Are $PQ$ and $RS$ parallel? Explain. (3 marks)",
+   "answer": "No: $\\overrightarrow{RS}$ is not a multiple of $\\overrightarrow{PQ}$ because the multiples [[k]] and [[(q * k + 1) / q|dp:2]] differ"
+  }
+ ]
+}
