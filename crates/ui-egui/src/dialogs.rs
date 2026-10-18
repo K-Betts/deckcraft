@@ -58,6 +58,7 @@ fn title(id: &str) -> &'static str {
         "equation" => "Equation",
         "dateTime" => "Date and Time",
         "getReady" => "Get Ready Starter",
+        "questionBank" => "Manage Questions",
         "update" => "Update DeckCraft",
         "spelling" => "Spelling",
         "pasteSpecial" => "Paste Special",
@@ -125,6 +126,11 @@ pub fn show(app: &mut SlideApp, ctx: &egui::Context) {
 }
 
 fn buttons(ui: &mut Ui, ok_label: &str) -> (bool, bool) {
+    buttons_if(ui, ok_label, true)
+}
+
+/// OK and Cancel, with OK greyed out until there is something to do.
+fn buttons_if(ui: &mut Ui, ok_label: &str, can_ok: bool) -> (bool, bool) {
     let mut ok = false;
     let mut cancel = false;
     ui.add_space(8.0);
@@ -141,6 +147,9 @@ fn buttons(ui: &mut Ui, ok_label: &str) -> (bool, bool) {
             .clicked()
             || ui.input(|i| i.key_pressed(egui::Key::Enter))
         {
+        let go =
+            ui.add_enabled(can_ok, egui::Button::new(egui::RichText::new(ok_label).color(t.accent_text)).fill(t.accent).min_size(vec2(72.0, 24.0)));
+        if can_ok && (go.clicked() || ui.input(|i| i.key_pressed(egui::Key::Enter))) {
             ok = true;
         }
         if ui.add(egui::Button::new(egui::RichText::new("Cancel").color(t.text_dim)).fill(Color32::TRANSPARENT).min_size(vec2(80.0, 32.0))).clicked()
@@ -154,6 +163,7 @@ fn buttons(ui: &mut Ui, ok_label: &str) -> (bool, bool) {
 /// What the Preferences dialog can change, as it was when the dialog opened.
 fn preferences_snapshot(app: &SlideApp) -> Value {
     json!({
+        "appearance": theme::appearance_mode(app.ui.follow_system, app.ui.brightness),
         "dark": app.ui.brightness == theme::Brightness::Dark,
         "uiScale": app.ui.ui_scale,
         "packs": app.ui.packs,
@@ -167,10 +177,14 @@ fn preferences_snapshot(app: &SlideApp) -> Value {
 /// Puts back the settings the Preferences dialog opened with (Cancel, Esc, the close button).
 fn restore_preferences(app: &mut SlideApp, d: &Dialog) {
     let Some(before) = d.params.get("before") else { return };
-    if let Some(dark) = before.get("dark").and_then(Value::as_bool)
-        && dark != (app.ui.brightness == theme::Brightness::Dark)
+    if let Some(mode) = before.get("appearance").and_then(Value::as_str)
+        && mode != theme::appearance_mode(app.ui.follow_system, app.ui.brightness)
     {
-        let _ = app.run("view.dark", json!({ "on": dark }));
+        let _ = app.run("view.appearance", json!({ "mode": mode }));
+        // "Match this computer" has no colour of its own: put back the one it had.
+        if let Some(dark) = before.get("dark").and_then(Value::as_bool) {
+            app.ui.brightness = if dark { theme::Brightness::Dark } else { theme::Brightness::Light };
+        }
     }
     if let Some(scale) = before.get("uiScale").and_then(Value::as_f64) {
         app.ui.ui_scale = scale as f32;
@@ -1725,23 +1739,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             let (ok, cancel) = buttons(ui, "Close");
             ok || cancel
         }
-        "equation" => {
-            ui.label("Type an equation in linear form (e.g. a^2+b^2=c^2, x=(-b±√(b^2-4ac))/2a).");
-            let mut v = d.get("eq", "");
-            ui.add(egui::TextEdit::singleline(&mut v).desired_width(340.0).font(theme::font(15.0)));
-            d.fields.insert("eq".into(), v.clone());
-            let (ok, cancel) = buttons(ui, "Insert");
-            if ok && !v.is_empty() {
-                let pretty = pretty_equation(&v);
-                let size = app.session.active().map(|s| s.doc.slide_size).unwrap_or(deckcraft_model::defaults::WIDE);
-                run(app, "insert.textBox", json!({"rect": [size.width / 2.0 - 150.0, size.height / 2.0 - 25.0, 300, 50], "text": pretty}));
-                run(app, "text.exit", json!({}));
-                run(app, "format.font", json!({"family": "Liberation Serif"}));
-                run(app, "format.italic", json!({"on": true}));
-                run(app, "format.size", json!({"size": 28}));
-            }
-            ok || cancel
-        }
+        "equation" => equation_dialog(app, ui, d),
         "pasteSpecial" => {
             const OPTS: [(&str, &str); 4] = [
                 ("destinationTheme", "Use Destination Theme"),
@@ -2167,10 +2165,10 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 d.params = json!({ "before": preferences_snapshot(app) });
             }
             ui.label(egui::RichText::new("General").font(theme::bold(13.0)));
-            let mut dark = app.ui.brightness == theme::Brightness::Dark;
-            if ui.checkbox(&mut dark, "Dark appearance").changed() {
-                let _ = app.run("view.dark", json!({"on": dark}));
-            }
+            ui.horizontal(|ui| {
+                ui.label("Appearance");
+                crate::theme::appearance_picker(app, ui, "prefs_appearance");
+            });
             // While the pointer holds the slider its value only waits in the dialog: applying it
             // would rescale the slider under the pointer and run it to an end (#767). It applies
             // on release, and at once from the keyboard.
@@ -2252,6 +2250,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
         "getReady" => get_ready_dialog(app, ui, d),
+        "questionBank" => question_bank_dialog(app, ui, d),
         "update" => crate::update_ui::dialog(app, ui),
         _ => {
             ui.label(format!("“{}” is not available yet.", d.id));
@@ -2591,6 +2590,186 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     cancel
 }
 
+/// How many questions one Get Ready slide shows.
+const GET_READY_QUESTIONS: usize = 4;
+
+/// The question bank in use: the built-in questions less any the teacher removed, plus their own.
+fn question_bank(app: &SlideApp) -> Result<deckcraft_engine::questions::Bank, String> {
+    let starter = deckcraft_engine::questions::starter()?;
+    Ok(deckcraft_engine::questions::Bank::merged(starter, &app.ui.removed_questions, &app.ui.my_questions))
+}
+
+/// Manage Questions: look through the bank, add a question of your own, and remove any question
+/// (built-in ones are hidden and can be restored; your own are deleted). Changes are kept with the
+/// app's other settings and used by the Get Ready starter at once.
+fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    use deckcraft_engine::questions::{DIFFICULTIES, Question};
+    const LEVELS: [&str; 3] = ["Secure", "Core", "Stretch"];
+    ui.set_min_width(640.0);
+    let Ok(bank) = question_bank(app) else {
+        ui.label("The built-in question bank could not be read.");
+        let (ok, cancel) = buttons(ui, "Done");
+        return ok || cancel;
+    };
+    let topics = bank.topics();
+    let t = Tokens::get(ui.ctx());
+    ui.label(egui::RichText::new(format!("{} questions in your bank", bank.questions.len())).font(theme::bold(13.0)));
+    ui.horizontal(|ui| {
+        let topic = d.get("filter", "");
+        egui::ComboBox::from_id_salt("qb-filter").selected_text(if topic.is_empty() { "All topics" } else { topic.as_str() }).width(150.0).show_ui(
+            ui,
+            |ui| {
+                if ui.selectable_label(topic.is_empty(), "All topics").clicked() {
+                    d.fields.insert("filter".into(), String::new());
+                }
+                for tp in &topics {
+                    if ui.selectable_label(&topic == tp, tp).clicked() {
+                        d.fields.insert("filter".into(), tp.clone());
+                    }
+                }
+            },
+        );
+        let mut search = d.get("search", "");
+        ui.add(egui::TextEdit::singleline(&mut search).hint_text("Search questions").desired_width(220.0));
+        d.fields.insert("search".into(), search);
+    });
+    let topic = d.get("filter", "");
+    let search = d.get("search", "").to_lowercase();
+    let mut remove: Option<String> = None;
+    egui::ScrollArea::vertical().max_height(220.0).min_scrolled_height(220.0).auto_shrink([false, false]).id_salt("qb-list").show(ui, |ui| {
+        for q in &bank.questions {
+            let shown = deckcraft_engine::latex::plain(&q.text);
+            if (!topic.is_empty() && !q.topic.eq_ignore_ascii_case(&topic)) || (!search.is_empty() && !shown.to_lowercase().contains(&search)) {
+                continue;
+            }
+            let mine = app.ui.my_questions.iter().any(|m| m.id == q.id);
+            ui.horizontal(|ui| {
+                let level = LEVELS.get(usize::from(q.difficulty).saturating_sub(1)).copied().unwrap_or("");
+                let head = format!("{} · {}{}", q.topic, level, if q.needs_diagram { " · figure" } else { "" });
+                ui.add_sized(vec2(150.0, 20.0), egui::Label::new(egui::RichText::new(head).size(11.0).color(t.text_dim)));
+                let line: String = shown.chars().take(70).collect();
+                ui.add_sized(vec2(360.0, 20.0), egui::Label::new(line).truncate());
+                if ui.small_button(if mine { "Delete" } else { "Remove" }).clicked() {
+                    remove = Some(q.id.clone());
+                }
+            });
+        }
+    });
+    if let Some(id) = remove {
+        if app.ui.my_questions.iter().any(|m| m.id == id) {
+            app.ui.my_questions.retain(|m| m.id != id);
+        } else if !app.ui.removed_questions.contains(&id) {
+            app.ui.removed_questions.push(id);
+        }
+    }
+    if !app.ui.removed_questions.is_empty() {
+        ui.horizontal(|ui| {
+            ui.label(egui::RichText::new(format!("{} built-in questions removed.", app.ui.removed_questions.len())).size(11.0).color(t.text_dim));
+            if ui.small_button("Restore them").clicked() {
+                app.ui.removed_questions.clear();
+            }
+        });
+    }
+    ui.separator();
+    ui.label(egui::RichText::new("Add a question").font(theme::bold(13.0)));
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new("Topic:"));
+        let mut tp = d.get("nq_topic", &topics.first().cloned().unwrap_or_default());
+        egui::ComboBox::from_id_salt("qb-topic").selected_text(tp.clone()).width(130.0).show_ui(ui, |ui| {
+            for x in &topics {
+                if ui.selectable_label(&tp == x, x).clicked() {
+                    tp = x.clone();
+                }
+            }
+        });
+        ui.label("or new:");
+        let mut new_topic = d.get("nq_newtopic", "");
+        ui.add(egui::TextEdit::singleline(&mut new_topic).desired_width(110.0));
+        d.fields.insert("nq_newtopic".into(), new_topic);
+        d.fields.insert("nq_topic".into(), tp);
+        let level: u8 = d.get("nq_level", "2").parse().unwrap_or(2);
+        for (i, name) in LEVELS.iter().enumerate() {
+            let v = i as u8 + 1;
+            if ui.selectable_label(level == v, *name).clicked() {
+                d.fields.insert("nq_level".into(), v.to_string());
+            }
+        }
+    });
+    field_wide(ui, d, "Subtopic:", "nq_sub");
+    multiline(ui, d, "Question:", "nq_text", 2);
+    multiline(ui, d, "Answer:", "nq_answer", 1);
+    ui.label(
+        egui::RichText::new("Put maths between dollar signs: $\\frac{3}{4} + \\frac{1}{8}$, $x^2 - 9$, $\\sqrt{50}$, $80\\text{ cm}^3$.")
+            .size(11.0)
+            .color(t.text_dim),
+    );
+    let text = d.get("nq_text", "");
+    if !text.trim().is_empty() {
+        ui.label(egui::RichText::new(format!("Shows as: {}", deckcraft_engine::latex::plain(&text))).size(12.0));
+    }
+    if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
+        ui.colored_label(egui::Color32::from_rgb(200, 60, 60), e);
+    }
+    let mut done = false;
+    ui.horizontal(|ui| {
+        let can_add = !text.trim().is_empty() && !d.get("nq_answer", "").trim().is_empty();
+        if ui
+            .add_enabled(
+                can_add,
+                egui::Button::new(egui::RichText::new("Add question").color(t.accent_text)).fill(t.accent).min_size(vec2(120.0, 28.0)),
+            )
+            .clicked()
+        {
+            let topic = {
+                let n = d.get("nq_newtopic", "");
+                if n.trim().is_empty() { d.get("nq_topic", "") } else { n.trim().to_string() }
+            };
+            let q = Question {
+                id: bank.new_id(&app.ui.my_questions),
+                topic: topic.chars().take(40).collect(),
+                subtopic: d.get("nq_sub", "").trim().chars().take(60).collect(),
+                difficulty: d.get("nq_level", "2").parse().ok().filter(|l| DIFFICULTIES.contains(l)).unwrap_or(2),
+                text: text.trim().to_string(),
+                answer: d.get("nq_answer", "").trim().to_string(),
+                needs_diagram: false,
+                diagram: None,
+            };
+            if q.topic.trim().is_empty() {
+                d.fields.insert("error".into(), "Choose a topic or type a new one.".into());
+            } else if q.text.chars().count() > 600 {
+                d.fields.insert("error".into(), "The question is too long (600 characters at most).".into());
+            } else {
+                app.ui.my_questions.push(q);
+                for k in ["nq_text", "nq_answer", "nq_sub", "nq_newtopic", "error"] {
+                    d.fields.insert(k.into(), String::new());
+                }
+            }
+        }
+        if ui.add(egui::Button::new("Done").min_size(vec2(80.0, 28.0))).clicked() {
+            done = true;
+        }
+    });
+    done
+}
+
+fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
+    let mut v = d.get(key, "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new(label));
+        ui.add(egui::TextEdit::singleline(&mut v).desired_width(520.0));
+    });
+    d.fields.insert(key.into(), v);
+}
+
+fn multiline(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str, rows: usize) {
+    let mut v = d.get(key, "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new(label));
+        ui.add(egui::TextEdit::multiline(&mut v).desired_rows(rows).desired_width(520.0));
+    });
+    d.fields.insert(key.into(), v);
+}
+
 /// A seed that differs every time the teacher asks, so Reroll gives different questions. The
 /// engine command stays deterministic: the clock is read here, in the UI.
 fn fresh_seed() -> u64 {
@@ -2603,7 +2782,7 @@ fn fresh_seed() -> u64 {
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     const LEVELS: [(u8, &str); 4] = [(0, "Any"), (1, "Secure"), (2, "Core"), (3, "Stretch")];
     ui.set_min_width(520.0);
-    let topics = deckcraft_engine::questions::starter().map(|b| b.topics()).unwrap_or_default();
+    let topics = question_bank(app).map(|b| b.topics()).unwrap_or_default();
     let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
     // Start from what was chosen last time.
     if !d.fields.contains_key("count") {
@@ -2614,15 +2793,8 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             d.fields.insert(format!("level{i}"), level.to_string());
         }
     }
-    let count: usize = d.get("count", "4").parse().unwrap_or(4).clamp(2, 6);
-    ui.horizontal(|ui| {
-        ui.add_sized(vec2(110.0, 28.0), egui::Label::new("Questions:"));
-        for n in 2..=6usize {
-            if ui.selectable_label(count == n, n.to_string()).clicked() {
-                d.fields.insert("count".into(), n.to_string());
-            }
-        }
-    });
+    // One slide always shows four questions, as a 2×2 grid.
+    let count = GET_READY_QUESTIONS;
     ui.separator();
     let topic_combo = |ui: &mut Ui, id: String, current: &str| -> Option<String> {
         let mut picked = None;
@@ -2670,8 +2842,11 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             }
         });
     }
+    ui.add_space(4.0);
+    let expand = check(ui, d, "Add a full-screen slide for each question (the Expand buttons)", "expand", true);
+    let headings = check(ui, d, "Show Last lesson, Last week, Last topic and Last year", "headings", true);
     ui.label(
-        egui::RichText::new("Questions are placeholders until your own bank is added. Answers go in the speaker notes.")
+        egui::RichText::new("Four questions a slide. Answers appear on click in Slide Show and are in the speaker notes.")
             .size(11.0)
             .color(Tokens::get(ui.ctx()).text_dim),
     );
@@ -2691,7 +2866,16 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             reroll = false;
             d.fields.insert("cancel".into(), "1".into());
         }
+        if ui.add(egui::Button::new("Manage questions…").min_size(vec2(150.0, 32.0))).clicked() {
+            go = false;
+            reroll = false;
+            d.fields.insert("manage".into(), "1".into());
+        }
     });
+    if d.fields.contains_key("manage") {
+        let _ = app.run("app.dialog", json!({"id": "questionBank"}));
+        return true;
+    }
     if go || reroll {
         let spec: Vec<Value> = slots
             .iter()
@@ -2706,7 +2890,16 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 s
             })
             .collect();
-        let mut params = json!({"seed": fresh_seed(), "slots": spec});
+        let mut params = json!({"seed": fresh_seed(), "slots": spec, "expand": expand, "headings": headings});
+        if !app.ui.my_questions.is_empty() || !app.ui.removed_questions.is_empty() {
+            match question_bank(app) {
+                Ok(bank) => params["bankJson"] = json!(bank.to_json()),
+                Err(e) => {
+                    d.fields.insert("error".into(), e);
+                    return false;
+                }
+            }
+        }
         if reroll {
             params["reroll"] = json!(true);
         }
@@ -2760,46 +2953,229 @@ fn grid_options(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     cancel
 }
 
-fn pretty_equation(s: &str) -> String {
-    let sup = |c: char| match c {
-        '0' => '⁰',
-        '1' => '¹',
-        '2' => '²',
-        '3' => '³',
-        '4' => '⁴',
-        '5' => '⁵',
-        '6' => '⁶',
-        '7' => '⁷',
-        '8' => '⁸',
-        '9' => '⁹',
-        'n' => 'ⁿ',
-        'i' => 'ⁱ',
-        '+' => '⁺',
-        '-' => '⁻',
-        _ => c,
-    };
-    let mut out = String::new();
-    let mut chars = s.chars().peekable();
-    while let Some(c) = chars.next() {
-        match c {
-            '^' => {
-                while let Some(&n) = chars.peek() {
-                    if n.is_ascii_alphanumeric() || n == '+' || n == '-' {
-                        out.push(sup(n));
-                        chars.next();
-                        if !n.is_ascii_digit() {
-                            break;
-                        }
-                    } else {
-                        break;
-                    }
-                }
+/// One button on the Equation palette: a picture, its name, and the text it types.
+struct Piece {
+    glyph: &'static str,
+    name: &'static str,
+    /// What it types; `□` is a box to fill in.
+    typed: &'static str,
+    /// Raises or lowers what is already there instead of starting something new.
+    script: bool,
+}
+
+const fn piece(glyph: &'static str, name: &'static str, typed: &'static str) -> Piece {
+    Piece { glyph, name, typed, script: false }
+}
+
+const fn script(glyph: &'static str, name: &'static str, typed: &'static str) -> Piece {
+    Piece { glyph, name, typed, script: true }
+}
+
+const STRUCTURES: [Piece; 11] = [
+    piece("a⁄b", "Fraction", "(□)/(□)"),
+    script("x²", "Squared", "^2"),
+    script("xⁿ", "Power", "^(□)"),
+    script("xₙ", "Subscript", "_(□)"),
+    piece("√", "Square root", "sqrt(□)"),
+    piece("ⁿ√", "Root", "sqrt[□](□)"),
+    piece("( )", "Brackets", "(□)"),
+    piece("|x|", "Absolute value", "|□|"),
+    piece("∑", "Sum", "∑_(□)^(□) □"),
+    piece("∫", "Integral", "∫_(□)^(□) □"),
+    piece("sin", "Sine", "sin(□)"),
+];
+
+const SYMBOL_GROUPS: [(&str, &str); 4] =
+    [("Operators", "± × ÷ · ≠ ≈ ≤ ≥ < >"), ("Maths", "° ∞ ∠ ⊥ ∥ ∴ ∵ % ′ ″"), ("Sets", "∈ ∉ ⊂ ∪ ∩ ∅ ∀ ∃"), ("Arrows", "→ ← ⇒ ⇔ ↔")];
+
+const GREEK: &str = "α β γ δ ε θ λ μ π ρ σ τ φ ω Δ Σ Θ Φ Ω";
+
+const EXAMPLES: [(&str, &str); 3] =
+    [("Pythagoras", "a^2+b^2=c^2"), ("Quadratic formula", "x=(-b+-sqrt(b^2-4ac))/(2a)"), ("Area of a circle", "A=pi r^2")];
+
+fn char_to_byte(s: &str, chars: usize) -> usize {
+    s.char_indices().nth(chars).map_or(s.len(), |(b, _)| b)
+}
+
+/// Put `typed` where the cursor is (over the selection, if any), then select the first empty box in
+/// it, or leave the cursor after it.
+fn type_into(ctx: &egui::Context, id: egui::Id, text: &mut String, p: &Piece) {
+    use egui::text::{CCursor, CCursorRange};
+    let len = text.chars().count();
+    let (a, b) = TextEditRange::of(ctx, id, len);
+    let selected: String = text.chars().skip(a).take(b - a).collect();
+    let before = text.chars().take(a).last();
+    let mut typed = p.typed.to_string();
+    if p.script {
+        // Raising what is already there needs no base; on its own it gets a box for one.
+        let has_base = !selected.is_empty() || before.is_some_and(|c| c.is_alphanumeric() || matches!(c, ')' | ']' | '}' | '|'));
+        if !has_base {
+            typed.insert(0, deckcraft_engine::equation::PLACEHOLDER);
+        }
+        typed.insert_str(0, &selected);
+    } else if !selected.is_empty() {
+        typed = typed.replacen(deckcraft_engine::equation::PLACEHOLDER, &selected, 1);
+    }
+    let (ba, bb) = (char_to_byte(text, a), char_to_byte(text, b));
+    text.replace_range(ba..bb, &typed);
+    let end = a + typed.chars().count();
+    let range = typed.chars().position(|c| c == deckcraft_engine::equation::PLACEHOLDER).map_or((end, end), |k| (a + k, a + k + 1));
+    let mut st = egui::TextEdit::load_state(ctx, id).unwrap_or_default();
+    st.cursor.set_char_range(Some(CCursorRange::two(CCursor::new(range.0), CCursor::new(range.1))));
+    st.store(ctx, id);
+    ctx.memory_mut(|m| m.request_focus(id));
+}
+
+/// Where the cursor and selection are in the equation field.
+struct TextEditRange;
+
+impl TextEditRange {
+    fn of(ctx: &egui::Context, id: egui::Id, len: usize) -> (usize, usize) {
+        let r = egui::TextEdit::load_state(ctx, id).and_then(|s| s.cursor.char_range());
+        match r {
+            Some(r) => {
+                let (x, y) = (usize::from(r.primary.index).min(len), usize::from(r.secondary.index).min(len));
+                (x.min(y), x.max(y))
             }
-            '*' => out.push('·'),
-            _ => out.push(c),
+            None => (len, len),
         }
     }
-    out.replace("sqrt", "√").replace("<=", "≤").replace(">=", "≥").replace("!=", "≠").replace("pi", "π").replace("+-", "±")
+}
+
+/// Tab moves to the next empty box, as it does in PowerPoint's equation editor.
+fn next_box(ctx: &egui::Context, id: egui::Id, text: &str) {
+    use egui::text::{CCursor, CCursorRange};
+    let boxes: Vec<usize> = text.chars().enumerate().filter(|(_, c)| *c == deckcraft_engine::equation::PLACEHOLDER).map(|(k, _)| k).collect();
+    let (_, hi) = TextEditRange::of(ctx, id, text.chars().count());
+    if let Some(&k) = boxes.iter().find(|&&k| k >= hi).or(boxes.first()) {
+        let mut st = egui::TextEdit::load_state(ctx, id).unwrap_or_default();
+        st.cursor.set_char_range(Some(CCursorRange::two(CCursor::new(k), CCursor::new(k + 1))));
+        st.store(ctx, id);
+    }
+}
+
+fn equation_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    use deckcraft_engine::equation as eq;
+    let t = Tokens::get(ui.ctx());
+    ui.set_min_width(560.0);
+    let id = egui::Id::new("equation-text");
+    let first = !d.fields.contains_key("started");
+    d.fields.insert("started".into(), "1".into());
+    if first
+        && let Ok(v) = app.session.execute("equation.source", &json!({}))
+        && let Some(lin) = v.get("linear").and_then(Value::as_str)
+    {
+        // An equation is selected: open on it, and Update changes it in place.
+        d.fields.insert("eq".into(), lin.to_string());
+        d.fields.insert("editing".into(), "1".into());
+    }
+    let editing = d.fields.contains_key("editing");
+    let mut text = d.get("eq", "");
+
+    // Tab jumps to the next empty box. It has to be taken before the field sees it.
+    let text_has_boxes = text.contains(eq::PLACEHOLDER);
+    if text_has_boxes && ui.memory(|m| m.has_focus(id)) && ui.input_mut(|i| i.consume_key(egui::Modifiers::NONE, egui::Key::Tab)) {
+        next_box(ui.ctx(), id, &text);
+    }
+
+    // What the equation will look like.
+    let parsed = eq::parse(&text);
+    let (area, _) = ui.allocate_exact_size(vec2(ui.available_width(), 112.0), Sense::hover());
+    ui.painter().rect(area, 8.0, t.field_bg, Stroke::new(1.0, t.border), egui::StrokeKind::Inside);
+    if text.trim().is_empty() {
+        ui.painter().text(area.center(), Align2::CENTER_CENTER, "Your equation appears here", theme::font(15.0), t.text_faint);
+    } else {
+        crate::equation_view::paint(&ui.painter().with_clip_rect(area.shrink(2.0)), area, &parsed, t.text, t.text_faint);
+    }
+
+    // Typing.
+    ui.add_space(8.0);
+    let field = ui.add(
+        egui::TextEdit::singleline(&mut text)
+            .id(id)
+            .lock_focus(text_has_boxes)
+            .hint_text("Type here, e.g. 3/4 or x^2 or sqrt(x), or use the buttons below")
+            .desired_width(f32::INFINITY)
+            .font(theme::font(17.0)),
+    );
+    if first {
+        field.request_focus();
+    }
+
+    // The buttons.
+    ui.add_space(8.0);
+    let tab = d.get("tab", "Structures");
+    ui.horizontal(|ui| {
+        for name in ["Structures", "Symbols", "Greek"] {
+            if ui.selectable_label(tab == name, egui::RichText::new(name).font(theme::bold(13.0))).clicked() {
+                d.fields.insert("tab".into(), name.into());
+            }
+        }
+    });
+    ui.separator();
+    let tab = d.get("tab", "Structures");
+    let ctx = ui.ctx().clone();
+    match tab.as_str() {
+        "Structures" => {
+            ui.horizontal_wrapped(|ui| {
+                for p in &STRUCTURES {
+                    ui.vertical(|ui| {
+                        ui.set_width(62.0);
+                        let b = egui::Button::new(egui::RichText::new(p.glyph).size(20.0)).min_size(vec2(60.0, 38.0));
+                        if ui.add(b).on_hover_text(p.name).clicked() {
+                            type_into(&ctx, id, &mut text, p);
+                        }
+                        ui.label(egui::RichText::new(p.name).size(10.5).color(t.text_dim));
+                    });
+                }
+            });
+        }
+        _ => {
+            let groups: Vec<(&str, &str)> = if tab == "Greek" { vec![("Greek letters", GREEK)] } else { SYMBOL_GROUPS.to_vec() };
+            for (name, chars) in groups {
+                ui.label(egui::RichText::new(name).size(11.5).color(t.text_dim));
+                ui.horizontal_wrapped(|ui| {
+                    for c in chars.split(' ') {
+                        let b = egui::Button::new(egui::RichText::new(c).size(17.0)).min_size(vec2(34.0, 32.0));
+                        if ui.add(b).clicked() {
+                            type_into(&ctx, id, &mut text, &Piece { glyph: "", name: "", typed: c, script: false });
+                        }
+                    }
+                });
+            }
+        }
+    }
+
+    // A nudge for whoever has not typed anything, or has boxes left.
+    let blank = text.trim().is_empty();
+    let unfilled = eq::has_empty(&eq::parse(&text));
+    ui.add_space(6.0);
+    if blank {
+        ui.horizontal_wrapped(|ui| {
+            ui.label(egui::RichText::new("Try one:").size(12.0).color(t.text_dim));
+            for (name, typed) in EXAMPLES {
+                if ui.small_button(name).clicked() {
+                    text = typed.to_string();
+                    ctx.memory_mut(|m| m.request_focus(id));
+                }
+            }
+        });
+    } else if unfilled {
+        ui.label(egui::RichText::new("Click each empty box and type in it (Tab moves to the next one).").size(12.0).color(t.text_dim));
+    } else {
+        ui.label(
+            egui::RichText::new(if editing { "Change it, then click Update." } else { "Looks right? Click Insert to put it on the slide." })
+                .size(12.0)
+                .color(t.text_dim),
+        );
+    }
+    d.fields.insert("eq".into(), text.clone());
+
+    let (ok, cancel) = buttons_if(ui, if editing { "Update" } else { "Insert" }, !blank && !unfilled);
+    if ok {
+        let _ = app.run("insert.equation", json!({"linear": text, "replace": editing}));
+    }
+    ok || cancel
 }
 
 pub fn about(app: &mut SlideApp, ui: &mut Ui) {

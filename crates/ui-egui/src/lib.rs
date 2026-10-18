@@ -14,6 +14,7 @@ pub mod credits;
 pub mod dialogs;
 pub mod doc_window;
 pub mod drive_ui;
+pub mod equation_view;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
@@ -247,6 +248,8 @@ pub enum ViewMode {
 #[serde(default, rename_all = "camelCase")]
 pub struct UiState {
     pub brightness: theme::Brightness,
+    /// Light or dark follows the computer's setting (the default). Choosing Light or Dark yourself turns this off.
+    pub follow_system: bool,
     pub tab: String,
     pub ribbon_collapsed: bool,
     pub view: ViewMode,
@@ -299,12 +302,17 @@ pub struct UiState {
     pub check_for_updates: bool,
     /// The Get Ready starter's last choices, one `(topic, level)` per question; topic "" and level 0 mean any.
     pub get_ready_slots: Vec<(String, u8)>,
+    /// Questions the teacher has added to the Get Ready bank (Manage Questions).
+    pub my_questions: Vec<deckcraft_engine::questions::Question>,
+    /// Ids of built-in questions the teacher has taken out of the bank.
+    pub removed_questions: Vec<String>,
 }
 
 impl Default for UiState {
     fn default() -> Self {
         UiState {
             brightness: theme::Brightness::Light,
+            follow_system: true,
             tab: "Home".into(),
             ribbon_collapsed: false,
             view: ViewMode::Normal,
@@ -338,6 +346,8 @@ impl Default for UiState {
             drive_enabled: false,
             check_for_updates: false,
             get_ready_slots: vec![(String::new(), 0); 4],
+            my_questions: vec![],
+            removed_questions: vec![],
         }
     }
 }
@@ -387,6 +397,10 @@ impl UiState {
             topic.truncate(60);
             *level = (*level).min(3);
         }
+        self.my_questions
+            .retain(|q| !q.id.is_empty() && !q.text.trim().is_empty() && deckcraft_engine::questions::DIFFICULTIES.contains(&q.difficulty));
+        self.my_questions.truncate(5_000);
+        self.removed_questions.truncate(5_000);
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);
@@ -418,7 +432,8 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("review.thesaurusPane", "Thesaurus", Some("Shift+F7"), "{word?}: open the Thesaurus pane on the selected word"),
     ("view.tab", "Ribbon Tab", None, "{tab}"),
     ("view.collapseRibbon", "Collapse the Ribbon", Some("Cmd+F1"), "{}"),
-    ("view.dark", "Dark Mode", None, "{on?: bool}"),
+    ("view.dark", "Dark Mode", None, "{on?: bool}: choosing it yourself stops following the computer"),
+    ("view.appearance", "Appearance", None, "{mode: \"system\"|\"light\"|\"dark\"}"),
     ("view.grayscale", "Grayscale", None, "{on?: bool}"),
     ("view.newWindow", "New Window", None, "{on?: bool, slide?: index, delta?: int}"),
     ("show.start", "Slide Show", Some("F5"), "{from?: index, custom?: name}"),
@@ -1038,6 +1053,16 @@ impl SlideApp {
             "view.dark" => {
                 let on = self.flag(p, self.ui.brightness == theme::Brightness::Dark);
                 self.ui.brightness = if on { theme::Brightness::Dark } else { theme::Brightness::Light };
+                self.ui.follow_system = false;
+                self.restyle = true;
+            }
+            "view.appearance" => {
+                match p.get("mode").and_then(Value::as_str) {
+                    Some("system") => self.ui.follow_system = true,
+                    Some("light") => (self.ui.follow_system, self.ui.brightness) = (false, theme::Brightness::Light),
+                    Some("dark") => (self.ui.follow_system, self.ui.brightness) = (false, theme::Brightness::Dark),
+                    _ => return Err("mode must be system, light or dark".into()),
+                }
                 self.restyle = true;
             }
             "view.grayscale" => self.ui.grayscale = self.flag(p, self.ui.grayscale),
@@ -1662,6 +1687,15 @@ impl SlideApp {
         } else if self.frame_drawn {
             self.fonts_ready = true;
         }
+        if self.ui.follow_system
+            && let Some(system) = ctx.input(|i| i.raw.system_theme)
+        {
+            let want = if system == egui::Theme::Dark { theme::Brightness::Dark } else { theme::Brightness::Light };
+            if want != self.ui.brightness {
+                self.ui.brightness = want;
+                self.restyle = true;
+            }
+        }
         if self.restyle {
             theme::apply(ctx, &theme::Tokens::for_brightness(self.ui.brightness));
             self.restyle = false;
@@ -2157,6 +2191,8 @@ fn js_now() -> f64 {
 #[cfg(test)]
 mod animpane_tests;
 #[cfg(test)]
+mod appearance_tests;
+#[cfg(test)]
 mod browsetheme_tests;
 #[cfg(test)]
 mod cleanup_tests;
@@ -2164,6 +2200,8 @@ mod cleanup_tests;
 mod compare_tests;
 #[cfg(test)]
 mod drive_tests;
+#[cfg(test)]
+mod equation_tests;
 #[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]
@@ -2750,10 +2788,15 @@ mod tests {
         harness.run_steps(2);
         let before = harness.state().session.prefs.clone();
         let dark_before = harness.state().ui.brightness;
+        assert!(harness.state().ui.follow_system, "the default follows the computer");
         let change = |harness: &mut egui_kittest::Harness<'static, SlideApp>| {
             harness.state_mut().run("app.preferences", json!({})).unwrap();
             harness.run_steps(2);
-            for label in ["Dark appearance", "Show smart guides", "Snap objects to grid"] {
+            // The Appearance drop-down runs this command.
+            let other = if dark_before == theme::Brightness::Dark { "light" } else { "dark" };
+            harness.state_mut().run("view.appearance", json!({ "mode": other })).unwrap();
+            harness.run_steps(1);
+            for label in ["Show smart guides", "Snap objects to grid"] {
                 harness
                     .query_all_by_role_and_label(egui::accesskit::Role::CheckBox, label)
                     .next()
@@ -2768,6 +2811,7 @@ mod tests {
             let s = harness.state();
             assert!(s.dialog.is_none(), "{how} closes Preferences");
             assert_eq!(s.ui.brightness, dark_before, "{how} restores the appearance");
+            assert!(s.ui.follow_system, "{how} restores following the computer");
             assert_eq!(s.session.prefs.smart_guides, before.smart_guides, "{how} restores smart guides");
             assert_eq!(s.session.prefs.snap_to_grid, before.snap_to_grid, "{how} restores snap to grid");
         };

@@ -22,6 +22,9 @@
 mod bidi;
 pub mod datetime;
 
+pub mod equation;
+pub mod math;
+
 use std::collections::HashMap;
 use std::sync::Arc;
 
@@ -418,6 +421,12 @@ struct ParaShaped {
     level: u8,
     /// Right-to-left paragraph (`a:pPr/@rtl`).
     rtl: bool,
+    /// The paragraph is one equation drawn as maths: its box and the style it takes colour from.
+    /// The line holds blank space the equation's width, which the equation is drawn over.
+    math: Option<(math::MathBox, usize)>,
+    /// Equations inside a sentence: the cell where the blank space they are drawn over starts, the
+    /// equation, and the style it takes its colour and size from.
+    inline_math: Vec<(usize, math::MathBox, usize)>,
 }
 
 fn style_name(bold: bool, italic: bool) -> &'static str {
@@ -698,6 +707,43 @@ pub fn autonum(scheme: &str, n: u32) -> String {
     }
 }
 
+/// The text that stands in for an equation we do not draw as maths: letters are the mathematical
+/// italic ones, as the equation editor writes them, unless the equation sets its own style or the
+/// text holds a word (`sin`, `max`), which stays upright. One character in, one out.
+fn stand_in_text(text: &str, omml: &str) -> String {
+    let word = text.chars().collect::<Vec<_>>().windows(3).any(|w| w.iter().all(char::is_ascii_alphabetic));
+    if word || omml.contains("<m:sty") {
+        return text.to_string();
+    }
+    text.chars().map(|c| if c.is_ascii_alphabetic() { equation::math_italic(c) } else { c }).collect()
+}
+
+/// Whether the paragraph is one equation on its own (a display equation), which is laid out whole.
+fn math_of_paragraph_kind(para: &deckcraft_model::text::Paragraph) -> bool {
+    let maths = para.runs.iter().filter(|r| matches!(r.kind, RunKind::Math { .. })).count();
+    maths == 1 && para.runs.iter().all(|r| matches!(r.kind, RunKind::Math { .. }) || (r.kind == RunKind::Text && r.text.trim().is_empty()))
+}
+
+/// The maths box of a paragraph that is one equation worth drawing as maths, and the index of the
+/// style (one per run, in order) its colour and size come from.
+fn math_of_paragraph(para: &deckcraft_model::text::Paragraph, styles: &[Style]) -> Option<(math::MathBox, usize)> {
+    let mut found = None;
+    for (i, r) in para.runs.iter().enumerate() {
+        match &r.kind {
+            RunKind::Math { omml } if found.is_none() => found = Some((i, omml)),
+            RunKind::Text if r.text.trim().is_empty() => {}
+            _ => return None,
+        }
+    }
+    let (i, omml) = found?;
+    let expr = equation::from_omml(omml)?;
+    if !math::is_complex(&expr) {
+        return None;
+    }
+    let st = styles.get(i)?;
+    Some((math::layout(&expr, &st.face, st.size), i))
+}
+
 #[allow(clippy::too_many_arguments)]
 fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, opts: &Opts, number: Option<u32>, vertical: Upright) -> ParaShaped {
     let db = FontDb::global();
@@ -713,6 +759,8 @@ fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, 
             bullet: None,
             level: 0,
             rtl: false,
+            math: None,
+            inline_math: vec![],
         };
     };
     let mut props = resolve::para(ctx, shape, para);
@@ -726,6 +774,10 @@ fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, 
     // The logical paragraph: its text and each character's style.
     let mut text = String::new();
     let mut char_style: Vec<usize> = vec![];
+    // Equations among other text are laid out as maths and drawn over blank space as wide as they
+    // are (a non-breaking space run, so a line never splits them).
+    let single = math_of_paragraph_kind(para);
+    let mut inline_math: Vec<(usize, math::MathBox, usize)> = vec![];
     for run in &para.runs {
         let rp = resolve::run(ctx, shape, para, &run.props);
         let st = make_style(ctx, &rp, scale, opts.prompt_color);
@@ -733,13 +785,35 @@ fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, 
             RunKind::Text => run.text.clone(),
             RunKind::Break => "\u{b}".into(),
             RunKind::Field { field } => opts.fields.field_in(field, rp.lang.as_deref()).unwrap_or_else(|| run.text.clone()),
-            RunKind::Math { .. } => run.text.clone(),
+            RunKind::Math { omml } => stand_in_text(&run.text, omml),
         };
         let si = styles.len();
+        let mut t = t;
+        if !single
+            && let RunKind::Math { omml } = &run.kind
+            && let Some(expr) = equation::from_omml(omml)
+            && math::is_complex(&expr)
+        {
+            let b = math::layout(&expr, &st.face, st.size);
+            let space = st.face.advance(st.face.glyph_for('\u{a0}')) * st.size / st.face.upem.max(1.0);
+            let n = if space > 0.1 { (b.w / space).ceil().clamp(1.0, 2000.0) as usize } else { 1 };
+            inline_math.push((text.chars().count(), b, si));
+            t = "\u{a0}".repeat(n);
+        }
         styles.push(st);
         char_style.extend(std::iter::repeat_n(si, t.chars().count()));
         text.push_str(&t);
     }
+    // One display equation of fractions, powers or roots is drawn as maths over blank space as
+    // wide as it is; the line is as tall as it needs, and the saved text stays the stand-in.
+    let math = math_of_paragraph(para, &styles).map(|(b, si)| {
+        let st = &styles[si];
+        let space = st.face.advance(st.face.glyph_for('\u{a0}')) * st.size / st.face.upem.max(1.0);
+        let n = if space > 0.1 { (b.w / space).ceil().clamp(1.0, 2000.0) as usize } else { 1 };
+        text = "\u{a0}".repeat(n);
+        char_style = vec![si; n];
+        (b, si)
+    });
     let cells = shape_cells(ctx, &text, &char_style, &styles, &mut faces, rtl, vertical);
     let lead = para.runs.first().map(|r| resolve::run(ctx, shape, para, &r.props)).unwrap_or_else(|| resolve::run(ctx, shape, para, &para.end_props));
     let lead_style = make_style(ctx, &lead, scale, opts.prompt_color);
@@ -793,7 +867,7 @@ fn shape_para(ctx: &Ctx, shape: &Shape, body: &TextBody, pi: usize, scale: f64, 
         }
         _ => None,
     };
-    ParaShaped { cells, styles, faces, props, lead_size, lead_face, bullet, level: para.level, rtl }
+    ParaShaped { cells, styles, faces, props, lead_size, lead_face, bullet, level: para.level, rtl, math, inline_math }
 }
 
 /// A face that draws the bullet `label` when the bullet's own can't (circled numbers ①, arrows
@@ -1721,6 +1795,18 @@ fn layout_scaled(ctx: &Ctx, shape: &Shape, body: &TextBody, bp: &BodyProps, opts
                 desc = d;
                 size = p.lead_size;
             }
+            for (at, m, _) in &p.inline_math {
+                if (rl.start..rl.end).contains(at) {
+                    asc = asc.max(m.asc);
+                    desc = desc.max(m.desc);
+                    size = size.max(1.0);
+                }
+            }
+            if let Some((m, _)) = p.math.as_ref().filter(|_| li == 0) {
+                // An equation sets its own line: as tall as its fractions and roots reach.
+                asc = asc.max(m.asc);
+                desc = desc.max(m.desc);
+            }
             let natural = (asc + desc).max(size * 1.0);
             let lh = match props.line_spacing {
                 // The reduction comes off the percentage (90 % less 20 % is 70 %), as PowerPoint
@@ -1974,6 +2060,21 @@ fn layout_scaled(ctx: &Ctx, shape: &Shape, body: &TextBody, bp: &BodyProps, opts
                 out.runs.push(run);
             }
         }
+        // An equation drawn as maths: over the blank line, centred on it.
+        if let Some((m, si)) = p.math.as_ref().filter(|_| line.start == 0)
+            && let Some(st) = p.styles.get(*si)
+        {
+            let left = line.extent.0 + ((line.extent.1 - line.extent.0) - m.w) / 2.0;
+            emit_math(&mut out, m, st, left, line.baseline, line.para);
+            continue;
+        }
+        for (at, m, si) in &p.inline_math {
+            if let (true, Some(st), Some(&(x0, _))) =
+                ((line.start..line.end).contains(at), p.styles.get(*si), line.edges.get(at.wrapping_sub(line.start)))
+            {
+                emit_math(&mut out, m, st, x0, line.baseline, line.para);
+            }
+        }
         // Group visually consecutive cells by (style, face).
         let mut cur: Option<GlyphRun> = None;
         let mut cur_key = (usize::MAX, usize::MAX, false, false);
@@ -2118,6 +2219,51 @@ fn layout_scaled(ctx: &Ctx, shape: &Shape, body: &TextBody, bp: &BodyProps, opts
     // Merge adjacent decorations of the same colour on the same line.
     out.decos = merge_decos(std::mem::take(&mut out.decos));
     out
+}
+
+/// Put an equation's glyphs and bars on the layout, its baseline at (`left`, `baseline`).
+fn emit_math(out: &mut TextLayout, m: &math::MathBox, st: &Style, left: f64, baseline: f64, para: usize) {
+    let mut groups: Vec<((u64, bool), GlyphRun)> = vec![];
+    for g in &m.glyphs {
+        let key = (g.size.to_bits(), g.slant);
+        let at = match groups.iter().position(|(k, _)| *k == key) {
+            Some(i) => i,
+            None => {
+                groups.push((
+                    key,
+                    GlyphRun {
+                        face: st.face.clone(),
+                        size: g.size,
+                        color: st.color,
+                        glyphs: vec![],
+                        cells: vec![],
+                        fake_bold: st.fake_bold,
+                        fake_italic: g.slant,
+                        outline: None,
+                        para,
+                        chars: (0, 0),
+                        link: false,
+                        alpha: st.alpha,
+                        gradient: st.gradient.clone(),
+                        effects: st.effects,
+                        upright: false,
+                    },
+                ));
+                groups.len() - 1
+            }
+        };
+        groups[at].1.glyphs.push((g.gid, left + g.x, baseline + g.y));
+    }
+    out.runs.extend(groups.into_iter().map(|(_, r)| r));
+    for r in &m.rules {
+        out.decos.push(Deco {
+            rect: Rect::new(left + r.x0, baseline + r.y0, left + r.x1, baseline + r.y1),
+            color: st.color,
+            behind: false,
+            para,
+            line: DecoLine::Solid,
+        });
+    }
 }
 
 fn merge_decos(v: Vec<Deco>) -> Vec<Deco> {

@@ -11,6 +11,7 @@ pub mod cmd;
 pub mod compare;
 pub mod connect;
 pub mod drawtable;
+pub use deckcraft_text::equation;
 pub mod file_access;
 pub mod fonts;
 pub mod gif_export;
@@ -19,6 +20,7 @@ pub mod icons;
 pub mod inkshape;
 pub mod io;
 pub mod keys;
+pub mod latex;
 pub mod links;
 pub mod media_refs;
 pub mod questions;
@@ -780,5 +782,7 @@ pub(crate) fn push_undo(st: &mut DocState, e: HistoryEntry) {
 mod soak_tests;
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod tests_equation;
 #[cfg(test)]
 mod tests_keys;

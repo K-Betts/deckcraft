@@ -1390,6 +1390,18 @@ impl FontDb {
         false
     }
 
+    /// The box a glyph's ink fills, `(left, top, right, bottom)` in font units, y-down from the
+    /// baseline (so a letter's top is negative). `None` for a glyph with no outline (a space).
+    pub fn glyph_bounds(&self, face: &FontFace, gid: u32) -> Option<(f64, f64, f64, f64)> {
+        use kurbo::Shape;
+        let path = self.outline(face, gid);
+        if path.elements().is_empty() {
+            return None;
+        }
+        let r = path.bounding_box();
+        Some((r.x0, r.y0, r.x1, r.y1))
+    }
+
     /// Glyph outline in font units, y-down (flipped), cached per (face, glyph).
     pub fn outline(&self, face: &FontFace, gid: u32) -> Arc<BezPath> {
         let key = (face.id, gid);

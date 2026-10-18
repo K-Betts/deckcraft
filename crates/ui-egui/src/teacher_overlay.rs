@@ -21,6 +21,20 @@ const PALETTE_MARGIN: f32 = 16.0;
 /// The smallest a control may be: a fingertip on a board or a tablet, not a mouse pointer.
 pub const TOUCH_TARGET: f32 = 44.0;
 
+/// The presenting surfaces (palette, timer) use the design system's ink, a little see-through, so
+/// they sit on any slide; selected controls use the accent, danger and success are the status colours.
+const INK: Color32 = Color32::from_rgba_premultiplied(18, 20, 25, 235);
+const INK_LIGHT: Color32 = Color32::from_rgba_premultiplied(48, 51, 62, 240);
+/// A button face lifted off the ink.
+const RAISED: Color32 = Color32::from_rgb(47, 51, 62);
+const RAISED_HOVER: Color32 = Color32::from_rgb(64, 69, 84);
+const ACCENT: Color32 = Color32::from_rgb(0x2B, 0x59, 0xFF);
+const DANGER: Color32 = Color32::from_rgb(0xE5, 0x48, 0x4D);
+const DANGER_HOVER: Color32 = Color32::from_rgb(0xF2, 0x6B, 0x6F);
+/// Darker than the mockup's green so white text on it stays above 4.5:1.
+const SUCCESS: Color32 = Color32::from_rgb(0x11, 0x87, 0x5A);
+const SURFACE_RADIUS: u8 = 28;
+
 pub const PEN_COLOURS: [(&str, Color32); 5] = [
     ("Red", Color32::from_rgb(230, 40, 40)),
     ("Blue", Color32::from_rgb(30, 100, 230)),
@@ -240,6 +254,14 @@ enum Draft {
     Shape(DrawnShape),
 }
 
+/// What was drawn on a slide that is not showing.
+#[derive(Default)]
+struct Parked {
+    strokes: Vec<Stroke>,
+    shapes: Vec<DrawnShape>,
+    revealer: Option<Revealer>,
+}
+
 pub struct TeacherOverlay {
     pub tool: Tool,
     pub strokes: Vec<Stroke>,
@@ -255,6 +277,9 @@ pub struct TeacherOverlay {
     pub timers: Vec<Timer>,
     /// Keep marks and the revealer when the slide changes (the Preferences setting).
     pub keep_on_advance: bool,
+    /// The slide the live marks belong to, and the marks of the slides left behind.
+    slide: Option<usize>,
+    parked: std::collections::HashMap<usize, Parked>,
     next_id: u64,
     seq: u64,
     /// Where the middle of the hand was last frame while wiping, so a fast rub leaves no gaps.
@@ -291,6 +316,8 @@ impl Default for TeacherOverlay {
             erase_mode: EraseMode::Pixel,
             timers: vec![],
             keep_on_advance: false,
+            slide: None,
+            parked: Default::default(),
             next_id: 0,
             seq: 0,
             palm_last: None,
@@ -345,12 +372,28 @@ impl TeacherOverlay {
         }
     }
 
-    /// The slide changed: marks go, and so does the revealer, unless the
-    /// teacher chose to keep annotations. Timers always carry on.
-    pub fn on_slide_change(&mut self) {
-        if !self.keep_on_advance {
+    /// The show moved to slide `to`. Marks stay with the slide they were drawn on: they are put
+    /// away here and come back when the teacher returns. Unless the teacher chose to keep
+    /// annotations, in which case they ride along. Timers always carry on.
+    pub fn on_slide_change(&mut self, to: usize) {
+        let from = self.slide.replace(to);
+        if self.keep_on_advance || from == Some(to) {
+            return;
+        }
+        if let Some(from) = from {
+            let saved =
+                Parked { strokes: std::mem::take(&mut self.strokes), shapes: std::mem::take(&mut self.shapes), revealer: self.revealer.take() };
+            self.parked.insert(from, saved);
+        } else {
             self.clear();
             self.revealer = None;
+        }
+        self.draft = None;
+        self.revealer_drag = false;
+        if let Some(back) = self.parked.remove(&to) {
+            self.strokes = back.strokes;
+            self.shapes = back.shapes;
+            self.revealer = back.revealer;
         }
     }
 
@@ -539,8 +582,7 @@ impl TeacherOverlay {
             .pivot(Align2::LEFT_CENTER)
             .show(ctx, |ui| {
                 let (r, resp) = ui.allocate_exact_size(vec2(34.0, 72.0), Sense::click());
-                let fill =
-                    if resp.hovered() { Color32::from_rgba_unmultiplied(60, 60, 68, 240) } else { Color32::from_rgba_unmultiplied(24, 24, 28, 220) };
+                let fill = if resp.hovered() { INK_LIGHT } else { INK };
                 ui.painter().rect_filled(r, CornerRadius { nw: 0, sw: 0, ne: 12, se: 12 }, fill);
                 let (c, s) = (r.center(), 5.0);
                 let dir = if self.palette_open { -1.0 } else { 1.0 };
@@ -663,25 +705,21 @@ impl TeacherOverlay {
             None => palette_anchor(full, self.edge, self.along),
         };
         let out = egui::Area::new(Id::new("teacher_palette")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
-            egui::Frame::new()
-                .fill(Color32::from_rgba_unmultiplied(24, 24, 28, 232))
-                .corner_radius(CornerRadius::same(26))
-                .inner_margin(Margin::symmetric(10, 6))
-                .show(ui, |ui| {
-                    ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                    let has_options = matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
-                    let mut body = |this: &mut Self, ui: &mut Ui| {
-                        if has_options {
-                            lay(ui, horizontal, |ui| this.options(ui));
-                        }
-                        lay(ui, horizontal, |ui| this.main_row(ui, full, horizontal, actions));
-                    };
-                    if horizontal {
-                        ui.vertical_centered(|ui| body(self, ui));
-                    } else {
-                        ui.horizontal(|ui| body(self, ui));
+            egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(10, 6)).show(ui, |ui| {
+                ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
+                let has_options = matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
+                let mut body = |this: &mut Self, ui: &mut Ui| {
+                    if has_options {
+                        lay(ui, horizontal, |ui| this.options(ui));
                     }
-                });
+                    lay(ui, horizontal, |ui| this.main_row(ui, full, horizontal, actions));
+                };
+                if horizontal {
+                    ui.vertical_centered(|ui| body(self, ui));
+                } else {
+                    ui.horizontal(|ui| body(self, ui));
+                }
+            });
         });
         let rect = out.response.rect;
         self.hit_rects.push(rect);
@@ -821,7 +859,7 @@ impl TeacherOverlay {
             actions.push(Action::Next);
         }
         let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
-        let fill = if resp.hovered() { Color32::from_rgb(240, 70, 70) } else { Color32::from_rgb(200, 40, 40) };
+        let fill = if resp.hovered() { DANGER_HOVER } else { DANGER };
         ui.painter().circle_filled(r.center(), 16.0, fill);
         let c = r.center();
         let s = egui::Stroke::new(2.2, Color32::WHITE);
@@ -856,9 +894,9 @@ fn icon_button(ui: &mut Ui, selected: bool, tip: &str, paint: impl FnOnce(&Paint
     let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
     let p = ui.painter();
     if selected {
-        p.rect_filled(r, CornerRadius::same(10), Color32::from_rgb(52, 112, 214));
+        p.rect_filled(r, CornerRadius::same(12), ACCENT);
     } else if resp.hovered() {
-        p.rect_filled(r, CornerRadius::same(10), Color32::from_white_alpha(28));
+        p.rect_filled(r, CornerRadius::same(12), Color32::from_white_alpha(28));
     }
     paint(p, r.shrink(11.0), Color32::WHITE);
     resp.on_hover_text(tip)
@@ -1162,7 +1200,7 @@ pub fn timer_digit_size(screen_height: f32) -> f32 {
 /// A drawn cross: the ✕ glyph is missing from the bundled fonts and shows as an empty box.
 fn close_button(ui: &mut Ui) -> Response {
     let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
-    let fill = if resp.hovered() { Color32::from_gray(96) } else { Color32::from_gray(72) };
+    let fill = if resp.hovered() { RAISED_HOVER } else { RAISED };
     ui.painter().rect_filled(r, CornerRadius::same(8), fill);
     let (c, k) = (r.center(), 8.0);
     let s = egui::Stroke::new(2.5, Color32::WHITE);
@@ -1184,7 +1222,7 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
     let mut remove = false;
     let mut start = false;
     let flash = t.expired && (now * 2.0) as i64 % 2 == 0;
-    let fill = if flash { Color32::from_rgb(200, 30, 30) } else { Color32::from_rgba_unmultiplied(20, 20, 24, 232) };
+    let fill = if flash { Color32::from_rgb(214, 48, 52) } else { INK };
     let setting = t.setup.is_some();
     let size = if setting { 52.0 } else { timer_digit_size(full.height()) };
     let id = Id::new(("teacher_timer", t.id));
@@ -1197,7 +1235,7 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
         .movable(true)
         .constrain(true)
         .show(ctx, |ui| {
-            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(18)).inner_margin(Margin::symmetric(24, 14)).show(ui, |ui| {
+            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(26, 16)).show(ui, |ui| {
                 ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
                 if setting {
                     let mut set = t.setup.unwrap_or_default();
@@ -1205,7 +1243,7 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
                     ui.horizontal(|ui| {
                         for mins in TIMER_QUICK_MINS {
                             let on = set == [0, mins, 0];
-                            let fill = if on { Color32::from_rgb(52, 112, 214) } else { Color32::from_gray(72) };
+                            let fill = if on { ACCENT } else { RAISED };
                             if timer_button(ui, &format!("{mins}"), fill, TOUCH_TARGET + 6.0).on_hover_text(format!("{mins} minute(s)")).clicked() {
                                 set = [0, mins, 0];
                             }
@@ -1215,7 +1253,7 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
                     t.setup = Some(set);
                     ui.horizontal(|ui| {
                         let go = egui::Button::new(egui::RichText::new("Start").size(22.0).strong().color(Color32::WHITE))
-                            .fill(Color32::from_rgb(30, 140, 70))
+                            .fill(SUCCESS)
                             .min_size(vec2(150.0, 52.0));
                         if ui.add_enabled(set != [0, 0, 0], go).clicked() {
                             start = true;
@@ -1233,12 +1271,11 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
                     }
                     if !t.running || hovered {
                         ui.horizontal(|ui| {
-                            let (label, fill) =
-                                if t.running { ("Pause", Color32::from_gray(72)) } else { ("Resume", Color32::from_rgb(30, 140, 70)) };
+                            let (label, fill) = if t.running { ("Pause", RAISED) } else { ("Resume", SUCCESS) };
                             if timer_button(ui, label, fill, 110.0).clicked() {
                                 t.toggle();
                             }
-                            if timer_button(ui, "Reset", Color32::from_gray(72), 96.0).on_hover_text("Back to setting the time").clicked() {
+                            if timer_button(ui, "Reset", RAISED, 96.0).on_hover_text("Back to setting the time").clicked() {
                                 t.reset();
                                 t.begin_setup();
                             }
@@ -1516,9 +1553,25 @@ mod tests {
         stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
         o.add_timer();
         o.set_tool(Tool::Revealer);
-        o.on_slide_change();
+        o.on_slide_change(0);
+        o.on_slide_change(1);
         assert!(o.strokes.is_empty() && o.revealer.is_none());
         assert_eq!(o.timers.len(), 1);
+    }
+
+    #[test]
+    fn marks_stay_on_their_slide_and_return_when_you_go_back() {
+        let mut o = TeacherOverlay::new();
+        o.on_slide_change(0);
+        stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
+        o.on_slide_change(1);
+        assert!(o.strokes.is_empty());
+        stroke(&mut o, &[(2.0, 2.0), (3.0, 3.0)]);
+        stroke(&mut o, &[(4.0, 4.0), (5.0, 5.0)]);
+        o.on_slide_change(0);
+        assert_eq!(o.strokes.len(), 1);
+        o.on_slide_change(1);
+        assert_eq!(o.strokes.len(), 2);
     }
 
     #[test]
@@ -1527,7 +1580,8 @@ mod tests {
         o.keep_on_advance = true;
         stroke(&mut o, &[(0.0, 0.0), (1.0, 1.0)]);
         o.set_tool(Tool::Revealer);
-        o.on_slide_change();
+        o.on_slide_change(0);
+        o.on_slide_change(1);
         assert_eq!(o.strokes.len(), 1);
         assert!(o.revealer.is_some());
     }

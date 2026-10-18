@@ -1490,3 +1490,24 @@ fn empty_plain_paragraphs_and_soft_breaks_have_no_bullet_preview() {
     assert_eq!(l.lines.len(), 2);
     assert!(l.empty_bullets.is_empty(), "a soft line break is not a new list item");
 }
+
+#[test]
+fn an_equation_inside_a_sentence_is_drawn_as_maths() {
+    const FRAC: &str = "<m:oMath><m:f><m:num><m:r><m:t>1</m:t></m:r></m:num><m:den><m:r><m:t>2</m:t></m:r></m:den></m:f></m:oMath>";
+    let (p, mut sh) = setup("x", 600.0, 200.0);
+    let para = &mut sh.text.as_mut().unwrap().paragraphs[0];
+    para.props.bullet = Some(Bullet::None);
+    para.runs =
+        vec![Run::new("Add "), Run { text: "1/2".into(), props: Default::default(), kind: RunKind::Math { omml: FRAC.into() } }, Run::new(" now")];
+    let with = lay(&p, &sh, 600.0, 200.0);
+    let plain = {
+        let mut q = sh.clone();
+        q.text.as_mut().unwrap().paragraphs[0].runs = vec![Run::new("Add 1/2 now")];
+        lay(&p, &q, 600.0, 200.0)
+    };
+    let h = |l: &TextLayout| l.lines[0].bottom - l.lines[0].top;
+    assert!(h(&with) > h(&plain), "the stacked fraction makes the line taller: {} vs {}", h(&with), h(&plain));
+    assert!(with.decos.len() > plain.decos.len(), "the fraction bar is drawn");
+    // Words on either side of it stay on the line, the fraction between them.
+    assert!(with.lines[0].caret_x[4] < with.lines[0].caret_x[with.lines[0].end - with.lines[0].start - 4]);
+}
