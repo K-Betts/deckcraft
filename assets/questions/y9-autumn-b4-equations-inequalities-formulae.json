@@ -1,0 +1,1915 @@
+{
+ "version": 1,
+ "note": "Y9 Autumn Block 4 Equations, inequalities and formulae: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9au4-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S1 Solve equations and inequalities",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m * x0 + c - c) / m == x0"
+   ],
+   "text": "Solve $[[m]]x + [[c]] = [[m * x0 + c]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S1 Solve equations and inequalities",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "x0",
+     "d * k"
+    ]
+   ],
+   "where": [
+    "k > c"
+   ],
+   "check": [
+    "x0 / d * d == x0"
+   ],
+   "text": "Solve $\\frac{x}{[[d]]} - [[c]] = [[x0 / d - c]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S1 Solve equations and inequalities",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m * x0 + c - c) / m == x0"
+   ],
+   "text": "Solve $[[m]]x + [[c]] > [[m * x0 + c]]$ and write down the smallest integer that satisfies it.",
+   "answer": "$x > [[x0]]$; smallest integer [[x0 + 1]]"
+  },
+  {
+   "id": "y9au4-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S1 Solve equations and inequalities",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * x0 > c"
+   ],
+   "check": [
+    "(m * x0 - c + c) / m == x0"
+   ],
+   "text": "Solve $[[m]]x - [[c]] \\leq [[m * x0 - c]]$. List the positive integers that satisfy it. (3 marks)",
+   "answer": "$x \\leq [[x0]]$; 1 to [[x0]]"
+  },
+  {
+   "id": "y9au4-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with brackets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S2 Solve equations and inequalities with brackets",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "brackets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (x0 + b) / m - b == x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) = [[m * (x0 + b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with brackets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S2 Solve equations and inequalities with brackets",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "brackets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 > b"
+   ],
+   "check": [
+    "m * (x0 - b) / m + b == x0"
+   ],
+   "text": "Solve $[[m]](x - [[b]]) = [[m * (x0 - b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with brackets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S2 Solve equations and inequalities with brackets",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "brackets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (x0 + b) / m - b == x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) < [[m * (x0 + b)]]$.",
+   "answer": "$x < [[x0]]$"
+  },
+  {
+   "id": "y9au4-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with brackets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S2 Solve equations and inequalities with brackets",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "brackets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m - n) * x0 + m * b + n * d - m * b - n * d == (m - n) * x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) - [[n]](x - [[d]]) = [[(m - n) * x0 + m * b + n * d]]$. (4 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with unknowns on both sides",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S3 Solve equations and inequalities with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]]x + [[b]] = [[q]]x + [[b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with unknowns on both sides",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S3 Solve equations and inequalities with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p - q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p - q) * (p - q) == b + d"
+   ],
+   "text": "Solve $[[p]]x - [[b]] = [[q]]x + [[d]]$.",
+   "answer": "$x = [[(b + d) / (p - q)]]$"
+  },
+  {
+   "id": "y9au4-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with unknowns on both sides",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S3 Solve equations and inequalities with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "b + (p - q) * x0"
+    ]
+   ],
+   "check": [
+    "(d - b) / (p - q) * (p - q) == d - b"
+   ],
+   "text": "Solve $[[p]]x + [[b]] \\geq [[q]]x + [[d]]$.",
+   "answer": "$x \\geq [[(d - b) / (p - q)]]$"
+  },
+  {
+   "id": "y9au4-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations and inequalities with unknowns on both sides",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S3 Solve equations and inequalities with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "and",
+    "inequalities",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "((p - q) * x0 - p * b) / q"
+    ]
+   ],
+   "where": [
+    "isint(d)",
+    "d > 0"
+   ],
+   "check": [
+    "(p * b + q * d) / (p - q) * (p - q) == p * b + q * d"
+   ],
+   "text": "Solve $[[p]](x - [[b]]) = [[q]](x + [[d]])$. (4 marks)",
+   "answer": "$x = [[(p * b + q * d) / (p - q)]]$"
+  },
+  {
+   "id": "y9au4-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Inequalities with negative numbers (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S4 Inequalities with negative numbers (E)",
+   "keywords": [
+    "inequalities",
+    "with",
+    "negative",
+    "numbers",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * x0 / m == x0"
+   ],
+   "text": "Solve $-[[m]]x < [[m * x0]]$.",
+   "answer": "$x > -[[x0]]$"
+  },
+  {
+   "id": "y9au4-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Inequalities with negative numbers (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S4 Inequalities with negative numbers (E)",
+   "keywords": [
+    "inequalities",
+    "with",
+    "negative",
+    "numbers",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(c - (c - m * x0)) / m == x0"
+   ],
+   "text": "Solve $[[c]] - [[m]]x \\geq [[c - m * x0]]$.",
+   "answer": "$x \\leq [[x0]]$"
+  },
+  {
+   "id": "y9au4-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Inequalities with negative numbers (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S4 Inequalities with negative numbers (E)",
+   "keywords": [
+    "inequalities",
+    "with",
+    "negative",
+    "numbers",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * p"
+    ],
+    [
+     "b",
+     "m * q"
+    ]
+   ],
+   "check": [
+    "a / m * m == a"
+   ],
+   "text": "Solve $-[[a]] < [[m]]x \\leq [[b]]$.",
+   "answer": "$-[[a / m]] < x \\leq [[b / m]]$"
+  },
+  {
+   "id": "y9au4-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Inequalities with negative numbers (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S4 Inequalities with negative numbers (E)",
+   "keywords": [
+    "inequalities",
+    "with",
+    "negative",
+    "numbers",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(c - (c - m * x0)) / m == x0"
+   ],
+   "text": "Solve $[[c]] - [[m]]x > [[c - m * x0]]$ and list the positive integers that satisfy it. Explain why the inequality sign changes direction. (3 marks)",
+   "answer": "$x < [[x0]]$; positive integers 1 to [[x0 - 1]]; dividing by a negative number reverses the inequality sign"
+  },
+  {
+   "id": "y9au4-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with equations and inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S5 Solve problems with equations and inequalities",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * x0 > c"
+   ],
+   "check": [
+    "(m * x0 - c + c) / m == x0"
+   ],
+   "text": "I think of a number, multiply it by [[m]] and subtract [[c]]. The answer is [[m * x0 - c]]. Form and solve an equation to find my number.",
+   "answer": "$[[m]]x - [[c]] = [[m * x0 - c]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with equations and inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S5 Solve problems with equations and inequalities",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > e"
+   ],
+   "text": "A rectangle has length $(x + [[d]])$ cm and width $(x - [[e]])$ cm. Its perimeter is [[4 * x0 + 2 * d - 2 * e]] cm. Form and solve an equation to find $x$.",
+   "answer": "$4x + [[2 * d - 2 * e]] = [[4 * x0 + 2 * d - 2 * e]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y9au4-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with equations and inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S5 Solve problems with equations and inequalities",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       25,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % p != 0"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Ben has £[[m]]. Each book costs £[[p]]. Form and solve an inequality to find the greatest number of books he can buy.",
+   "answer": "$[[p]]n \\leq [[m]]$, so $n \\leq [[m / p|dp:2]]$: [[floor(m / p)]] books"
+  },
+  {
+   "id": "y9au4-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with equations and inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S5 Solve problems with equations and inequalities",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "equations",
+    "and",
+    "inequalities",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > e"
+   ],
+   "text": "The sides of a triangle are $x$ cm, $(x + [[d]])$ cm and $(2x - [[e]])$ cm. Its perimeter is at most [[4 * x0 + d - e]] cm. Form and solve an inequality. What is the largest whole number $x$ can be? (4 marks)",
+   "answer": "$4x + [[d - e]] \\leq [[4 * x0 + d - e]]$, so $x \\leq [[x0]]$; largest whole number [[x0]]"
+  },
+  {
+   "id": "y9au4-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Substitute into formulae and equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S6 Substitute into formulae and equations",
+   "keywords": [
+    "substitute",
+    "into",
+    "formulae",
+    "and",
+    "equations",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "u > 0"
+   ],
+   "text": "Use $v = u + at$ to work out $v$ when $u = [[u]]$, $a = [[p]]$ and $t = [[t]]$.",
+   "answer": "[[u + p * t]]"
+  },
+  {
+   "id": "y9au4-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Substitute into formulae and equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S6 Substitute into formulae and equations",
+   "keywords": [
+    "substitute",
+    "into",
+    "formulae",
+    "and",
+    "equations",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) * h % 2 == 0"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $A = \\frac{1}{2}(a + b)h$ to work out $A$ when $a = [[a]]$, $b = [[b]]$ and $h = [[h]]$.",
+   "answer": "[[(a + b) * h / 2]]"
+  },
+  {
+   "id": "y9au4-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Substitute into formulae and equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S6 Substitute into formulae and equations",
+   "keywords": [
+    "substitute",
+    "into",
+    "formulae",
+    "and",
+    "equations",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "v",
+     "u + p * t"
+    ]
+   ],
+   "check": [
+    "(v - u) / p * p == v - u"
+   ],
+   "text": "Use $v = u + at$ to work out $t$ when $v = [[v]]$, $u = [[u]]$ and $a = [[p]]$.",
+   "answer": "[[(v - u) / p]]"
+  },
+  {
+   "id": "y9au4-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Substitute into formulae and equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S6 Substitute into formulae and equations",
+   "keywords": [
+    "substitute",
+    "into",
+    "formulae",
+    "and",
+    "equations",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "u > 0"
+   ],
+   "text": "Use $s = ut + \\frac{1}{2}at^2$ to work out $s$ when $u = [[u]]$, $a = [[p]]$ and $t = [[t]]$. Then work out $s$ when $t = [[t + 1]]$. (3 marks)",
+   "answer": "[[u * t + p * t * t / 2]]; [[u * (t + 1) + p * (t + 1) * (t + 1) / 2]]"
+  },
+  {
+   "id": "y9au4-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (one-step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S7 Change the subject of a formula (one-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "one",
+    "step",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Make $x$ the subject of $y = x + [[c]]$.",
+   "answer": "$x = y - [[c]]$"
+  },
+  {
+   "id": "y9au4-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (one-step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S7 Change the subject of a formula (one-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "one",
+    "step",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x$.",
+   "answer": "$x = \\frac{y}{[[m]]}$"
+  },
+  {
+   "id": "y9au4-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (one-step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S7 Change the subject of a formula (one-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "one",
+    "step",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "t",
+       "n"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "pick": [
+       "y",
+       "p",
+       "q"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $[[v]]$ the subject of $[[w]] = \\frac{[[v]]}{[[m]]}$.",
+   "answer": "$[[v]] = [[m]][[w]]$"
+  },
+  {
+   "id": "y9au4-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (one-step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S7 Change the subject of a formula (one-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "one",
+    "step",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l * w0 / l == w0"
+   ],
+   "text": "The area of a rectangle is $A = lw$. (a) Make $w$ the subject. (b) Work out $w$ when $A = [[l * w0]]$ and $l = [[l]]$. (2 marks)",
+   "answer": "(a) $w = \\frac{A}{l}$  (b) [[w0]]"
+  },
+  {
+   "id": "y9au4-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (two-step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S8 Change the subject of a formula (two-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "two",
+    "step",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x + [[c]]$.",
+   "answer": "$x = \\frac{y - [[c]]}{[[m]]}$"
+  },
+  {
+   "id": "y9au4-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (two-step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S8 Change the subject of a formula (two-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "two",
+    "step",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x - [[c]]$.",
+   "answer": "$x = \\frac{y + [[c]]}{[[m]]}$"
+  },
+  {
+   "id": "y9au4-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (two-step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S8 Change the subject of a formula (two-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "two",
+    "step",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $l$ the subject of $P = [[m]]l + 2w$.",
+   "answer": "$l = \\frac{P - 2w}{[[m]]}$"
+  },
+  {
+   "id": "y9au4-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a formula (two-step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S8 Change the subject of a formula (two-step)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "formula",
+    "two",
+    "step",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "a0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "v",
+     "sqrt(u * u + 2 * a0 * s)"
+    ]
+   ],
+   "where": [
+    "isint(v)"
+   ],
+   "check": [
+    "(v * v - u * u) / (2 * s) == a0"
+   ],
+   "text": "$v^2 = u^2 + 2as$. (a) Make $a$ the subject. (b) Work out $a$ when $v = [[v]]$, $u = [[u]]$ and $s = [[s]]$. (3 marks)",
+   "answer": "(a) $a = \\frac{v^2 - u^2}{2s}$  (b) [[(v * v - u * u) / (2 * s)]]"
+  },
+  {
+   "id": "y9au4-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S9 Change the subject of a complex formula (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\sqrt{x - [[c]]}$.",
+   "answer": "$x = y^2 + [[c]]$"
+  },
+  {
+   "id": "y9au4-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S9 Change the subject of a complex formula (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $r$ the subject of $A = [[m]]\\pi r^2$.",
+   "answer": "$r = \\sqrt{\\frac{A}{[[m]]\\pi}}$"
+  },
+  {
+   "id": "y9au4-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S9 Change the subject of a complex formula (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{[[m]]}{x} + [[c]]$.",
+   "answer": "$x = \\frac{[[m]]}{y - [[c]]}$"
+  },
+  {
+   "id": "y9au4-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B4 Equations, inequalities and formulae · S9 Change the subject of a complex formula (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{x + [[a]]}{x - [[b]]}$. (4 marks)",
+   "answer": "$x = \\frac{[[b]]y + [[a]]}{y - 1}$"
+  }
+ ]
+}

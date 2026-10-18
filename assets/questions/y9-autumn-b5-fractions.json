@@ -1,0 +1,870 @@
+{
+ "version": 1,
+ "note": "Y9 Autumn Block 5 Fractions: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9au5-s01-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "(a * d + c * b) / (b * d) * (b * d) == a * d + c * b"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} + \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a / b + c / d|mixed]]$"
+  },
+  {
+   "id": "y9au5-s01-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "(w + a / b) > (v + c / d)",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $[[w]]\\frac{[[a]]}{[[b]]} - [[v]]\\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[(w + a / b) - (v + c / d)|mixed]]$"
+  },
+  {
+   "id": "y9au5-s01-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "a / b + c / d != 1",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Which is greater, $\\frac{[[a]]}{[[b]]} + \\frac{[[c]]}{[[d]]}$ or 1? Work it out.",
+   "answer": "$[[a / b + c / d|mixed]]$, which is [[a / b + c / d > 1|if:greater than/less than]] 1"
+  },
+  {
+   "id": "y9au5-s01-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "a / b + c / d < 1",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Sam eats $\\frac{[[a]]}{[[b]]}$ of a pizza and Tia eats $\\frac{[[c]]}{[[d]]}$ of it. What fraction of the pizza is left? (3 marks)",
+   "answer": "$[[1 - a / b - c / d|frac]]$"
+  },
+  {
+   "id": "y9au5-s02-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} \\times \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a * c / (b * d)|frac]]$"
+  },
+  {
+   "id": "y9au5-s02-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "a * d != b * c",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * c > 0"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} \\div \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a * d / (b * c)|mixed]]$"
+  },
+  {
+   "id": "y9au5-s02-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $[[w]]\\frac{[[a]]}{[[b]]} \\times [[v]]\\frac{[[c]]}{[[d]]}$. Show that you changed both to improper fractions.",
+   "answer": "$\\frac{[[w * b + a]]}{[[b]]} \\times \\frac{[[v * d + c]]}{[[d]]} = [[(w + a / b) * (v + c / d)|mixed]]$"
+  },
+  {
+   "id": "y9au5-s02-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "L",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "A rectangle is $[[w]]\\frac{[[a]]}{[[b]]}$ m long and $\\frac{[[c]]}{[[d]]}$ m wide. Work out its area. Then work out how many of these rectangles fit side by side along a [[L]] m wall. (4 marks)",
+   "answer": "Area $[[(w + a / b) * c / d|mixed]]$ m²; [[floor(L / (w + a / b))]] fit along the wall"
+  },
+  {
+   "id": "y9au5-s03-l1",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S3 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       5,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "b * m / b == m"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]}$ of £[[b * m]].",
+   "answer": "£[[a * m]]"
+  },
+  {
+   "id": "y9au5-s03-l2",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S3 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "$\\frac{[[a]]}{[[b]]}$ of a number is [[a * m]]. Work out the number.",
+   "answer": "[[b * m]]"
+  },
+  {
+   "id": "y9au5-s03-l3",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S3 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "T",
+     "lcm(b, d) * m * 5"
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "Mia has £[[T]]. She spends $\\frac{[[a]]}{[[b]]}$ of it on a coat and $\\frac{[[c]]}{[[d]]}$ of what is left on lunch. How much does she have left?",
+   "answer": "After the coat: £[[T - T * a / b|dp:2]]; lunch £[[(T - T * a / b) * c / d|dp:2]]; left £[[(T - T * a / b) * (1 - c / d)|dp:2]]"
+  },
+  {
+   "id": "y9au5-s03-l4",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B5 Fractions · S3 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "S",
+     "b * d * m"
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "isint(S * a / b)",
+    "isint((S - S * a / b) * c / d)",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "S > 0"
+   ],
+   "text": "In a school, $\\frac{[[a]]}{[[b]]}$ of the pupils are in Key Stage 3 and $\\frac{[[c]]}{[[d]]}$ of the rest are in Key Stage 4. There are [[S]] pupils in the school. How many are in each key stage and how many are in sixth form? (4 marks)",
+   "answer": "KS3 [[S * a / b]], KS4 [[(S - S * a / b) * c / d]], sixth form [[(S - S * a / b) * (1 - c / d)]]"
+  }
+ ]
+}

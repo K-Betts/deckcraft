@@ -1,0 +1,1244 @@
+{
+ "version": 1,
+ "note": "Y9 Autumn Block 6 Rates: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9au6-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S1 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       30,
+       90
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / t == v"
+   ],
+   "text": "A car travels [[v * t]] km in [[t]] hours. Work out its average speed.",
+   "answer": "[[v]] km/h"
+  },
+  {
+   "id": "y9au6-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S1 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "choose": [
+       60,
+       80,
+       120
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       15,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A train travels at [[v]] km/h for [[t]] hours and [[m]] minutes. How far does it go?",
+   "answer": "[[v * (t + m / 60)]] km"
+  },
+  {
+   "id": "y9au6-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S1 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t1 > 0"
+   ],
+   "text": "A runner covers [[d1]] km in [[t1]] hours and then [[d2]] km in [[t2]] hours. Work out the average speed for the whole journey.",
+   "answer": "[[(d1 + d2) / (t1 + t2)|dp:2]] km/h"
+  },
+  {
+   "id": "y9au6-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S1 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "choose": [
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "choose": [
+       40,
+       80
+      ]
+     }
+    ],
+    [
+     "k1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "k2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       15,
+       30
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * k1"
+    ],
+    [
+     "d2",
+     "v2 * k2"
+    ]
+   ],
+   "check": [
+    "v1 > 0"
+   ],
+   "text": "Mia drives [[d1]] km at [[v1]] km/h, stops for [[s]] minutes, then drives [[d2]] km at [[v2]] km/h. Work out her total journey time and her average speed for the whole journey including the stop. (4 marks)",
+   "answer": "Time [[d1 / v1 + s / 60 + d2 / v2|dp:2]] hours; average speed [[(d1 + d2) / (d1 / v1 + s / 60 + d2 / v2)|dp:1]] km/h"
+  },
+  {
+   "id": "y9au6-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S2 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "cyclist",
+       "walker",
+       "runner",
+       "horse rider"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 + g + t2 <= 8"
+   ],
+   "check": [
+    "v1 * t1 / t1 == v1"
+   ],
+   "text": "The graph shows the journey out and back of a [[who]]. What was the speed on the outward journey?",
+   "answer": "[[v1]] km/h",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t1 + g + t2|n]]",
+    "ymin": 0,
+    "ymax": "[[ceil((v1 * t1 + 5) / 10) * 10|n]]",
+    "xstep": 1,
+    "ystep": "[[ceil((v1 * t1 + 5) / 10) * 2|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g + t2|n]]",
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9au6-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S2 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "cyclist",
+       "walker",
+       "runner",
+       "horse rider"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 + g + t2 <= 8"
+   ],
+   "check": [
+    "g > 0"
+   ],
+   "text": "The graph shows the journey out and back of a [[who]]. For how long did the person stop?",
+   "answer": "[[g]] [[g == 1|if:hour/hours]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t1 + g + t2|n]]",
+    "ymin": 0,
+    "ymax": "[[ceil((v1 * t1 + 5) / 10) * 10|n]]",
+    "xstep": 1,
+    "ystep": "[[ceil((v1 * t1 + 5) / 10) * 2|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g + t2|n]]",
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9au6-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S2 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "cyclist",
+       "walker",
+       "runner",
+       "horse rider"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 + g + t2 <= 8"
+   ],
+   "check": [
+    "t2 > 0"
+   ],
+   "text": "The graph shows the journey out and back of a [[who]]. Work out the speed on the return journey.",
+   "answer": "[[v1 * t1 / t2|dp:1]] km/h",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t1 + g + t2|n]]",
+    "ymin": 0,
+    "ymax": "[[ceil((v1 * t1 + 5) / 10) * 10|n]]",
+    "xstep": 1,
+    "ystep": "[[ceil((v1 * t1 + 5) / 10) * 2|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g + t2|n]]",
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9au6-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S2 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "who",
+     {
+      "pick": [
+       "cyclist",
+       "walker",
+       "runner",
+       "horse rider"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 + g + t2 <= 8"
+   ],
+   "check": [
+    "t1 > 0"
+   ],
+   "text": "The graph shows the journey out and back of a [[who]]. (a) How far did the person travel in total? (b) What was the average speed for the whole journey, including the stop, to 1 decimal place? (3 marks)",
+   "answer": "(a) [[2 * v1 * t1]] km  (b) [[2 * v1 * t1 / (t1 + g + t2)|dp:1]] km/h",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t1 + g + t2|n]]",
+    "ymin": 0,
+    "ymax": "[[ceil((v1 * t1 + 5) / 10) * 10|n]]",
+    "xstep": 1,
+    "ystep": "[[ceil((v1 * t1 + 5) / 10) * 2|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g|n]]",
+      "[[v1 * t1|n]]"
+     ],
+     [
+      "[[t1 + g + t2|n]]",
+      0
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9au6-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Rates of change and their units",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S3 Rates of change and their units",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "and",
+    "their",
+    "units",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * t / t == r"
+   ],
+   "text": "A tap fills [[r * t]] litres in [[t]] minutes. Work out the rate of flow in litres per minute.",
+   "answer": "[[r]] litres per minute"
+  },
+  {
+   "id": "y9au6-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Rates of change and their units",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S3 Rates of change and their units",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "and",
+    "their",
+    "units",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       9,
+       25
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * h / h == r"
+   ],
+   "text": "A worker earns £[[r * h]] for [[h]] hours. Work out the rate of pay in £ per hour.",
+   "answer": "£[[r]] per hour"
+  },
+  {
+   "id": "y9au6-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Rates of change and their units",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S3 Rates of change and their units",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "and",
+    "their",
+    "units",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       50,
+       300
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * d / d == r"
+   ],
+   "text": "[[r * d]] MB of data is used in [[d]] days. Work out the rate in MB per day, and in GB per week (1 GB = 1000 MB).",
+   "answer": "[[r]] MB per day; [[r * 7 / 1000]] GB per week"
+  },
+  {
+   "id": "y9au6-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Rates of change and their units",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S3 Rates of change and their units",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "and",
+    "their",
+    "units",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "P1",
+     {
+      "choose": [
+       10000,
+       12000,
+       15000
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       200,
+       800
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "P2",
+     "P1 + r * n"
+    ]
+   ],
+   "check": [
+    "r * n / n == r"
+   ],
+   "text": "A population changes from [[P1]] to [[P2]] in [[n]] years. (a) Work out the rate of change in people per year. (b) If it continues at this rate, what will it be after another [[m]] years? (3 marks)",
+   "answer": "(a) [[(P2 - P1) / n]] people per year  (b) [[P2 + (P2 - P1) / n * m]]"
+  },
+  {
+   "id": "y9au6-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Flow problems and their graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S4 Flow problems and their graphs",
+   "keywords": [
+    "flow",
+    "problems",
+    "and",
+    "their",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       6,
+       20
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "V",
+     "r * t"
+    ]
+   ],
+   "check": [
+    "V / r == t"
+   ],
+   "text": "A tank holds [[V]] litres. A tap fills it at [[r]] litres per minute. How long does it take to fill?",
+   "answer": "[[V / r]] minutes"
+  },
+  {
+   "id": "y9au6-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Flow problems and their graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S4 Flow problems and their graphs",
+   "keywords": [
+    "flow",
+    "problems",
+    "and",
+    "their",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       15,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "V",
+     "(a - b) * t"
+    ]
+   ],
+   "check": [
+    "V / (a - b) == t"
+   ],
+   "text": "A bath fills at [[a]] litres per minute and drains at [[b]] litres per minute when both the tap and the plug hole are open. What is the net rate? How long to fill [[V]] litres?",
+   "answer": "Net rate [[a - b]] litres per minute; [[V / (a - b)]] minutes"
+  },
+  {
+   "id": "y9au6-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Flow problems and their graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S4 Flow problems and their graphs",
+   "keywords": [
+    "flow",
+    "problems",
+    "and",
+    "their",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * t / t == r"
+   ],
+   "text": "The graph shows the volume of water in a tank. Work out the rate of filling.",
+   "answer": "[[r]] litres per minute",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t|n]]",
+    "ymin": 0,
+    "ymax": "[[r * t|n]]",
+    "xstep": "[[max(1, floor(t / 4))|n]]",
+    "ystep": "[[ceil(r * t / 40) * 10|n]]",
+    "xlabel": "Time (min)",
+    "ylabel": "Volume (litres)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t|n]]",
+      "[[r * t|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9au6-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Flow problems and their graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S4 Flow problems and their graphs",
+   "keywords": [
+    "flow",
+    "problems",
+    "and",
+    "their",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "V",
+     "(a + b) * k"
+    ]
+   ],
+   "check": [
+    "V / (a + b) == k"
+   ],
+   "text": "A pool holds [[V]] litres. Pipe A fills it at [[a]] litres per minute and pipe B at [[b]] litres per minute. How long to fill it with both open? How long with A alone? (3 marks)",
+   "answer": "Both: [[V / (a + b)|dp:1]] minutes; A alone: [[V / a|dp:1]] minutes"
+  },
+  {
+   "id": "y9au6-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S5 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "Convert [[v * 18]] km/h to m/s.",
+   "answer": "[[v * 5]] m/s"
+  },
+  {
+   "id": "y9au6-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S5 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "choose": [
+       5,
+       10,
+       15,
+       20,
+       25,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "Convert [[v]] m/s to km/h.",
+   "answer": "[[v * 3.6]] km/h"
+  },
+  {
+   "id": "y9au6-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S5 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2.7,
+       7.8,
+       8.9,
+       11.3,
+       19.3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A metal has a density of [[d]] g/cm³. Write this in kg/m³.",
+   "answer": "[[d * 1000]] kg/m³"
+  },
+  {
+   "id": "y9au6-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B6 Rates · S5 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A car travels at [[v * 18]] km/h. (a) Write this in m/s. (b) How far does it travel in [[t]] seconds? (c) How long to travel [[d]] km? (3 marks)",
+   "answer": "(a) [[v * 5]] m/s  (b) [[v * 5 * t]] m  (c) [[d / (v * 18) * 60|dp:1]] minutes"
+  }
+ ]
+}

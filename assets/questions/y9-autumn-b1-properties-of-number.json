@@ -1,0 +1,1763 @@
+{
+ "version": 1,
+ "note": "Y9 Autumn Block 1 Properties of number: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9au1-s01-l1",
+   "topic": "Number",
+   "subtopic": "Factors, multiples and primes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S1 Factors, multiples and primes",
+   "keywords": [
+    "factors",
+    "multiples",
+    "and",
+    "primes",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "(a) Write the first four multiples of [[m]]. (b) Is [[n]] a prime number?",
+   "answer": "(a) [[m]], [[2 * m]], [[3 * m]], [[4 * m]]  (b) [[isprime(n)|if:Yes/No]]"
+  },
+  {
+   "id": "y9au1-s01-l2",
+   "topic": "Number",
+   "subtopic": "Factors, multiples and primes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S1 Factors, multiples and primes",
+   "keywords": [
+    "factors",
+    "multiples",
+    "and",
+    "primes",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Write down all the factors of [[k == 0|if:24/]][[k == 1|if:36/]][[k == 2|if:40/]][[k == 3|if:30/]][[k == 4|if:48/]][[k == 5|if:60/]].",
+   "answer": "[[k == 0|if:1, 2, 3, 4, 6, 8, 12, 24/]][[k == 1|if:1, 2, 3, 4, 6, 9, 12, 18, 36/]][[k == 2|if:1, 2, 4, 5, 8, 10, 20, 40/]][[k == 3|if:1, 2, 3, 5, 6, 10, 15, 30/]][[k == 4|if:1, 2, 3, 4, 6, 8, 12, 16, 24, 48/]][[k == 5|if:1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60/]]"
+  },
+  {
+   "id": "y9au1-s01-l3",
+   "topic": "Number",
+   "subtopic": "Factors, multiples and primes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S1 Factors, multiples and primes",
+   "keywords": [
+    "factors",
+    "multiples",
+    "and",
+    "primes",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       9,
+       15,
+       21,
+       25,
+       27,
+       33,
+       35,
+       39,
+       45,
+       49
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "f",
+     "max(gcd(n, 3), max(gcd(n, 5), gcd(n, 7)))"
+    ]
+   ],
+   "check": [
+    "f > 1"
+   ],
+   "text": "Ali says that [[n]] is a prime number because it is an odd number. Is he right? Explain.",
+   "answer": "No: [[n]] = [[f]] × [[n / f]], so it has factors other than 1 and itself"
+  },
+  {
+   "id": "y9au1-s01-l4",
+   "topic": "Number",
+   "subtopic": "Factors, multiples and primes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S1 Factors, multiples and primes",
+   "keywords": [
+    "factors",
+    "multiples",
+    "and",
+    "primes",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       20,
+       90
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       7,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "(a) Write down the next prime number after [[n]]. (b) How many factors does [[n * 4]] have? (c) Write down a multiple of [[m]] that is between [[m * 5 + 1]] and [[m * 6 + 1]]. (3 marks)",
+   "answer": "(a) [[nextprime(n)]]  (b) [[ndiv(n * 4)]]  (c) [[m * 6]]"
+  },
+  {
+   "id": "y9au1-s02-l1",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S2 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "choose": [
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "choose": [
+       11,
+       13
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p1 * p2 * p3 > 0"
+   ],
+   "text": "Write [[p1 * p2 * p3]] as a product of its prime factors.",
+   "answer": "[[p1]] × [[p2]] × [[p3]]"
+  },
+  {
+   "id": "y9au1-s02-l2",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S2 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2^a * 3^b > 0"
+   ],
+   "text": "Write [[2^a * 3^b]] as a product of prime factors in index form.",
+   "answer": "$2^{[[a]]} \\times 3^{[[b]]}$"
+  },
+  {
+   "id": "y9au1-s02-l3",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S2 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2^a * 3^b * 5 > 0"
+   ],
+   "text": "Write [[2^a * 3^b * 5]] as a product of prime factors in index form.",
+   "answer": "$2^{[[a]]} \\times 3^{[[b]]} \\times 5$"
+  },
+  {
+   "id": "y9au1-s02-l4",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S2 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "ndiv(2^a * 3^b) == (a + 1) * (b + 1)"
+   ],
+   "text": "(a) Write [[2^a * 3^b]] as a product of prime factors. (b) How many factors does [[2^a * 3^b]] have? (3 marks)",
+   "answer": "(a) $2^{[[a]]} \\times 3^{[[b]]}$  (b) ([[a]] + 1)([[b]] + 1) = [[(a + 1) * (b + 1)]]"
+  },
+  {
+   "id": "y9au1-s03-l1",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF) and lowest common multiple (LCM)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S3 Highest common factor (HCF) and lowest common multiple (LCM)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "and",
+    "lowest",
+    "multiple",
+    "lcm",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q",
+    "gcd(p, q) == 1"
+   ],
+   "check": [
+    "gcd(g * p, g * q) == g"
+   ],
+   "text": "Find the highest common factor (HCF) of [[g * p]] and [[g * q]].",
+   "answer": "[[g]]"
+  },
+  {
+   "id": "y9au1-s03-l2",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF) and lowest common multiple (LCM)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S3 Highest common factor (HCF) and lowest common multiple (LCM)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "and",
+    "lowest",
+    "multiple",
+    "lcm",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q",
+    "gcd(p, q) == 1"
+   ],
+   "check": [
+    "lcm(g * p, g * q) == g * p * q"
+   ],
+   "text": "Find the lowest common multiple (LCM) of [[g * p]] and [[g * q]].",
+   "answer": "[[g * p * q]]"
+  },
+  {
+   "id": "y9au1-s03-l3",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF) and lowest common multiple (LCM)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S3 Highest common factor (HCF) and lowest common multiple (LCM)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "and",
+    "lowest",
+    "multiple",
+    "lcm",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "gcd(a, b) > 1"
+   ],
+   "check": [
+    "gcd(a, b) * lcm(a, b) == a * b"
+   ],
+   "text": "Find (a) the HCF (b) the LCM of [[a]] and [[b]].",
+   "answer": "(a) [[gcd(a, b)]]  (b) [[lcm(a, b)]]"
+  },
+  {
+   "id": "y9au1-s03-l4",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF) and lowest common multiple (LCM)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S3 Highest common factor (HCF) and lowest common multiple (LCM)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "and",
+    "lowest",
+    "multiple",
+    "lcm",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       6,
+       8,
+       9,
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8,
+       10,
+       12,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "lcm(a, b) < 100"
+   ],
+   "check": [
+    "lcm(a, b) > 0"
+   ],
+   "text": "One bus leaves a station every [[a]] minutes and another leaves every [[b]] minutes. They both leave at 9:00. After how many minutes do they next leave together? (2 marks)",
+   "answer": "[[lcm(a, b)]] minutes"
+  },
+  {
+   "id": "y9au1-s04-l1",
+   "topic": "Number",
+   "subtopic": "Use prime factors (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S4 Use prime factors (E)",
+   "keywords": [
+    "use",
+    "prime",
+    "factors",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "2^min(a, c) * 3^min(b, d) > 0"
+   ],
+   "text": "$A = 2^{[[a]]} \\times 3^{[[b]]}$ and $B = 2^{[[c]]} \\times 3^{[[d]]}$. Work out the HCF of $A$ and $B$.",
+   "answer": "[[2^min(a, c) * 3^min(b, d)]]"
+  },
+  {
+   "id": "y9au1-s04-l2",
+   "topic": "Number",
+   "subtopic": "Use prime factors (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S4 Use prime factors (E)",
+   "keywords": [
+    "use",
+    "prime",
+    "factors",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "2^max(a, c) * 3^max(b, d) > 0"
+   ],
+   "text": "$A = 2^{[[a]]} \\times 3^{[[b]]}$ and $B = 2^{[[c]]} \\times 3^{[[d]]}$. Work out the LCM of $A$ and $B$.",
+   "answer": "[[2^max(a, c) * 3^max(b, d)]]"
+  },
+  {
+   "id": "y9au1-s04-l3",
+   "topic": "Number",
+   "subtopic": "Use prime factors (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S4 Use prime factors (E)",
+   "keywords": [
+    "use",
+    "prime",
+    "factors",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c",
+    "b != d"
+   ],
+   "check": [
+    "gcd(2^a * 3^b, 2^c * 3^d) == 2^min(a, c) * 3^min(b, d)"
+   ],
+   "text": "Write [[2^a * 3^b]] and [[2^c * 3^d]] as products of prime factors. Use them to find the HCF and the LCM.",
+   "answer": "$2^{[[a]]} \\times 3^{[[b]]}$ and $2^{[[c]]} \\times 3^{[[d]]}$; HCF = [[2^min(a, c) * 3^min(b, d)]], LCM = [[2^max(a, c) * 3^max(b, d)]]"
+  },
+  {
+   "id": "y9au1-s04-l4",
+   "topic": "Number",
+   "subtopic": "Use prime factors (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S4 Use prime factors (E)",
+   "keywords": [
+    "use",
+    "prime",
+    "factors",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a % 2) + (b % 2) + (c % 2) > 0"
+   ],
+   "check": [
+    "2^a * 3^b * 5^c > 0"
+   ],
+   "text": "$n = 2^{[[a]]} \\times 3^{[[b]]} \\times 5^{[[c]]}$. Find the smallest whole number that $n$ can be multiplied by to give a square number. (3 marks)",
+   "answer": "[[2^(a % 2) * 3^(b % 2) * 5^(c % 2)]]"
+  },
+  {
+   "id": "y9au1-s05-l1",
+   "topic": "Number",
+   "subtopic": "Venn diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S5 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       5,
+       4
+      ]
+     }
+    ],
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "A",
+     "floor(N / p)"
+    ],
+    [
+     "B",
+     "floor(N / q)"
+    ],
+    [
+     "C",
+     "floor(N / lcm(p, q))"
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "N - A - B + C > 0"
+   ],
+   "text": "There are [[N]] numbers from 1 to [[N]]. [[A]] are multiples of [[p]], [[B]] are multiples of [[q]] and [[C]] are multiples of both. How many are in neither group?",
+   "answer": "[[N - A - B + C]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "×[[p]]",
+    "b": "×[[q]]",
+    "onlyA": "[[A - C]]",
+    "both": "[[C]]",
+    "onlyB": "[[B - C]]",
+    "outside": null,
+    "unknown": "?"
+   }
+  },
+  {
+   "id": "y9au1-s05-l2",
+   "topic": "Number",
+   "subtopic": "Venn diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S5 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       5,
+       4
+      ]
+     }
+    ],
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "A",
+     "floor(N / p)"
+    ],
+    [
+     "B",
+     "floor(N / q)"
+    ],
+    [
+     "C",
+     "floor(N / lcm(p, q))"
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "A + B - C > 0"
+   ],
+   "text": "The Venn diagram shows the multiples of [[p]] and [[q]] from 1 to [[N]]. How many numbers are multiples of [[p]] or [[q]] (or both)?",
+   "answer": "[[A + B - C]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "×[[p]]",
+    "b": "×[[q]]",
+    "onlyA": "[[A - C]]",
+    "both": "[[C]]",
+    "onlyB": "[[B - C]]",
+    "outside": "[[N - A - B + C]]"
+   }
+  },
+  {
+   "id": "y9au1-s05-l3",
+   "topic": "Number",
+   "subtopic": "Venn diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S5 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       28,
+       32
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "T - a - b + c > 0"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "In a class of [[T]] pupils, [[a]] play football, [[b]] play rugby and [[c]] play both. How many play neither?",
+   "answer": "[[T - a - b + c]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "Football",
+    "b": "Rugby",
+    "onlyA": "[[a - c]]",
+    "both": "[[c]]",
+    "onlyB": "[[b - c]]",
+    "outside": null,
+    "unknown": "?"
+   }
+  },
+  {
+   "id": "y9au1-s05-l4",
+   "topic": "Number",
+   "subtopic": "Venn diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S5 Venn diagrams",
+   "keywords": [
+    "venn",
+    "diagrams",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "T - a - b + c"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "a + b - c + d == T"
+   ],
+   "text": "[[T]] pupils are asked about homework. [[a]] like maths, [[b]] like science, [[c]] like both and [[d]] like neither. Work out how many like maths or science. Then work out how many like only one of the two. (3 marks)",
+   "answer": "Maths or science: [[a + b - c]]; only one: [[a + b - 2 * c]]"
+  },
+  {
+   "id": "y9au1-s06-l1",
+   "topic": "Number",
+   "subtopic": "Use a Venn diagram to calculate HCF and LCM",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S6 Use a Venn diagram to calculate HCF and LCM",
+   "keywords": [
+    "use",
+    "a",
+    "venn",
+    "diagram",
+    "to",
+    "calculate",
+    "hcf",
+    "and",
+    "lcm",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "min(x, u)"
+    ],
+    [
+     "n1",
+     "2^x * 3"
+    ],
+    [
+     "n2",
+     "2^u * 5"
+    ]
+   ],
+   "where": [
+    "x != u"
+   ],
+   "check": [
+    "gcd(2^x * 3, 2^u * 5) == 2^m"
+   ],
+   "text": "The Venn diagram shows the prime factors of [[2^x * 3]] and [[2^u * 5]]. Work out the HCF.",
+   "answer": "[[2^m]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "[[n1]]",
+    "b": "[[n2]]",
+    "onlyA": "[[x - m == 0|if:3/]][[x - m == 1|if:2, 3/]][[x - m == 2|if:2, 2, 3/]]",
+    "both": "[[m == 1|if:2/]][[m == 2|if:2, 2/]][[m == 3|if:2, 2, 2/]]",
+    "onlyB": "[[u - m == 0|if:5/]][[u - m == 1|if:2, 5/]][[u - m == 2|if:2, 2, 5/]]"
+   }
+  },
+  {
+   "id": "y9au1-s06-l2",
+   "topic": "Number",
+   "subtopic": "Use a Venn diagram to calculate HCF and LCM",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S6 Use a Venn diagram to calculate HCF and LCM",
+   "keywords": [
+    "use",
+    "a",
+    "venn",
+    "diagram",
+    "to",
+    "calculate",
+    "hcf",
+    "and",
+    "lcm",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "min(x, u)"
+    ],
+    [
+     "n1",
+     "2^x * 3"
+    ],
+    [
+     "n2",
+     "2^u * 5"
+    ]
+   ],
+   "where": [
+    "x != u"
+   ],
+   "check": [
+    "lcm(2^x * 3, 2^u * 5) == 2^max(x, u) * 15"
+   ],
+   "text": "The Venn diagram shows the prime factors of [[2^x * 3]] and [[2^u * 5]]. Work out the LCM.",
+   "answer": "[[2^max(x, u) * 15]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "[[n1]]",
+    "b": "[[n2]]",
+    "onlyA": "[[x - m == 0|if:3/]][[x - m == 1|if:2, 3/]][[x - m == 2|if:2, 2, 3/]]",
+    "both": "[[m == 1|if:2/]][[m == 2|if:2, 2/]][[m == 3|if:2, 2, 2/]]",
+    "onlyB": "[[u - m == 0|if:5/]][[u - m == 1|if:2, 5/]][[u - m == 2|if:2, 2, 5/]]"
+   }
+  },
+  {
+   "id": "y9au1-s06-l3",
+   "topic": "Number",
+   "subtopic": "Use a Venn diagram to calculate HCF and LCM",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S6 Use a Venn diagram to calculate HCF and LCM",
+   "keywords": [
+    "use",
+    "a",
+    "venn",
+    "diagram",
+    "to",
+    "calculate",
+    "hcf",
+    "and",
+    "lcm",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "min(x, u)"
+    ],
+    [
+     "n1",
+     "2^x * 3"
+    ],
+    [
+     "n2",
+     "2^u * 5"
+    ]
+   ],
+   "where": [
+    "x != u"
+   ],
+   "check": [
+    "gcd(2^x * 3, 2^u * 5) * lcm(2^x * 3, 2^u * 5) == 2^x * 3 * 2^u * 5"
+   ],
+   "text": "Use the Venn diagram of prime factors to find (a) the HCF (b) the LCM of [[2^x * 3]] and [[2^u * 5]].",
+   "answer": "(a) [[2^m]]  (b) [[2^max(x, u) * 15]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "[[n1]]",
+    "b": "[[n2]]",
+    "onlyA": "[[x - m == 0|if:3/]][[x - m == 1|if:2, 3/]][[x - m == 2|if:2, 2, 3/]]",
+    "both": "[[m == 1|if:2/]][[m == 2|if:2, 2/]][[m == 3|if:2, 2, 2/]]",
+    "onlyB": "[[u - m == 0|if:5/]][[u - m == 1|if:2, 5/]][[u - m == 2|if:2, 2, 5/]]"
+   }
+  },
+  {
+   "id": "y9au1-s06-l4",
+   "topic": "Number",
+   "subtopic": "Use a Venn diagram to calculate HCF and LCM",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S6 Use a Venn diagram to calculate HCF and LCM",
+   "keywords": [
+    "use",
+    "a",
+    "venn",
+    "diagram",
+    "to",
+    "calculate",
+    "hcf",
+    "and",
+    "lcm",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "min(x, u)"
+    ]
+   ],
+   "where": [
+    "x != u"
+   ],
+   "check": [
+    "2^m * 2^max(x, u) * 15 == 2^x * 3 * 2^u * 5"
+   ],
+   "text": "Write [[2^x * 3]] and [[2^u * 5]] as products of prime factors and draw a Venn diagram. Use it to show that HCF × LCM = product of the two numbers. (4 marks)",
+   "answer": "HCF [[2^m]] × LCM [[2^max(x, u) * 15]] = [[2^m * 2^max(x, u) * 15]] = [[2^x * 3]] × [[2^u * 5]]"
+  },
+  {
+   "id": "y9au1-s07-l1",
+   "topic": "Number",
+   "subtopic": "Integers, real numbers and rational numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S7 Integers, real numbers and rational numbers",
+   "keywords": [
+    "integers",
+    "real",
+    "numbers",
+    "and",
+    "rational",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(p, q) == 1"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "State whether each number is an integer, a rational number or an irrational number: (a) [[-n]] (b) $\\frac{[[p]]}{[[q]]}$ (c) $\\sqrt{[[s]]}$.",
+   "answer": "(a) integer (and rational)  (b) rational  (c) [[isint(sqrt(s))|if:integer (and rational)/irrational]]"
+  },
+  {
+   "id": "y9au1-s07-l2",
+   "topic": "Number",
+   "subtopic": "Integers, real numbers and rational numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S7 Integers, real numbers and rational numbers",
+   "keywords": [
+    "integers",
+    "real",
+    "numbers",
+    "and",
+    "rational",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{[[b]]}$ as a decimal. Is it terminating or recurring?",
+   "answer": "[[a / b|dp:3]][[isint(a * 1000 / b)|if: (it terminates)/… (it recurs)]]"
+  },
+  {
+   "id": "y9au1-s07-l3",
+   "topic": "Number",
+   "subtopic": "Integers, real numbers and rational numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S7 Integers, real numbers and rational numbers",
+   "keywords": [
+    "integers",
+    "real",
+    "numbers",
+    "and",
+    "rational",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "Which of these are rational? (a) $\\sqrt{[[q * q]]}$ (b) $\\sqrt{[[q * q + 1]]}$ (c) $\\pi$ (d) [[q]].[[q]]",
+   "answer": "Rational: (a) which equals [[q]], and (d); irrational: (b) and (c)"
+  },
+  {
+   "id": "y9au1-s07-l4",
+   "topic": "Number",
+   "subtopic": "Integers, real numbers and rational numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S7 Integers, real numbers and rational numbers",
+   "keywords": [
+    "integers",
+    "real",
+    "numbers",
+    "and",
+    "rational",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "Write down an irrational number that lies between [[q]] and [[q + 1]]. Explain how you know it is irrational. (2 marks)",
+   "answer": "e.g. $\\sqrt{[[q * q + 1]]}$: it is between [[q]] and [[q + 1]] and [[q * q + 1]] is not a square number, so it cannot be written as a fraction"
+  },
+  {
+   "id": "y9au1-s08-l1",
+   "topic": "Number",
+   "subtopic": "Introduction to surds (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S8 Introduction to surds (E)",
+   "keywords": [
+    "introduction",
+    "to",
+    "surds",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\sqrt{[[a * a * b]]}$ in the form $a\\sqrt{b}$ where $b$ is as small as possible.",
+   "answer": "$[[a]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y9au1-s08-l2",
+   "topic": "Number",
+   "subtopic": "Introduction to surds (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S8 Introduction to surds (E)",
+   "keywords": [
+    "introduction",
+    "to",
+    "surds",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * k > 0"
+   ],
+   "text": "Simplify $\\sqrt{[[p]]} \\times \\sqrt{[[p * k * k]]}$.",
+   "answer": "[[p * k]]"
+  },
+  {
+   "id": "y9au1-s08-l3",
+   "topic": "Number",
+   "subtopic": "Introduction to surds (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S8 Introduction to surds (E)",
+   "keywords": [
+    "introduction",
+    "to",
+    "surds",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\sqrt{[[a * a * b]]} + \\sqrt{[[b]]}$.",
+   "answer": "$[[a + 1]]\\sqrt{[[b]]}$"
+  },
+  {
+   "id": "y9au1-s08-l4",
+   "topic": "Number",
+   "subtopic": "Introduction to surds (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B1 Properties of number · S8 Introduction to surds (E)",
+   "keywords": [
+    "introduction",
+    "to",
+    "surds",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A square has an area of [[a * a * b]] cm². Write the side length and the perimeter as surds in their simplest form. (3 marks)",
+   "answer": "Side $[[a]]\\sqrt{[[b]]}$ cm; perimeter $[[4 * a]]\\sqrt{[[b]]}$ cm"
+  }
+ ]
+}
