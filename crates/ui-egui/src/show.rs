@@ -447,8 +447,13 @@ fn keyboard(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64) 
     });
     let mut keep = true;
     let mut actions = vec![];
+    // Typing at the on-screen calculator is not also a show shortcut (E clears the board, B blanks it).
+    let to_calculator = show.teacher.as_ref().is_some_and(|t| t.keyboard_captured());
     for (k, m) in keys {
         use egui::Key::*;
+        if to_calculator && k != Escape {
+            continue;
+        }
         if show.grid && !matches!(k, Escape | Minus) {
             // See All Slides takes no other keys until a slide is chosen.
             if k == G && plain(m) {
@@ -1095,7 +1100,9 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     if keep {
         app.show = Some(show);
     } else {
-        if let Some(t) = show.teacher.take() {
+        if let Some(mut t) = show.teacher.take() {
+            // Next time the slides come first, with the board's drawing kept for later.
+            t.set_whiteboard(false);
             app.teacher_stash = Some(t);
         }
         app.media.stop_owned(crate::media::Owner::Show);

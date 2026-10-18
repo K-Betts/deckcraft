@@ -443,3 +443,295 @@ fn writing_is_still_there_after_leaving_teacher_mode_and_coming_back() {
     teacher(&mut h);
     assert_eq!(overlay(&mut h).strokes.len(), 1, "the writing came back with the slide");
 }
+
+#[test]
+fn the_toolbar_tucks_away_when_left_alone_and_a_double_tapped_grip_keeps_it_out() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).auto_hide_secs = 0.5;
+    overlay(&mut h).open_palette();
+    overlay(&mut h).set_tool(Tool::Pen);
+    h.event(Event::PointerMoved(pos2(1100.0, 700.0)));
+    h.run_steps(10);
+    assert!(overlay(&mut h).palette_open, "not yet: it was only just left alone");
+    h.run_steps(60);
+    assert!(!overlay(&mut h).palette_open, "left alone for a while, the toolbar tucks away");
+    assert!(!overlay(&mut h).options_open, "and takes the pen's colours with it");
+    assert_eq!(overlay(&mut h).tool, Tool::Pen, "the pen is still the pen");
+    // Brought back and kept: it stays however long it is left.
+    overlay(&mut h).open_palette();
+    overlay(&mut h).pinned = true;
+    h.run_steps(90);
+    assert!(overlay(&mut h).palette_open);
+}
+
+#[test]
+fn using_the_toolbar_holds_off_the_tuck_away() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).auto_hide_secs = 0.5;
+    overlay(&mut h).open_palette();
+    h.run_steps(2);
+    // The pointer rests on the toolbar: that is using it.
+    let on_bar = overlay(&mut h).palette_rect_for_test().center();
+    h.event(Event::PointerMoved(on_bar));
+    h.run_steps(90);
+    assert!(overlay(&mut h).palette_open);
+}
+
+#[test]
+fn the_pens_choices_pop_out_beside_the_tool_and_drawing_puts_them_away() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).open_palette();
+    overlay(&mut h).set_tool(Tool::Pen);
+    h.run_steps(3);
+    assert!(overlay(&mut h).options_open);
+    let pop = h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_options"))).expect("the popover");
+    let bar = overlay(&mut h).palette_rect_for_test();
+    assert!(pop.min.x >= bar.max.x, "beside the toolbar, not inside it: {pop:?} vs {bar:?}");
+    assert!(pop.height() < 80.0, "one row, as in the mock-up");
+    // Choosing a width leaves it for the colour; drawing closes it.
+    drag(&mut h, pos2(600.0, 400.0), pos2(800.0, 400.0));
+    assert!(!overlay(&mut h).options_open);
+    h.run_steps(2);
+    assert!(h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_options"))).is_none() || !overlay(&mut h).options_open);
+}
+
+#[test]
+fn a_timer_can_be_made_bigger_or_smaller_and_the_next_one_keeps_the_size() {
+    use crate::teacher_overlay::{TIMER_SCALE_MAX, TIMER_SCALE_MIN};
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).add_timer();
+    h.run_steps(3);
+    h.get_by_label("Start").click();
+    h.run_steps(3);
+    overlay(&mut h).timers[0].toggle();
+    h.run_steps(3);
+    let size = |h: &egui_kittest::Harness<'static, SlideApp>| h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).unwrap().height();
+    let before = size(&h);
+    h.get_by_label("Smaller digits").click();
+    h.run_steps(3);
+    h.get_by_label("Smaller digits").click();
+    h.run_steps(3);
+    assert!(overlay(&mut h).timers[0].scale < 0.8, "{}", overlay(&mut h).timers[0].scale);
+    assert!(size(&h) < before, "the card follows the digits (the buttons keep the width)");
+    overlay(&mut h).add_timer();
+    assert!(overlay(&mut h).timers[1].scale < 0.8, "a new timer starts at the size the teacher last chose");
+    // It cannot be lost off either end.
+    let t = &mut overlay(&mut h).timers[0];
+    for _ in 0..40 {
+        t.resize(1.2);
+    }
+    assert_eq!(t.scale, TIMER_SCALE_MAX);
+    for _ in 0..80 {
+        t.resize(1.0 / 1.2);
+    }
+    assert_eq!(t.scale, TIMER_SCALE_MIN);
+}
+
+#[test]
+fn dragging_a_ruler_moves_it_and_does_not_draw() {
+    use crate::maths_tools::MathsTool;
+    let mut h = harness();
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    h.state_mut().maths_tools.enabled = MathsTool::ALL.into_iter().collect();
+    teacher(&mut h);
+    overlay(&mut h).set_tool(Tool::Pen);
+    overlay(&mut h).maths_tools_panel.open_tool(MathsTool::Ruler);
+    h.run_steps(3);
+    let centre = overlay(&mut h).maths_tools_panel.centre_of(MathsTool::Ruler).expect("it is on the board");
+    drag(&mut h, centre, centre + egui::vec2(120.0, 90.0));
+    let moved = overlay(&mut h).maths_tools_panel.centre_of(MathsTool::Ruler).unwrap();
+    assert!(((moved - centre) - egui::vec2(120.0, 90.0)).length() < 8.0, "{centre:?} -> {moved:?}");
+    assert!(overlay(&mut h).strokes.is_empty(), "the drag was the ruler's, not the pen's");
+    // Clear board still takes ink.
+    drag(&mut h, pos2(300.0, 600.0), pos2(500.0, 600.0));
+    assert_eq!(overlay(&mut h).strokes.len(), 1);
+}
+
+#[test]
+fn typing_goes_to_the_calculator_only_while_the_pointer_is_over_it() {
+    use crate::maths_tools::MathsTool;
+    let mut h = harness();
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    h.state_mut().maths_tools.enabled = MathsTool::ALL.into_iter().collect();
+    teacher(&mut h);
+    overlay(&mut h).maths_tools_panel.open_tool(MathsTool::Calculator);
+    h.run_steps(3);
+    let rect = h.ctx.memory(|m| m.area_rect(egui::Id::new(("maths_tool", MathsTool::Calculator)))).expect("the calculator");
+    h.event(Event::PointerMoved(rect.center()));
+    h.run_steps(3);
+    assert!(overlay(&mut h).keyboard_captured());
+    h.key_press(Key::Num5);
+    h.event(Event::Text("5".into()));
+    h.run_steps(3);
+    assert_eq!(overlay(&mut h).maths_tools_panel.calculator().calc.tokens.len(), 1, "the 5 went to the calculator");
+    assert_eq!(slide(&h), Some(0), "and nothing else acted on the key");
+    h.key_press(Key::Enter);
+    h.run_steps(3);
+    assert_eq!(slide(&h), Some(0), "Enter is the calculator's equals here, not 'next slide'");
+    // Off the calculator the show has its keys back.
+    h.event(Event::PointerMoved(pos2(300.0, 600.0)));
+    h.run_steps(3);
+    assert!(!overlay(&mut h).keyboard_captured());
+    h.key_press(Key::ArrowRight);
+    h.run_steps(3);
+    assert_eq!(slide(&h), Some(1));
+}
+
+#[test]
+fn the_whiteboard_is_a_blank_page_with_its_own_marks_and_the_slide_comes_back_as_it_was() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).set_tool(Tool::Pen);
+    drag(&mut h, pos2(300.0, 300.0), pos2(500.0, 300.0));
+    assert_eq!(overlay(&mut h).strokes.len(), 1);
+    overlay(&mut h).set_whiteboard(true);
+    h.run_steps(2);
+    assert!(overlay(&mut h).strokes.is_empty(), "a fresh page: the slide's ink is put by");
+    drag(&mut h, pos2(300.0, 400.0), pos2(500.0, 400.0));
+    drag(&mut h, pos2(300.0, 500.0), pos2(500.0, 500.0));
+    assert_eq!(overlay(&mut h).strokes.len(), 2);
+    overlay(&mut h).set_whiteboard(false);
+    assert_eq!(overlay(&mut h).strokes.len(), 1, "back on the slide with its one line");
+    overlay(&mut h).set_whiteboard(true);
+    assert_eq!(overlay(&mut h).strokes.len(), 2, "and the board kept what was written on it");
+}
+
+#[test]
+fn the_whiteboard_button_toggles_and_the_arrows_bring_the_slide_back_instead_of_turning_it() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).open_palette();
+    h.run_steps(3);
+    h.get_by_label("Blank whiteboard").click();
+    h.run_steps(3);
+    assert!(overlay(&mut h).whiteboard.is_some());
+    h.get_by_label("Next").click();
+    h.run_steps(3);
+    assert!(overlay(&mut h).whiteboard.is_none(), "Next returns to the slide");
+    assert_eq!(slide(&h), Some(0), "without moving on");
+}
+
+#[test]
+fn a_click_on_the_whiteboard_does_not_turn_the_page_and_choosing_black_swaps_a_black_pen() {
+    use crate::teacher_overlay::Board;
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).pen_colour = egui::Color32::BLACK;
+    overlay(&mut h).set_whiteboard(true);
+    click_at(&mut h, pos2(600.0, 400.0));
+    assert_eq!(slide(&h), Some(0));
+    overlay(&mut h).set_board_kind(Board::Black);
+    assert_eq!(overlay(&mut h).whiteboard, Some(Board::Black));
+    assert_eq!(overlay(&mut h).pen_colour, egui::Color32::WHITE);
+    h.key_press(Key::ArrowRight);
+    h.run_steps(3);
+    assert_eq!(slide(&h), Some(1), "a key still turns the slide, which also leaves the board");
+    assert!(overlay(&mut h).whiteboard.is_none());
+}
+
+/// Writes pictures of the teacher overlay to `$DECKCRAFT_SHOTS` for a human to look at:
+/// `DECKCRAFT_SHOTS=/some/dir cargo test -p deckcraft-ui-egui --lib screenshots_for_review -- --ignored`.
+#[test]
+#[ignore = "writes screenshots for review"]
+fn screenshots_for_review() {
+    use crate::calculator::Key;
+    use crate::maths_tools::MathsTool;
+    let dir = std::path::PathBuf::from(std::env::var("DECKCRAFT_SHOTS").unwrap_or_else(|_| "out".into()));
+    std::fs::create_dir_all(&dir).unwrap();
+    let mut h = harness();
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    h.state_mut().maths_tools.enabled = MathsTool::ALL.into_iter().collect();
+    teacher(&mut h);
+    let shot = |h: &mut egui_kittest::Harness<'static, SlideApp>, name: &str| {
+        h.run_steps(4);
+        h.render().unwrap().save(dir.join(name)).unwrap();
+    };
+    // The toolbar out with the pen's choices beside it.
+    overlay(&mut h).open_palette();
+    overlay(&mut h).set_tool(Tool::Pen);
+    shot(&mut h, "1-pen-popover.png");
+    // Then tucked away, only the pen's tab left.
+    overlay(&mut h).collapse_palette();
+    shot(&mut h, "2-collapsed.png");
+    // Instruments and the calculator on the board, with a timer.
+    {
+        let o = overlay(&mut h);
+        o.open_palette();
+        o.set_tool(Tool::Pointer);
+        o.maths_tools_panel.open_tool(MathsTool::Ruler);
+        o.maths_tools_panel.open_tool(MathsTool::Protractor);
+        o.maths_tools_panel.open_tool(MathsTool::Calculator);
+        let calc = o.maths_tools_panel.calculator();
+        for k in [
+            Key::Digit(1),
+            Key::Frac,
+            Key::Digit(3),
+            Key::Right,
+            Key::Right,
+            Key::Plus,
+            Key::Sqrt,
+            Key::Digit(1),
+            Key::Digit(2),
+            Key::Right,
+            Key::Equals,
+        ] {
+            calc.press(k);
+        }
+        o.add_timer();
+    }
+    shot(&mut h, "3-board.png");
+    {
+        let o = overlay(&mut h);
+        o.maths_tools_panel.open = true;
+        o.timers[0].setup = None;
+        o.timers[0].running = true;
+        o.timers[0].scale = 0.4;
+    }
+    shot(&mut h, "4-chooser-small-timer.png");
+    // Turned instruments, a compass and the grid and number line cards.
+    {
+        let o = overlay(&mut h);
+        o.maths_tools_panel = Default::default();
+        o.collapse_palette();
+        let m = &mut o.maths_tools_panel;
+        m.set_pose(MathsTool::Ruler, pos2(520.0, 330.0), 0.35, 1.0);
+        m.set_pose(MathsTool::Protractor, pos2(360.0, 600.0), -0.2, 0.9);
+        m.set_pose(MathsTool::Compass, pos2(820.0, 560.0), -0.6, 1.0);
+        m.open_tool(MathsTool::CoordinateGrid);
+        m.open_tool(MathsTool::NumberLine);
+        o.timers.clear();
+    }
+    shot(&mut h, "5-instruments-cards.png");
+    // The calculator's home menu and a solved table, then the whiteboard.
+    {
+        let o = overlay(&mut h);
+        o.maths_tools_panel = Default::default();
+        o.maths_tools_panel.open_tool(MathsTool::Calculator);
+        o.maths_tools_panel.calculator().press(Key::Home);
+    }
+    shot(&mut h, "6-calc-home.png");
+    {
+        let d = overlay(&mut h).maths_tools_panel.calculator();
+        d.press(Key::Digit(3));
+        for k in [Key::Digit(2), Key::X, Key::Square, Key::Minus, Key::Digit(1)] {
+            d.press(k);
+        }
+        for _ in 0..4 {
+            d.press(Key::Ok);
+        }
+    }
+    shot(&mut h, "7-calc-table.png");
+    {
+        let o = overlay(&mut h);
+        o.maths_tools_panel = Default::default();
+        o.maths_tools_panel.set_pose(MathsTool::Ruler, pos2(600.0, 420.0), 0.0, 1.0);
+        o.open_palette();
+        o.set_board_kind(crate::teacher_overlay::Board::Squared);
+        o.set_whiteboard(true);
+    }
+    shot(&mut h, "8-whiteboard.png");
+}

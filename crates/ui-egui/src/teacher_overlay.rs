@@ -18,6 +18,13 @@ const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
 const TIMER_QUICK_MINS: [u32; 4] = [1, 2, 5, 10];
 const REVEAL_GRAB: f32 = 24.0;
 const PALETTE_MARGIN: f32 = 16.0;
+/// The toolbar tucks itself away this long after the last time it was used, so the board has
+/// the whole screen. Double-tapping its grip keeps it out.
+pub const AUTO_HIDE_SECS: f64 = 4.0;
+/// A timer's digits can be scaled between these multiples of the standard size.
+pub const TIMER_SCALE_MIN: f32 = 0.25;
+pub const TIMER_SCALE_MAX: f32 = 1.6;
+const TIMER_SCALE_STEP: f32 = 1.2;
 /// The smallest a control may be: a fingertip on a board or a tablet, not a mouse pointer.
 pub const TOUCH_TARGET: f32 = 44.0;
 
@@ -83,6 +90,15 @@ pub enum Edge {
     Bottom,
     Left,
     Right,
+}
+
+/// The blank page the teacher can switch to, away from the slides.
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+pub enum Board {
+    White,
+    Black,
+    /// White with a grid of squares.
+    Squared,
 }
 
 /// What the palette asks the show to do.
@@ -169,12 +185,19 @@ pub struct Timer {
     pub expired: bool,
     /// Hours, minutes and seconds on the dials while the timer is being set; `None` once started.
     pub setup: Option<[u32; 3]>,
+    /// The size of the running digits as a multiple of the standard size, set by the teacher.
+    pub scale: f32,
 }
 
 impl Timer {
     pub fn new(id: u64, duration: f64) -> Self {
         let duration = duration.clamp(1.0, TIMER_MAX_SECS);
-        Timer { id, duration, remaining: duration, running: false, expired: false, setup: None }
+        Timer { id, duration, remaining: duration, running: false, expired: false, setup: None, scale: 1.0 }
+    }
+
+    /// Make the digits bigger (`factor` above 1) or smaller, within the limits.
+    pub fn resize(&mut self, factor: f32) {
+        self.scale = (self.scale * factor).clamp(TIMER_SCALE_MIN, TIMER_SCALE_MAX);
     }
 
     /// Open the dials on the current duration.
@@ -302,6 +325,27 @@ pub struct TeacherOverlay {
     palette_rect: Option<Rect>,
     last_tick: Option<f64>,
     hit_rects: Vec<Rect>,
+    /// Keep the toolbar out however long it is left alone (double-tap its grip).
+    pub pinned: bool,
+    /// Seconds of being left alone before the toolbar tucks away; 0 turns that off.
+    pub auto_hide_secs: f64,
+    /// When the toolbar was last used. `None` until it has been drawn once since it came out.
+    last_used: Option<f64>,
+    /// Where the button of the chosen tool is, so its choices open beside it.
+    active_tool_rect: Option<Rect>,
+    maths_button_rect: Option<Rect>,
+    options_rect: Option<Rect>,
+    /// The size the next timer starts at: whatever the teacher last chose.
+    timer_scale: f32,
+    /// A blank board is showing in place of the slide, and which kind.
+    pub whiteboard: Option<Board>,
+    /// The kind the whiteboard button brings out.
+    pub board_kind: Board,
+    /// The marks that are not showing: the slide's while on the board, the board's while on the slide.
+    board_marks: Parked,
+    /// The choices beside the whiteboard button are out (they share `options_open`).
+    board_choice: bool,
+    whiteboard_button_rect: Option<Rect>,
 }
 
 impl Default for TeacherOverlay {
@@ -337,6 +381,18 @@ impl Default for TeacherOverlay {
             palette_rect: None,
             last_tick: None,
             hit_rects: vec![],
+            pinned: false,
+            auto_hide_secs: AUTO_HIDE_SECS,
+            last_used: None,
+            active_tool_rect: None,
+            maths_button_rect: None,
+            options_rect: None,
+            timer_scale: 1.0,
+            whiteboard: None,
+            board_kind: Board::White,
+            board_marks: Parked::default(),
+            board_choice: false,
+            whiteboard_button_rect: None,
         }
     }
 }
@@ -380,6 +436,8 @@ impl TeacherOverlay {
     /// away here and come back when the teacher returns. Unless the teacher chose to keep
     /// annotations, in which case they ride along. Timers always carry on.
     pub fn on_slide_change(&mut self, to: usize) {
+        // The slide the marks belong to is the one being left: put the board away first.
+        self.set_whiteboard(false);
         let from = self.slide.replace(to);
         if self.keep_on_advance || from == Some(to) {
             return;
@@ -401,7 +459,40 @@ impl TeacherOverlay {
         }
     }
 
+    /// Show a blank board in place of the slide, or go back to it. Each keeps its own marks, so the
+    /// teacher can go off the slides for a while and return to exactly what was there.
+    pub fn set_whiteboard(&mut self, on: bool) {
+        if on == self.whiteboard.is_some() {
+            return;
+        }
+        self.draft = None;
+        self.revealer_drag = false;
+        let other = std::mem::take(&mut self.board_marks);
+        self.board_marks = Parked {
+            strokes: std::mem::replace(&mut self.strokes, other.strokes),
+            shapes: std::mem::replace(&mut self.shapes, other.shapes),
+            revealer: std::mem::replace(&mut self.revealer, other.revealer),
+        };
+        self.whiteboard = on.then_some(self.board_kind);
+        self.board_choice = on;
+        self.options_open = on;
+    }
+
+    pub fn set_board_kind(&mut self, kind: Board) {
+        self.board_kind = kind;
+        if self.whiteboard.is_some() {
+            self.whiteboard = Some(kind);
+        }
+        // Keep the ink readable: no black pen on a black board, no white pen on white paper.
+        if kind == Board::Black && self.pen_colour == Color32::BLACK {
+            self.pen_colour = Color32::WHITE;
+        } else if kind != Board::Black && self.pen_colour == Color32::WHITE {
+            self.pen_colour = Color32::BLACK;
+        }
+    }
+
     pub fn set_tool(&mut self, tool: Tool) {
+        self.board_choice = false;
         self.draft = None;
         self.revealer_drag = false;
         // Choosing a tool opens its choices; choosing it again opens or closes them.
@@ -429,6 +520,7 @@ impl TeacherOverlay {
         self.next_id += 1;
         let id = self.next_id;
         let mut t = Timer::new(id, TIMER_DEFAULT_SECS);
+        t.scale = self.timer_scale;
         t.begin_setup();
         self.timers.push(t);
     }
@@ -442,14 +534,28 @@ impl TeacherOverlay {
         }
     }
 
+    #[cfg(test)]
+    pub fn palette_rect_for_test(&self) -> Rect {
+        self.palette_rect.expect("the toolbar is out")
+    }
+
     /// Whether the overlay takes the pointer, so the show must not also act on the click.
     pub fn wants_pointer(&self, at: Option<Pos2>) -> bool {
-        self.tool != Tool::Pointer || at.is_some_and(|p| self.hit_rects.iter().any(|r| r.expand(6.0).contains(p)))
+        // A blank board is something to write on, not a slide to click past.
+        self.tool != Tool::Pointer
+            || self.whiteboard.is_some()
+            || at.is_some_and(|p| self.hit_rects.iter().any(|r| r.expand(6.0).contains(p)) || (self.maths && self.maths_tools_panel.hits(p)))
+    }
+
+    /// Typing goes to the on-screen calculator while the pointer is over it, so the digits and
+    /// letters are not also show shortcuts.
+    pub fn keyboard_captured(&self) -> bool {
+        self.maths && self.maths_tools_panel.keyboard_captured()
     }
 
     /// With a tool on, the wheel belongs to the overlay rather than turning the page.
     pub fn owns_wheel(&self) -> bool {
-        self.tool != Tool::Pointer || self.maths_tools_panel.has_visible_widgets()
+        self.tool != Tool::Pointer || self.whiteboard.is_some() || self.maths_tools_panel.has_visible_widgets()
     }
 
     /// Rub out ink within `radius` of `p`. In pixel mode only the ink under the eraser goes and
@@ -537,7 +643,12 @@ impl TeacherOverlay {
         let resp = ui.interact(full, Id::new("teacher_surface"), if self.tool == Tool::Pointer { Sense::hover() } else { Sense::click_and_drag() });
         let palm = ctx.multi_touch().filter(|m| m.num_touches >= PALM_TOUCHES).map(|m| m.center_pos);
         self.palm_wipe(palm);
-        if palm.is_none() {
+        // A ruler or protractor under the pointer takes the gesture: dragging it must not also draw.
+        let grabbed = palm.is_none() && self.maths && self.maths_tools_panel.instrument_input(&ctx, full);
+        if grabbed {
+            self.draft = None;
+        }
+        if palm.is_none() && !grabbed {
             self.pointer_tools(&resp, full, hover, origin);
         }
         if matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape) {
@@ -545,6 +656,13 @@ impl TeacherOverlay {
         } else if self.tool == Tool::Eraser {
             ctx.set_cursor_icon(egui::CursorIcon::None);
         }
+        // The board and the instruments share one layer, the board painted first, so the instruments
+        // are always on top of it.
+        let board_layer = LayerId::new(Order::Middle, Id::new("teacher_board"));
+        if let Some(kind) = self.whiteboard {
+            paint_board(&ctx.layer_painter(board_layer), full, kind);
+        }
+        self.maths_tools_panel.layer = self.whiteboard.map(|_| board_layer);
         let painter = ctx.layer_painter(LayerId::new(Order::Foreground, Id::new("teacher_overlay")));
         self.paint(&painter, full, hover);
         if let Some(c) = self.palm_now {
@@ -553,13 +671,19 @@ impl TeacherOverlay {
         self.hit_rects.clear();
         if self.palette_open {
             self.palette(&ctx, full, &mut actions);
+            self.options_popover(&ctx, full);
         } else {
             self.palette_rect = None;
+            self.options_rect = None;
         }
-        self.palette_tab(&ctx, full);
+        self.palette_tab(&ctx, full, now);
         let mut dead = vec![];
         for (i, t) in self.timers.iter_mut().enumerate() {
+            let scale = t.scale;
             let (remove, rect) = timer_widget(&ctx, t, i, full, now);
+            if t.scale != scale {
+                self.timer_scale = t.scale;
+            }
             self.hit_rects.push(rect);
             if remove {
                 dead.push(t.id);
@@ -567,16 +691,58 @@ impl TeacherOverlay {
         }
         self.timers.retain(|t| !dead.contains(&t.id));
         if self.maths {
+            self.maths_tools_panel.anchor = self.palette_rect.zip(self.maths_button_rect).map(|(pal, btn)| popover_anchor(self.edge, pal, btn, 6.0));
             self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
         }
+        self.auto_collapse(&ctx, now, hover);
         if self.timers.iter().any(|t| t.running || t.expired) {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
         }
         actions
     }
 
+    /// Tuck the toolbar (and the choices that opened from it) away once it has been left alone.
+    /// Being over it, using it or dragging it counts as using it.
+    fn auto_collapse(&mut self, ctx: &egui::Context, now: f64, hover: Option<Pos2>) {
+        if !self.palette_open {
+            self.last_used = None;
+            return;
+        }
+        let near = |r: Option<Rect>| r.zip(hover).is_some_and(|(r, p)| r.expand(14.0).contains(p));
+        let busy = self.palette_drag.is_some()
+            || near(self.palette_rect)
+            || near(self.options_rect)
+            || (self.maths_tools_panel.open && near(self.maths_tools_panel.chooser_rect()));
+        let last = self.last_used.get_or_insert(now);
+        if busy {
+            *last = now;
+        }
+        if self.pinned || self.auto_hide_secs <= 0.0 {
+            return;
+        }
+        if now - *last >= self.auto_hide_secs {
+            self.collapse_palette();
+        } else {
+            ctx.request_repaint_after(std::time::Duration::from_millis(250));
+        }
+    }
+
+    /// Put the toolbar away: just its tab stays on the edge.
+    pub fn collapse_palette(&mut self) {
+        self.palette_open = false;
+        self.options_open = false;
+        self.maths_tools_panel.open = false;
+        self.last_used = None;
+    }
+
+    /// Bring the toolbar out and start the clock on tucking it away again.
+    pub fn open_palette(&mut self) {
+        self.palette_open = true;
+        self.last_used = None;
+    }
+
     /// The small arrow on the left edge that puts the palette away or brings it out.
-    fn palette_tab(&mut self, ctx: &egui::Context, full: Rect) {
+    fn palette_tab(&mut self, ctx: &egui::Context, full: Rect, now: f64) {
         // Beside the palette when that is docked on the left, so the two never overlap.
         let x = match (self.palette_open, self.edge, self.palette_rect) {
             (true, Edge::Left, Some(r)) => r.max.x + 2.0,
@@ -587,18 +753,44 @@ impl TeacherOverlay {
             .fixed_pos(pos2(x, full.center().y))
             .pivot(Align2::LEFT_CENTER)
             .show(ctx, |ui| {
-                let (r, resp) = ui.allocate_exact_size(vec2(34.0, 72.0), Sense::click());
-                let fill = if resp.hovered() { INK_LIGHT } else { INK };
+                // Out of the way while the toolbar is away: a narrow, see-through handle, full
+                // strength once the pointer is on it.
+                let away = !self.palette_open;
+                let (r, resp) = ui.allocate_exact_size(if away { vec2(26.0, 64.0) } else { vec2(34.0, 72.0) }, Sense::click());
+                let fill = if resp.hovered() {
+                    INK_LIGHT
+                } else if away {
+                    INK.gamma_multiply(0.55)
+                } else {
+                    INK
+                };
                 ui.painter().rect_filled(r, CornerRadius { nw: 0, sw: 0, ne: 12, se: 12 }, fill);
-                let (c, s) = (r.center(), 5.0);
+                let arrow_y = if away && matches!(self.tool, Tool::Pen | Tool::Shape | Tool::Highlighter) { -9.0 } else { 0.0 };
+                let (c, s) = (r.center() + vec2(0.0, arrow_y), 5.0);
                 let dir = if self.palette_open { -1.0 } else { 1.0 };
                 let pts = [pos2(c.x - s * dir * 0.6, c.y - s), pos2(c.x + s * dir * 0.6, c.y), pos2(c.x - s * dir * 0.6, c.y + s)];
                 ui.painter().add(Shape::line(pts.to_vec(), egui::Stroke::new(2.5, Color32::WHITE)));
+                // The ink in the pen, so a teacher can see it with the toolbar away.
+                let dot = match self.tool {
+                    Tool::Pen | Tool::Shape => Some(self.pen_colour),
+                    Tool::Highlighter => Some(self.highlight_colour),
+                    _ => None,
+                };
+                if away && let Some(d) = dot {
+                    let shown = Color32::from_rgb(d.r(), d.g(), d.b());
+                    ui.painter().circle_filled(r.center() + vec2(0.0, 17.0), 6.0, shown);
+                    ui.painter().circle_stroke(r.center() + vec2(0.0, 17.0), 6.5, egui::Stroke::new(1.5, Color32::WHITE));
+                }
                 resp.on_hover_text(if self.palette_open { "Hide the tools" } else { "Show the tools" })
             });
         self.hit_rects.push(out.response.rect);
         if out.inner.clicked() {
-            self.palette_open = !self.palette_open;
+            if self.palette_open {
+                self.collapse_palette();
+            } else {
+                self.open_palette();
+                self.last_used = Some(now);
+            }
         }
     }
 
@@ -608,6 +800,9 @@ impl TeacherOverlay {
         match self.tool {
             Tool::Pointer => {}
             Tool::Pen | Tool::Highlighter => {
+                if resp.drag_started() || resp.clicked() {
+                    self.options_open = false;
+                }
                 if resp.drag_started() {
                     let s = self.new_stroke(origin.or(at).unwrap_or(Pos2::ZERO));
                     self.draft = Some(Draft::Stroke(s));
@@ -632,6 +827,7 @@ impl TeacherOverlay {
             }
             Tool::Shape => {
                 if resp.drag_started() {
+                    self.options_open = false;
                     let s = self.new_shape(origin.or(at).unwrap_or(Pos2::ZERO));
                     self.draft = Some(Draft::Shape(s));
                 }
@@ -713,16 +909,11 @@ impl TeacherOverlay {
         let out = egui::Area::new(Id::new("teacher_palette")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
             egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(10, 6)).show(ui, |ui| {
                 ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                let has_options =
-                    self.options_open && matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
                 // Room along the docked edge: the tools wrap onto a second line or column on a
                 // phone instead of running off the screen.
                 let limit = if horizontal { full.width() - 2.0 * PALETTE_MARGIN - 20.0 } else { full.height() - 2.0 * PALETTE_MARGIN - 12.0 }
                     .max(TOUCH_TARGET * 2.0);
                 let mut body = |this: &mut Self, ui: &mut Ui| {
-                    if has_options {
-                        lay(ui, horizontal, limit, |ui| this.options(ui));
-                    }
                     lay(ui, horizontal, limit, |ui| this.main_row(ui, full, horizontal, actions));
                 };
                 if horizontal {
@@ -737,7 +928,47 @@ impl TeacherOverlay {
         self.palette_rect = Some(rect);
     }
 
+    /// The colours and widths of the chosen tool, in a pill beside its button: out when the tool
+    /// is chosen, away again as soon as a colour is picked or drawing begins.
+    fn options_popover(&mut self, ctx: &egui::Context, full: Rect) {
+        self.options_rect = None;
+        let boards = self.board_choice && self.whiteboard.is_some();
+        let has = self.options_open && (boards || matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser));
+        let Some(pal) = self.palette_rect.filter(|_| has) else { return };
+        let button = if boards { self.whiteboard_button_rect } else { self.active_tool_rect }.unwrap_or(pal);
+        let (pos, pivot) = popover_anchor(self.edge, pal, button, if self.edge == Edge::Left { 44.0 } else { 8.0 });
+        let limit = (full.width() - 2.0 * PALETTE_MARGIN - 20.0).max(TOUCH_TARGET * 3.0);
+        let out = egui::Area::new(Id::new("teacher_options")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
+            egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(12, 6)).show(ui, |ui| {
+                ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
+                lay(ui, true, limit, |ui| self.options(ui));
+            });
+        });
+        self.hit_rects.push(out.response.rect);
+        self.options_rect = Some(out.response.rect);
+    }
+
     fn options(&mut self, ui: &mut Ui) {
+        if self.board_choice && self.whiteboard.is_some() {
+            for (kind, name) in [(Board::White, "White board"), (Board::Black, "Black board"), (Board::Squared, "Squared board")] {
+                let on = self.whiteboard == Some(kind);
+                let resp = icon_button(ui, on, name, |p, r, c| {
+                    let fill = if kind == Board::Black { Color32::from_rgb(0x1E, 0x23, 0x2B) } else { Color32::WHITE };
+                    p.rect_filled(r, CornerRadius::same(2), fill);
+                    p.rect_stroke(r, CornerRadius::same(2), egui::Stroke::new(1.5, c), egui::StrokeKind::Inside);
+                    if kind == Board::Squared {
+                        let g = egui::Stroke::new(1.0, Color32::from_rgb(0x7A, 0x9C, 0xD6));
+                        p.line_segment([r.center_top(), r.center_bottom()], g);
+                        p.line_segment([r.left_center(), r.right_center()], g);
+                    }
+                });
+                if resp.clicked() {
+                    self.set_board_kind(kind);
+                    self.options_open = false;
+                }
+            }
+            return;
+        }
         let swatch = |ui: &mut Ui, colour: Color32, on: bool, tip: &str| {
             let (r, resp) = ui.allocate_exact_size(vec2(36.0, 36.0), Sense::click());
             let shown = Color32::from_rgb(colour.r(), colour.g(), colour.b());
@@ -828,10 +1059,20 @@ impl TeacherOverlay {
     fn main_row(&mut self, ui: &mut Ui, full: Rect, horizontal: bool, actions: &mut Vec<Action>) {
         let grip = ui
             .allocate_response(if horizontal { vec2(24.0, TOUCH_TARGET) } else { vec2(TOUCH_TARGET, 24.0) }, Sense::drag())
-            .on_hover_text("Drag to move the toolbar");
+            .on_hover_text("Drag to move the toolbar. Double-tap to keep it out.");
         for d in [-7.0, 0.0, 7.0] {
             let off = if horizontal { vec2(0.0, d) } else { vec2(d, 0.0) };
             ui.painter().circle_filled(grip.rect.center() + off, 2.0, Color32::from_gray(150));
+        }
+        if grip.double_clicked() {
+            self.pinned = !self.pinned;
+        }
+        if self.pinned {
+            // The dots go blue: the toolbar will stay where it is.
+            for d in [-7.0, 0.0, 7.0] {
+                let off = if horizontal { vec2(0.0, d) } else { vec2(d, 0.0) };
+                ui.painter().circle_filled(grip.rect.center() + off, 2.4, ACCENT);
+            }
         }
         if grip.dragged() {
             self.palette_drag = grip.interact_pointer_pos();
@@ -843,7 +1084,11 @@ impl TeacherOverlay {
             self.along = along_edge(full, self.edge, p);
         }
         let tool_btn = |this: &mut Self, ui: &mut Ui, tool: Tool, name: &str| {
-            if icon_button(ui, this.tool == tool, name, |p, r, c| paint_tool_icon(p, r, c, tool)).clicked() {
+            let resp = icon_button(ui, this.tool == tool, name, |p, r, c| paint_tool_icon(p, r, c, tool));
+            if this.tool == tool {
+                this.active_tool_rect = Some(resp.rect);
+            }
+            if resp.clicked() {
                 this.set_tool(tool);
             }
         };
@@ -863,15 +1108,36 @@ impl TeacherOverlay {
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
         }
-        if self.maths && icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
-            self.maths_tools_panel.toggle();
+        {
+            let on = self.whiteboard.is_some();
+            let resp = icon_button(ui, on, if on { "Back to the slides" } else { "Blank whiteboard" }, paint_whiteboard_icon);
+            self.whiteboard_button_rect = Some(resp.rect);
+            if resp.clicked() {
+                self.set_whiteboard(!on);
+            }
+        }
+        if self.maths {
+            let resp = icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon);
+            self.maths_button_rect = Some(resp.rect);
+            if resp.clicked() {
+                self.maths_tools_panel.toggle();
+            }
         }
         group_gap(ui, horizontal);
+        // On the whiteboard the arrows bring the slide back rather than leave it for another.
         if icon_button(ui, false, "Previous", |p, r, c| paint_arrow_icon(p, r, c, false)).clicked() {
-            actions.push(Action::Prev);
+            if self.whiteboard.is_some() {
+                self.set_whiteboard(false);
+            } else {
+                actions.push(Action::Prev);
+            }
         }
         if icon_button(ui, false, "Next", |p, r, c| paint_arrow_icon(p, r, c, true)).clicked() {
-            actions.push(Action::Next);
+            if self.whiteboard.is_some() {
+                self.set_whiteboard(false);
+            } else {
+                actions.push(Action::Next);
+            }
         }
         let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
         let fill = if resp.hovered() { DANGER_HOVER } else { DANGER };
@@ -884,6 +1150,56 @@ impl TeacherOverlay {
             actions.push(Action::Exit);
         }
     }
+}
+
+/// Where a pill of choices opens beside `button` on a toolbar docked to `edge`: just clear of it,
+/// level with the button, on the side that faces the board.
+fn popover_anchor(edge: Edge, bar: Rect, button: Rect, gap: f32) -> (Pos2, Align2) {
+    let g = 10.0 + gap;
+    match edge {
+        Edge::Left => (pos2(bar.max.x + g, button.center().y), Align2::LEFT_CENTER),
+        Edge::Right => (pos2(bar.min.x - g, button.center().y), Align2::RIGHT_CENTER),
+        Edge::Top => (pos2(button.center().x, bar.max.y + g), Align2::CENTER_TOP),
+        Edge::Bottom => (pos2(button.center().x, bar.min.y - g), Align2::CENTER_BOTTOM),
+    }
+}
+
+fn paint_board(p: &Painter, full: Rect, kind: Board) {
+    let (fill, line) = match kind {
+        Board::Black => (Color32::from_rgb(0x1E, 0x23, 0x2B), Color32::TRANSPARENT),
+        Board::White => (Color32::WHITE, Color32::TRANSPARENT),
+        Board::Squared => (Color32::WHITE, Color32::from_rgb(0xC9, 0xD8, 0xEE)),
+    };
+    p.rect_filled(full, CornerRadius::ZERO, fill);
+    if line != Color32::TRANSPARENT {
+        let step = 32.0;
+        let s = egui::Stroke::new(1.0, line);
+        let mut x = full.min.x + step;
+        while x < full.max.x {
+            p.line_segment([pos2(x, full.min.y), pos2(x, full.max.y)], s);
+            x += step;
+        }
+        let mut y = full.min.y + step;
+        while y < full.max.y {
+            p.line_segment([pos2(full.min.x, y), pos2(full.max.x, y)], s);
+            y += step;
+        }
+    }
+}
+
+fn paint_whiteboard_icon(p: &Painter, r: Rect, c: Color32) {
+    let s = egui::Stroke::new(2.0, c);
+    p.rect_stroke(Rect::from_min_max(r.min + vec2(0.0, 1.0), r.max - vec2(0.0, 5.0)), CornerRadius::same(2), s, egui::StrokeKind::Middle);
+    p.line_segment([pos2(r.min.x + 3.0, r.max.y - 1.0), pos2(r.max.x - 3.0, r.max.y - 1.0)], s);
+    p.add(Shape::line(
+        vec![
+            pos2(r.min.x + 4.0, r.center().y),
+            pos2(r.center().x - 1.0, r.min.y + 6.0),
+            pos2(r.center().x + 2.0, r.center().y + 1.0),
+            pos2(r.max.x - 4.0, r.min.y + 6.0),
+        ],
+        egui::Stroke::new(1.6, c),
+    ));
 }
 
 /// A thin rule between groups of tools.
@@ -1237,6 +1553,21 @@ fn close_button(ui: &mut Ui) -> Response {
     resp
 }
 
+/// A small `−` or `+` button that makes the running digits smaller or bigger.
+fn size_button(ui: &mut Ui, grow: bool) -> Response {
+    let (r, resp) = ui.allocate_exact_size(vec2(TOUCH_TARGET, TOUCH_TARGET), Sense::click());
+    let fill = if resp.hovered() { RAISED_HOVER } else { RAISED };
+    ui.painter().rect_filled(r, CornerRadius::same(8), fill);
+    let (c, k, s) = (r.center(), 7.0, egui::Stroke::new(2.5, Color32::WHITE));
+    ui.painter().line_segment([c + vec2(-k, 0.0), c + vec2(k, 0.0)], s);
+    if grow {
+        ui.painter().line_segment([c + vec2(0.0, -k), c + vec2(0.0, k)], s);
+    }
+    let name = if grow { "Bigger digits" } else { "Smaller digits" };
+    resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name));
+    resp
+}
+
 fn timer_button(ui: &mut Ui, text: &str, fill: Color32, width: f32) -> Response {
     ui.add(egui::Button::new(egui::RichText::new(text).size(18.0).strong().color(Color32::WHITE)).fill(fill).min_size(vec2(width, TOUCH_TARGET)))
 }
@@ -1257,7 +1588,10 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
     let beside_palette = if compact { 90.0 } else { 0.0 };
     let pad_x: i8 = if compact { 12 } else { 26 };
     let dial_room = (full.width() - beside_palette - 2.0 * f32::from(pad_x) - 8.0).max(120.0);
-    let size = if setting { 52.0f32.min(dial_room / run_width("00:00:00", 1.0)) } else { timer_digit_fit(full, &t.label()) };
+    let size = if setting { 52.0f32.min(dial_room / run_width("00:00:00", 1.0)) } else { (timer_digit_fit(full, &t.label()) * t.scale).max(18.0) };
+    // A small timer gets a snug card.
+    let pad_y = (16.0 * t.scale.clamp(0.5, 1.0)) as i8;
+    let small = !setting && t.scale < 0.6;
     let id = Id::new(("teacher_timer", t.id));
     let last_rect: Option<Rect> = ctx.data(|d| d.get_temp(id.with("rect")));
     let hovered = last_rect.zip(ctx.pointer_hover_pos()).is_some_and(|(r, p)| r.expand(8.0).contains(p));
@@ -1271,9 +1605,11 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
         .movable(true)
         .constrain(true)
         .show(ctx, |ui| {
-            egui::Frame::new().fill(fill).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(pad_x, 16)).show(
-                ui,
-                |ui| {
+            let framed = egui::Frame::new()
+                .fill(fill)
+                .corner_radius(CornerRadius::same(if small { 18 } else { SURFACE_RADIUS }))
+                .inner_margin(Margin::symmetric(pad_x, pad_y))
+                .show(ui, |ui| {
                     ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
                     if setting {
                         let mut set = t.setup.unwrap_or_default();
@@ -1313,12 +1649,21 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
                         if !t.running || hovered {
                             ui.horizontal(|ui| {
                                 let (label, fill) = if t.running { ("Pause", RAISED) } else { ("Resume", SUCCESS) };
-                                if timer_button(ui, label, fill, 110.0).clicked() {
+                                if timer_button(ui, label, fill, if small { 84.0 } else { 110.0 }).clicked() {
                                     t.toggle();
                                 }
-                                if timer_button(ui, "Reset", RAISED, 96.0).on_hover_text("Back to setting the time").clicked() {
+                                if timer_button(ui, "Reset", RAISED, if small { 72.0 } else { 96.0 })
+                                    .on_hover_text("Back to setting the time")
+                                    .clicked()
+                                {
                                     t.reset();
                                     t.begin_setup();
+                                }
+                                if size_button(ui, false).on_hover_text("Smaller digits").clicked() {
+                                    t.resize(1.0 / TIMER_SCALE_STEP);
+                                }
+                                if size_button(ui, true).on_hover_text("Bigger digits").clicked() {
+                                    t.resize(TIMER_SCALE_STEP);
                                 }
                                 if close_button(ui).on_hover_text("Dismiss").clicked() {
                                     remove = true;
@@ -1326,8 +1671,21 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
                             });
                         }
                     }
-                },
-            );
+                });
+            // Drag the corner to size the digits to the room; it shows with the buttons.
+            if !setting && (hovered || !t.running) {
+                let rect = framed.response.rect;
+                let corner = Rect::from_min_size(rect.max - vec2(34.0, 34.0), vec2(34.0, 34.0));
+                let grab = ui.interact(corner, id.with("grow"), Sense::drag()).on_hover_text("Drag to resize the timer");
+                let ink = if grab.hovered() || grab.dragged() { Color32::WHITE } else { Color32::from_white_alpha(120) };
+                for k in [8.0, 14.0, 20.0] {
+                    ui.painter().line_segment([rect.max - vec2(k, 8.0), rect.max - vec2(8.0, k)], egui::Stroke::new(2.0, ink));
+                }
+                if grab.dragged() {
+                    let d = grab.drag_delta();
+                    t.resize(1.0 + (d.x + d.y) * 0.5 / rect.width().max(80.0));
+                }
+            }
         });
     ctx.data_mut(|d| d.insert_temp(id.with("rect"), out.response.rect));
     if start {
