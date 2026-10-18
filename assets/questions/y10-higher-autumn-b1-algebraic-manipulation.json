@@ -1,0 +1,959 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Autumn Block 1 Algebraic manipulation: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hau1-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Simplify expressions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S1 Simplify expressions",
+   "keywords": [
+    "simplify",
+    "expressions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b - c > 0"
+   ],
+   "check": [
+    "a + b - c != 0"
+   ],
+   "text": "Simplify $[[a]]x + [[b]]x - [[c]]x$.",
+   "answer": "$[[a + b - c|term:x]]$"
+  },
+  {
+   "id": "y10hau1-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Simplify expressions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S1 Simplify expressions",
+   "keywords": [
+    "simplify",
+    "expressions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - c != 0"
+   ],
+   "text": "Simplify $[[a]]x + [[b]]y - [[c]]x + [[d]]y$.",
+   "answer": "$[[a - c|term:x]][[b + d|sterm:y]]$"
+  },
+  {
+   "id": "y10hau1-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Simplify expressions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S1 Simplify expressions",
+   "keywords": [
+    "simplify",
+    "expressions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c - e > 1"
+   ],
+   "check": [
+    "c - e != 0"
+   ],
+   "text": "Simplify (a) $[[a]]p \\times [[b]]q$ (b) $[[c]]x^2 + [[d]]x - [[e]]x^2$.",
+   "answer": "(a) $[[a * b]]pq$  (b) $[[c - e]]x^2 + [[d]]x$"
+  },
+  {
+   "id": "y10hau1-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Simplify expressions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S1 Simplify expressions",
+   "keywords": [
+    "simplify",
+    "expressions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a - c + d > 0"
+   ],
+   "check": [
+    "(3 + b + 1) * k == 3 * k + b * k + k"
+   ],
+   "text": "A triangle has sides $(3x + [[a]])$ cm, $([[b]]x - [[c]])$ cm and $(x + [[d]])$ cm. (a) Write and simplify an expression for its perimeter. (b) Work out the perimeter when $x = [[k]]$. (3 marks)",
+   "answer": "(a) $[[3 + b + 1]]x + [[a - c + d]]$  (b) [[(4 + b) * k + a - c + d]] cm"
+  },
+  {
+   "id": "y10hau1-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Laws of indices",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S2 Laws of indices",
+   "keywords": [
+    "laws",
+    "of",
+    "indices",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - k > 0"
+   ],
+   "text": "Simplify $x^{[[m]]} \\times x^{[[n]]} \\div x^{[[k]]}$.",
+   "answer": "$x^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y10hau1-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Laws of indices",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S2 Laws of indices",
+   "keywords": [
+    "laws",
+    "of",
+    "indices",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m + n - k > 0"
+   ],
+   "text": "Write $\\frac{[[b]]^{[[m]]} \\times [[b]]^{[[n]]}}{[[b]]^{[[k]]}}$ as a single power.",
+   "answer": "$[[b]]^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y10hau1-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Laws of indices",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S2 Laws of indices",
+   "keywords": [
+    "laws",
+    "of",
+    "indices",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b != 1"
+   ],
+   "check": [
+    "a * c / c == a"
+   ],
+   "text": "Simplify $\\frac{[[a * c]]x^{[[m]]} \\times [[b]]x^{[[n]]}}{[[c]]x^{[[k]]}}$.",
+   "answer": "$[[a * b]]x^{[[m + n - k]]}$"
+  },
+  {
+   "id": "y10hau1-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Laws of indices",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S2 Laws of indices",
+   "keywords": [
+    "laws",
+    "of",
+    "indices",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       4,
+       7
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * c / c == a"
+   ],
+   "text": "Simplify $\\frac{[[a * c]]x^{[[m]]}y^{[[p]]} \\times x^{[[n]]}y}{[[c]]x^{[[k]]}y^{[[q]]}}$. (3 marks)",
+   "answer": "$[[a|coef]]x^{[[m + n - k]]}y^{[[p + 1 - q]]}$"
+  },
+  {
+   "id": "y10hau1-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand a single bracket",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S3 Expand a single bracket",
+   "keywords": [
+    "expand",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Expand $[[a]](x + [[b]])$.",
+   "answer": "$[[a]]x + [[a * b]]$"
+  },
+  {
+   "id": "y10hau1-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand a single bracket",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S3 Expand a single bracket",
+   "keywords": [
+    "expand",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Expand $[[a]](x - [[b]])$.",
+   "answer": "$[[a]]x - [[a * b]]$"
+  },
+  {
+   "id": "y10hau1-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand a single bracket",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S3 Expand a single bracket",
+   "keywords": [
+    "expand",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Expand (a) $[[a]]x(x + [[b]])$ (b) $-[[c]](y - [[d]])$.",
+   "answer": "(a) $[[a]]x^2 + [[a * b]]x$  (b) $-[[c]]y + [[c * d]]$"
+  },
+  {
+   "id": "y10hau1-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand a single bracket",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S3 Expand a single bracket",
+   "keywords": [
+    "expand",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * (k + b) == a * k + a * b"
+   ],
+   "text": "A rectangle has width [[a]] cm and length $(x + [[b]])$ cm. (a) Write an expression for its area and expand it. (b) Work out the area when $x = [[k]]$. (3 marks)",
+   "answer": "(a) $[[a]](x + [[b]]) = [[a]]x + [[a * b]]$  (b) [[a * (k + b)]] cm$^2$"
+  },
+  {
+   "id": "y10hau1-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S4 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise $[[a]]x + [[a * b]]$.",
+   "answer": "$[[a]](x + [[b]])$"
+  },
+  {
+   "id": "y10hau1-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S4 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise fully $[[a * b]]x + [[a * c]]$.",
+   "answer": "$[[a]]([[b|coef]]x + [[c]])$"
+  },
+  {
+   "id": "y10hau1-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S4 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise fully $[[a * b]]x^2 + [[a * c]]x$.",
+   "answer": "$[[a]]x([[b|coef]]x + [[c]])$"
+  },
+  {
+   "id": "y10hau1-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Factorise into a single bracket",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B1 Algebraic manipulation · S4 Factorise into a single bracket",
+   "keywords": [
+    "factorise",
+    "into",
+    "a",
+    "single",
+    "bracket",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Factorise fully (a) $[[a * b]]x - [[a * c]]$ (b) $x^2 + [[d]]x$ (c) $[[a * b]]xy - [[a * c]]y^2$. (4 marks)",
+   "answer": "(a) $[[a]]([[b|coef]]x - [[c]])$  (b) $x(x + [[d]])$  (c) $[[a]]y([[b|coef]]x - [[c]]y)$"
+  }
+ ]
+}
