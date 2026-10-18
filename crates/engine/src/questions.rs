@@ -4,8 +4,9 @@
 //! in `docs/design/ux-review.md` (area E). A starter bank ships in the binary
 //! (`assets/questions/bank.json`); a teacher's own bank is read from a path on request.
 //! Nothing here touches the network or the pupils' data: questions are plain text.
+//! LaTeX between `$…$` in `text` and `answer` is rendered as real equations on the slide.
 
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 /// The bank compiled into the app.
 pub const STARTER: &str = include_str!("../../../assets/questions/bank.json");
@@ -13,33 +14,71 @@ pub const STARTER: &str = include_str!("../../../assets/questions/bank.json");
 const MAX_BYTES: usize = 4 << 20;
 const MAX_QUESTIONS: usize = 20_000;
 const MAX_TEXT: usize = 600;
+/// The figure kinds the Get Ready slide can draw.
+pub const DRAWABLE: &[&str] = &[
+    "triangle-angles",
+    "isosceles-triangle",
+    "parallel-lines",
+    "right-triangle",
+    "similar-triangles",
+    "angles-line",
+    "angles-point",
+    "circle",
+    "regular-polygon",
+    "rectangle",
+    "l-shape",
+    "trapezium",
+    "parallelogram",
+    "cuboid",
+    "bar-chart",
+    "number-line",
+    "coordinate-grid",
+    "venn",
+    "tree",
+];
+
+/// Whether a question's `diagram` is one the slide can draw.
+pub fn is_drawable(d: &serde_json::Value) -> bool {
+    d.get("kind").and_then(|k| k.as_str()).is_some_and(|k| DRAWABLE.contains(&k))
+}
+
+impl Question {
+    /// Usable on a slide: it needs no figure, or its figure can be drawn.
+    pub fn usable(&self) -> bool {
+        !self.needs_diagram || self.diagram.as_ref().is_some_and(is_drawable)
+    }
+}
+
 pub const DIFFICULTIES: std::ops::RangeInclusive<u8> = 1..=3;
 
-#[derive(Clone, Debug, Deserialize, PartialEq)]
+#[derive(Clone, Debug, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
 pub struct Question {
     pub id: String,
     pub topic: String,
-    #[serde(default)]
+    #[serde(default, alias = "subtopics")]
     pub subtopic: String,
     /// 1 = secure, 2 = core, 3 = stretch.
     pub difficulty: u8,
     pub text: String,
     /// Shown in the slide's speaker notes, never on the slide.
-    #[serde(default)]
+    /// May contain LaTeX between `$…$` that is rendered as a real equation.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
     pub answer: String,
     /// The question is meaningless without its figure. Such questions are skipped until diagrams
     /// are built (see the review: the figure is parameterised by `diagram`).
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub needs_diagram: bool,
     /// Free-form figure description, reserved for the diagram follow-up.
-    #[serde(default)]
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub diagram: Option<serde_json::Value>,
 }
 
-#[derive(Clone, Debug, Deserialize)]
+#[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct Bank {
     pub version: u32,
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub note: String,
     pub questions: Vec<Question>,
 }
 
@@ -91,6 +130,38 @@ impl Bank {
         out
     }
 
+    /// The starter bank without the questions in `removed`, followed by the teacher's own.
+    pub fn merged(starter: Bank, removed: &[String], mine: &[Question]) -> Bank {
+        let mut questions: Vec<Question> = starter.questions.into_iter().filter(|q| !removed.contains(&q.id)).collect();
+        for q in mine {
+            if !questions.iter().any(|o| o.id == q.id) {
+                questions.push(q.clone());
+            }
+        }
+        Bank { version: 1, note: starter.note, questions }
+    }
+
+    /// An id for a new question of the teacher's own that no question in the bank has.
+    pub fn new_id(&self, mine: &[Question]) -> String {
+        (1..).map(|n| format!("my-{n:03}")).find(|id| !self.questions.iter().chain(mine).any(|q| &q.id == id)).unwrap_or_else(|| "my-0".into())
+    }
+
+    /// Serialize this bank back to indented JSON (for export and user-bank persistence).
+    pub fn to_json(&self) -> String {
+        serde_json::to_string_pretty(self).unwrap_or_default()
+    }
+
+    /// Distinct subtopics for a given topic, in the order they first appear.
+    pub fn subtopics_for(&self, topic: &str) -> Vec<String> {
+        let mut out: Vec<String> = Vec::new();
+        for q in &self.questions {
+            if q.topic.eq_ignore_ascii_case(topic) && !out.contains(&q.subtopic) {
+                out.push(q.subtopic.clone());
+            }
+        }
+        out
+    }
+
     /// `n` questions that match `filter`, chosen by `seed` (the same seed gives the same four, a
     /// new seed is a reroll). With no topic asked for, the pick spreads across topics first so a
     /// starter revisits several areas rather than one. Questions that need a figure are skipped.
@@ -98,7 +169,7 @@ impl Bank {
         let mut pool: Vec<&Question> = self
             .questions
             .iter()
-            .filter(|q| !q.needs_diagram)
+            .filter(|q| q.usable())
             .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
             .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
             .collect();
@@ -134,7 +205,7 @@ impl Bank {
         let pool: Vec<&Question> = self
             .questions
             .iter()
-            .filter(|q| !q.needs_diagram && !exclude.contains(&q.id))
+            .filter(|q| q.usable() && !exclude.contains(&q.id))
             .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
             .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
             .collect();
@@ -151,7 +222,7 @@ impl Bank {
     pub fn candidates(&self, filter: &Filter) -> Vec<&Question> {
         self.questions
             .iter()
-            .filter(|q| !q.needs_diagram)
+            .filter(|q| q.usable())
             .filter(|q| filter.topic.as_ref().is_none_or(|t| q.topic.eq_ignore_ascii_case(t)))
             .filter(|q| filter.difficulty.is_none_or(|d| q.difficulty == d))
             .collect()
@@ -204,11 +275,21 @@ mod tests {
     use super::*;
 
     #[test]
-    fn the_starter_bank_is_valid_and_has_about_twenty_questions() {
+    fn the_starter_bank_is_valid_and_has_ks3_ks4_questions() {
         let bank = starter().unwrap();
-        let usable = bank.questions.iter().filter(|q| !q.needs_diagram).count();
-        assert!((18..=24).contains(&usable), "{usable}");
+        let usable = bank.questions.iter().filter(|q| q.usable()).count();
+        // The KS3/KS4 curriculum bank has many more than the 20 placeholder questions.
+        assert!(usable >= 18, "expected at least 18 usable questions, got {usable}");
         assert!(bank.topics().len() >= 4);
+    }
+
+    #[test]
+    fn bank_round_trips_through_to_json() {
+        let bank = starter().unwrap();
+        let json = bank.to_json();
+        let bank2 = parse(&json).unwrap();
+        assert_eq!(bank.questions.len(), bank2.questions.len());
+        assert_eq!(bank.questions[0].id, bank2.questions[0].id);
     }
 
     #[test]
@@ -225,8 +306,8 @@ mod tests {
         let f = Filter { topic: Some("geometry".into()), difficulty: Some(1) };
         let got = bank.pick(&f, 3, 4);
         assert!(!got.is_empty());
-        assert!(got.iter().all(|q| q.topic == "Geometry" && q.difficulty == 1 && !q.needs_diagram));
-        assert!(bank.pick(&Filter::default(), 1, 50).iter().all(|q| !q.needs_diagram));
+        assert!(got.iter().all(|q| q.topic == "Geometry" && q.difficulty == 1 && q.usable()));
+        assert!(bank.pick(&Filter::default(), 1, 50).iter().all(|q| q.usable()));
     }
 
     #[test]
@@ -258,18 +339,41 @@ mod tests {
     #[test]
     fn a_loose_slot_never_takes_the_only_question_a_strict_slot_needs() {
         let bank = starter().unwrap();
-        let strict = Filter { topic: Some("Algebra".into()), difficulty: Some(3) };
-        assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one algebra stretch question");
+        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3) };
+        assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one ratio stretch question");
         for seed in 0..300 {
             let got = bank.assign(&[Filter::default(), strict.clone(), Filter::default(), Filter::default()], seed).expect("a set exists");
-            assert_eq!(got[1].id, "alg-005");
+            assert_eq!(got[1].id, "rat-006");
             let mut ids: Vec<_> = got.iter().map(|q| q.id.clone()).collect();
             ids.sort();
             ids.dedup();
             assert_eq!(ids.len(), 4, "all different");
         }
         let impossible = bank.assign(&[strict.clone(), strict], 1);
-        assert!(impossible.is_none(), "two questions cannot both be the one algebra stretch question");
+        assert!(impossible.is_none(), "two questions cannot both be the one ratio stretch question");
+    }
+
+    #[test]
+    fn merging_hides_removed_starter_questions_and_adds_the_teachers_own() {
+        let starter = starter().unwrap();
+        let first = starter.questions[0].id.clone();
+        let n = starter.questions.len();
+        let mine = Question {
+            id: "my-001".into(),
+            topic: "Number".into(),
+            subtopic: String::new(),
+            difficulty: 2,
+            text: "Work out $\\frac{1}{2} + \\frac{1}{3}$".into(),
+            answer: "$\\frac{5}{6}$".into(),
+            needs_diagram: false,
+            diagram: None,
+        };
+        let merged = Bank::merged(starter, std::slice::from_ref(&first), std::slice::from_ref(&mine));
+        assert_eq!(merged.questions.len(), n);
+        assert!(merged.questions.iter().all(|q| q.id != first));
+        assert_eq!(merged.questions.last().unwrap().id, "my-001");
+        assert_eq!(merged.new_id(&[]), "my-002");
+        assert!(parse(&merged.to_json()).is_ok());
     }
 
     #[test]

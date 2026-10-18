@@ -302,6 +302,10 @@ pub struct UiState {
     pub check_for_updates: bool,
     /// The Get Ready starter's last choices, one `(topic, level)` per question; topic "" and level 0 mean any.
     pub get_ready_slots: Vec<(String, u8)>,
+    /// Questions the teacher has added to the Get Ready bank (Manage Questions).
+    pub my_questions: Vec<deckcraft_engine::questions::Question>,
+    /// Ids of built-in questions the teacher has taken out of the bank.
+    pub removed_questions: Vec<String>,
 }
 
 impl Default for UiState {
@@ -342,6 +346,8 @@ impl Default for UiState {
             drive_enabled: false,
             check_for_updates: false,
             get_ready_slots: vec![(String::new(), 0); 4],
+            my_questions: vec![],
+            removed_questions: vec![],
         }
     }
 }
@@ -391,6 +397,10 @@ impl UiState {
             topic.truncate(60);
             *level = (*level).min(3);
         }
+        self.my_questions
+            .retain(|q| !q.id.is_empty() && !q.text.trim().is_empty() && deckcraft_engine::questions::DIFFICULTIES.contains(&q.difficulty));
+        self.my_questions.truncate(5_000);
+        self.removed_questions.truncate(5_000);
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);

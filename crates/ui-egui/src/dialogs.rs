@@ -58,6 +58,7 @@ fn title(id: &str) -> &'static str {
         "equation" => "Equation",
         "dateTime" => "Date and Time",
         "getReady" => "Get Ready Starter",
+        "questionBank" => "Manage Questions",
         "update" => "Update DeckCraft",
         "spelling" => "Spelling",
         "pasteSpecial" => "Paste Special",
@@ -2237,6 +2238,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "themeFonts" => theme_fonts_dialog(app, ui, d),
         "dateTime" => date_time_dialog(app, ui, d),
         "getReady" => get_ready_dialog(app, ui, d),
+        "questionBank" => question_bank_dialog(app, ui, d),
         "update" => crate::update_ui::dialog(app, ui),
         _ => {
             ui.label(format!("“{}” is not available yet.", d.id));
@@ -2576,6 +2578,186 @@ fn date_time_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     cancel
 }
 
+/// How many questions one Get Ready slide shows.
+const GET_READY_QUESTIONS: usize = 4;
+
+/// The question bank in use: the built-in questions less any the teacher removed, plus their own.
+fn question_bank(app: &SlideApp) -> Result<deckcraft_engine::questions::Bank, String> {
+    let starter = deckcraft_engine::questions::starter()?;
+    Ok(deckcraft_engine::questions::Bank::merged(starter, &app.ui.removed_questions, &app.ui.my_questions))
+}
+
+/// Manage Questions: look through the bank, add a question of your own, and remove any question
+/// (built-in ones are hidden and can be restored; your own are deleted). Changes are kept with the
+/// app's other settings and used by the Get Ready starter at once.
+fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    use deckcraft_engine::questions::{DIFFICULTIES, Question};
+    const LEVELS: [&str; 3] = ["Secure", "Core", "Stretch"];
+    ui.set_min_width(640.0);
+    let Ok(bank) = question_bank(app) else {
+        ui.label("The built-in question bank could not be read.");
+        let (ok, cancel) = buttons(ui, "Done");
+        return ok || cancel;
+    };
+    let topics = bank.topics();
+    let t = Tokens::get(ui.ctx());
+    ui.label(egui::RichText::new(format!("{} questions in your bank", bank.questions.len())).font(theme::bold(13.0)));
+    ui.horizontal(|ui| {
+        let topic = d.get("filter", "");
+        egui::ComboBox::from_id_salt("qb-filter").selected_text(if topic.is_empty() { "All topics" } else { topic.as_str() }).width(150.0).show_ui(
+            ui,
+            |ui| {
+                if ui.selectable_label(topic.is_empty(), "All topics").clicked() {
+                    d.fields.insert("filter".into(), String::new());
+                }
+                for tp in &topics {
+                    if ui.selectable_label(&topic == tp, tp).clicked() {
+                        d.fields.insert("filter".into(), tp.clone());
+                    }
+                }
+            },
+        );
+        let mut search = d.get("search", "");
+        ui.add(egui::TextEdit::singleline(&mut search).hint_text("Search questions").desired_width(220.0));
+        d.fields.insert("search".into(), search);
+    });
+    let topic = d.get("filter", "");
+    let search = d.get("search", "").to_lowercase();
+    let mut remove: Option<String> = None;
+    egui::ScrollArea::vertical().max_height(220.0).min_scrolled_height(220.0).auto_shrink([false, false]).id_salt("qb-list").show(ui, |ui| {
+        for q in &bank.questions {
+            let shown = deckcraft_engine::latex::plain(&q.text);
+            if (!topic.is_empty() && !q.topic.eq_ignore_ascii_case(&topic)) || (!search.is_empty() && !shown.to_lowercase().contains(&search)) {
+                continue;
+            }
+            let mine = app.ui.my_questions.iter().any(|m| m.id == q.id);
+            ui.horizontal(|ui| {
+                let level = LEVELS.get(usize::from(q.difficulty).saturating_sub(1)).copied().unwrap_or("");
+                let head = format!("{} · {}{}", q.topic, level, if q.needs_diagram { " · figure" } else { "" });
+                ui.add_sized(vec2(150.0, 20.0), egui::Label::new(egui::RichText::new(head).size(11.0).color(t.text_dim)));
+                let line: String = shown.chars().take(70).collect();
+                ui.add_sized(vec2(360.0, 20.0), egui::Label::new(line).truncate());
+                if ui.small_button(if mine { "Delete" } else { "Remove" }).clicked() {
+                    remove = Some(q.id.clone());
+                }
+            });
+        }
+    });
+    if let Some(id) = remove {
+        if app.ui.my_questions.iter().any(|m| m.id == id) {
+            app.ui.my_questions.retain(|m| m.id != id);
+        } else if !app.ui.removed_questions.contains(&id) {
+            app.ui.removed_questions.push(id);
+        }
+    }
+    if !app.ui.removed_questions.is_empty() {
+        ui.horizontal(|ui| {
+            ui.label(egui::RichText::new(format!("{} built-in questions removed.", app.ui.removed_questions.len())).size(11.0).color(t.text_dim));
+            if ui.small_button("Restore them").clicked() {
+                app.ui.removed_questions.clear();
+            }
+        });
+    }
+    ui.separator();
+    ui.label(egui::RichText::new("Add a question").font(theme::bold(13.0)));
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new("Topic:"));
+        let mut tp = d.get("nq_topic", &topics.first().cloned().unwrap_or_default());
+        egui::ComboBox::from_id_salt("qb-topic").selected_text(tp.clone()).width(130.0).show_ui(ui, |ui| {
+            for x in &topics {
+                if ui.selectable_label(&tp == x, x).clicked() {
+                    tp = x.clone();
+                }
+            }
+        });
+        ui.label("or new:");
+        let mut new_topic = d.get("nq_newtopic", "");
+        ui.add(egui::TextEdit::singleline(&mut new_topic).desired_width(110.0));
+        d.fields.insert("nq_newtopic".into(), new_topic);
+        d.fields.insert("nq_topic".into(), tp);
+        let level: u8 = d.get("nq_level", "2").parse().unwrap_or(2);
+        for (i, name) in LEVELS.iter().enumerate() {
+            let v = i as u8 + 1;
+            if ui.selectable_label(level == v, *name).clicked() {
+                d.fields.insert("nq_level".into(), v.to_string());
+            }
+        }
+    });
+    field_wide(ui, d, "Subtopic:", "nq_sub");
+    multiline(ui, d, "Question:", "nq_text", 2);
+    multiline(ui, d, "Answer:", "nq_answer", 1);
+    ui.label(
+        egui::RichText::new("Put maths between dollar signs: $\\frac{3}{4} + \\frac{1}{8}$, $x^2 - 9$, $\\sqrt{50}$, $80\\text{ cm}^3$.")
+            .size(11.0)
+            .color(t.text_dim),
+    );
+    let text = d.get("nq_text", "");
+    if !text.trim().is_empty() {
+        ui.label(egui::RichText::new(format!("Shows as: {}", deckcraft_engine::latex::plain(&text))).size(12.0));
+    }
+    if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
+        ui.colored_label(egui::Color32::from_rgb(200, 60, 60), e);
+    }
+    let mut done = false;
+    ui.horizontal(|ui| {
+        let can_add = !text.trim().is_empty() && !d.get("nq_answer", "").trim().is_empty();
+        if ui
+            .add_enabled(
+                can_add,
+                egui::Button::new(egui::RichText::new("Add question").color(t.accent_text)).fill(t.accent).min_size(vec2(120.0, 28.0)),
+            )
+            .clicked()
+        {
+            let topic = {
+                let n = d.get("nq_newtopic", "");
+                if n.trim().is_empty() { d.get("nq_topic", "") } else { n.trim().to_string() }
+            };
+            let q = Question {
+                id: bank.new_id(&app.ui.my_questions),
+                topic: topic.chars().take(40).collect(),
+                subtopic: d.get("nq_sub", "").trim().chars().take(60).collect(),
+                difficulty: d.get("nq_level", "2").parse().ok().filter(|l| DIFFICULTIES.contains(l)).unwrap_or(2),
+                text: text.trim().to_string(),
+                answer: d.get("nq_answer", "").trim().to_string(),
+                needs_diagram: false,
+                diagram: None,
+            };
+            if q.topic.trim().is_empty() {
+                d.fields.insert("error".into(), "Choose a topic or type a new one.".into());
+            } else if q.text.chars().count() > 600 {
+                d.fields.insert("error".into(), "The question is too long (600 characters at most).".into());
+            } else {
+                app.ui.my_questions.push(q);
+                for k in ["nq_text", "nq_answer", "nq_sub", "nq_newtopic", "error"] {
+                    d.fields.insert(k.into(), String::new());
+                }
+            }
+        }
+        if ui.add(egui::Button::new("Done").min_size(vec2(80.0, 28.0))).clicked() {
+            done = true;
+        }
+    });
+    done
+}
+
+fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
+    let mut v = d.get(key, "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new(label));
+        ui.add(egui::TextEdit::singleline(&mut v).desired_width(520.0));
+    });
+    d.fields.insert(key.into(), v);
+}
+
+fn multiline(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str, rows: usize) {
+    let mut v = d.get(key, "");
+    ui.horizontal(|ui| {
+        ui.add_sized(vec2(70.0, 24.0), egui::Label::new(label));
+        ui.add(egui::TextEdit::multiline(&mut v).desired_rows(rows).desired_width(520.0));
+    });
+    d.fields.insert(key.into(), v);
+}
+
 /// A seed that differs every time the teacher asks, so Reroll gives different questions. The
 /// engine command stays deterministic: the clock is read here, in the UI.
 fn fresh_seed() -> u64 {
@@ -2588,7 +2770,7 @@ fn fresh_seed() -> u64 {
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     const LEVELS: [(u8, &str); 4] = [(0, "Any"), (1, "Secure"), (2, "Core"), (3, "Stretch")];
     ui.set_min_width(520.0);
-    let topics = deckcraft_engine::questions::starter().map(|b| b.topics()).unwrap_or_default();
+    let topics = question_bank(app).map(|b| b.topics()).unwrap_or_default();
     let on_starter = app.session.active().is_some_and(|st| st.doc.slides.get(st.selection.slide).is_some_and(|s| s.name == "Get Ready"));
     // Start from what was chosen last time.
     if !d.fields.contains_key("count") {
@@ -2599,15 +2781,8 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             d.fields.insert(format!("level{i}"), level.to_string());
         }
     }
-    let count: usize = d.get("count", "4").parse().unwrap_or(4).clamp(2, 6);
-    ui.horizontal(|ui| {
-        ui.add_sized(vec2(110.0, 28.0), egui::Label::new("Questions:"));
-        for n in 2..=6usize {
-            if ui.selectable_label(count == n, n.to_string()).clicked() {
-                d.fields.insert("count".into(), n.to_string());
-            }
-        }
-    });
+    // One slide always shows four questions, as a 2×2 grid.
+    let count = GET_READY_QUESTIONS;
     ui.separator();
     let topic_combo = |ui: &mut Ui, id: String, current: &str| -> Option<String> {
         let mut picked = None;
@@ -2655,8 +2830,11 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             }
         });
     }
+    ui.add_space(4.0);
+    let expand = check(ui, d, "Add a full-screen slide for each question (the Expand buttons)", "expand", true);
+    let headings = check(ui, d, "Show Last lesson, Last week, Last topic and Last year", "headings", true);
     ui.label(
-        egui::RichText::new("Questions are placeholders until your own bank is added. Answers go in the speaker notes.")
+        egui::RichText::new("Four questions a slide. Answers appear on click in Slide Show and are in the speaker notes.")
             .size(11.0)
             .color(Tokens::get(ui.ctx()).text_dim),
     );
@@ -2676,7 +2854,16 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             reroll = false;
             d.fields.insert("cancel".into(), "1".into());
         }
+        if ui.add(egui::Button::new("Manage questions…").min_size(vec2(150.0, 32.0))).clicked() {
+            go = false;
+            reroll = false;
+            d.fields.insert("manage".into(), "1".into());
+        }
     });
+    if d.fields.contains_key("manage") {
+        let _ = app.run("app.dialog", json!({"id": "questionBank"}));
+        return true;
+    }
     if go || reroll {
         let spec: Vec<Value> = slots
             .iter()
@@ -2691,7 +2878,16 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 s
             })
             .collect();
-        let mut params = json!({"seed": fresh_seed(), "slots": spec});
+        let mut params = json!({"seed": fresh_seed(), "slots": spec, "expand": expand, "headings": headings});
+        if !app.ui.my_questions.is_empty() || !app.ui.removed_questions.is_empty() {
+            match question_bank(app) {
+                Ok(bank) => params["bankJson"] = json!(bank.to_json()),
+                Err(e) => {
+                    d.fields.insert("error".into(), e);
+                    return false;
+                }
+            }
+        }
         if reroll {
             params["reroll"] = json!(true);
         }
