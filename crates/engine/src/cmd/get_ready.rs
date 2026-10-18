@@ -558,7 +558,7 @@ mod tests {
     #[test]
     fn two_slots_with_the_same_narrow_filter_never_repeat_and_run_out_with_a_clear_error() {
         let mut s = Session::with_new();
-        let same = json!({"topic": "Ratio", "difficulty": 3});
+        let same = json!({"skill": "Y7 Summer B2 Properties of number · S3 Prime numbers", "difficulty": 3});
         let enough = s.execute("slide.getReady", &json!({"slots": [same, same], "seed": 1}));
         let err = enough.err().map(|e| e.to_string()).unwrap_or_default();
         assert!(err.contains("question 1") || err.contains("question 2"), "{err}");
@@ -577,11 +577,12 @@ mod tests {
     fn a_question_left_on_any_cannot_starve_one_that_needs_a_specific_topic_and_level() {
         // Regression: with slots [any, Algebra level 3, …] the loose first slot could draw the
         // bank's only Algebra stretch question, and the command then failed for the second.
-        let slots = json!([{}, {"topic": "Ratio", "difficulty": 3}, {}, {"topic": "Number", "difficulty": 1}]);
+        let slots =
+            json!([{}, {"skill": "Y7 Summer B2 Properties of number · S3 Prime numbers", "difficulty": 3}, {}, {"topic": "Number", "difficulty": 1}]);
         for seed in 0..300u64 {
             let mut s = Session::with_new();
             let r = s.execute("slide.getReady", &json!({"slots": slots, "seed": seed})).unwrap_or_else(|e| panic!("seed {seed}: {e}"));
-            assert_eq!(r["questions"][1], "rat-006", "seed {seed}");
+            assert_eq!(r["questions"][1], "y7su2-s03-l3", "seed {seed}");
         }
     }
 

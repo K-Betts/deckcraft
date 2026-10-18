@@ -1,0 +1,1676 @@
+{
+ "version": 1,
+ "note": "Y7 Spring Block 5 Perimeter and area: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7sp5-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of length",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S1 Convert metric units of length",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "length",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       90
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * 10 / 10 == n"
+   ],
+   "text": "Convert [[n]] cm to mm.",
+   "answer": "[[n * 10]] mm"
+  },
+  {
+   "id": "y7sp5-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of length",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S1 Convert metric units of length",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "length",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * 100 / 100 == n"
+   ],
+   "text": "Convert [[n]] m to cm.",
+   "answer": "[[n * 100]] cm"
+  },
+  {
+   "id": "y7sp5-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of length",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S1 Convert metric units of length",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "length",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       12,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n * 100 / 100 == n"
+   ],
+   "text": "Convert [[n / 10]] km to m.",
+   "answer": "[[n * 100]] m"
+  },
+  {
+   "id": "y7sp5-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Convert metric units of length",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S1 Convert metric units of length",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "of",
+    "length",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       59
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "(a * 10) % b != 0"
+   ],
+   "check": [
+    "floor(a * 10 / b) * b + a * 10 % b == a * 10"
+   ],
+   "text": "A ribbon is [[a / 10]] m long. It is cut into pieces that are each [[b]] cm long. How many pieces can be cut and how much ribbon is left over? (3 marks)",
+   "answer": "[[floor(a * 10 / b)]] pieces; [[a * 10 % b]] cm left over"
+  },
+  {
+   "id": "y7sp5-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S2 Perimeter of a polygon",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "polygon",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w != h"
+   ],
+   "check": [
+    "2 * (w + h) == 2 * w + 2 * h"
+   ],
+   "text": "Work out the perimeter of the rectangle.",
+   "answer": "[[2 * (w + h)]] cm",
+   "diagram": {
+    "kind": "rectangle",
+    "width": "[[w]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y7sp5-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S2 Perimeter of a polygon",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "polygon",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > c",
+    "a + c > b",
+    "b + c > a"
+   ],
+   "check": [
+    "a + b + c - c == a + b"
+   ],
+   "text": "A triangle has sides [[a]] cm, [[b]] cm and [[c]] cm. Work out its perimeter.",
+   "answer": "[[a + b + c]] cm"
+  },
+  {
+   "id": "y7sp5-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S2 Perimeter of a polygon",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "polygon",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "5 * s / 5 == s"
+   ],
+   "text": "A regular pentagon has a perimeter of [[5 * s]] cm. How long is each side?",
+   "answer": "[[s]] cm"
+  },
+  {
+   "id": "y7sp5-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S2 Perimeter of a polygon",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "polygon",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w != h"
+   ],
+   "check": [
+    "2 * (w + h) / 2 - w == h"
+   ],
+   "text": "A rectangle has a perimeter of [[2 * (w + h)]] cm and a width of [[w]] cm. Work out its length. (2 marks)",
+   "answer": "[[h]] cm"
+  },
+  {
+   "id": "y7sp5-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S3 Perimeter of a compound shape",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "W",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "H",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w1 < W - 2",
+    "h1 < H - 2"
+   ],
+   "check": [
+    "w1 + h1 + (W - w1) + (H - h1) + W + H == 2 * (W + H)"
+   ],
+   "text": "Work out the perimeter of the shape.",
+   "answer": "[[2 * (W + H)]] cm",
+   "diagram": {
+    "kind": "l-shape",
+    "labels": [
+     "[[w1]] cm",
+     "[[h1]] cm",
+     "[[W - w1]] cm",
+     "[[H - h1]] cm",
+     "[[W]] cm",
+     "[[H]] cm"
+    ]
+   }
+  },
+  {
+   "id": "y7sp5-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S3 Perimeter of a compound shape",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "W",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "H",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w1 < W - 2",
+    "h1 < H - 2"
+   ],
+   "check": [
+    "2 * (W + H) == w1 + h1 + (W - w1) + (H - h1) + W + H"
+   ],
+   "text": "Work out the perimeter of the shape.",
+   "answer": "[[2 * (W + H)]] cm",
+   "diagram": {
+    "kind": "l-shape",
+    "labels": [
+     "[[w1]] cm",
+     null,
+     null,
+     "[[H - h1]] cm",
+     "[[W]] cm",
+     "[[H]] cm"
+    ]
+   }
+  },
+  {
+   "id": "y7sp5-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S3 Perimeter of a compound shape",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "W",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "H",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w1 < W - 2",
+    "h1 < H - 2"
+   ],
+   "check": [
+    "2 * (W + H) == 2 * W + 2 * H"
+   ],
+   "text": "Work out the perimeter of the shape. Explain why it equals the perimeter of the rectangle [[W]] cm by [[H]] cm.",
+   "answer": "[[2 * (W + H)]] cm: the missing sides add up to the same as the sides of the full rectangle",
+   "diagram": {
+    "kind": "l-shape",
+    "labels": [
+     "[[w1]] cm",
+     null,
+     null,
+     null,
+     "[[W]] cm",
+     "[[H]] cm"
+    ]
+   }
+  },
+  {
+   "id": "y7sp5-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S3 Perimeter of a compound shape",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "W",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "H",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w1 < W - 2",
+    "h1 < H - 2"
+   ],
+   "check": [
+    "2 * (W + H) * p / p == 2 * (W + H)"
+   ],
+   "text": "A fence goes all the way round the shape. Fencing costs £[[p]] per metre. (a) Work out the perimeter in metres. (b) Work out the cost of the fencing. (3 marks)",
+   "answer": "(a) [[2 * (W + H)]] m  (b) £[[2 * (W + H) * p]]",
+   "diagram": {
+    "kind": "l-shape",
+    "labels": [
+     "[[w1]] m",
+     "[[h1]] m",
+     "[[W - w1]] m",
+     "[[H - h1]] m",
+     "[[W]] m",
+     "[[H]] m"
+    ]
+   }
+  },
+  {
+   "id": "y7sp5-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of rectangles and parallelograms",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S4 Area of rectangles and parallelograms",
+   "keywords": [
+    "area",
+    "of",
+    "rectangles",
+    "and",
+    "parallelograms",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       14
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w != h"
+   ],
+   "check": [
+    "w * h / h == w"
+   ],
+   "text": "Work out the area of the rectangle.",
+   "answer": "[[w * h]] cm²",
+   "diagram": {
+    "kind": "rectangle",
+    "width": "[[w]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y7sp5-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of rectangles and parallelograms",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S4 Area of rectangles and parallelograms",
+   "keywords": [
+    "area",
+    "of",
+    "rectangles",
+    "and",
+    "parallelograms",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s > h"
+   ],
+   "check": [
+    "b * h / h == b"
+   ],
+   "text": "Work out the area of the parallelogram.",
+   "answer": "[[b * h]] cm²",
+   "diagram": {
+    "kind": "parallelogram",
+    "base": "[[b]] cm",
+    "height": "[[h]] cm",
+    "side": "[[s]] cm"
+   }
+  },
+  {
+   "id": "y7sp5-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of rectangles and parallelograms",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S4 Area of rectangles and parallelograms",
+   "keywords": [
+    "area",
+    "of",
+    "rectangles",
+    "and",
+    "parallelograms",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       14
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w != h"
+   ],
+   "check": [
+    "w * h / w == h"
+   ],
+   "text": "A rectangle has an area of [[w * h]] cm² and a width of [[w]] cm. Work out its length.",
+   "answer": "[[h]] cm"
+  },
+  {
+   "id": "y7sp5-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of rectangles and parallelograms",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S4 Area of rectangles and parallelograms",
+   "keywords": [
+    "area",
+    "of",
+    "rectangles",
+    "and",
+    "parallelograms",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "w * q"
+    ]
+   ],
+   "check": [
+    "b * h / w == q * h"
+   ],
+   "text": "A parallelogram has a base of [[b]] cm and a perpendicular height of [[h]] cm. A rectangle has the same area and a width of [[w]] cm. Work out the length of the rectangle. (3 marks)",
+   "answer": "[[b * h / w]] cm"
+  },
+  {
+   "id": "y7sp5-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S5 Area of a triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(b * h) % 2 == 0"
+   ],
+   "check": [
+    "b * h / 2 * 2 == b * h"
+   ],
+   "text": "Work out the area of the triangle.",
+   "answer": "[[b * h / 2]] cm²",
+   "diagram": {
+    "kind": "right-triangle",
+    "base": "[[b]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y7sp5-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S5 Area of a triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b * h / 2 * 2 == b * h"
+   ],
+   "text": "A triangle has a base of [[b]] cm and a perpendicular height of [[h]] cm. Work out its area.",
+   "answer": "[[b * h / 2]] cm²"
+  },
+  {
+   "id": "y7sp5-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S5 Area of a triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(b * h) % 2 == 0"
+   ],
+   "check": [
+    "b * h / 2 * 2 / b == h"
+   ],
+   "text": "A triangle has an area of [[b * h / 2]] cm² and a base of [[b]] cm. Work out its perpendicular height.",
+   "answer": "[[h]] cm"
+  },
+  {
+   "id": "y7sp5-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S5 Area of a triangle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b * h / 2 * 2 == b * h"
+   ],
+   "text": "A triangular sail has a base of [[b]] m and a height of [[h]] m. Sail cloth costs £[[p]] per square metre. Work out the cost of the cloth for one sail. (3 marks)",
+   "answer": "£[[b * h / 2 * p|dp:2]]"
+  },
+  {
+   "id": "y7sp5-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a trapezium",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S6 Area of a trapezium",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "trapezium",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "((a + b) * h) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "(a + b) * h / 2 * 2 == (a + b) * h"
+   ],
+   "text": "Work out the area of the trapezium.",
+   "answer": "[[(a + b) * h / 2]] cm²",
+   "diagram": {
+    "kind": "trapezium",
+    "top": "[[a]] cm",
+    "bottom": "[[b]] cm",
+    "height": "[[h]] cm"
+   }
+  },
+  {
+   "id": "y7sp5-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a trapezium",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S6 Area of a trapezium",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "trapezium",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "((a + b) * h) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "(a + b) * h / 2 * 2 == (a + b) * h"
+   ],
+   "text": "A trapezium has parallel sides [[a]] cm and [[b]] cm, and a height of [[h]] cm. Work out its area.",
+   "answer": "[[(a + b) * h / 2]] cm²"
+  },
+  {
+   "id": "y7sp5-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a trapezium",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S6 Area of a trapezium",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "trapezium",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "((a + b) * h) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "(a + b) * h / 2 * 2 / (a + b) == h"
+   ],
+   "text": "A trapezium has an area of [[(a + b) * h / 2]] cm², parallel sides [[a]] cm and [[b]] cm. Work out its height.",
+   "answer": "[[h]] cm"
+  },
+  {
+   "id": "y7sp5-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a trapezium",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S6 Area of a trapezium",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "trapezium",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "((a + b) * h) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "(a + b) * h / 2 * 2 == (a + b) * h"
+   ],
+   "text": "A garden is a trapezium with parallel sides [[a]] m and [[b]] m, [[h]] m apart. Turf costs £[[p]] per square metre. Work out the cost of turfing the whole garden. (3 marks)",
+   "answer": "£[[(a + b) * h / 2 * p]]",
+   "diagram": {
+    "kind": "trapezium",
+    "top": "[[a]] m",
+    "bottom": "[[b]] m",
+    "height": "[[h]] m"
+   }
+  },
+  {
+   "id": "y7sp5-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with perimeter and area",
+   "difficulty": 1,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S7 Solve problems with perimeter and area",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w != h"
+   ],
+   "check": [
+    "w * h / h == w"
+   ],
+   "text": "A rectangular field is [[w]] m by [[h]] m. Work out the perimeter and the area.",
+   "answer": "Perimeter [[2 * (w + h)]] m; area [[w * h]] m²"
+  },
+  {
+   "id": "y7sp5-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with perimeter and area",
+   "difficulty": 2,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S7 Solve problems with perimeter and area",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * s * 4 / 4 == s * s"
+   ],
+   "text": "A square room has a side of [[s]] m. Square tiles with sides of 50 cm cover the floor. How many tiles are needed?",
+   "answer": "[[s * s * 4]]"
+  },
+  {
+   "id": "y7sp5-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with perimeter and area",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S7 Solve problems with perimeter and area",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * s - (s + d) * (s - d) == d * d"
+   ],
+   "text": "A rectangle and a square have the same perimeter of [[4 * s]] cm. The rectangle is [[s + d]] cm long. Which has the larger area, and by how much?",
+   "answer": "The square, by [[d * d]] cm²"
+  },
+  {
+   "id": "y7sp5-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with perimeter and area",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S7 Solve problems with perimeter and area",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(w + 2 * p) * (h + 2 * p) - w * h == 2 * p * (w + h) + 4 * p * p"
+   ],
+   "text": "A path [[p]] m wide goes all the way round a rectangular lawn that is [[w]] m by [[h]] m. Work out the area of the path. (3 marks)",
+   "answer": "[[(w + 2 * p) * (h + 2 * p) - w * h]] m²"
+  },
+  {
+   "id": "y7sp5-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Form expressions with perimeter and area (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S8 Form expressions with perimeter and area (E)",
+   "keywords": [
+    "form",
+    "expressions",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2 * (a + b) == 2 * a + 2 * b"
+   ],
+   "text": "A rectangle has length $(x + [[a]])$ cm and width [[b]] cm. Write an expression for its perimeter.",
+   "answer": "$[[2]]x + [[2 * a + 2 * b]]$"
+  },
+  {
+   "id": "y7sp5-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Form expressions with perimeter and area (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S8 Form expressions with perimeter and area (E)",
+   "keywords": [
+    "form",
+    "expressions",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 1"
+   ],
+   "text": "A rectangle has length $x$ cm and width [[b]] cm. Write an expression for its area.",
+   "answer": "$[[b]]x$ cm²"
+  },
+  {
+   "id": "y7sp5-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Form expressions with perimeter and area (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S8 Form expressions with perimeter and area (E)",
+   "keywords": [
+    "form",
+    "expressions",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2 * (x0 + a) + 2 * b == 2 * (x0 + a + b)"
+   ],
+   "text": "A rectangle has length $(x + [[a]])$ cm and width [[b]] cm. Its perimeter is [[2 * (x0 + a + b)]] cm. Form and solve an equation to find $x$.",
+   "answer": "$2(x + [[a]]) + [[2 * b]] = [[2 * (x0 + a + b)]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y7sp5-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Form expressions with perimeter and area (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B5 Perimeter and area · S8 Form expressions with perimeter and area (E)",
+   "keywords": [
+    "form",
+    "expressions",
+    "with",
+    "perimeter",
+    "and",
+    "area",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(x0 + a) * 2 * b / 2 == b * (x0 + a)"
+   ],
+   "text": "A triangle has base $(x + [[a]])$ cm and height [[2 * b]] cm. Its area is [[b * (x0 + a)]] cm². Form and solve an equation to find $x$. (3 marks)",
+   "answer": "$\\frac{1}{2} \\times (x + [[a]]) \\times [[2 * b]] = [[b * (x0 + a)]]$, so $x = [[x0]]$"
+  }
+ ]
+}

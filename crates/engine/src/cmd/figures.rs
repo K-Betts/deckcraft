@@ -57,6 +57,15 @@ pub(crate) fn draw(s: &mut Session, d: &Value, area: [f64; 4], scale: f64) -> Re
         "bar-model" => f.bar_model(s),
         "table" => f.table(s),
         "fraction-bar" => f.fraction_bar(s),
+        "pictogram" => f.pictogram(s),
+        "scatter" => f.plot(s, false),
+        "line-graph" => f.plot(s, true),
+        "polygon-shape" => f.polygon_shape(s),
+        "polygon-angles" => f.polygon_angles(s),
+        "ruler" => f.ruler(s),
+        "factor-tree" => f.factor_tree(s),
+        "counters" => f.counters(s),
+        "crossing-lines" => f.crossing_lines(s),
         "shade-grid" => f.shade_grid(s),
         _ => Ok(()),
     }
@@ -135,7 +144,7 @@ fn label_sized(s: &mut Session, text: &str, at: P, size: f64) -> Result<()> {
     }
     let size = size * k();
     let chars = crate::latex::plain(text).chars().count() as f64;
-    let (w, h) = ((chars * size * 0.63 + 16.0).max(30.0), size * 1.6);
+    let (w, h) = ((chars * size * 0.66 + 26.0).max(34.0), size * 1.6);
     let id = rich_text_box(s, text, [at[0] - w / 2.0, at[1] - h / 2.0, w, h], size, INK)?;
     center(s, id)
 }
@@ -216,7 +225,8 @@ impl Fig<'_> {
     /// `sizes` (the three true angles) the triangle is drawn to those angles, so what pupils see
     /// agrees with the numbers.
     fn triangle_angles(&self, s: &mut Session) -> Result<()> {
-        let [x, y, w, h] = self.fit(1.5, 36.0);
+        let longest = self.list("angles").iter().flatten().map(|t| crate::latex::plain(t).chars().count()).max().unwrap_or(3) as f64;
+        let [x, y, w, h] = self.fit(1.5, 28.0 + longest * 5.0);
         let (a, b, c) = match self.sizes().filter(|v| v.len() == 3 && (v.iter().sum::<f64>() - 180.0).abs() < 1.0) {
             Some(v) => {
                 // Base from A (bottom left) to B; the apex follows from the angles at A and B.
@@ -260,7 +270,7 @@ impl Fig<'_> {
         label(s, "$B$", pt(b, -12.0, 12.0))?;
         label(s, "$C$", pt(c, 12.0, 12.0))?;
         label(s, &self.text("topAngle").unwrap_or_default(), pt(a, 0.0, 36.0))?;
-        label(s, "?", pt(b, 42.0, -12.0))
+        label(s, &self.unknown(), pt(b, 42.0, -12.0))
     }
 
     /// `base`, `height`, `hyp`: side labels; `angle`: the angle at the right-hand end of the base.
@@ -551,6 +561,9 @@ impl Fig<'_> {
 
     /// `categories` and `values`; optional `yLabel`.
     fn bar_chart(&self, s: &mut Session) -> Result<()> {
+        if self.d.get("series").is_some() {
+            return self.series_bar_chart(s);
+        }
         let [x, y, w, h] = self.fit(1.5, 14.0);
         let cats = self.list("categories");
         let vals: Vec<f64> = self.d.get("values").and_then(Value::as_array).map(|v| v.iter().filter_map(Value::as_f64).collect()).unwrap_or_default();
@@ -830,6 +843,448 @@ impl Fig<'_> {
                 draw_line(s, [end, by], [end, by + 6.0], INK, 2.0)?;
                 label_sized(s, &self.lab_or("total", "?"), [(x + end) / 2.0, by - 12.0 * k()], 15.0)?;
             }
+        }
+        Ok(())
+    }
+
+    /// `categories`, `series`: `[{"name": "Boys", "values": [..]}, ..]`; `stacked` true gives a
+    /// composite bar chart (series on top of each other), false a dual one (side by side).
+    fn series_bar_chart(&self, s: &mut Session) -> Result<()> {
+        let [x, y, w, h] = self.fit(1.5, 12.0);
+        let cats = self.list("categories");
+        let series: Vec<(String, Vec<f64>)> = self
+            .d
+            .get("series")
+            .and_then(Value::as_array)
+            .map(|a| {
+                a.iter()
+                    .map(|v| {
+                        (
+                            v.get("name").and_then(Value::as_str).unwrap_or("").to_string(),
+                            v.get("values").and_then(Value::as_array).map(|x| x.iter().filter_map(Value::as_f64).collect()).unwrap_or_default(),
+                        )
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        let stacked = self.d.get("stacked").and_then(Value::as_bool).unwrap_or(false);
+        let n = cats.len();
+        if n == 0 || series.is_empty() {
+            return Ok(());
+        }
+        let col = |i: usize| ["#4A7BD0", "#F4B183", "#6FAE7B", "#B58CD9"][i % 4];
+        let total = |c: usize| -> f64 {
+            if stacked {
+                series.iter().map(|sr| sr.1.get(c).copied().unwrap_or(0.0)).sum()
+            } else {
+                series.iter().map(|sr| sr.1.get(c).copied().unwrap_or(0.0)).fold(0.0, f64::max)
+            }
+        };
+        let top = (0..n).map(total).fold(1.0, f64::max);
+        let step = if top <= 10.0 {
+            2.0
+        } else if top <= 30.0 {
+            5.0
+        } else if top <= 60.0 {
+            10.0
+        } else {
+            20.0
+        };
+        let max = (top / step).ceil() * step;
+        let legend = 18.0 * k();
+        let (left, bottom) = (x + 34.0, y + h - 22.0);
+        let (pw, ph) = (w - 40.0, h - 30.0 - legend);
+        let mut v = 0.0;
+        while v <= max + 1e-9 {
+            let yy = bottom - ph * v / max;
+            thin(s, [left, yy], [left + pw, yy], LIGHT)?;
+            label_sized(s, &format!("{v}"), [left - 14.0, yy], 11.0)?;
+            v += step;
+        }
+        ln(s, [left, bottom - ph], [left, bottom])?;
+        ln(s, [left, bottom], [left + pw, bottom])?;
+        let slot = pw / n as f64;
+        for c in 0..n {
+            let groups = if stacked { 1.0 } else { series.len() as f64 };
+            let bw = slot * 0.7 / groups;
+            let mut base = 0.0;
+            for (i, sr) in series.iter().enumerate() {
+                let val = sr.1.get(c).copied().unwrap_or(0.0);
+                let bh = ph * val / max;
+                let bx = if stacked { left + slot * c as f64 + slot * 0.15 } else { left + slot * c as f64 + slot * 0.15 + bw * i as f64 };
+                let by = if stacked { bottom - ph * base / max - bh } else { bottom - bh };
+                draw_shape(s, "rect", [bx, by, bw, bh], Some(col(i)), Some((INK, 1.5)))?;
+                if stacked {
+                    base += val;
+                }
+            }
+            if let Some(Some(cn)) = cats.get(c) {
+                label_sized(s, cn, [left + slot * (c as f64 + 0.5), bottom + 12.0], 10.0)?;
+            }
+        }
+        let mut lx = left;
+        for (i, (name, _)) in series.iter().enumerate() {
+            draw_shape(s, "rect", [lx, y, 12.0 * k(), 12.0 * k()], Some(col(i)), Some((INK, 1.2)))?;
+            label_sized(s, name, [lx + 22.0 * k() + name.chars().count() as f64 * 3.0 * k(), y + 6.0 * k()], 11.0)?;
+            lx += 40.0 * k() + name.chars().count() as f64 * 6.5 * k();
+        }
+        Ok(())
+    }
+
+    /// `rows`: `[{"label": "Mon", "count": 3.5}]`, `key`: how many each symbol stands for
+    /// (default 1); half symbols for halves. `keyLabel` text beside the key symbol.
+    fn pictogram(&self, s: &mut Session) -> Result<()> {
+        let rows: Vec<(String, f64)> = self
+            .d
+            .get("rows")
+            .and_then(Value::as_array)
+            .map(|a| {
+                a.iter()
+                    .map(|r| {
+                        (r.get("label").and_then(Value::as_str).unwrap_or("").to_string(), r.get("count").and_then(Value::as_f64).unwrap_or(0.0))
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        if rows.is_empty() {
+            return Ok(());
+        }
+        let key = self.num("key", 1.0).max(0.01);
+        let widest = rows.iter().map(|r| (r.1 / key).ceil()).fold(1.0, f64::max);
+        let [x, y, w, h] = self.fit(1.7, 6.0);
+        let label_w = 44.0 * k();
+        let rh = ((h - 24.0 * k()) / rows.len() as f64).min(34.0 * k());
+        let unit = ((w - label_w) / widest.max(4.0)).min(rh * 0.9);
+        for (i, (label, count)) in rows.iter().enumerate() {
+            let ty = y + rh * i as f64;
+            label_sized(s, label, [x + label_w / 2.0, ty + rh / 2.0], 12.0)?;
+            let symbols = count / key;
+            let full = symbols.floor() as usize;
+            for j in 0..full {
+                draw_shape(s, "ellipse", [x + label_w + unit * j as f64, ty + rh * 0.1, unit * 0.8, rh * 0.8], Some("#F4B183"), Some((INK, 1.5)))?;
+            }
+            if symbols - symbols.floor() > 0.01 {
+                draw_shape(s, "rect", [x + label_w + unit * full as f64, ty + rh * 0.1, unit * 0.4, rh * 0.8], Some("#F4B183"), Some((INK, 1.5)))?;
+            }
+        }
+        let ky = y + rh * rows.len() as f64 + 10.0 * k();
+        draw_shape(s, "ellipse", [x + label_w, ky, unit * 0.6, rh * 0.6], Some("#F4B183"), Some((INK, 1.5)))?;
+        let kl = self.text("keyLabel").unwrap_or_else(|| format!("= {}", num_text(key)));
+        label_sized(s, &kl, [x + label_w + unit * 0.9 + kl.chars().count() as f64 * 3.5, ky + rh * 0.3], 12.0)?;
+        Ok(())
+    }
+
+    /// Axes `xmin`..`xmax`, `ymin`..`ymax` with `xstep`/`ystep` gridlines, `xlabel`/`ylabel` and
+    /// `points`: `[[x, y], ..]`. With `join` the points are joined in order (a line graph, a
+    /// distance-time graph); `line`: `[[x1, y1], [x2, y2]]` adds a straight line (line of best fit).
+    fn plot(&self, s: &mut Session, join: bool) -> Result<()> {
+        let (x0, x1, y0, y1) = (self.num("xmin", 0.0), self.num("xmax", 10.0), self.num("ymin", 0.0), self.num("ymax", 10.0));
+        let (xs, ys) = (self.num("xstep", ((x1 - x0) / 5.0).max(1.0)), self.num("ystep", ((y1 - y0) / 5.0).max(1.0)));
+        let [x, y, w, h] = self.fit(1.45, 4.0);
+        let ytitle = if self.text("ylabel").is_some() { 14.0 * k() } else { 0.0 };
+        let (left, right, top, bottom) = (x + 40.0 * k(), x + w - 8.0, y + 12.0 * k() + ytitle, y + h - 32.0 * k());
+        let px = |v: f64| left + (right - left) * (v - x0) / (x1 - x0).max(1e-9);
+        let py = |v: f64| bottom - (bottom - top) * (v - y0) / (y1 - y0).max(1e-9);
+        let mut gx = x0;
+        while gx <= x1 + 1e-9 {
+            thin(s, [px(gx), top], [px(gx), bottom], LIGHT)?;
+            label_sized(s, &num_text(gx), [px(gx), bottom + 11.0 * k()], 11.0)?;
+            gx += xs;
+        }
+        let mut gy = y0;
+        while gy <= y1 + 1e-9 {
+            thin(s, [left, py(gy)], [right, py(gy)], LIGHT)?;
+            label_sized(s, &num_text(gy), [left - 16.0 * k(), py(gy)], 11.0)?;
+            gy += ys;
+        }
+        draw_line(s, [left, top], [left, bottom], INK, 2.0)?;
+        draw_line(s, [left, bottom], [right, bottom], INK, 2.0)?;
+        if let Some(t) = self.text("xlabel") {
+            label_sized(s, &t, [(left + right) / 2.0, y + h - 7.0 * k()], 12.0)?;
+        }
+        if let Some(t) = self.text("ylabel") {
+            label_sized(s, &t, [left + 20.0 * k() + t.chars().count() as f64 * 3.0 * k(), top - ytitle - 2.0 * k() + 8.0], 12.0)?;
+        }
+        let raw: Vec<&Value> = self.d.get("points").and_then(Value::as_array).map(|a| a.iter().collect()).unwrap_or_default();
+        let pts: Vec<P> = raw.iter().filter_map(|p| Some([p.get(0)?.as_f64()?, p.get(1)?.as_f64()?])).collect();
+        if let Some(l) = self.d.get("line").and_then(Value::as_array) {
+            let g = |i: usize, j: usize| l.get(i).and_then(|p| p.get(j)).and_then(Value::as_f64);
+            if let (Some(a), Some(b), Some(c), Some(d)) = (g(0, 0), g(0, 1), g(1, 0), g(1, 1)) {
+                draw_line(s, [px(a), py(b)], [px(c), py(d)], "#D0453A", 2.5 * k().sqrt())?;
+            }
+        }
+        if join {
+            for pair in pts.windows(2) {
+                draw_line(s, [px(pair[0][0]), py(pair[0][1])], [px(pair[1][0]), py(pair[1][1])], BLUE, 2.5 * k().sqrt())?;
+            }
+        }
+        for p in &pts {
+            let r = if join { 3.5 } else { 4.5 } * k().sqrt();
+            draw_shape(s, "ellipse", [px(p[0]) - r, py(p[1]) - r, 2.0 * r, 2.0 * r], Some(if join { BLUE } else { "#2F4F9F" }), None)?;
+        }
+        // A third item in a point is its name, written beside it.
+        for p in &raw {
+            if let (Some(xv), Some(yv), Some(name)) =
+                (p.get(0).and_then(Value::as_f64), p.get(1).and_then(Value::as_f64), p.get(2).and_then(Value::as_str))
+            {
+                label(s, &format!("${name}$"), [px(xv) + 12.0 * k(), py(yv) - 12.0 * k()])?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `shape`: square, rectangle, parallelogram, rhombus, trapezium, kite, equilateral,
+    /// isosceles, scalene, right-angled; drawn with equal-side and right-angle marks.
+    fn polygon_shape(&self, s: &mut Session) -> Result<()> {
+        let name = self.text("shape").unwrap_or_default();
+        let [x, y, w, h] = self.fit(1.35, 16.0);
+        let (cx, cy) = (x + w / 2.0, y + h / 2.0);
+        let r = |fx: f64, fy: f64| [cx + fx * w / 2.0, cy + fy * h / 2.0];
+        let pts: Vec<P> = match name.as_str() {
+            "square" => {
+                let a = h.min(w) * 0.5;
+                vec![[cx - a, cy - a], [cx + a, cy - a], [cx + a, cy + a], [cx - a, cy + a]]
+            }
+            "rectangle" => vec![r(-0.9, -0.55), r(0.9, -0.55), r(0.9, 0.55), r(-0.9, 0.55)],
+            "parallelogram" => vec![r(-0.55, -0.6), r(0.95, -0.6), r(0.55, 0.6), r(-0.95, 0.6)],
+            "rhombus" => vec![r(0.0, -0.9), r(0.75, 0.0), r(0.0, 0.9), r(-0.75, 0.0)],
+            "trapezium" => vec![r(-0.5, -0.6), r(0.5, -0.6), r(0.95, 0.6), r(-0.95, 0.6)],
+            "kite" => vec![r(0.0, -0.95), r(0.6, -0.25), r(0.0, 0.95), r(-0.6, -0.25)],
+            "equilateral" => vec![r(0.0, -0.85), r(0.95, 0.75), r(-0.95, 0.75)],
+            "isosceles" => vec![r(0.0, -0.9), r(0.7, 0.75), r(-0.7, 0.75)],
+            "scalene" => vec![r(-0.3, -0.85), r(0.95, 0.75), r(-0.95, 0.5)],
+            "right-angled" => vec![r(-0.8, -0.8), r(-0.8, 0.75), r(0.9, 0.75)],
+            _ => return Ok(()),
+        };
+        poly(s, &pts)?;
+        let tick = |s: &mut Session, a: P, b: P| -> Result<()> {
+            let m = mid(a, b);
+            let (dx, dy) = (b[0] - a[0], b[1] - a[1]);
+            let n = (dx * dx + dy * dy).sqrt().max(1.0);
+            let (ux, uy) = (-dy / n * 6.0, dx / n * 6.0);
+            draw_line(s, [m[0] - ux, m[1] - uy], [m[0] + ux, m[1] + uy], INK, 2.0)?;
+            Ok(())
+        };
+        let equal: Vec<(usize, usize)> = match name.as_str() {
+            "square" | "rhombus" => vec![(0, 1), (1, 2), (2, 3), (3, 0)],
+            "equilateral" => vec![(0, 1), (1, 2), (2, 0)],
+            "isosceles" => vec![(0, 1), (2, 0)],
+            "kite" => vec![(0, 1), (3, 0)],
+            _ => vec![],
+        };
+        for (i, j) in equal {
+            tick(s, pts[i], pts[j])?;
+        }
+        if matches!(name.as_str(), "square" | "rectangle") {
+            for i in 0..4 {
+                right_angle(s, pts[i], pts[(i + 1) % 4], pts[(i + 3) % 4])?;
+            }
+        }
+        if name == "right-angled" {
+            right_angle(s, pts[1], pts[0], pts[2])?;
+        }
+        Ok(())
+    }
+
+    /// `angles`: a label for each interior angle (`null` the unknown), `sizes`: the true sizes in
+    /// degrees (3 to 6 of them, adding up to (n - 2) × 180): the polygon is drawn with those angles.
+    fn polygon_angles(&self, s: &mut Session) -> Result<()> {
+        let sizes = self.sizes().unwrap_or_default();
+        let n = sizes.len();
+        if !(3..=6).contains(&n) {
+            return Ok(());
+        }
+        let [x, y, w, h] = self.fit(1.35, 34.0);
+        // Walk the edges turning by each exterior angle; try some side lengths until it closes.
+        let mut best: Option<Vec<P>> = None;
+        let lens: Vec<f64> = (0..n).map(|i| 1.0 + 0.1 * (i as f64)).collect();
+        'search: for a in 0..9 {
+            for b in 0..9 {
+                let mut l = lens.clone();
+                l[0] = 0.6 + a as f64 * 0.25;
+                l[1] = 0.6 + b as f64 * 0.25;
+                let (mut ang, mut p) = (0.0f64, [0.0, 0.0]);
+                let mut pts = vec![p];
+                let mut ok = true;
+                // All but the last two sides are chosen; the last two follow from closure.
+                for i in 0..n.saturating_sub(2) {
+                    p = [p[0] + l[i] * ang.cos(), p[1] + l[i] * ang.sin()];
+                    pts.push(p);
+                    ang += (180.0 - sizes[(i + 1) % n]).to_radians();
+                }
+                // Directions of the last two sides: solve p + l1*d1 + l2*d2 = start.
+                let d1 = ang;
+                let d2 = ang + (180.0 - sizes[(n - 1) % n]).to_radians();
+                let det = d1.cos() * d2.sin() - d1.sin() * d2.cos();
+                if det.abs() < 1e-6 {
+                    continue;
+                }
+                let (rx, ry) = (-p[0], -p[1]);
+                let l1 = (rx * d2.sin() - ry * d2.cos()) / det;
+                let l2 = (d1.cos() * ry - d1.sin() * rx) / det;
+                if l1 < 0.25 || l2 < 0.25 {
+                    ok = false;
+                }
+                if ok {
+                    let q = [p[0] + l1 * d1.cos(), p[1] + l1 * d1.sin()];
+                    pts.push(q);
+                    best = Some(pts);
+                    break 'search;
+                }
+            }
+        }
+        let pts = match best {
+            Some(p) => p,
+            None => return Ok(()),
+        };
+        let (minx, maxx) = pts.iter().fold((f64::MAX, f64::MIN), |a, p| (a.0.min(p[0]), a.1.max(p[0])));
+        let (miny, maxy) = pts.iter().fold((f64::MAX, f64::MIN), |a, p| (a.0.min(p[1]), a.1.max(p[1])));
+        let scale = (w / (maxx - minx).max(1e-6)).min(h / (maxy - miny).max(1e-6));
+        let off = [x + (w - (maxx - minx) * scale) / 2.0, y + (h - (maxy - miny) * scale) / 2.0];
+        let pts: Vec<P> = pts.iter().map(|p| [off[0] + (p[0] - minx) * scale, off[1] + (p[1] - miny) * scale]).collect();
+        poly(s, &pts)?;
+        let unknown = self.unknown();
+        let labels: Vec<String> = self.list("angles").into_iter().map(|v| v.unwrap_or_else(|| unknown.clone())).collect();
+        let centre = [pts.iter().map(|p| p[0]).sum::<f64>() / n as f64, pts.iter().map(|p| p[1]).sum::<f64>() / n as f64];
+        // The first angle sits at vertex 1 (after the first edge), and so on round the shape.
+        for (i, t) in labels.iter().enumerate().take(n) {
+            let v = pts[(i + 1) % n];
+            let (dx, dy) = (v[0] - centre[0], v[1] - centre[1]);
+            let d = (dx * dx + dy * dy).sqrt().max(1.0);
+            let chars = crate::latex::plain(t).chars().count() as f64;
+            let out = (14.0 + chars * 4.5) * k();
+            label(s, t, [v[0] + dx / d * out, v[1] + dy / d * out * 0.8])?;
+        }
+        Ok(())
+    }
+
+    /// `length`: the length of a line in cm (to one decimal), drawn from `from` (default 0) along
+    /// a ruler marked in cm and mm; `unit` shows `cm` labels.
+    fn ruler(&self, s: &mut Session) -> Result<()> {
+        let len = self.num("length", 5.0);
+        let from = self.num("from", 0.0);
+        let cm = (from + len).ceil().max(len.ceil()) + 1.0;
+        let [x, y, w, h] = self.fit(cm.max(4.0) * 0.45 + 1.0, 6.0);
+        let (left, right) = (x + 8.0, x + w - 8.0);
+        let at = |v: f64| left + (right - left) * v / cm;
+        let top = y + h * 0.5;
+        // The line being measured.
+        draw_line(s, [at(from), y + h * 0.22], [at(from + len), y + h * 0.22], "#D0453A", 4.0 * k().sqrt())?;
+        draw_line(s, [at(from), y + h * 0.12], [at(from), y + h * 0.32], "#D0453A", 2.0)?;
+        draw_line(s, [at(from + len), y + h * 0.12], [at(from + len), y + h * 0.32], "#D0453A", 2.0)?;
+        draw_shape(s, "rect", [left, top, right - left, h * 0.42], Some("#FDF3C8"), Some((INK, 1.8)))?;
+        let mm = (cm * 10.0) as usize;
+        for i in 0..=mm {
+            let v = i as f64 / 10.0;
+            let tall = if i % 10 == 0 {
+                0.22
+            } else if i % 5 == 0 {
+                0.15
+            } else {
+                0.09
+            };
+            draw_line(s, [at(v), top], [at(v), top + h * tall], INK, 1.2)?;
+            if i % 10 == 0 {
+                label_sized(s, &format!("{}", i / 10), [at(v), top + h * 0.32], 11.0)?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `root`: `{"v": 60, "l": {...}, "r": {...}}`; `v` is a number or text, `null` is `?`; a node
+    /// without children is a leaf (drawn circled, as a prime in a factor tree).
+    fn factor_tree(&self, s: &mut Session) -> Result<()> {
+        fn depth(n: &Value) -> usize {
+            1 + ["l", "r"].iter().filter_map(|k| n.get(k)).map(depth).max().unwrap_or(0)
+        }
+        fn leaves(n: &Value) -> usize {
+            let kids: Vec<&Value> = ["l", "r"].iter().filter_map(|k| n.get(k)).collect();
+            if kids.is_empty() { 1 } else { kids.iter().map(|c| leaves(c)).sum() }
+        }
+        let Some(root) = self.d.get("root") else { return Ok(()) };
+        let (d, l) = (depth(root), leaves(root));
+        let [x, y, w, h] = self.fit((l as f64 / d as f64 * 1.15).max(1.4), 6.0);
+        let (cw, rh) = (w / l as f64, h / d as f64);
+        let r = (cw * 0.34).min(rh * 0.34).min(20.0 * k());
+        #[allow(clippy::too_many_arguments)]
+        fn place(s: &mut Session, n: &Value, lvl: usize, first: usize, x: f64, y: f64, cw: f64, rh: f64, r: f64) -> Result<(f64, f64)> {
+            let kids: Vec<&Value> = ["l", "r"].iter().filter_map(|k| n.get(k)).collect();
+            let span = leaves(n);
+            let cx = x + cw * (first as f64 + span as f64 / 2.0);
+            let cy = y + rh * (lvl as f64 + 0.5);
+            let mut at = first;
+            for c in &kids {
+                let (kx, ky) = place(s, c, lvl + 1, at, x, y, cw, rh, r)?;
+                draw_line(s, [cx, cy + r], [kx, ky - r], INK, 2.0)?;
+                at += leaves(c);
+            }
+            let text = match n.get("v") {
+                Some(Value::Null) | None => "?".to_string(),
+                Some(Value::String(t)) => t.clone(),
+                Some(v) => v.to_string(),
+            };
+            let leaf = kids.is_empty();
+            draw_shape(s, "ellipse", [cx - r, cy - r, 2.0 * r, 2.0 * r], Some(if leaf { "#FDE9B8" } else { "#FFFFFF" }), Some((INK, 2.0)))?;
+            label_sized(s, &text, [cx, cy], 14.0)?;
+            Ok((cx, cy))
+        }
+        place(s, root, 0, 0, x, y, cw, rh, r)?;
+        Ok(())
+    }
+
+    /// Two straight lines crossing: `theta` is the acute angle between them (default 60) and
+    /// `labels` the four angles round the crossing, starting with the acute angle on the right
+    /// and going anticlockwise (`null` the unknown).
+    fn crossing_lines(&self, s: &mut Session) -> Result<()> {
+        let theta = self.num("theta", 60.0).clamp(25.0, 155.0);
+        let [x, y, w, h] = self.fit(1.5, 26.0);
+        let (c, r) = ([x + w / 2.0, y + h / 2.0], (w.min(h * 1.5) / 2.0) * 0.95);
+        let a0 = -theta / 2.0;
+        let dir = |deg: f64, len: f64| [c[0] + len * deg.to_radians().cos(), c[1] - len * deg.to_radians().sin()];
+        for base in [a0, a0 + theta] {
+            ln(s, dir(base, r), dir(base + 180.0, r))?;
+        }
+        let unknown = self.unknown();
+        let labels = self.list("labels");
+        // Sectors, anticlockwise from the first line: θ, 180 − θ, θ, 180 − θ.
+        let sectors = [(a0, theta), (a0 + theta, 180.0 - theta), (a0 + 180.0, theta), (a0 + 180.0 + theta, 180.0 - theta)];
+        for (i, (start, size)) in sectors.iter().enumerate() {
+            if let Some(l) = labels.get(i) {
+                let text = l.clone().unwrap_or_else(|| unknown.clone());
+                label(s, &text, dir(start + size / 2.0, r * 0.62))?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `pos`, `neg`: counters (yellow plus, red minus) in rows of five, for directed number.
+    fn counters(&self, s: &mut Session) -> Result<()> {
+        let (pos, neg) = (self.num("pos", 0.0).max(0.0) as usize, self.num("neg", 0.0).max(0.0) as usize);
+        let total = (pos + neg).max(1);
+        let cols = total.min(10);
+        let rows = total.div_ceil(cols);
+        let [x, y, w, h] = self.fit(cols as f64 / rows as f64 * 1.0, 6.0);
+        let u = (w / cols as f64).min(h / rows as f64).min(34.0 * k());
+        let left = x + (w - u * cols as f64) / 2.0;
+        for i in 0..total {
+            let (c, r) = (i % cols, i / cols);
+            let positive = i < pos;
+            let colour = if i >= pos + neg {
+                "#FFFFFF"
+            } else if positive {
+                "#F6D860"
+            } else {
+                "#E8735F"
+            };
+            draw_shape(
+                s,
+                "ellipse",
+                [left + u * c as f64 + u * 0.08, y + u * r as f64 + u * 0.08, u * 0.84, u * 0.84],
+                Some(colour),
+                Some((INK, 1.8)),
+            )?;
+            let ch = if positive { "+" } else { "−" };
+            label_sized(s, ch, [left + u * (c as f64 + 0.5), y + u * (r as f64 + 0.5)], 15.0)?;
         }
         Ok(())
     }

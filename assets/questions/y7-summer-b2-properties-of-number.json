@@ -1,0 +1,2156 @@
+{
+ "version": 1,
+ "note": "Y7 Summer Block 2 Properties of number: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7su2-s01-l1",
+   "topic": "Number",
+   "subtopic": "Multiples",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S1 Multiples",
+   "keywords": [
+    "multiples",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "5 * n / n == 5"
+   ],
+   "text": "Write down the first five multiples of [[n]].",
+   "answer": "[[n]], [[2 * n]], [[3 * n]], [[4 * n]], [[5 * n]]"
+  },
+  {
+   "id": "y7su2-s01-l2",
+   "topic": "Number",
+   "subtopic": "Multiples",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S1 Multiples",
+   "keywords": [
+    "multiples",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       4,
+       15
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "n * k + (1 - f)"
+    ]
+   ],
+   "check": [
+    "(m % n == 0) == (f == 1)"
+   ],
+   "text": "Is [[m]] a multiple of [[n]]?",
+   "answer": "[[m % n == 0|if:Yes/No]]: [[m]] ÷ [[n]] = [[m / n|dec]]"
+  },
+  {
+   "id": "y7su2-s01-l3",
+   "topic": "Number",
+   "subtopic": "Multiples",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S1 Multiples",
+   "keywords": [
+    "multiples",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       30,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % n != 0"
+   ],
+   "check": [
+    "(floor(m / n) + 1) * n > m"
+   ],
+   "text": "Write down the smallest multiple of [[n]] that is greater than [[m]].",
+   "answer": "[[(floor(m / n) + 1) * n]]"
+  },
+  {
+   "id": "y7su2-s01-l4",
+   "topic": "Number",
+   "subtopic": "Multiples",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S1 Multiples",
+   "keywords": [
+    "multiples",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "(floor(a / n) + 3) * n + 1"
+    ]
+   ],
+   "where": [
+    "a % n != 0"
+   ],
+   "check": [
+    "(floor(a / n) + 3) * n < b"
+   ],
+   "text": "List the multiples of [[n]] that are between [[a]] and [[b]]. (2 marks)",
+   "answer": "[[(floor(a / n) + 1) * n]], [[(floor(a / n) + 2) * n]], [[(floor(a / n) + 3) * n]]"
+  },
+  {
+   "id": "y7su2-s02-l1",
+   "topic": "Number",
+   "subtopic": "Factors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S2 Factors",
+   "keywords": [
+    "factors",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f * k % f == 0"
+   ],
+   "text": "Is [[f]] a factor of [[f * k]]?",
+   "answer": "Yes: [[f]] × [[k]] = [[f * k]]"
+  },
+  {
+   "id": "y7su2-s02-l2",
+   "topic": "Number",
+   "subtopic": "Factors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S2 Factors",
+   "keywords": [
+    "factors",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       18,
+       20,
+       24,
+       30,
+       36,
+       40,
+       48
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Write down all the factors of [[n]].",
+   "answer": "[[n == 12|if:1, 2, 3, 4, 6, 12/]][[n == 18|if:1, 2, 3, 6, 9, 18/]][[n == 20|if:1, 2, 4, 5, 10, 20/]][[n == 24|if:1, 2, 3, 4, 6, 8, 12, 24/]][[n == 30|if:1, 2, 3, 5, 6, 10, 15, 30/]][[n == 36|if:1, 2, 3, 4, 6, 9, 12, 18, 36/]][[n == 40|if:1, 2, 4, 5, 8, 10, 20, 40/]][[n == 48|if:1, 2, 3, 4, 6, 8, 12, 16, 24, 48/]]"
+  },
+  {
+   "id": "y7su2-s02-l3",
+   "topic": "Number",
+   "subtopic": "Factors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S2 Factors",
+   "keywords": [
+    "factors",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       18,
+       20,
+       24,
+       30,
+       36,
+       40,
+       48
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "ndiv(n) > 3"
+   ],
+   "text": "Write down all the factors of [[n]] and say how many there are.",
+   "answer": "[[ndiv(n)]] factors: [[n == 12|if:1, 2, 3, 4, 6, 12/]][[n == 18|if:1, 2, 3, 6, 9, 18/]][[n == 20|if:1, 2, 4, 5, 10, 20/]][[n == 24|if:1, 2, 3, 4, 6, 8, 12, 24/]][[n == 30|if:1, 2, 3, 5, 6, 10, 15, 30/]][[n == 36|if:1, 2, 3, 4, 6, 9, 12, 18, 36/]][[n == 40|if:1, 2, 4, 5, 8, 10, 20, 40/]][[n == 48|if:1, 2, 3, 4, 6, 8, 12, 16, 24, 48/]]"
+  },
+  {
+   "id": "y7su2-s02-l4",
+   "topic": "Number",
+   "subtopic": "Factors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S2 Factors",
+   "keywords": [
+    "factors",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       12,
+       18,
+       20,
+       24,
+       30,
+       36,
+       40,
+       48
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "ndiv(n) > 3"
+   ],
+   "text": "[[n]] biscuits are shared equally between some children with none left over. Write down all the possible numbers of children. (2 marks)",
+   "answer": "[[n == 12|if:1, 2, 3, 4, 6, 12/]][[n == 18|if:1, 2, 3, 6, 9, 18/]][[n == 20|if:1, 2, 4, 5, 10, 20/]][[n == 24|if:1, 2, 3, 4, 6, 8, 12, 24/]][[n == 30|if:1, 2, 3, 5, 6, 10, 15, 30/]][[n == 36|if:1, 2, 3, 4, 6, 9, 12, 18, 36/]][[n == 40|if:1, 2, 4, 5, 8, 10, 20, 40/]][[n == 48|if:1, 2, 3, 4, 6, 8, 12, 16, 24, 48/]]"
+  },
+  {
+   "id": "y7su2-s03-l1",
+   "topic": "Number",
+   "subtopic": "Prime numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S3 Prime numbers",
+   "keywords": [
+    "prime",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 9"
+   ],
+   "text": "Is [[n]] a prime number?",
+   "answer": "[[isprime(n)|if:Yes/No]]"
+  },
+  {
+   "id": "y7su2-s03-l2",
+   "topic": "Number",
+   "subtopic": "Prime numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S3 Prime numbers",
+   "keywords": [
+    "prime",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       10,
+       90
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "nextprime(a) < a + 10"
+   ],
+   "check": [
+    "isprime(nextprime(a)) == 1"
+   ],
+   "text": "Write down a prime number between [[a]] and [[a + 10]].",
+   "answer": "[[nextprime(a)]]"
+  },
+  {
+   "id": "y7su2-s03-l3",
+   "topic": "Number",
+   "subtopic": "Prime numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S3 Prime numbers",
+   "keywords": [
+    "prime",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       3,
+       5,
+       7,
+       11
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       3,
+       5,
+       7,
+       13
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "isprime(p * q) == 0"
+   ],
+   "text": "Explain why [[p * q]] is not a prime number.",
+   "answer": "[[p * q]] = [[p]] × [[q]], so it has factors other than 1 and itself"
+  },
+  {
+   "id": "y7su2-s03-l4",
+   "topic": "Number",
+   "subtopic": "Prime numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S3 Prime numbers",
+   "keywords": [
+    "prime",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "nextprime(a) > a"
+   ],
+   "text": "(a) Write down the smallest prime number greater than [[a]]. (b) Is [[b]] prime? Give a reason. (2 marks)",
+   "answer": "(a) [[nextprime(a)]]  (b) [[isprime(b)|if:Yes: it has no factors except 1 and itself/No: it has other factors]]"
+  },
+  {
+   "id": "y7su2-s04-l1",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S4 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "p * q * r"
+    ]
+   ],
+   "where": [
+    "p <= q",
+    "q <= r"
+   ],
+   "check": [
+    "n == p * q * r"
+   ],
+   "text": "Complete the factor tree.",
+   "answer": "[[p]] × [[q]] × [[r]]",
+   "diagram": {
+    "kind": "factor-tree",
+    "root": {
+     "v": "[[n|n]]",
+     "l": {
+      "v": "[[p * q|n]]",
+      "l": {
+       "v": "[[p|n]]"
+      },
+      "r": {
+       "v": null
+      }
+     },
+     "r": {
+      "v": "[[r|n]]"
+     }
+    }
+   }
+  },
+  {
+   "id": "y7su2-s04-l2",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S4 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       5,
+       7,
+       11
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "p * q * r"
+    ]
+   ],
+   "where": [
+    "p <= q",
+    "q <= r"
+   ],
+   "check": [
+    "n == p * q * r"
+   ],
+   "text": "Write [[n]] as a product of its prime factors.",
+   "answer": "[[p]] × [[q]] × [[r]]"
+  },
+  {
+   "id": "y7su2-s04-l3",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S4 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       5,
+       7,
+       11
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "p^a * q"
+    ]
+   ],
+   "check": [
+    "n == p^a * q"
+   ],
+   "text": "Write [[n]] as a product of its prime factors. Use index notation.",
+   "answer": "$[[p]]^{[[a]]} \\times [[q]]$"
+  },
+  {
+   "id": "y7su2-s04-l4",
+   "topic": "Number",
+   "subtopic": "Write a number as a product of prime factors",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S4 Write a number as a product of prime factors",
+   "keywords": [
+    "write",
+    "a",
+    "number",
+    "as",
+    "product",
+    "of",
+    "prime",
+    "factors",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "p^a * q^b"
+    ]
+   ],
+   "check": [
+    "n == p^a * q^b"
+   ],
+   "text": "(a) Write [[n]] as a product of prime factors using indices. (b) Is [[n]] a multiple of [[p]]? Use your answer to explain. (3 marks)",
+   "answer": "(a) $[[p]]^{[[a]]} \\times [[q]]^{[[b]]}$  (b) Yes: [[p]] is one of its prime factors"
+  },
+  {
+   "id": "y7su2-s05-l1",
+   "topic": "Number",
+   "subtopic": "Square, cube and triangular numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S5 Square, cube and triangular numbers",
+   "keywords": [
+    "square",
+    "cube",
+    "and",
+    "triangular",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * k == k^2"
+   ],
+   "text": "Work out [[k]]²",
+   "answer": "[[k * k]]"
+  },
+  {
+   "id": "y7su2-s05-l2",
+   "topic": "Number",
+   "subtopic": "Square, cube and triangular numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S5 Square, cube and triangular numbers",
+   "keywords": [
+    "square",
+    "cube",
+    "and",
+    "triangular",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k^3 == k * k * k"
+   ],
+   "text": "Work out [[k]]³",
+   "answer": "[[k^3]]"
+  },
+  {
+   "id": "y7su2-s05-l3",
+   "topic": "Number",
+   "subtopic": "Square, cube and triangular numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S5 Square, cube and triangular numbers",
+   "keywords": [
+    "square",
+    "cube",
+    "and",
+    "triangular",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       4,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "isint(sqrt(k * k)) == 1"
+   ],
+   "text": "Which of these is a square number: [[k * k + 1]], [[k * k]], [[k * k - 1]]?",
+   "answer": "[[k * k]]"
+  },
+  {
+   "id": "y7su2-s05-l4",
+   "topic": "Number",
+   "subtopic": "Square, cube and triangular numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S5 Square, cube and triangular numbers",
+   "keywords": [
+    "square",
+    "cube",
+    "and",
+    "triangular",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * (n + 1) / 2 - (n - 1) * n / 2 == n"
+   ],
+   "text": "The triangular numbers are 1, 3, 6, 10, … (a) Write down the next two. (b) Work out the [[n]]th triangular number. (3 marks)",
+   "answer": "(a) 15, 21  (b) [[n * (n + 1) / 2]]"
+  },
+  {
+   "id": "y7su2-s06-l1",
+   "topic": "Number",
+   "subtopic": "Square roots and cube roots",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S6 Square roots and cube roots",
+   "keywords": [
+    "square",
+    "roots",
+    "and",
+    "cube",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "sqrt(k * k) == k"
+   ],
+   "text": "Work out √[[k * k]]",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y7su2-s06-l2",
+   "topic": "Number",
+   "subtopic": "Square roots and cube roots",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S6 Square roots and cube roots",
+   "keywords": [
+    "square",
+    "roots",
+    "and",
+    "cube",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k^3 / k / k == k"
+   ],
+   "text": "Work out the cube root of [[k^3]].",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y7su2-s06-l3",
+   "topic": "Number",
+   "subtopic": "Square roots and cube roots",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S6 Square roots and cube roots",
+   "keywords": [
+    "square",
+    "roots",
+    "and",
+    "cube",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       10,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(n))"
+   ],
+   "check": [
+    "floor(sqrt(n)) ^ 2 < n"
+   ],
+   "text": "√[[n]] is between which two whole numbers?",
+   "answer": "[[floor(sqrt(n))]] and [[floor(sqrt(n)) + 1]]"
+  },
+  {
+   "id": "y7su2-s06-l4",
+   "topic": "Number",
+   "subtopic": "Square roots and cube roots",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S6 Square roots and cube roots",
+   "keywords": [
+    "square",
+    "roots",
+    "and",
+    "cube",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "sqrt(k * k) == k"
+   ],
+   "text": "A square has an area of [[k * k]] cm². (a) Work out the length of one side. (b) Work out the perimeter. (2 marks)",
+   "answer": "(a) [[k]] cm  (b) [[4 * k]] cm"
+  },
+  {
+   "id": "y7su2-s07-l1",
+   "topic": "Number",
+   "subtopic": "Explore higher powers and roots (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S7 Explore higher powers and roots (E)",
+   "keywords": [
+    "explore",
+    "higher",
+    "powers",
+    "and",
+    "roots",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b^e < 100000"
+   ],
+   "check": [
+    "b^e == b * b^(e - 1)"
+   ],
+   "text": "Work out [[b]]^[[e]]",
+   "answer": "[[b^e]]"
+  },
+  {
+   "id": "y7su2-s07-l2",
+   "topic": "Number",
+   "subtopic": "Explore higher powers and roots (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S7 Explore higher powers and roots (E)",
+   "keywords": [
+    "explore",
+    "higher",
+    "powers",
+    "and",
+    "roots",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b^e == b * b^(e - 1)"
+   ],
+   "text": "Write [[b^e]] as a power of [[b]].",
+   "answer": "$[[b]]^{[[e]]}$"
+  },
+  {
+   "id": "y7su2-s07-l3",
+   "topic": "Number",
+   "subtopic": "Explore higher powers and roots (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S7 Explore higher powers and roots (E)",
+   "keywords": [
+    "explore",
+    "higher",
+    "powers",
+    "and",
+    "roots",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k^4 == k * k * k * k"
+   ],
+   "text": "Work out the fourth root of [[k^4]].",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y7su2-s07-l4",
+   "topic": "Number",
+   "subtopic": "Explore higher powers and roots (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S7 Explore higher powers and roots (E)",
+   "keywords": [
+    "explore",
+    "higher",
+    "powers",
+    "and",
+    "roots",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "e",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2^e == 2 * 2^(e - 1)"
+   ],
+   "text": "(a) Work out 2^[[e]]. (b) Work out √[[k * k]] + ∛[[m^3]]. (2 marks)",
+   "answer": "(a) [[2^e]]  (b) [[k + m]]"
+  },
+  {
+   "id": "y7su2-s08-l1",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S8 Highest common factor (HCF)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(x, y) == 1",
+    "x != y"
+   ],
+   "check": [
+    "gcd(g * x, g * y) == g"
+   ],
+   "text": "Work out the highest common factor (HCF) of [[g * x]] and [[g * y]].",
+   "answer": "[[g]]"
+  },
+  {
+   "id": "y7su2-s08-l2",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S8 Highest common factor (HCF)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) > 3",
+    "a != b",
+    "a % b != 0",
+    "b % a != 0"
+   ],
+   "check": [
+    "gcd(a, b) > 1"
+   ],
+   "text": "Find the HCF of [[a]] and [[b]].",
+   "answer": "[[gcd(a, b)]]"
+  },
+  {
+   "id": "y7su2-s08-l3",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S8 Highest common factor (HCF)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "g * x"
+    ],
+    [
+     "b",
+     "g * y"
+    ],
+    [
+     "c",
+     "g * z"
+    ]
+   ],
+   "where": [
+    "gcd(gcd(x, y), z) == 1",
+    "x != y",
+    "y != z",
+    "x != z"
+   ],
+   "check": [
+    "gcd(gcd(a, b), c) == g"
+   ],
+   "text": "Find the HCF of [[a]], [[b]] and [[c]].",
+   "answer": "[[gcd(gcd(a, b), c)]]"
+  },
+  {
+   "id": "y7su2-s08-l4",
+   "topic": "Number",
+   "subtopic": "Highest common factor (HCF)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S8 Highest common factor (HCF)",
+   "keywords": [
+    "highest",
+    "common",
+    "factor",
+    "hcf",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "g * x"
+    ],
+    [
+     "b",
+     "g * y"
+    ]
+   ],
+   "where": [
+    "gcd(x, y) == 1",
+    "x != y"
+   ],
+   "check": [
+    "gcd(a, b) == g"
+   ],
+   "text": "A ribbon [[a]] cm long and a ribbon [[b]] cm long are cut into pieces of equal length with none left over. What is the greatest possible length of each piece? How many pieces are there altogether? (3 marks)",
+   "answer": "[[gcd(a, b)]] cm; [[a / gcd(a, b) + b / gcd(a, b)]] pieces"
+  },
+  {
+   "id": "y7su2-s09-l1",
+   "topic": "Number",
+   "subtopic": "Lowest common multiple (LCM)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S9 Lowest common multiple (LCM)",
+   "keywords": [
+    "lowest",
+    "common",
+    "multiple",
+    "lcm",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "lcm(a, b) % a == 0"
+   ],
+   "text": "Work out the lowest common multiple (LCM) of [[a]] and [[b]].",
+   "answer": "[[lcm(a, b)]]"
+  },
+  {
+   "id": "y7su2-s09-l2",
+   "topic": "Number",
+   "subtopic": "Lowest common multiple (LCM)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S9 Lowest common multiple (LCM)",
+   "keywords": [
+    "lowest",
+    "common",
+    "multiple",
+    "lcm",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "a % b != 0",
+    "b % a != 0"
+   ],
+   "check": [
+    "lcm(a, b) % b == 0"
+   ],
+   "text": "Find the LCM of [[a]] and [[b]].",
+   "answer": "[[lcm(a, b)]]"
+  },
+  {
+   "id": "y7su2-s09-l3",
+   "topic": "Number",
+   "subtopic": "Lowest common multiple (LCM)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S9 Lowest common multiple (LCM)",
+   "keywords": [
+    "lowest",
+    "common",
+    "multiple",
+    "lcm",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       4,
+       5,
+       8,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "lcm(lcm(a, b), c) % a == 0"
+   ],
+   "text": "Find the LCM of [[a]], [[b]] and [[c]].",
+   "answer": "[[lcm(lcm(a, b), c)]]"
+  },
+  {
+   "id": "y7su2-s09-l4",
+   "topic": "Number",
+   "subtopic": "Lowest common multiple (LCM)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S9 Lowest common multiple (LCM)",
+   "keywords": [
+    "lowest",
+    "common",
+    "multiple",
+    "lcm",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       6,
+       8,
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       9,
+       10,
+       12,
+       20,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "lcm(a, b) < 180"
+   ],
+   "check": [
+    "lcm(a, b) % a == 0"
+   ],
+   "text": "Bus A leaves the station every [[a]] minutes and bus B every [[b]] minutes. They both leave at 9:00. When do they next leave together? (3 marks)",
+   "answer": "[[floor((540 + lcm(a, b)) / 60)]]:[[(540 + lcm(a, b)) % 60 < 10|if:0/]][[(540 + lcm(a, b)) % 60]]"
+  },
+  {
+   "id": "y7su2-s10-l1",
+   "topic": "Number",
+   "subtopic": "HCF and LCM from a Venn diagram (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S10 HCF and LCM from a Venn diagram (E)",
+   "keywords": [
+    "hcf",
+    "and",
+    "lcm",
+    "from",
+    "a",
+    "venn",
+    "diagram",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "pa",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "pb",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ],
+    [
+     "c1",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c2",
+     {
+      "choose": [
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "pa != pb",
+    "pa != c1",
+    "pa != c2",
+    "pb != c1",
+    "pb != c2",
+    "c1 < c2"
+   ],
+   "check": [
+    "pa * c1 * c2 / pa == c1 * c2"
+   ],
+   "text": "The Venn diagram shows the prime factors of two numbers, A and B. Work out A.",
+   "answer": "[[pa * c1 * c2]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[pa]]",
+    "both": "[[c1]], [[c2]]",
+    "onlyB": "[[pb]]"
+   }
+  },
+  {
+   "id": "y7su2-s10-l2",
+   "topic": "Number",
+   "subtopic": "HCF and LCM from a Venn diagram (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S10 HCF and LCM from a Venn diagram (E)",
+   "keywords": [
+    "hcf",
+    "and",
+    "lcm",
+    "from",
+    "a",
+    "venn",
+    "diagram",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "pa",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "pb",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ],
+    [
+     "c1",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c2",
+     {
+      "choose": [
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "pa != pb",
+    "pa != c1",
+    "pa != c2",
+    "pb != c1",
+    "pb != c2",
+    "c1 < c2"
+   ],
+   "check": [
+    "c1 * c2 > 1"
+   ],
+   "text": "The Venn diagram shows the prime factors of A and B. Work out the HCF of A and B.",
+   "answer": "[[c1 * c2]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[pa]]",
+    "both": "[[c1]], [[c2]]",
+    "onlyB": "[[pb]]"
+   }
+  },
+  {
+   "id": "y7su2-s10-l3",
+   "topic": "Number",
+   "subtopic": "HCF and LCM from a Venn diagram (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S10 HCF and LCM from a Venn diagram (E)",
+   "keywords": [
+    "hcf",
+    "and",
+    "lcm",
+    "from",
+    "a",
+    "venn",
+    "diagram",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "pa",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "pb",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ],
+    [
+     "c1",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c2",
+     {
+      "choose": [
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "pa != pb",
+    "pa != c1",
+    "pa != c2",
+    "pb != c1",
+    "pb != c2",
+    "c1 < c2"
+   ],
+   "check": [
+    "pa * pb * c1 * c2 % (c1 * c2) == 0"
+   ],
+   "text": "The Venn diagram shows the prime factors of A and B. Work out the LCM of A and B.",
+   "answer": "[[pa * pb * c1 * c2]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[pa]]",
+    "both": "[[c1]], [[c2]]",
+    "onlyB": "[[pb]]"
+   }
+  },
+  {
+   "id": "y7su2-s10-l4",
+   "topic": "Number",
+   "subtopic": "HCF and LCM from a Venn diagram (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S10 HCF and LCM from a Venn diagram (E)",
+   "keywords": [
+    "hcf",
+    "and",
+    "lcm",
+    "from",
+    "a",
+    "venn",
+    "diagram",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "pa",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "pb",
+     {
+      "choose": [
+       5,
+       7,
+       11,
+       13
+      ]
+     }
+    ],
+    [
+     "c1",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c2",
+     {
+      "choose": [
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "pa != pb",
+    "pa != c1",
+    "pa != c2",
+    "pb != c1",
+    "pb != c2",
+    "c1 < c2"
+   ],
+   "check": [
+    "gcd(pa * c1 * c2, pb * c1 * c2) == c1 * c2"
+   ],
+   "text": "The Venn diagram shows the prime factors of A and B. Work out A, B, the HCF and the LCM. (4 marks)",
+   "answer": "A = [[pa * c1 * c2]], B = [[pb * c1 * c2]], HCF = [[c1 * c2]], LCM = [[pa * pb * c1 * c2]]",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[pa]]",
+    "both": "[[c1]], [[c2]]",
+    "onlyB": "[[pb]]"
+   }
+  },
+  {
+   "id": "y7su2-s11-l1",
+   "topic": "Number",
+   "subtopic": "Use factors to simplify calculations (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S11 Use factors to simplify calculations (E)",
+   "keywords": [
+    "use",
+    "factors",
+    "to",
+    "simplify",
+    "calculations",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       19
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "4 * k * 25 == 100 * k"
+   ],
+   "text": "Use 4 × 25 = 100 to work out 4 × [[k]] × 25.",
+   "answer": "[[100 * k]]"
+  },
+  {
+   "id": "y7su2-s11-l2",
+   "topic": "Number",
+   "subtopic": "Use factors to simplify calculations (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S11 Use factors to simplify calculations (E)",
+   "keywords": [
+    "use",
+    "factors",
+    "to",
+    "simplify",
+    "calculations",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 4 == 0"
+   ],
+   "check": [
+    "k * 25 == (k / 4) * 100"
+   ],
+   "text": "Work out [[k]] × 25 by using 25 × 4 = 100. Start by writing [[k * 4]] as [[k]] × 4.",
+   "answer": "[[k * 25]]"
+  },
+  {
+   "id": "y7su2-s11-l3",
+   "topic": "Number",
+   "subtopic": "Use factors to simplify calculations (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S11 Use factors to simplify calculations (E)",
+   "keywords": [
+    "use",
+    "factors",
+    "to",
+    "simplify",
+    "calculations",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       38
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * 4 * 25 == a * 100"
+   ],
+   "text": "Use factors to work out [[a * 4]] × 25 without a calculator.",
+   "answer": "[[a * 100]]"
+  },
+  {
+   "id": "y7su2-s11-l4",
+   "topic": "Number",
+   "subtopic": "Use factors to simplify calculations (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B2 Properties of number · S11 Use factors to simplify calculations (E)",
+   "keywords": [
+    "use",
+    "factors",
+    "to",
+    "simplify",
+    "calculations",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       3,
+       19
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "8 * k * 125 == 1000 * k"
+   ],
+   "text": "Show that 8 × [[k]] × 125 = [[k * 1000]]. Then work out 16 × [[k]] × 125. (3 marks)",
+   "answer": "8 × 125 = 1000, so 1000 × [[k]] = [[k * 1000]]; 16 × [[k]] × 125 = [[k * 2000]]"
+  }
+ ]
+}

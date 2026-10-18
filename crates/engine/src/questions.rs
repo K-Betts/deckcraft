@@ -22,6 +22,12 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y7-spring-b2-fractions-decimals-percentages.json"),
     include_str!("../../../assets/questions/y7-spring-b4-fractions-percentages-of-amounts.json"),
     include_str!("../../../assets/questions/y7-summer-b3-add-subtract-fractions.json"),
+    include_str!("../../../assets/questions/y7-spring-b1-graphing-data.json"),
+    include_str!("../../../assets/questions/y7-spring-b3-directed-number.json"),
+    include_str!("../../../assets/questions/y7-spring-b5-perimeter-area.json"),
+    include_str!("../../../assets/questions/y7-summer-b1-speed-distance-time.json"),
+    include_str!("../../../assets/questions/y7-summer-b2-properties-of-number.json"),
+    include_str!("../../../assets/questions/y7-summer-b4-angles-polygons.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -55,6 +61,15 @@ pub const DRAWABLE: &[&str] = &[
     "table",
     "fraction-bar",
     "shade-grid",
+    "pictogram",
+    "scatter",
+    "line-graph",
+    "polygon-shape",
+    "polygon-angles",
+    "ruler",
+    "factor-tree",
+    "counters",
+    "crossing-lines",
 ];
 
 /// Whether a question's `diagram` is one the slide can draw.
@@ -632,6 +647,18 @@ mod tests {
     }
 
     #[test]
+    fn every_built_in_template_gives_different_questions_not_the_same_one() {
+        // Most make dozens; a few cover a small topic (eighths, quarters, powers of 10) and make
+        // fewer, but never fewer than three.
+        let bank = starter().unwrap();
+        for t in &bank.templates {
+            let seen: std::collections::HashSet<(String, String)> =
+                (0..300u64).map(|s| t.instantiate(s).map(|q| (q.text, q.answer)).unwrap()).collect();
+            assert!(seen.len() >= 3, "{} makes only {} different questions", t.id, seen.len());
+        }
+    }
+
+    #[test]
     fn every_scheme_of_work_step_has_questions_at_all_four_levels() {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
@@ -640,7 +667,7 @@ mod tests {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 80, "the Year 7 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 120, "the Year 7 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }

@@ -1,0 +1,2576 @@
+{
+ "version": 1,
+ "note": "Y7 Summer Block 4 Angles and polygons: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7su4-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Draw and measure line segments and angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S1 Draw and measure line segments and angles",
+   "keywords": [
+    "draw",
+    "and",
+    "measure",
+    "line",
+    "segments",
+    "angles",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "int": [
+       31,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "L % 10 != 0"
+   ],
+   "check": [
+    "L / 10 * 10 == L"
+   ],
+   "text": "What is the length of the red line?",
+   "answer": "[[L / 10]] cm",
+   "diagram": {
+    "kind": "ruler",
+    "length": "[[L / 10|n]]"
+   }
+  },
+  {
+   "id": "y7su4-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Draw and measure line segments and angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S1 Draw and measure line segments and angles",
+   "keywords": [
+    "draw",
+    "and",
+    "measure",
+    "line",
+    "segments",
+    "angles",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "int": [
+       31,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "L % 10 != 0"
+   ],
+   "check": [
+    "L / 10 * 10 == L"
+   ],
+   "text": "A line is [[L / 10]] cm long. How many millimetres is this?",
+   "answer": "[[L]] mm"
+  },
+  {
+   "id": "y7su4-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Draw and measure line segments and angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S1 Draw and measure line segments and angles",
+   "keywords": [
+    "draw",
+    "and",
+    "measure",
+    "line",
+    "segments",
+    "angles",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       25,
+       40,
+       65,
+       110,
+       135,
+       160,
+       200,
+       250,
+       300,
+       75,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x != 90",
+    "x != 180"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "An angle measures [[x]]°. Is it acute, obtuse or reflex? Explain.",
+   "answer": "[[x < 90|if:Acute: less than 90°/]][[(x > 90) && (x < 180)|if:Obtuse: between 90° and 180°/]][[x > 180|if:Reflex: more than 180°/]]"
+  },
+  {
+   "id": "y7su4-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Draw and measure line segments and angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S1 Draw and measure line segments and angles",
+   "keywords": [
+    "draw",
+    "and",
+    "measure",
+    "line",
+    "segments",
+    "angles",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "L",
+     {
+      "int": [
+       31,
+       75
+      ]
+     }
+    ],
+    [
+     "M",
+     {
+      "int": [
+       11,
+       29
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       35,
+       70,
+       100,
+       150,
+       220,
+       280
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "L % 10 != 0",
+    "M % 10 != 0"
+   ],
+   "check": [
+    "(L + M) / 10 * 10 == L + M"
+   ],
+   "text": "(a) The red line measures [[L / 10]] cm. A second line is [[M / 10]] cm longer. How long is the second line? (b) An angle is [[x]]°. What type of angle is it? (2 marks)",
+   "answer": "(a) [[(L + M) / 10]] cm  (b) [[x < 90|if:acute/]][[(x > 90) && (x < 180)|if:obtuse/]][[x > 180|if:reflex/]]",
+   "diagram": {
+    "kind": "ruler",
+    "length": "[[L / 10|n]]"
+   }
+  },
+  {
+   "id": "y7su4-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Understand and use geometric notation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S2 Understand and use geometric notation",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "geometric",
+    "notation",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "pick": [
+       "A",
+       "B",
+       "C"
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "pick": [
+       "D",
+       "E",
+       "F"
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "pick": [
+       "G",
+       "H",
+       "J"
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       30,
+       110
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Triangle [[p1]][[p2]][[p3]] has an angle of [[x]]° at [[p2]]. Write this using angle notation.",
+   "answer": "∠[[p1]][[p2]][[p3]] = [[x]]°"
+  },
+  {
+   "id": "y7su4-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Understand and use geometric notation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S2 Understand and use geometric notation",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "geometric",
+    "notation",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "pick": [
+       "A",
+       "B",
+       "C"
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "pick": [
+       "D",
+       "E",
+       "F"
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "pick": [
+       "G",
+       "H",
+       "J"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 > 0"
+   ],
+   "text": "Write the name of the line from [[p1]] to [[p2]] and the angle between lines [[p2]][[p1]] and [[p2]][[p3]].",
+   "answer": "Line [[p1]][[p2]]; angle [[p1]][[p2]][[p3]]"
+  },
+  {
+   "id": "y7su4-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Understand and use geometric notation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S2 Understand and use geometric notation",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "geometric",
+    "notation",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "pick": [
+       "P",
+       "Q",
+       "R"
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "pick": [
+       "S",
+       "T",
+       "U"
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "pick": [
+       "V",
+       "W",
+       "X"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 > 0"
+   ],
+   "text": "In the notation ∠[[p1]][[p2]][[p3]], which letter is the vertex (the point where the angle is)?",
+   "answer": "[[p2]]"
+  },
+  {
+   "id": "y7su4-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Understand and use geometric notation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S2 Understand and use geometric notation",
+   "keywords": [
+    "understand",
+    "and",
+    "use",
+    "geometric",
+    "notation",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "pick": [
+       "A",
+       "B",
+       "C"
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "pick": [
+       "D",
+       "E",
+       "F"
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "pick": [
+       "G",
+       "H",
+       "J"
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       30,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x != 90"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Lines [[p1]][[p2]] and [[p2]][[p3]] meet at [[p2]] to make an angle of [[x]]°. Write this using notation. Is the angle acute or obtuse? (2 marks)",
+   "answer": "∠[[p1]][[p2]][[p3]] = [[x]]°; [[x < 90|if:acute/obtuse]]"
+  },
+  {
+   "id": "y7su4-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S3 Angles around a point",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       80,
+       150
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       80,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b > 40"
+   ],
+   "check": [
+    "a + b + (360 - a - b) == 360"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[360 - a - b]]°$",
+   "diagram": {
+    "kind": "angles-point",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[360 - a - b|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S3 Angles around a point",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 30"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "Find angle $y$.",
+   "answer": "$y = [[360 - a - b - c]]°$",
+   "diagram": {
+    "kind": "angles-point",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     "[[c]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[c|n]]",
+     "[[360 - a - b - c|n]]"
+    ],
+    "unknown": "y"
+   }
+  },
+  {
+   "id": "y7su4-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S3 Angles around a point",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "r",
+     "360 - (p + 1) * x0 - q"
+    ]
+   ],
+   "where": [
+    "r > 50",
+    "r < 150"
+   ],
+   "check": [
+    "(p + 1) * x0 + q + r == 360"
+   ],
+   "text": "The angles meet at a point. Form and solve an equation to find $x$.",
+   "answer": "$[[p + 1]]x + [[q + r]] = 360$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "angles-point",
+    "angles": [
+     "$[[p|coef]]x$°",
+     "$x + [[q]]$°",
+     "[[r]]°"
+    ],
+    "sizes": [
+     "[[p * x0|n]]",
+     "[[x0 + q|n]]",
+     "[[r|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles around a point",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S3 Angles around a point",
+   "keywords": [
+    "angles",
+    "around",
+    "a",
+    "point",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 30"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "Four angles meet at a point: [[a]]°, [[b]]°, [[c]]° and $x$. (a) Work out $x$. (b) Give a reason for your method. (3 marks)",
+   "answer": "(a) $x = [[360 - a - b - c]]°$  (b) angles around a point add up to 360°"
+  },
+  {
+   "id": "y7su4-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles on a straight line",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S4 Angles on a straight line",
+   "keywords": [
+    "angles",
+    "on",
+    "a",
+    "straight",
+    "line",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 90"
+   ],
+   "check": [
+    "a + (180 - a) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - a]]°$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "[[a]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[180 - a|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles on a straight line",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S4 Angles on a straight line",
+   "keywords": [
+    "angles",
+    "on",
+    "a",
+    "straight",
+    "line",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "180 - a - b > 20",
+    "abs(180 - a - b - 90) > 12"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Find angle $y$.",
+   "answer": "$y = [[180 - a - b]]°$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[180 - a - b|n]]"
+    ],
+    "unknown": "y"
+   }
+  },
+  {
+   "id": "y7su4-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles on a straight line",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S4 Angles on a straight line",
+   "keywords": [
+    "angles",
+    "on",
+    "a",
+    "straight",
+    "line",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "q",
+     "180 - (p + 1) * x0"
+    ]
+   ],
+   "where": [
+    "q >= 5",
+    "q <= 60",
+    "p * x0 >= 25",
+    "abs(p * x0 - 90) >= 12",
+    "abs(x0 + q - 90) >= 12"
+   ],
+   "check": [
+    "(p + 1) * x0 + q == 180"
+   ],
+   "text": "The angles are on a straight line. Form and solve an equation to find $x$.",
+   "answer": "$[[p + 1]]x + [[q]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "$[[p|coef]]x$°",
+     "$x + [[q]]$°"
+    ],
+    "sizes": [
+     "[[p * x0|n]]",
+     "[[x0 + q|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles on a straight line",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S4 Angles on a straight line",
+   "keywords": [
+    "angles",
+    "on",
+    "a",
+    "straight",
+    "line",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "180 - a - b > 20"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Angles of [[a]]°, [[b]]° and $x$ lie on a straight line. (a) Work out $x$. (b) Give a reason. (2 marks)",
+   "answer": "(a) $x = [[180 - a - b]]°$  (b) angles on a straight line add up to 180°"
+  },
+  {
+   "id": "y7su4-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Vertically opposite angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S5 Vertically opposite angles",
+   "keywords": [
+    "vertically",
+    "opposite",
+    "angles",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[t]]°$",
+   "diagram": {
+    "kind": "crossing-lines",
+    "theta": "[[t|n]]",
+    "labels": [
+     "[[t]]°",
+     null,
+     null,
+     null
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Vertically opposite angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S5 Vertically opposite angles",
+   "keywords": [
+    "vertically",
+    "opposite",
+    "angles",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t + (180 - t) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - t]]°$",
+   "diagram": {
+    "kind": "crossing-lines",
+    "theta": "[[t|n]]",
+    "labels": [
+     "[[t]]°",
+     "[[180 - t]]°",
+     null,
+     null
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Vertically opposite angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S5 Vertically opposite angles",
+   "keywords": [
+    "vertically",
+    "opposite",
+    "angles",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t + (180 - t) == 180"
+   ],
+   "text": "Work out the angles marked $x$ and $y$ and say which angle facts you used.",
+   "answer": "$x = [[t]]°$ (vertically opposite), $y = [[180 - t]]°$ (angles on a straight line)",
+   "diagram": {
+    "kind": "crossing-lines",
+    "theta": "[[t|n]]",
+    "labels": [
+     "[[t]]°",
+     "$y$°",
+     "$x$°",
+     null
+    ],
+    "unknown": "y"
+   }
+  },
+  {
+   "id": "y7su4-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Vertically opposite angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S5 Vertically opposite angles",
+   "keywords": [
+    "vertically",
+    "opposite",
+    "angles",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "q",
+     "p * x0"
+    ]
+   ],
+   "where": [
+    "q < 80"
+   ],
+   "check": [
+    "q / p == x0"
+   ],
+   "text": "Two straight lines cross. One angle is $[[p]]x$° and the vertically opposite angle is [[q]]°. Find $x$ and the other two angles. (3 marks)",
+   "answer": "$x = [[q / p]]$; the other angles are [[180 - q]]° each"
+  },
+  {
+   "id": "y7su4-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Recognise and name polygons",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S6 Recognise and name polygons",
+   "keywords": [
+    "recognise",
+    "and",
+    "name",
+    "polygons",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "pick": [
+       "equilateral",
+       "isosceles",
+       "scalene",
+       "right-angled"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "Name this triangle.",
+   "answer": "[[s]] triangle",
+   "diagram": {
+    "kind": "polygon-shape",
+    "shape": "[[s]]"
+   }
+  },
+  {
+   "id": "y7su4-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Recognise and name polygons",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S6 Recognise and name polygons",
+   "keywords": [
+    "recognise",
+    "and",
+    "name",
+    "polygons",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "pick": [
+       "square",
+       "rectangle",
+       "parallelogram",
+       "rhombus",
+       "trapezium",
+       "kite"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "Name this quadrilateral.",
+   "answer": "[[s]]",
+   "diagram": {
+    "kind": "polygon-shape",
+    "shape": "[[s]]"
+   }
+  },
+  {
+   "id": "y7su4-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Recognise and name polygons",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S6 Recognise and name polygons",
+   "keywords": [
+    "recognise",
+    "and",
+    "name",
+    "polygons",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 4"
+   ],
+   "text": "How many sides does a regular polygon with the name below have? Name the polygon with [[n]] sides.",
+   "answer": "[[n == 5|if:pentagon/]][[n == 6|if:hexagon/]][[n == 7|if:heptagon/]][[n == 8|if:octagon/]]",
+   "diagram": {
+    "kind": "regular-polygon",
+    "sides": "[[n|n]]"
+   }
+  },
+  {
+   "id": "y7su4-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Recognise and name polygons",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S6 Recognise and name polygons",
+   "keywords": [
+    "recognise",
+    "and",
+    "name",
+    "polygons",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 4"
+   ],
+   "text": "A shape has [[n]] equal sides and [[n]] equal angles. (a) What is the name of the shape? (b) How many lines of symmetry does it have? (2 marks)",
+   "answer": "(a) [[n == 5|if:regular pentagon/]][[n == 6|if:regular hexagon/]][[n == 8|if:regular octagon/]]  (b) [[n]]"
+  },
+  {
+   "id": "y7su4-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S7 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 145",
+    "a != b",
+    "a + b > 70"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - a - b]]°$",
+   "diagram": {
+    "kind": "triangle-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[180 - a - b|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S7 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       20,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t % 2 == 0",
+    "t != 60"
+   ],
+   "check": [
+    "(180 - t) / 2 * 2 + t == 180"
+   ],
+   "text": "The triangle is isosceles. Find angle $x$.",
+   "answer": "$x = [[(180 - t) / 2]]°$",
+   "diagram": {
+    "kind": "isosceles-triangle",
+    "topAngle": "[[t]]°",
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S7 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       15,
+       30
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "r",
+     "180 - (p + 1) * x0 - q"
+    ]
+   ],
+   "where": [
+    "r >= 30",
+    "r <= 110",
+    "p * x0 >= 30",
+    "x0 + q >= 30",
+    "abs(r - 90) >= 8"
+   ],
+   "check": [
+    "(p + 1) * x0 + q + r == 180"
+   ],
+   "text": "Form and solve an equation to find $x$.",
+   "answer": "$[[p + 1]]x + [[q + r]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "triangle-angles",
+    "angles": [
+     "$[[p|coef]]x$°",
+     "$x + [[q]]$°",
+     "[[r]]°"
+    ],
+    "sizes": [
+     "[[p * x0|n]]",
+     "[[x0 + q|n]]",
+     "[[r|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in a triangle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S7 Angles in a triangle",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "triangle",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(180 / (1 + m + n))",
+    "m != n"
+   ],
+   "check": [
+    "180 / (1 + m + n) * (1 + m + n) == 180"
+   ],
+   "text": "A triangle has angles in the ratio 1 : [[m]] : [[n]]. Work out the three angles. (3 marks)",
+   "answer": "[[180 / (1 + m + n)]]°, [[180 * m / (1 + m + n)]]°, [[180 * n / (1 + m + n)]]°"
+  },
+  {
+   "id": "y7su4-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S8 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       70,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 40",
+    "360 - a - b - c < 140"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[360 - a - b - c]]°$",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     "[[c]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[c|n]]",
+     "[[360 - a - b - c|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y7su4-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S8 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 40"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "A quadrilateral has angles [[a]]°, [[b]]°, [[c]]° and $y$. Find $y$.",
+   "answer": "$y = [[360 - a - b - c]]°$"
+  },
+  {
+   "id": "y7su4-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S8 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       60,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - 2 * a - b > 20"
+   ],
+   "check": [
+    "2 * a + b + (360 - 2 * a - b) == 360"
+   ],
+   "text": "A kite has two equal angles of [[a]]° and angles of [[b]]° and $x$. Find $x$.",
+   "answer": "$x = [[360 - 2 * a - b]]°$"
+  },
+  {
+   "id": "y7su4-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in a quadrilateral",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S8 Angles in a quadrilateral",
+   "keywords": [
+    "angles",
+    "in",
+    "a",
+    "quadrilateral",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       30,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "360 - (p + 1) * x0 - a"
+    ]
+   ],
+   "where": [
+    "b > 40",
+    "b < 150"
+   ],
+   "check": [
+    "(p + 1) * x0 + a + b == 360"
+   ],
+   "text": "The angles of a quadrilateral are $x$, $[[p]]x$, [[a]]° and [[b]]°. Form and solve an equation to find $x$. (3 marks)",
+   "answer": "$[[p + 1]]x + [[a + b]] = 360$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y7su4-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles",
+   "difficulty": 1,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S9 Solve problems with angles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       40,
+       100
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 150"
+   ],
+   "check": [
+    "a + (180 - a) == 180"
+   ],
+   "text": "Angle $x$ and a [[a]]° angle are on a straight line. Another angle $y$ is in a triangle with angles [[a]]° and [[b]]°. Work out $x$ and $y$.",
+   "answer": "$x = [[180 - a]]°$, $y = [[180 - a - b]]°$"
+  },
+  {
+   "id": "y7su4-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles",
+   "difficulty": 2,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S9 Solve problems with angles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       40,
+       75
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b * 2 + (180 - 2 * b) == 180"
+   ],
+   "text": "An isosceles triangle has a base angle of [[b]]°. Work out its top angle, and the angle between one slanting side and a straight line through the base.",
+   "answer": "Top angle [[180 - 2 * b]]°; exterior angle [[180 - b]]°"
+  },
+  {
+   "id": "y7su4-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S9 Solve problems with angles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       100,
+       140
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       20,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "180 - (180 - a) - c > 10"
+   ],
+   "check": [
+    "a + (180 - a) == 180"
+   ],
+   "text": "Two angles on a straight line are $x$ and [[a]]°. One of them is also an angle of a triangle with another angle [[c]]°. Find the third angle of the triangle if it uses $x$.",
+   "answer": "$x = [[180 - a]]°$, third angle [[180 - (180 - a) - c]]°"
+  },
+  {
+   "id": "y7su4-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S9 Solve problems with angles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       150,
+       200
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       100,
+       140
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b < 100",
+    "360 - a - b > 30",
+    "180 - c - (360 - a - b) > 10"
+   ],
+   "check": [
+    "a + b + (360 - a - b) == 360"
+   ],
+   "text": "Three angles meet at a point: [[a]]°, [[b]]° and $x$. $x$ is also one of the angles in a triangle with angles [[c]]° and $y$. Find $x$ and $y$. (4 marks)",
+   "answer": "$x = [[360 - a - b]]°$, $y = [[180 - c - (360 - a - b)]]°$"
+  },
+  {
+   "id": "y7su4-s10-l1",
+   "topic": "Geometry",
+   "subtopic": "Parallel and perpendicular lines",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S10 Parallel and perpendicular lines",
+   "keywords": [
+    "parallel",
+    "and",
+    "perpendicular",
+    "lines",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p1",
+     {
+      "pick": [
+       "A",
+       "B",
+       "C"
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "pick": [
+       "D",
+       "E",
+       "F"
+      ]
+     }
+    ],
+    [
+     "p3",
+     {
+      "pick": [
+       "G",
+       "H",
+       "J"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "Line [[p1]][[p2]] is perpendicular to line [[p2]][[p3]]. What is the size of angle [[p1]][[p2]][[p3]]?",
+   "answer": "90°"
+  },
+  {
+   "id": "y7su4-s10-l2",
+   "topic": "Geometry",
+   "subtopic": "Parallel and perpendicular lines",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S10 Parallel and perpendicular lines",
+   "keywords": [
+    "parallel",
+    "and",
+    "perpendicular",
+    "lines",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Which line is parallel to $y = [[m]]x + [[c]]$: A $y = [[m]]x + [[c + 3]]$, B $y = [[m + 2]]x + [[c]]$ or C $y = -[[m]]x + [[c]]$?",
+   "answer": "A: it has the same gradient ([[m]])"
+  },
+  {
+   "id": "y7su4-s10-l3",
+   "topic": "Geometry",
+   "subtopic": "Parallel and perpendicular lines",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S10 Parallel and perpendicular lines",
+   "keywords": [
+    "parallel",
+    "and",
+    "perpendicular",
+    "lines",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "pick": [
+       "square",
+       "rectangle",
+       "parallelogram",
+       "rhombus"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k == 2"
+   ],
+   "text": "How many pairs of parallel sides does a [[s]] have?",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y7su4-s10-l4",
+   "topic": "Geometry",
+   "subtopic": "Parallel and perpendicular lines",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S10 Parallel and perpendicular lines",
+   "keywords": [
+    "parallel",
+    "and",
+    "perpendicular",
+    "lines",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       90,
+       60,
+       70,
+       80,
+       100,
+       110,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A quadrilateral has two pairs of parallel sides, and one angle is [[a]]°. (a) Is it a rectangle? (b) What is the size of the opposite angle? (2 marks)",
+   "answer": "(a) [[a == 90|if:It could be a rectangle (all angles 90°)/No: a rectangle has all angles 90°]]  (b) [[a]]°"
+  },
+  {
+   "id": "y7su4-s11-l1",
+   "topic": "Geometry",
+   "subtopic": "Investigate angles in parallel lines (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S11 Investigate angles in parallel lines (E)",
+   "keywords": [
+    "investigate",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 90"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. One angle is [[a]]°. What is the alternate angle? Give a reason.",
+   "answer": "[[a]]°: alternate angles are equal"
+  },
+  {
+   "id": "y7su4-s11-l2",
+   "topic": "Geometry",
+   "subtopic": "Investigate angles in parallel lines (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S11 Investigate angles in parallel lines (E)",
+   "keywords": [
+    "investigate",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 90"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. One angle is [[a]]°. What is the corresponding angle? Give a reason.",
+   "answer": "[[a]]°: corresponding angles are equal"
+  },
+  {
+   "id": "y7su4-s11-l3",
+   "topic": "Geometry",
+   "subtopic": "Investigate angles in parallel lines (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S11 Investigate angles in parallel lines (E)",
+   "keywords": [
+    "investigate",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       60,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 90"
+   ],
+   "check": [
+    "a + (180 - a) == 180"
+   ],
+   "text": "Find the co-interior angle $z$.",
+   "answer": "$z = [[180 - a]]°$",
+   "diagram": {
+    "kind": "parallel-lines",
+    "knownAngle": "[[a]]°",
+    "unknown": "z"
+   }
+  },
+  {
+   "id": "y7su4-s11-l4",
+   "topic": "Geometry",
+   "subtopic": "Investigate angles in parallel lines (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S11 Investigate angles in parallel lines (E)",
+   "keywords": [
+    "investigate",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       15,
+       35
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "q",
+     "180 - p * x0"
+    ]
+   ],
+   "where": [
+    "q >= 30",
+    "q <= 120",
+    "p * x0 >= 30"
+   ],
+   "check": [
+    "p * x0 + q == 180"
+   ],
+   "text": "Two parallel lines are cut by a transversal. One co-interior pair of angles is $[[p]]x$° and [[q]]°. Find $x$. (3 marks)",
+   "answer": "$[[p]]x + [[q]] = 180$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y7su4-s12-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in any polygon (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S12 Angles in any polygon (E)",
+   "keywords": [
+    "angles",
+    "in",
+    "any",
+    "polygon",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(n - 2) * 180 / 180 == n - 2"
+   ],
+   "text": "Work out the sum of the interior angles of a polygon with [[n]] sides.",
+   "answer": "[[(n - 2) * 180]]°"
+  },
+  {
+   "id": "y7su4-s12-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in any polygon (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S12 Angles in any polygon (E)",
+   "keywords": [
+    "angles",
+    "in",
+    "any",
+    "polygon",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((n - 2) * 180 / n)"
+   ],
+   "check": [
+    "(n - 2) * 180 / n * n == (n - 2) * 180"
+   ],
+   "text": "Work out the size of one interior angle of a regular polygon with [[n]] sides.",
+   "answer": "[[(n - 2) * 180 / n]]°"
+  },
+  {
+   "id": "y7su4-s12-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in any polygon (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S12 Angles in any polygon (E)",
+   "keywords": [
+    "angles",
+    "in",
+    "any",
+    "polygon",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "One exterior angle of a regular polygon is [[360 / n]]°. How many sides does it have?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y7su4-s12-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in any polygon (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S12 Angles in any polygon (E)",
+   "keywords": [
+    "angles",
+    "in",
+    "any",
+    "polygon",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((n - 2) * 180 / n)"
+   ],
+   "check": [
+    "180 - (n - 2) * 180 / n == 360 / n"
+   ],
+   "text": "A regular polygon has an interior angle of [[(n - 2) * 180 / n]]°. (a) Work out the exterior angle. (b) How many sides does the polygon have? (3 marks)",
+   "answer": "(a) [[180 - (n - 2) * 180 / n]]°  (b) [[n]]"
+  },
+  {
+   "id": "y7su4-s13-l1",
+   "topic": "Geometry",
+   "subtopic": "Simple proofs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S13 Simple proofs (E)",
+   "keywords": [
+    "simple",
+    "proofs",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "pick": [
+       "a and b",
+       "p and q",
+       "x and y",
+       "m and n"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "Two straight lines cross. Angles $[[a]]$ are opposite each other. Give a reason why they are equal.",
+   "answer": "They are vertically opposite angles"
+  },
+  {
+   "id": "y7su4-s13-l2",
+   "topic": "Geometry",
+   "subtopic": "Simple proofs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S13 Simple proofs (E)",
+   "keywords": [
+    "simple",
+    "proofs",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b + c < 150"
+   ],
+   "check": [
+    "b + c + (180 - b - c) == 180"
+   ],
+   "text": "Show that the angles of a triangle with angles $a$, [[b]]° and [[c]]° give $a$ = [[180 - b - c]]°.",
+   "answer": "$a + [[b]] + [[c]] = 180$ (angles in a triangle), so $a = [[180 - b - c]]°$"
+  },
+  {
+   "id": "y7su4-s13-l3",
+   "topic": "Geometry",
+   "subtopic": "Simple proofs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S13 Simple proofs (E)",
+   "keywords": [
+    "simple",
+    "proofs",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "e",
+     {
+      "int": [
+       100,
+       150
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "e - a > 20"
+   ],
+   "check": [
+    "a + (e - a) == e"
+   ],
+   "text": "Prove that the exterior angle of a triangle ([[e]]°) equals the sum of the two opposite interior angles ([[a]]° and [[e - a]]°).",
+   "answer": "Interior angles: [[a]] + [[e - a]] + third = 180; the exterior angle and the third angle are on a straight line, so exterior = 180 − third = [[a]] + [[e - a]] = [[e]]°"
+  },
+  {
+   "id": "y7su4-s13-l4",
+   "topic": "Geometry",
+   "subtopic": "Simple proofs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B4 Angles and polygons · S13 Simple proofs (E)",
+   "keywords": [
+    "simple",
+    "proofs",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       70,
+       110
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       70,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c > 40",
+    "360 - a - b - c < 140"
+   ],
+   "check": [
+    "a + b + c + (360 - a - b - c) == 360"
+   ],
+   "text": "Prove that the angles in a quadrilateral add up to 360° using a diagonal, and use it to find $x$ when the other angles are [[a]]°, [[b]]° and [[c]]°. (4 marks)",
+   "answer": "A diagonal splits it into 2 triangles: 2 × 180° = 360°. $x = 360 - [[a + b + c]] = [[360 - a - b - c]]°$"
+  }
+ ]
+}
