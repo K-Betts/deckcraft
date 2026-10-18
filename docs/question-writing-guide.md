@@ -36,6 +36,12 @@ EACH TEMPLATE HAS THESE FIELDS
   "vars"       the numbers/letters that change, as a list of [name, rule] pairs, chosen in order
   "calc"       (optional) values worked out from the vars: [["d","(a - c) * x + b"]]
   "where"      (optional) conditions that must be true: ["a > c", "d != 0"]
+  "check"      ALWAYS INCLUDE. Sums that must be true for every question made, written by putting
+               the ANSWER BACK into the question. The app tests them on 25 questions and refuses
+               the template if one fails, so a wrong formula is caught. Examples:
+               "a * x + b == c * x + d"   (the answer x really solves the equation)
+               "a * a + b * b == c * c"   (Pythagoras)
+               "part1 + part2 == t"       (shares add up to the total)
   "text"       the question pupils see
   "answer"     the answer only (a short working line is fine for "form and solve" questions)
   "diagram"    (optional) a figure, see below
@@ -99,7 +105,23 @@ DIAGRAM RULES (these are shown on a classroom screen, so they must not mislead):
   - Keep each angle at least 25 degrees so labels fit. Keep labels short.
   - The numbers in the diagram, question and answer must all come from the same variables.
 
+JSON MUST BE VALID (the most common mistake): every [ has a matching ], every { a matching }.
+  A "vars" entry is  ["v", {"pick": ["x","y"]}]  -- the rule's { } closes, then the entry's ].
+  No comments, no trailing commas, straight quotes only. Check the brackets before replying.
+
 QUALITY RULES
+  - NEGATIVE NUMBERS: never write "+ [[d]]" where d can be negative (you get "+ -5"). Write
+    [[d|signed]] with no sign of your own: "x[[d|signed]]". Same for brackets: "([[b|coef]]x[[c|signed]])".
+  - MONEY: always two decimal places: "£[[amount|dp:2]]". Keep percentages out of the dollars.
+  - RATIOS must be in simplest form: add "gcd(x, y) == 1" to "where". Sharing questions need the
+    total to divide exactly: add "t % (x + y) == 0".
+  - MEANS and other averages: choose the numbers so the answer is a whole number (or build the
+    data from the answer) and say so in "where" (e.g. "sum % 5 == 0").
+  - A LABEL YOU DO NOT WANT drawn must be LEFT OUT of the diagram, not null. null means "the
+    unknown to find" and draws a letter. (An area question with a right-angle triangle gives
+    base and height only: no "hyp", no "angle".)
+  - Do not invent maths: a question and its answer must match exactly. If you write an expand
+    question, the answer is the real expansion; test it with a "check".
   - Every answer must be correct for EVERY possible choice of numbers. Check by working
     two or three examples by hand.
   - Choose ranges so answers are sensible for the topic: whole numbers unless the topic needs
@@ -117,6 +139,7 @@ EXAMPLE 1 (algebra, no diagram)
          ["b",{"int":[1,20]}],["v",{"pick":["x","y","n","p"]}]],
  "calc":[["d","(a - c) * x + b"]],
  "where":["a > c","d != 0"],
+ "check":["a * x + b == c * x + d"],
  "text":"Solve $[[a|coef]][[v]] + [[b]] = [[c|coef]][[v]][[d|signed]]$",
  "answer":"$[[v]] = [[x]]$"}
 (We choose the answer x first, then d is worked out so that ax + b = cx + d really has answer x.)
@@ -127,6 +150,7 @@ EXAMPLE 2 (geometry with a true-to-size diagram)
  "vars":[["p",{"int":[2,4]}],["x",{"int":["ceil(120 / (p + 1))","floor(175 / (p + 1))"]}]],
  "calc":[["q","180 - (p + 1) * x"],["first","p * x"],["second","x + q"]],
  "where":["q >= 5","q <= 60","first >= 25","second >= 25","abs(first - 90) >= 12","abs(second - 90) >= 12"],
+ "check":["(p + 1) * x + q == 180"],
  "text":"The angles lie on a straight line. Form and solve an equation to find $x$.",
  "answer":"$[[p+1|coef]]x + [[q]] = 180$, so $x = [[x]]$",
  "diagram":{"kind":"angles-line","angles":["$[[p|coef]]x$°","$x + [[q]]$°"],
@@ -138,6 +162,7 @@ EXAMPLE 3 (Pythagoras from whole-number triples)
  "vars":[["m",{"int":[2,5]}],["n",{"int":[1,"m - 1"]}],["k",{"int":[1,3]}]],
  "calc":[["a","k * (m * m - n * n)"],["b","k * 2 * m * n"],["c","k * (m * m + n * n)"]],
  "where":["gcd(m, n) == 1","c <= 60","a != b"],
+ "check":["a * a + b * b == c * c"],
  "text":"Find the length $x$.",
  "answer":"$x = [[c]]\\text{ cm}$",
  "diagram":{"kind":"right-triangle","base":"[[b]] cm","height":"[[a]] cm","hyp":null,"unknown":"x"}}
@@ -148,11 +173,14 @@ Reply with the JSON object only.
 
 ## After the AI answers
 
-1. Save the reply as `something.json`.
-2. Check it: `deckcraft-cli bank check something.json --samples 5`, or import it in the app
-   (*Insert ▸ Get Ready Starter ▸ Manage questions ▸ Import questions from a file*).
-3. Read the example questions the check prints. Work two answers by hand. If anything is off, paste
-   the problem back to the AI and ask it to fix that template.
+1. In the app: *Insert ▸ Get Ready Starter ▸ Manage questions ▸ Add questions written by an AI*.
+   Paste the whole reply (a Markdown fence or a friendly sentence around it is fine) and press
+   **Check**. (Or save it as `something.json` and use *Import questions from a file…*, or run
+   `deckcraft-cli bank check something.json --samples 5` in a terminal.)
+2. If it says something is wrong, it names the place; paste that message back to the AI.
+3. If it works, read the example questions and answers it shows (three per recipe). Work two by
+   hand. An orange ⚠ is a warning to take seriously (for example "+ −5", or money like £8.4);
+   ask the AI to fix it, then check again. When happy press **Add these to my bank**.
 4. To share with colleagues, send them the file; they import it the same way.
 5. To make questions part of the built-in bank, add them to `assets/questions/bank.json` on a
    branch and open a pull request.

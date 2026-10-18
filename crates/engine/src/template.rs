@@ -41,6 +41,10 @@ pub struct Template {
     /// Every one must be true for the numbers to be used: `"a != c"`, `"d > 0"`.
     #[serde(default, rename = "where")]
     pub conditions: Vec<String>,
+    /// Sums that must hold for every question made, to catch a wrong answer formula: put the
+    /// answer back into the question, e.g. `"a * x + b == c * x + d"`. A failure is an error.
+    #[serde(default, rename = "check")]
+    pub checks: Vec<String>,
     pub text: String,
     pub answer: String,
     /// A figure whose strings may hold `[[placeholders]]`; see `cmd/figures.rs` for the kinds.
@@ -597,6 +601,13 @@ impl Template {
                 Err(_) => return Ok(None),
             }
         }
+        for rule in &self.checks {
+            match eval(rule, &scope) {
+                Ok(v) if v != 0.0 => {}
+                Ok(_) => return Err(format!("its own check `{rule}` fails for {}: the answer or a formula is wrong", show_scope(&scope))),
+                Err(e) => return Err(format!("check `{rule}`: {e}")),
+            }
+        }
         let text = fill_all(&self.text, &scope)?;
         let answer = fill_all(&self.answer, &scope)?;
         let diagram = self.diagram.as_ref().map(|d| fill_json(d, &scope)).transpose()?;
@@ -642,6 +653,75 @@ impl Template {
             }
         }
         Ok(())
+    }
+}
+
+/// The numbers of one try, for an error message: `a = 3, b = 5`.
+fn show_scope(scope: &Scope) -> String {
+    let mut v: Vec<String> = scope
+        .iter()
+        .map(|(k, v)| match v {
+            Val::Num(n) => format!("{k} = {}", plain(*n)),
+            Val::Text(t) => format!("{k} = {t}"),
+        })
+        .collect();
+    v.sort();
+    v.join(", ")
+}
+
+impl Template {
+    /// Things that are not wrong enough to refuse the template but that a teacher would not want
+    /// on the board: a minus sign right after a plus, money without two decimal places, an
+    /// unused variable, a question that never changes. Found by reading questions made from it.
+    pub fn lint(&self) -> Vec<String> {
+        let mut out: Vec<String> = vec![];
+        let samples: Vec<Question> = (0..25u64).filter_map(|s| self.instantiate(s.wrapping_mul(7919)).ok()).collect();
+        let any = |f: &dyn Fn(&str) -> bool| samples.iter().any(|q| f(&q.text) || f(&q.answer));
+        if any(&|t| ["+ -", "+ −", "- -", "− −", "−−", "+ +"].iter().any(|b| t.contains(b))) {
+            out.push("a negative number can appear right after a sign (like “+ −5”): write it with the signed filter, e.g. [[b|signed]]".into());
+        }
+        let money_one_dp = |t: &str| {
+            t.match_indices('£').any(|(i, _)| {
+                let rest: String = t[i + '£'.len_utf8()..].chars().take_while(|c| c.is_ascii_digit() || *c == '.').collect();
+                rest.split_once('.').is_some_and(|(_, d)| d.len() == 1)
+            })
+        };
+        let money_whole_mixed = samples.iter().any(|q| money_one_dp(&q.answer));
+        if money_whole_mixed {
+            out.push("money should have two decimal places (£12.50): use [[amount|dp:2]]".into());
+        }
+        let long_decimal = |t: &str| {
+            let b: Vec<char> = t.chars().collect();
+            b.windows(5).any(|w| w[0].is_ascii_digit() && w[1] == '.' && w[2..5].iter().all(char::is_ascii_digit))
+        };
+        if any(&long_decimal) {
+            out.push("a long decimal can appear: round it with a filter such as [[x|dp:2]]".into());
+        }
+        let mut used = format!("{} {} ", self.text, self.answer);
+        for e in self.calc.iter().map(|(_, e)| e).chain(self.conditions.iter()).chain(self.checks.iter()) {
+            used.push_str(e);
+            used.push(' ');
+        }
+        used.push_str(&self.diagram.as_ref().map(Value::to_string).unwrap_or_default());
+        for (_, v) in &self.vars {
+            for e in v.int.iter().flatten().filter_map(Value::as_str) {
+                used.push(' ');
+                used.push_str(e);
+            }
+        }
+        let has_word = |w: &str| used.split(|c: char| !(c.is_ascii_alphanumeric() || c == '_')).any(|t| t == w);
+        for name in self.vars.iter().map(|(n, _)| n).chain(self.calc.iter().map(|(n, _)| n)) {
+            if !has_word(name) {
+                out.push(format!("`{name}` is never used"));
+            }
+        }
+        if self.checks.is_empty() {
+            out.push("no \"check\": add one that puts the answer back into the question, so a wrong formula is caught".into());
+        }
+        if samples.len() > 3 && samples.iter().all(|q| q.text == samples[0].text && q.answer == samples[0].answer) {
+            out.push("every question made from it is the same: give a variable a range".into());
+        }
+        out
     }
 }
 
@@ -748,6 +828,34 @@ mod tests {
         assert_eq!(f("[[p|dp:1]]"), "22.6");
         assert_eq!(f("[[a + b * 2]]"), "-5");
         assert_eq!(f("[[1/3|frac]]"), "\\frac{1}{3}");
+    }
+
+    #[test]
+    fn a_wrong_answer_formula_is_caught_by_the_templates_own_check() {
+        let wrong = BOTH_SIDES.replace(
+            "\"calc\": [[\"d\", \"(a - c) * x + b\"]],",
+            "\"calc\": [[\"d\", \"(a - c) * x + b + 1\"]], \"check\": [\"a * x + b == c * x + d\"],",
+        );
+        let err = t(&wrong).check().unwrap_err();
+        assert!(err.contains("its own check") && err.contains("wrong"), "{err}");
+        let right = BOTH_SIDES.replace("\"where\"", "\"check\": [\"a * x + b == c * x + d\"], \"where\"");
+        assert!(t(&right).check().is_ok());
+    }
+
+    #[test]
+    fn lint_flags_signs_money_and_unused_variables_and_the_built_in_templates_are_clean() {
+        let sloppy = t(r#"{"id":"n","topic":"Number","difficulty":1,
+            "vars":[["a",{"int":[1,9]}],["b",{"int":[-9,9],"not":[0]}],["unused",{"int":[1,3]}]],
+            "calc":[["m","a * 5 / 2"]],
+            "text":"Work out $[[a]] + [[b]]$","answer":"£[[m]]"}"#);
+        let w = sloppy.lint().join(" | ");
+        assert!(w.contains("right after a sign"), "{w}");
+        assert!(w.contains("two decimal places"), "{w}");
+        assert!(w.contains("`unused` is never used"), "{w}");
+        assert!(w.contains("no \"check\""), "{w}");
+        for tpl in crate::questions::starter().unwrap().templates {
+            assert!(tpl.lint().is_empty(), "{}: {:?}", tpl.id, tpl.lint());
+        }
     }
 
     #[test]

@@ -214,6 +214,54 @@ fn importing_a_question_file_adds_templates_and_skips_repeats() {
     h.get_by_label_contains("Import questions").click();
     h.run_steps(3);
     assert_eq!(h.state().ui.my_templates.len(), 1);
-    assert!(h.state().ui.my_questions.is_empty(), "the repeated id was skipped");
-    assert!(h.query_by_label_contains("Skipped 1").is_some());
+    assert_eq!(h.state().ui.my_questions.len(), 1);
+    assert!(h.state().ui.my_templates[0].id.starts_with("my-t-"), "it has an id of its own, so it cannot clash with a built-in one");
+    assert!(h.state().ui.my_questions[0].id.starts_with("my-"));
+    // The same file again adds nothing new.
+    h.get_by_label_contains("Import questions").click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.my_templates.len(), 1);
+    assert_eq!(h.state().ui.my_questions.len(), 1);
+    assert!(h.query_by_label_contains("already in your bank").is_some());
+}
+
+fn paste_into_the_dialog(text: &str) -> egui_kittest::Harness<'static, SlideApp> {
+    let mut h = harness();
+    h.state_mut().run("app.dialog", json!({"id": "questionBank"})).unwrap();
+    h.run_steps(3);
+    h.get_by_label_contains("Add questions written by an AI").click();
+    h.run_steps(3);
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("paste".into(), text.to_string());
+    h.run_steps(2);
+    h
+}
+
+#[test]
+fn pasting_an_ais_answer_shows_examples_and_adds_it_once_checked() {
+    let good = "Sure!\n```json\n{\"version\":1,\"templates\":[{\"id\":\"num-t-001\",\"topic\":\"Number\",\"subtopic\":\"Doubling\",\"difficulty\":1,\"keywords\":[\"double\"],\"vars\":[[\"a\",{\"int\":[2,40]}]],\"check\":[\"a * 2 == a + a\"],\"text\":\"Double [[a]].\",\"answer\":\"[[a * 2]]\"}]}\n```";
+    let mut h = paste_into_the_dialog(good);
+    assert!(h.query_by_label_contains("Press Check first").is_some());
+    h.get_by_label("Add these to my bank").click();
+    h.run_steps(2);
+    assert!(h.state().ui.my_templates.is_empty(), "nothing is added before it has been checked");
+    h.get_by_label("Check").click();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("Found 1 recipe").is_some(), "the check says what it found");
+    assert!(h.query_all_by_label_contains("Double").count() >= 3, "and shows three example questions");
+    h.get_by_label("Add these to my bank").click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.my_templates.len(), 1);
+    assert!(h.query_by_label_contains("Added 1").is_some());
+}
+
+#[test]
+fn a_mistake_in_pasted_text_is_explained_and_nothing_is_added() {
+    // The slip a local AI made: a } where the ] belongs.
+    let broken = "{\"version\":1,\"templates\":[\n{\"id\":\"t\",\"vars\":[[\"v\",{\"pick\":[\"x\"]}}],\"text\":\"a\",\"answer\":\"b\"}]}";
+    let mut h = paste_into_the_dialog(broken);
+    h.get_by_label("Check").click();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("not valid JSON").is_some());
+    assert!(h.query_by_label_contains("Common causes").is_some());
+    assert!(h.state().ui.my_templates.is_empty());
 }

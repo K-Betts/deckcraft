@@ -148,6 +148,43 @@ pub fn parse(json: &str) -> Result<Bank, String> {
     Ok(bank)
 }
 
+/// Reads pasted text as a bank, for a teacher who copies an AI's answer into the app. It looks
+/// past a Markdown fence and chatter around the JSON, accepts a bare list of templates or
+/// questions, and when the text is not valid JSON says where and what usually causes it.
+pub fn parse_loose(input: &str) -> Result<Bank, String> {
+    let text = input.replace(['\u{201C}', '\u{201D}'], "\"").replace(['\u{2018}', '\u{2019}'], "'");
+    let open = text.find(['{', '[']).ok_or("There is no question data in that text (it should start with { ).")?;
+    let close = text.rfind(['}', ']']).ok_or("The pasted text stops before the end of the question data: the last } or ] is missing.")?;
+    if close < open {
+        return Err("The pasted text is cut off: the closing } or ] is missing.".into());
+    }
+    let text = &text[open..=close];
+    let value: serde_json::Value = serde_json::from_str(text).map_err(|e| {
+        let line = text.lines().nth(e.line().saturating_sub(1)).unwrap_or("").trim();
+        let near: String = line.chars().take(90).collect();
+        format!(
+            "The text is not valid JSON: {e}. Look near: “{near}”. Common causes: a missing comma between items, a }} where a ] belongs (or the other way round), a missing quote, or an extra bracket at the end. Ask the AI to fix that line."
+        )
+    })?;
+    let value = match value {
+        serde_json::Value::Array(items) => {
+            let (templates, questions): (Vec<_>, Vec<_>) = items.into_iter().partition(|i| i.get("vars").is_some());
+            serde_json::json!({"version": 1, "templates": templates, "questions": questions})
+        }
+        mut v => {
+            if v.get("version").is_none() {
+                v["version"] = serde_json::json!(1);
+            }
+            v
+        }
+    };
+    let bank: Bank = serde_json::from_value(value).map_err(|e| format!("Some of it is not in the question format: {e}"))?;
+    if bank.questions.is_empty() && bank.templates.is_empty() {
+        return Err("There are no questions in that text.".into());
+    }
+    parse(&serde_json::to_string(&bank).map_err(|e| e.to_string())?)
+}
+
 pub fn starter() -> Result<Bank, String> {
     parse(STARTER)
 }
@@ -383,6 +420,20 @@ mod tests {
         }
         let impossible = bank.assign(&[strict.clone(), strict], 1);
         assert!(impossible.is_none(), "two questions cannot both be the one ratio stretch question");
+    }
+
+    #[test]
+    fn pasted_text_is_read_past_fences_and_chatter_and_errors_say_where() {
+        let good = "Here you go!\n```json\n{\"version\":1,\"templates\":[{\"id\":\"t\",\"topic\":\"Number\",\"difficulty\":1,\"vars\":[[\"a\",{\"int\":[1,5]}]],\"text\":\"Add [[a]] and 1.\",\"answer\":\"[[a + 1]]\"}]}\n```\nHope that helps";
+        assert_eq!(parse_loose(good).unwrap().templates.len(), 1);
+        let bare = r#"[{"id":"q","topic":"Number","difficulty":1,"text":"1 + 1","answer":"2"}]"#;
+        assert_eq!(parse_loose(bare).unwrap().questions.len(), 1);
+        // The mistake a local AI made: a } where the ] belongs.
+        let broken = "{\"version\":1,\"templates\":[\n{\"id\":\"t\",\"vars\":[[\"v\",{\"pick\":[\"x\"]}}],\"text\":\"a\",\"answer\":\"b\"}]}";
+        let e = parse_loose(broken).unwrap_err();
+        assert!(e.contains("not valid JSON") && e.contains("line 2") && e.contains("pick"), "{e}");
+        assert!(parse_loose("nothing here").is_err());
+        assert!(parse_loose("{\"questions\": []}").unwrap_err().contains("no questions"));
     }
 
     #[test]

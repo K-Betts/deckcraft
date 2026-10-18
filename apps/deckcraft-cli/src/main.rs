@@ -244,10 +244,13 @@ fn bank(args: &[String]) -> Result<(), String> {
         None => 3,
     };
     let text = String::from_utf8(std::fs::read(path).map_err(|e| format!("{path}: {e}"))?).map_err(|_| format!("{path} is not text"))?;
-    let bank = questions::parse(&text).map_err(|e| format!("PROBLEM: {e}"))?;
+    let bank = questions::parse_loose(&text).map_err(|e| format!("PROBLEM: {e}"))?;
     outln!("OK: {} fixed questions and {} templates", bank.questions.len(), bank.templates.len());
     for t in &bank.templates {
         outln!("\n{} · {} · {} · level {}", t.id, t.topic, t.subtopic, t.difficulty);
+        for w in t.lint() {
+            outln!("  CHECK THIS: {w}");
+        }
         for n in 0..samples {
             let q = t.instantiate(n * 7 + 1)?;
             outln!("  Q: {}\n  A: {}", latex::plain(&q.text), latex::plain(&q.answer));

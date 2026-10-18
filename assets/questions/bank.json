@@ -1307,7 +1307,10 @@
         "d != 0"
       ],
       "text": "Solve $[[a|coef]][[v]] + [[b]] = [[c|coef]][[v]][[d|signed]]$",
-      "answer": "$[[v]] = [[x]]$"
+      "answer": "$[[v]] = [[x]]$",
+      "check": [
+        "a * x + b == c * x + d"
+      ]
     },
     {
       "id": "alg-t-002",
@@ -1370,7 +1373,10 @@
         ]
       ],
       "text": "Solve $[[a]][[v]] + [[b]] = [[c]]$",
-      "answer": "$[[v]] = [[x]]$"
+      "answer": "$[[v]] = [[x]]$",
+      "check": [
+        "a * x + b == c"
+      ]
     },
     {
       "id": "alg-t-003",
@@ -1427,7 +1433,10 @@
         ]
       ],
       "text": "Expand $[[a]]([[b|coef]][[v]][[c|signed]])$",
-      "answer": "$[[a*b|coef]][[v]][[a*c|signed]]$"
+      "answer": "$[[a*b|coef]][[v]][[a*c|signed]]$",
+      "check": [
+        "a * (b * 2 + c) == a * b * 2 + a * c"
+      ]
     },
     {
       "id": "geo-t-001",
@@ -1499,7 +1508,10 @@
           "[[second|n]]"
         ],
         "unknown": "x"
-      }
+      },
+      "check": [
+        "(p + 1) * x + q == 180"
+      ]
     },
     {
       "id": "geo-t-002",
@@ -1580,7 +1592,10 @@
           "[[third|n]]"
         ],
         "unknown": "x"
-      }
+      },
+      "check": [
+        "(p + 1) * x + q + third == 180"
+      ]
     },
     {
       "id": "geo-t-003",
@@ -1649,7 +1664,10 @@
         "height": "[[a]] cm",
         "hyp": null,
         "unknown": "x"
-      }
+      },
+      "check": [
+        "a * a + b * b == c * c"
+      ]
     },
     {
       "id": "geo-t-004",
@@ -1679,7 +1697,10 @@
         "kind": "circle",
         "radius": "[[r]] cm",
         "centre": "O"
-      }
+      },
+      "check": [
+        "r > 0"
+      ]
     },
     {
       "id": "num-t-001",
@@ -1730,7 +1751,10 @@
         ]
       ],
       "text": "Find [[p]]% of £[[amt]].",
-      "answer": "£[[ans|dp:2]]"
+      "answer": "£[[ans|dp:2]]",
+      "check": [
+        "ans * 100 == p * amt"
+      ]
     },
     {
       "id": "rat-t-001",
@@ -1783,7 +1807,10 @@
         "gcd(a, b) == 1"
       ],
       "text": "Share £[[total]] in the ratio $[[a]] : [[b]]$.",
-      "answer": "£[[a*k*5]] and £[[b*k*5]]"
+      "answer": "£[[a*k*5]] and £[[b*k*5]]",
+      "check": [
+        "a * k * 5 + b * k * 5 == total"
+      ]
     }
   ]
 }
