@@ -23,6 +23,7 @@ Then the web version gets it for free.
 ## Get Ready starter (where its code lives)
 
 - `engine/src/questions.rs`: the bank (loading, merging the teacher's own, picking).
+- `engine/src/template.rs`: question templates (recipes that make new numbers each time) and their checks. Format: `docs/question-writing-guide.md`.
 - `engine/src/latex.rs`: turns `$\frac{3}{4}$` into the equation parser's syntax.
 - `engine/src/cmd/get_ready.rs`: builds the slide: cards, full-screen slides, answers on click.
 - `engine/src/cmd/figures.rs`: draws the diagrams from shapes.

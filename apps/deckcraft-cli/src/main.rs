@@ -53,6 +53,7 @@ fn main() -> ExitCode {
         Some("info") => report(info(rest)),
         Some("fidelity") => report(fidelity(rest)),
         Some("bench") => report(bench(rest)),
+        Some("bank") => report(bank(rest)),
         Some("render") => report(render(rest)),
         Some("render-transition") => report(render_transition(rest)),
         Some("convert") => report(convert(rest)),
@@ -220,6 +221,36 @@ fn bench(args: &[String]) -> Result<(), String> {
         }
         if let Some(p) = peak {
             outln!("  peak memory              {p:>9.1} MiB");
+        }
+    }
+    Ok(())
+}
+
+/// `bank check FILE [--samples N]`: validate a question bank and print generated examples.
+fn bank(args: &[String]) -> Result<(), String> {
+    use deckcraft_engine::{latex, questions};
+    if args.first().is_some_and(|a| is_help(a)) {
+        outln!("{}", help_page("bank"));
+        return Ok(());
+    }
+    if args.first().map(String::as_str) != Some("check") {
+        return Err("bank needs a subcommand: bank check FILE".into());
+    }
+    let path = args.get(1).ok_or("bank check needs a FILE")?;
+    let samples = match args.iter().position(|a| a == "--samples") {
+        Some(i) => {
+            args.get(i + 1).and_then(|n| n.parse::<u64>().ok()).filter(|n| (1..=20).contains(n)).ok_or("--samples needs a number from 1 to 20")?
+        }
+        None => 3,
+    };
+    let text = String::from_utf8(std::fs::read(path).map_err(|e| format!("{path}: {e}"))?).map_err(|_| format!("{path} is not text"))?;
+    let bank = questions::parse(&text).map_err(|e| format!("PROBLEM: {e}"))?;
+    outln!("OK: {} fixed questions and {} templates", bank.questions.len(), bank.templates.len());
+    for t in &bank.templates {
+        outln!("\n{} · {} · {} · level {}", t.id, t.topic, t.subtopic, t.difficulty);
+        for n in 0..samples {
+            let q = t.instantiate(n * 7 + 1)?;
+            outln!("  Q: {}\n  A: {}", latex::plain(&q.text), latex::plain(&q.answer));
         }
     }
     Ok(())

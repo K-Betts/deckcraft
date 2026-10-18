@@ -16,7 +16,7 @@ pub fn specs() -> Vec<CommandSpec> {
         "Get Ready Starter",
         ["Insert", "Slides From"],
         None,
-        "{slots?: [{topic?: text, difficulty?: 1|2|3}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
+        "{slots?: [{topic?: text, difficulty?: 1|2|3, search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
         has_doc,
         get_ready
     )]
@@ -41,6 +41,9 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         (None, None) => questions::starter(),
     }
     .map_err(|e| bad("slide.getReady", e))?;
+    let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
+    // Templates become questions with this seed's numbers: a new seed is a reroll with new numbers.
+    let bank = bank.instantiate(seed);
     let level = |v: Option<&Value>, what: &str| -> Result<Option<u8>> {
         match v {
             None | Some(Value::Null) => Ok(None),
@@ -52,7 +55,6 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
                 .ok_or_else(|| bad("slide.getReady", format!("{what} must be 1, 2 or 3"))),
         }
     };
-    let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
     // Always pick exactly 4 questions for the standard 2×2 retrieval grid.
     let picked: Vec<_> = if let Some(slots) = p.get("slots") {
         let slots = slots.as_array().ok_or_else(|| bad("slide.getReady", "`slots` must be a list"))?;
@@ -63,7 +65,8 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         for (i, slot) in slots.iter().enumerate() {
             let topic = slot.get("topic").and_then(Value::as_str).filter(|t| !t.is_empty()).map(String::from);
             let difficulty = level(slot.get("difficulty"), &format!("question {}: `difficulty`", i + 1))?;
-            filters.push(Filter { topic, difficulty });
+            let query = slot.get("search").and_then(Value::as_str).map(str::trim).filter(|t| !t.is_empty()).map(String::from);
+            filters.push(Filter { topic, difficulty, query });
         }
         match bank.assign(&filters, seed) {
             Some(qs) => qs.into_iter().cloned().collect(),
@@ -85,7 +88,11 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         if !(1..=8).contains(&count) {
             return Err(bad("slide.getReady", "`count` must be 1 to 8"));
         }
-        let filter = Filter { topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from), difficulty };
+        let filter = Filter {
+            topic: str_param(p, "topic").filter(|t| !t.is_empty()).map(String::from),
+            difficulty,
+            query: str_param(p, "search").map(str::trim).filter(|t| !t.is_empty()).map(String::from),
+        };
         let picked: Vec<_> = bank.pick(&filter, seed, count).into_iter().cloned().collect();
         if picked.is_empty() {
             return Err(bad("slide.getReady", "no questions match that topic and difficulty"));
@@ -465,7 +472,7 @@ pub(super) fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f
 
 #[cfg(test)]
 mod tests {
-    use serde_json::json;
+    use serde_json::{Value, json};
 
     use crate::Session;
 
@@ -565,9 +572,11 @@ mod tests {
     #[test]
     fn every_starter_question_reaches_the_slide_text_unchanged() {
         // Many seeds, so every question gets drawn: the text on the slide must be the bank's text.
-        let bank = crate::questions::starter().expect("bank");
+        let starter = crate::questions::starter().expect("bank");
         let mut seen = std::collections::HashSet::new();
         for seed in 0..400u64 {
+            // Templates make their question from the seed, as the slide will.
+            let bank = starter.instantiate(seed);
             let mut s = Session::with_new();
             let r = s.execute("slide.getReady", &json!({"seed": seed, "count": 6})).expect("get ready");
             let i = r["index"].as_u64().expect("index") as usize;
@@ -581,7 +590,7 @@ mod tests {
                 seen.insert(q.id.clone());
             }
         }
-        let usable = bank.questions.iter().filter(|q| q.usable()).count();
+        let usable = starter.questions.iter().filter(|q| q.usable()).count() + starter.templates.len();
         assert_eq!(seen.len(), usable, "every usable question was drawn at least once");
     }
 
@@ -642,6 +651,29 @@ mod tests {
         let st = o.doc().expect("doc");
         let badge = st.doc.slides[idx].shapes.iter().find(|x| x.name == "Question 1 number").expect("badge");
         assert!(badge.click.is_some(), "the badge still opens its full-screen slide");
+    }
+
+    #[test]
+    fn searching_finds_a_template_and_every_reroll_has_new_numbers() {
+        let mut s = Session::with_new();
+        let mut texts = std::collections::HashSet::new();
+        for seed in 0..12u64 {
+            let r = s
+                .execute("slide.getReady", &json!({"seed": seed, "slots": [{"search": "both sides"}, {"search": "pythagoras"}, {"search": "straight line"}, {"search": "percentage"}]}))
+                .expect("get ready");
+            let ids: Vec<&str> = r["questions"].as_array().expect("ids").iter().filter_map(Value::as_str).collect();
+            assert_eq!(ids[0], "alg-t-001", "the only question about both sides is the template");
+            let bank = crate::questions::starter().expect("bank").instantiate(seed);
+            for (id, words) in ids.iter().zip(["both sides", "pythagoras", "straight line", "percentage"]) {
+                let q = bank.questions.iter().find(|q| q.id == *id).expect("question");
+                assert!(crate::questions::matches_words(q, words), "{id} does not match {words}");
+            }
+            let i = r["index"].as_u64().expect("index") as usize;
+            texts.insert(ready_texts(&s, i).join("|"));
+        }
+        assert!(texts.len() > 6, "different numbers most times: {}", texts.len());
+        let none = s.execute("slide.getReady", &json!({"slots": [{"search": "origami"}]}));
+        assert!(none.is_err(), "a search with no match says so");
     }
 
     #[test]
