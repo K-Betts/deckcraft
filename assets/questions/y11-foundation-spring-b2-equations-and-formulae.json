@@ -1,0 +1,1739 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Spring Block 2 Equations and formulae: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fsp2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * (x0 + b) / a - b == x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) = [[a * (x0 + b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 > b"
+   ],
+   "check": [
+    "a * (x0 - b) / a + b == x0"
+   ],
+   "text": "Solve $[[a]](x - [[b]]) = [[a * (x0 - b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * (x0 + b) + c - c) / a - b == x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) + [[c]] = [[a * (x0 + b) + c]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a - c) * x0 + a * b + c * d - a * b - c * d == (a - c) * x0"
+   ],
+   "text": "Solve $[[a]](x + [[b]]) - [[c]](x - [[d]]) = [[(a - c) * x0 + a * b + c * d]]$. (4 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S2 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + x0 - a == x0"
+   ],
+   "text": "Solve $x + [[a]] > [[a + x0]]$.",
+   "answer": "$x > [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S2 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * x0 / a == x0"
+   ],
+   "text": "Solve $[[a]]x \\leq [[a * x0]]$.",
+   "answer": "$x \\leq [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S2 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * x0 > b"
+   ],
+   "check": [
+    "(a * x0 - b + b) / a == x0"
+   ],
+   "text": "Solve $[[a]]x - [[b]] \\geq [[a * x0 - b]]$ and write down the smallest integer solution.",
+   "answer": "$x \\geq [[x0]]$; smallest integer [[x0]]"
+  },
+  {
+   "id": "y11fsp2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S2 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * x0 / a == x0"
+   ],
+   "text": "Solve $-[[a]]x < [[a * x0]]$. Explain what happens to the inequality sign. (3 marks)",
+   "answer": "$x > -[[x0]]$: dividing by a negative number reverses the inequality sign"
+  },
+  {
+   "id": "y11fsp2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S3 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * x0 + b - b) / a == x0"
+   ],
+   "text": "I think of a number, multiply it by [[a]] and add [[b]]. The answer is [[a * x0 + b]]. Form an equation and solve it to find my number.",
+   "answer": "$[[a]]x + [[b]] = [[a * x0 + b]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S3 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(4 * x0 + 2 * d - 2 * d) / 4 == x0"
+   ],
+   "text": "A rectangle has width $x$ cm and length $(x + [[d]])$ cm. Its perimeter is [[4 * x0 + 2 * d]] cm. Form and solve an equation to find $x$.",
+   "answer": "$4x + [[2 * d]] = [[4 * x0 + 2 * d]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S3 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((180 - d) / (p + 2))",
+    "(p + 2) > 0"
+   ],
+   "check": [
+    "(180 - d) / (p + 2) * (p + 2) == 180 - d"
+   ],
+   "text": "The angles of a triangle are $x°$, $(x + [[d]])°$ and $([[p]]x)°$. Form and solve an equation to find $x$.",
+   "answer": "$[[p + 2]]x + [[d]] = 180$, so $x = [[(180 - d) / (p + 2)]]$"
+  },
+  {
+   "id": "y11fsp2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S3 Form and solve equations",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(2 * c + a - a) / 2 == c"
+   ],
+   "text": "Ben is [[a]] years older than Cara. Their ages add up to [[2 * c + a]]. Form and solve an equation to find Cara's age and Ben's age. (3 marks)",
+   "answer": "$c + (c + [[a]]) = [[2 * c + a]]$, so Cara is [[c]] and Ben is [[c + a]]"
+  },
+  {
+   "id": "y11fsp2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve more complex equations and inequalities (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S4 Form and solve more complex equations and inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * x0 > c"
+   ],
+   "check": [
+    "(m * x0 - c + c) / m == x0"
+   ],
+   "text": "I think of a number, multiply it by [[m]] and subtract [[c]]. The answer is [[m * x0 - c]]. Form and solve an equation to find my number.",
+   "answer": "$[[m]]x - [[c]] = [[m * x0 - c]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve more complex equations and inequalities (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S4 Form and solve more complex equations and inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > e"
+   ],
+   "text": "A rectangle has length $(x + [[d]])$ cm and width $(x - [[e]])$ cm. Its perimeter is [[4 * x0 + 2 * d - 2 * e]] cm. Form and solve an equation to find $x$.",
+   "answer": "$4x + [[2 * d - 2 * e]] = [[4 * x0 + 2 * d - 2 * e]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve more complex equations and inequalities (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S4 Form and solve more complex equations and inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       25,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % p != 0"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Ben has £[[m]]. Each book costs £[[p]]. Form and solve an inequality to find the greatest number of books he can buy.",
+   "answer": "$[[p]]n \\leq [[m]]$, so $n \\leq [[m / p|dp:2]]$: [[floor(m / p)]] books"
+  },
+  {
+   "id": "y11fsp2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve more complex equations and inequalities (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S4 Form and solve more complex equations and inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "more",
+    "complex",
+    "equations",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > e"
+   ],
+   "text": "The sides of a triangle are $x$ cm, $(x + [[d]])$ cm and $(2x - [[e]])$ cm. Its perimeter is at most [[4 * x0 + d - e]] cm. Form and solve an inequality. What is the largest whole number $x$ can be? (4 marks)",
+   "answer": "$4x + [[d - e]] \\leq [[4 * x0 + d - e]]$, so $x \\leq [[x0]]$; largest whole number [[x0]]"
+  },
+  {
+   "id": "y11fsp2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations with unknowns on both sides (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S5 Form and solve equations with unknowns on both sides (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]]x + [[b]] = [[q]]x + [[b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations with unknowns on both sides (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S5 Form and solve equations with unknowns on both sides (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p - q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p - q) * (p - q) == b + d"
+   ],
+   "text": "Solve $[[p]]x - [[b]] = [[q]]x + [[d]]$.",
+   "answer": "$x = [[(b + d) / (p - q)]]$"
+  },
+  {
+   "id": "y11fsp2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations with unknowns on both sides (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S5 Form and solve equations with unknowns on both sides (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "b + (p - q) * x0"
+    ]
+   ],
+   "check": [
+    "(d - b) / (p - q) * (p - q) == d - b"
+   ],
+   "text": "Solve $[[p]]x + [[b]] \\geq [[q]]x + [[d]]$.",
+   "answer": "$x \\geq [[(d - b) / (p - q)]]$"
+  },
+  {
+   "id": "y11fsp2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve equations with unknowns on both sides (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S5 Form and solve equations with unknowns on both sides (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "((p - q) * x0 - p * b) / q"
+    ]
+   ],
+   "where": [
+    "isint(d)",
+    "d > 0"
+   ],
+   "check": [
+    "(p * b + q * d) / (p - q) * (p - q) == p * b + q * d"
+   ],
+   "text": "Solve $[[p]](x - [[b]]) = [[q]](x + [[d]])$. (4 marks)",
+   "answer": "$x = [[(p * b + q * d) / (p - q)]]$"
+  },
+  {
+   "id": "y11fsp2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S6 Solve simultaneous equations",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Solve $x + y = [[x0 + y0]]$ and $x - y = [[x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y11fsp2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S6 Solve simultaneous equations",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + y = [[a * x0 + y0]]$ and $[[a]]x - y = [[a * x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y11fsp2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S6 Solve simultaneous equations",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[b]]y = [[c * x0 - b * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y11fsp2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S6 Solve simultaneous equations",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Two numbers add to [[x0 + y0]] and differ by [[x0 - y0]]. Form simultaneous equations and find the numbers. Then find their product. (3 marks)",
+   "answer": "$x + y = [[x0 + y0]]$, $x - y = [[x0 - y0]]$: [[x0]] and [[y0]]; product [[x0 * y0]]"
+  },
+  {
+   "id": "y11fsp2-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S7 Form and solve inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * x0 + b - b) / a == x0"
+   ],
+   "text": "I think of a number, multiply by [[a]] and add [[b]]. The answer is greater than [[a * x0 + b]]. Form and solve an inequality.",
+   "answer": "$[[a]]x + [[b]] > [[a * x0 + b]]$, so $x > [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S7 Form and solve inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       25,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % p != 0"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Ali has £[[m]]. Books cost £[[p]] each. Form and solve an inequality to find the most books he can buy.",
+   "answer": "$[[p]]n \\leq [[m]]$, so $n \\leq [[m / p|dp:2]]$: [[floor(m / p)]] books"
+  },
+  {
+   "id": "y11fsp2-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S7 Form and solve inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2 * (w + x0 + d) == 2 * w + 2 * (x0 + d)"
+   ],
+   "text": "A rectangle has width [[w]] cm and length $(x + [[d]])$ cm. Its perimeter is at most [[2 * w + 2 * (x0 + d)]] cm. Form and solve an inequality for $x$.",
+   "answer": "$2([[w]] + x + [[d]]) \\leq [[2 * w + 2 * (x0 + d)]]$, so $x \\leq [[x0]]$"
+  },
+  {
+   "id": "y11fsp2-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve inequalities (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S7 Form and solve inequalities (E)",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "inequalities",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       18,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(m - a) % b != 0"
+   ],
+   "check": [
+    "m > a"
+   ],
+   "text": "A taxi costs £[[a]] plus £[[b]] per mile. Mia has £[[m]]. Form an inequality and work out the greatest whole number of miles she can travel. (3 marks)",
+   "answer": "$[[a]] + [[b]]x \\leq [[m]]$, so $x \\leq [[(m - a) / b|dp:2]]$: [[floor((m - a) / b)]] miles"
+  },
+  {
+   "id": "y11fsp2-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S8 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "[[a]] pens and [[b]] pencils cost £[[a * p + b * q]]. [[c]] pens and [[b]] pencils cost £[[c * p + b * q]]. Find the price of a pen and a pencil.",
+   "answer": "Pen £[[p]], pencil £[[q]]"
+  },
+  {
+   "id": "y11fsp2-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S8 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Two adults and [[b]] children pay £[[2 * A + b * C]] for tickets. [[3]] adults and [[b]] children pay £[[3 * A + b * C]]. Find the adult and child prices.",
+   "answer": "Adult £[[A]], child £[[C]]"
+  },
+  {
+   "id": "y11fsp2-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S8 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       8,
+       15
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > w"
+   ],
+   "text": "A rectangle has perimeter [[2 * (l + w)]] cm and its length is [[l - w]] cm more than its width. Form simultaneous equations and find the dimensions.",
+   "answer": "$l + w = [[l + w]]$ and $l - w = [[l - w]]$: length [[l]] cm, width [[w]] cm"
+  },
+  {
+   "id": "y11fsp2-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve problems with simultaneous equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B2 Equations and formulae · S8 Solve problems with simultaneous equations",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "simultaneous",
+    "equations",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d > n"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Sam is [[d]] years older than Tia. In [[n]] years Sam will be twice as old as Tia. Find their ages now. (4 marks)",
+   "answer": "Tia is [[d - n]] and Sam is [[2 * d - n]]"
+  }
+ ]
+}

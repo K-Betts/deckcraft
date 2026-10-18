@@ -1,0 +1,1438 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 4 Angles, bearings and trigonometry: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp4-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Bearings",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S1 Bearings",
+   "keywords": [
+    "bearings",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       5,
+       89
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Write [[b]]° as a three-figure bearing.",
+   "answer": "[[b < 100|if:0/]][[b < 10|if:0/]][[b]]°"
+  },
+  {
+   "id": "y11hsp4-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Bearings",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S1 Bearings",
+   "keywords": [
+    "bearings",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       10,
+       350
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b % 90 != 0"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The bearing of $B$ from $A$ is [[b]]°. Is $B$ north-east, south-east, south-west or north-west of $A$ (roughly)?",
+   "answer": "[[b < 90|if:north-east/]][[b >= 90 && b < 180|if:south-east/]][[b >= 180 && b < 270|if:south-west/]][[b >= 270|if:north-west/]]"
+  },
+  {
+   "id": "y11hsp4-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Bearings",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S1 Bearings",
+   "keywords": [
+    "bearings",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       20,
+       340
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != 180"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The bearing of $B$ from $A$ is [[b]]°. Work out the bearing of $A$ from $B$.",
+   "answer": "[[(b + 180) % 360]]°"
+  },
+  {
+   "id": "y11hsp4-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Bearings",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S1 Bearings",
+   "keywords": [
+    "bearings",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       20,
+       340
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != 180"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A boat sails on a bearing of [[b]]° for [[d]] km then on the reverse (back) bearing for [[d]] km. Where does it finish? What is the reverse bearing? (2 marks)",
+   "answer": "Back to the start; reverse bearing [[(b + 180) % 360]]°"
+  },
+  {
+   "id": "y11hsp4-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Bearings with Pythagoras and trigonometry",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S2 Bearings with Pythagoras and trigonometry",
+   "keywords": [
+    "bearings",
+    "with",
+    "pythagoras",
+    "and",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A ship sails [[d]] km on a bearing of [[t]]°. How far north has it travelled? (Give to 1 decimal place.)",
+   "answer": "[[d * cos(t)|dp:1]] km"
+  },
+  {
+   "id": "y11hsp4-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Bearings with Pythagoras and trigonometry",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S2 Bearings with Pythagoras and trigonometry",
+   "keywords": [
+    "bearings",
+    "with",
+    "pythagoras",
+    "and",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A ship sails [[d]] km on a bearing of [[t]]°. How far east has it travelled? (Give to 1 decimal place.)",
+   "answer": "[[d * sin(t)|dp:1]] km"
+  },
+  {
+   "id": "y11hsp4-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Bearings with Pythagoras and trigonometry",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S2 Bearings with Pythagoras and trigonometry",
+   "keywords": [
+    "bearings",
+    "with",
+    "pythagoras",
+    "and",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A plane flies [[a]] km north then [[b]] km east. Find its distance from the start and the bearing from the start (to 1 decimal place).",
+   "answer": "[[sqrt(a * a + b * b)|dp:1]] km; bearing [[atan(b / a)|dp:1]]°"
+  },
+  {
+   "id": "y11hsp4-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Bearings with Pythagoras and trigonometry",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S2 Bearings with Pythagoras and trigonometry",
+   "keywords": [
+    "bearings",
+    "with",
+    "pythagoras",
+    "and",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$B$ is [[a]] km north and [[b]] km west of $A$. Find the distance $AB$ and the bearing of $B$ from $A$ (to 1 decimal place). (4 marks)",
+   "answer": "$AB$ = [[sqrt(a * a + b * b)|dp:1]] km; bearing [[360 - atan(b / a)|dp:1]]°"
+  },
+  {
+   "id": "y11hsp4-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Sine rule",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S3 Sine rule",
+   "keywords": [
+    "sine",
+    "rule",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       60,
+       70,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $ABC$, $a = [[a]]$ cm, $A = [[A]]°$, $B = [[B]]°$. Find $b$ (1 d.p.).",
+   "answer": "[[a * sin(B) / sin(A)|dp:1]] cm"
+  },
+  {
+   "id": "y11hsp4-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Sine rule",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S3 Sine rule",
+   "keywords": [
+    "sine",
+    "rule",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       11
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $ABC$, $a = [[a]]$ cm, $b = [[b]]$ cm, $A = [[A]]°$. Find $\\sin B$ (3 d.p.).",
+   "answer": "[[b * sin(A) / a|dp:3]]"
+  },
+  {
+   "id": "y11hsp4-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Sine rule",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S3 Sine rule",
+   "keywords": [
+    "sine",
+    "rule",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       30,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       60,
+       70,
+       80
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Triangle $ABC$ has $A = [[A]]°$, $B = [[B]]°$ and $c = [[c]]$ cm. Find angle $C$ then side $a$ (1 d.p.).",
+   "answer": "$C$ = [[180 - A - B]]°; $a$ = [[c * sin(A) / sin(180 - A - B)|dp:1]] cm"
+  },
+  {
+   "id": "y11hsp4-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Sine rule",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S3 Sine rule",
+   "keywords": [
+    "sine",
+    "rule",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Two lighthouses $A$ and $B$ are [[d]] km apart. A ship $S$ has angle $SAB$ = [[A]]° and angle $SBA$ = [[B]]°. Find $AS$ (1 d.p.). (4 marks)",
+   "answer": "[[d * sin(B) / sin(180 - A - B)|dp:1]] km"
+  },
+  {
+   "id": "y11hsp4-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Cosine rule",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S4 Cosine rule",
+   "keywords": [
+    "cosine",
+    "rule",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "In triangle $ABC$, $b = [[b]]$ cm, $c = [[c]]$ cm and $A = [[A]]°$. Find $a$ (1 d.p.).",
+   "answer": "[[sqrt(b * b + c * c - 2 * b * c * cos(A))|dp:1]] cm"
+  },
+  {
+   "id": "y11hsp4-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Cosine rule",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S4 Cosine rule",
+   "keywords": [
+    "cosine",
+    "rule",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "In triangle $ABC$, $a = [[a]]$, $b = [[b]]$, $c = [[c]]$ cm. Find $\\cos C$ (3 d.p.).",
+   "answer": "[[(a * a + b * b - c * c) / (2 * a * b)|dp:3]]"
+  },
+  {
+   "id": "y11hsp4-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Cosine rule",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S4 Cosine rule",
+   "keywords": [
+    "cosine",
+    "rule",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       7,
+       11
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       11,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c < a + b",
+    "c > a",
+    "c > b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has sides [[a]] cm, [[b]] cm and [[c]] cm. Find its largest angle (1 d.p.).",
+   "answer": "[[acos((a * a + b * b - c * c) / (2 * a * b))|dp:1]]°"
+  },
+  {
+   "id": "y11hsp4-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Cosine rule",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S4 Cosine rule",
+   "keywords": [
+    "cosine",
+    "rule",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       50,
+       60,
+       70,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Two paths of length [[b]] m and [[c]] m meet at [[A]]°. Find the straight-line distance between their ends and the perimeter of the triangle (1 d.p.). (4 marks)",
+   "answer": "Distance [[sqrt(b * b + c * c - 2 * b * c * cos(A))|dp:1]] m; perimeter [[b + c + sqrt(b * b + c * c - 2 * b * c * cos(A))|dp:1]] m"
+  },
+  {
+   "id": "y11hsp4-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle using 1/2 ab sin C",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S5 Area of a triangle using 1/2 ab sin C",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "using",
+    "1",
+    "2",
+    "ab",
+    "sin",
+    "c",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Triangle with sides [[a]] cm and [[b]] cm and included angle [[C]]°. Find the area (1 d.p.).",
+   "answer": "[[0.5 * a * b * sin(C)|dp:1]] cm²"
+  },
+  {
+   "id": "y11hsp4-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle using 1/2 ab sin C",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S5 Area of a triangle using 1/2 ab sin C",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "using",
+    "1",
+    "2",
+    "ab",
+    "sin",
+    "c",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A triangle has area [[a * b * sin(C) / 2|dp:1]] cm², sides [[a]] cm and [[b]] cm. Find the sine of the included angle (3 d.p.).",
+   "answer": "[[sin(C)|dp:3]]"
+  },
+  {
+   "id": "y11hsp4-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle using 1/2 ab sin C",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S5 Area of a triangle using 1/2 ab sin C",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "using",
+    "1",
+    "2",
+    "ab",
+    "sin",
+    "c",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "An isosceles triangle has two sides of [[a]] cm with angle [[C]]° between them. Find the area (1 d.p.).",
+   "answer": "[[0.5 * a * a * sin(C)|dp:1]] cm²"
+  },
+  {
+   "id": "y11hsp4-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a triangle using 1/2 ab sin C",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S5 Area of a triangle using 1/2 ab sin C",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "triangle",
+    "using",
+    "1",
+    "2",
+    "ab",
+    "sin",
+    "c",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       40,
+       90
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       40,
+       90
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "choose": [
+       50,
+       60,
+       70,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A field is a triangle with sides [[a]] m and [[b]] m meeting at [[C]]°. Grass seed covers 50 m² per bag. How many whole bags are needed? (3 marks)",
+   "answer": "[[ceil(0.5 * a * b * sin(C) / 50)]]"
+  },
+  {
+   "id": "y11hsp4-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Bearings problems with the sine and cosine rules",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S6 Bearings problems with the sine and cosine rules",
+   "keywords": [
+    "bearings",
+    "problems",
+    "with",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "rules",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b1",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       100,
+       160
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Ship $A$ is [[a]] km from port on a bearing of [[b1]]° and ship $B$ is [[c]] km on a bearing of [[b2]]°. Find the angle between them.",
+   "answer": "[[b2 - b1]]°"
+  },
+  {
+   "id": "y11hsp4-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Bearings problems with the sine and cosine rules",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S6 Bearings problems with the sine and cosine rules",
+   "keywords": [
+    "bearings",
+    "problems",
+    "with",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "rules",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b1",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       100,
+       160
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Ship $A$ is [[a]] km on a bearing of [[b1]]° and $B$ is [[c]] km on [[b2]]°. Find $AB$ (1 d.p.).",
+   "answer": "[[sqrt(a * a + c * c - 2 * a * c * cos(b2 - b1))|dp:1]] km"
+  },
+  {
+   "id": "y11hsp4-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Bearings problems with the sine and cosine rules",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S6 Bearings problems with the sine and cosine rules",
+   "keywords": [
+    "bearings",
+    "problems",
+    "with",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "rules",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "b1",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       100,
+       150
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "A plane flies [[d1]] km on a bearing of [[b1]]° then [[d2]] km on [[b2]]°. Find the direct distance back to the start (1 d.p.).",
+   "answer": "[[sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * cos(180 - (b2 - b1)))|dp:1]] km"
+  },
+  {
+   "id": "y11hsp4-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Bearings problems with the sine and cosine rules",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S6 Bearings problems with the sine and cosine rules",
+   "keywords": [
+    "bearings",
+    "problems",
+    "with",
+    "the",
+    "sine",
+    "and",
+    "cosine",
+    "rules",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "b1",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       100,
+       150
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "A boat sails [[d1]] km on [[b1]]° then [[d2]] km on [[b2]]°. Find its distance from the start and the bearing of the start from the boat (1 d.p.). (5 marks)",
+   "answer": "Distance [[sqrt(d1 * d1 + d2 * d2 - 2 * d1 * d2 * cos(180 - (b2 - b1)))|dp:1]] km; bearing from boat uses angle rules (reverse of final leg adjusted by the triangle angle)"
+  },
+  {
+   "id": "y11hsp4-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "3D trigonometry",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S7 3D trigonometry",
+   "keywords": [
+    "3d",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm by [[w]] cm by [[h]] cm. Find the length of the diagonal of the base (1 d.p.).",
+   "answer": "[[sqrt(l * l + w * w)|dp:1]] cm"
+  },
+  {
+   "id": "y11hsp4-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "3D trigonometry",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S7 3D trigonometry",
+   "keywords": [
+    "3d",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] cm by [[w]] cm by [[h]] cm. Find the space diagonal (1 d.p.).",
+   "answer": "[[sqrt(l * l + w * w + h * h)|dp:1]] cm"
+  },
+  {
+   "id": "y11hsp4-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "3D trigonometry",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S7 3D trigonometry",
+   "keywords": [
+    "3d",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "A cuboid is [[l]] by [[w]] by [[h]] cm. Find the angle between the space diagonal and the base (1 d.p.).",
+   "answer": "[[atan(h / sqrt(l * l + w * w))|dp:1]]°"
+  },
+  {
+   "id": "y11hsp4-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "3D trigonometry",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B4 Angles, bearings and trigonometry · S7 3D trigonometry",
+   "keywords": [
+    "3d",
+    "trigonometry",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A square-based pyramid has base side [[b]] cm and vertical height [[h]] cm. Find the angle between a sloping edge and the base (1 d.p.). (4 marks)",
+   "answer": "[[atan(h / (b * sqrt(2) / 2))|dp:1]]°"
+  }
+ ]
+}

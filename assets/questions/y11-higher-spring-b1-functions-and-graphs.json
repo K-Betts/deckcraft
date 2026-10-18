@@ -1,0 +1,1255 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 1 Functions and graphs: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp1-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Function notation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S1 Function notation",
+   "keywords": [
+    "function",
+    "notation",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = [[m]]x + [[c]]$. Work out $f([[k]])$.",
+   "answer": "[[m * k + c]]"
+  },
+  {
+   "id": "y11hsp1-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Function notation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S1 Function notation",
+   "keywords": [
+    "function",
+    "notation",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "$f(x) = x^2 - [[c]]$. Work out $f(-[[k]])$.",
+   "answer": "[[k * k - c]]"
+  },
+  {
+   "id": "y11hsp1-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Function notation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S1 Function notation",
+   "keywords": [
+    "function",
+    "notation",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = [[m]]x - [[c]]$. Solve $f(x) = [[m * k - c]]$.",
+   "answer": "$x = [[k]]$"
+  },
+  {
+   "id": "y11hsp1-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Function notation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S1 Function notation",
+   "keywords": [
+    "function",
+    "notation",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k != -k - c"
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "$f(x) = x^2 + [[c]]x$. Find the values of $x$ for which $f(x) = [[k * k + c * k]]$. (3 marks)",
+   "answer": "$x = [[k]]$ or $x = [[-k - c]]$"
+  },
+  {
+   "id": "y11hsp1-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Composite functions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S2 Composite functions",
+   "keywords": [
+    "composite",
+    "functions",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = x + [[a]]$ and $g(x) = [[m]]x$. Find $fg(x)$.",
+   "answer": "$[[m]]x + [[a]]$"
+  },
+  {
+   "id": "y11hsp1-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Composite functions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S2 Composite functions",
+   "keywords": [
+    "composite",
+    "functions",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = x + [[a]]$ and $g(x) = [[m]]x$. Find $gf(x)$.",
+   "answer": "$[[m]]x + [[m * a]]$"
+  },
+  {
+   "id": "y11hsp1-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Composite functions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S2 Composite functions",
+   "keywords": [
+    "composite",
+    "functions",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = [[m]]x$ and $g(x) = x^2 - [[a]]$. Work out $gf([[k]])$.",
+   "answer": "[[m * m * k * k - a]]"
+  },
+  {
+   "id": "y11hsp1-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Composite functions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S2 Composite functions",
+   "keywords": [
+    "composite",
+    "functions",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = x + [[a]]$ and $g(x) = [[m]]x$. Solve $fg(x) = gf(x)$ and explain what this shows. (3 marks)",
+   "answer": "$[[m]]x + [[a]] = [[m]]x + [[m * a]]$ so $[[a]] = [[m * a]]$: no solution"
+  },
+  {
+   "id": "y11hsp1-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Inverse functions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S3 Inverse functions",
+   "keywords": [
+    "inverse",
+    "functions",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$f(x) = x + [[a]]$. Find $f^{-1}(x)$.",
+   "answer": "$x - [[a]]$"
+  },
+  {
+   "id": "y11hsp1-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Inverse functions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S3 Inverse functions",
+   "keywords": [
+    "inverse",
+    "functions",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = [[m]]x$. Find $f^{-1}([[m * k]])$.",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y11hsp1-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Inverse functions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S3 Inverse functions",
+   "keywords": [
+    "inverse",
+    "functions",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = [[m]]x - [[c]]$. Find $f^{-1}(x)$.",
+   "answer": "$\\frac{x + [[c]]}{[[m]]}$"
+  },
+  {
+   "id": "y11hsp1-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Inverse functions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S3 Inverse functions",
+   "keywords": [
+    "inverse",
+    "functions",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "$f(x) = \\frac{x + [[a]]}{[[m]]}$. Find $f^{-1}(x)$ and solve $f^{-1}(x) = f(x)$ (3 marks)",
+   "answer": "$f^{-1}(x) = [[m]]x - [[a]]$"
+  },
+  {
+   "id": "y11hsp1-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S4 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 + [[c]]$.",
+   "answer": "$y$ = [[9 + c]], [[4 + c]], [[1 + c]], [[c]], [[1 + c]], [[4 + c]], [[9 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S4 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x$.",
+   "answer": "$y$ = [[9 + 3 * b]], [[4 + 2 * b]], [[1 + b]], 0, [[1 - b]], [[4 - 2 * b]], [[9 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S4 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = [[c]] - x^2$ and write down the maximum value of $y$.",
+   "answer": "$y$ = [[c - 9]], [[c - 4]], [[c - 1]], [[c]], [[c - 1]], [[c - 4]], [[c - 9]]; maximum [[c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S4 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x - [[c]]$ and write down the lowest value in the table. (3 marks)",
+   "answer": "$y$ = [[9 + 3 * b - c]], [[4 + 2 * b - c]], [[1 + b - c]], [[-c]], [[1 - b - c]], [[4 - 2 * b - c]], [[9 - 3 * b - c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Cubic and reciprocal graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S5 Cubic and reciprocal graphs",
+   "keywords": [
+    "cubic",
+    "and",
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 + [[c]]$.",
+   "answer": "$y$ = [[-27 + c]], [[-8 + c]], [[-1 + c]], [[c]], [[1 + c]], [[8 + c]], [[27 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Cubic and reciprocal graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S5 Cubic and reciprocal graphs",
+   "keywords": [
+    "cubic",
+    "and",
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 - [[b]]x$.",
+   "answer": "$y$ = [[-27 + 3 * b]], [[-8 + 2 * b]], [[-1 + b]], 0, [[1 - b]], [[8 - 2 * b]], [[27 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Cubic and reciprocal graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S5 Cubic and reciprocal graphs",
+   "keywords": [
+    "cubic",
+    "and",
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^3$, what happens to $y$ when $x$ is negative? Describe the shape of the graph.",
+   "answer": "$y$ is negative for negative $x$ ([[-k * k * k]] when $x = -[[k]]$); the graph rises from bottom left to top right through the origin with a flat point at the origin"
+  },
+  {
+   "id": "y11hsp1-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Cubic and reciprocal graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S5 Cubic and reciprocal graphs",
+   "keywords": [
+    "cubic",
+    "and",
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table for $y = x^3 - [[b]]x$ and write down the values of $x$ in the table where $y = 0$. Is the graph symmetrical about the origin? (4 marks)",
+   "answer": "$y = 0$ when $x = 0$ [[b == 1|if: and x = ±1/ ]][[b == 4|if: and x = ±2/ ]][[b == 9|if: and x = ±3/ ]]; yes, it has rotational symmetry about the origin",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11hsp1-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Transformations of graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S6 Transformations of graphs",
+   "keywords": [
+    "transformations",
+    "of",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The graph of $y = f(x)$ is translated [[a]] units up. Write the equation of the new graph.",
+   "answer": "$y = f(x) + [[a]]$"
+  },
+  {
+   "id": "y11hsp1-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Transformations of graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S6 Transformations of graphs",
+   "keywords": [
+    "transformations",
+    "of",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The graph of $y = f(x)$ is translated [[a]] units right. Write the equation of the new graph.",
+   "answer": "$y = f(x - [[a]])$"
+  },
+  {
+   "id": "y11hsp1-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Transformations of graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S6 Transformations of graphs",
+   "keywords": [
+    "transformations",
+    "of",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A point $(2, [[b]])$ lies on $y = f(x)$. Write the coordinates of its image on $y = f(x + [[a]])$ and on $y = -f(x)$.",
+   "answer": "$(2 - [[a]], [[b]])$ and $(2, [[-b]])$"
+  },
+  {
+   "id": "y11hsp1-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Transformations of graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S6 Transformations of graphs",
+   "keywords": [
+    "transformations",
+    "of",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The curve $y = x^2$ is transformed to $y = (x - [[a]])^2 + [[b]]$. Describe the transformation and give the minimum point. (3 marks)",
+   "answer": "Translation by $\\binom{[[a]]}{[[b]]}$; minimum $([[a]], [[b]])$"
+  },
+  {
+   "id": "y11hsp1-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Trigonometric graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S7 Trigonometric graphs",
+   "keywords": [
+    "trigonometric",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "What is the maximum value of $y = [[m]]\\sin x$?",
+   "answer": "[[m]]"
+  },
+  {
+   "id": "y11hsp1-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Trigonometric graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S7 Trigonometric graphs",
+   "keywords": [
+    "trigonometric",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "How many degrees before the graph of $y = \\cos([[n]]x)$ repeats?",
+   "answer": "[[360 / n]]°"
+  },
+  {
+   "id": "y11hsp1-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Trigonometric graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S7 Trigonometric graphs",
+   "keywords": [
+    "trigonometric",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Write the coordinates of the maximum point of $y = [[m]]\\sin x$ for $0° \\le x \\le 360°$.",
+   "answer": "$(90°, [[m]])$"
+  },
+  {
+   "id": "y11hsp1-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Trigonometric graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B1 Functions and graphs · S7 Trigonometric graphs",
+   "keywords": [
+    "trigonometric",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       20,
+       25,
+       30,
+       35,
+       40,
+       50,
+       55
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "Solve $\\sin x = [[sin(t)|dp:3]]$ for $0° \\le x \\le 90°$ and give the other solution up to 180°. (3 marks)",
+   "answer": "$x = [[t]]°$ or $x = [[180 - t]]°$"
+  }
+ ]
+}

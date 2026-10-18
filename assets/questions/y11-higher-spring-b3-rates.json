@@ -1,0 +1,1023 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 3 Rates: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp3-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S1 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / t == v"
+   ],
+   "text": "A cyclist rides at [[v]] km/h. How far does she go in [[t]] hours? Write the point to plot on a distance-time graph.",
+   "answer": "([[t]], [[v * t]])"
+  },
+  {
+   "id": "y11hsp3-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S1 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v * t1"
+    ]
+   ],
+   "check": [
+    "d1 == v * t1"
+   ],
+   "text": "A walker travels [[d1]] km in [[t1]] hours and then stops for [[g]] hour[[g > 1|if:s/]]. Write the three points that join to show this journey, starting at (0, 0).",
+   "answer": "(0, 0), ([[t1]], [[d1]]), ([[t1 + g]], [[d1]])"
+  },
+  {
+   "id": "y11hsp3-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S1 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "d2",
+     "v2 * t2"
+    ]
+   ],
+   "check": [
+    "d1 + d2 == v1 * t1 + v2 * t2"
+   ],
+   "text": "A car travels [[d1]] km in [[t1]] hours, stops for [[g]] hour and then travels a further [[d2]] km in [[t2]] hours. Write the coordinates of the end of each section of the graph.",
+   "answer": "([[t1]], [[d1]]), ([[t1 + g]], [[d1]]), ([[t1 + g + t2]], [[d1 + d2]])"
+  },
+  {
+   "id": "y11hsp3-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S1 Distance-time graphs",
+   "keywords": [
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v1 * t1 / t1 == v1"
+   ],
+   "text": "Draw a distance-time graph for this journey. A person walks at [[v1]] km/h for [[t1]] hours, rests for [[g]] hour and then walks back to the start at [[v1]] km/h. Write the coordinates you would plot and the total time. (3 marks)",
+   "answer": "(0, 0), ([[t1]], [[v1 * t1]]), ([[t1 + g]], [[v1 * t1]]), ([[t1 + g + t1]], 0); total time [[2 * t1 + g]] hours"
+  },
+  {
+   "id": "y11hsp3-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Velocity-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S2 Velocity-time graphs",
+   "keywords": [
+    "velocity",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A velocity-time graph is a horizontal line at [[v]] m/s for [[t]] s. What is the acceleration?",
+   "answer": "0 m/s²"
+  },
+  {
+   "id": "y11hsp3-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Velocity-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S2 Velocity-time graphs",
+   "keywords": [
+    "velocity",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A car speeds up from 0 to [[v]] m/s in [[t]] s at a constant rate. Find the acceleration.",
+   "answer": "[[v / t|dp:2]] m/s²"
+  },
+  {
+   "id": "y11hsp3-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Velocity-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S2 Velocity-time graphs",
+   "keywords": [
+    "velocity",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       0,
+       6
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t2 > t1"
+   ],
+   "text": "On a velocity-time graph the line goes from ([[t1]], [[v1]]) to ([[t2]], [[v2]]). Work out the acceleration.",
+   "answer": "[[(v2 - v1) / (t2 - t1)|dp:2]] m/s²"
+  },
+  {
+   "id": "y11hsp3-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Velocity-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S2 Velocity-time graphs",
+   "keywords": [
+    "velocity",
+    "time",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A train decelerates from [[v]] m/s to rest in [[t]] s. Find the deceleration and the distance travelled (constant deceleration). (3 marks)",
+   "answer": "Deceleration [[v / t|dp:2]] m/s²; distance [[v * t / 2|dp:1]] m"
+  },
+  {
+   "id": "y11hsp3-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Acceleration and area under a velocity-time graph",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S3 Acceleration and area under a velocity-time graph",
+   "keywords": [
+    "acceleration",
+    "and",
+    "area",
+    "under",
+    "a",
+    "velocity",
+    "time",
+    "graph",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A velocity-time graph is a horizontal line at [[v]] m/s for [[t]] s. Find the distance travelled.",
+   "answer": "[[v * t]] m"
+  },
+  {
+   "id": "y11hsp3-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Acceleration and area under a velocity-time graph",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S3 Acceleration and area under a velocity-time graph",
+   "keywords": [
+    "acceleration",
+    "and",
+    "area",
+    "under",
+    "a",
+    "velocity",
+    "time",
+    "graph",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A velocity-time graph is a triangle with base [[t]] s and height [[v]] m/s. Find the distance travelled.",
+   "answer": "[[v * t / 2|dp:1]] m"
+  },
+  {
+   "id": "y11hsp3-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Acceleration and area under a velocity-time graph",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S3 Acceleration and area under a velocity-time graph",
+   "keywords": [
+    "acceleration",
+    "and",
+    "area",
+    "under",
+    "a",
+    "velocity",
+    "time",
+    "graph",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       6,
+       20
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A car accelerates from 0 to [[v]] m/s in [[t1]] s, then travels at [[v]] m/s for [[t2]] s. Find the total distance.",
+   "answer": "[[v * t1 / 2 + v * t2|dp:1]] m"
+  },
+  {
+   "id": "y11hsp3-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Acceleration and area under a velocity-time graph",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S3 Acceleration and area under a velocity-time graph",
+   "keywords": [
+    "acceleration",
+    "and",
+    "area",
+    "under",
+    "a",
+    "velocity",
+    "time",
+    "graph",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A cyclist accelerates from rest to [[v]] m/s in [[t1]] s, holds that speed for [[t2]] s then slows to rest in [[t3]] s. Find the total distance and average speed (1 d.p.). (4 marks)",
+   "answer": "Distance [[v * (t1 + t3) / 2 + v * t2|dp:1]] m; average speed [[(v * (t1 + t3) / 2 + v * t2) / (t1 + t2 + t3)|dp:1]] m/s"
+  },
+  {
+   "id": "y11hsp3-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Compound units, density and pressure",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S4 Compound units, density and pressure",
+   "keywords": [
+    "compound",
+    "units",
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A metal block has mass [[d * v]] g and volume [[v]] cm³. Work out its density.",
+   "answer": "[[d]] g/cm³"
+  },
+  {
+   "id": "y11hsp3-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Compound units, density and pressure",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S4 Compound units, density and pressure",
+   "keywords": [
+    "compound",
+    "units",
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "F",
+     "p * A"
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A force of [[F]] N acts on an area of [[A]] m². Work out the pressure in N/m².",
+   "answer": "[[F / A]] N/m²"
+  },
+  {
+   "id": "y11hsp3-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Compound units, density and pressure",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S4 Compound units, density and pressure",
+   "keywords": [
+    "compound",
+    "units",
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "F",
+     "p * A * 2"
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A block weighs [[F]] N and rests on a face of area [[A]] m² or a face of area [[A * 2]] m². Work out the pressure on each face.",
+   "answer": "[[F / A]] N/m² and [[F / (A * 2)]] N/m²"
+  },
+  {
+   "id": "y11hsp3-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Compound units, density and pressure",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S4 Compound units, density and pressure",
+   "keywords": [
+    "compound",
+    "units",
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       19.3
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "Gold has density [[d]] g/cm³. A bar is [[l]] cm by [[w]] cm by [[h]] cm. Work out its mass in kg. (3 marks)",
+   "answer": "[[d * l * w * h / 1000|dp:2]] kg"
+  },
+  {
+   "id": "y11hsp3-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Rates of change from curved graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S5 Rates of change from curved graphs",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "from",
+    "curved",
+    "graphs",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A curve passes through (2, [[a]]) and (4, [[b]]). Work out the gradient of the chord.",
+   "answer": "[[(b - a) / 2|dp:2]]"
+  },
+  {
+   "id": "y11hsp3-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Rates of change from curved graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S5 Rates of change from curved graphs",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "from",
+    "curved",
+    "graphs",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "The gradient of a tangent to a distance-time graph at $t = [[t]]$ is [[v]]. What does it represent?",
+   "answer": "The speed at $t = [[t]]$ s is [[v]] m/s"
+  },
+  {
+   "id": "y11hsp3-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Rates of change from curved graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S5 Rates of change from curved graphs",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "from",
+    "curved",
+    "graphs",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       14,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A tangent to a curve is drawn through (1, [[a]]) and (5, [[b]]). Estimate the rate of change.",
+   "answer": "[[(b - a) / 4|dp:2]]"
+  },
+  {
+   "id": "y11hsp3-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Rates of change from curved graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B3 Rates · S5 Rates of change from curved graphs",
+   "keywords": [
+    "rates",
+    "of",
+    "change",
+    "from",
+    "curved",
+    "graphs",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       14,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The depth of water is [[a]] cm at 2 min and [[b]] cm at 6 min. Estimate the average rate of change and say whether the instantaneous rate at 4 min is likely larger or smaller if the graph is a flattening curve. (3 marks)",
+   "answer": "Average [[(b - a) / 4|dp:2]] cm/min; the instantaneous rate at 4 min is likely larger than the average later and smaller than earlier ones as the curve flattens"
+  }
+ ]
+}

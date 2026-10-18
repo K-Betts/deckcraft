@@ -1,0 +1,1558 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Spring Block 3 Rates: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fsp3-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours and minutes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S1 Convert between hours and minutes",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "and",
+    "minutes",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       14
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * 24 / 24 == d"
+   ],
+   "text": "How many hours are there in [[d]] days?",
+   "answer": "[[d * 24]] hours"
+  },
+  {
+   "id": "y11fsp3-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours and minutes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S1 Convert between hours and minutes",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "and",
+    "minutes",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       5,
+       55
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % 5 == 0"
+   ],
+   "check": [
+    "h * 60 + m - m == h * 60"
+   ],
+   "text": "Write [[h]] hours [[m]] minutes in minutes.",
+   "answer": "[[h * 60 + m]] minutes"
+  },
+  {
+   "id": "y11fsp3-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours and minutes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S1 Convert between hours and minutes",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "and",
+    "minutes",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       15,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 7 != 0"
+   ],
+   "check": [
+    "floor(d / 7) * 7 + d % 7 == d"
+   ],
+   "text": "Write [[d]] days as weeks and days.",
+   "answer": "[[floor(d / 7)]] weeks [[d % 7]] days"
+  },
+  {
+   "id": "y11fsp3-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours and minutes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S1 Convert between hours and minutes",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "and",
+    "minutes",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       95,
+       175
+      ]
+     }
+    ],
+    [
+     "sh",
+     {
+      "int": [
+       12,
+       19
+      ]
+     }
+    ],
+    [
+     "sm",
+     {
+      "choose": [
+       0,
+       15,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % 60 != 0"
+   ],
+   "check": [
+    "floor(m / 60) * 60 + m % 60 == m"
+   ],
+   "text": "A film lasts [[m]] minutes. (a) Write this in hours and minutes. (b) It starts at [[sh]]:[[sm < 10|if:0/]][[sm]]. At what time does it finish? (2 marks)",
+   "answer": "(a) [[floor(m / 60)]] h [[m % 60]] min  (b) [[floor((sh * 60 + sm + m) / 60)]]:[[(sh * 60 + sm + m) % 60 < 10|if:0/]][[(sh * 60 + sm + m) % 60]]"
+  },
+  {
+   "id": "y11fsp3-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 1,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S2 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "s1",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       30
+      ]
+     }
+    ],
+    [
+     "s2",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "s1 * t1"
+    ],
+    [
+     "d2",
+     "s2 * t2"
+    ]
+   ],
+   "where": [
+    "s1 != s2",
+    "isint((d1 + d2) / (t1 + t2))"
+   ],
+   "check": [
+    "(d1 + d2) / (t1 + t2) * (t1 + t2) == d1 + d2"
+   ],
+   "text": "Tom drives [[d1]] km in [[t1]] hours and then [[d2]] km in [[t2]] hours. What is his average speed for the whole journey?",
+   "answer": "[[(d1 + d2) / (t1 + t2)]] km/h"
+  },
+  {
+   "id": "y11fsp3-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 2,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S2 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       100,
+       200,
+       400
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 != t2"
+   ],
+   "check": [
+    "t1 != t2"
+   ],
+   "text": "Ana runs [[d]] m in [[t1]] seconds. Ben runs [[d]] m in [[t2]] seconds. Who is faster, and by how much in metres per second?",
+   "answer": "[[t1 < t2|if:Ana/Ben]] is faster, by [[abs(d / t1 - d / t2)|dp:2]] m/s"
+  },
+  {
+   "id": "y11fsp3-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S2 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       30,
+       60,
+       90,
+       48,
+       72
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(s * m / 60)"
+   ],
+   "check": [
+    "s * m / 60 * 60 == s * m"
+   ],
+   "text": "A car travels at [[s]] km/h. How far does it travel in [[m]] minutes?",
+   "answer": "[[s * m / 60]] km"
+  },
+  {
+   "id": "y11fsp3-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Speed, distance and time",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S2 Speed, distance and time",
+   "keywords": [
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s1",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "s2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "q2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "s1 * q1"
+    ],
+    [
+     "d2",
+     "s2 * q2"
+    ]
+   ],
+   "where": [
+    "isint((d1 / s1 + d2 / s2 - floor(d1 / s1 + d2 / s2)) * 60)"
+   ],
+   "check": [
+    "d1 / s1 + d2 / s2 == q1 + q2"
+   ],
+   "text": "A bus travels [[d1]] km at [[s1]] km/h and then [[d2]] km at [[s2]] km/h. Work out the total time for the journey in hours and minutes. (3 marks)",
+   "answer": "[[floor(d1 / s1 + d2 / s2)]] h [[(d1 / s1 + d2 / s2 - floor(d1 / s1 + d2 / s2)) * 60]] min"
+  },
+  {
+   "id": "y11fsp3-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S3 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / t == v"
+   ],
+   "text": "A cyclist rides at [[v]] km/h. How far does she go in [[t]] hours? Write the point to plot on a distance-time graph.",
+   "answer": "([[t]], [[v * t]])"
+  },
+  {
+   "id": "y11fsp3-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S3 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v * t1"
+    ]
+   ],
+   "check": [
+    "d1 == v * t1"
+   ],
+   "text": "A walker travels [[d1]] km in [[t1]] hours and then stops for [[g]] hour[[g > 1|if:s/]]. Write the three points that join to show this journey, starting at (0, 0).",
+   "answer": "(0, 0), ([[t1]], [[d1]]), ([[t1 + g]], [[d1]])"
+  },
+  {
+   "id": "y11fsp3-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S3 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "d2",
+     "v2 * t2"
+    ]
+   ],
+   "check": [
+    "d1 + d2 == v1 * t1 + v2 * t2"
+   ],
+   "text": "A car travels [[d1]] km in [[t1]] hours, stops for [[g]] hour and then travels a further [[d2]] km in [[t2]] hours. Write the coordinates of the end of each section of the graph.",
+   "answer": "([[t1]], [[d1]]), ([[t1 + g]], [[d1]]), ([[t1 + g + t2]], [[d1 + d2]])"
+  },
+  {
+   "id": "y11fsp3-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S3 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v1 * t1 / t1 == v1"
+   ],
+   "text": "Draw a distance-time graph for this journey. A person walks at [[v1]] km/h for [[t1]] hours, rests for [[g]] hour and then walks back to the start at [[v1]] km/h. Write the coordinates you would plot and the total time. (3 marks)",
+   "answer": "(0, 0), ([[t1]], [[v1 * t1]]), ([[t1 + g]], [[v1 * t1]]), ([[t1 + g + t1]], 0); total time [[2 * t1 + g]] hours"
+  },
+  {
+   "id": "y11fsp3-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S4 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d1 == v1 * t1"
+   ],
+   "text": "The distance-time graph shows a journey. How far had the person travelled after [[t1]] hour[[t1 > 1|if:s/]]?",
+   "answer": "[[d1]] km",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp3-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S4 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "t2 - t1 == gap"
+   ],
+   "text": "The distance-time graph shows a journey. For how long did the person stop?",
+   "answer": "[[gap]] hour[[gap > 1|if:s/]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp3-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S4 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d2 - d1 == v2 * t4"
+   ],
+   "text": "The distance-time graph shows a journey. How far did the person travel after the stop?",
+   "answer": "[[d2 - d1]] km",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp3-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S4 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d2 == v1 * t1 + v2 * t4"
+   ],
+   "text": "The distance-time graph shows a journey. (a) How far had the person travelled in total? (b) How long did the whole journey take? (c) During which part was the person travelling fastest, the first or the last? (3 marks)",
+   "answer": "(a) [[d2]] km  (b) [[t3]] hours  (c) the [[v1 > v2|if:first/last]] part",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp3-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Density and pressure",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S5 Density and pressure",
+   "keywords": [
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A metal block has mass [[d * v]] g and volume [[v]] cm³. Work out its density.",
+   "answer": "[[d]] g/cm³"
+  },
+  {
+   "id": "y11fsp3-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Density and pressure",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S5 Density and pressure",
+   "keywords": [
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "F",
+     "p * A"
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A force of [[F]] N acts on an area of [[A]] m². Work out the pressure in N/m².",
+   "answer": "[[F / A]] N/m²"
+  },
+  {
+   "id": "y11fsp3-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Density and pressure",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S5 Density and pressure",
+   "keywords": [
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "F",
+     "p * A * 2"
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A block weighs [[F]] N and rests on a face of area [[A]] m² or a face of area [[A * 2]] m². Work out the pressure on each face.",
+   "answer": "[[F / A]] N/m² and [[F / (A * 2)]] N/m²"
+  },
+  {
+   "id": "y11fsp3-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Density and pressure",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S5 Density and pressure",
+   "keywords": [
+    "density",
+    "and",
+    "pressure",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       19.3
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l > 0"
+   ],
+   "text": "Gold has density [[d]] g/cm³. A bar is [[l]] cm by [[w]] cm by [[h]] cm. Work out its mass in kg. (3 marks)",
+   "answer": "[[d * l * w * h / 1000|dp:2]] kg"
+  },
+  {
+   "id": "y11fsp3-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S6 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "Convert [[v * 18]] km/h to m/s.",
+   "answer": "[[v * 5]] m/s"
+  },
+  {
+   "id": "y11fsp3-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S6 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "choose": [
+       5,
+       10,
+       15,
+       20,
+       25,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "Convert [[v]] m/s to km/h.",
+   "answer": "[[v * 3.6]] km/h"
+  },
+  {
+   "id": "y11fsp3-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S6 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2.7,
+       7.8,
+       8.9,
+       11.3,
+       19.3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A metal has a density of [[d]] g/cm³. Write this in kg/m³.",
+   "answer": "[[d * 1000]] kg/m³"
+  },
+  {
+   "id": "y11fsp3-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert compound units (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B3 Rates · S6 Convert compound units (E)",
+   "keywords": [
+    "convert",
+    "compound",
+    "units",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "A car travels at [[v * 18]] km/h. (a) Write this in m/s. (b) How far does it travel in [[t]] seconds? (c) How long to travel [[d]] km? (3 marks)",
+   "answer": "(a) [[v * 5]] m/s  (b) [[v * 5 * t]] m  (c) [[d / (v * 18) * 60|dp:1]] minutes"
+  }
+ ]
+}

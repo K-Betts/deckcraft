@@ -1,0 +1,1273 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 6 Transformations: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp6-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Enlargement with a negative scale factor",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S1 Enlargement with a negative scale factor",
+   "keywords": [
+    "enlargement",
+    "with",
+    "a",
+    "negative",
+    "scale",
+    "factor",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "y2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y3",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(x2 - x1) * (y3 - y1) != 0"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $P$ has vertices ([[x1]], [[y1]]), ([[x2]], [[y2]]) and ([[x3]], [[y3]]). It is enlarged by scale factor [[k]], centre the origin. Write the coordinates of the image of the first vertex.",
+   "answer": "([[k * x1]], [[k * y1]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 13,
+    "ymin": -1,
+    "ymax": 13,
+    "polygons": [
+     {
+      "points": [
+       [
+        "[[x1|n]]",
+        "[[y1|n]]"
+       ],
+       [
+        "[[x2|n]]",
+        "[[y2|n]]"
+       ],
+       [
+        "[[x3|n]]",
+        "[[y3|n]]"
+       ]
+      ],
+      "color": "#2F6FDB",
+      "label": "P"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y11hsp6-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Enlargement with a negative scale factor",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S1 Enlargement with a negative scale factor",
+   "keywords": [
+    "enlargement",
+    "with",
+    "a",
+    "negative",
+    "scale",
+    "factor",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "y2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y3",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(x2 - x1) * (y3 - y1) != 0"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $P$ is enlarged by scale factor [[k]], centre the origin. Write the coordinates of all three vertices of the image.",
+   "answer": "([[k * x1]], [[k * y1]]), ([[k * x2]], [[k * y2]]), ([[k * x3]], [[k * y3]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 13,
+    "ymin": -1,
+    "ymax": 13,
+    "polygons": [
+     {
+      "points": [
+       [
+        "[[x1|n]]",
+        "[[y1|n]]"
+       ],
+       [
+        "[[x2|n]]",
+        "[[y2|n]]"
+       ],
+       [
+        "[[x3|n]]",
+        "[[y3|n]]"
+       ]
+      ],
+      "color": "#2F6FDB",
+      "label": "P"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y11hsp6-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Enlargement with a negative scale factor",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S1 Enlargement with a negative scale factor",
+   "keywords": [
+    "enlargement",
+    "with",
+    "a",
+    "negative",
+    "scale",
+    "factor",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "int": [
+       8,
+       30
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $P$ has a perimeter of [[p]] cm and an area of [[A]] cm². It is enlarged by scale factor [[k]]. Work out the new perimeter and area.",
+   "answer": "Perimeter [[p * k]] cm; area [[A * k * k]] cm²"
+  },
+  {
+   "id": "y11hsp6-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Enlargement with a negative scale factor",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S1 Enlargement with a negative scale factor",
+   "keywords": [
+    "enlargement",
+    "with",
+    "a",
+    "negative",
+    "scale",
+    "factor",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A rectangle [[a]] cm by [[b]] cm is enlarged by scale factor [[k]]. (a) Write the new dimensions. (b) Show that the area is [[k * k]] times bigger. (3 marks)",
+   "answer": "(a) [[a * k]] cm by [[b * k]] cm  (b) [[a * b]] → [[a * b * k * k]] = [[k * k]] × [[a * b]]"
+  },
+  {
+   "id": "y11hsp6-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Describe enlargements",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S2 Describe enlargements",
+   "keywords": [
+    "describe",
+    "enlargements",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Shape $P$ is mapped to shape $Q$ by an enlargement. A side of $P$ is [[a]] cm and the matching side of $Q$ is [[a * k]] cm. Work out the scale factor.",
+   "answer": "[[k]]"
+  },
+  {
+   "id": "y11hsp6-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Describe enlargements",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S2 Describe enlargements",
+   "keywords": [
+    "describe",
+    "enlargements",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $P$ is enlarged to give triangle $Q$. $P$ has a vertex at ([[x1]], [[y1]]) and $Q$ has the matching vertex at ([[k * x1]], [[k * y1]]). Describe the enlargement.",
+   "answer": "Enlargement, scale factor [[k]], centre (0, 0)"
+  },
+  {
+   "id": "y11hsp6-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Describe enlargements",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S2 Describe enlargements",
+   "keywords": [
+    "describe",
+    "enlargements",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "y2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y3",
+     {
+      "int": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "pick": [
+       "A",
+       "B",
+       "T",
+       "R"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(x2 - x1) * (y3 - y1) != 0"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $[[s]]$ is mapped to triangle $[[s]]'$ by an enlargement. $[[s]]$ has vertices ([[x1]], [[y1]]), ([[x2]], [[y2]]), ([[x3]], [[y3]]) and $[[s]]'$ has vertices ([[k * x1]], [[k * y1]]), ([[k * x2]], [[k * y2]]), ([[k * x3]], [[k * y3]]). Describe the enlargement fully.",
+   "answer": "Enlargement with scale factor [[k]] and centre (0, 0)",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 13,
+    "ymin": -1,
+    "ymax": 13,
+    "polygons": [
+     {
+      "points": [
+       [
+        "[[x1|n]]",
+        "[[y1|n]]"
+       ],
+       [
+        "[[x2|n]]",
+        "[[y2|n]]"
+       ],
+       [
+        "[[x3|n]]",
+        "[[y3|n]]"
+       ]
+      ],
+      "color": "#2F6FDB",
+      "label": "[[s]]"
+     },
+     {
+      "points": [
+       [
+        "[[k * x1|n]]",
+        "[[k * y1|n]]"
+       ],
+       [
+        "[[k * x2|n]]",
+        "[[k * y2|n]]"
+       ],
+       [
+        "[[k * x3|n]]",
+        "[[k * y3|n]]"
+       ]
+      ],
+      "color": "#D0453A",
+      "label": "[[s]]'"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y11hsp6-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Describe enlargements",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S2 Describe enlargements",
+   "keywords": [
+    "describe",
+    "enlargements",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "y2",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "cx",
+     {
+      "int": [
+       0,
+       1
+      ]
+     }
+    ],
+    [
+     "cy",
+     {
+      "int": [
+       0,
+       1
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x2 != x1"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Triangle $P$ is mapped to $Q$ by an enlargement. The vertex ([[x1]], [[y1]]) maps to ([[cx + k * (x1 - cx)]], [[cy + k * (y1 - cy)]]) and ([[x2]], [[y2]]) maps to ([[cx + k * (x2 - cx)]], [[cy + k * (y2 - cy)]]). Find the scale factor and the centre. (4 marks)",
+   "answer": "Scale factor [[k]]; centre ([[cx]], [[cy]])"
+  },
+  {
+   "id": "y11hsp6-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Fractional enlargement",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S3 Fractional enlargement",
+   "keywords": [
+    "fractional",
+    "enlargement",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "choose": [
+       2,
+       4,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x1 > 0"
+   ],
+   "text": "Triangle $P$ is enlarged by scale factor $\\frac{1}{2}$, centre the origin. Write the image of the vertex ([[x1]], [[y1]]).",
+   "answer": "([[x1 / 2]], [[y1 / 2]])"
+  },
+  {
+   "id": "y11hsp6-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Fractional enlargement",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S3 Fractional enlargement",
+   "keywords": [
+    "fractional",
+    "enlargement",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "choose": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "choose": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "choose": [
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "y2",
+     {
+      "choose": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "choose": [
+       2,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "y3",
+     {
+      "choose": [
+       6,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x2 != x1",
+    "y3 != y1"
+   ],
+   "check": [
+    "x1 > 0"
+   ],
+   "text": "Triangle $P$ has vertices ([[x1]], [[y1]]), ([[x2]], [[y2]]) and ([[x3]], [[y3]]). It is enlarged by scale factor $\\frac{1}{2}$ from the origin. Write the three image vertices.",
+   "answer": "([[x1 / 2]], [[y1 / 2]]), ([[x2 / 2]], [[y2 / 2]]), ([[x3 / 2]], [[y3 / 2]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -1,
+    "xmax": 13,
+    "ymin": -1,
+    "ymax": 13,
+    "polygons": [
+     {
+      "points": [
+       [
+        "[[x1|n]]",
+        "[[y1|n]]"
+       ],
+       [
+        "[[x2|n]]",
+        "[[y2|n]]"
+       ],
+       [
+        "[[x3|n]]",
+        "[[y3|n]]"
+       ]
+      ],
+      "color": "#2F6FDB",
+      "label": "P"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y11hsp6-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Fractional enlargement",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S3 Fractional enlargement",
+   "keywords": [
+    "fractional",
+    "enlargement",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       36,
+       72,
+       144
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A / (k * k))"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A shape with area [[A]] cm² is enlarged by scale factor $\\frac{1}{[[k]]}$. Work out the area of the image. Is the image smaller or larger?",
+   "answer": "[[A / (k * k)|dp:2]] cm²: smaller, as the scale factor is less than 1"
+  },
+  {
+   "id": "y11hsp6-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Fractional enlargement",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S3 Fractional enlargement",
+   "keywords": [
+    "fractional",
+    "enlargement",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k != m"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A triangle with vertices (0, 0), ([[6 * k]], 0) and (0, [[6 * m]]) is enlarged by scale factor $\\frac{1}{3}$ from the origin. Write the image vertices and its area. (3 marks)",
+   "answer": "(0, 0), ([[2 * k]], 0), (0, [[2 * m]]); area [[2 * k * 2 * m / 2]]"
+  },
+  {
+   "id": "y11hsp6-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Combine transformations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S4 Combine transformations",
+   "keywords": [
+    "combine",
+    "transformations",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The point ([[x1]], [[y1]]) is reflected in the $y$-axis and then translated [[a]] up. Find the final image.",
+   "answer": "([[-x1]], [[y1 + a]])"
+  },
+  {
+   "id": "y11hsp6-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Combine transformations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S4 Combine transformations",
+   "keywords": [
+    "combine",
+    "transformations",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x1 > 0"
+   ],
+   "text": "The point ([[x1]], [[y1]]) is rotated 180° about the origin and then reflected in the $x$-axis. Find the final image.",
+   "answer": "([[-x1]], [[y1]])"
+  },
+  {
+   "id": "y11hsp6-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Combine transformations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S4 Combine transformations",
+   "keywords": [
+    "combine",
+    "transformations",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x1 != y1"
+   ],
+   "check": [
+    "x1 > 0"
+   ],
+   "text": "A point is reflected in the line $y = x$ and then in the line $y = -x$. Starting at ([[x1]], [[y1]]), find the final image and the single transformation that does the same.",
+   "answer": "([[-x1]], [[-y1]]): rotation of 180° about the origin"
+  },
+  {
+   "id": "y11hsp6-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Combine transformations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S4 Combine transformations",
+   "keywords": [
+    "combine",
+    "transformations",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x1 > 0"
+   ],
+   "text": "Triangle $P$ is rotated 90° anticlockwise about the origin to give $Q$, then $Q$ is translated [[a]] right to give $R$. A vertex of $P$ is ([[x1]], [[y1]]). Find its position in $Q$ and in $R$. (3 marks)",
+   "answer": "$Q$: ([[-y1]], [[x1]]); $R$: ([[-y1 + a]], [[x1]])"
+  },
+  {
+   "id": "y11hsp6-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Invariant points",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S5 Invariant points",
+   "keywords": [
+    "invariant",
+    "points",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A point $(x, y)$ is reflected in the line $y = x$. Which point is invariant for $(3, 3)$? Is $([[a]], [[a]])$ invariant?",
+   "answer": "Yes: $([[a]], [[a]])$ lies on $y = x$ so it does not move"
+  },
+  {
+   "id": "y11hsp6-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Invariant points",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S5 Invariant points",
+   "keywords": [
+    "invariant",
+    "points",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       0,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Is the point $([[a]], [[b]])$ invariant under reflection in the $x$-axis?",
+   "answer": "[[b == 0|if:Yes/No]]: its image is $([[a]], [[-b]])$"
+  },
+  {
+   "id": "y11hsp6-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Invariant points",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S5 Invariant points",
+   "keywords": [
+    "invariant",
+    "points",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rotation of 90° about the origin is applied to $([[a]], [[b]])$. Is it invariant? State the image.",
+   "answer": "No (only the origin is invariant); image $([[-b]], [[a]])$"
+  },
+  {
+   "id": "y11hsp6-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Invariant points",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B6 Transformations · S5 Invariant points",
+   "keywords": [
+    "invariant",
+    "points",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "An enlargement has scale factor [[k]] and centre $(1, 1)$. Find the invariant point and the image of $([[a]], [[b]])$. (3 marks)",
+   "answer": "Invariant point $(1, 1)$; image $([[1 + k * (a - 1)]], [[1 + k * (b - 1)]])$"
+  }
+ ]
+}
