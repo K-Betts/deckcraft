@@ -1,159 +1,488 @@
 {
   "version": 1,
-  "note": "PLACEHOLDER starter questions written for this app so the Get Ready slide works. Replace this file with the curated bank export; format is documented in docs/design/ux-review.md.",
+  "note": "UK KS3 & KS4 secondary mathematics starter question bank. LaTeX between $...$ is rendered as real equations. Questions marked needsDiagram are shown only when diagram rendering is available.",
   "questions": [
     {
       "id": "num-001",
       "topic": "Number",
       "subtopic": "Fractions",
       "difficulty": 1,
-      "text": "Work out 3/4 + 1/8.",
-      "answer": "7/8",
-      "needsDiagram": false
+      "text": "Work out $\\frac{3}{4} + \\frac{1}{8}$",
+      "answer": "$\\frac{7}{8}$"
     },
     {
       "id": "num-002",
       "topic": "Number",
-      "subtopic": "Percentages",
-      "difficulty": 1,
-      "text": "Find 15% of 80.",
-      "answer": "12",
-      "needsDiagram": false
+      "subtopic": "Fractions",
+      "difficulty": 2,
+      "text": "Work out $\\frac{5}{6} - \\frac{2}{9}$",
+      "answer": "$\\frac{11}{18}$"
     },
     {
       "id": "num-003",
       "topic": "Number",
-      "subtopic": "Order of operations",
-      "difficulty": 1,
-      "text": "Work out 6 + 4 × 3 − 2.",
-      "answer": "16",
-      "needsDiagram": false
+      "subtopic": "Fractions",
+      "difficulty": 2,
+      "text": "Work out $2\\frac{1}{3} \\times 1\\frac{1}{2}$",
+      "answer": "$3\\frac{1}{2}$"
     },
     {
       "id": "num-004",
       "topic": "Number",
-      "subtopic": "Rounding",
-      "difficulty": 2,
-      "text": "Round 4.0763 to 2 decimal places and to 2 significant figures.",
-      "answer": "4.08; 4.1",
-      "needsDiagram": false
+      "subtopic": "Percentages",
+      "difficulty": 1,
+      "text": "Find 15% of 80.",
+      "answer": "12"
     },
     {
       "id": "num-005",
       "topic": "Number",
+      "subtopic": "Percentages",
+      "difficulty": 2,
+      "text": "A coat costs £120 and is reduced by 35%. Find the sale price.",
+      "answer": "£78"
+    },
+    {
+      "id": "num-006",
+      "topic": "Number",
+      "subtopic": "Percentages",
+      "difficulty": 3,
+      "text": "A price increases from £80 to £94. Find the percentage increase.",
+      "answer": "17.5%"
+    },
+    {
+      "id": "num-007",
+      "topic": "Number",
+      "subtopic": "Order of operations",
+      "difficulty": 1,
+      "text": "Work out $6 + 4 \\times 3 - 2$",
+      "answer": "16"
+    },
+    {
+      "id": "num-008",
+      "topic": "Number",
+      "subtopic": "Order of operations",
+      "difficulty": 2,
+      "text": "Work out $\\frac{(3 + 7)^2}{4} - 6$",
+      "answer": "19"
+    },
+    {
+      "id": "num-009",
+      "topic": "Number",
+      "subtopic": "Rounding",
+      "difficulty": 1,
+      "text": "Round 4.0763 to 2 decimal places.",
+      "answer": "4.08"
+    },
+    {
+      "id": "num-010",
+      "topic": "Number",
+      "subtopic": "Rounding",
+      "difficulty": 2,
+      "text": "Round 0.004836 to 3 significant figures.",
+      "answer": "0.00484"
+    },
+    {
+      "id": "num-011",
+      "topic": "Number",
+      "subtopic": "Standard form",
+      "difficulty": 2,
+      "text": "Write $0.00046$ in standard form.",
+      "answer": "$4.6 \\times 10^{-4}$"
+    },
+    {
+      "id": "num-012",
+      "topic": "Number",
       "subtopic": "Standard form",
       "difficulty": 3,
-      "text": "Write 0.000 46 in standard form.",
-      "answer": "4.6 × 10⁻⁴",
-      "needsDiagram": false
+      "text": "Work out $(3.2 \\times 10^5) \\times (2.5 \\times 10^{-3})$. Give your answer in standard form.",
+      "answer": "$8.0 \\times 10^2$"
+    },
+    {
+      "id": "num-013",
+      "topic": "Number",
+      "subtopic": "Indices",
+      "difficulty": 2,
+      "text": "Simplify $\\frac{2^6}{2^3}$",
+      "answer": "$2^3 = 8$"
+    },
+    {
+      "id": "num-014",
+      "topic": "Number",
+      "subtopic": "Indices",
+      "difficulty": 3,
+      "text": "Evaluate $27^{\\frac{2}{3}}$",
+      "answer": "9"
+    },
+    {
+      "id": "num-015",
+      "topic": "Number",
+      "subtopic": "Surds",
+      "difficulty": 3,
+      "text": "Simplify $\\sqrt{75}$",
+      "answer": "$5\\sqrt{3}$"
+    },
+    {
+      "id": "num-016",
+      "topic": "Number",
+      "subtopic": "HCF and LCM",
+      "difficulty": 1,
+      "text": "Find the HCF and LCM of 12 and 18.",
+      "answer": "HCF = 6,  LCM = 36"
+    },
+    {
+      "id": "num-017",
+      "topic": "Number",
+      "subtopic": "Fractions",
+      "difficulty": 3,
+      "text": "Work out $\\frac{3}{4} \\div 1\\frac{1}{2}$",
+      "answer": "$\\frac{1}{2}$"
     },
     {
       "id": "alg-001",
       "topic": "Algebra",
-      "subtopic": "Expanding",
+      "subtopic": "Simplifying",
       "difficulty": 1,
-      "text": "Expand 3(x + 4).",
-      "answer": "3x + 12",
-      "needsDiagram": false
+      "text": "Simplify $3p \\times 3q$",
+      "answer": "$9pq$"
     },
     {
       "id": "alg-002",
       "topic": "Algebra",
-      "subtopic": "Solving equations",
+      "subtopic": "Expanding",
       "difficulty": 1,
-      "text": "Solve 2x + 5 = 17.",
-      "answer": "x = 6",
-      "needsDiagram": false
+      "text": "Expand $3(x + 4)$",
+      "answer": "$3x + 12$"
     },
     {
       "id": "alg-003",
       "topic": "Algebra",
-      "subtopic": "Factorising",
+      "subtopic": "Expanding",
       "difficulty": 2,
-      "text": "Factorise x² + 7x + 12.",
-      "answer": "(x + 3)(x + 4)",
-      "needsDiagram": false
+      "text": "Expand and simplify $(x + 3)(x + 5)$",
+      "answer": "$x^2 + 8x + 15$"
     },
     {
       "id": "alg-004",
       "topic": "Algebra",
-      "subtopic": "Substitution",
-      "difficulty": 1,
-      "text": "Work out 3a − b when a = 4 and b = 5.",
-      "answer": "7",
-      "needsDiagram": false
+      "subtopic": "Factorising",
+      "difficulty": 2,
+      "text": "Factorise $x^2 + 7x + 12$",
+      "answer": "$(x + 3)(x + 4)$"
     },
     {
       "id": "alg-005",
       "topic": "Algebra",
-      "subtopic": "Simultaneous equations",
+      "subtopic": "Factorising",
       "difficulty": 3,
-      "text": "Solve x + y = 9 and x − y = 3.",
-      "answer": "x = 6, y = 3",
-      "needsDiagram": false
+      "text": "Factorise $x^2 - 9$",
+      "answer": "$(x + 3)(x - 3)$"
     },
     {
       "id": "alg-006",
       "topic": "Algebra",
+      "subtopic": "Solving equations",
+      "difficulty": 1,
+      "text": "Solve $2x + 5 = 17$",
+      "answer": "$x = 6$"
+    },
+    {
+      "id": "alg-007",
+      "topic": "Algebra",
+      "subtopic": "Solving equations",
+      "difficulty": 2,
+      "text": "Solve $2(4y + 9) = 26$",
+      "answer": "$y = 1$"
+    },
+    {
+      "id": "alg-008",
+      "topic": "Algebra",
+      "subtopic": "Solving equations",
+      "difficulty": 3,
+      "text": "Solve $x^2 - 12x + 35 = 0$",
+      "answer": "$x = 7$ or $x = 5$"
+    },
+    {
+      "id": "alg-009",
+      "topic": "Algebra",
+      "subtopic": "Substitution",
+      "difficulty": 1,
+      "text": "Work out $3a - b$ when $a = 4$ and $b = 5$.",
+      "answer": "7"
+    },
+    {
+      "id": "alg-010",
+      "topic": "Algebra",
+      "subtopic": "Substitution",
+      "difficulty": 2,
+      "text": "Work out $\\frac{2x^2 - y}{3}$ when $x = 3$ and $y = 9$.",
+      "answer": "3"
+    },
+    {
+      "id": "alg-011",
+      "topic": "Algebra",
+      "subtopic": "Simultaneous equations",
+      "difficulty": 3,
+      "text": "Solve $x + y = 9$ and $x - y = 3$",
+      "answer": "$x = 6,\\ y = 3$"
+    },
+    {
+      "id": "alg-012",
+      "topic": "Algebra",
       "subtopic": "Sequences",
       "difficulty": 2,
-      "text": "Find the nth term of 5, 8, 11, 14, …",
-      "answer": "3n + 2",
-      "needsDiagram": false
+      "text": "Find the $n$th term of $5, 8, 11, 14, \\ldots$",
+      "answer": "$3n + 2$"
+    },
+    {
+      "id": "alg-013",
+      "topic": "Algebra",
+      "subtopic": "Sequences",
+      "difficulty": 2,
+      "text": "Is 85 in the sequence $3n + 1$? Show how you know.",
+      "answer": "$3n + 1 = 85 \\Rightarrow n = 28$. Yes, when $n = 28$."
+    },
+    {
+      "id": "alg-014",
+      "topic": "Algebra",
+      "subtopic": "Rearranging formulae",
+      "difficulty": 2,
+      "text": "Make $r$ the subject of $A = \\pi r^2$",
+      "answer": "$r = \\sqrt{\\frac{A}{\\pi}}$"
+    },
+    {
+      "id": "alg-015",
+      "topic": "Algebra",
+      "subtopic": "Rearranging formulae",
+      "difficulty": 3,
+      "text": "Make $x$ the subject of $y = \\frac{3x + 1}{x - 2}$",
+      "answer": "$x = \\frac{2y + 1}{y - 3}$"
+    },
+    {
+      "id": "alg-016",
+      "topic": "Algebra",
+      "subtopic": "Straight line graphs",
+      "difficulty": 2,
+      "text": "Find the gradient and $y$-intercept of $3y - 6x = 12$",
+      "answer": "Gradient $= 2$, $y$-intercept $= 4$"
+    },
+    {
+      "id": "alg-017",
+      "topic": "Algebra",
+      "subtopic": "Inequalities",
+      "difficulty": 2,
+      "text": "Solve $3x - 4 \\geq 2x + 1$",
+      "answer": "$x \\geq 5$"
     },
     {
       "id": "rat-001",
       "topic": "Ratio",
       "subtopic": "Sharing",
       "difficulty": 1,
-      "text": "Share 40 in the ratio 3 : 5.",
-      "answer": "15 and 25",
-      "needsDiagram": false
+      "text": "Share £40 in the ratio $3 : 5$.",
+      "answer": "£15 and £25"
     },
     {
       "id": "rat-002",
       "topic": "Ratio",
+      "subtopic": "Sharing",
+      "difficulty": 2,
+      "text": "Share 72 in the ratio $1 : 2 : 3$.",
+      "answer": "12, 24 and 36"
+    },
+    {
+      "id": "rat-003",
+      "topic": "Ratio",
+      "subtopic": "Proportion",
+      "difficulty": 1,
+      "text": "5 pens cost £3.50. How much do 8 pens cost?",
+      "answer": "£5.60"
+    },
+    {
+      "id": "rat-004",
+      "topic": "Ratio",
       "subtopic": "Proportion",
       "difficulty": 2,
-      "text": "5 pens cost £3.50. How much do 8 pens cost?",
-      "answer": "£5.60",
-      "needsDiagram": false
+      "text": "A car travels 180 km in 3 hours. Find the average speed in km/h.",
+      "answer": "60 km/h"
+    },
+    {
+      "id": "rat-005",
+      "topic": "Ratio",
+      "subtopic": "Direct proportion",
+      "difficulty": 2,
+      "text": "$y$ is directly proportional to $x$. When $x = 4$, $y = 20$. Find $y$ when $x = 7$.",
+      "answer": "$y = 35$"
+    },
+    {
+      "id": "rat-006",
+      "topic": "Ratio",
+      "subtopic": "Inverse proportion",
+      "difficulty": 3,
+      "text": "$y$ is inversely proportional to $x^2$. When $x = 3$, $y = 4$. Find $y$ when $x = 6$.",
+      "answer": "$y = 1$"
+    },
+    {
+      "id": "rat-007",
+      "topic": "Ratio",
+      "subtopic": "Compound measures",
+      "difficulty": 2,
+      "text": "A block of metal has mass 600 g and volume $80\\text{ cm}^3$. Find its density.",
+      "answer": "$7.5\\text{ g/cm}^3$"
+    },
+    {
+      "id": "rat-008",
+      "topic": "Ratio",
+      "subtopic": "Currency conversion",
+      "difficulty": 1,
+      "text": "The exchange rate is £1 = €1.15. Convert £250 to euros.",
+      "answer": "€287.50"
     },
     {
       "id": "geo-001",
       "topic": "Geometry",
-      "subtopic": "Area",
+      "subtopic": "Area and perimeter",
       "difficulty": 1,
       "text": "Find the area of a rectangle 7 cm by 6 cm.",
-      "answer": "42 cm²",
-      "needsDiagram": false
+      "answer": "$42\\text{ cm}^2$"
     },
     {
       "id": "geo-002",
       "topic": "Geometry",
-      "subtopic": "Angles",
-      "difficulty": 1,
-      "text": "Angles on a straight line add up to what? One angle is 65°. Find the other.",
-      "answer": "180°; 115°",
-      "needsDiagram": false
+      "subtopic": "Area and perimeter",
+      "difficulty": 2,
+      "text": "Find the area of a trapezium with parallel sides 8 cm and 14 cm and height 6 cm.",
+      "answer": "$66\\text{ cm}^2$"
     },
     {
       "id": "geo-003",
       "topic": "Geometry",
-      "subtopic": "Pythagoras",
+      "subtopic": "Circles",
       "difficulty": 2,
-      "text": "A right-angled triangle has shorter sides 6 cm and 8 cm. Find the hypotenuse.",
-      "answer": "10 cm",
-      "needsDiagram": false
+      "text": "Find the circumference and area of a circle with radius 5 cm. Give answers in terms of $\\pi$.",
+      "answer": "Circumference $= 10\\pi$ cm,  Area $= 25\\pi\\text{ cm}^2$"
     },
     {
       "id": "geo-004",
       "topic": "Geometry",
       "subtopic": "Circles",
+      "difficulty": 3,
+      "text": "A semicircle has diameter 12 cm. Find its area to 1 decimal place.",
+      "answer": "$56.5\\text{ cm}^2$"
+    },
+    {
+      "id": "geo-005",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras",
       "difficulty": 2,
-      "text": "Find the circumference of a circle of radius 5 cm, in terms of π.",
-      "answer": "10π cm",
-      "needsDiagram": false
+      "text": "A right-angled triangle has shorter sides 6 cm and 8 cm. Find the hypotenuse.",
+      "answer": "10 cm"
+    },
+    {
+      "id": "geo-006",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras",
+      "difficulty": 2,
+      "text": "Find the missing side $x$ in a right-angled triangle with hypotenuse 13 cm and one side 5 cm.",
+      "answer": "12 cm"
+    },
+    {
+      "id": "geo-007",
+      "topic": "Geometry",
+      "subtopic": "Trigonometry",
+      "difficulty": 3,
+      "text": "In a right-angled triangle, the side opposite to angle $\\theta$ is 5 cm and the hypotenuse is 13 cm. Find $\\theta$ to 1 decimal place.",
+      "answer": "$\\theta = 22.6°$"
+    },
+    {
+      "id": "geo-008",
+      "topic": "Geometry",
+      "subtopic": "Volume",
+      "difficulty": 2,
+      "text": "Find the volume of a cylinder with radius 4 cm and height 10 cm. Give your answer in terms of $\\pi$.",
+      "answer": "$160\\pi\\text{ cm}^3$"
+    },
+    {
+      "id": "geo-009",
+      "topic": "Geometry",
+      "subtopic": "Angles",
+      "difficulty": 1,
+      "text": "Angles on a straight line add up to 180°. Find angle $x$ if the other two angles are 65° and 72°.",
+      "answer": "$x = 43°$"
+    },
+    {
+      "id": "geo-010",
+      "topic": "Geometry",
+      "subtopic": "Angles",
+      "difficulty": 2,
+      "text": "The interior angles of a regular hexagon are all equal. Find the size of each interior angle.",
+      "answer": "$120°$"
+    },
+    {
+      "id": "geo-011",
+      "topic": "Geometry",
+      "subtopic": "Angles",
+      "difficulty": 3,
+      "text": "The exterior angle of a regular polygon is 24°. How many sides does the polygon have?",
+      "answer": "15 sides"
+    },
+    {
+      "id": "geo-012",
+      "topic": "Geometry",
+      "subtopic": "Transformations",
+      "difficulty": 2,
+      "text": "Describe fully the single transformation that maps shape A onto shape B when shape B is 3 times as large and in the same orientation.",
+      "answer": "Enlargement, scale factor 3"
+    },
+    {
+      "id": "geo-013",
+      "topic": "Geometry",
+      "subtopic": "Similarity",
+      "difficulty": 3,
+      "text": "Two similar triangles have sides in the ratio $3 : 5$. The smaller has area $27\\text{ cm}^2$. Find the area of the larger.",
+      "answer": "$75\\text{ cm}^2$"
+    },
+    {
+      "id": "geo-901",
+      "topic": "Geometry",
+      "subtopic": "Angles in a triangle",
+      "difficulty": 1,
+      "text": "Find angle $x$ in the triangle.",
+      "answer": "$x = 70°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "triangle-angles",
+        "angles": ["50°", "60°", null],
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-902",
+      "topic": "Geometry",
+      "subtopic": "Angles in isosceles triangle",
+      "difficulty": 2,
+      "text": "$ABC$ is an isosceles triangle with $AB = AC$. Angle $BAC = 40°$. Find angle $ABC$.",
+      "answer": "$70°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "isosceles-triangle",
+        "topAngle": "40°",
+        "baseAngle": null
+      }
+    },
+    {
+      "id": "geo-903",
+      "topic": "Geometry",
+      "subtopic": "Angles on parallel lines",
+      "difficulty": 2,
+      "text": "Two parallel lines are cut by a transversal. One co-interior angle is 115°. Find the other co-interior angle $z$.",
+      "answer": "$z = 65°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "parallel-lines",
+        "knownAngle": "115°",
+        "unknown": "z"
+      }
     },
     {
       "id": "sta-001",
@@ -161,43 +490,71 @@
       "subtopic": "Averages",
       "difficulty": 1,
       "text": "Find the mean of 3, 7, 8, 10 and 12.",
-      "answer": "8",
-      "needsDiagram": false
+      "answer": "8"
     },
     {
       "id": "sta-002",
       "topic": "Statistics",
-      "subtopic": "Probability",
+      "subtopic": "Averages",
       "difficulty": 2,
-      "text": "A fair dice is rolled once. What is the probability of a prime number?",
-      "answer": "1/2",
-      "needsDiagram": false
+      "text": "Find the median and range of 4, 9, 2, 7, 5.",
+      "answer": "Median $= 5$,  Range $= 7$"
     },
     {
       "id": "sta-003",
       "topic": "Statistics",
-      "subtopic": "Range",
-      "difficulty": 1,
-      "text": "Find the median and range of 4, 9, 2, 7, 5.",
-      "answer": "5; 7",
-      "needsDiagram": false
+      "subtopic": "Averages",
+      "difficulty": 2,
+      "text": "The mean of five numbers is 6. Four of the numbers are 3, 4, 8 and 9. Find the fifth number.",
+      "answer": "6"
     },
     {
-      "id": "geo-901",
-      "topic": "Geometry",
-      "subtopic": "Angles in a triangle",
+      "id": "sta-004",
+      "topic": "Statistics",
+      "subtopic": "Probability",
       "difficulty": 1,
-      "text": "Find angle x in the triangle (angles 50° and 60° shown).",
-      "answer": "70°",
-      "needsDiagram": true,
-      "diagram": {
-        "kind": "triangle-angles",
-        "values": [
-          50,
-          60,
-          null
-        ]
-      }
+      "text": "A fair dice is rolled once. Find the probability of scoring a prime number.",
+      "answer": "$\\frac{1}{2}$"
+    },
+    {
+      "id": "sta-005",
+      "topic": "Statistics",
+      "subtopic": "Probability",
+      "difficulty": 2,
+      "text": "A bag has 5 red, 3 blue and 2 green counters. One counter is chosen at random. Find $P$(not red).",
+      "answer": "$\\frac{1}{2}$"
+    },
+    {
+      "id": "sta-006",
+      "topic": "Statistics",
+      "subtopic": "Probability",
+      "difficulty": 3,
+      "text": "A and B are independent events. $P(A) = 0.3$ and $P(B) = 0.4$. Find $P(A \\cap B)$.",
+      "answer": "0.12"
+    },
+    {
+      "id": "sta-007",
+      "topic": "Statistics",
+      "subtopic": "Averages from tables",
+      "difficulty": 2,
+      "text": "Find an estimate for the mean of: 0–10 (freq 4), 10–20 (freq 6), 20–30 (freq 10), 30–40 (freq 5).",
+      "answer": "Estimate $= \\frac{(5)(4)+(15)(6)+(25)(10)+(35)(5)}{25} = 21$"
+    },
+    {
+      "id": "sta-008",
+      "topic": "Statistics",
+      "subtopic": "Scatter graphs",
+      "difficulty": 2,
+      "text": "A scatter graph shows height and shoe size. Describe the correlation and what it means.",
+      "answer": "Positive correlation — taller people tend to have larger shoe sizes."
+    },
+    {
+      "id": "sta-009",
+      "topic": "Statistics",
+      "subtopic": "Pie charts",
+      "difficulty": 1,
+      "text": "In a pie chart, the sector for 'Football' has an angle of 90°. What fraction of people chose football?",
+      "answer": "$\\frac{1}{4}$"
     }
   ]
 }

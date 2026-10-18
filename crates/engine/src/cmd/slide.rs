@@ -25,7 +25,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Get Ready Starter",
             ["Insert", "Slides From"],
             None,
-            "{slots?: [{topic?: text, difficulty?: 1|2|3}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank (default: the built-in one), at?: index} → {index, questions: [ids]}",
+            "{slots?: [{topic?: text, difficulty?: 1|2|3}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
             has_doc,
             get_ready
         ),
@@ -627,17 +627,20 @@ fn section_move(s: &mut Session, p: &Value) -> Result<Value> {
 /// The name that marks a slide made by `slide.getReady`, so a reroll can find it again.
 pub const GET_READY_NAME: &str = "Get Ready";
 
-/// A retrieval starter: a title and up to eight questions as ordinary text boxes (they save to
-/// PowerPoint like any others), with the answers in the speaker notes.
+/// A retrieval starter: four questions in a 2×2 card grid (matching the Dr Frost / MathsWhiteboard
+/// format). Each card shows the question with real equations (LaTeX `$…$` rendered as OMML), a
+/// numbered coloured header, and an answer box initially hidden via `shape.visible`. The answers
+/// also go in the speaker notes. Cards save as ordinary shapes, so the deck opens in PowerPoint.
 fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     use crate::questions::{self, Filter};
-    let bank = match str_param(p, "bank") {
-        Some(path) => {
+    let bank = match (str_param(p, "bankJson"), str_param(p, "bank")) {
+        (Some(json), _) => questions::parse(json),
+        (None, Some(path)) => {
             let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
             let text = String::from_utf8(bytes).map_err(|_| bad("slide.getReady", "the question bank is not text"))?;
             questions::parse(&text)
         }
-        None => questions::starter(),
+        (None, None) => questions::starter(),
     }
     .map_err(|e| bad("slide.getReady", e))?;
     let level = |v: Option<&Value>, what: &str| -> Result<Option<u8>> {
@@ -652,8 +655,8 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         }
     };
     let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
+    // Always pick exactly 4 questions for the standard 2×2 retrieval grid.
     let picked: Vec<_> = if let Some(slots) = p.get("slots") {
-        // One topic and level per question; a question never repeats another on the slide.
         let slots = slots.as_array().ok_or_else(|| bad("slide.getReady", "`slots` must be a list"))?;
         if !(1..=8).contains(&slots.len()) {
             return Err(bad("slide.getReady", "`slots` must have 1 to 8 entries"));
@@ -667,8 +670,6 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         match bank.assign(&filters, seed) {
             Some(qs) => qs.into_iter().cloned().collect(),
             None => {
-                // Say which question is the problem: one with nothing to pick from, else the first
-                // whose choice cannot be met alongside the others.
                 let at = |i: usize| {
                     let f = &filters[i];
                     let what = f.topic.as_deref().unwrap_or("any topic");
@@ -693,7 +694,7 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         }
         picked
     };
-    let count = picked.len();
+
     // Where it goes: after the current slide, or in place of the current Get Ready slide.
     let (cur, replace) = {
         let st = s.doc()?;
@@ -708,27 +709,301 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         st.selection.slide
     };
     s.execute("slide.rename", &json!({"name": GET_READY_NAME, "index": new_index}))?;
-    let (cols, rows) = (2usize, count.div_ceil(2));
-    let (left, top, gap) = (48.0, 150.0, 24.0);
-    let w = (960.0 - 2.0 * left - gap) / cols as f64;
-    let h = ((540.0 - top - 36.0 - gap * (rows as f64 - 1.0)) / rows as f64).min(170.0);
+
+    // A 2×2 grid of cards below the title: a numbered coloured tab, the question (with real
+    // equations), its figure when it has one, and an answer that appears on click.
+    let cols = 2usize;
+    let rows = picked.len().div_ceil(cols).max(1);
+    let (margin, top, bottom, gap) = (20.0_f64, 104.0_f64, 16.0_f64, 14.0_f64);
+    let card_w = (960.0 - 2.0 * margin - gap * (cols as f64 - 1.0)) / cols as f64;
+    let card_h = (540.0 - top - bottom - gap * (rows as f64 - 1.0)) / rows as f64;
+    let accents = ["#E8735F", "#4FA37A", "#4A7BD0", "#8A62C9"];
+    let tints = ["#FFF3F0", "#F0F9F4", "#EFF4FD", "#F6F1FC"];
+    let (tab, pad) = (34.0_f64, 10.0_f64);
+
     let mut ids = vec![];
     let mut answers = String::new();
     for (i, q) in picked.iter().enumerate() {
-        let (col, row) = (i % cols, i / cols);
-        let rect = [left + col as f64 * (w + gap), top + row as f64 * (h + gap), w, h];
-        let r = s.execute("insert.textBox", &json!({"rect": rect, "text": format!("{}.  {}", i + 1, q.text)}))?;
-        let id = r.get("id").and_then(Value::as_u64).ok_or_else(|| bad("slide.getReady", "insert failed"))?;
-        s.execute("format.size", &json!({"ids": [id], "size": 28}))?;
+        let (col, row) = ((i % cols) as f64, (i / cols) as f64);
+        let (cx, cy) = (margin + col * (card_w + gap), top + row * (card_h + gap));
+        let (accent, tint) = (accents[i % accents.len()], tints[i % tints.len()]);
+
+        let card = draw_shape(s, "roundRect", [cx, cy, card_w, card_h], Some(tint), Some((accent, 2.0)))?;
+        s.execute("shape.rename", &json!({"id": card, "name": format!("Question {} card", i + 1)}))?;
+        let badge = draw_shape(s, "ellipse", [cx + pad, cy + pad, tab, tab], Some(accent), None)?;
+        s.execute("shape.rename", &json!({"id": badge, "name": format!("Question {} number", i + 1)}))?;
+        set_shape_text(s, badge, &(i + 1).to_string(), 18.0, "#FFFFFF", true)?;
+
+        // The figure takes the right-hand side of the card when the question has one.
+        let figure = q.diagram.as_ref().filter(|d| questions::is_drawable(d));
+        let text_w = if figure.is_some() { card_w * 0.52 } else { card_w - 2.0 * pad - tab - 6.0 };
+        let text_x = cx + pad + tab + 6.0;
+        // Longer questions, and those beside a figure, take a smaller size so they stay in the card.
+        let len = plain_answer(&q.text).chars().count();
+        let q_size = match (len, figure.is_some()) {
+            (0..=60, false) => 22.0,
+            (0..=100, false) | (0..=45, true) => 18.0,
+            (_, false) => 16.0,
+            (_, true) => 14.0,
+        };
+        let q_id = rich_text_box(s, &q.text, [text_x, cy + pad, text_w - tab, card_h * 0.58], q_size, "#1F2937")?;
+        s.execute("shape.rename", &json!({"id": q_id, "name": format!("Question {} text", i + 1)}))?;
+        if let Some(d) = figure {
+            let area = [cx + card_w * 0.55, cy + pad, card_w * 0.43, card_h * 0.62];
+            draw_figure(s, d, area)?;
+        }
+
+        // The answer sits along the bottom of the card and appears on click.
+        let a_h = (card_h * 0.24).clamp(30.0, 56.0);
+        let a_rect = [cx + pad, cy + card_h - a_h - pad, card_w - 2.0 * pad, a_h];
+        let a_id = draw_shape(s, "roundRect", a_rect, Some("#E3F4E8"), Some(("#2E7D4F", 1.5)))?;
+        s.execute("shape.rename", &json!({"id": a_id, "name": format!("Question {} answer", i + 1)}))?;
+        let a_size = if plain_answer(&q.answer).chars().count() > 26 { 16.0 } else { 22.0 };
+        set_rich_shape_text(s, a_id, &q.answer, a_size, "#14532D")?;
+        s.execute("animation.set", &json!({"ids": [a_id], "effect": "appear"}))?;
+
         ids.push(q.id.clone());
-        answers.push_str(&format!("{}. {}\n", i + 1, q.answer));
+        answers.push_str(&format!("{}. {}\n", i + 1, plain_answer(&q.answer)));
     }
+
     s.execute("slide.notes", &json!({"text": format!("Answers:\n{answers}")}))?;
     if replace {
         s.execute("slide.delete", &json!({"index": new_index + 1}))?;
         s.execute("slide.go", &json!({"index": new_index}))?;
     }
     Ok(json!({"index": new_index, "questions": ids}))
+}
+
+/// An answer as plain text for the speaker notes (`$…$` removed).
+fn plain_answer(text: &str) -> String {
+    crate::latex::plain(text)
+}
+
+/// A preset shape with an optional fill and outline (`#RRGGBB`, width in pt).
+fn draw_shape(s: &mut Session, preset: &str, rect: [f64; 4], fill: Option<&str>, line: Option<(&str, f64)>) -> Result<u64> {
+    use super::insert::add_shape;
+    use deckcraft_geom::Xfrm;
+    use deckcraft_model::{Geom, Shape};
+    let shape = Shape {
+        xfrm: Some(Xfrm { x: rect[0], y: rect[1], w: rect[2].max(1.0), h: rect[3].max(1.0), ..Default::default() }),
+        geom: Geom::preset(preset),
+        ..Default::default()
+    };
+    let id = add_shape(s, "slide.getReady", shape, false)?.0;
+    let id = u64::from(id);
+    match fill {
+        Some(c) => s.execute("shape.fill", &json!({"ids": [id], "color": c}))?,
+        None => s.execute("shape.fill", &json!({"ids": [id], "none": true}))?,
+    };
+    match line {
+        Some((c, w)) => s.execute("shape.line", &json!({"ids": [id], "color": c, "width": w}))?,
+        None => s.execute("shape.line", &json!({"ids": [id], "none": true}))?,
+    };
+    Ok(id)
+}
+
+/// A straight line from `a` to `b`.
+fn draw_line(s: &mut Session, a: [f64; 2], b: [f64; 2], color: &str, width: f64) -> Result<u64> {
+    use super::insert::add_shape;
+    use deckcraft_geom::Xfrm;
+    use deckcraft_model::{Geom, Shape};
+    let shape = Shape {
+        xfrm: Some(Xfrm {
+            x: a[0].min(b[0]),
+            y: a[1].min(b[1]),
+            w: (a[0] - b[0]).abs(),
+            h: (a[1] - b[1]).abs(),
+            flip_h: b[0] < a[0],
+            flip_v: b[1] < a[1],
+            ..Default::default()
+        }),
+        geom: Geom::preset("line"),
+        ..Default::default()
+    };
+    let id = u64::from(add_shape(s, "slide.getReady", shape, false)?.0);
+    s.execute("shape.line", &json!({"ids": [id], "color": color, "width": width}))?;
+    Ok(id)
+}
+
+/// Text on a shape, one run, no maths.
+fn set_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str, bold: bool) -> Result<()> {
+    use deckcraft_model::text::{Align, Anchor, Run, RunProps};
+    let props = RunProps { size: Some(size), bold: Some(bold), fill: Some(parse_fill(color)), ..Default::default() };
+    let para = deckcraft_model::text::Paragraph { runs: vec![Run::with(text, props)], ..Default::default() };
+    edit_shape_paragraphs(s, id, vec![para], Align::Center, Anchor::Middle)
+}
+
+/// Text on a shape with `$…$` drawn as equations.
+fn set_rich_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str) -> Result<()> {
+    use deckcraft_model::text::{Align, Anchor};
+    edit_shape_paragraphs(s, id, rich_paragraphs(text, size, color), Align::Center, Anchor::Middle)
+}
+
+fn parse_fill(hex: &str) -> deckcraft_model::style::Fill {
+    use deckcraft_model::style::{ColorRef, Fill};
+    let rgba = deckcraft_color::Rgba::from_hex(hex).unwrap_or_default();
+    Fill::solid(ColorRef::rgb(rgba))
+}
+
+fn edit_shape_paragraphs(
+    s: &mut Session,
+    id: u64,
+    paras: Vec<deckcraft_model::text::Paragraph>,
+    align: deckcraft_model::text::Align,
+    anchor: deckcraft_model::text::Anchor,
+) -> Result<()> {
+    use deckcraft_model::text::TextBody;
+    s.edit(|doc, sel| {
+        let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
+        let sh = list.iter_mut().find(|sh| u64::from(sh.id.0) == id).ok_or_else(|| bad("slide.getReady", "shape vanished"))?;
+        let mut paras = paras;
+        for para in &mut paras {
+            para.props.align.get_or_insert(align);
+        }
+        let mut body = TextBody { paragraphs: paras, ..Default::default() };
+        body.body.wrap = Some(true);
+        body.body.anchor = Some(anchor);
+        sh.text = Some(body);
+        Ok(())
+    })
+}
+
+/// Paragraphs for a line with `$…$` maths. The editor stacks a fraction or root only when the
+/// equation has its paragraph to itself, so those go on their own centred line (as on a printed
+/// worksheet); simple maths such as `x^2` stays inside the sentence.
+fn rich_paragraphs(text: &str, size: f64, color: &str) -> Vec<deckcraft_model::text::Paragraph> {
+    use crate::latex::{Segment, segments};
+    use deckcraft_model::text::{Align, Paragraph, Run, RunKind, RunProps};
+    let fill = parse_fill(color);
+    let mut paras: Vec<Paragraph> = vec![];
+    let mut line: Vec<Run> = vec![];
+    let flush = |line: &mut Vec<Run>, paras: &mut Vec<Paragraph>| {
+        if line.iter().any(|r| !r.text.trim().is_empty()) {
+            paras.push(Paragraph { runs: std::mem::take(line), ..Default::default() });
+        }
+        line.clear();
+    };
+    for seg in segments(text) {
+        match seg {
+            Segment::Text(t) => line.push(Run::with(t, RunProps { size: Some(size), fill: Some(fill.clone()), ..Default::default() })),
+            Segment::Math(m) => {
+                let parsed = crate::equation::parse(&m);
+                let stacked = {
+                    let omml = crate::equation::to_omml(&parsed);
+                    omml.contains("<m:f>") || omml.contains("<m:rad>") || omml.contains("<m:nary>")
+                };
+                let size = if stacked { size * 1.2 } else { size };
+                let run = Run {
+                    text: crate::equation::to_plain(&parsed),
+                    props: RunProps { font: Some("Cambria Math".into()), size: Some(size), fill: Some(fill.clone()), ..Default::default() },
+                    kind: RunKind::Math { omml: crate::equation::to_omml_sized(&parsed, Some(size)) },
+                };
+                if stacked {
+                    flush(&mut line, &mut paras);
+                    let mut para = Paragraph { runs: vec![run], ..Default::default() };
+                    para.props.align = Some(Align::Center);
+                    paras.push(para);
+                } else {
+                    line.push(run);
+                }
+            }
+        }
+    }
+    flush(&mut line, &mut paras);
+    if paras.is_empty() {
+        paras.push(Paragraph::default());
+    }
+    paras
+}
+
+/// A text box holding one wrapped paragraph of text and equations.
+fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f64, color: &str) -> Result<u64> {
+    use super::insert::{add_shape, new_text_box};
+    use deckcraft_geom::Xfrm;
+    let xfrm = Xfrm { x: rect[0], y: rect[1], w: rect[2].max(1.0), h: rect[3].max(1.0), ..Default::default() };
+    let mut shape = new_text_box(xfrm, "");
+    if let Some(t) = shape.text.as_mut() {
+        t.paragraphs = rich_paragraphs(text, size, color);
+    }
+    Ok(u64::from(add_shape(s, "slide.getReady", shape, false)?.0))
+}
+
+/// A small text label at the centre `(x, y)`.
+fn label(s: &mut Session, text: &str, x: f64, y: f64) -> Result<()> {
+    let (w, h) = (60.0, 24.0);
+    let id = rich_text_box(s, text, [x - w / 2.0, y - h / 2.0, w, h], 16.0, "#111827")?;
+    s.edit(|doc, sel| {
+        let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
+        for para in list.iter_mut().filter(|sh| u64::from(sh.id.0) == id).filter_map(|sh| sh.text.as_mut()).flat_map(|t| t.paragraphs.iter_mut()) {
+            para.props.align = Some(deckcraft_model::text::Align::Center);
+        }
+        Ok(())
+    })
+}
+
+/// Draws a question's figure inside `area` ([x, y, w, h]). The figure is made of ordinary shapes
+/// and text, so it saves to PowerPoint like anything else.
+fn draw_figure(s: &mut Session, d: &Value, area: [f64; 4]) -> Result<()> {
+    let [ax, ay, aw, ah] = area;
+    let kind = d.get("kind").and_then(Value::as_str).unwrap_or("");
+    let text = |key: &str| d.get(key).and_then(Value::as_str).map(str::to_string);
+    let ink = "#111827";
+    match kind {
+        // A triangle with its angles marked; `null` is the unknown, written as the letter.
+        "triangle-angles" => {
+            let (a, b, c) = ([ax + aw * 0.08, ay + ah * 0.88], [ax + aw * 0.92, ay + ah * 0.88], [ax + aw * 0.62, ay + ah * 0.18]);
+            for (p, q) in [(a, b), (b, c), (c, a)] {
+                draw_line(s, p, q, ink, 2.5)?;
+            }
+            let unknown = text("unknown").unwrap_or_else(|| "x".into());
+            let angles: Vec<String> = d
+                .get("angles")
+                .and_then(Value::as_array)
+                .map(|v| v.iter().map(|x| x.as_str().map(str::to_string).unwrap_or_else(|| format!("${unknown}$"))).collect())
+                .unwrap_or_default();
+            let spots = [[a[0] + 34.0, a[1] - 12.0], [b[0] - 34.0, b[1] - 12.0], [c[0], c[1] + 34.0]];
+            for (t, at) in angles.iter().zip(spots) {
+                label(s, t, at[0], at[1])?;
+            }
+        }
+        // Equal sides ticked; the apex angle given and a base angle to find.
+        "isosceles-triangle" => {
+            let (a, b, c) = ([ax + aw * 0.5, ay + ah * 0.2], [ax + aw * 0.1, ay + ah * 0.86], [ax + aw * 0.9, ay + ah * 0.86]);
+            for (p, q) in [(a, b), (b, c), (c, a)] {
+                draw_line(s, p, q, ink, 2.5)?;
+            }
+            for (p, q) in [(a, b), (a, c)] {
+                let (mx, my) = ((p[0] + q[0]) / 2.0, (p[1] + q[1]) / 2.0);
+                let (dx, dy) = ((q[1] - p[1]).signum() * 5.0, 5.0);
+                draw_line(s, [mx - dx, my - dy], [mx + dx, my + dy], ink, 2.0)?;
+            }
+            label(s, "$A$", a[0], a[1] - 12.0)?;
+            label(s, "$B$", b[0] - 10.0, b[1] + 12.0)?;
+            label(s, "$C$", c[0] + 10.0, c[1] + 12.0)?;
+            label(s, &text("topAngle").unwrap_or_default(), a[0], a[1] + 38.0)?;
+            label(s, "?", b[0] + 40.0, b[1] - 12.0)?;
+        }
+        // Two parallel lines cut by a transversal, with arrow marks on the parallels.
+        "parallel-lines" => {
+            let (y1, y2) = (ay + ah * 0.3, ay + ah * 0.7);
+            for y in [y1, y2] {
+                draw_line(s, [ax + aw * 0.04, y], [ax + aw * 0.96, y], ink, 2.5)?;
+                draw_line(s, [ax + aw * 0.82, y - 5.0], [ax + aw * 0.82 + 8.0, y], ink, 2.0)?;
+                draw_line(s, [ax + aw * 0.82, y + 5.0], [ax + aw * 0.82 + 8.0, y], ink, 2.0)?;
+            }
+            // The transversal runs from (0.28, 0.04) to (0.72, 0.96) of the area.
+            let on_transversal = |y: f64| {
+                let t = ((y - ay) / ah - 0.04) / 0.92;
+                ax + aw * (0.28 + 0.44 * t)
+            };
+            draw_line(s, [ax + aw * 0.28, ay + ah * 0.04], [ax + aw * 0.72, ay + ah * 0.96], ink, 2.5)?;
+            // Co-interior angles: both between the lines, on the same (right-hand) side.
+            label(s, &text("knownAngle").unwrap_or_default(), on_transversal(y1) + 38.0, y1 + 22.0)?;
+            label(s, &format!("${}$", text("unknown").unwrap_or_else(|| "x".into())), on_transversal(y2) + 30.0, y2 - 22.0)?;
+        }
+        _ => {}
+    }
+    Ok(())
 }
 
 fn from_outline(s: &mut Session, p: &Value) -> Result<Value> {
@@ -777,7 +1052,7 @@ mod tests {
     }
 
     #[test]
-    fn get_ready_makes_a_titled_slide_of_four_ordinary_text_boxes_with_answers_in_the_notes() {
+    fn get_ready_makes_a_titled_slide_of_four_question_cards_with_answers_in_the_notes() {
         let mut s = Session::with_new();
         let r = s.execute("slide.getReady", &json!({"seed": 5})).expect("get ready");
         assert_eq!(r["questions"].as_array().expect("ids").len(), 4);
@@ -785,7 +1060,13 @@ mod tests {
         let texts = ready_texts(&s, i);
         assert!(texts.iter().any(|t| t == "Get Ready"), "{texts:?}");
         for n in 1..=4 {
-            assert!(texts.iter().any(|t| t.starts_with(&format!("{n}.  "))), "question {n}: {texts:?}");
+            assert!(texts.iter().any(|t| *t == n.to_string()), "number badge {n}: {texts:?}");
+        }
+        let names: Vec<_> = s.doc().expect("doc").doc.slides[i].shapes.iter().map(|sh| sh.name.clone()).collect();
+        for n in 1..=4 {
+            for part in ["card", "number", "text", "answer"] {
+                assert!(names.contains(&format!("Question {n} {part}")), "{n} {part}: {names:?}");
+            }
         }
         let st = s.doc().expect("doc");
         let slide = st.doc.slides.get(i).expect("slide");
@@ -830,7 +1111,7 @@ mod tests {
     #[test]
     fn two_slots_with_the_same_narrow_filter_never_repeat_and_run_out_with_a_clear_error() {
         let mut s = Session::with_new();
-        let same = json!({"topic": "Ratio", "difficulty": 1});
+        let same = json!({"topic": "Ratio", "difficulty": 3});
         let enough = s.execute("slide.getReady", &json!({"slots": [same, same], "seed": 1}));
         let err = enough.err().map(|e| e.to_string()).unwrap_or_default();
         assert!(err.contains("question 1") || err.contains("question 2"), "{err}");
@@ -849,11 +1130,11 @@ mod tests {
     fn a_question_left_on_any_cannot_starve_one_that_needs_a_specific_topic_and_level() {
         // Regression: with slots [any, Algebra level 3, …] the loose first slot could draw the
         // bank's only Algebra stretch question, and the command then failed for the second.
-        let slots = json!([{}, {"topic": "Algebra", "difficulty": 3}, {}, {"topic": "Number", "difficulty": 1}]);
+        let slots = json!([{}, {"topic": "Ratio", "difficulty": 3}, {}, {"topic": "Number", "difficulty": 1}]);
         for seed in 0..300u64 {
             let mut s = Session::with_new();
             let r = s.execute("slide.getReady", &json!({"slots": slots, "seed": seed})).unwrap_or_else(|e| panic!("seed {seed}: {e}"));
-            assert_eq!(r["questions"][1], "alg-005", "seed {seed}");
+            assert_eq!(r["questions"][1], "rat-006", "seed {seed}");
         }
     }
 
@@ -869,11 +1150,14 @@ mod tests {
             let texts = ready_texts(&s, i);
             for id in r["questions"].as_array().expect("ids") {
                 let q = bank.questions.iter().find(|q| Some(q.id.as_str()) == id.as_str()).expect("question");
-                assert!(texts.iter().any(|t| t.ends_with(&q.text)), "seed {seed}: {:?} is not on the slide: {texts:?}", q.text);
+                // A fraction or root sits on its own line, so compare without the line breaks.
+                let squash = |t: &str| t.split_whitespace().collect::<String>();
+                let want = squash(&super::plain_answer(&q.text));
+                assert!(texts.iter().any(|t| squash(t) == want), "seed {seed}: {want:?} is not on the slide: {texts:?}");
                 seen.insert(q.id.clone());
             }
         }
-        let usable = bank.questions.iter().filter(|q| !q.needs_diagram).count();
+        let usable = bank.questions.iter().filter(|q| q.usable()).count();
         assert_eq!(seen.len(), usable, "every usable question was drawn at least once");
     }
 
@@ -895,10 +1179,28 @@ mod tests {
     }
 
     #[test]
-    fn a_get_ready_slide_survives_a_pptx_round_trip_as_plain_text() {
+    fn a_get_ready_slide_survives_a_pptx_round_trip_with_its_equations() {
+        use deckcraft_model::text::RunKind;
+        let maths = |s: &Session, i: usize| -> Vec<String> {
+            let st = s.doc().expect("doc");
+            st.doc.slides[i]
+                .shapes
+                .iter()
+                .filter_map(|sh| sh.text.as_ref())
+                .flat_map(|t| t.paragraphs.iter().flat_map(|p| p.runs.iter()))
+                .filter_map(|r| match &r.kind {
+                    RunKind::Math { omml } => Some(omml.clone()),
+                    _ => None,
+                })
+                .collect()
+        };
         let mut s = Session::with_new();
-        s.execute("slide.getReady", &json!({"seed": 3})).expect("get ready");
-        let before = ready_texts(&s, s.doc().expect("doc").selection.slide);
+        // Question 1 of this seed has a fraction, so there is real maths to keep.
+        s.execute("slide.getReady", &json!({"topic": "Number", "difficulty": 1, "count": 4, "seed": 3})).expect("get ready");
+        let at = s.doc().expect("doc").selection.slide;
+        let before_texts = ready_texts(&s, at);
+        let before_maths = maths(&s, at);
+        assert!(!before_maths.is_empty());
         let dir = std::env::temp_dir().join(format!("deckcraft-getready-{}", std::process::id()));
         std::fs::create_dir_all(&dir).expect("dir");
         let path = dir.join("starter.pptx");
@@ -907,10 +1209,12 @@ mod tests {
         o.execute("file.open", &json!({"path": path.to_str().expect("utf8")})).expect("open");
         let n = o.doc().expect("doc").doc.slides.len();
         let idx = (0..n).find(|i| ready_texts(&o, *i).contains(&"Get Ready".to_string())).expect("the Get Ready slide reopened");
-        let after = ready_texts(&o, idx);
+        let after_texts = ready_texts(&o, idx);
+        let after_maths = maths(&o, idx);
         let _ = std::fs::remove_dir_all(&dir);
-        assert_eq!(after.len(), before.len());
-        assert!(before.iter().all(|t| after.contains(t)), "before {before:?} after {after:?}");
+        assert_eq!(after_texts.len(), before_texts.len());
+        assert_eq!(after_maths.len(), before_maths.len(), "every equation is still an equation");
+        assert!(after_maths.iter().any(|m| m.contains("<m:f>")), "fractions are still stacked: {after_maths:?}");
     }
 
     #[test]

@@ -77,8 +77,12 @@ fn the_dialog_has_a_topic_and_level_for_every_question_and_uses_them() {
     let bank = deckcraft_engine::questions::starter().unwrap();
     let texts = slide_texts(&h);
     let find = |n: usize| {
-        let t = texts.iter().find(|t| t.starts_with(&format!("{n}.  "))).unwrap();
-        bank.questions.iter().find(|q| t.ends_with(&q.text)).unwrap_or_else(|| panic!("no bank question matches the slide text {t:?}")).clone()
+        // The question text follows its number badge on the slide.
+        let squash = |t: &str| t.split_whitespace().collect::<String>();
+        let is = |q: &deckcraft_engine::questions::Question, t: &str| squash(&deckcraft_engine::latex::plain(&q.text)) == squash(t);
+        let at = texts.iter().position(|t| *t == n.to_string()).unwrap();
+        let t = texts.iter().skip(at + 1).find(|t| bank.questions.iter().any(|q| is(q, t))).unwrap();
+        bank.questions.iter().find(|q| is(q, t)).unwrap().clone()
     };
     assert_eq!((find(2).topic.as_str(), find(2).difficulty), ("Algebra", 3));
     assert_eq!((find(4).topic.as_str(), find(4).difficulty), ("Number", 1));
@@ -104,19 +108,57 @@ fn choosing_a_level_for_one_question_changes_only_that_question_and_is_remembere
 }
 
 #[test]
-fn set_all_and_the_question_count_work() {
+fn set_all_works_and_a_slide_always_has_four_questions() {
     let mut h = harness();
     h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
     h.run_steps(3);
+    assert!(h.query_by_label("Question 5").is_none(), "four questions, no more");
     h.query_all_by_label("Core").next().unwrap().click();
     h.run_steps(3);
-    h.get_by_label("6").click();
-    h.run_steps(3);
-    assert!(h.query_by_label("Question 6").is_some());
     h.get_by_label("Insert").click();
     h.run_steps(3);
     let slots = h.state().ui.get_ready_slots.clone();
-    assert_eq!(slots.len(), 6);
+    assert_eq!(slots.len(), 4);
     assert!(slots.iter().all(|s| s.1 == 2), "{slots:?}");
-    assert_eq!(slide_texts(&h).iter().filter(|t| t.contains(".  ")).count(), 6);
+    assert_eq!((1..=4).filter(|n| slide_texts(&h).contains(&n.to_string())).count(), 4);
+}
+
+#[test]
+fn removing_and_adding_questions_changes_what_the_starter_can_pick() {
+    use deckcraft_engine::questions::Question;
+    let mut h = harness();
+    // Take every built-in Ratio question out and add one of our own: Ratio now has just that one.
+    let starter = deckcraft_engine::questions::starter().unwrap();
+    h.state_mut().ui.removed_questions = starter.questions.iter().filter(|q| q.topic == "Ratio").map(|q| q.id.clone()).collect();
+    h.state_mut().ui.my_questions = vec![Question {
+        id: "my-001".into(),
+        topic: "Ratio".into(),
+        subtopic: String::new(),
+        difficulty: 2,
+        text: "Share 20 in the ratio $2 : 3$".into(),
+        answer: "8 and 12".into(),
+        needs_diagram: false,
+        diagram: None,
+    }];
+    h.state_mut().ui.get_ready_slots = vec![("Ratio".into(), 0), (String::new(), 0), (String::new(), 0), (String::new(), 0)];
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    assert!(slide_texts(&h).iter().any(|t| t == "Share 20 in the ratio 2:3"), "{:?}", slide_texts(&h));
+}
+
+#[test]
+fn the_manage_dialog_adds_a_question_and_removes_a_built_in_one() {
+    let mut h = harness();
+    h.state_mut().run("app.dialog", json!({"id": "questionBank"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("questions in your bank").is_some());
+    let first = deckcraft_engine::questions::starter().unwrap().questions[0].id.clone();
+    h.query_all_by_label("Remove").next().unwrap().click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.removed_questions, vec![first]);
+    h.get_by_label("Restore them").click();
+    h.run_steps(3);
+    assert!(h.state().ui.removed_questions.is_empty());
 }
