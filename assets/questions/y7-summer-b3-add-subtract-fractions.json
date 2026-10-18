@@ -1,0 +1,2068 @@
+{
+ "version": 1,
+ "note": "Y7 Summer Block 3 Add and subtract fractions: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7s3-s01-l1",
+   "topic": "Number",
+   "subtopic": "Simplify fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S1 Simplify fractions",
+   "keywords": [
+    "simplify",
+    "fractions",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "m * g / (n * g) == m / n"
+   ],
+   "text": "Simplify $\\frac{[[m * g]]}{[[n * g]]}$.",
+   "answer": "$[[m / n|frac]]$"
+  },
+  {
+   "id": "y7s3-s01-l2",
+   "topic": "Number",
+   "subtopic": "Simplify fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S1 Simplify fractions",
+   "keywords": [
+    "simplify",
+    "fractions",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       13
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "m * g / (n * g) == m / n"
+   ],
+   "text": "Simplify $\\frac{[[m * g]]}{[[n * g]]}$ fully.",
+   "answer": "$[[m / n|frac]]$"
+  },
+  {
+   "id": "y7s3-s01-l3",
+   "topic": "Number",
+   "subtopic": "Simplify fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S1 Simplify fractions",
+   "keywords": [
+    "simplify",
+    "fractions",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       4,
+       "b - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) > 1",
+    "gcd(a, b) < min(a, b)"
+   ],
+   "check": [
+    "a / b < 1"
+   ],
+   "text": "Write $\\frac{[[a]]}{[[b]]}$ in its simplest form.",
+   "answer": "$[[a / b|frac]]$"
+  },
+  {
+   "id": "y7s3-s01-l4",
+   "topic": "Number",
+   "subtopic": "Simplify fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S1 Simplify fractions",
+   "keywords": [
+    "simplify",
+    "fractions",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "m * g / (n * g) == m / n"
+   ],
+   "text": "Ali simplifies $\\frac{[[m * g]]}{[[n * g]]}$ and gets $\\frac{[[m * g / 2]]}{[[n * g / 2]]}$. Is his answer fully simplified? Explain, and give the simplest form. (2 marks)",
+   "answer": "No: it can be simplified further to $[[m / n|frac]]$"
+  },
+  {
+   "id": "y7s3-s02-l1",
+   "topic": "Number",
+   "subtopic": "Convert between mixed numbers and improper fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S2 Convert between mixed numbers and improper fractions",
+   "keywords": [
+    "convert",
+    "between",
+    "mixed",
+    "numbers",
+    "and",
+    "improper",
+    "fractions",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       5,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > d",
+    "n % d != 0"
+   ],
+   "check": [
+    "n > d"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a mixed number.",
+   "answer": "$[[n / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s02-l2",
+   "topic": "Number",
+   "subtopic": "Convert between mixed numbers and improper fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S2 Convert between mixed numbers and improper fractions",
+   "keywords": [
+    "convert",
+    "between",
+    "mixed",
+    "numbers",
+    "and",
+    "improper",
+    "fractions",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w * d + a > d"
+   ],
+   "text": "Write $[[w]]\\frac{[[a]]}{[[d]]}$ as an improper fraction.",
+   "answer": "$\\frac{[[w * d + a]]}{[[d]]}$"
+  },
+  {
+   "id": "y7s3-s02-l3",
+   "topic": "Number",
+   "subtopic": "Convert between mixed numbers and improper fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S2 Convert between mixed numbers and improper fractions",
+   "keywords": [
+    "convert",
+    "between",
+    "mixed",
+    "numbers",
+    "and",
+    "improper",
+    "fractions",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10,
+       12
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       13,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > d",
+    "n % d != 0",
+    "gcd(n % d, d) > 1"
+   ],
+   "check": [
+    "n > d"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a mixed number in its simplest form.",
+   "answer": "$[[n / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s02-l4",
+   "topic": "Number",
+   "subtopic": "Convert between mixed numbers and improper fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S2 Convert between mixed numbers and improper fractions",
+   "keywords": [
+    "convert",
+    "between",
+    "mixed",
+    "numbers",
+    "and",
+    "improper",
+    "fractions",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       7,
+       30
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > d",
+    "n % d != 0"
+   ],
+   "check": [
+    "w * d + a > d"
+   ],
+   "text": "A recipe uses $\\frac{[[n]]}{[[d]]}$ of a cup of flour for each cake. Write this as a mixed number. Then write $[[w]]\\frac{[[a]]}{[[d]]}$ as an improper fraction. (2 marks)",
+   "answer": "$[[n / d|mixed]]$; $\\frac{[[w * d + a]]}{[[d]]}$"
+  },
+  {
+   "id": "y7s3-s03-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with the same denominator",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S3 Add and subtract fractions with the same denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "the",
+    "same",
+    "denominator",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < d"
+   ],
+   "check": [
+    "(a + b) / d - b / d == a / d"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ + $\\frac{[[b]]}{[[d]]}$",
+   "answer": "$[[(a + b) / d|frac]]$"
+  },
+  {
+   "id": "y7s3-s03-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with the same denominator",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S3 Add and subtract fractions with the same denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "the",
+    "same",
+    "denominator",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       3,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "a - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ − $\\frac{[[b]]}{[[d]]}$",
+   "answer": "$[[(a - b) / d|frac]]$"
+  },
+  {
+   "id": "y7s3-s03-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with the same denominator",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S3 Add and subtract fractions with the same denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "the",
+    "same",
+    "denominator",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b > d",
+    "(a + b) % d != 0"
+   ],
+   "check": [
+    "(a + b) / d > 1"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ + $\\frac{[[b]]}{[[d]]}$. Give your answer as a mixed number.",
+   "answer": "$[[(a + b) / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s03-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with the same denominator",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S3 Add and subtract fractions with the same denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "the",
+    "same",
+    "denominator",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       8,
+       10,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < d"
+   ],
+   "check": [
+    "a + b + (d - a - b) == d"
+   ],
+   "text": "A cake is cut into [[d]] equal slices. Amy eats [[a]] slices and Ben eats [[b]] slices. What fraction of the cake is left? Write it in its simplest form. (2 marks)",
+   "answer": "$[[(d - a - b) / d|frac]]$"
+  },
+  {
+   "id": "y7s3-s04-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract with fractions and integers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S4 Add and subtract with fractions and integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "with",
+    "fractions",
+    "integers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < d"
+   ],
+   "text": "Work out [[w]] + $\\frac{[[a]]}{[[d]]}$",
+   "answer": "$[[w]]\\frac{[[a]]}{[[d]]}$"
+  },
+  {
+   "id": "y7s3-s04-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract with fractions and integers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S4 Add and subtract with fractions and integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "with",
+    "fractions",
+    "integers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < d"
+   ],
+   "text": "Work out [[w]] − $\\frac{[[a]]}{[[d]]}$",
+   "answer": "$[[w - a / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s04-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract with fractions and integers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S4 Add and subtract with fractions and integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "with",
+    "fractions",
+    "integers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 2"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "d - a - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < d",
+    "(a + b) % d != 0"
+   ],
+   "check": [
+    "w - (a + b) / d < w"
+   ],
+   "text": "Work out [[w]] − $\\frac{[[a]]}{[[d]]}$ − $\\frac{[[b]]}{[[d]]}$",
+   "answer": "$[[w - (a + b) / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s04-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract with fractions and integers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S4 Add and subtract with fractions and integers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "with",
+    "fractions",
+    "integers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < d"
+   ],
+   "check": [
+    "w - (a + b) / d > 0"
+   ],
+   "text": "A plank is [[w]] m long. A carpenter cuts off $\\frac{[[a]]}{[[d]]}$ m, then another $\\frac{[[b]]}{[[d]]}$ m. How much is left? (2 marks)",
+   "answer": "$[[w - (a + b) / d|mixed]]$ m"
+  },
+  {
+   "id": "y7s3-s05-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with any denominator",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S5 Add and subtract fractions with any denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "any",
+    "denominator",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "d * m - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a / d + b / (d * m) < 1"
+   ],
+   "check": [
+    "(a * m + b) / (d * m) == a / d + b / (d * m)"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ + $\\frac{[[b]]}{[[d * m]]}$",
+   "answer": "$[[a / d + b / (d * m)|frac]]$"
+  },
+  {
+   "id": "y7s3-s05-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with any denominator",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S5 Add and subtract fractions with any denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "any",
+    "denominator",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "e - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d != e",
+    "gcd(d, e) == 1",
+    "a / d + b / e < 1"
+   ],
+   "check": [
+    "(a * e + b * d) / (d * e) == a / d + b / e"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ + $\\frac{[[b]]}{[[e]]}$",
+   "answer": "$[[a / d + b / e|frac]]$"
+  },
+  {
+   "id": "y7s3-s05-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with any denominator",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S5 Add and subtract fractions with any denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "any",
+    "denominator",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "e - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d != e",
+    "a / d > b / e"
+   ],
+   "check": [
+    "a / d - b / e > 0"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[d]]}$ − $\\frac{[[b]]}{[[e]]}$",
+   "answer": "$[[a / d - b / e|frac]]$"
+  },
+  {
+   "id": "y7s3-s05-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions with any denominator",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S5 Add and subtract fractions with any denominator",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "with",
+    "any",
+    "denominator",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "e - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(d, e) == 1",
+    "a / d + b / e < 1"
+   ],
+   "check": [
+    "a / d + b / e + (1 - a / d - b / e) == 1"
+   ],
+   "text": "Amy spends $\\frac{[[a]]}{[[d]]}$ of her money on a book and $\\frac{[[b]]}{[[e]]}$ on a snack. What fraction of her money does she have left? (3 marks)",
+   "answer": "$[[1 - a / d - b / e|frac]]$"
+  },
+  {
+   "id": "y7s3-s06-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract improper fractions and mixed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S6 Add and subtract improper fractions and mixed numbers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "improper",
+    "fractions",
+    "mixed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "w2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w1 + w2 > 1"
+   ],
+   "text": "Work out $[[w1]]\\frac{[[a]]}{[[d]]}$ + $[[w2]]\\frac{[[b]]}{[[d]]}$",
+   "answer": "$[[w1 + w2 + (a + b) / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s06-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract improper fractions and mixed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S6 Add and subtract improper fractions and mixed numbers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "improper",
+    "fractions",
+    "mixed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "e - 1"
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "w2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d != e",
+    "gcd(d, e) == 1"
+   ],
+   "check": [
+    "w1 + w2 > 1"
+   ],
+   "text": "Work out $[[w1]]\\frac{[[a]]}{[[d]]}$ + $[[w2]]\\frac{[[b]]}{[[e]]}$",
+   "answer": "$[[w1 + w2 + a / d + b / e|mixed]]$"
+  },
+  {
+   "id": "y7s3-s06-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract improper fractions and mixed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S6 Add and subtract improper fractions and mixed numbers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "improper",
+    "fractions",
+    "mixed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "w2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "w1 > w2 + 1"
+   ],
+   "check": [
+    "w1 + a / d > w2 + b / d"
+   ],
+   "text": "Work out $[[w1]]\\frac{[[a]]}{[[d]]}$ − $[[w2]]\\frac{[[b]]}{[[d]]}$",
+   "answer": "$[[w1 + a / d - w2 - b / d|mixed]]$"
+  },
+  {
+   "id": "y7s3-s06-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract improper fractions and mixed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S6 Add and subtract improper fractions and mixed numbers",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "improper",
+    "fractions",
+    "mixed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w1",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "w2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b"
+   ],
+   "check": [
+    "w1 + a / d > w2 + b / d"
+   ],
+   "text": "A tank holds $[[w1]]\\frac{[[a]]}{[[d]]}$ litres. Then $[[w2]]\\frac{[[b]]}{[[d]]}$ litres are used. How much is left? (3 marks)",
+   "answer": "$[[w1 + a / d - w2 - b / d|mixed]]$ litres"
+  },
+  {
+   "id": "y7s3-s07-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract simple algebraic fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S7 Add and subtract simple algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "simple",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b + 1 > 1"
+   ],
+   "text": "Simplify $\\frac{[[v]]}{[[d]]}$ + $\\frac{[[b|coef]][[v]]}{[[d]]}$",
+   "answer": "$\\frac{[[b + 1]][[v]]}{[[d]]}$"
+  },
+  {
+   "id": "y7s3-s07-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract simple algebraic fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S7 Add and subtract simple algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "simple",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p0",
+     "d + e"
+    ],
+    [
+     "q0",
+     "d * e"
+    ],
+    [
+     "g",
+     "gcd(p0, q0)"
+    ],
+    [
+     "p",
+     "p0 / g"
+    ],
+    [
+     "q",
+     "q0 / g"
+    ]
+   ],
+   "where": [
+    "d != e"
+   ],
+   "check": [
+    "p / q == 1 / d + 1 / e"
+   ],
+   "text": "Simplify $\\frac{[[v]]}{[[d]]}$ + $\\frac{[[v]]}{[[e]]}$",
+   "answer": "$\\frac{[[p|coef]][[v]]}{[[q]]}$"
+  },
+  {
+   "id": "y7s3-s07-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract simple algebraic fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S7 Add and subtract simple algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "simple",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       3,
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p0",
+     "a * e - b * d"
+    ],
+    [
+     "q0",
+     "d * e"
+    ],
+    [
+     "g",
+     "gcd(p0, q0)"
+    ],
+    [
+     "p",
+     "p0 / g"
+    ],
+    [
+     "q",
+     "q0 / g"
+    ]
+   ],
+   "where": [
+    "d != e",
+    "a * e > b * d",
+    "a % d != 0",
+    "b % e != 0"
+   ],
+   "check": [
+    "p / q == a / d - b / e"
+   ],
+   "text": "Simplify $\\frac{[[a|coef]][[v]]}{[[d]]}$ − $\\frac{[[b|coef]][[v]]}{[[e]]}$",
+   "answer": "$\\frac{[[p|coef]][[v]]}{[[q]]}$"
+  },
+  {
+   "id": "y7s3-s07-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract simple algebraic fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S7 Add and subtract simple algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "simple",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       12,
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p0",
+     "1 / d + 1 / e - 1 / f"
+    ],
+    [
+     "den",
+     "24"
+    ],
+    [
+     "p1",
+     "p0 * den"
+    ],
+    [
+     "g",
+     "gcd(p1, den)"
+    ],
+    [
+     "p",
+     "p1 / g"
+    ],
+    [
+     "q",
+     "den / g"
+    ]
+   ],
+   "where": [
+    "p1 > 0",
+    "isint(p1)"
+   ],
+   "check": [
+    "p / q == 1 / d + 1 / e - 1 / f"
+   ],
+   "text": "Write as a single fraction in its simplest form: $\\frac{[[v]]}{[[d]]}$ + $\\frac{[[v]]}{[[e]]}$ − $\\frac{[[v]]}{[[f]]}$. (3 marks)",
+   "answer": "$\\frac{[[p|coef]][[v]]}{[[q]]}$"
+  },
+  {
+   "id": "y7s3-s08-l1",
+   "topic": "Number",
+   "subtopic": "Substitution and solving equations with fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S8 Substitution and solving equations with fractions (E)",
+   "keywords": [
+    "substitution",
+    "and",
+    "solving",
+    "equations",
+    "with",
+    "fractions",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q + b > q"
+   ],
+   "text": "Work out $\\frac{[[v]]}{[[d]]}$ + [[b]] when $[[v]] = [[d * q]]$.",
+   "answer": "[[q + b]]"
+  },
+  {
+   "id": "y7s3-s08-l2",
+   "topic": "Number",
+   "subtopic": "Substitution and solving equations with fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S8 Substitution and solving equations with fractions (E)",
+   "keywords": [
+    "substitution",
+    "and",
+    "solving",
+    "equations",
+    "with",
+    "fractions",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * q / d == q"
+   ],
+   "text": "Solve $\\frac{[[v]]}{[[d]]}$ = [[q]]",
+   "answer": "$[[v]] = [[d * q]]$"
+  },
+  {
+   "id": "y7s3-s08-l3",
+   "topic": "Number",
+   "subtopic": "Substitution and solving equations with fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S8 Substitution and solving equations with fractions (E)",
+   "keywords": [
+    "substitution",
+    "and",
+    "solving",
+    "equations",
+    "with",
+    "fractions",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n"
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(q + b) - b == q"
+   ],
+   "text": "Solve $\\frac{[[v]]}{[[d]]}$ + [[b]] = [[q + b]]",
+   "answer": "$[[v]] = [[d * q]]$"
+  },
+  {
+   "id": "y7s3-s08-l4",
+   "topic": "Number",
+   "subtopic": "Substitution and solving equations with fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B3 Add and subtract fractions · S8 Substitution and solving equations with fractions (E)",
+   "keywords": [
+    "substitution",
+    "and",
+    "solving",
+    "equations",
+    "with",
+    "fractions",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(q + b) - b == q"
+   ],
+   "text": "A number is divided by [[d]] and then [[b]] is added. The answer is [[q + b]]. Form and solve an equation to find the number. (3 marks)",
+   "answer": "$\\frac{x}{[[d]]} + [[b]] = [[q + b]]$, so $x = [[d * q]]$"
+  }
+ ]
+}

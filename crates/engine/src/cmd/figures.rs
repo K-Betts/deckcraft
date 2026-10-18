@@ -56,6 +56,8 @@ pub(crate) fn draw(s: &mut Session, d: &Value, area: [f64; 4], scale: f64) -> Re
         "pattern" => f.pattern(s),
         "bar-model" => f.bar_model(s),
         "table" => f.table(s),
+        "fraction-bar" => f.fraction_bar(s),
+        "shade-grid" => f.shade_grid(s),
         _ => Ok(()),
     }
 }
@@ -611,11 +613,17 @@ impl Fig<'_> {
         let blanks: Vec<f64> =
             self.d.get("blank").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_f64).collect()).unwrap_or_default();
         let n = ((hi - lo) / step + 1e-6).floor() as usize;
+        // `tickLabels`: a text for each tick, left to right (fractions: "$\\frac{1}{4}$"; null leaves it blank).
+        let custom: Vec<Option<String>> = self.list("tickLabels");
         for i in 0..=n {
             let v = lo + step * i as f64;
-            let big = i % every == 0;
+            let big = i % every == 0 || !custom.is_empty();
             draw_line(s, [at(v), yy - if big { 7.0 } else { 4.0 }], [at(v), yy + if big { 7.0 } else { 4.0 }], INK, 1.5)?;
-            if big && !hide {
+            if !custom.is_empty() {
+                if let Some(Some(text)) = custom.get(i) {
+                    label_sized(s, text, [at(v), yy + 22.0], 12.0)?;
+                }
+            } else if big && !hide {
                 let text = if blanks.iter().any(|b| (b - v).abs() < 1e-9) { "?".to_string() } else { num_text(v) };
                 label_sized(s, &text, [at(v), yy + 20.0], 12.0)?;
             }
@@ -823,6 +831,72 @@ impl Fig<'_> {
                 label_sized(s, &self.lab_or("total", "?"), [(x + end) / 2.0, by - 12.0 * k()], 15.0)?;
             }
         }
+        Ok(())
+    }
+
+    /// `bars`: a list of `{parts, shaded, label?}` drawn one under another, every bar the same
+    /// length so fractions can be compared; or `parts` and `shaded` for a single bar.
+    fn fraction_bar(&self, s: &mut Session) -> Result<()> {
+        let bars: Vec<(usize, usize, Option<String>)> = match self.d.get("bars").and_then(Value::as_array) {
+            Some(list) => list
+                .iter()
+                .map(|b| {
+                    (
+                        b.get("parts").and_then(Value::as_u64).unwrap_or(1).clamp(1, 60) as usize,
+                        b.get("shaded").and_then(Value::as_u64).unwrap_or(0) as usize,
+                        b.get("label").and_then(Value::as_str).map(str::to_string),
+                    )
+                })
+                .collect(),
+            None => vec![(
+                self.num("parts", 1.0).clamp(1.0, 60.0) as usize,
+                self.num("shaded", 0.0).max(0.0) as usize,
+                self.d.get("label").and_then(Value::as_str).map(str::to_string),
+            )],
+        };
+        let [x, y, w, h] = self.fit(3.2 * bars.len().max(1) as f64 / 1.2, 8.0);
+        let row_h = (h / bars.len().max(1) as f64).min(46.0 * k());
+        let left = x + 24.0 * k();
+        let bw = w - 28.0 * k();
+        for (r, (parts, shaded, label)) in bars.iter().enumerate() {
+            let top = y + row_h * r as f64 + (h - row_h * bars.len() as f64) / 2.0;
+            let cw = bw / *parts as f64;
+            for i in 0..*parts {
+                draw_shape(
+                    s,
+                    "rect",
+                    [left + cw * i as f64, top, cw, row_h * 0.78],
+                    Some(if i < *shaded { "#F4B183" } else { "#FFFFFF" }),
+                    Some((INK, 2.0)),
+                )?;
+            }
+            if let Some(l) = label {
+                label_sized(s, l, [x + 10.0 * k(), top + row_h * 0.39], 14.0)?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `rows` × `cols` squares (default 10 × 10) with the first `shaded` of them coloured, row by row.
+    fn shade_grid(&self, s: &mut Session) -> Result<()> {
+        let rows = self.num("rows", 10.0).clamp(1.0, 20.0) as usize;
+        let cols = self.num("cols", 10.0).clamp(1.0, 20.0) as usize;
+        let shaded = self.num("shaded", 0.0).max(0.0) as usize;
+        let [x, y, w, h] = self.fit(cols as f64 / rows as f64, 8.0);
+        let (cw, ch) = (w / cols as f64, h / rows as f64);
+        for r in 0..rows {
+            for c in 0..cols {
+                let on = r * cols + c < shaded;
+                draw_shape(
+                    s,
+                    "rect",
+                    [x + cw * c as f64, y + ch * r as f64, cw, ch],
+                    Some(if on { "#F4B183" } else { "#FFFFFF" }),
+                    Some((INK, 1.2)),
+                )?;
+            }
+        }
+        draw_shape(s, "rect", [x, y, w, h], None, Some((INK, 2.5)))?;
         Ok(())
     }
 

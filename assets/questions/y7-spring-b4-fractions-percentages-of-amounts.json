@@ -1,0 +1,1219 @@
+{
+ "version": 1,
+ "note": "Y7 Spring Block 4 Fractions and percentages of amounts: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7s4-s01-l1",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S1 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q * d / d == q"
+   ],
+   "text": "Work out $\\frac{1}{[[d]]}$ of [[d * q]].",
+   "answer": "[[q]]"
+  },
+  {
+   "id": "y7s4-s01-l2",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S1 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * q / q == n"
+   ],
+   "text": "Work out $\\frac{[[n]]}{[[d]]}$ of [[d * q]].",
+   "answer": "[[n * q]]"
+  },
+  {
+   "id": "y7s4-s01-l3",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S1 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * q + (d - n) * q == d * q"
+   ],
+   "text": "A bag has [[d * q]] sweets. $\\frac{[[n]]}{[[d]]}$ of them are red. How many are not red?",
+   "answer": "[[(d - n) * q]]"
+  },
+  {
+   "id": "y7s4-s01-l4",
+   "topic": "Number",
+   "subtopic": "Fraction of an amount",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S1 Fraction of an amount",
+   "keywords": [
+    "fraction",
+    "of",
+    "an",
+    "amount",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       5,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 3"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "d - n - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n + m < d"
+   ],
+   "check": [
+    "n * q + m * q + (d - n - m) * q == d * q"
+   ],
+   "text": "A school has [[d * q]] pupils. $\\frac{[[n]]}{[[d]]}$ of the pupils walk to school and $\\frac{[[m]]}{[[d]]}$ cycle. How many pupils use neither? (3 marks)",
+   "answer": "[[(d - n - m) * q]]"
+  },
+  {
+   "id": "y7s4-s02-l1",
+   "topic": "Number",
+   "subtopic": "Use a fraction to find the whole",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S2 Use a fraction to find the whole",
+   "keywords": [
+    "use",
+    "a",
+    "fraction",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * q / d == q"
+   ],
+   "text": "$\\frac{1}{[[d]]}$ of a number is [[q]]. Work out the number.",
+   "answer": "[[d * q]]"
+  },
+  {
+   "id": "y7s4-s02-l2",
+   "topic": "Number",
+   "subtopic": "Use a fraction to find the whole",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S2 Use a fraction to find the whole",
+   "keywords": [
+    "use",
+    "a",
+    "fraction",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * q / n * d == d * q"
+   ],
+   "text": "$\\frac{[[n]]}{[[d]]}$ of a number is [[n * q]]. Work out the number.",
+   "answer": "[[d * q]]"
+  },
+  {
+   "id": "y7s4-s02-l3",
+   "topic": "Number",
+   "subtopic": "Use a fraction to find the whole",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S2 Use a fraction to find the whole",
+   "keywords": [
+    "use",
+    "a",
+    "fraction",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * q - n * q == (d - n) * q"
+   ],
+   "text": "A shop sold $\\frac{[[n]]}{[[d]]}$ of its apples. It sold [[n * q]] apples. How many apples did it start with and how many are left?",
+   "answer": "[[d * q]] apples; [[(d - n) * q]] left"
+  },
+  {
+   "id": "y7s4-s02-l4",
+   "topic": "Number",
+   "subtopic": "Use a fraction to find the whole",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S2 Use a fraction to find the whole",
+   "keywords": [
+    "use",
+    "a",
+    "fraction",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "((d - n) * q) % 2 == 0"
+   ],
+   "check": [
+    "d * q - n * q == (d - n) * q"
+   ],
+   "text": "Amy spent $\\frac{[[n]]}{[[d]]}$ of her money on a book that cost £[[n * q]]. She spent half of the rest on lunch. How much money did she have to begin with and how much did she spend on lunch? (3 marks)",
+   "answer": "£[[d * q]] to begin with; lunch £[[(d - n) * q / 2]]"
+  },
+  {
+   "id": "y7s4-s03-l1",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (non-calculator)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S3 Percentage of an amount (non-calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "non",
+    "calculator",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       50,
+       25,
+       20
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * w * 20 / 100 == p * w / 5"
+   ],
+   "text": "Work out [[p]]% of [[w * 20]].",
+   "answer": "[[p * w / 5]]"
+  },
+  {
+   "id": "y7s4-s03-l2",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (non-calculator)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S3 Percentage of an amount (non-calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "non",
+    "calculator",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       15,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * w * 20 / 100 == p * w / 5"
+   ],
+   "text": "Work out [[p]]% of £[[w * 20]].",
+   "answer": "£[[p * w / 5]]"
+  },
+  {
+   "id": "y7s4-s03-l3",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (non-calculator)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S3 Percentage of an amount (non-calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "non",
+    "calculator",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       35,
+       45,
+       15,
+       65,
+       85
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * w * 40 / 100 * 100 == p * w * 40"
+   ],
+   "text": "Work out [[p]]% of [[w * 40]] without a calculator. Show how you found it.",
+   "answer": "[[p * w * 40 / 100]]"
+  },
+  {
+   "id": "y7s4-s03-l4",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (non-calculator)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S3 Percentage of an amount (non-calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "non",
+    "calculator",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       30,
+       35,
+       40,
+       45
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p + 25) * w / 5 < w * 20"
+   ],
+   "text": "There are [[w * 20]] pupils in Year 7. [[p]]% of them walk to school and 25% cycle. How many pupils do not walk or cycle? (3 marks)",
+   "answer": "[[w * 20 - (p + 25) * w / 5]]"
+  },
+  {
+   "id": "y7s4-s04-l1",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (calculator)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S4 Percentage of an amount (calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "calculator",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       98
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       12,
+       500
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 5 != 0",
+    "w % 10 != 0"
+   ],
+   "check": [
+    "p * w / 100 * 100 == p * w"
+   ],
+   "text": "Use a calculator to work out [[p]]% of [[w]].",
+   "answer": "[[p * w / 100]]"
+  },
+  {
+   "id": "y7s4-s04-l2",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (calculator)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S4 Percentage of an amount (calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "calculator",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       98
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       12,
+       900
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 5 != 0",
+    "w % 10 != 0"
+   ],
+   "check": [
+    "p * w / 100 * 100 == p * w"
+   ],
+   "text": "Use a calculator to work out [[p]]% of £[[w]].",
+   "answer": "£[[p * w / 100|dp:2]]"
+  },
+  {
+   "id": "y7s4-s04-l3",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (calculator)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S4 Percentage of an amount (calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "calculator",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       48
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       120,
+       900
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 5 != 0",
+    "w % 10 != 0"
+   ],
+   "check": [
+    "p * w / 100 * 100 == p * w"
+   ],
+   "text": "A phone costs £[[w]]. A shop gives a deposit discount of [[p]]%. How much is the discount?",
+   "answer": "£[[p * w / 100|dp:2]]"
+  },
+  {
+   "id": "y7s4-s04-l4",
+   "topic": "Number",
+   "subtopic": "Percentage of an amount (calculator)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S4 Percentage of an amount (calculator)",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "calculator",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       200,
+       400,
+       500,
+       800,
+       1000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w * (100 - p) / 100 * (100 - q) / 100 > 0"
+   ],
+   "text": "A shop has [[w]] items. [[p]]% are sold on Monday and [[q]]% of the rest are sold on Tuesday. How many items are left? (3 marks)",
+   "answer": "[[w * (100 - p) / 100 * (100 - q) / 100]]"
+  },
+  {
+   "id": "y7s4-s05-l1",
+   "topic": "Number",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S5 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       20,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       15,
+       20,
+       25,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 20 == 0"
+   ],
+   "check": [
+    "w * (100 + p) / 100 > w"
+   ],
+   "text": "Increase £[[w]] by [[p]]%.",
+   "answer": "£[[w * (100 + p) / 100|dp:2]]"
+  },
+  {
+   "id": "y7s4-s05-l2",
+   "topic": "Number",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S5 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       20,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       15,
+       20,
+       25,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 20 == 0"
+   ],
+   "check": [
+    "w * (100 - p) / 100 < w"
+   ],
+   "text": "Decrease £[[w]] by [[p]]%.",
+   "answer": "£[[w * (100 - p) / 100|dp:2]]"
+  },
+  {
+   "id": "y7s4-s05-l3",
+   "topic": "Number",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S5 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       48
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 5 != 0"
+   ],
+   "check": [
+    "(100 + p) / 100 - (100 - p) / 100 == p / 50"
+   ],
+   "text": "Write the multiplier that increases a number by [[p]]%, and the multiplier that decreases a number by [[p]]%.",
+   "answer": "Increase: [[(100 + p) / 100]]; decrease: [[(100 - p) / 100]]"
+  },
+  {
+   "id": "y7s4-s05-l4",
+   "topic": "Number",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S5 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       200,
+       300,
+       400,
+       500,
+       600
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       5,
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w * (100 - p) / 100 - c > 0"
+   ],
+   "text": "A TV costs £[[w]]. In a sale the price is reduced by [[p]]%. Then a coupon takes a further £[[c]] off. What is the final price? (3 marks)",
+   "answer": "£[[w * (100 - p) / 100 - c|dp:2]]"
+  },
+  {
+   "id": "y7s4-s06-l1",
+   "topic": "Number",
+   "subtopic": "Use a percentage to find the whole (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S6 Use a percentage to find the whole (E)",
+   "keywords": [
+    "use",
+    "a",
+    "percentage",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       2,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "q * 10 / 10 == q"
+   ],
+   "text": "10% of a number is [[q]]. Work out the number.",
+   "answer": "[[q * 10]]"
+  },
+  {
+   "id": "y7s4-s06-l2",
+   "topic": "Number",
+   "subtopic": "Use a percentage to find the whole (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S6 Use a percentage to find the whole (E)",
+   "keywords": [
+    "use",
+    "a",
+    "percentage",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       20,
+       25,
+       40,
+       50,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(p * q) % 10 == 0"
+   ],
+   "check": [
+    "p * q / 10 / p * 100 == q * 10"
+   ],
+   "text": "[[p]]% of a number is [[p * q / 10]]. Work out the number.",
+   "answer": "[[q * 10]]"
+  },
+  {
+   "id": "y7s4-s06-l3",
+   "topic": "Number",
+   "subtopic": "Use a percentage to find the whole (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S6 Use a percentage to find the whole (E)",
+   "keywords": [
+    "use",
+    "a",
+    "percentage",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       50
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       40,
+       400
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 20 == 0"
+   ],
+   "check": [
+    "w * (100 + p) / 100 / (100 + p) * 100 == w"
+   ],
+   "text": "After a [[p]]% increase a price is £[[w * (100 + p) / 100|dp:2]]. What was the price before the increase?",
+   "answer": "£[[w|dp:2]]"
+  },
+  {
+   "id": "y7s4-s06-l4",
+   "topic": "Number",
+   "subtopic": "Use a percentage to find the whole (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B4 Fractions and percentages of amounts · S6 Use a percentage to find the whole (E)",
+   "keywords": [
+    "use",
+    "a",
+    "percentage",
+    "to",
+    "find",
+    "the",
+    "whole",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       40,
+       400
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 20 == 0"
+   ],
+   "check": [
+    "w * (100 - p) / 100 + w * p / 100 == w"
+   ],
+   "text": "A shop reduces a coat by [[p]]%. The sale price is £[[w * (100 - p) / 100|dp:2]]. Work out the original price and how much was saved. (3 marks)",
+   "answer": "original £[[w|dp:2]]; saving £[[w * p / 100|dp:2]]"
+  }
+ ]
+}
