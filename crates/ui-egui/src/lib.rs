@@ -8,6 +8,9 @@
 
 pub mod animtimeline;
 pub mod backstage;
+pub mod calculator;
+pub mod calculator_apps;
+pub mod calculator_ui;
 pub mod canvas;
 pub mod control;
 pub mod credits;
