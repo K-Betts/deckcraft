@@ -2695,6 +2695,7 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
             }
         });
     }
+    paste_section(app, ui, d);
     ui.separator();
     ui.label(egui::RichText::new("Add a question").font(theme::bold(13.0)));
     ui.horizontal(|ui| {
@@ -2787,33 +2788,158 @@ fn import_questions(app: &mut SlideApp) -> String {
         Ok(t) => t,
         Err(e) => return format!("Could not read the file: {e}"),
     };
-    let incoming = match deckcraft_engine::questions::parse(&text) {
-        Ok(b) => b,
-        Err(e) => return format!("Not added. {e}"),
-    };
+    match deckcraft_engine::questions::parse_loose(&text) {
+        Ok(bank) => add_to_my_bank(app, bank),
+        Err(e) => format!("Not added. {e}"),
+    }
+}
+
+/// Adds `incoming` to the teacher's own bank. Each item gets a fresh id of its own (so an AI that
+/// numbered its questions the same as the built-in ones cannot clash), and an item that is already
+/// there, the same question or the same recipe, is skipped. Returns what to tell the teacher.
+fn add_to_my_bank(app: &mut SlideApp, incoming: deckcraft_engine::questions::Bank) -> String {
     let existing = match question_bank(app) {
         Ok(b) => b,
         Err(e) => return e,
     };
-    let taken = |id: &str| existing.questions.iter().any(|q| q.id == id) || existing.templates.iter().any(|t| t.id == id);
+    let used = |app: &SlideApp, id: &str| {
+        existing.questions.iter().any(|q| q.id == id)
+            || existing.templates.iter().any(|t| t.id == id)
+            || app.ui.my_questions.iter().any(|q| q.id == id)
+            || app.ui.my_templates.iter().any(|t| t.id == id)
+    };
+    let fresh = |app: &SlideApp, prefix: &str| (1..).map(|n| format!("{prefix}{n:03}")).find(|id| !used(app, id)).unwrap_or_default();
     let (mut added, mut skipped) = (0, 0);
-    for q in incoming.questions {
-        if taken(&q.id) {
+    for mut q in incoming.questions {
+        let same = |o: &deckcraft_engine::questions::Question| o.text == q.text && o.answer == q.answer;
+        if existing.questions.iter().any(same) || app.ui.my_questions.iter().any(same) {
             skipped += 1;
-        } else {
-            app.ui.my_questions.push(q);
-            added += 1;
+            continue;
+        }
+        q.id = fresh(app, "my-");
+        app.ui.my_questions.push(q);
+        added += 1;
+    }
+    for mut t in incoming.templates {
+        let same = |o: &deckcraft_engine::template::Template| deckcraft_engine::template::Template { id: t.id.clone(), ..o.clone() } == t;
+        if existing.templates.iter().any(same) || app.ui.my_templates.iter().any(same) {
+            skipped += 1;
+            continue;
+        }
+        t.id = fresh(app, "my-t-");
+        app.ui.my_templates.push(t);
+        added += 1;
+    }
+    match (added, skipped) {
+        (0, 0) => "Nothing to add.".into(),
+        (n, 0) => format!("Added {n}. They are in your bank now."),
+        (0, k) => format!("Nothing new: {k} of these are already in your bank."),
+        (n, k) => format!("Added {n}. Skipped {k} that were already in your bank."),
+    }
+}
+
+/// What a pasted bank will give, in words a teacher can check: for each recipe a few of the
+/// questions it makes with their answers, and anything the checks think looks wrong.
+fn preview_bank(bank: &deckcraft_engine::questions::Bank) -> String {
+    use deckcraft_engine::latex::plain;
+    let mut lines = vec![];
+    lines.push(format!(
+        "Found {} recipe{} (new numbers every time) and {} fixed question{}.",
+        bank.templates.len(),
+        if bank.templates.len() == 1 { "" } else { "s" },
+        bank.questions.len(),
+        if bank.questions.len() == 1 { "" } else { "s" }
+    ));
+    for t in &bank.templates {
+        lines.push(format!("▸ {} · {} · level {}", t.subtopic, t.topic, t.difficulty));
+        for n in 0..3u64 {
+            if let Ok(q) = t.instantiate(n * 7 + 1) {
+                lines.push(format!("    {}   →   {}", plain(&q.text), plain(&q.answer)));
+            }
+        }
+        for w in t.lint() {
+            lines.push(format!("    ⚠ {w}"));
         }
     }
-    for t in incoming.templates {
-        if taken(&t.id) {
-            skipped += 1;
-        } else {
-            app.ui.my_templates.push(t);
-            added += 1;
-        }
+    for q in bank.questions.iter().take(8) {
+        lines.push(format!("▸ {} · {}\n    {}   →   {}", q.subtopic, q.topic, plain(&q.text), plain(&q.answer)));
     }
-    if skipped > 0 { format!("Added {added}. Skipped {skipped} whose id is already in your bank.") } else { format!("Added {added}.") }
+    if bank.questions.len() > 8 {
+        lines.push(format!("… and {} more fixed questions", bank.questions.len() - 8));
+    }
+    lines.join("\n")
+}
+
+/// The “paste an AI's answer” part of Manage Questions: Check shows what the text will make (or
+/// what is wrong with it in plain words), and Add puts it in the teacher's bank.
+fn paste_section(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) {
+    let t = Tokens::get(ui.ctx());
+    egui::CollapsingHeader::new(egui::RichText::new("Add questions written by an AI").font(theme::bold(13.0))).id_salt("qb-paste").default_open(false).show(ui, |ui| {
+        ui.label(
+            egui::RichText::new("Paste the AI's whole answer here (see docs/question-writing-guide.md for what to ask it), press Check, read the examples, then Add.")
+                .size(11.0)
+                .color(t.text_dim),
+        );
+        let mut text = d.get("paste", "");
+        egui::ScrollArea::vertical().max_height(110.0).id_salt("qb-paste-box").show(ui, |ui| {
+            ui.add(egui::TextEdit::multiline(&mut text).desired_rows(5).desired_width(f32::INFINITY).hint_text("Paste here…").font(egui::TextStyle::Monospace));
+        });
+        if text != d.get("paste", "") {
+            // New text: the last check no longer applies.
+            d.fields.insert("paste_done".into(), String::new());
+        }
+        d.fields.insert("paste".into(), text.clone());
+        let checked = d.get("paste_checked", "") == text && !text.trim().is_empty();
+        let ok = checked && d.get("paste_error", "").is_empty();
+        ui.horizontal(|ui| {
+            if ui.add_enabled(!text.trim().is_empty(), egui::Button::new("Check")).clicked() {
+                match deckcraft_engine::questions::parse_loose(&text) {
+                    Ok(bank) => {
+                        d.fields.insert("paste_error".into(), String::new());
+                        d.fields.insert("paste_preview".into(), preview_bank(&bank));
+                    }
+                    Err(e) => {
+                        d.fields.insert("paste_error".into(), e);
+                        d.fields.insert("paste_preview".into(), String::new());
+                    }
+                }
+                d.fields.insert("paste_checked".into(), text.clone());
+                d.fields.insert("paste_done".into(), String::new());
+            }
+            if ui.add_enabled(ok, egui::Button::new(egui::RichText::new("Add these to my bank").color(t.accent_text)).fill(t.accent)).clicked()
+                && let Ok(bank) = deckcraft_engine::questions::parse_loose(&text)
+            {
+                let msg = add_to_my_bank(app, bank);
+                d.fields.insert("paste_done".into(), msg);
+                d.fields.insert("paste".into(), String::new());
+                d.fields.insert("paste_checked".into(), String::new());
+            }
+            if let Some(m) = d.fields.get("paste_done").filter(|m| !m.is_empty()) {
+                ui.label(egui::RichText::new(m).size(12.0).strong());
+            } else if !text.trim().is_empty() && !checked {
+                ui.label(egui::RichText::new("Press Check first.").size(11.0).color(t.text_dim));
+            }
+        });
+        if checked {
+            let err = d.get("paste_error", "");
+            if !err.is_empty() {
+                ui.colored_label(egui::Color32::from_rgb(200, 60, 60), err);
+            } else {
+                egui::ScrollArea::vertical().max_height(200.0).id_salt("qb-paste-preview").show(ui, |ui| {
+                    for line in d.get("paste_preview", "").lines() {
+                        let rich = if line.trim_start().starts_with('⚠') {
+                            egui::RichText::new(line).size(12.0).color(egui::Color32::from_rgb(190, 110, 0))
+                        } else if line.starts_with('▸') || line.starts_with("Found") {
+                            egui::RichText::new(line).size(12.5).strong()
+                        } else {
+                            egui::RichText::new(line).size(12.0)
+                        };
+                        ui.add(egui::Label::new(rich).wrap());
+                    }
+                });
+            }
+        }
+    });
 }
 
 fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
