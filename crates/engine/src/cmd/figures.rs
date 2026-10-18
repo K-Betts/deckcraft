@@ -1397,8 +1397,8 @@ impl Fig<'_> {
         let mut row_i = 0usize;
         let mut draw_row = |s: &mut Session, cells: &[String], fill: &str, bold: bool| -> Result<()> {
             let mut cx = x;
-            for c in 0..cols {
-                let cw = w * weights[c] / total;
+            for (c, wt) in weights.iter().enumerate() {
+                let cw = w * wt / total;
                 let ry = top + rh * row_i as f64;
                 draw_shape(s, "rect", [cx, ry, cw, rh], Some(fill), Some((INK, 1.8)))?;
                 if let Some(t) = cells.get(c) {
