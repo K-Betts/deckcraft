@@ -64,6 +64,18 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y9-summer-b4-transformations.json"),
     include_str!("../../../assets/questions/y9-summer-b5-simultaneous-equations.json"),
     include_str!("../../../assets/questions/y9-summer-b6-trigonometry.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b1-algebraic-manipulation.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b2-equations-inequalities-formulae.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b3-quadratics.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b4-percentages.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b5-ratio-and-scale.json"),
+    include_str!("../../../assets/questions/y10-foundation-autumn-b6-work-with-fractions.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b1-algebraic-manipulation.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b2-equations-inequalities-formulae.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b3-quadratics.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b4-percentages.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b5-ratio-and-scale.json"),
+    include_str!("../../../assets/questions/y10-higher-autumn-b6-work-with-fractions.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -396,9 +408,15 @@ impl Bank {
                     // “Y7 Autumn B4 Place value, ordering and rounding · S3 Compare…”
                     let head = q.source.split(" · ").next().unwrap_or("");
                     let mut words = head.split_whitespace();
-                    let (_, term, _) = (words.next(), words.next().unwrap_or(""), words.next());
+                    // Key Stage 4 sources carry a tier: “Y10 Foundation Autumn B1 Percentages · …”.
+                    let (_, first) = (words.next(), words.next().unwrap_or(""));
+                    let (term, _) = if matches!(first, "Foundation" | "Higher") {
+                        (format!("{first} {}", words.next().unwrap_or("")), words.next())
+                    } else {
+                        (first.to_string(), words.next())
+                    };
                     let block = words.collect::<Vec<_>>().join(" ");
-                    let (term, block) = if q.source.is_empty() { (String::new(), q.topic.clone()) } else { (term.to_string(), block) };
+                    let (term, block) = if q.source.is_empty() { (String::new(), q.topic.clone()) } else { (term, block) };
                     out.push(Skill {
                         key,
                         name: q.subtopic.clone(),
@@ -664,6 +682,11 @@ mod tests {
         let two_step = skills.iter().find(|s| s.name == "Solve 2-step equations").expect("a skill for the step");
         assert_eq!(two_step.counts, [1, 1, 1, 1], "support, core, stretch and exam style");
         assert_eq!((two_step.year.as_str(), two_step.term.as_str()), ("Y7", "Autumn"));
+        let ten = skills
+            .iter()
+            .find(|s| s.year == "Y10" && s.name == "Percentage of an amount" && s.term.starts_with("Higher"))
+            .expect("a Year 10 Higher skill");
+        assert_eq!((ten.term.as_str(), ten.block.as_str()), ("Higher Autumn", "Percentages"));
         assert_eq!(two_step.block, "Expressions and equations");
         // Skills come in the order of the scheme of work: sequences before equations.
         let at = |n: &str| skills.iter().position(|s| s.name == n).unwrap();
@@ -700,11 +723,11 @@ mod tests {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
         for t in &bank.templates {
-            if t.source.starts_with("Y7 ") || t.source.starts_with("Y8 ") || t.source.starts_with("Y9 ") {
+            if t.source.starts_with("Y7 ") || t.source.starts_with("Y8 ") || t.source.starts_with("Y9 ") || t.source.starts_with("Y10 ") {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 410, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 450, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }

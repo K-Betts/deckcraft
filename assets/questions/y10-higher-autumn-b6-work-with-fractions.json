@@ -1,0 +1,2374 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Autumn Block 6 Work with fractions: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hau6-s01-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "(a * d + c * b) / (b * d) * (b * d) == a * d + c * b"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} + \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a / b + c / d|mixed]]$"
+  },
+  {
+   "id": "y10hau6-s01-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "(w + a / b) > (v + c / d)",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $[[w]]\\frac{[[a]]}{[[b]]} - [[v]]\\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[(w + a / b) - (v + c / d)|mixed]]$"
+  },
+  {
+   "id": "y10hau6-s01-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "a / b + c / d != 1",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Which is greater, $\\frac{[[a]]}{[[b]]} + \\frac{[[c]]}{[[d]]}$ or 1? Work it out.",
+   "answer": "$[[a / b + c / d|mixed]]$, which is [[a / b + c / d > 1|if:greater than/less than]] 1"
+  },
+  {
+   "id": "y10hau6-s01-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S1 Add and subtract fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "b != d",
+    "a / b + c / d < 1",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Sam eats $\\frac{[[a]]}{[[b]]}$ of a pizza and Tia eats $\\frac{[[c]]}{[[d]]}$ of it. What fraction of the pizza is left? (3 marks)",
+   "answer": "$[[1 - a / b - c / d|frac]]$"
+  },
+  {
+   "id": "y10hau6-s02-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} \\times \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a * c / (b * d)|frac]]$"
+  },
+  {
+   "id": "y10hau6-s02-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "a * d != b * c",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * c > 0"
+   ],
+   "text": "Work out $\\frac{[[a]]}{[[b]]} \\div \\frac{[[c]]}{[[d]]}$.",
+   "answer": "$[[a * d / (b * c)|mixed]]$"
+  },
+  {
+   "id": "y10hau6-s02-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Work out $[[w]]\\frac{[[a]]}{[[b]]} \\times [[v]]\\frac{[[c]]}{[[d]]}$. Show that you changed both to improper fractions.",
+   "answer": "$\\frac{[[w * b + a]]}{[[b]]} \\times \\frac{[[v * d + c]]}{[[d]]} = [[(w + a / b) * (v + c / d)|mixed]]$"
+  },
+  {
+   "id": "y10hau6-s02-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S2 Multiply and divide fractions",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "L",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "A rectangle is $[[w]]\\frac{[[a]]}{[[b]]}$ m long and $\\frac{[[c]]}{[[d]]}$ m wide. Work out its area. Then work out how many of these rectangles fit side by side along a [[L]] m wall. (4 marks)",
+   "answer": "Area $[[(w + a / b) * c / d|mixed]]$ m²; [[floor(L / (w + a / b))]] fit along the wall"
+  },
+  {
+   "id": "y10hau6-s03-l1",
+   "topic": "Number",
+   "subtopic": "Solve problems with fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S3 Solve problems with fractions",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A recipe uses $\\frac{[[a]]}{[[b]]}$ kg of flour. Work out how much flour is needed for [[n]] batches.",
+   "answer": "$[[a * n / b|mixed]]$ kg"
+  },
+  {
+   "id": "y10hau6-s03-l2",
+   "topic": "Number",
+   "subtopic": "Solve problems with fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S3 Solve problems with fractions",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A ribbon of length $[[w]]\\frac{[[a]]}{[[b]]}$ m is cut into pieces of $\\frac{1}{[[b]]}$ m. How many pieces?",
+   "answer": "[[w * b + a]]"
+  },
+  {
+   "id": "y10hau6-s03-l3",
+   "topic": "Number",
+   "subtopic": "Solve problems with fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S3 Solve problems with fractions",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       7,
+       8,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "a / b + c / d < 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Sam read $\\frac{[[a]]}{[[b]]}$ of a book on Monday and $\\frac{[[c]]}{[[d]]}$ on Tuesday. What fraction is left to read?",
+   "answer": "$[[1 - a / b - c / d|frac]]$"
+  },
+  {
+   "id": "y10hau6-s03-l4",
+   "topic": "Number",
+   "subtopic": "Solve problems with fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S3 Solve problems with fractions",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "T",
+     "lcm(b, d) * k * 5"
+    ]
+   ],
+   "where": [
+    "a < b",
+    "c < d",
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "A bag holds [[T]] sweets. $\\frac{[[a]]}{[[b]]}$ are red, $\\frac{[[c]]}{[[d]]}$ of the rest are green and the others are blue. How many of each colour? (4 marks)",
+   "answer": "Red [[T * a / b]], green [[(T - T * a / b) * c / d]], blue [[(T - T * a / b) * (1 - c / d)]]"
+  },
+  {
+   "id": "y10hau6-s04-l1",
+   "topic": "Number",
+   "subtopic": "Multiply algebraic fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S4 Multiply algebraic fractions",
+   "keywords": [
+    "multiply",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x}{[[a]]} \\times \\frac{[[a * c]]}{[[d]]}$.",
+   "answer": "$\\frac{[[c|coef]]x}{[[d]]}$"
+  },
+  {
+   "id": "y10hau6-s04-l2",
+   "topic": "Number",
+   "subtopic": "Multiply algebraic fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S4 Multiply algebraic fractions",
+   "keywords": [
+    "multiply",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "g",
+     "gcd(a * c, b * d)"
+    ]
+   ],
+   "where": [
+    "b * d / g > 1"
+   ],
+   "check": [
+    "g > 0"
+   ],
+   "text": "Simplify $\\frac{[[a]]x}{[[b]]} \\times \\frac{[[c]]}{[[d]]x}$.",
+   "answer": "$\\frac{[[a * c / g]]}{[[b * d / g]]}$"
+  },
+  {
+   "id": "y10hau6-s04-l3",
+   "topic": "Number",
+   "subtopic": "Multiply algebraic fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S4 Multiply algebraic fractions",
+   "keywords": [
+    "multiply",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "g",
+     "gcd(a * c, b * d)"
+    ]
+   ],
+   "where": [
+    "b * d / g > 1"
+   ],
+   "check": [
+    "g > 0"
+   ],
+   "text": "Simplify $\\frac{[[a]]x^2}{[[b]]y} \\times \\frac{[[c]]y}{[[d]]x}$.",
+   "answer": "$\\frac{[[a * c / g]]x}{[[b * d / g]]}$"
+  },
+  {
+   "id": "y10hau6-s04-l4",
+   "topic": "Number",
+   "subtopic": "Multiply algebraic fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S4 Multiply algebraic fractions",
+   "keywords": [
+    "multiply",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "g",
+     "gcd(a, b)"
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "g > 0"
+   ],
+   "text": "Simplify $\\frac{[[a]]x}{y^2} \\times \\frac{y^3}{[[b]]x^2}$ and find its value when $x = [[k]]$ and $y = [[m]]$. (3 marks)",
+   "answer": "$\\frac{[[a / g]]y}{[[b / g]]x}$; value [[a * m / (b * k)|frac]]"
+  },
+  {
+   "id": "y10hau6-s05-l1",
+   "topic": "Number",
+   "subtopic": "Simplify algebraic fractions by factorising",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S5 Simplify algebraic fractions by factorising",
+   "keywords": [
+    "simplify",
+    "algebraic",
+    "fractions",
+    "by",
+    "factorising",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a]]x}{x}$.",
+   "answer": "$x + [[a]]$"
+  },
+  {
+   "id": "y10hau6-s05-l2",
+   "topic": "Number",
+   "subtopic": "Simplify algebraic fractions by factorising",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S5 Simplify algebraic fractions by factorising",
+   "keywords": [
+    "simplify",
+    "algebraic",
+    "fractions",
+    "by",
+    "factorising",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 - [[a * a]]}{x + [[a]]}$.",
+   "answer": "$x - [[a]]$"
+  },
+  {
+   "id": "y10hau6-s05-l3",
+   "topic": "Number",
+   "subtopic": "Simplify algebraic fractions by factorising",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S5 Simplify algebraic fractions by factorising",
+   "keywords": [
+    "simplify",
+    "algebraic",
+    "fractions",
+    "by",
+    "factorising",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a + b]]x + [[a * b]]}{x + [[a]]}$.",
+   "answer": "$x + [[b]]$"
+  },
+  {
+   "id": "y10hau6-s05-l4",
+   "topic": "Number",
+   "subtopic": "Simplify algebraic fractions by factorising",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S5 Simplify algebraic fractions by factorising",
+   "keywords": [
+    "simplify",
+    "algebraic",
+    "fractions",
+    "by",
+    "factorising",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a + b]]x + [[a * b]]}{x^2 - [[a * a]]}$. (3 marks)",
+   "answer": "$\\frac{x + [[b]]}{x - [[a]]}$"
+  },
+  {
+   "id": "y10hau6-s06-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract algebraic fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S6 Add and subtract algebraic fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{x}{[[a]]} + \\frac{x}{[[b]]}$ as a single fraction.",
+   "answer": "$\\frac{[[b + a]]x}{[[a * b]]}$"
+  },
+  {
+   "id": "y10hau6-s06-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract algebraic fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S6 Add and subtract algebraic fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{x} + \\frac{[[b]]}{x}$ as a single fraction.",
+   "answer": "$\\frac{[[a + b]]}{x}$"
+  },
+  {
+   "id": "y10hau6-s06-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract algebraic fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S6 Add and subtract algebraic fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != d",
+    "a * d != b * c"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Write $\\frac{x + [[a]]}{[[b]]} + \\frac{x - [[c]]}{[[d]]}$ as a single fraction.",
+   "answer": "$\\frac{[[d + b]]x[[a * d - b * c|signed]]}{[[b * d]]}$"
+  },
+  {
+   "id": "y10hau6-s06-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract algebraic fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S6 Add and subtract algebraic fractions",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{x} - \\frac{[[b]]}{y}$ as a single fraction. (3 marks)",
+   "answer": "$\\frac{[[a]]y - [[b]]x}{xy}$"
+  },
+  {
+   "id": "y10hau6-s07-l1",
+   "topic": "Number",
+   "subtopic": "Divide algebraic fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S7 Divide algebraic fractions",
+   "keywords": [
+    "divide",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x}{[[a]]} \\div \\frac{x}{[[b]]}$.",
+   "answer": "$\\frac{[[b]]}{[[a]]}$"
+  },
+  {
+   "id": "y10hau6-s07-l2",
+   "topic": "Number",
+   "subtopic": "Divide algebraic fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S7 Divide algebraic fractions",
+   "keywords": [
+    "divide",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2}{[[a]]} \\div \\frac{x}{[[b]]}$.",
+   "answer": "$\\frac{[[b]]x}{[[a]]}$"
+  },
+  {
+   "id": "y10hau6-s07-l3",
+   "topic": "Number",
+   "subtopic": "Divide algebraic fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S7 Divide algebraic fractions",
+   "keywords": [
+    "divide",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c",
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x + [[a]]}{[[b]]} \\div \\frac{x + [[a]]}{[[c]]}$.",
+   "answer": "$\\frac{[[c]]}{[[b]]}$"
+  },
+  {
+   "id": "y10hau6-s07-l4",
+   "topic": "Number",
+   "subtopic": "Divide algebraic fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S7 Divide algebraic fractions",
+   "keywords": [
+    "divide",
+    "algebraic",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c",
+    "gcd(b, c) == 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 - [[a * a]]}{[[b]]} \\div \\frac{x + [[a]]}{[[c]]}$. (3 marks)",
+   "answer": "$\\frac{[[c]](x - [[a]])}{[[b]]}$"
+  },
+  {
+   "id": "y10hau6-s08-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract more complex algebraic fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S8 Add and subtract more complex algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{1}{x + [[a]]} + \\frac{1}{x + [[b]]}$ as a single fraction.",
+   "answer": "$\\frac{2x + [[a + b]]}{(x + [[a]])(x + [[b]])}$"
+  },
+  {
+   "id": "y10hau6-s08-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract more complex algebraic fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S8 Add and subtract more complex algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c * b != a * d",
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{x + [[b]]} + \\frac{[[c]]}{x - [[d]]}$ as a single fraction.",
+   "answer": "$\\frac{[[a + c]]x[[c * b - a * d|signed]]}{(x + [[b]])(x - [[d]])}$"
+  },
+  {
+   "id": "y10hau6-s08-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract more complex algebraic fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S8 Add and subtract more complex algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $\\frac{[[a]]}{x + [[b]]} - \\frac{[[c]]}{x - [[d]]}$ as a single fraction.",
+   "answer": "$\\frac{[[a - c|term:x]][[-a * d - c * b|signed]]}{(x + [[b]])(x - [[d]])}$"
+  },
+  {
+   "id": "y10hau6-s08-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract more complex algebraic fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S8 Add and subtract more complex algebraic fractions (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $\\frac{[[a]]}{x - [[b]]} + \\frac{[[c]]}{x + [[b]]}$ can be written as $\\frac{[[a + c]]x[[(a - c) * b|signed]]}{x^2 - [[b * b]]}$. (4 marks)",
+   "answer": "$\\frac{[[a]](x + [[b]]) + [[c]](x - [[b]])}{(x - [[b]])(x + [[b]])} = \\frac{[[a + c]]x[[(a - c) * b|signed]]}{x^2 - [[b * b]]}$"
+  },
+  {
+   "id": "y10hau6-s09-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide more complex algebraic fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S9 Multiply and divide more complex algebraic fractions (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a + b]]x + [[a * b]]}{x - [[c]]} \\times \\frac{x - [[c]]}{x + [[a]]}$.",
+   "answer": "$x + [[b]]$"
+  },
+  {
+   "id": "y10hau6-s09-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide more complex algebraic fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S9 Multiply and divide more complex algebraic fractions (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 - [[a * a]]}{x} \\div \\frac{x - [[a]]}{[[b]]x}$.",
+   "answer": "$[[b]](x + [[a]])$"
+  },
+  {
+   "id": "y10hau6-s09-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide more complex algebraic fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S9 Multiply and divide more complex algebraic fractions (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a + b]]x + [[a * b]]}{x^2 - [[b * b]]} \\times \\frac{x - [[b]]}{[[a]]}$.",
+   "answer": "$\\frac{x + [[a]]}{[[a]]}$"
+  },
+  {
+   "id": "y10hau6-s09-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide more complex algebraic fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S9 Multiply and divide more complex algebraic fractions (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "more",
+    "complex",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Simplify $\\frac{x^2 + [[a + b]]x + [[a * b]]}{x^2 - [[a * a]]} \\div \\frac{x + [[b]]}{x - [[a]]}$. (4 marks)",
+   "answer": "1"
+  },
+  {
+   "id": "y10hau6-s10-l1",
+   "topic": "Number",
+   "subtopic": "Solve equations with algebraic fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S10 Solve equations with algebraic fractions (E)",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b * c > a"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Solve $\\frac{x + [[a]]}{[[b]]} = [[c]]$.",
+   "answer": "$x = [[b * c - a]]$"
+  },
+  {
+   "id": "y10hau6-s10-l2",
+   "topic": "Number",
+   "subtopic": "Solve equations with algebraic fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S10 Solve equations with algebraic fractions (E)",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Solve $\\frac{[[a]]}{x} + \\frac{[[b]]}{x} = [[c]]$.",
+   "answer": "$x = [[(a + b) / c|frac]]$"
+  },
+  {
+   "id": "y10hau6-s10-l3",
+   "topic": "Number",
+   "subtopic": "Solve equations with algebraic fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S10 Solve equations with algebraic fractions (E)",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $\\frac{x}{[[a]]} + \\frac{x}{[[b]]} = [[a + b]]$.",
+   "answer": "$x = [[a * b]]$"
+  },
+  {
+   "id": "y10hau6-s10-l4",
+   "topic": "Number",
+   "subtopic": "Solve equations with algebraic fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B6 Work with fractions · S10 Solve equations with algebraic fractions (E)",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c > a"
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "Solve $\\frac{[[a]]}{x - [[b]]} = \\frac{[[c]]}{x + [[d]]}$. (4 marks)",
+   "answer": "$[[a]](x + [[d]]) = [[c]](x - [[b]])$, so $x = [[(c * b + a * d) / (c - a)|frac]]$"
+  }
+ ]
+}

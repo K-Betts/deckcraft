@@ -1,0 +1,2387 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Autumn Block 3 Quadratic expressions and equations: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hau3-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S1 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x + [[a]])(x + [[b]])$.",
+   "answer": "$x^2 + [[a + b]]x + [[a * b]]$"
+  },
+  {
+   "id": "y10hau3-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S1 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a != b"
+   ],
+   "text": "Expand and simplify $(x - [[a]])(x + [[b]])$.",
+   "answer": "$x^2[[b - a|sterm:x]][[-a * b|signed]]$"
+  },
+  {
+   "id": "y10hau3-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S1 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x - [[a]])(x - [[b]])$ and $(x + [[a]])^2$.",
+   "answer": "$x^2 - [[a + b]]x + [[a * b]]$; $x^2 + [[2 * a]]x + [[a * a]]$"
+  },
+  {
+   "id": "y10hau3-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand double brackets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S1 Expand double brackets",
+   "keywords": [
+    "expand",
+    "double",
+    "brackets",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle has sides $(x + [[a]])$ cm and $(x + [[b]])$ cm. Show that its area is $x^2 + [[a + b]]x + [[a * b]]$. Find the area when $x = [[x0]]$. (3 marks)",
+   "answer": "Area = $(x + [[a]])(x + [[b]]) = x^2 + [[a + b]]x + [[a * b]]$; when $x$ = [[x0]] it is [[(x0 + a) * (x0 + b)]] cm²"
+  },
+  {
+   "id": "y10hau3-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S2 Expand triple brackets",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand $(x + [[a]])(x + [[b]])(x + [[c]])$ and write the $x^2$ coefficient.",
+   "answer": "The coefficient of $x^2$ is [[a + b + c]]"
+  },
+  {
+   "id": "y10hau3-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S2 Expand triple brackets",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $x(x + [[a]])(x + [[b]])$.",
+   "answer": "$x^3 + [[a + b]]x^2 + [[a * b]]x$"
+  },
+  {
+   "id": "y10hau3-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S2 Expand triple brackets",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Expand and simplify $(x + [[a]])(x - [[a]])(x + [[b]])$.",
+   "answer": "$x^3 + [[b]]x^2 - [[a * a]]x - [[a * a * b]]$"
+  },
+  {
+   "id": "y10hau3-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Expand triple brackets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S2 Expand triple brackets",
+   "keywords": [
+    "expand",
+    "triple",
+    "brackets",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A cuboid has sides $x$ cm, $(x + [[a]])$ cm and $(x + [[b]])$ cm. Show that its volume is $x^3 + [[a + b]]x^2 + [[a * b]]x$ and find the volume when $x$ = [[x0]]. (4 marks)",
+   "answer": "Volume = $x(x + [[a]])(x + [[b]]) = x^3 + [[a + b]]x^2 + [[a * b]]x$; when $x$ = [[x0]]: [[x0 * (x0 + a) * (x0 + b)]] cm³"
+  },
+  {
+   "id": "y10hau3-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S3 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 + [[a + b]]x + [[a * b]]$.",
+   "answer": "$(x + [[a]])(x + [[b]])$"
+  },
+  {
+   "id": "y10hau3-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S3 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 - [[a + b]]x + [[a * b]]$.",
+   "answer": "$(x - [[a]])(x - [[b]])$"
+  },
+  {
+   "id": "y10hau3-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S3 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a != b"
+   ],
+   "text": "Factorise $x^2[[a - b|sterm:x]][[-a * b|signed]]$.",
+   "answer": "$(x + [[a]])(x - [[b]])$"
+  },
+  {
+   "id": "y10hau3-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Factorise quadratic expressions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S3 Factorise quadratic expressions",
+   "keywords": [
+    "factorise",
+    "quadratic",
+    "expressions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $x^2 - [[a * a]]$ and $x^2 - [[a + b]]x + [[a * b]]$. Then solve $x^2 - [[a * a]] = 0$. (4 marks)",
+   "answer": "$(x - [[a]])(x + [[a]])$; $(x - [[a]])(x - [[b]])$; $x = \\pm [[a]]$"
+  },
+  {
+   "id": "y10hau3-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Factorise more complex quadratic expressions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S4 Factorise more complex quadratic expressions (E)",
+   "keywords": [
+    "factorise",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * r > 1",
+    "gcd(p * r, gcd(p * s + q * r, q * s)) == 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Factorise $[[p * r]]x^2 + [[p * s + q * r]]x + [[q * s]]$.",
+   "answer": "$([[p]]x + [[q]])([[r|coef]]x + [[s]])$"
+  },
+  {
+   "id": "y10hau3-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Factorise more complex quadratic expressions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S4 Factorise more complex quadratic expressions (E)",
+   "keywords": [
+    "factorise",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * r > 1",
+    "gcd(p * r, gcd(p * s + q * r, q * s)) == 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Factorise $[[p * r]]x^2 - [[p * s + q * r]]x + [[q * s]]$.",
+   "answer": "$([[p]]x - [[q]])([[r|coef]]x - [[s]])$"
+  },
+  {
+   "id": "y10hau3-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Factorise more complex quadratic expressions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S4 Factorise more complex quadratic expressions (E)",
+   "keywords": [
+    "factorise",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * s - q * r > 0",
+    "gcd(p * r, gcd(p * s - q * r, q * s)) == 1",
+    "p * r > 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Factorise $[[p * r]]x^2 + [[p * s - q * r|coef]]x - [[q * s]]$.",
+   "answer": "$([[p]]x - [[q]])([[r|coef]]x + [[s]])$"
+  },
+  {
+   "id": "y10hau3-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Factorise more complex quadratic expressions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S4 Factorise more complex quadratic expressions (E)",
+   "keywords": [
+    "factorise",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * r > 1",
+    "gcd(p * r, gcd(p * s + q * r, q * s)) == 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Factorise $[[p * r]]x^2 + [[p * s + q * r]]x + [[q * s]]$ and hence solve $[[p * r]]x^2 + [[p * s + q * r]]x + [[q * s]] = 0$. (4 marks)",
+   "answer": "$([[p]]x + [[q]])([[r|coef]]x + [[s]])$; $x = -[[q / p|frac]]$ or $x = -[[s / r|frac]]$"
+  },
+  {
+   "id": "y10hau3-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Difference of two squares",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S5 Difference of two squares",
+   "keywords": [
+    "difference",
+    "of",
+    "two",
+    "squares",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Factorise $x^2 - [[k * k]]$.",
+   "answer": "$(x - [[k]])(x + [[k]])$"
+  },
+  {
+   "id": "y10hau3-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Difference of two squares",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S5 Difference of two squares",
+   "keywords": [
+    "difference",
+    "of",
+    "two",
+    "squares",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Factorise $[[a * a]]x^2 - [[b * b]]$.",
+   "answer": "$([[a]]x - [[b]])([[a]]x + [[b]])$"
+  },
+  {
+   "id": "y10hau3-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Difference of two squares",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S5 Difference of two squares",
+   "keywords": [
+    "difference",
+    "of",
+    "two",
+    "squares",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Factorise fully $[[m]]x^2 - [[m * k * k]]$.",
+   "answer": "$[[m]](x - [[k]])(x + [[k]])$"
+  },
+  {
+   "id": "y10hau3-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Difference of two squares",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S5 Difference of two squares",
+   "keywords": [
+    "difference",
+    "of",
+    "two",
+    "squares",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $(n + [[a]])^2 - (n - [[a]])^2 = [[4 * a]]n$ and use it to work out $[[100 + a]]^2 - [[100 - a]]^2$. (3 marks)",
+   "answer": "$(n + [[a]] - n + [[a]])(n + [[a]] + n - [[a]]) = [[2 * a]] \\times 2n = [[4 * a]]n$; $[[4 * a]] \\times 100 = [[400 * a]]$"
+  },
+  {
+   "id": "y10hau3-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations equal to 0",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S6 Solve quadratic equations equal to 0",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "equal",
+    "to",
+    "0",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 + [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = -[[a]]$ or $x = -[[b]]$"
+  },
+  {
+   "id": "y10hau3-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations equal to 0",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S6 Solve quadratic equations equal to 0",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "equal",
+    "to",
+    "0",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 - [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = [[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y10hau3-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations equal to 0",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S6 Solve quadratic equations equal to 0",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "equal",
+    "to",
+    "0",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2[[a - b|sterm:x]][[-a * b|signed]] = 0$.",
+   "answer": "$x = -[[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y10hau3-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations equal to 0",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S6 Solve quadratic equations equal to 0",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "equal",
+    "to",
+    "0",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 = [[a + b]]x - [[a * b]]$. (3 marks)",
+   "answer": "$x^2 - [[a + b]]x + [[a * b]] = 0$, so $x = [[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y10hau3-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by factorisation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S7 Solve quadratic equations by factorisation",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 + [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = -[[a]]$ or $x = -[[b]]$"
+  },
+  {
+   "id": "y10hau3-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by factorisation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S7 Solve quadratic equations by factorisation",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 - [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = [[a]]$ or $x = [[b]]$"
+  },
+  {
+   "id": "y10hau3-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by factorisation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S7 Solve quadratic equations by factorisation",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 - [[a * a]] = 0$ and $x^2 - [[a]]x = 0$.",
+   "answer": "$x = \\pm [[a]]$; $x = 0$ or $x = [[a]]$"
+  },
+  {
+   "id": "y10hau3-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by factorisation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S7 Solve quadratic equations by factorisation",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > 0"
+   ],
+   "text": "The area of a rectangle with sides $x$ cm and $(x + [[d]])$ cm is [[x0 * (x0 + d)]] cm². Form and solve a quadratic equation to find $x$. (4 marks)",
+   "answer": "$x(x + [[d]]) = [[x0 * (x0 + d)]]$, so $x^2 + [[d]]x - [[x0 * (x0 + d)]] = 0$, giving $(x - [[x0]])(x + [[x0 + d]]) = 0$; $x$ = [[x0]] (length is positive)"
+  },
+  {
+   "id": "y10hau3-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex quadratic equations by factorisation (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S8 Solve more complex quadratic equations by factorisation (E)",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * r > 1",
+    "gcd(p * r, gcd(p * s + q * r, q * s)) == 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p * r]]x^2 + [[p * s + q * r]]x + [[q * s]] = 0$.",
+   "answer": "$x = -[[q / p|frac]]$ or $x = -[[s / r|frac]]$"
+  },
+  {
+   "id": "y10hau3-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex quadratic equations by factorisation (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S8 Solve more complex quadratic equations by factorisation (E)",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != r"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $([[p]]x + [[q]])([[r]]x - [[s]]) = 0$.",
+   "answer": "$x = -[[q / p|frac]]$ or $x = [[s / r|frac]]$"
+  },
+  {
+   "id": "y10hau3-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex quadratic equations by factorisation (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S8 Solve more complex quadratic equations by factorisation (E)",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * s - q * r > 0",
+    "p * r > 1",
+    "gcd(p * r, gcd(p * s - q * r, q * s)) == 1"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p * r]]x^2 = [[p * s - q * r]]x + [[q * s]]$.",
+   "answer": "$[[p * r]]x^2 - [[p * s - q * r]]x - [[q * s]] = 0$, so $([[p]]x + [[q]])([[r|coef]]x - [[s]]) = 0$: $x = -[[q / p|frac]]$ or $x = [[s / r|frac]]$"
+  },
+  {
+   "id": "y10hau3-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve more complex quadratic equations by factorisation (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S8 Solve more complex quadratic equations by factorisation (E)",
+   "keywords": [
+    "solve",
+    "more",
+    "complex",
+    "quadratic",
+    "equations",
+    "by",
+    "factorisation",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > 0"
+   ],
+   "text": "A rectangle has sides $(2x + [[q]])$ cm and $(x + [[s]])$ cm and area [[(2 * x0 + q) * (x0 + s)]] cm². Form and solve a quadratic equation to find $x$. (4 marks)",
+   "answer": "$2x^2 + [[2 * s + q]]x + [[q * s]] = [[(2 * x0 + q) * (x0 + s)]]$; $x$ = [[x0]] (the other solution is negative)"
+  },
+  {
+   "id": "y10hau3-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Complete the square",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S9 Complete the square",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write $x^2 + [[2 * k]]x + [[c]]$ in the form $(x + a)^2 + b$.",
+   "answer": "$(x + [[k]])^2 [[c - k * k|signed]]$"
+  },
+  {
+   "id": "y10hau3-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Complete the square",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S9 Complete the square",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write $x^2 - [[2 * k]]x + [[c]]$ in the form $(x + a)^2 + b$.",
+   "answer": "$(x - [[k]])^2 [[c - k * k|signed]]$"
+  },
+  {
+   "id": "y10hau3-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Complete the square",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S9 Complete the square",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write $x^2 + [[2 * k]]x + [[c]]$ in completed-square form and write down the coordinates of the turning point of $y = x^2 + [[2 * k]]x + [[c]]$.",
+   "answer": "$(x + [[k]])^2 [[c - k * k|signed]]$; turning point ([[-k]], [[c - k * k]])"
+  },
+  {
+   "id": "y10hau3-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Complete the square",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S9 Complete the square",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "(a) Write $x^2 - [[2 * k]]x + [[c]]$ in the form $(x + a)^2 + b$. (b) Hence write down the minimum value of $x^2 - [[2 * k]]x + [[c]]$ and the value of $x$ where it occurs. (3 marks)",
+   "answer": "(a) $(x - [[k]])^2 [[c - k * k|signed]]$  (b) minimum [[c - k * k]] at $x = [[k]]$"
+  },
+  {
+   "id": "y10hau3-s10-l1",
+   "topic": "Algebra",
+   "subtopic": "Complete the square with more complex quadratic expressions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S10 Complete the square with more complex quadratic expressions (E)",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "with",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != 2 * k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write $2x^2 + [[4 * k]]x + [[c]]$ in the form $a(x + b)^2 + c$.",
+   "answer": "$2(x + [[k]])^2 [[c - 2 * k * k|signed]]$"
+  },
+  {
+   "id": "y10hau3-s10-l2",
+   "topic": "Algebra",
+   "subtopic": "Complete the square with more complex quadratic expressions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S10 Complete the square with more complex quadratic expressions (E)",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "with",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != 3 * k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write $3x^2 + [[6 * k]]x + [[c]]$ in the form $a(x + b)^2 + c$.",
+   "answer": "$3(x + [[k]])^2 [[c - 3 * k * k|signed]]$"
+  },
+  {
+   "id": "y10hau3-s10-l3",
+   "topic": "Algebra",
+   "subtopic": "Complete the square with more complex quadratic expressions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S10 Complete the square with more complex quadratic expressions (E)",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "with",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       5,
+       7,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != b * b / 4"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Write $x^2 + [[b]]x + [[c]]$ in the form $(x + p)^2 + q$ and give the turning point of its graph.",
+   "answer": "$(x + [[b / 2]])^2 [[c - b * b / 4|signed]]$; turning point ([[-b / 2]], [[c - b * b / 4]])"
+  },
+  {
+   "id": "y10hau3-s10-l4",
+   "topic": "Algebra",
+   "subtopic": "Complete the square with more complex quadratic expressions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S10 Complete the square with more complex quadratic expressions (E)",
+   "keywords": [
+    "complete",
+    "the",
+    "square",
+    "with",
+    "more",
+    "complex",
+    "quadratic",
+    "expressions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != 2 * k * k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$y = 2x^2 - [[4 * k]]x + [[c]]$. (a) Write $y$ in the form $a(x + b)^2 + c$. (b) Write down the coordinates of the turning point and say whether it is a maximum or minimum. (4 marks)",
+   "answer": "(a) $2(x - [[k]])^2 [[c - 2 * k * k|signed]]$  (b) ([[k]], [[c - 2 * k * k]]), a minimum"
+  },
+  {
+   "id": "y10hau3-s11-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by completing the square (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S11 Solve quadratic equations by completing the square (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "completing",
+    "the",
+    "square",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $(x + [[k]])^2 = [[m * m]]$.",
+   "answer": "$x = [[-k + m]]$ or $x = [[-k - m]]$"
+  },
+  {
+   "id": "y10hau3-s11-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by completing the square (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S11 Solve quadratic equations by completing the square (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "completing",
+    "the",
+    "square",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m > k"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $x^2 + [[2 * k]]x - [[m * m - k * k]] = 0$ by completing the square.",
+   "answer": "$(x + [[k]])^2 = [[m * m]]$, so $x = [[-k + m]]$ or $x = [[-k - m]]$"
+  },
+  {
+   "id": "y10hau3-s11-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by completing the square (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S11 Solve quadratic equations by completing the square (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "completing",
+    "the",
+    "square",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(c + k * k))"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $x^2 + [[2 * k]]x - [[c]] = 0$ by completing the square. Give your answers as surds.",
+   "answer": "$(x + [[k]])^2 = [[c + k * k]]$, so $x = -[[k]] \\pm \\sqrt{[[c + k * k]]}$"
+  },
+  {
+   "id": "y10hau3-s11-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations by completing the square (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S11 Solve quadratic equations by completing the square (E)",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "by",
+    "completing",
+    "the",
+    "square",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(c + k * k))"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Solve $x^2 + [[2 * k]]x - [[c]] = 0$ by completing the square. Give your answers to 2 decimal places. (4 marks)",
+   "answer": "$x = [[-k + sqrt(c + k * k)|dp:2]]$ or $x = [[-k - sqrt(c + k * k)|dp:2]]$"
+  },
+  {
+   "id": "y10hau3-s12-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations using the quadratic formula",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S12 Solve quadratic equations using the quadratic formula",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "using",
+    "the",
+    "formula",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b * b > 4 * c"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "For $x^2 + [[b]]x + [[c]] = 0$ write down $a$, $b$ and $c$ for the quadratic formula and work out $b^2 - 4ac$.",
+   "answer": "$a = 1$, $b = [[b]]$, $c = [[c]]$; $b^2 - 4ac = [[b * b - 4 * c]]$"
+  },
+  {
+   "id": "y10hau3-s12-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations using the quadratic formula",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S12 Solve quadratic equations using the quadratic formula",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "using",
+    "the",
+    "formula",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use the quadratic formula to solve $x^2 + [[a + b]]x + [[a * b]] = 0$.",
+   "answer": "$x = -[[a]]$ or $x = -[[b]]$"
+  },
+  {
+   "id": "y10hau3-s12-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations using the quadratic formula",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S12 Solve quadratic equations using the quadratic formula",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "using",
+    "the",
+    "formula",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(b * b + 4 * c))"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Use the quadratic formula to solve $x^2 + [[b]]x - [[c]] = 0$. Give your answers to 2 decimal places.",
+   "answer": "$x = [[(-b + sqrt(b * b + 4 * c)) / 2|dp:2]]$ or $x = [[(-b - sqrt(b * b + 4 * c)) / 2|dp:2]]$"
+  },
+  {
+   "id": "y10hau3-s12-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic equations using the quadratic formula",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B3 Quadratic expressions and equations · S12 Solve quadratic equations using the quadratic formula",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "equations",
+    "using",
+    "the",
+    "formula",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(b * b + 4 * p * c))"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p]]x^2 + [[b]]x - [[c]] = 0$ using the quadratic formula. Give your answers to 2 decimal places. (4 marks)",
+   "answer": "$x = [[(-b + sqrt(b * b + 4 * p * c)) / (2 * p)|dp:2]]$ or $x = [[(-b - sqrt(b * b + 4 * p * c)) / (2 * p)|dp:2]]$"
+  }
+ ]
+}

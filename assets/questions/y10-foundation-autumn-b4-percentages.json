@@ -1,0 +1,2022 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Autumn Block 4 Percentages: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fau4-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Percentage of an amount",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S1 Percentage of an amount",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       50,
+       5,
+       75
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "A",
+     "k * 40"
+    ]
+   ],
+   "check": [
+    "p * A / 100 * 100 == p * A"
+   ],
+   "text": "Work out [[p]]% of £[[A]].",
+   "answer": "£[[p * A / 100]]"
+  },
+  {
+   "id": "y10fau4-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Percentage of an amount",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S1 Percentage of an amount",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       15,
+       35,
+       45,
+       60,
+       30,
+       95
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "A",
+     "k * 20"
+    ]
+   ],
+   "check": [
+    "p * A / 100 * 100 == p * A"
+   ],
+   "text": "Work out [[p]]% of [[A]] kg.",
+   "answer": "[[p * A / 100]] kg"
+  },
+  {
+   "id": "y10fau4-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Percentage of an amount",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S1 Percentage of an amount",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q",
+    "p * q % 100 == 0"
+   ],
+   "check": [
+    "p * q / 100 * 100 == p * q"
+   ],
+   "text": "Mia says that [[p]]% of [[q]] is the same as [[q]]% of [[p]]. Is she right? Work out both to check.",
+   "answer": "Yes: [[p]]% of [[q]] = [[p * q / 100]] and [[q]]% of [[p]] = [[p * q / 100]]"
+  },
+  {
+   "id": "y10fau4-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Percentage of an amount",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S1 Percentage of an amount",
+   "keywords": [
+    "percentage",
+    "of",
+    "an",
+    "amount",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "A",
+     "k * 20"
+    ]
+   ],
+   "where": [
+    "p + q < 70"
+   ],
+   "check": [
+    "p * A / 100 * 100 == p * A"
+   ],
+   "text": "A bag has [[A]] sweets. [[p]]% are red and [[q]]% are green. The rest are yellow. How many yellow sweets are there? (3 marks)",
+   "answer": "[[A - p * A / 100 - q * A / 100]]"
+  },
+  {
+   "id": "y10fau4-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S2 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       120,
+       160,
+       240
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       35,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A * p / 100)"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Increase [[A]] by [[p]]%.",
+   "answer": "[[A * (1 + p / 100)]]"
+  },
+  {
+   "id": "y10fau4-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S2 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       120,
+       160,
+       240,
+       350
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       15,
+       20,
+       25,
+       30,
+       35,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A * p / 100 * 4)"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Decrease £[[A]] by [[p]]%.",
+   "answer": "£[[A * (1 - p / 100)|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S2 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       200,
+       300,
+       400,
+       500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       20,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A phone costs £[[A]]. In a sale the price is reduced by [[p]]%. The sale price is then increased by [[q]]%. Is the final price the same as the original? Work it out.",
+   "answer": "£[[A * (1 - p / 100) * (1 + q / 100)|dp:2]]: it is [[A * (1 - p / 100) * (1 + q / 100) < A|if:lower/higher]] than £[[A]]"
+  },
+  {
+   "id": "y10fau4-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Percentage increase and decrease",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S2 Percentage increase and decrease",
+   "keywords": [
+    "percentage",
+    "increase",
+    "and",
+    "decrease",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       100,
+       200,
+       300,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A shop increases its prices by [[p]]%. A jacket cost £[[A]] before. (a) Work out the new price. (b) The new price is then reduced by [[p]]% in a sale. Work out the sale price and the overall percentage change. (4 marks)",
+   "answer": "(a) £[[A * (1 + p / 100)|dp:2]]  (b) £[[A * (1 + p / 100) * (1 - p / 100)|dp:2]]; overall a decrease of [[p * p / 100|dp:1]]%"
+  },
+  {
+   "id": "y10fau4-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Express one number as a fraction or percentage of another",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S3 Express one number as a fraction or percentage of another",
+   "keywords": [
+    "express",
+    "one",
+    "number",
+    "as",
+    "a",
+    "fraction",
+    "or",
+    "percentage",
+    "of",
+    "another",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       50,
+       40,
+       200
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       49
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b"
+   ],
+   "check": [
+    "a * 100 / b * b == a * 100"
+   ],
+   "text": "Write [[a]] out of [[b]] as a percentage.",
+   "answer": "[[a * 100 / b]]%"
+  },
+  {
+   "id": "y10fau4-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Express one number as a fraction or percentage of another",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S3 Express one number as a fraction or percentage of another",
+   "keywords": [
+    "express",
+    "one",
+    "number",
+    "as",
+    "a",
+    "fraction",
+    "or",
+    "percentage",
+    "of",
+    "another",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       20,
+       25,
+       40,
+       50,
+       80
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       39
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "a * 100 % b == 0"
+   ],
+   "check": [
+    "a * 100 / b * b == a * 100"
+   ],
+   "text": "Write [[a]] cm as a fraction of [[b]] cm in its simplest form, and as a percentage.",
+   "answer": "$[[a / b|frac]]$ = [[a * 100 / b]]%"
+  },
+  {
+   "id": "y10fau4-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Express one number as a fraction or percentage of another",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S3 Express one number as a fraction or percentage of another",
+   "keywords": [
+    "express",
+    "one",
+    "number",
+    "as",
+    "a",
+    "fraction",
+    "or",
+    "percentage",
+    "of",
+    "another",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       20,
+       25,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       49
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       30,
+       90
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "a * 100 % b == 0",
+    "a * 100 / b != c"
+   ],
+   "check": [
+    "a * 100 / b * b == a * 100"
+   ],
+   "text": "In a test Ali scored [[a]] out of [[b]] and Ben scored [[c]]%. Who did better?",
+   "answer": "Ali: [[a * 100 / b]]%; so [[a * 100 / b > c|if:Ali/Ben]] did better"
+  },
+  {
+   "id": "y10fau4-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Express one number as a fraction or percentage of another",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S3 Express one number as a fraction or percentage of another",
+   "keywords": [
+    "express",
+    "one",
+    "number",
+    "as",
+    "a",
+    "fraction",
+    "or",
+    "percentage",
+    "of",
+    "another",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       25,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       14
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "g * 100 % n == 0",
+    "b * 100 % n == 0",
+    "g + b < n"
+   ],
+   "check": [
+    "g * 100 / n * n == g * 100"
+   ],
+   "text": "In a class of [[n]] pupils, [[g]] walk to school. [[b]] cycle. (a) What percentage walk? (b) What percentage cycle? (c) What percentage do neither? (3 marks)",
+   "answer": "(a) [[g * 100 / n]]%  (b) [[b * 100 / n]]%  (c) [[(n - g - b) * 100 / n]]%"
+  },
+  {
+   "id": "y10fau4-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Express a change as a percentage",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S4 Express a change as a percentage",
+   "keywords": [
+    "express",
+    "a",
+    "change",
+    "as",
+    "percentage",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80,
+       200
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "B",
+     "A * (1 + p / 100)"
+    ]
+   ],
+   "where": [
+    "isint(B)"
+   ],
+   "check": [
+    "B > A"
+   ],
+   "text": "A price goes from £[[A]] to £[[B]]. Work out the percentage increase.",
+   "answer": "[[(B - A) * 100 / A]]%"
+  },
+  {
+   "id": "y10fau4-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Express a change as a percentage",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S4 Express a change as a percentage",
+   "keywords": [
+    "express",
+    "a",
+    "change",
+    "as",
+    "percentage",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       200,
+       250
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "B",
+     "A * (1 - p / 100)"
+    ]
+   ],
+   "where": [
+    "isint(B)"
+   ],
+   "check": [
+    "B < A"
+   ],
+   "text": "The number of members falls from [[A]] to [[B]]. Work out the percentage decrease.",
+   "answer": "[[(A - B) * 100 / A]]%"
+  },
+  {
+   "id": "y10fau4-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Express a change as a percentage",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S4 Express a change as a percentage",
+   "keywords": [
+    "express",
+    "a",
+    "change",
+    "as",
+    "percentage",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       200,
+       400
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "int": [
+       450,
+       700
+      ]
+     }
+    ],
+    [
+     "C",
+     {
+      "int": [
+       300,
+       440
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "C < B",
+    "C != A"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A shop's profit rises from £[[A]] to £[[B]] and then falls to £[[C]]. Work out the percentage change in each step.",
+   "answer": "[[(B - A) * 100 / A|dp:1]]% increase; [[(B - C) * 100 / B|dp:1]]% decrease"
+  },
+  {
+   "id": "y10fau4-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Express a change as a percentage",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S4 Express a change as a percentage",
+   "keywords": [
+    "express",
+    "a",
+    "change",
+    "as",
+    "percentage",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "int": [
+       12000,
+       19000
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "int": [
+       20000,
+       30000
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "The population of a town was [[A]] in 2010 and [[B]] in 2020. (a) Work out the percentage increase to 1 decimal place. (b) If it grows by the same percentage again, what will it be in 2030? (3 marks)",
+   "answer": "(a) [[(B - A) * 100 / A|dp:1]]%  (b) about [[round(B * B / A)]]"
+  },
+  {
+   "id": "y10fau4-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Find the original value after a percentage change",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S5 Find the original value after a percentage change",
+   "keywords": [
+    "find",
+    "the",
+    "original",
+    "value",
+    "after",
+    "a",
+    "percentage",
+    "change",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       120,
+       200,
+       250
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A * (1 + p / 100) * 100)"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "After a [[p]]% increase a price is £[[A * (1 + p / 100)|dp:2]]. Work out the original price.",
+   "answer": "£[[A]]"
+  },
+  {
+   "id": "y10fau4-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Find the original value after a percentage change",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S5 Find the original value after a percentage change",
+   "keywords": [
+    "find",
+    "the",
+    "original",
+    "value",
+    "after",
+    "a",
+    "percentage",
+    "change",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       120,
+       200,
+       250
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A * (1 - p / 100) * 100)"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "After a [[p]]% decrease a price is £[[A * (1 - p / 100)|dp:2]]. Work out the original price.",
+   "answer": "£[[A]]"
+  },
+  {
+   "id": "y10fau4-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Find the original value after a percentage change",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S5 Find the original value after a percentage change",
+   "keywords": [
+    "find",
+    "the",
+    "original",
+    "value",
+    "after",
+    "a",
+    "percentage",
+    "change",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       200,
+       400,
+       500,
+       800
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A laptop costs £[[A * (1 - p / 100)|dp:2]] after a [[p]]% discount. Sam says the original price was £[[A * (1 - p / 100) * (1 + p / 100)|dp:2]]. What did Sam do wrong? What is the original price?",
+   "answer": "Sam added [[p]]% of the sale price; the sale price is [[100 - p]]% of the original, so original = £[[A * (1 - p / 100)|dp:2]] ÷ [[1 - p / 100]] = £[[A]]"
+  },
+  {
+   "id": "y10fau4-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Find the original value after a percentage change",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S5 Find the original value after a percentage change",
+   "keywords": [
+    "find",
+    "the",
+    "original",
+    "value",
+    "after",
+    "a",
+    "percentage",
+    "change",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       100000,
+       150000,
+       200000,
+       250000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(A * (1 + p / 100) * (1 + q / 100) * 100)"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A house is worth £[[A * (1 + p / 100) * (1 + q / 100)|dp:2]] after rising by [[p]]% and then by [[q]]%. Work out its value before the rises. (3 marks)",
+   "answer": "£[[A]]"
+  },
+  {
+   "id": "y10fau4-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Repeated percentage change (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S6 Repeated percentage change (E)",
+   "keywords": [
+    "repeated",
+    "percentage",
+    "change",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       10000,
+       12000,
+       15000,
+       20000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A car costs £[[A]]. Its value goes down by [[p]]% each year. Work out its value after 2 years.",
+   "answer": "£[[A * (1 - p / 100)^2|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Repeated percentage change (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S6 Repeated percentage change (E)",
+   "keywords": [
+    "repeated",
+    "percentage",
+    "change",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       100000,
+       150000,
+       200000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "The price of a house rises by [[p]]% each year. It is worth £[[A]] now. Work out its value after 3 years.",
+   "answer": "£[[A * (1 + p / 100)^3|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Repeated percentage change (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S6 Repeated percentage change (E)",
+   "keywords": [
+    "repeated",
+    "percentage",
+    "change",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       5000,
+       8000,
+       10000,
+       20000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       5,
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A town has [[A]] people. The population grows by [[p]]% each year. Is the population after 2 years [[2 * p]]% higher? Work it out.",
+   "answer": "After 2 years: [[A * (1 + p / 100)^2|dp:0]], an increase of [[((1 + p / 100)^2 - 1) * 100|dp:2]]%, which is more than [[2 * p]]%"
+  },
+  {
+   "id": "y10fau4-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Repeated percentage change (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S6 Repeated percentage change (E)",
+   "keywords": [
+    "repeated",
+    "percentage",
+    "change",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       8000,
+       10000,
+       12000,
+       20000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A machine is worth £[[A]]. It loses [[p]]% of its value each year. (a) Work out its value after [[n]] years. (b) Work out the overall percentage decrease. (4 marks)",
+   "answer": "(a) £[[A * (1 - p / 100)^n|dp:2]]  (b) [[(1 - (1 - p / 100)^n) * 100|dp:1]]%"
+  },
+  {
+   "id": "y10fau4-s07-l1",
+   "topic": "Ratio",
+   "subtopic": "Simple interest",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S7 Simple interest",
+   "keywords": [
+    "simple",
+    "interest",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2000,
+       2500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Work out the simple interest on £[[A]] at [[p]]% a year for [[n]] years.",
+   "answer": "£[[A * p * n / 100|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s07-l2",
+   "topic": "Ratio",
+   "subtopic": "Simple interest",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S7 Simple interest",
+   "keywords": [
+    "simple",
+    "interest",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2000,
+       2500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested at [[p]]% simple interest. What is it worth after [[n]] years?",
+   "answer": "£[[A * (1 + p * n / 100)|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s07-l3",
+   "topic": "Ratio",
+   "subtopic": "Simple interest",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S7 Simple interest",
+   "keywords": [
+    "simple",
+    "interest",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2000,
+       2500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] earns £[[A * p * n / 100|dp:2]] simple interest in [[n]] years. Work out the interest rate.",
+   "answer": "[[p]]% a year"
+  },
+  {
+   "id": "y10fau4-s07-l4",
+   "topic": "Ratio",
+   "subtopic": "Simple interest",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S7 Simple interest",
+   "keywords": [
+    "simple",
+    "interest",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2000,
+       2500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested at [[p]]% simple interest a year. How many years until the interest is £[[A * p * n / 100|dp:2]]? How much is the account worth then? (3 marks)",
+   "answer": "[[n]] years; £[[A * (1 + p * n / 100)|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s08-l1",
+   "topic": "Ratio",
+   "subtopic": "Compound interest (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S8 Compound interest (E)",
+   "keywords": [
+    "compound",
+    "interest",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       1000,
+       2000,
+       5000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested at [[p]]% compound interest. Work out its value after 2 years.",
+   "answer": "£[[A * (1 + p / 100)^2|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s08-l2",
+   "topic": "Ratio",
+   "subtopic": "Compound interest (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S8 Compound interest (E)",
+   "keywords": [
+    "compound",
+    "interest",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       1000,
+       2000,
+       5000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested at [[p]]% compound interest a year. Work out the total interest earned after [[n]] years.",
+   "answer": "£[[A * (1 + p / 100)^n - A|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s08-l3",
+   "topic": "Ratio",
+   "subtopic": "Compound interest (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S8 Compound interest (E)",
+   "keywords": [
+    "compound",
+    "interest",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       1000,
+       2000,
+       5000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "£[[A]] is invested for [[n]] years at [[p]]%. Compare simple and compound interest.",
+   "answer": "Simple: £[[A * (1 + p * n / 100)|dp:2]]; compound: £[[A * (1 + p / 100)^n|dp:2]]; compound is £[[A * (1 + p / 100)^n - A * (1 + p * n / 100)|dp:2]] more"
+  },
+  {
+   "id": "y10fau4-s08-l4",
+   "topic": "Ratio",
+   "subtopic": "Compound interest (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S8 Compound interest (E)",
+   "keywords": [
+    "compound",
+    "interest",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       2000,
+       3000,
+       4000,
+       5000
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A scooter costs £[[A]] and loses [[p]]% of its value each year. (a) Work out its value after [[n]] years. (b) Mia says it loses [[n * p]]% in total. Is she right? (4 marks)",
+   "answer": "(a) £[[A * (1 - p / 100)^n|dp:2]]  (b) No: it loses [[(1 - (1 - p / 100)^n) * 100|dp:1]]% in total, less than [[n * p]]%"
+  },
+  {
+   "id": "y10fau4-s09-l1",
+   "topic": "Ratio",
+   "subtopic": "Choose appropriate methods to solve percentage problems",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S9 Choose appropriate methods to solve percentage problems",
+   "keywords": [
+    "choose",
+    "appropriate",
+    "methods",
+    "to",
+    "solve",
+    "percentage",
+    "problems",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       15,
+       25,
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "A",
+     {
+      "choose": [
+       80,
+       120,
+       160,
+       200
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       20,
+       40,
+       45
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "choose": [
+       100,
+       150,
+       200,
+       300
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p * A != q * B",
+    "p * A % 100 == 0",
+    "q * B % 100 == 0"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Which is greater: [[p]]% of [[A]] or [[q]]% of [[B]]? Show your working.",
+   "answer": "[[p]]% of [[A]] = [[p * A / 100]]; [[q]]% of [[B]] = [[q * B / 100]]; so [[p * A > q * B|if:the first/the second]] is greater"
+  },
+  {
+   "id": "y10fau4-s09-l2",
+   "topic": "Ratio",
+   "subtopic": "Choose appropriate methods to solve percentage problems",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S9 Choose appropriate methods to solve percentage problems",
+   "keywords": [
+    "choose",
+    "appropriate",
+    "methods",
+    "to",
+    "solve",
+    "percentage",
+    "problems",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       500,
+       800,
+       1000,
+       2000,
+       2500
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Simple interest of [[p]]% a year is paid on £[[A]]. How much is the account worth after [[n]] years?",
+   "answer": "£[[A * (1 + p * n / 100)|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s09-l3",
+   "topic": "Ratio",
+   "subtopic": "Choose appropriate methods to solve percentage problems",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S9 Choose appropriate methods to solve percentage problems",
+   "keywords": [
+    "choose",
+    "appropriate",
+    "methods",
+    "to",
+    "solve",
+    "percentage",
+    "problems",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       80,
+       100,
+       120,
+       160
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "B",
+     {
+      "int": [
+       80,
+       130
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "choose": [
+       5,
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "A * (1 - p / 100) != B - v"
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "Shop A sells a £[[A]] coat with [[p]]% off. Shop B sells the same coat for £[[B]] with a £[[v]] voucher. Which shop is cheaper, and by how much?",
+   "answer": "A: £[[A * (1 - p / 100)|dp:2]]; B: £[[B - v|dp:2]]; [[A * (1 - p / 100) < B - v|if:Shop A/Shop B]] is cheaper by £[[abs(A * (1 - p / 100) - (B - v))|dp:2]]"
+  },
+  {
+   "id": "y10fau4-s09-l4",
+   "topic": "Ratio",
+   "subtopic": "Choose appropriate methods to solve percentage problems",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Autumn B4 Percentages · S9 Choose appropriate methods to solve percentage problems",
+   "keywords": [
+    "choose",
+    "appropriate",
+    "methods",
+    "to",
+    "solve",
+    "percentage",
+    "problems",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       100,
+       150,
+       200,
+       250,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A jacket costs £[[A]]. In a sale it is reduced by [[p]]%. Mia then pays [[q]]% VAT on the sale price. Work out the final price. (4 marks)",
+   "answer": "£[[A * (1 - p / 100) * (1 + q / 100)|dp:2]]"
+  }
+ ]
+}

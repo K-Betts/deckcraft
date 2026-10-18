@@ -1,0 +1,2092 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Autumn Block 2 Equations, inequalities and formulae: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hau2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (x0 + b) / m - b == x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) = [[m * (x0 + b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 > b"
+   ],
+   "check": [
+    "m * (x0 - b) / m + b == x0"
+   ],
+   "text": "Solve $[[m]](x - [[b]]) = [[m * (x0 - b)]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (x0 + b) / m - b == x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) < [[m * (x0 + b)]]$.",
+   "answer": "$x < [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S1 Solve equations",
+   "keywords": [
+    "solve",
+    "equations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m - n) * x0 + m * b + n * d - m * b - n * d == (m - n) * x0"
+   ],
+   "text": "Solve $[[m]](x + [[b]]) - [[n]](x - [[d]]) = [[(m - n) * x0 + m * b + n * d]]$. (4 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Understand inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S2 Understand inequalities",
+   "keywords": [
+    "understand",
+    "inequalities",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "List the integers $n$ that satisfy $-[[a]] < n \\leq [[b]]$.",
+   "answer": "[[-a + 1]] to [[b]]"
+  },
+  {
+   "id": "y10hau2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Understand inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S2 Understand inequalities",
+   "keywords": [
+    "understand",
+    "inequalities",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "Write an inequality for: $x$ is greater than [[a]] and at most [[b]].",
+   "answer": "$[[a]] < x \\leq [[b]]$"
+  },
+  {
+   "id": "y10hau2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Understand inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S2 Understand inequalities",
+   "keywords": [
+    "understand",
+    "inequalities",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "How many integers satisfy $[[a]] \\leq n < [[b]]$? List them.",
+   "answer": "[[b - a]] integers: [[a]] to [[b - 1]]"
+  },
+  {
+   "id": "y10hau2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Understand inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S2 Understand inequalities",
+   "keywords": [
+    "understand",
+    "inequalities",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       -5,
+       -3,
+       -1,
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "$n$ is an integer. List all the values of $n$ for which $[[a]] < 2n \\leq [[2 * b]]$. (2 marks)",
+   "answer": "[[floor(a / 2) + 1]] to [[b]]"
+  },
+  {
+   "id": "y10hau2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10,
+       12,
+       15,
+       18,
+       20,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 % a == 0"
+   ],
+   "check": [
+    "x0 / a * a == x0"
+   ],
+   "text": "Solve $\\frac{x}{[[a]]} + [[b]] = [[x0 / a + b]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * c > b"
+   ],
+   "check": [
+    "a * c - b + b == a * c"
+   ],
+   "text": "Solve $\\frac{x + [[b]]}{[[a]]} = [[c]]$.",
+   "answer": "$x = [[a * c - b]]$"
+  },
+  {
+   "id": "y10hau2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(a * x0 + b) / c"
+    ]
+   ],
+   "where": [
+    "isint(d)"
+   ],
+   "check": [
+    "a * x0 + b == c * d"
+   ],
+   "text": "Solve $\\frac{[[a]]x + [[b]]}{[[c]]} = [[d]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve fractional equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S3 Solve fractional equations",
+   "keywords": [
+    "solve",
+    "fractional",
+    "equations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "x0",
+     "lcm(a, b) * k"
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "x0 / a + x0 / b - x0 / a - x0 / b == 0"
+   ],
+   "text": "Solve $\\frac{x}{[[a]]} + \\frac{x}{[[b]]} = [[x0 / a + x0 / b]]$. (3 marks)",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Represent solutions to inequalities using set notation (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S4 Represent solutions to inequalities using set notation (E)",
+   "keywords": [
+    "represent",
+    "solutions",
+    "to",
+    "inequalities",
+    "using",
+    "set",
+    "notation",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       -5,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k == k"
+   ],
+   "text": "Write the inequality $x > [[k]]$ using set notation.",
+   "answer": "{x : x > [[k]]}"
+  },
+  {
+   "id": "y10hau2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Represent solutions to inequalities using set notation (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S4 Represent solutions to inequalities using set notation (E)",
+   "keywords": [
+    "represent",
+    "solutions",
+    "to",
+    "inequalities",
+    "using",
+    "set",
+    "notation",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "Write $[[a]] < x \\leq [[b]]$ in set notation and list the integers in the set.",
+   "answer": "{x : [[a]] < x ≤ [[b]]}; integers [[a + 1]] to [[b]]"
+  },
+  {
+   "id": "y10hau2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Represent solutions to inequalities using set notation (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S4 Represent solutions to inequalities using set notation (E)",
+   "keywords": [
+    "represent",
+    "solutions",
+    "to",
+    "inequalities",
+    "using",
+    "set",
+    "notation",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $[[m]]x + [[c]] > [[m * k + c]]$ and write the solution in set notation.",
+   "answer": "$x > [[k]]$, so {x : x > [[k]]}"
+  },
+  {
+   "id": "y10hau2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Represent solutions to inequalities using set notation (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S4 Represent solutions to inequalities using set notation (E)",
+   "keywords": [
+    "represent",
+    "solutions",
+    "to",
+    "inequalities",
+    "using",
+    "set",
+    "notation",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > a"
+   ],
+   "text": "Solve $[[m]]x - [[c]] \\geq [[m * a - c]]$ and $[[n]]x < [[n * b]]$. Write the values of $x$ that satisfy both, using set notation. (4 marks)",
+   "answer": "$x \\geq [[a]]$ and $x < [[b]]$: {x : [[a]] ≤ x < [[b]]}"
+  },
+  {
+   "id": "y10hau2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]]x + [[b]] = [[q]]x + [[b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(p - q) * x0 - b"
+    ]
+   ],
+   "where": [
+    "d > 0"
+   ],
+   "check": [
+    "(b + d) / (p - q) * (p - q) == b + d"
+   ],
+   "text": "Solve $[[p]]x - [[b]] = [[q]]x + [[d]]$.",
+   "answer": "$x = [[(b + d) / (p - q)]]$"
+  },
+  {
+   "id": "y10hau2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(p - q) * x0 / (p - q) == x0"
+   ],
+   "text": "Solve $[[p]](x + [[b]]) = [[q]]x + [[p * b + (p - q) * x0]]$.",
+   "answer": "$x = [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations with unknowns on both sides",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S5 Solve equations with unknowns on both sides",
+   "keywords": [
+    "solve",
+    "equations",
+    "with",
+    "unknowns",
+    "on",
+    "both",
+    "sides",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       1
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "b",
+     "a + (p - q) * x0"
+    ]
+   ],
+   "where": [
+    "p > q"
+   ],
+   "check": [
+    "(b - a) / (p - q) * (p - q) == b - a"
+   ],
+   "text": "Taxi A charges £[[a]] plus £[[p]] per mile. Taxi B charges £[[b]] plus £[[q]] per mile. For what distance do both taxis cost the same? (4 marks)",
+   "answer": "$[[a]] + [[p]]m = [[b]] + [[q|coef]]m$, so $m = [[(b - a) / (p - q)]]$ miles"
+  },
+  {
+   "id": "y10hau2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S6 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * x0 / m == x0"
+   ],
+   "text": "Solve $-[[m]]x < [[m * x0]]$.",
+   "answer": "$x > -[[x0]]$"
+  },
+  {
+   "id": "y10hau2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S6 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(c - (c - m * x0)) / m == x0"
+   ],
+   "text": "Solve $[[c]] - [[m]]x \\geq [[c - m * x0]]$.",
+   "answer": "$x \\leq [[x0]]$"
+  },
+  {
+   "id": "y10hau2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S6 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "a",
+     "m * p"
+    ],
+    [
+     "b",
+     "m * q"
+    ]
+   ],
+   "check": [
+    "a / m * m == a"
+   ],
+   "text": "Solve $-[[a]] < [[m]]x \\leq [[b]]$.",
+   "answer": "$-[[a / m]] < x \\leq [[b / m]]$"
+  },
+  {
+   "id": "y10hau2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S6 Solve inequalities",
+   "keywords": [
+    "solve",
+    "inequalities",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(c - (c - m * x0)) / m == x0"
+   ],
+   "text": "Solve $[[c]] - [[m]]x > [[c - m * x0]]$ and list the positive integers that satisfy it. Explain why the inequality sign changes direction. (3 marks)",
+   "answer": "$x < [[x0]]$; positive integers 1 to [[x0 - 1]]; dividing by a negative number reverses the inequality sign"
+  },
+  {
+   "id": "y10hau2-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a simple formula",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S7 Change the subject of a simple formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "simple",
+    "formula",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x + [[c]]$.",
+   "answer": "$x = \\frac{y - [[c]]}{[[m]]}$"
+  },
+  {
+   "id": "y10hau2-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a simple formula",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S7 Change the subject of a simple formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "simple",
+    "formula",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x - [[c]]$.",
+   "answer": "$x = \\frac{y + [[c]]}{[[m]]}$"
+  },
+  {
+   "id": "y10hau2-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a simple formula",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S7 Change the subject of a simple formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "simple",
+    "formula",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $l$ the subject of $P = [[m]]l + 2w$.",
+   "answer": "$l = \\frac{P - 2w}{[[m]]}$"
+  },
+  {
+   "id": "y10hau2-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a simple formula",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S7 Change the subject of a simple formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "simple",
+    "formula",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "u",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "a0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "v",
+     "sqrt(u * u + 2 * a0 * s)"
+    ]
+   ],
+   "where": [
+    "isint(v)"
+   ],
+   "check": [
+    "(v * v - u * u) / (2 * s) == a0"
+   ],
+   "text": "$v^2 = u^2 + 2as$. (a) Make $a$ the subject. (b) Work out $a$ when $v = [[v]]$, $u = [[u]]$ and $s = [[s]]$. (3 marks)",
+   "answer": "(a) $a = \\frac{v^2 - u^2}{2s}$  (b) [[(v * v - u * u) / (2 * s)]]"
+  },
+  {
+   "id": "y10hau2-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a known formula",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S8 Change the subject of a known formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "known",
+    "formula",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Make $x$ the subject of $y = x + [[c]]$.",
+   "answer": "$x = y - [[c]]$"
+  },
+  {
+   "id": "y10hau2-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a known formula",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S8 Change the subject of a known formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "known",
+    "formula",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x$.",
+   "answer": "$x = \\frac{y}{[[m]]}$"
+  },
+  {
+   "id": "y10hau2-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a known formula",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S8 Change the subject of a known formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "known",
+    "formula",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "t",
+       "n"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "pick": [
+       "y",
+       "p",
+       "q"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $[[v]]$ the subject of $[[w]] = \\frac{[[v]]}{[[m]]}$.",
+   "answer": "$[[v]] = [[m]][[w]]$"
+  },
+  {
+   "id": "y10hau2-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a known formula",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S8 Change the subject of a known formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "known",
+    "formula",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "l * w0 / l == w0"
+   ],
+   "text": "The area of a rectangle is $A = lw$. (a) Make $w$ the subject. (b) Work out $w$ when $A = [[l * w0]]$ and $l = [[l]]$. (2 marks)",
+   "answer": "(a) $w = \\frac{A}{l}$  (b) [[w0]]"
+  },
+  {
+   "id": "y10hau2-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S9 Change the subject of a complex formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\sqrt{x - [[c]]}$.",
+   "answer": "$x = y^2 + [[c]]$"
+  },
+  {
+   "id": "y10hau2-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S9 Change the subject of a complex formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $r$ the subject of $A = [[m]]\\pi r^2$.",
+   "answer": "$r = \\sqrt{\\frac{A}{[[m]]\\pi}}$"
+  },
+  {
+   "id": "y10hau2-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S9 Change the subject of a complex formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{[[m]]}{x} + [[c]]$.",
+   "answer": "$x = \\frac{[[m]]}{y - [[c]]}$"
+  },
+  {
+   "id": "y10hau2-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject of a complex formula",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S9 Change the subject of a complex formula",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "of",
+    "a",
+    "complex",
+    "formula",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{x + [[a]]}{x - [[b]]}$. (4 marks)",
+   "answer": "$x = \\frac{[[b]]y + [[a]]}{y - 1}$"
+  },
+  {
+   "id": "y10hau2-s10-l1",
+   "topic": "Algebra",
+   "subtopic": "Change the subject where the subject appears more than once (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S10 Change the subject where the subject appears more than once (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "where",
+    "appears",
+    "more",
+    "than",
+    "once",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[a]]x + [[b]]x + [[c]]$.",
+   "answer": "$x = \\frac{y - [[c]]}{[[a + b]]}$"
+  },
+  {
+   "id": "y10hau2-s10-l2",
+   "topic": "Algebra",
+   "subtopic": "Change the subject where the subject appears more than once (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S10 Change the subject where the subject appears more than once (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "where",
+    "appears",
+    "more",
+    "than",
+    "once",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $[[a]]x + [[b]] = [[c]]y - x$.",
+   "answer": "$x = \\frac{[[c]]y - [[b]]}{[[a + 1]]}$"
+  },
+  {
+   "id": "y10hau2-s10-l3",
+   "topic": "Algebra",
+   "subtopic": "Change the subject where the subject appears more than once (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S10 Change the subject where the subject appears more than once (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "where",
+    "appears",
+    "more",
+    "than",
+    "once",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{x + [[a]]}{x - [[b]]}$.",
+   "answer": "$x = \\frac{[[b]]y + [[a]]}{y - 1}$"
+  },
+  {
+   "id": "y10hau2-s10-l4",
+   "topic": "Algebra",
+   "subtopic": "Change the subject where the subject appears more than once (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Autumn B2 Equations, inequalities and formulae · S10 Change the subject where the subject appears more than once (E)",
+   "keywords": [
+    "change",
+    "the",
+    "subject",
+    "where",
+    "appears",
+    "more",
+    "than",
+    "once",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > a"
+   ],
+   "text": "Make $x$ the subject of $[[a]]x + [[b]]y = x([[c]] + y)$. (4 marks)",
+   "answer": "$x([[c]] + y - [[a]]) = [[b]]y$, so $x = \\frac{[[b]]y}{[[c - a]] + y}$"
+  }
+ ]
+}
