@@ -1,0 +1,1065 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Spring Block 7 Non-linear graphs: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsp7-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the coordinates of the minimum point.",
+   "answer": "([[a]], [[-b]])",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the equation of the line of symmetry.",
+   "answer": "$x = [[a]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Use it to solve $(x - [[a]])^2 - [[b]] = 0$.",
+   "answer": "$x = [[a - sqrt(b)]]$ or $x = [[a + sqrt(b)]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "For $y = (x - [[a]])^2 - [[b]]$: (a) where does the graph cross the $y$-axis? (b) What is the minimum value of $y$? (c) For which values of $x$ is $y$ less than 0? (3 marks)",
+   "answer": "(a) (0, [[a * a - b]])  (b) [[-b]]  (c) [[a - sqrt(b)]] < $x$ < [[a + sqrt(b)]]"
+  },
+  {
+   "id": "y10fsp7-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs (E)",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "The graph of $y = (x [[-a|signed]])(x [[-b|signed]])$ crosses the $x$-axis at which points?",
+   "answer": "([[a]], 0) and ([[b]], 0)"
+  },
+  {
+   "id": "y10fsp7-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs (E)",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Write down the line of symmetry and the $x$-coordinate of the turning point.",
+   "answer": "$x = [[(a + b) / 2]]$"
+  },
+  {
+   "id": "y10fsp7-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs (E)",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Work out the coordinates of the turning point and say if it is a maximum or minimum.",
+   "answer": "([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]]): a minimum"
+  },
+  {
+   "id": "y10fsp7-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs (E)",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y = x^2 - [[a + b]]x + [[a * b]]$. (a) Factorise to find the roots. (b) Write down the turning point. (c) Write down the $y$-intercept. (4 marks)",
+   "answer": "(a) $x = [[a]]$ and $x = [[b]]$  (b) ([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]])  (c) [[a * b]]"
+  },
+  {
+   "id": "y10fsp7-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S3 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 + [[c]]$.",
+   "answer": "$y$ = [[-27 + c]], [[-8 + c]], [[-1 + c]], [[c]], [[1 + c]], [[8 + c]], [[27 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S3 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 - [[b]]x$.",
+   "answer": "$y$ = [[-27 + 3 * b]], [[-8 + 2 * b]], [[-1 + b]], 0, [[1 - b]], [[8 - 2 * b]], [[27 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S3 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^3$, what happens to $y$ when $x$ is negative? Describe the shape of the graph.",
+   "answer": "$y$ is negative for negative $x$ ([[-k * k * k]] when $x = -[[k]]$); the graph rises from bottom left to top right through the origin with a flat point at the origin"
+  },
+  {
+   "id": "y10fsp7-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S3 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table for $y = x^3 - [[b]]x$ and write down the values of $x$ in the table where $y = 0$. Is the graph symmetrical about the origin? (4 marks)",
+   "answer": "$y = 0$ when $x = 0$ [[b == 1|if: and x = ±1/ ]][[b == 4|if: and x = ±2/ ]][[b == 9|if: and x = ±3/ ]]; yes, it has rotational symmetry about the origin",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S4 Approximate solutions to equations using graphs (E)",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The graph shows $y = x^2$. Use it to estimate the positive solution of $x^2 = [[c]]$ to 1 decimal place.",
+   "answer": "$x \\approx [[sqrt(c)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S4 Approximate solutions to equations using graphs (E)",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The graph shows $y = x^2$. Use it to estimate the solutions of $x^2 = [[c]]$ to 1 decimal place.",
+   "answer": "$x \\approx [[sqrt(c)|dp:1]]$ or $x \\approx -[[sqrt(c)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S4 Approximate solutions to equations using graphs (E)",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Use the graph of $y = x^2$ to estimate the solutions of $x^2 - [[k]] = 0$.",
+   "answer": "$x^2 = [[k]]$, so $x \\approx \\pm [[sqrt(k)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp7-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B7 Non-linear graphs · S4 Approximate solutions to equations using graphs (E)",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Use the graph of $y = x^2$ to solve $x^2 = [[c]]$. Then use it to solve $x^2 + 1 = [[c + 1]]$ and say what you notice. (3 marks)",
+   "answer": "$x \\approx \\pm [[sqrt(c)|dp:1]]$; the second equation has the same solutions because $x^2 = [[c]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  }
+ ]
+}

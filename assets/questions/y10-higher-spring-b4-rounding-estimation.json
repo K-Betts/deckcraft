@@ -1,0 +1,907 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Spring Block 4 Rounding and estimation: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsp4-s01-l1",
+   "topic": "Number",
+   "subtopic": "Round to decimal places and significant figures",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S1 Round to decimal places and significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "and",
+    "significant",
+    "figures",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 10) / 10 - n / 100) < 0.051"
+   ],
+   "text": "Round [[n / 100]] to 1 decimal place.",
+   "answer": "[[(n / 100)|dp:1]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s01-l2",
+   "topic": "Number",
+   "subtopic": "Round to decimal places and significant figures",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S1 Round to decimal places and significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "and",
+    "significant",
+    "figures",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 10) / 100 - n / 1000) < 0.0051"
+   ],
+   "text": "Round [[n / 1000]] to 2 decimal places.",
+   "answer": "[[(n / 1000)|dp:2]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s01-l3",
+   "topic": "Number",
+   "subtopic": "Round to decimal places and significant figures",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S1 Round to decimal places and significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "and",
+    "significant",
+    "figures",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "abs((w + 1) - (w + 0.99 + t / 1000)) < 0.005"
+   ],
+   "text": "Round [[w + 0.99 + t / 1000]] to 2 decimal places.",
+   "answer": "[[(w + 1)|dp:2]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s01-l4",
+   "topic": "Number",
+   "subtopic": "Round to decimal places and significant figures",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S1 Round to decimal places and significant figures",
+   "keywords": [
+    "round",
+    "to",
+    "decimal",
+    "places",
+    "and",
+    "significant",
+    "figures",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1001,
+       9999
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 5",
+    "n % 100 != 50",
+    "n % 10 != 0"
+   ],
+   "check": [
+    "abs(round(n / 100) / 10 - n / 1000) < 0.051"
+   ],
+   "text": "A calculator shows [[n / 1000]]. (a) Round this to 1 decimal place. (b) Round this to 2 decimal places. (2 marks)",
+   "answer": "(a) [[(n / 1000)|dp:1]]  (b) [[(n / 1000)|dp:2]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s02-l1",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S2 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "sf(a, 1) * sf(b, 1) > 0"
+   ],
+   "text": "Estimate [[a]] × [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a, 1) * sf(b, 1)]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s02-l2",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S2 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "sf(a / 10, 1) * sf(b, 1) > 0"
+   ],
+   "text": "Estimate [[a / 10]] × [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a / 10, 1) * sf(b, 1)]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s02-l3",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S2 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       120,
+       899
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "isint(sf(a, 1) / sf(b, 1))"
+   ],
+   "check": [
+    "sf(a, 1) / sf(b, 1) * sf(b, 1) == sf(a, 1)"
+   ],
+   "text": "Estimate [[a]] ÷ [[b]] by rounding each number to 1 significant figure.",
+   "answer": "[[sf(a, 1) / sf(b, 1)]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s02-l4",
+   "topic": "Number",
+   "subtopic": "Estimate answers to calculations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S2 Estimate answers to calculations",
+   "keywords": [
+    "estimate",
+    "answers",
+    "to",
+    "calculations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       89
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 5",
+    "b % 10 != 5",
+    "c % 10 != 5",
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "c % 10 != 0",
+    "isint(sf(a, 1) * sf(b / 10, 1) / sf(c, 1) * 10)"
+   ],
+   "check": [
+    "sf(a, 1) * sf(b / 10, 1) / sf(c, 1) * sf(c, 1) == sf(a, 1) * sf(b / 10, 1)"
+   ],
+   "text": "Estimate the value of ([[a]] × [[b / 10]]) ÷ [[c]] by rounding each number to 1 significant figure. (3 marks)",
+   "answer": "[[sf(a, 1) * sf(b / 10, 1) / sf(c, 1)]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s03-l1",
+   "topic": "Number",
+   "subtopic": "Use of a calculator",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S3 Use of a calculator",
+   "keywords": [
+    "use",
+    "of",
+    "a",
+    "calculator",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "!isint(sqrt(a * a + b * b))"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use a calculator to work out $\\sqrt{[[a * a + b * b]]}$. Give your answer to 3 significant figures.",
+   "answer": "[[sf(sqrt(a * a + b * b), 3)]]"
+  },
+  {
+   "id": "y10hsp4-s03-l2",
+   "topic": "Number",
+   "subtopic": "Use of a calculator",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S3 Use of a calculator",
+   "keywords": [
+    "use",
+    "of",
+    "a",
+    "calculator",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       60
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       40,
+       90
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       11,
+       39
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % (c - d) != 0"
+   ],
+   "check": [
+    "c > d"
+   ],
+   "text": "Use a calculator to work out $\\frac{[[a]] + [[b]]}{[[c]] - [[d]]}$. Give your answer to 2 decimal places.",
+   "answer": "[[(a + b) / (c - d)|dp:2]]"
+  },
+  {
+   "id": "y10hsp4-s03-l3",
+   "topic": "Number",
+   "subtopic": "Use of a calculator",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S3 Use of a calculator",
+   "keywords": [
+    "use",
+    "of",
+    "a",
+    "calculator",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Use a calculator to work out $[[a]]^2 - \\frac{[[b]]}{[[c]]}$. Give your answer to 3 significant figures.",
+   "answer": "[[sf(a * a - b / c, 3)]]"
+  },
+  {
+   "id": "y10hsp4-s03-l4",
+   "topic": "Number",
+   "subtopic": "Use of a calculator",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S3 Use of a calculator",
+   "keywords": [
+    "use",
+    "of",
+    "a",
+    "calculator",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       7,
+       19
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       17
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "!isint(sqrt(a * a + b * b))"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle is [[a]] cm by [[b]] cm. Use a calculator to work out the length of its diagonal and its area. Give each to 3 significant figures. (3 marks)",
+   "answer": "Diagonal [[sf(sqrt(a * a + b * b), 3)]] cm; area [[a * b]] cm²"
+  },
+  {
+   "id": "y10hsp4-s04-l1",
+   "topic": "Number",
+   "subtopic": "Upper and lower bounds",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S4 Upper and lower bounds",
+   "keywords": [
+    "upper",
+    "and",
+    "lower",
+    "bounds",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       4.2,
+       5.6,
+       7.3,
+       8.9,
+       12.4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A length is [[x]] cm to 1 decimal place. Write the lower and upper bounds.",
+   "answer": "Lower bound [[x - 0.05]] cm; upper bound [[x + 0.05]] cm"
+  },
+  {
+   "id": "y10hsp4-s04-l2",
+   "topic": "Number",
+   "subtopic": "Upper and lower bounds",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S4 Upper and lower bounds",
+   "keywords": [
+    "upper",
+    "and",
+    "lower",
+    "bounds",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle is [[a]] cm by [[b]] cm, each to the nearest cm. Work out the upper bound for its area.",
+   "answer": "[[(a + 0.5) * (b + 0.5)]] cm²"
+  },
+  {
+   "id": "y10hsp4-s04-l3",
+   "topic": "Number",
+   "subtopic": "Upper and lower bounds",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S4 Upper and lower bounds",
+   "keywords": [
+    "upper",
+    "and",
+    "lower",
+    "bounds",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       30
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a > b + 3"
+   ],
+   "check": [
+    "b > 1"
+   ],
+   "text": "$a = [[a]]$ and $b = [[b]]$ both to the nearest integer. Work out the lower bound of $a - b$ and the upper bound of $\\frac{a}{b}$.",
+   "answer": "Lower bound of $a - b$ = [[a - 0.5 - (b + 0.5)]]; upper bound of $\\frac{a}{b}$ = [[(a + 0.5) / (b - 0.5)|dp:2]]"
+  },
+  {
+   "id": "y10hsp4-s04-l4",
+   "topic": "Number",
+   "subtopic": "Upper and lower bounds",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S4 Upper and lower bounds",
+   "keywords": [
+    "upper",
+    "and",
+    "lower",
+    "bounds",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       120,
+       150,
+       180,
+       240
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 1"
+   ],
+   "text": "A car travels [[d]] km (to the nearest km) in [[t]] hours (to the nearest hour). Work out the upper bound and lower bound for its average speed. (4 marks)",
+   "answer": "Upper bound [[(d + 0.5) / (t - 0.5)|dp:2]] km/h; lower bound [[(d - 0.5) / (t + 0.5)|dp:2]] km/h"
+  },
+  {
+   "id": "y10hsp4-s05-l1",
+   "topic": "Number",
+   "subtopic": "Error intervals (including truncation)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S5 Error intervals (including truncation)",
+   "keywords": [
+    "error",
+    "intervals",
+    "including",
+    "truncation",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n - 0.5 < n"
+   ],
+   "text": "A number is [[n]] to the nearest integer. Write the error interval.",
+   "answer": "$[[n - 0.5]] \\leq x < [[n + 0.5]]$",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s05-l2",
+   "topic": "Number",
+   "subtopic": "Error intervals (including truncation)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S5 Error intervals (including truncation)",
+   "keywords": [
+    "error",
+    "intervals",
+    "including",
+    "truncation",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * 10 - 5 < n * 10"
+   ],
+   "text": "A number is [[n * 10]] to the nearest 10. Write the error interval.",
+   "answer": "$[[n * 10 - 5]] \\leq x < [[n * 10 + 5]]$",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s05-l3",
+   "topic": "Number",
+   "subtopic": "Error intervals (including truncation)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S5 Error intervals (including truncation)",
+   "keywords": [
+    "error",
+    "intervals",
+    "including",
+    "truncation",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 10 - 0.05 < n / 10"
+   ],
+   "text": "A length is [[n / 10]] cm to 1 decimal place. Write the error interval.",
+   "answer": "$[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp4-s05-l4",
+   "topic": "Number",
+   "subtopic": "Error intervals (including truncation)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Higher Spring B4 Rounding and estimation · S5 Error intervals (including truncation)",
+   "keywords": [
+    "error",
+    "intervals",
+    "including",
+    "truncation",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "n / 10 - 0.05 < n / 10"
+   ],
+   "text": "A plank is [[n / 10]] m long to 1 decimal place. (a) Write the error interval. (b) Could the length be [[n / 10 + 0.05]] m? Explain. (3 marks)",
+   "answer": "(a) $[[n / 10 - 0.05]] \\leq x < [[n / 10 + 0.05]]$  (b) No: the upper limit is not included",
+   "year": "Y10"
+  }
+ ]
+}

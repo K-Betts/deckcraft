@@ -1,0 +1,1652 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Spring Block 1 Non-calculator methods: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsp1-s01-l1",
+   "topic": "Number",
+   "subtopic": "Place value for integers and decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S1 Place value for integers and decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "integers",
+    "and",
+    "decimals",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "b / 10 * 10 == b"
+   ],
+   "text": "What is the value of the digit [[b]] in [[a]].[[b]][[c]]?",
+   "answer": "[[b]] tenths, or [[b / 10]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s01-l2",
+   "topic": "Number",
+   "subtopic": "Place value for integers and decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S1 Place value for integers and decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "integers",
+    "and",
+    "decimals",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "b != c",
+    "a != c"
+   ],
+   "check": [
+    "c / 100 * 100 == c"
+   ],
+   "text": "What is the value of the digit [[c]] in [[a]].[[b]][[c]]?",
+   "answer": "[[c]] hundredths, or [[c / 100]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s01-l3",
+   "topic": "Number",
+   "subtopic": "Place value for integers and decimals",
+   "difficulty": 3,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S1 Place value for integers and decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "integers",
+    "and",
+    "decimals",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * 10 + y > 10"
+   ],
+   "text": "Write [[x]] tenths and [[y]] hundredths as a decimal.",
+   "answer": "0.[[x]][[y]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s01-l4",
+   "topic": "Number",
+   "subtopic": "Place value for integers and decimals",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S1 Place value for integers and decimals",
+   "keywords": [
+    "place",
+    "value",
+    "for",
+    "integers",
+    "and",
+    "decimals",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "a + b / 10 + c / 100 + 0.1 > a + b / 10 + c / 100"
+   ],
+   "text": "(a) What is the value of the digit [[c]] in [[a]].[[b]][[c]]? (b) Write the number that is 0.1 more than [[a]].[[b]][[c]]. (2 marks)",
+   "answer": "(a) [[c / 100]]  (b) [[a + b / 10 + c / 100 + 0.1]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s02-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S2 Compare and order numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100"
+    ],
+    [
+     "left",
+     "f * p + (1 - f) * q"
+    ],
+    [
+     "right",
+     "f * q + (1 - f) * p"
+    ]
+   ],
+   "check": [
+    "left != right",
+    "q < p"
+   ],
+   "text": "Write < or > in the space: [[left]] ? [[right]]",
+   "answer": "[[left < right|if:</>]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s02-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S2 Compare and order numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100"
+    ],
+    [
+     "r",
+     "k / 10 + e / 100"
+    ],
+    [
+     "s",
+     "k / 100"
+    ]
+   ],
+   "check": [
+    "s < q",
+    "q < p",
+    "p < r"
+   ],
+   "text": "Write these in order, smallest first: [[p]], [[s]], [[r]], [[q]]",
+   "answer": "[[s]], [[q]], [[p]], [[r]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s02-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S2 Compare and order numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w + d / 1000 < w + d / 100",
+    "w + d / 100 < w + d / 100 + 0.001",
+    "w + d / 100 + 0.001 < w + d / 10"
+   ],
+   "text": "Write these in order, smallest first: [[w + d / 100]], [[w + d / 10]], [[w + d / 1000]], [[w + d / 100 + 0.001]]",
+   "answer": "[[w + d / 1000]], [[w + d / 100]], [[w + d / 100 + 0.001]], [[w + d / 10]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s02-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S2 Compare and order numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p",
+     "k / 10 + 10"
+    ],
+    [
+     "q",
+     "(10 * k - e) / 100 + 10"
+    ],
+    [
+     "r",
+     "k / 10 + e / 100 + 10"
+    ],
+    [
+     "s",
+     "k / 100 + 10"
+    ]
+   ],
+   "check": [
+    "s < q",
+    "q < p",
+    "p < r"
+   ],
+   "text": "Four runners have these times in seconds: A [[p]], B [[s]], C [[r]] and D [[q]]. Who finished first, second, third and fourth? (2 marks)",
+   "answer": "B, D, A, C",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s03-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers and decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S3 Add and subtract integers and decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(a + b) / 10 - b / 10 == a / 10"
+   ],
+   "text": "Work out [[a / 10]] + [[b / 10]]",
+   "answer": "[[(a + b) / 10]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s03-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers and decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S3 Add and subtract integers and decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       101,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(a + 10 * b) / 100 - b / 10 == a / 100"
+   ],
+   "text": "Work out [[a / 100]] + [[b / 10]]",
+   "answer": "[[(a + 10 * b) / 100]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s03-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers and decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S3 Add and subtract integers and decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       111,
+       499
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(100 * w - b) / 100 + b / 100 == w"
+   ],
+   "text": "Work out [[w]] − [[b / 100]]",
+   "answer": "[[(100 * w - b) / 100]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s03-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract integers and decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S3 Add and subtract integers and decimals",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       501,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       101,
+       499
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "(2000 - a - b) / 100 + (a + b) / 100 == 20"
+   ],
+   "text": "A book costs £[[a / 100]] and a pen costs £[[b / 100]]. Maria pays with a £20 note. How much change does she get? (2 marks)",
+   "answer": "£[[(2000 - a - b) / 100|dp:2]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s04-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide integers and decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S4 Multiply and divide integers and decimals",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * b / 10 / b == a / 10"
+   ],
+   "text": "Work out [[a / 10]] × [[b]]",
+   "answer": "[[a * b / 10]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s04-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide integers and decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S4 Multiply and divide integers and decimals",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "a * b / 100 * 100 == a * b"
+   ],
+   "text": "Work out [[a / 10]] × [[b / 10]]",
+   "answer": "[[a * b / 100]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s04-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide integers and decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S4 Multiply and divide integers and decimals",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       111,
+       499
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       49
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "a * b / 1000 * 1000 == a * b"
+   ],
+   "text": "Work out [[a / 100]] × [[b / 10]]",
+   "answer": "[[a * b / 1000]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s04-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide integers and decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S4 Multiply and divide integers and decimals",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "integers",
+    "decimals",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       301,
+       999
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0"
+   ],
+   "check": [
+    "a * b / 100 / b == a / 100"
+   ],
+   "text": "One book costs £[[a / 100]]. Work out the cost of [[b]] books. (2 marks)",
+   "answer": "£[[a * b / 100|dp:2]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s05-l1",
+   "topic": "Number",
+   "subtopic": "Four operations with directed number",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S5 Four operations with directed number",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "directed",
+    "number",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a]]) \\times [[b]]$",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y10fsp1-s05-l2",
+   "topic": "Number",
+   "subtopic": "Four operations with directed number",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S5 Four operations with directed number",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "directed",
+    "number",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a]]) \\times ([[b]])$",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y10fsp1-s05-l3",
+   "topic": "Number",
+   "subtopic": "Four operations with directed number",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S5 Four operations with directed number",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "directed",
+    "number",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != 0"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Work out $([[a * b]]) \\div ([[a]])$",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y10fsp1-s05-l4",
+   "topic": "Number",
+   "subtopic": "Four operations with directed number",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S5 Four operations with directed number",
+   "keywords": [
+    "four",
+    "operations",
+    "with",
+    "directed",
+    "number",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s - f * h + f * h == s"
+   ],
+   "text": "The temperature falls by [[f]]°C every hour for [[h]] hours. It starts at [[s]]°C. What is the temperature at the end? (2 marks)",
+   "answer": "[[s - f * h]]°C"
+  },
+  {
+   "id": "y10fsp1-s06-l1",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S6 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * c == a + c * b"
+   ],
+   "text": "Work out [[a]] + [[b]] × [[c]]",
+   "answer": "[[a + b * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s06-l2",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S6 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + b) * c == a * c + b * c"
+   ],
+   "text": "Work out ([[a]] + [[b]]) × [[c]]",
+   "answer": "[[(a + b) * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s06-l3",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S6 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * b * c == a + (b * b) * c"
+   ],
+   "text": "Work out [[a]] + [[b]]² × [[c]]",
+   "answer": "[[a + b * b * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s06-l4",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S6 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b * c > q"
+   ],
+   "check": [
+    "q * e / e == q"
+   ],
+   "text": "Work out (a) [[a]] + [[b]] × [[c]] − [[q * e]] ÷ [[e]]  (b) ([[a]] + [[b]]) × [[c]] (2 marks)",
+   "answer": "(a) [[a + b * c - q]]  (b) [[(a + b) * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10fsp1-s07-l1",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S7 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a * 10]] × [[b]].",
+   "answer": "[[a * b * 10]]"
+  },
+  {
+   "id": "y10fsp1-s07-l2",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S7 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a / 10]] × [[b]] and [[a * b]] ÷ [[b]].",
+   "answer": "[[a * b / 10]]; [[a]]"
+  },
+  {
+   "id": "y10fsp1-s07-l3",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S7 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a / 10]] × [[b / 10]] and [[a * b / 10]] ÷ [[b]].",
+   "answer": "[[a * b / 100]]; [[a / 10]]"
+  },
+  {
+   "id": "y10fsp1-s07-l4",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S7 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out (a) [[a * 100]] × [[b * 10]] (b) [[a * b * 10]] ÷ [[a / 10]] (c) [[a / 100]] × [[b / 10]]. (3 marks)",
+   "answer": "(a) [[a * b * 1000]]  (b) [[b * 100]]  (c) [[a * b / 1000]]"
+  },
+  {
+   "id": "y10fsp1-s08-l1",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S8 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       20,
+       30,
+       40,
+       50,
+       60,
+       75
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Pens cost £[[p / 100|dp:2]] each. Work out the cost of [[n]] pens without a calculator.",
+   "answer": "£[[p * n / 100|dp:2]]"
+  },
+  {
+   "id": "y10fsp1-s08-l2",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S8 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((n * p + 1) / 10) * 10"
+    ]
+   ],
+   "check": [
+    "R > n * p"
+   ],
+   "text": "Tom buys [[n]] books at £[[p]] each and pays with a £[[R]] note. How much change does he get?",
+   "answer": "£[[R - n * p]]"
+  },
+  {
+   "id": "y10fsp1-s08-l3",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S8 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       14
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((f + m * d + 1) / 10) * 10"
+    ]
+   ],
+   "check": [
+    "R > f + m * d"
+   ],
+   "text": "A taxi costs £[[f]] plus £[[m]] per mile. Mia travels [[d]] miles and pays with a £[[R]] note. How much change does she get?",
+   "answer": "£[[R - f - m * d]]"
+  },
+  {
+   "id": "y10fsp1-s08-l4",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B1 Non-calculator methods · S8 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       150,
+       180,
+       200
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       250,
+       300,
+       350
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((n * t + k * c) / 1000) * 10"
+    ]
+   ],
+   "where": [
+    "R * 100 > n * t + k * c"
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "A café sells tea for £[[t / 100|dp:2]] and cake for £[[c / 100|dp:2]]. A group buys [[n]] teas and [[k]] cakes and pays with £[[R]]. How much change? (3 marks)",
+   "answer": "£[[R - (n * t + k * c) / 100|dp:2]]"
+  }
+ ]
+}

@@ -1,0 +1,1965 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Spring Block 7 Non-linear graphs: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsp7-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = 2x^2 + x - [[c]]$ for $x$ from -2 to 3.",
+   "answer": "$y$ = [[8 - 2 - c]], [[2 - 1 - c]], [[-c]], [[2 + 1 - c]], [[8 + 2 - c]], [[18 + 3 - c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[a + b]]x + [[a * b]]$ for $x$ from -2 to 3.",
+   "answer": "$y$ = [[4 + 2 * (a + b) + a * b]], [[1 + (a + b) + a * b]], [[a * b]], [[1 - (a + b) + a * b]], [[4 - 2 * (a + b) + a * b]], [[9 - 3 * (a + b) + a * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A quadratic is $y = (2x + [[a]])(x - [[b]])$. Write down where it crosses the $x$-axis and the $y$-axis.",
+   "answer": "$x$-axis at $x = -[[a / 2]]$ and $x = [[b]]$; $y$-axis at $y = -[[a * b]]$"
+  },
+  {
+   "id": "y10hsp7-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S1 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 2 * b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $y = (2x + [[a]])(x - [[b]]) = 2x^2 + [[a - 2 * b|signed]]x - [[a * b]]$ to find the values of $x$ for which $y = 0$ and the $y$-intercept. (4 marks)",
+   "answer": "$x = -[[a / 2]]$ and $x = [[b]]$; $y$-intercept [[-a * b]]"
+  },
+  {
+   "id": "y10hsp7-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "The graph of $y = (x [[-a|signed]])(x [[-b|signed]])$ crosses the $x$-axis at which points?",
+   "answer": "([[a]], 0) and ([[b]], 0)"
+  },
+  {
+   "id": "y10hsp7-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Write down the line of symmetry and the $x$-coordinate of the turning point.",
+   "answer": "$x = [[(a + b) / 2]]$"
+  },
+  {
+   "id": "y10hsp7-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Work out the coordinates of the turning point and say if it is a maximum or minimum.",
+   "answer": "([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]]): a minimum"
+  },
+  {
+   "id": "y10hsp7-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Intercepts and roots of quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S2 Intercepts and roots of quadratic graphs",
+   "keywords": [
+    "intercepts",
+    "and",
+    "roots",
+    "of",
+    "quadratic",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y = x^2 - [[a + b]]x + [[a * b]]$. (a) Factorise to find the roots. (b) Write down the turning point. (c) Write down the $y$-intercept. (4 marks)",
+   "answer": "(a) $x = [[a]]$ and $x = [[b]]$  (b) ([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]])  (c) [[a * b]]"
+  },
+  {
+   "id": "y10hsp7-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Turning points",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S3 Turning points",
+   "keywords": [
+    "turning",
+    "points",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the coordinates of the minimum point.",
+   "answer": "([[a]], [[-b]])",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Turning points",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S3 Turning points",
+   "keywords": [
+    "turning",
+    "points",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the equation of the line of symmetry.",
+   "answer": "$x = [[a]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Turning points",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S3 Turning points",
+   "keywords": [
+    "turning",
+    "points",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Use it to solve $(x - [[a]])^2 - [[b]] = 0$.",
+   "answer": "$x = [[a - sqrt(b)]]$ or $x = [[a + sqrt(b)]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Turning points",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S3 Turning points",
+   "keywords": [
+    "turning",
+    "points",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "For $y = (x - [[a]])^2 - [[b]]$: (a) where does the graph cross the $y$-axis? (b) What is the minimum value of $y$? (c) For which values of $x$ is $y$ less than 0? (3 marks)",
+   "answer": "(a) (0, [[a * a - b]])  (b) [[-b]]  (c) [[a - sqrt(b)]] < $x$ < [[a + sqrt(b)]]"
+  },
+  {
+   "id": "y10hsp7-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 + [[c]]$.",
+   "answer": "$y$ = [[-27 + c]], [[-8 + c]], [[-1 + c]], [[c]], [[1 + c]], [[8 + c]], [[27 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 - [[b]]x$.",
+   "answer": "$y$ = [[-27 + 3 * b]], [[-8 + 2 * b]], [[-1 + b]], 0, [[1 - b]], [[8 - 2 * b]], [[27 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^3$, what happens to $y$ when $x$ is negative? Describe the shape of the graph.",
+   "answer": "$y$ is negative for negative $x$ ([[-k * k * k]] when $x = -[[k]]$); the graph rises from bottom left to top right through the origin with a flat point at the origin"
+  },
+  {
+   "id": "y10hsp7-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table for $y = x^3 - [[b]]x$ and write down the values of $x$ in the table where $y = 0$. Is the graph symmetrical about the origin? (4 marks)",
+   "answer": "$y = 0$ when $x = 0$ [[b == 1|if: and x = ±1/ ]][[b == 4|if: and x = ±2/ ]][[b == 9|if: and x = ±3/ ]]; yes, it has rotational symmetry about the origin",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S5 Approximate solutions to equations using graphs",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The graph shows $y = x^2$. Use it to estimate the positive solution of $x^2 = [[c]]$ to 1 decimal place.",
+   "answer": "$x \\approx [[sqrt(c)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S5 Approximate solutions to equations using graphs",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The graph shows $y = x^2$. Use it to estimate the solutions of $x^2 = [[c]]$ to 1 decimal place.",
+   "answer": "$x \\approx [[sqrt(c)|dp:1]]$ or $x \\approx -[[sqrt(c)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S5 Approximate solutions to equations using graphs",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Use the graph of $y = x^2$ to estimate the solutions of $x^2 - [[k]] = 0$.",
+   "answer": "$x^2 = [[k]]$, so $x \\approx \\pm [[sqrt(k)|dp:1]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Approximate solutions to equations using graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S5 Approximate solutions to equations using graphs",
+   "keywords": [
+    "approximate",
+    "solutions",
+    "to",
+    "equations",
+    "using",
+    "graphs",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "choose": [
+       3,
+       5,
+       6,
+       7,
+       8,
+       10,
+       11,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Use the graph of $y = x^2$ to solve $x^2 = [[c]]$. Then use it to solve $x^2 + 1 = [[c + 1]]$ and say what you notice. (3 marks)",
+   "answer": "$x \\approx \\pm [[sqrt(c)|dp:1]]$; the second equation has the same solutions because $x^2 = [[c]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": -4,
+    "xmax": 4,
+    "ymin": 0,
+    "ymax": 16,
+    "xstep": 1,
+    "ystep": 4,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      -4,
+      16
+     ],
+     [
+      -3,
+      9
+     ],
+     [
+      -2,
+      4
+     ],
+     [
+      -1,
+      1
+     ],
+     [
+      0,
+      0
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      9
+     ],
+     [
+      4,
+      16
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10hsp7-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Estimate the gradient of a curve at a given point",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S6 Estimate the gradient of a curve at a given point",
+   "keywords": [
+    "estimate",
+    "the",
+    "gradient",
+    "of",
+    "a",
+    "curve",
+    "at",
+    "given",
+    "point",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "x1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       0,
+       6
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A tangent to a curve passes through ([[x1]], [[y1]]) and ([[x1 + d]], [[y1 + g * d]]). Estimate the gradient of the curve at the point of contact.",
+   "answer": "[[g]]"
+  },
+  {
+   "id": "y10hsp7-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Estimate the gradient of a curve at a given point",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S6 Estimate the gradient of a curve at a given point",
+   "keywords": [
+    "estimate",
+    "the",
+    "gradient",
+    "of",
+    "a",
+    "curve",
+    "at",
+    "given",
+    "point",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "The tangent to $y = x^2$ at $x = [[k]]$ passes through ([[k - 1]], [[k * k - 2 * k]]) and ([[k + 1]], [[k * k + 2 * k]]). Find the gradient of the tangent.",
+   "answer": "[[2 * k]]"
+  },
+  {
+   "id": "y10hsp7-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Estimate the gradient of a curve at a given point",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S6 Estimate the gradient of a curve at a given point",
+   "keywords": [
+    "estimate",
+    "the",
+    "gradient",
+    "of",
+    "a",
+    "curve",
+    "at",
+    "given",
+    "point",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ],
+    [
+     "y1",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 2"
+   ],
+   "text": "A distance-time graph has a tangent at $t = [[t]]$ s passing through ([[t - 2]], [[y1]]) and ([[t + 2]], [[y1 + 4 * v]]). Estimate the speed at $t = [[t]]$ s.",
+   "answer": "[[v]] m/s"
+  },
+  {
+   "id": "y10hsp7-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Estimate the gradient of a curve at a given point",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S6 Estimate the gradient of a curve at a given point",
+   "keywords": [
+    "estimate",
+    "the",
+    "gradient",
+    "of",
+    "a",
+    "curve",
+    "at",
+    "given",
+    "point",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^2$, the gradient at $x = [[k]]$ is [[2 * k]]. A student draws a chord from $x = [[k]]$ to $x = [[k + 2]]$. Work out the gradient of the chord and compare it with the gradient of the tangent. (3 marks)",
+   "answer": "Chord gradient [[((k + 2) * (k + 2) - k * k) / 2]]; tangent gradient [[2 * k]]; the chord is steeper because it is over a bigger interval"
+  },
+  {
+   "id": "y10hsp7-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Estimate the area under a curve (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S7 Estimate the area under a curve (E)",
+   "keywords": [
+    "estimate",
+    "the",
+    "area",
+    "under",
+    "a",
+    "curve",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) * w % 2 == 0"
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A straight line graph goes from (0, [[a]]) to ([[w]], [[b]]). Work out the area under it using a trapezium.",
+   "answer": "[[(a + b) * w / 2]]"
+  },
+  {
+   "id": "y10hsp7-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Estimate the area under a curve (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S7 Estimate the area under a curve (E)",
+   "keywords": [
+    "estimate",
+    "the",
+    "area",
+    "under",
+    "a",
+    "curve",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Estimate the area under $y = [[m]]x$ from $x = 0$ to $x = 4$ using 4 strips of width 1 and the trapezium rule.",
+   "answer": "[[8 * m]]"
+  },
+  {
+   "id": "y10hsp7-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Estimate the area under a curve (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S7 Estimate the area under a curve (E)",
+   "keywords": [
+    "estimate",
+    "the",
+    "area",
+    "under",
+    "a",
+    "curve",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Use the trapezium rule with 4 strips of width 1 to estimate the area under $y = x^2 + [[c]]$ from $x = 0$ to $x = 4$.",
+   "answer": "[[22 + 4 * c]]"
+  },
+  {
+   "id": "y10hsp7-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Estimate the area under a curve (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S7 Estimate the area under a curve (E)",
+   "keywords": [
+    "estimate",
+    "the",
+    "area",
+    "under",
+    "a",
+    "curve",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v0",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       10,
+       18
+      ]
+     }
+    ],
+    [
+     "v3",
+     {
+      "int": [
+       12,
+       20
+      ]
+     }
+    ],
+    [
+     "v4",
+     {
+      "int": [
+       14,
+       22
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v1 > 0"
+   ],
+   "text": "A car's speed (m/s) is [[v0]], [[v1]], [[v2]], [[v3]], [[v4]] at 0, 2, 4, 6 and 8 seconds. Use the trapezium rule to estimate the distance travelled. (3 marks)",
+   "answer": "[[2 * ((v0 + v4) / 2 + v1 + v2 + v3)]] m"
+  },
+  {
+   "id": "y10hsp7-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Equation of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S8 Equation of a circle",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "circle",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Write down the radius of the circle $x^2 + y^2 = [[r * r]]$.",
+   "answer": "[[r]]"
+  },
+  {
+   "id": "y10hsp7-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Equation of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S8 Equation of a circle",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "circle",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       0,
+       0,
+       3,
+       -5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Does the point ([[3 * k]], [[4 * k]]) lie on the circle $x^2 + y^2 = [[25 * k * k + e]]$?",
+   "answer": "[[e == 0|if:Yes/No]]: [[9 * k * k]] + [[16 * k * k]] = [[25 * k * k]]"
+  },
+  {
+   "id": "y10hsp7-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Equation of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S8 Equation of a circle",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "circle",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write down the equation of a circle with centre the origin that passes through ([[3 * k]], [[4 * k]]).",
+   "answer": "$x^2 + y^2 = [[25 * k * k]]$"
+  },
+  {
+   "id": "y10hsp7-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Equation of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S8 Equation of a circle",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "circle",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A circle has equation $x^2 + y^2 = [[25 * k * k]]$. (a) Find the radius. (b) Find the points where it crosses the $x$-axis. (c) Does ([[3 * k]], -[[4 * k]]) lie on it? (3 marks)",
+   "answer": "(a) [[5 * k]]  (b) ([[5 * k]], 0) and (-[[5 * k]], 0)  (c) Yes"
+  },
+  {
+   "id": "y10hsp7-s09-l1",
+   "topic": "Algebra",
+   "subtopic": "Equation of a tangent to a circle (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S9 Equation of a tangent to a circle (E)",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "tangent",
+    "to",
+    "circle",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A point $P$ ([[3 * k]], [[4 * k]]) is on the circle $x^2 + y^2 = [[25 * k * k]]$. Work out the gradient of the radius $OP$.",
+   "answer": "$\\frac{4}{3}$"
+  },
+  {
+   "id": "y10hsp7-s09-l2",
+   "topic": "Algebra",
+   "subtopic": "Equation of a tangent to a circle (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S9 Equation of a tangent to a circle (E)",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "tangent",
+    "to",
+    "circle",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A point $P$ ([[3 * k]], [[4 * k]]) is on the circle $x^2 + y^2 = [[25 * k * k]]$. Write down the gradient of the tangent at $P$.",
+   "answer": "$-\\frac{3}{4}$"
+  },
+  {
+   "id": "y10hsp7-s09-l3",
+   "topic": "Algebra",
+   "subtopic": "Equation of a tangent to a circle (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S9 Equation of a tangent to a circle (E)",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "tangent",
+    "to",
+    "circle",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Find the equation of the tangent at ([[3 * k]], [[4 * k]]) to the circle $x^2 + y^2 = [[25 * k * k]]$.",
+   "answer": "$3x + 4y = [[25 * k]]$"
+  },
+  {
+   "id": "y10hsp7-s09-l4",
+   "topic": "Algebra",
+   "subtopic": "Equation of a tangent to a circle (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B7 Non-linear graphs · S9 Equation of a tangent to a circle (E)",
+   "keywords": [
+    "equation",
+    "of",
+    "a",
+    "tangent",
+    "to",
+    "circle",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Find the equation of the tangent at ([[4 * k]], [[3 * k]]) to the circle $x^2 + y^2 = [[25 * k * k]]$ and the points where it meets the axes. (4 marks)",
+   "answer": "$4x + 3y = [[25 * k]]$; meets the axes at ([[25 * k / 4|dp:2]], 0) and (0, [[25 * k / 3|dp:2]])"
+  }
+ ]
+}

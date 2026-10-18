@@ -1,0 +1,2997 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Spring Block 6 Interpret and represent data: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsp6-s01-l1",
+   "topic": "Statistics",
+   "subtopic": "Averages and range",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S1 Averages and range",
+   "keywords": [
+    "averages",
+    "and",
+    "range",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       14
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "x1",
+     "s"
+    ],
+    [
+     "x2",
+     "s"
+    ],
+    [
+     "x3",
+     "s + d2"
+    ],
+    [
+     "x4",
+     "s + d2 + d3"
+    ],
+    [
+     "x5",
+     "s + d2 + d3 + d4"
+    ]
+   ],
+   "check": [
+    "x5 - x1 > 0"
+   ],
+   "text": "Here are five numbers: [[x3]], [[x1]], [[x5]], [[x2]], [[x4]]. Work out (a) the mean (b) the median (c) the mode (d) the range.",
+   "answer": "(a) [[(x1 + x2 + x3 + x4 + x5) / 5|dp:1]]  (b) [[x3]]  (c) [[x1]]  (d) [[x5 - x1]]"
+  },
+  {
+   "id": "y10fsp6-s01-l2",
+   "topic": "Statistics",
+   "subtopic": "Averages and range",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S1 Averages and range",
+   "keywords": [
+    "averages",
+    "and",
+    "range",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       14
+      ]
+     }
+    ],
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d4",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d5",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "x1",
+     "s"
+    ],
+    [
+     "x2",
+     "s + d1"
+    ],
+    [
+     "x3",
+     "s + d1 + d2"
+    ],
+    [
+     "x4",
+     "s + d1 + d2 + d3"
+    ],
+    [
+     "x5",
+     "s + d1 + d2 + d3 + d4"
+    ],
+    [
+     "x6",
+     "s + d1 + d2 + d3 + d4 + d5"
+    ]
+   ],
+   "check": [
+    "x6 - x1 > 0"
+   ],
+   "text": "Here are six numbers: [[x4]], [[x1]], [[x6]], [[x2]], [[x5]], [[x3]]. Work out the median and the range.",
+   "answer": "Median [[(x3 + x4) / 2]], range [[x6 - x1]]"
+  },
+  {
+   "id": "y10fsp6-s01-l3",
+   "topic": "Statistics",
+   "subtopic": "Averages and range",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S1 Averages and range",
+   "keywords": [
+    "averages",
+    "and",
+    "range",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "5 * m - a - b - c - d > 0"
+   ],
+   "check": [
+    "(a + b + c + d + 5 * m - a - b - c - d) / 5 == m"
+   ],
+   "text": "The mean of five numbers is [[m]]. Four of the numbers are [[a]], [[b]], [[c]] and [[d]]. Work out the fifth number.",
+   "answer": "[[5 * m - a - b - c - d]]"
+  },
+  {
+   "id": "y10fsp6-s01-l4",
+   "topic": "Statistics",
+   "subtopic": "Averages and range",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S1 Averages and range",
+   "keywords": [
+    "averages",
+    "and",
+    "range",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       8,
+       15
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "int": [
+       9,
+       18
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "5 * m2 > 4 * m",
+    "m != m2"
+   ],
+   "check": [
+    "(4 * m + 5 * m2 - 4 * m) / 5 == m2"
+   ],
+   "text": "The mean of four numbers is [[m]]. A fifth number is added and the mean of the five numbers becomes [[m2]]. Work out the fifth number. (3 marks)",
+   "answer": "[[5 * m2 - 4 * m]]"
+  },
+  {
+   "id": "y10fsp6-s02-l1",
+   "topic": "Statistics",
+   "subtopic": "Types of data",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S2 Types of data",
+   "keywords": [
+    "types",
+    "of",
+    "data",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Is [[k == 0|if:the number of pupils in a class/]][[k == 1|if:the time taken to run 100 m/]][[k == 2|if:a pupil's favourite sport/]][[k == 3|if:the height of a tree/]][[k == 4|if:shoe size/]][[k == 5|if:eye colour/]][[k == 6|if:the mass of a parcel/]][[k == 7|if:the number of goals in a match/]] categorical, discrete or continuous?",
+   "answer": "[[k == 0 || k == 4 || k == 7|if:discrete/]][[k == 1 || k == 3 || k == 6|if:continuous/]][[k == 2 || k == 5|if:categorical/]]"
+  },
+  {
+   "id": "y10fsp6-s02-l2",
+   "topic": "Statistics",
+   "subtopic": "Types of data",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S2 Types of data",
+   "keywords": [
+    "types",
+    "of",
+    "data",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Is [[k == 0|if:the number of pupils in a class/]][[k == 1|if:the time taken to run 100 m/]][[k == 2|if:a pupil's favourite sport/]][[k == 3|if:the height of a tree/]][[k == 4|if:shoe size/]][[k == 5|if:eye colour/]][[k == 6|if:the mass of a parcel/]][[k == 7|if:the number of goals in a match/]] qualitative or quantitative data?",
+   "answer": "[[k == 2 || k == 5|if:Qualitative/Quantitative]]"
+  },
+  {
+   "id": "y10fsp6-s02-l3",
+   "topic": "Statistics",
+   "subtopic": "Types of data",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S2 Types of data",
+   "keywords": [
+    "types",
+    "of",
+    "data",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Mia says that [[k == 0|if:the number of pupils in a class/]][[k == 1|if:the time taken to run 100 m/]][[k == 2|if:a pupil's favourite sport/]][[k == 3|if:the height of a tree/]][[k == 4|if:shoe size/]][[k == 5|if:eye colour/]][[k == 6|if:the mass of a parcel/]][[k == 7|if:the number of goals in a match/]] is continuous data because it is a number. Is she right? Explain.",
+   "answer": "[[k == 0 || k == 4 || k == 7|if:No: it is discrete, it can only take particular values/Not always: only some numerical data is continuous]] (this one is [[k == 0 || k == 4 || k == 7|if:discrete/]][[k == 1 || k == 3 || k == 6|if:continuous/]][[k == 2 || k == 5|if:categorical/]])"
+  },
+  {
+   "id": "y10fsp6-s02-l4",
+   "topic": "Statistics",
+   "subtopic": "Types of data",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S2 Types of data",
+   "keywords": [
+    "types",
+    "of",
+    "data",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Give one example each of discrete, continuous and categorical data from a survey about [[k == 0|if:school/]][[k == 1|if:sport/]][[k == 2|if:shopping/]]. (3 marks)",
+   "answer": "e.g. discrete: a count such as the number of items; continuous: a measurement such as a time or length; categorical: a colour, type or name"
+  },
+  {
+   "id": "y10fsp6-s03-l1",
+   "topic": "Statistics",
+   "subtopic": "Averages from an ungrouped frequency table",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S3 Averages from an ungrouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "an",
+    "ungrouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "f0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       10,
+       14
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f0 > 0"
+   ],
+   "text": "The table shows the number of goals scored in some matches. (a) What is the mode? (b) How many matches were played?",
+   "answer": "(a) 2  (b) [[f0 + f1 + f2 + f3 + f4]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Goals",
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f0|n]]",
+      "[[f1|n]]",
+      "[[f2|n]]",
+      "[[f3|n]]",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s03-l2",
+   "topic": "Statistics",
+   "subtopic": "Averages from an ungrouped frequency table",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S3 Averages from an ungrouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "an",
+    "ungrouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "f0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       10,
+       14
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f0 > 0"
+   ],
+   "text": "The table shows the number of goals scored in some matches. Work out the mean number of goals. Give your answer to 2 decimal places.",
+   "answer": "[[(f1 + 2 * f2 + 3 * f3 + 4 * f4) / (f0 + f1 + f2 + f3 + f4)|dp:2]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Goals",
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f0|n]]",
+      "[[f1|n]]",
+      "[[f2|n]]",
+      "[[f3|n]]",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s03-l3",
+   "topic": "Statistics",
+   "subtopic": "Averages from an ungrouped frequency table",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S3 Averages from an ungrouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "an",
+    "ungrouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c0",
+     "f0"
+    ],
+    [
+     "c1",
+     "f0 + f1"
+    ],
+    [
+     "c2",
+     "f0 + f1 + f2"
+    ],
+    [
+     "c3",
+     "f0 + f1 + f2 + f3"
+    ],
+    [
+     "h",
+     "(f0 + f1 + f2 + f3 + f4 + 1) / 2"
+    ]
+   ],
+   "where": [
+    "(f0 + f1 + f2 + f3 + f4) % 2 == 1"
+   ],
+   "check": [
+    "f0 > 0"
+   ],
+   "text": "The table shows the number of goals scored in some matches. Work out the median number of goals.",
+   "answer": "[[c0 >= h|if:0/]][[c0 < h && c1 >= h|if:1/]][[c1 < h && c2 >= h|if:2/]][[c2 < h && c3 >= h|if:3/]][[c3 < h|if:4/]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Goals",
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f0|n]]",
+      "[[f1|n]]",
+      "[[f2|n]]",
+      "[[f3|n]]",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s03-l4",
+   "topic": "Statistics",
+   "subtopic": "Averages from an ungrouped frequency table",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S3 Averages from an ungrouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "an",
+    "ungrouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f0",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "3 * f0 + f1 - 3 * f3 > 0"
+   ],
+   "check": [
+    "f0 > 0"
+   ],
+   "text": "The table shows the number of goals scored in matches. The mean is 1.5. Work out the missing frequency $x$. (3 marks)",
+   "answer": "$x = [[3 * f0 + f1 - 3 * f3]]$",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Goals",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "Frequency",
+      "[[f0|n]]",
+      "[[f1|n]]",
+      "x",
+      "[[f3|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s04-l1",
+   "topic": "Statistics",
+   "subtopic": "Averages from a grouped frequency table",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S4 Averages from a grouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The bar chart shows the number of books read by pupils in a month. How many pupils read 6 to 10 books?",
+   "answer": "[[f2]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "1-5",
+     "6-10",
+     "11-15",
+     "16-20"
+    ],
+    "values": [
+     "[[f1|n]]",
+     "[[f2|n]]",
+     "[[f3|n]]",
+     "[[f4|n]]"
+    ],
+    "yLabel": "Frequency"
+   }
+  },
+  {
+   "id": "y10fsp6-s04-l2",
+   "topic": "Statistics",
+   "subtopic": "Averages from a grouped frequency table",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S4 Averages from a grouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f1 != f3",
+    "f1 != f4",
+    "f2 != f3",
+    "f2 != f4",
+    "f3 != f4"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The bar chart shows the number of books read by pupils in a month. Which is the modal class?",
+   "answer": "[[f1 > f2 && f1 > f3 && f1 > f4|if:1-5/]][[f2 > f1 && f2 > f3 && f2 > f4|if:6-10/]][[f3 > f1 && f3 > f2 && f3 > f4|if:11-15/]][[f4 > f1 && f4 > f2 && f4 > f3|if:16-20/]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "1-5",
+     "6-10",
+     "11-15",
+     "16-20"
+    ],
+    "values": [
+     "[[f1|n]]",
+     "[[f2|n]]",
+     "[[f3|n]]",
+     "[[f4|n]]"
+    ],
+    "yLabel": "Frequency"
+   }
+  },
+  {
+   "id": "y10fsp6-s04-l3",
+   "topic": "Statistics",
+   "subtopic": "Averages from a grouped frequency table",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S4 Averages from a grouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The bar chart shows the number of books read by pupils in a month. How many pupils read more than 10 books? How many pupils were surveyed?",
+   "answer": "[[f3 + f4]] pupils read more than 10; [[f1 + f2 + f3 + f4]] pupils in total",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "1-5",
+     "6-10",
+     "11-15",
+     "16-20"
+    ],
+    "values": [
+     "[[f1|n]]",
+     "[[f2|n]]",
+     "[[f3|n]]",
+     "[[f4|n]]"
+    ],
+    "yLabel": "Frequency"
+   }
+  },
+  {
+   "id": "y10fsp6-s04-l4",
+   "topic": "Statistics",
+   "subtopic": "Averages from a grouped frequency table",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S4 Averages from a grouped frequency table",
+   "keywords": [
+    "averages",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f2 != f3"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The bar chart shows the number of books read by pupils in a month. (a) What fraction of the pupils read 11 or more books? Give your answer in its simplest form. (b) What percentage read 5 books or fewer, to 1 decimal place? (3 marks)",
+   "answer": "(a) $[[(f3 + f4) / (f1 + f2 + f3 + f4)|frac]]$  (b) [[f1 * 100 / (f1 + f2 + f3 + f4)|dp:1]]%",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "1-5",
+     "6-10",
+     "11-15",
+     "16-20"
+    ],
+    "values": [
+     "[[f1|n]]",
+     "[[f2|n]]",
+     "[[f3|n]]",
+     "[[f4|n]]"
+    ],
+    "yLabel": "Frequency"
+   }
+  },
+  {
+   "id": "y10fsp6-s05-l1",
+   "topic": "Statistics",
+   "subtopic": "Mean from a grouped frequency table",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S5 Mean from a grouped frequency table",
+   "keywords": [
+    "mean",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "f1 != f2",
+    "f1 != f3",
+    "f1 != f4",
+    "f2 != f3",
+    "f2 != f4",
+    "f3 != f4"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The table shows how long some people waited. (a) Write down the modal class. (b) Work out an estimate of the mean time. Give your answer to 1 decimal place.",
+   "answer": "(a) [[f1 > f2 && f1 > f3 && f1 > f4|if:0 ≤ t < 10/]][[f2 > f1 && f2 > f3 && f2 > f4|if:10 ≤ t < 20/]][[f3 > f1 && f3 > f2 && f3 > f4|if:20 ≤ t < 30/]][[f4 > f1 && f4 > f2 && f4 > f3|if:30 ≤ t < 40/]]  (b) [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4)|dp:1]] minutes",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Time (t min)",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "0 ≤ t < 10",
+      "[[f1|n]]"
+     ],
+     [
+      "10 ≤ t < 20",
+      "[[f2|n]]"
+     ],
+     [
+      "20 ≤ t < 30",
+      "[[f3|n]]"
+     ],
+     [
+      "30 ≤ t < 40",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s05-l2",
+   "topic": "Statistics",
+   "subtopic": "Mean from a grouped frequency table",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S5 Mean from a grouped frequency table",
+   "keywords": [
+    "mean",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The table shows how long some people waited. Complete the working: the midpoint of the class 10 ≤ t < 20 is 15. Work out an estimate of the total waiting time and the mean.",
+   "answer": "Total ≈ [[5 * f1 + 15 * f2 + 25 * f3 + 35 * f4]] minutes from [[f1 + f2 + f3 + f4]] people, mean ≈ [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4)|dp:1]] minutes",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Time (t min)",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "0 ≤ t < 10",
+      "[[f1|n]]"
+     ],
+     [
+      "10 ≤ t < 20",
+      "[[f2|n]]"
+     ],
+     [
+      "20 ≤ t < 30",
+      "[[f3|n]]"
+     ],
+     [
+      "30 ≤ t < 40",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s05-l3",
+   "topic": "Statistics",
+   "subtopic": "Mean from a grouped frequency table",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S5 Mean from a grouped frequency table",
+   "keywords": [
+    "mean",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "Explain why the mean worked out from a grouped frequency table is only an estimate.",
+   "answer": "We do not know the actual values in each class, so we use the midpoint of the class as an estimate (here [[f1 + f2 + f3 + f4]] people, mean ≈ [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4)|dp:1]])",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Time (t min)",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "0 ≤ t < 10",
+      "[[f1|n]]"
+     ],
+     [
+      "10 ≤ t < 20",
+      "[[f2|n]]"
+     ],
+     [
+      "20 ≤ t < 30",
+      "[[f3|n]]"
+     ],
+     [
+      "30 ≤ t < 40",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s05-l4",
+   "topic": "Statistics",
+   "subtopic": "Mean from a grouped frequency table",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S5 Mean from a grouped frequency table",
+   "keywords": [
+    "mean",
+    "from",
+    "a",
+    "grouped",
+    "frequency",
+    "table",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f3",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "f4",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "tg",
+     {
+      "int": [
+       14,
+       26
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "abs((5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4) - tg) > 0.5"
+   ],
+   "check": [
+    "f1 > 0"
+   ],
+   "text": "The table shows how long some people waited. (a) Estimate the mean waiting time. (b) The target is a mean of less than [[tg]] minutes. Is it met? Explain. (4 marks)",
+   "answer": "(a) [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4)|dp:1]] minutes  (b) [[(5 * f1 + 15 * f2 + 25 * f3 + 35 * f4) / (f1 + f2 + f3 + f4) < tg|if:Yes: the estimated mean is below the target/No: the estimated mean is not below the target]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Time (t min)",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "0 ≤ t < 10",
+      "[[f1|n]]"
+     ],
+     [
+      "10 ≤ t < 20",
+      "[[f2|n]]"
+     ],
+     [
+      "20 ≤ t < 30",
+      "[[f3|n]]"
+     ],
+     [
+      "30 ≤ t < 40",
+      "[[f4|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s06-l1",
+   "topic": "Statistics",
+   "subtopic": "Sampling",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S6 Sampling",
+   "keywords": [
+    "sampling",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       400,
+       500,
+       800,
+       1000
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "A school has [[N]] pupils. A random sample of [[n]] pupils is taken. What fraction of the pupils is in the sample?",
+   "answer": "$[[n / N|frac]]$"
+  },
+  {
+   "id": "y10fsp6-s06-l2",
+   "topic": "Statistics",
+   "subtopic": "Sampling",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S6 Sampling",
+   "keywords": [
+    "sampling",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       300,
+       360,
+       420
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "choose": [
+       200,
+       240,
+       280
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(n * b / (b + g))"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "A school has [[b]] boys and [[g]] girls. A stratified sample of [[n]] pupils is taken. How many boys and girls are in the sample?",
+   "answer": "Boys [[n * b / (b + g)|dp:0]], girls [[n * g / (b + g)|dp:0]]"
+  },
+  {
+   "id": "y10fsp6-s06-l3",
+   "topic": "Statistics",
+   "subtopic": "Sampling",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S6 Sampling",
+   "keywords": [
+    "sampling",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "tp",
+     {
+      "pick": [
+       "school meals",
+       "school trips",
+       "the library",
+       "sports clubs"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 == 1"
+   ],
+   "text": "A survey about [[tp]] only asks pupils in the lunch queue. Explain why the sample may be biased and say how to improve it.",
+   "answer": "Pupils who are not in the queue are left out, so it is not representative; take a random sample from the school register"
+  },
+  {
+   "id": "y10fsp6-s06-l4",
+   "topic": "Statistics",
+   "subtopic": "Sampling",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S6 Sampling",
+   "keywords": [
+    "sampling",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       6000,
+       7200
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       2000,
+       2800
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       100,
+       200
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(n * a / (a + c))"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A town has [[a]] adults and [[c]] children. A stratified sample of [[n]] people is taken. Work out how many adults and children, and explain why this is fair. (3 marks)",
+   "answer": "Adults [[n * a / (a + c)|dp:0]], children [[n * c / (a + c)|dp:0]]: each group is represented in proportion to its size"
+  },
+  {
+   "id": "y10fsp6-s07-l1",
+   "topic": "Statistics",
+   "subtopic": "Use data to compare distributions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S7 Use data to compare distributions (E)",
+   "keywords": [
+    "use",
+    "data",
+    "to",
+    "compare",
+    "distributions",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "int": [
+       50,
+       70
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "int": [
+       50,
+       70
+      ]
+     }
+    ],
+    [
+     "r1",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ],
+    [
+     "r2",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "r1 != r2"
+   ],
+   "check": [
+    "m1 > 0"
+   ],
+   "text": "Class A: mean [[m1]], range [[r1]]. Class B: mean [[m2]], range [[r2]]. Compare the two classes.",
+   "answer": "Class [[m1 > m2|if:A/B]] has the higher mean (better on average); class [[r1 < r2|if:A/B]] has the smaller range (more consistent)"
+  },
+  {
+   "id": "y10fsp6-s07-l2",
+   "topic": "Statistics",
+   "subtopic": "Use data to compare distributions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S7 Use data to compare distributions (E)",
+   "keywords": [
+    "use",
+    "data",
+    "to",
+    "compare",
+    "distributions",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "r1",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "r2",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "r1 != r2"
+   ],
+   "check": [
+    "m1 > 0"
+   ],
+   "text": "The mean time for Ali is [[m1]] seconds and the range is [[r1]]. For Ben the mean is [[m2]] seconds and the range is [[r2]]. Who is faster on average? Who is more consistent?",
+   "answer": "[[m1 < m2|if:Ali/Ben]] is faster on average; [[r1 < r2|if:Ali/Ben]] is more consistent"
+  },
+  {
+   "id": "y10fsp6-s07-l3",
+   "topic": "Statistics",
+   "subtopic": "Use data to compare distributions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S7 Use data to compare distributions (E)",
+   "keywords": [
+    "use",
+    "data",
+    "to",
+    "compare",
+    "distributions",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a1",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "a2",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "a3",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "a4",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "a5",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b1",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b4",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b5",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a1 > 0"
+   ],
+   "text": "Team A scored [[a1]], [[a2]], [[a3]], [[a4]], [[a5]] points. Team B scored [[b1]], [[b2]], [[b3]], [[b4]], [[b5]]. Compare the teams using the mean and the range.",
+   "answer": "A: mean [[(a1 + a2 + a3 + a4 + a5) / 5|dp:1]], range [[max(max(a1, a2), max(a3, max(a4, a5))) - min(min(a1, a2), min(a3, min(a4, a5)))]]; B: mean [[(b1 + b2 + b3 + b4 + b5) / 5|dp:1]], range [[max(max(b1, b2), max(b3, max(b4, b5))) - min(min(b1, b2), min(b3, min(b4, b5)))]]"
+  },
+  {
+   "id": "y10fsp6-s07-l4",
+   "topic": "Statistics",
+   "subtopic": "Use data to compare distributions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S7 Use data to compare distributions (E)",
+   "keywords": [
+    "use",
+    "data",
+    "to",
+    "compare",
+    "distributions",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "r1",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "r2",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "r1 != r2",
+    "m1 + r1 != m2 + r2"
+   ],
+   "check": [
+    "m1 > 0"
+   ],
+   "text": "Two bus companies record how many minutes late their buses are. Company X: mean [[m1]], range [[r1]]. Company Y: mean [[m2]], range [[r2]]. Which company would you use to be on time? Give two reasons. (3 marks)",
+   "answer": "[[m1 + r1 < m2 + r2|if:Company X/Company Y]]: [[m1 < m2|if:X/Y]] has the lower mean lateness and [[r1 < r2|if:X/Y]] has the smaller range (more consistent)"
+  },
+  {
+   "id": "y10fsp6-s08-l1",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S8 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. What score did the pupil who revised for [[k]] hours get?",
+   "answer": "[[m * k + c + (k == 1) * n1 + (k == 2) * n2 + (k == 3) * n3 + (k == 4) * n4 + (k == 5) * n5 + (k == 6) * n6 + (k == 7) * n7 + (k == 8) * n8]]",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s08-l2",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S8 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "8 - k > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. How many pupils revised for more than [[k]] hours?",
+   "answer": "[[8 - k]]",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s08-l3",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S8 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "m >= 4"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score (out of [[ymax]]) for 8 pupils. Describe how the test score changes as revision time increases.",
+   "answer": "As the hours of revision go up, the test score goes up",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s08-l4",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S8 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "m >= 4"
+   ],
+   "check": [
+    "m * 5 + c > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. (a) Estimate the score of a pupil who revised for 5 hours. (b) Pupil X revised for 9 hours. Explain why you should not use the graph to predict X's score. (3 marks)",
+   "answer": "(a) about [[m * 5 + c]]  (b) 9 hours is outside the range of the data (1 to 8 hours)",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp6-s09-l1",
+   "topic": "Statistics",
+   "subtopic": "Interpolation and extrapolation (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S9 Interpolation and extrapolation (E)",
+   "keywords": [
+    "interpolation",
+    "and",
+    "extrapolation",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "A line of best fit has equation $y = [[m]]x + [[c]]$. Use it to predict $y$ when $x = [[x0]]$.",
+   "answer": "[[m * x0 + c]]"
+  },
+  {
+   "id": "y10fsp6-s09-l2",
+   "topic": "Statistics",
+   "subtopic": "Interpolation and extrapolation (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S9 Interpolation and extrapolation (E)",
+   "keywords": [
+    "interpolation",
+    "and",
+    "extrapolation",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "lo",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "hi",
+     {
+      "int": [
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 != lo",
+    "x0 != hi"
+   ],
+   "check": [
+    "hi > lo"
+   ],
+   "text": "The data covers $x$ from [[lo]] to [[hi]]. Is a prediction at $x = [[x0]]$ interpolation or extrapolation?",
+   "answer": "[[x0 >= lo && x0 <= hi|if:Interpolation: inside the data range/Extrapolation: outside the data range]]"
+  },
+  {
+   "id": "y10fsp6-s09-l3",
+   "topic": "Statistics",
+   "subtopic": "Interpolation and extrapolation (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S9 Interpolation and extrapolation (E)",
+   "keywords": [
+    "interpolation",
+    "and",
+    "extrapolation",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "lo",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "hi",
+     {
+      "int": [
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x0 != lo",
+    "x0 != hi"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "A line of best fit $y = [[m]]x + [[c]]$ is based on $x$ from [[lo]] to [[hi]]. Predict $y$ at $x = [[x0]]$ and say whether you can trust it.",
+   "answer": "[[m * x0 + c]]; [[x0 >= lo && x0 <= hi|if:fairly reliable as it is inside the data/less reliable as it is outside the data]]"
+  },
+  {
+   "id": "y10fsp6-s09-l4",
+   "topic": "Statistics",
+   "subtopic": "Interpolation and extrapolation (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B6 Interpret and represent data · S9 Interpolation and extrapolation (E)",
+   "keywords": [
+    "interpolation",
+    "and",
+    "extrapolation",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ],
+    [
+     "lo",
+     {
+      "int": [
+       12,
+       16
+      ]
+     }
+    ],
+    [
+     "hi",
+     {
+      "int": [
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       18,
+       24
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "int": [
+       33,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Ice cream sales (y) against temperature (x) follow $y = [[m]]x - [[c]]$ for temperatures from [[lo]]°C to [[hi]]°C. (a) Predict sales at [[x0]]°C. (b) Explain why predicting sales at [[x1]]°C may be unreliable. (3 marks)",
+   "answer": "(a) [[m * x0 - c]]  (b) [[x1]]°C is outside the range of the data, so the pattern may not continue"
+  }
+ ]
+}

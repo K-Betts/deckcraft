@@ -1,0 +1,2557 @@
+{
+ "version": 1,
+ "note": "Year 10 Foundation Foundation Spring Block 3 Probability: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10fsp3-s01-l1",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S1 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != b"
+   ],
+   "check": [
+    "r + b > 0"
+   ],
+   "text": "A bag has [[r]] red counters and [[b]] blue counters. One counter is picked at random. Write the probability that it is red.",
+   "answer": "$[[r / (r + b)|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s01-l2",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S1 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "A fair six-sided dice is rolled. Work out the probability of getting [[k == 0|if:an even number/]][[k == 1|if:a prime number/]][[k == 2|if:greater than 4/]][[k == 3|if:a square number/]][[k == 4|if:a multiple of 3/]].",
+   "answer": "$[[(3 - min(floor(k / 2), 1)) / 6|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s01-l3",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S1 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       24,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A card is picked at random from cards numbered 1 to [[n]]. Work out the probability that the number is a multiple of [[m]].",
+   "answer": "$[[floor(n / m) / n|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s01-l4",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S1 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != b"
+   ],
+   "check": [
+    "r + b + g > 0"
+   ],
+   "text": "A bag has [[r]] red, [[b]] blue and [[g]] green counters. One is picked at random. Work out the probability that it is (a) green (b) not red (c) red or blue. (3 marks)",
+   "answer": "(a) $[[g / (r + b + g)|frac]]$  (b) $[[(b + g) / (r + b + g)|frac]]$  (c) $[[(r + b) / (r + b + g)|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s02-l1",
+   "topic": "Probability",
+   "subtopic": "Use the property that probabilities sum to 1",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S2 Use the property that probabilities sum to 1",
+   "keywords": [
+    "use",
+    "the",
+    "property",
+    "that",
+    "probabilities",
+    "sum",
+    "to",
+    "1",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       35,
+       40,
+       65,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "The probability that Amy wins a game is [[p / 100]]. What is the probability that she does not win?",
+   "answer": "[[(100 - p) / 100]]"
+  },
+  {
+   "id": "y10fsp3-s02-l2",
+   "topic": "Probability",
+   "subtopic": "Use the property that probabilities sum to 1",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S2 Use the property that probabilities sum to 1",
+   "keywords": [
+    "use",
+    "the",
+    "property",
+    "that",
+    "probabilities",
+    "sum",
+    "to",
+    "1",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       11
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability that a bus is on time is $\\frac{[[a]]}{[[b]]}$. Work out the probability that it is not on time.",
+   "answer": "$[[(b - a) / b|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s02-l3",
+   "topic": "Probability",
+   "subtopic": "Use the property that probabilities sum to 1",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S2 Use the property that probabilities sum to 1",
+   "keywords": [
+    "use",
+    "the",
+    "property",
+    "that",
+    "probabilities",
+    "sum",
+    "to",
+    "1",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 90"
+   ],
+   "check": [
+    "a + b < 100"
+   ],
+   "text": "A spinner is red, blue or green. The probability of red is [[a / 100]] and of blue is [[b / 100]]. Work out the probability of green.",
+   "answer": "[[(100 - a - b) / 100]]"
+  },
+  {
+   "id": "y10fsp3-s02-l4",
+   "topic": "Probability",
+   "subtopic": "Use the property that probabilities sum to 1",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S2 Use the property that probabilities sum to 1",
+   "keywords": [
+    "use",
+    "the",
+    "property",
+    "that",
+    "probabilities",
+    "sum",
+    "to",
+    "1",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       25,
+       30,
+       35
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       30,
+       60,
+       90,
+       150
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(100 - a - b) % 3 == 0",
+    "isint(n * 2 * (100 - a - b) / 300)"
+   ],
+   "check": [
+    "a + b < 100"
+   ],
+   "text": "The probabilities of a bag of sweets giving red, blue, green and yellow are [[a / 100]], [[b / 100]], $x$ and $2x$. Work out $x$. A box has [[n]] sweets; how many are yellow? (4 marks)",
+   "answer": "$3x = [[(100 - a - b) / 100]]$, so $x = [[(100 - a - b) / 300|dp:2]]$; yellow: [[n * 2 * (100 - a - b) / 300]]"
+  },
+  {
+   "id": "y10fsp3-s03-l1",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S3 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       8,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "h < n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A coin is flipped [[n]] times and lands on heads [[h]] times. Work out the relative frequency of heads.",
+   "answer": "$[[h / n|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s03-l2",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S3 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "The probability of rolling a 6 on a dice is $\\frac{1}{6}$. How many sixes would you expect in [[n * 6]] rolls?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y10fsp3-s03-l3",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S3 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "h1",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "h2",
+     {
+      "int": [
+       40,
+       110
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "h1 < n1",
+    "h2 < n2"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "Ben flips a coin [[n1]] times and gets [[h1]] heads. Cara flips the same coin [[n2]] times and gets [[h2]] heads. Whose results are more reliable? Work out each relative frequency.",
+   "answer": "Ben: [[h1 / n1|dp:2]]; Cara: [[h2 / n2|dp:2]]; Cara's are more reliable because she did more trials"
+  },
+  {
+   "id": "y10fsp3-s03-l4",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S3 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       40,
+       50,
+       80,
+       100
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       35
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       200,
+       400,
+       500,
+       1000
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b < n",
+    "isint(b * m / n)"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A spinner is spun [[n]] times. It lands on blue [[b]] times. (a) Work out the relative frequency of blue. (b) Estimate how many times it will land on blue in [[m]] spins. (3 marks)",
+   "answer": "(a) $[[b / n|frac]]$  (b) [[b * m / n]]"
+  },
+  {
+   "id": "y10fsp3-s04-l1",
+   "topic": "Probability",
+   "subtopic": "Two-way tables",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S4 Two-way tables",
+   "keywords": [
+    "two",
+    "way",
+    "tables",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "Complete the two-way table.",
+   "answer": "Boys total [[a + b]], girls total [[c + d]], walk total [[a + c]], bus total [[b + d]], all [[a + b + c + d]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "",
+     "Walk",
+     "Bus",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Boys",
+      "[[a|n]]",
+      "[[b|n]]",
+      "?"
+     ],
+     [
+      "Girls",
+      "[[c|n]]",
+      "[[d|n]]",
+      "?"
+     ],
+     [
+      "Total",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s04-l2",
+   "topic": "Probability",
+   "subtopic": "Two-way tables",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S4 Two-way tables",
+   "keywords": [
+    "two",
+    "way",
+    "tables",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "Complete the two-way table by finding the missing values.",
+   "answer": "Boys on the bus: [[b]]; girls who walk: [[c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "",
+     "Walk",
+     "Bus",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Boys",
+      "[[a|n]]",
+      "?",
+      "[[a + b|n]]"
+     ],
+     [
+      "Girls",
+      "?",
+      "[[d|n]]",
+      "[[c + d|n]]"
+     ],
+     [
+      "Total",
+      "[[a + c|n]]",
+      "[[b + d|n]]",
+      "[[a + b + c + d|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s04-l3",
+   "topic": "Probability",
+   "subtopic": "Two-way tables",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S4 Two-way tables",
+   "keywords": [
+    "two",
+    "way",
+    "tables",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "Use the two-way table to find (a) how many pupils walk (b) how many pupils are girls (c) how many boys do not walk.",
+   "answer": "(a) [[a + c]]  (b) [[c + d]]  (c) [[b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "",
+     "Walk",
+     "Bus",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Boys",
+      "[[a|n]]",
+      "[[b|n]]",
+      "[[a + b|n]]"
+     ],
+     [
+      "Girls",
+      "[[c|n]]",
+      "[[d|n]]",
+      "[[c + d|n]]"
+     ],
+     [
+      "Total",
+      "[[a + c|n]]",
+      "[[b + d|n]]",
+      "[[a + b + c + d|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s04-l4",
+   "topic": "Probability",
+   "subtopic": "Two-way tables",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S4 Two-way tables",
+   "keywords": [
+    "two",
+    "way",
+    "tables",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "The table shows how some pupils travel to school. (a) What percentage of the pupils are girls? (b) What percentage of the boys walk? Give answers to 1 decimal place. (3 marks)",
+   "answer": "(a) [[(c + d) * 100 / (a + b + c + d)|dp:1]]%  (b) [[a * 100 / (a + b)|dp:1]]%",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "",
+     "Walk",
+     "Bus",
+     "Total"
+    ],
+    "rows": [
+     [
+      "Boys",
+      "[[a|n]]",
+      "[[b|n]]",
+      "[[a + b|n]]"
+     ],
+     [
+      "Girls",
+      "[[c|n]]",
+      "[[d|n]]",
+      "[[c + d|n]]"
+     ],
+     [
+      "Total",
+      "[[a + c|n]]",
+      "[[b + d|n]]",
+      "[[a + b + c + d|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s05-l1",
+   "topic": "Probability",
+   "subtopic": "List outcomes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S5 List outcomes",
+   "keywords": [
+    "list",
+    "outcomes",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A coin is flipped and a spinner with [[s]] sections (1 to [[s]]) is spun. How many outcomes are there?",
+   "answer": "[[2 * s]]"
+  },
+  {
+   "id": "y10fsp3-s05-l2",
+   "topic": "Probability",
+   "subtopic": "List outcomes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S5 List outcomes",
+   "keywords": [
+    "list",
+    "outcomes",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A dice (1 to 6) is rolled and a coin is flipped. List the outcomes where the coin shows heads and the dice shows more than [[k]].",
+   "answer": "[[6 - k]] outcomes: H[[k + 1]] to H6"
+  },
+  {
+   "id": "y10fsp3-s05-l3",
+   "topic": "Probability",
+   "subtopic": "List outcomes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S5 List outcomes",
+   "keywords": [
+    "list",
+    "outcomes",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "Two spinners with [[s]] sections (numbered 1 to [[s]]) are spun. How many outcomes are there and how many of them are doubles?",
+   "answer": "[[s * s]] outcomes; [[s]] doubles"
+  },
+  {
+   "id": "y10fsp3-s05-l4",
+   "topic": "Probability",
+   "subtopic": "List outcomes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S5 List outcomes",
+   "keywords": [
+    "list",
+    "outcomes",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A café offers [[a]] sandwiches, [[b]] drinks and [[c]] desserts. How many different meals with one of each can be made? List the outcomes for [[a]] sandwiches and 2 drinks. (3 marks)",
+   "answer": "[[a * b * c]] meals; with 2 drinks there are [[a * 2]] sandwich-drink pairs"
+  },
+  {
+   "id": "y10fsp3-s06-l1",
+   "topic": "Probability",
+   "subtopic": "Sample spaces for 1 or more events",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S6 Sample spaces for 1 or more events",
+   "keywords": [
+    "sample",
+    "spaces",
+    "for",
+    "1",
+    "or",
+    "more",
+    "events",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "[[c]] fair coins are flipped. How many possible outcomes are there? Write out the list when there are two coins.",
+   "answer": "[[2^c]] outcomes (for two coins: HH, HT, TH, TT)"
+  },
+  {
+   "id": "y10fsp3-s06-l2",
+   "topic": "Probability",
+   "subtopic": "Sample spaces for 1 or more events",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S6 Sample spaces for 1 or more events",
+   "keywords": [
+    "sample",
+    "spaces",
+    "for",
+    "1",
+    "or",
+    "more",
+    "events",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A spinner has [[a]] sections and a coin is flipped. How many possible outcomes are there?",
+   "answer": "[[a * 2]]"
+  },
+  {
+   "id": "y10fsp3-s06-l3",
+   "topic": "Probability",
+   "subtopic": "Sample spaces for 1 or more events",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S6 Sample spaces for 1 or more events",
+   "keywords": [
+    "sample",
+    "spaces",
+    "for",
+    "1",
+    "or",
+    "more",
+    "events",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * m * d > 0"
+   ],
+   "text": "A café menu has [[s]] starters, [[m]] main courses and [[d]] desserts. How many different three-course meals can be chosen?",
+   "answer": "[[s]] × [[m]] × [[d]] = [[s * m * d]]"
+  },
+  {
+   "id": "y10fsp3-s06-l4",
+   "topic": "Probability",
+   "subtopic": "Sample spaces for 1 or more events",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S6 Sample spaces for 1 or more events",
+   "keywords": [
+    "sample",
+    "spaces",
+    "for",
+    "1",
+    "or",
+    "more",
+    "events",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b > 0"
+   ],
+   "text": "Spinner A has sections numbered 1 to [[a]] and spinner B has sections numbered 1 to [[b]]. Both are spun and the numbers are added. (a) How many outcomes are there? (b) How many outcomes give a total of [[a + b]]? (3 marks)",
+   "answer": "(a) [[a * b]]  (b) 1"
+  },
+  {
+   "id": "y10fsp3-s07-l1",
+   "topic": "Probability",
+   "subtopic": "Frequency trees",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S7 Frequency trees",
+   "keywords": [
+    "frequency",
+    "trees",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "Complete the frequency tree: [[a + b + c + d]] pupils, [[a + b]] boys. Work out the number of girls and the missing values.",
+   "answer": "Girls [[c + d]]; boys who bus [[b]]; girls who walk [[c]]",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Boys",
+      "[[a + b]]"
+     ],
+     [
+      "Girls",
+      "?"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Walk",
+       "[[a]]"
+      ],
+      [
+       "Bus",
+       "?"
+      ]
+     ],
+     [
+      [
+       "Walk",
+       "?"
+      ],
+      [
+       "Bus",
+       "[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s07-l2",
+   "topic": "Probability",
+   "subtopic": "Frequency trees",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S7 Frequency trees",
+   "keywords": [
+    "frequency",
+    "trees",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "choose": [
+       100,
+       200,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       20,
+       25,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(T * p * q / 10000)"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "[[T]] pupils are asked how they travel. [[p]]% are boys. Of the boys, [[q]]% walk. Complete the frequency tree.",
+   "answer": "Boys [[T * p / 100]]; girls [[T - T * p / 100]]; boys who walk [[T * p * q / 10000]]; boys who bus [[T * p / 100 - T * p * q / 10000]]"
+  },
+  {
+   "id": "y10fsp3-s07-l3",
+   "topic": "Probability",
+   "subtopic": "Frequency trees",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S7 Frequency trees",
+   "keywords": [
+    "frequency",
+    "trees",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "Complete the frequency tree for the [[a + b + c + d]] pupils.",
+   "answer": "Boys [[a + b]], girls [[c + d]]; walk: [[a]] boys and [[c]] girls; bus: [[b]] boys and [[d]] girls",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Boys",
+      "?"
+     ],
+     [
+      "Girls",
+      "?"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Walk",
+       "[[a]]"
+      ],
+      [
+       "Bus",
+       "[[b]]"
+      ]
+     ],
+     [
+      [
+       "Walk",
+       "[[c]]"
+      ],
+      [
+       "Bus",
+       "[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s07-l4",
+   "topic": "Probability",
+   "subtopic": "Frequency trees",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S7 Frequency trees",
+   "keywords": [
+    "frequency",
+    "trees",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "choose": [
+       100,
+       200,
+       400
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       40,
+       50,
+       60
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       20,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "choose": [
+       25,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(T * p * q / 10000)",
+    "isint((T - T * p / 100) * r / 100)"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "A frequency tree shows [[T]] pupils. [[p]]% are in Year 8, the rest in Year 9. [[q]]% of Year 8 and [[r]]% of Year 9 have a pet. How many pupils have a pet? (4 marks)",
+   "answer": "Year 8: [[T * p / 100]], with a pet [[T * p * q / 10000]]; Year 9: [[T - T * p / 100]], with a pet [[(T - T * p / 100) * r / 100]]; total [[T * p * q / 10000 + (T - T * p / 100) * r / 100]]"
+  },
+  {
+   "id": "y10fsp3-s08-l1",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S8 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A fair coin is flipped and a fair dice is rolled. Work out the probability of a head and a [[k]].",
+   "answer": "$\\frac{1}{12}$"
+  },
+  {
+   "id": "y10fsp3-s08-l2",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S8 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "$P(A) = \\frac{[[a]]}{[[b]]}$ and $P(B) = \\frac{[[c]]}{[[d]]}$ and the events are independent. Work out $P(A \\text{ and } B)$.",
+   "answer": "$[[a * c / (b * d)|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s08-l3",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S8 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       20,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "The probability that Ali is late is [[p / 100]] and that Ben is late is [[q / 100]], independently. Work out P(both late) and P(neither late).",
+   "answer": "[[p * q / 10000|dp:3]]; [[(100 - p) * (100 - q) / 10000|dp:3]]"
+  },
+  {
+   "id": "y10fsp3-s08-l4",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S8 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability of rain on Saturday is $\\frac{[[a]]}{[[b]]}$ and on Sunday is $\\frac{[[c]]}{[[d]]}$ (independent). Work out the probability that it rains on at least one of the days. (4 marks)",
+   "answer": "$1 - [[(b - a) * (d - c) / (b * d)|frac]] = [[1 - (b - a) * (d - c) / (b * d)|frac]]$"
+  },
+  {
+   "id": "y10fsp3-s09-l1",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for independent events",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S9 Tree diagrams for independent events",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The tree diagram shows the weather on two days. What is the missing probability for 'Dry' on Saturday?",
+   "answer": "$\\frac{[[b - a]]}{[[b]]}$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Rain",
+      "[[a]]/[[b]]"
+     ],
+     [
+      "Dry",
+      "?"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ],
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s09-l2",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for independent events",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S9 Tree diagrams for independent events",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability of rain is $\\frac{[[a]]}{[[b]]}$ on Saturday and $\\frac{[[c]]}{[[d]]}$ on Sunday, independently. Work out P(rain both days).",
+   "answer": "$[[a * c / (b * d)|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Rain",
+      "[[a]]/[[b]]"
+     ],
+     [
+      "Dry",
+      "[[b - a]]/[[b]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ],
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s09-l3",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for independent events",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S9 Tree diagrams for independent events",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability of rain is $\\frac{[[a]]}{[[b]]}$ on Saturday and $\\frac{[[c]]}{[[d]]}$ on Sunday, independently. Work out the probability of rain on exactly one day.",
+   "answer": "$[[(a * (d - c) + (b - a) * c) / (b * d)|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Rain",
+      "[[a]]/[[b]]"
+     ],
+     [
+      "Dry",
+      "[[b - a]]/[[b]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ],
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s09-l4",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for independent events",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S9 Tree diagrams for independent events",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "independent",
+    "events",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability of rain is $\\frac{[[a]]}{[[b]]}$ on Saturday and $\\frac{[[c]]}{[[d]]}$ on Sunday, independently. Work out the probability of at least one day of rain. (4 marks)",
+   "answer": "$[[1 - (b - a) * (d - c) / (b * d)|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Rain",
+      "[[a]]/[[b]]"
+     ],
+     [
+      "Dry",
+      "[[b - a]]/[[b]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ],
+     [
+      [
+       "Rain",
+       "[[c]]/[[d]]"
+      ],
+      [
+       "Dry",
+       "[[d - c]]/[[d]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s10-l1",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for dependent events (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S10 Tree diagrams for dependent events (E)",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "dependent",
+    "events",
+    "e",
+    "year 10",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "r + b"
+    ]
+   ],
+   "check": [
+    "r > 1"
+   ],
+   "text": "A bag has [[r]] red and [[b]] blue counters. Two counters are taken without replacement. Complete the tree: what is the probability of red on the second pick given red on the first?",
+   "answer": "$\\frac{[[r - 1]]}{[[n - 1]]}$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Red",
+      "[[r]]/[[n]]"
+     ],
+     [
+      "Blue",
+      "[[b]]/[[n]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Red",
+       "[[r - 1]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b]]/[[n - 1]]"
+      ]
+     ],
+     [
+      [
+       "Red",
+       "[[r]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b - 1]]/[[n - 1]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s10-l2",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for dependent events (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S10 Tree diagrams for dependent events (E)",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "dependent",
+    "events",
+    "e",
+    "year 10",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "r + b"
+    ]
+   ],
+   "check": [
+    "r > 1"
+   ],
+   "text": "A bag has [[r]] red and [[b]] blue counters. Two are taken without replacement. Work out P(red, red).",
+   "answer": "$[[r * (r - 1) / (n * (n - 1))|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Red",
+      "[[r]]/[[n]]"
+     ],
+     [
+      "Blue",
+      "[[b]]/[[n]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Red",
+       "[[r - 1]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b]]/[[n - 1]]"
+      ]
+     ],
+     [
+      [
+       "Red",
+       "[[r]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b - 1]]/[[n - 1]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s10-l3",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for dependent events (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S10 Tree diagrams for dependent events (E)",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "dependent",
+    "events",
+    "e",
+    "year 10",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "r + b"
+    ]
+   ],
+   "check": [
+    "r > 1"
+   ],
+   "text": "A bag has [[r]] red and [[b]] blue counters. Two are taken without replacement. Work out P(one of each colour).",
+   "answer": "$[[2 * r * b / (n * (n - 1))|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Red",
+      "[[r]]/[[n]]"
+     ],
+     [
+      "Blue",
+      "[[b]]/[[n]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Red",
+       "[[r - 1]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b]]/[[n - 1]]"
+      ]
+     ],
+     [
+      [
+       "Red",
+       "[[r]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b - 1]]/[[n - 1]]"
+      ]
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y10fsp3-s10-l4",
+   "topic": "Probability",
+   "subtopic": "Tree diagrams for dependent events (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Foundation Spring B3 Probability · S10 Tree diagrams for dependent events (E)",
+   "keywords": [
+    "tree",
+    "diagrams",
+    "for",
+    "dependent",
+    "events",
+    "e",
+    "year 10",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n",
+     "r + b"
+    ]
+   ],
+   "check": [
+    "r > 1"
+   ],
+   "text": "A bag has [[r]] red and [[b]] blue counters. Two are taken without replacement. Work out P(at least one red). (4 marks)",
+   "answer": "$[[1 - b * (b - 1) / (n * (n - 1))|frac]]$",
+   "diagram": {
+    "kind": "tree",
+    "first": [
+     [
+      "Red",
+      "[[r]]/[[n]]"
+     ],
+     [
+      "Blue",
+      "[[b]]/[[n]]"
+     ]
+    ],
+    "second": [
+     [
+      [
+       "Red",
+       "[[r - 1]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b]]/[[n - 1]]"
+      ]
+     ],
+     [
+      [
+       "Red",
+       "[[r]]/[[n - 1]]"
+      ],
+      [
+       "Blue",
+       "[[b - 1]]/[[n - 1]]"
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}
