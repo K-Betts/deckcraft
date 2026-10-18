@@ -128,7 +128,9 @@ whole string "[[expr|n]]". Kinds and their fields:
   factor-tree       root: {"v": 60, "l": {...}, "r": {...}}, "?" as a value hides it
   counters          positive, negative (zero-pair and charged-counter questions)
   crossing-lines    theta, labels:[4 sectors anticlockwise from the first line], unknown
-  bar-chart         also series:[...] with stacked:true for dual and stacked bars
+  bar-chart         also series:[...] with stacked:true for dual and stacked bars; "lines":true draws a vertical line chart;
+                    "yMin":50 starts the axis above zero (for misleading-graph questions)
+  pie               values:[slice sizes, clockwise from the top, drawn to scale], labels:[text beside each slice]
   number-line       also: labelEvery, hideLabels, blank:[values shown as ?], dots:[{"at":0.3,"label":"A"}]
 DIAGRAM RULES (these are shown on a classroom screen, so they must not mislead):
   - Angles are drawn to the sizes in "sizes". ALWAYS give "sizes" for algebraic angle questions
