@@ -106,6 +106,7 @@ whole string "[[expr|n]]". Kinds and their fields:
   cuboid            length, width, height
   bar-chart         categories:[...], values:[numbers], yLabel
   number-line       min, max, step, marks:[{"at":2,"open":false,"to":"right"}], dots:[...]
+                    a two-sided inequality: marks:[{"at":-2,"open":false,"end":4},{"at":4,"open":true}]
   coordinate-grid   xmin,xmax,ymin,ymax, line:{"m":2,"c":1}, points:[[1,2,"A"]]
                     also lines:[{"m":1,"c":0}|{"x":3}|{"y":-2}, optional "color","label","dash":true],
                     segments:[[x1,y1,x2,y2]], polygons:[{"points":[[x,y],...],"color":"#2F6FDB","label":"P"}]

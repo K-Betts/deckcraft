@@ -651,7 +651,12 @@ impl Fig<'_> {
                 "left" => {
                     draw_line(s, [l - 4.0, yy], [at(v), yy], BLUE, 5.0)?;
                 }
-                _ => {}
+                // `end`: the line runs to this value (a two-sided inequality).
+                _ => {
+                    if let Some(e) = m.get("end").and_then(Value::as_f64) {
+                        draw_line(s, [at(v), yy], [at(e), yy], BLUE, 5.0)?;
+                    }
+                }
             }
             draw_shape(s, "ellipse", [at(v) - 6.0, yy - 6.0, 12.0, 12.0], Some(if open { "#FFFFFF" } else { BLUE }), Some((BLUE, 2.5)))?;
         }
@@ -1379,18 +1384,29 @@ impl Fig<'_> {
             .unwrap_or_default();
         let cols = headers.len().max(rows.iter().map(Vec::len).max().unwrap_or(0)).max(1);
         let nrows = rows.len() + usize::from(!headers.is_empty());
-        let [x, y, w, h] = self.fit((cols as f64 * 0.7 + 0.8).max(1.6), 6.0);
-        let (cw, rh) = (w / cols as f64, (h / nrows.max(1) as f64).min(44.0 * k()));
+        // Columns are as wide as their longest text, so long headings and "Frequency" fit.
+        let chars = |c: usize| -> usize {
+            let cell = |t: &String| crate::latex::plain(t).chars().count();
+            headers.get(c).map(cell).into_iter().chain(rows.iter().filter_map(|r| r.get(c)).map(cell)).max().unwrap_or(1).max(3)
+        };
+        let weights: Vec<f64> = (0..cols).map(|c| chars(c) as f64 + 1.5).collect();
+        let total: f64 = weights.iter().sum();
+        let [x, y, w, h] = self.fit((total / (4.0 * nrows.max(1) as f64)).max(1.6), 6.0);
+        let rh = (h / nrows.max(1) as f64).min(44.0 * k());
         let top = y + (h - rh * nrows as f64) / 2.0;
         let mut row_i = 0usize;
         let mut draw_row = |s: &mut Session, cells: &[String], fill: &str, bold: bool| -> Result<()> {
+            let mut cx = x;
             for c in 0..cols {
+                let cw = w * weights[c] / total;
                 let ry = top + rh * row_i as f64;
-                draw_shape(s, "rect", [x + cw * c as f64, ry, cw, rh], Some(fill), Some((INK, 1.8)))?;
+                draw_shape(s, "rect", [cx, ry, cw, rh], Some(fill), Some((INK, 1.8)))?;
                 if let Some(t) = cells.get(c) {
-                    let t = if bold { format!("**{t}**") } else { t.clone() };
-                    label_sized(s, &t.replace("**", ""), [x + cw * (c as f64 + 0.5), ry + rh / 2.0], 15.0)?;
+                    let size = (15.0_f64).min((cw - 6.0) / (chars(c) as f64 * 0.62) / k()).max(8.0);
+                    let _ = bold;
+                    label_sized(s, t, [cx + cw / 2.0, ry + rh / 2.0], size)?;
                 }
+                cx += cw;
             }
             row_i += 1;
             Ok(())

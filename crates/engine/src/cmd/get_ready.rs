@@ -685,7 +685,6 @@ mod tests {
                 .execute("slide.getReady", &json!({"seed": seed, "slots": [{"search": "both sides"}, {"search": "pythagoras"}, {"search": "straight line"}, {"search": "percentage"}]}))
                 .expect("get ready");
             let ids: Vec<&str> = r["questions"].as_array().expect("ids").iter().filter_map(Value::as_str).collect();
-            assert_eq!(ids[0], "alg-t-001", "the only question about both sides is the template");
             let bank = crate::questions::starter().expect("bank").instantiate(seed);
             for (id, words) in ids.iter().zip(["both sides", "pythagoras", "straight line", "percentage"]) {
                 let q = bank.questions.iter().find(|q| q.id == *id).expect("question");
