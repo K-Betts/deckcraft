@@ -102,9 +102,24 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y10-higher-summer-b4-factors-powers-surds.json"),
     include_str!("../../../assets/questions/y10-higher-summer-b5-pythagoras-trigonometry.json"),
     include_str!("../../../assets/questions/y10-higher-summer-b6-simultaneous-equations.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b1-ratio-and-proportion.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b2-area-and-volume.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b3-similarity-and-congruence.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b4-sequences-and-proof.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b5-standard-form.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b6-work-with-circles.json"),
+    include_str!("../../../assets/questions/y11-foundation-autumn-b7-set-notation-venn.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b1-ratio-and-proportion.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b2-area-and-volume.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b3-similarity-and-congruence.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b4-sequences-and-proof.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b5-standard-form.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b6-circle-theorems.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b7-set-notation-venn.json"),
+    include_str!("../../../assets/questions/y11-higher-autumn-b8-vectors.json"),
 ];
 
-const MAX_BYTES: usize = 4 << 20;
+const MAX_BYTES: usize = 16 << 20;
 const MAX_QUESTIONS: usize = 20_000;
 const MAX_TEXT: usize = 600;
 /// The figure kinds the Get Ready slide can draw.
@@ -760,11 +775,16 @@ mod tests {
         let bank = starter().unwrap();
         let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
         for t in &bank.templates {
-            if t.source.starts_with("Y7 ") || t.source.starts_with("Y8 ") || t.source.starts_with("Y9 ") || t.source.starts_with("Y10 ") {
+            if t.source.starts_with("Y7 ")
+                || t.source.starts_with("Y8 ")
+                || t.source.starts_with("Y9 ")
+                || t.source.starts_with("Y10 ")
+                || t.source.starts_with("Y11 ")
+            {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 600, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 700, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }

@@ -1,0 +1,1167 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Autumn Block 6 Work with circles: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fau6-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S1 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d * d / 4 * 4 == d * d"
+   ],
+   "text": "A circle has a diameter of [[d]] cm. Work out (a) its circumference (b) its area, both in terms of $\\pi$.",
+   "answer": "(a) $[[d]]\\pi$ cm  (b) $[[d * d / 4]]\\pi$ cm²",
+   "diagram": {
+    "kind": "circle",
+    "diameter": "[[d]] cm"
+   }
+  },
+  {
+   "id": "y11fau6-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S1 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has a radius of [[r]] cm. Work out its circumference and area to 1 decimal place.",
+   "answer": "Circumference [[2 * r * 3.14159265|dp:1]] cm; area [[r * r * 3.14159265|dp:1]] cm²",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y11fau6-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S1 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has radius [[r]] cm. Mia says its circumference and its area are the same number. Is she right? Work out both in terms of $\\pi$.",
+   "answer": "Circumference $[[2 * r]]\\pi$, area $[[r * r]]\\pi$: [[r == 2|if:she is right only because the radius is 2/she is not right: the numbers are different]]"
+  },
+  {
+   "id": "y11fau6-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S1 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       5,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circular table has a circumference of $[[2 * r]]\\pi$ m. (a) Work out its radius. (b) Work out its area in terms of $\\pi$. (c) A tablecloth costs £[[p]] per m². Work out the cost to cover the table, to the nearest penny. (4 marks)",
+   "answer": "(a) [[r]] m  (b) $[[r * r|coef]]\\pi$ m²  (c) £[[r * r * 3.14159265 * p|dp:2]]"
+  },
+  {
+   "id": "y11fau6-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (area)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S2 Fractional parts of a circle (area)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "area",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A semicircle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 2|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (area)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S2 Fractional parts of a circle (area)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "area",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 4|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (area)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S2 Fractional parts of a circle (area)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "area",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the area of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * d * 3.14159265 / 8|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau6-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (area)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S2 Fractional parts of a circle (area)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "area",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * r * t / 360)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. Work out its area in terms of $\\pi$ and to 1 decimal place. (3 marks)",
+   "answer": "$[[r * r * t / 360|coef]]\\pi$ cm² = [[r * r * t / 360 * 3.14159265|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau6-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (perimeter)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S3 Fractional parts of a circle (perimeter)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "perimeter",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d / 2 * 2 == d"
+   ],
+   "text": "A semicircle has a diameter of [[d]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[d / 2|coef]]\\pi + [[d]]$ cm"
+  },
+  {
+   "id": "y11fau6-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (perimeter)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S3 Fractional parts of a circle (perimeter)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "perimeter",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r / 2 * 2 == r"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[r / 2|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y11fau6-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (perimeter)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S3 Fractional parts of a circle (perimeter)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "perimeter",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the perimeter of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * 3.14159265 / 2 + d|dp:1]] cm"
+  },
+  {
+   "id": "y11fau6-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Fractional parts of a circle (perimeter)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S3 Fractional parts of a circle (perimeter)",
+   "keywords": [
+    "fractional",
+    "parts",
+    "of",
+    "a",
+    "circle",
+    "perimeter",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * t / 180)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. (a) Work out the length of its arc in terms of $\\pi$. (b) Work out its perimeter in terms of $\\pi$. (3 marks)",
+   "answer": "(a) $[[r * t / 180|coef]]\\pi$ cm  (b) $[[r * t / 180|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y11fau6-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a sector (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S4 Area of a sector (E)",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "sector",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A semicircle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 2|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a sector (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S4 Area of a sector (E)",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "sector",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 4|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a sector (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S4 Area of a sector (E)",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "sector",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the area of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * d * 3.14159265 / 8|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau6-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a sector (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S4 Area of a sector (E)",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "sector",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * r * t / 360)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. Work out its area in terms of $\\pi$ and to 1 decimal place. (3 marks)",
+   "answer": "$[[r * r * t / 360|coef]]\\pi$ cm² = [[r * r * t / 360 * 3.14159265|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau6-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Arc length and perimeter (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S5 Arc length and perimeter (E)",
+   "keywords": [
+    "arc",
+    "length",
+    "and",
+    "perimeter",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d / 2 * 2 == d"
+   ],
+   "text": "A semicircle has a diameter of [[d]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[d / 2|coef]]\\pi + [[d]]$ cm"
+  },
+  {
+   "id": "y11fau6-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Arc length and perimeter (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S5 Arc length and perimeter (E)",
+   "keywords": [
+    "arc",
+    "length",
+    "and",
+    "perimeter",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r / 2 * 2 == r"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[r / 2|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y11fau6-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Arc length and perimeter (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S5 Arc length and perimeter (E)",
+   "keywords": [
+    "arc",
+    "length",
+    "and",
+    "perimeter",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the perimeter of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * 3.14159265 / 2 + d|dp:1]] cm"
+  },
+  {
+   "id": "y11fau6-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Arc length and perimeter (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S5 Arc length and perimeter (E)",
+   "keywords": [
+    "arc",
+    "length",
+    "and",
+    "perimeter",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * t / 180)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. (a) Work out the length of its arc in terms of $\\pi$. (b) Work out its perimeter in terms of $\\pi$. (3 marks)",
+   "answer": "(a) $[[r * t / 180|coef]]\\pi$ cm  (b) $[[r * t / 180|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y11fau6-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Area and perimeter of compound shapes with circles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S6 Area and perimeter of compound shapes with circles",
+   "keywords": [
+    "area",
+    "and",
+    "perimeter",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       4,
+       8,
+       12,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 4 == 0"
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A shape is a rectangle [[l]] cm by [[w]] cm with a semicircle on one of the [[w]] cm sides. Work out the area in terms of $\\pi$.",
+   "answer": "$[[l * w]] + [[w * w / 8|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Area and perimeter of compound shapes with circles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S6 Area and perimeter of compound shapes with circles",
+   "keywords": [
+    "area",
+    "and",
+    "perimeter",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       40,
+       60,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A running track is a rectangle [[l]] m by [[w]] m with a semicircle at each end. Work out the area inside the track in terms of $\\pi$.",
+   "answer": "$[[l * w]] + [[w * w / 4|coef]]\\pi$ m²"
+  },
+  {
+   "id": "y11fau6-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Area and perimeter of compound shapes with circles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S6 Area and perimeter of compound shapes with circles",
+   "keywords": [
+    "area",
+    "and",
+    "perimeter",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A square of side [[w]] cm has a semicircle on one side. Work out its perimeter and area, both to 1 decimal place.",
+   "answer": "Perimeter [[3 * w + w * 3.14159265 / 2|dp:1]] cm; area [[w * w + w * w * 3.14159265 / 8|dp:1]] cm²"
+  },
+  {
+   "id": "y11fau6-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Area and perimeter of compound shapes with circles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S6 Area and perimeter of compound shapes with circles",
+   "keywords": [
+    "area",
+    "and",
+    "perimeter",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       100
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A window is a rectangle [[w]] cm wide and [[h]] cm high with a semicircle on top. (a) Work out the area of the window in terms of $\\pi$. (b) Work out the perimeter, to 1 decimal place. (4 marks)",
+   "answer": "(a) $[[w * h]] + [[w * w / 8|coef]]\\pi$ cm²  (b) [[w + 2 * h + w * 3.14159265 / 2|dp:1]] cm"
+  },
+  {
+   "id": "y11fau6-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S7 Solve problems with circles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has a radius of [[r]] cm. Work out its circumference and area in terms of $\\pi$.",
+   "answer": "Circumference $[[2 * r]]\\pi$ cm; area $[[r * r]]\\pi$ cm²",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y11fau6-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S7 Solve problems with circles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "The circumference of a circle is $[[2 * r]]\\pi$ cm. Work out its radius and its area in terms of $\\pi$.",
+   "answer": "Radius [[r]] cm; area $[[r * r]]\\pi$ cm²"
+  },
+  {
+   "id": "y11fau6-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S7 Solve problems with circles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has an area of $[[r * r]]\\pi$ cm². Work out its circumference to 1 decimal place.",
+   "answer": "[[2 * r * 3.14159265|dp:1]] cm"
+  },
+  {
+   "id": "y11fau6-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with circles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B6 Work with circles · S7 Solve problems with circles",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "circles",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       10
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circular path has an inner radius of [[r]] m and an outer radius of [[r + w]] m. Work out the area of the path in terms of $\\pi$ and to 1 decimal place. (3 marks)",
+   "answer": "$[[(r + w) * (r + w) - r * r]]\\pi$ m² = [[((r + w) * (r + w) - r * r) * 3.14159265|dp:1]] m²"
+  }
+ ]
+}

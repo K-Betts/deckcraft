@@ -1,0 +1,1187 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Autumn Block 5 Standard form: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fau5-s01-l1",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S1 Numbers greater than 1 in standard form",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.2,
+       2.5,
+       3.4,
+       4.7,
+       5.6,
+       6.1,
+       7.3,
+       8.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * 10^n > 0"
+   ],
+   "text": "Write $[[x]] \\times 10^{[[n]]}$ as an ordinary number.",
+   "answer": "[[x * 10^n|group]]"
+  },
+  {
+   "id": "y11fau5-s01-l2",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S1 Numbers greater than 1 in standard form",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.2,
+       2.5,
+       3.4,
+       4.7,
+       5.6,
+       6.1,
+       7.3,
+       8.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * 10^n > 0"
+   ],
+   "text": "Write [[x * 10^n|group]] in standard form.",
+   "answer": "$[[x]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s01-l3",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S1 Numbers greater than 1 in standard form",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       3.2,
+       4.8,
+       7.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2.4,
+       5.5,
+       6.3,
+       9.2
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * 10^m != b * 10^n"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Which is larger, $[[a]] \\times 10^{[[m]]}$ or $[[b]] \\times 10^{[[n]]}$? Explain.",
+   "answer": "the [[a * 10^m > b * 10^n|if:first/second]] one: compare the powers of 10 first, then the numbers"
+  },
+  {
+   "id": "y11fau5-s01-l4",
+   "topic": "Number",
+   "subtopic": "Numbers greater than 1 in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S1 Numbers greater than 1 in standard form",
+   "keywords": [
+    "numbers",
+    "greater",
+    "than",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.5,
+       2.5,
+       3.5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       7,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x * k < 10"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "The distance from the Earth to the Sun is about [[x * 10^n|group]] km. (a) Write this in standard form. (b) A planet is [[k]] times as far away. Write its distance in standard form. (3 marks)",
+   "answer": "(a) $[[x]] \\times 10^{[[n]]}$  (b) $[[x * k]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s02-l1",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S2 Numbers between 0 and 1 in standard form",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.2,
+       2.5,
+       3.4,
+       4.7,
+       5.6,
+       6.1,
+       7.3,
+       8.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Write $[[x]] \\times 10^{-[[n]]}$ as an ordinary number.",
+   "answer": "[[x / 10^n]]"
+  },
+  {
+   "id": "y11fau5-s02-l2",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S2 Numbers between 0 and 1 in standard form",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.2,
+       2.5,
+       3.4,
+       4.7,
+       5.6,
+       6.1,
+       7.3,
+       8.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Write [[x / 10^n]] in standard form.",
+   "answer": "$[[x]] \\times 10^{-[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s02-l3",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S2 Numbers between 0 and 1 in standard form",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2.5,
+       4.2,
+       6.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.8,
+       3.3,
+       7.4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a / 10^m != b / 10^n"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Which is larger, $[[a]] \\times 10^{-[[m]]}$ or $[[b]] \\times 10^{-[[n]]}$? Explain.",
+   "answer": "the [[a / 10^m > b / 10^n|if:first/second]] one: the larger power of 10 matters most, so compare $-[[m]]$ and $-[[n]]$ first"
+  },
+  {
+   "id": "y11fau5-s02-l4",
+   "topic": "Number",
+   "subtopic": "Numbers between 0 and 1 in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S2 Numbers between 0 and 1 in standard form",
+   "keywords": [
+    "numbers",
+    "between",
+    "0",
+    "and",
+    "1",
+    "in",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.5,
+       2,
+       2.5,
+       3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x * k < 10"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A human hair is about [[x / 10^n]] m wide. (a) Write this in standard form. (b) A second hair is [[k]] times as wide. Write its width in standard form. (3 marks)",
+   "answer": "(a) $[[x]] \\times 10^{-[[n]]}$ m  (b) $[[x * k]] \\times 10^{-[[n]]}$ m"
+  },
+  {
+   "id": "y11fau5-s03-l1",
+   "topic": "Number",
+   "subtopic": "Adjust a number to standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S3 Adjust a number to standard form",
+   "keywords": [
+    "adjust",
+    "a",
+    "number",
+    "to",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.4,
+       2.7,
+       3.8,
+       4.6,
+       5.2,
+       6.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $[[a * 10]] \\times 10^{[[n]]}$ in standard form.",
+   "answer": "$[[a]] \\times 10^{[[n + 1]]}$"
+  },
+  {
+   "id": "y11fau5-s03-l2",
+   "topic": "Number",
+   "subtopic": "Adjust a number to standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S3 Adjust a number to standard form",
+   "keywords": [
+    "adjust",
+    "a",
+    "number",
+    "to",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.4,
+       2.7,
+       3.8,
+       4.6,
+       5.2,
+       6.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write $[[a / 10]] \\times 10^{[[n]]}$ in standard form.",
+   "answer": "$[[a]] \\times 10^{[[n - 1]]}$"
+  },
+  {
+   "id": "y11fau5-s03-l3",
+   "topic": "Number",
+   "subtopic": "Adjust a number to standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S3 Adjust a number to standard form",
+   "keywords": [
+    "adjust",
+    "a",
+    "number",
+    "to",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b % 10 != 0"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Write $[[b]] \\times 10^{[[n]]}$ and $0.[[c]] \\times 10^{[[n]]}$ in standard form.",
+   "answer": "$[[b / 10]] \\times 10^{[[n + 1]]}$ and $[[c]] \\times 10^{[[n - 1]]}$"
+  },
+  {
+   "id": "y11fau5-s03-l4",
+   "topic": "Number",
+   "subtopic": "Adjust a number to standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S3 Adjust a number to standard form",
+   "keywords": [
+    "adjust",
+    "a",
+    "number",
+    "to",
+    "standard",
+    "form",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2.5,
+       3.5,
+       4.5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A calculator shows [[a * 10]]E[[n]] for a mass in kg. Write this in standard form, as an ordinary number and say whether it is more or less than 1 kg. (3 marks)",
+   "answer": "$[[a]] \\times 10^{[[n + 1]]}$; [[a * 10 * 10^n|group]] kg; more than 1 kg"
+  },
+  {
+   "id": "y11fau5-s04-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S4 Multiply and divide numbers in standard form (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2,
+       2.5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $([[a]] \\times 10^{[[m]]}) \\times ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a * b]] \\times 10^{[[m + n]]}$"
+  },
+  {
+   "id": "y11fau5-s04-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S4 Multiply and divide numbers in standard form (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2,
+       2.5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b < 10"
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a * b]] \\times 10^{[[m]]}) \\div ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a]] \\times 10^{[[m - n]]}$"
+  },
+  {
+   "id": "y11fau5-s04-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S4 Multiply and divide numbers in standard form (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b >= 10",
+    "a * b < 100"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $([[a]] \\times 10^{[[m]]}) \\times ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a * b / 10]] \\times 10^{[[m + n + 1]]}$"
+  },
+  {
+   "id": "y11fau5-s04-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S4 Multiply and divide numbers in standard form (E)",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "9.5 * k >= 10",
+    "9.5 * k < 100"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A light-year is about $9.5 \\times 10^{12}$ km. A star is $[[k]] \\times 10^{[[n]]}$ light-years away. How far away is it in km? Give your answer in standard form to 2 significant figures. (3 marks)",
+   "answer": "$[[9.5 * k / 10]] \\times 10^{[[n + 13]]}$ km"
+  },
+  {
+   "id": "y11fau5-s05-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S5 Add and subtract numbers in standard form (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2.2,
+       3.4,
+       4.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.5,
+       2.3,
+       3.2,
+       4.4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} + [[b]] \\times 10^{[[n]]}$. Give your answer in standard form.",
+   "answer": "$[[a + b]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s05-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S5 Add and subtract numbers in standard form (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       6.5,
+       7.2,
+       8.4,
+       9.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.5,
+       2.3,
+       3.2,
+       4.4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} - [[b]] \\times 10^{[[n]]}$. Give your answer in standard form.",
+   "answer": "$[[a - b]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s05-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S5 Add and subtract numbers in standard form (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2.2,
+       3.4,
+       4.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b / 10 < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} + [[b]] \\times 10^{[[n - 1]]}$. Give your answer in standard form.",
+   "answer": "$[[a + b / 10]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y11fau5-s05-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Autumn B5 Standard form · S5 Add and subtract numbers in standard form (E)",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "e",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.2,
+       1.5,
+       1.8,
+       2.4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b / 10 < 10",
+    "a - b / 10 >= 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A school has $[[a]] \\times 10^{3}$ pupils and a second school has $[[b]] \\times 10^{2}$ pupils. Write the total number of pupils in standard form and the difference in standard form. (3 marks)",
+   "answer": "Total $[[a + b / 10]] \\times 10^{3}$; difference $[[a - b / 10]] \\times 10^{3}$"
+  }
+ ]
+}
