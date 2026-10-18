@@ -15,7 +15,27 @@ const MAX_BYTES: usize = 4 << 20;
 const MAX_QUESTIONS: usize = 20_000;
 const MAX_TEXT: usize = 600;
 /// The figure kinds the Get Ready slide can draw.
-pub const DRAWABLE: &[&str] = &["triangle-angles", "isosceles-triangle", "parallel-lines"];
+pub const DRAWABLE: &[&str] = &[
+    "triangle-angles",
+    "isosceles-triangle",
+    "parallel-lines",
+    "right-triangle",
+    "similar-triangles",
+    "angles-line",
+    "angles-point",
+    "circle",
+    "regular-polygon",
+    "rectangle",
+    "l-shape",
+    "trapezium",
+    "parallelogram",
+    "cuboid",
+    "bar-chart",
+    "number-line",
+    "coordinate-grid",
+    "venn",
+    "tree",
+];
 
 /// Whether a question's `diagram` is one the slide can draw.
 pub fn is_drawable(d: &serde_json::Value) -> bool {

@@ -7,7 +7,7 @@ use deckcraft_model::{LayoutId, LayoutType, Presentation, Section, SlideId, defa
 use serde_json::{Value, json};
 
 use super::*;
-use crate::{Result, Session, Target};
+use crate::{Result, Session, Target, questions};
 
 pub fn specs() -> Vec<CommandSpec> {
     vec![
@@ -710,68 +710,205 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     };
     s.execute("slide.rename", &json!({"name": GET_READY_NAME, "index": new_index}))?;
 
-    // A 2×2 grid of cards below the title: a numbered coloured tab, the question (with real
-    // equations), its figure when it has one, and an answer that appears on click.
+    // The title is a slim heading so the four cards get the slide.
+    let title = {
+        let st = s.doc()?;
+        st.doc.slides.get(new_index).and_then(|sl| sl.shapes.iter().find(|x| x.ph_type().is_some_and(|k| k.is_title())).map(|x| x.id.0))
+    };
+    if let Some(id) = title {
+        s.execute("shape.setBounds", &json!({"ids": [id], "x": 24.0, "y": 10.0, "w": 700.0, "h": 46.0}))?;
+        edit_runs(s, u64::from(id), |r| r.size = Some(30.0))?;
+    }
+
+    // A 2×2 grid of cards: Last lesson / week / topic / year, as on the MathsWhiteboard starter.
+    // Each card has its number, question (with equations), figure and an answer that appears on
+    // click; its Expand button opens it full screen on a slide of its own, with a Back button.
+    let expand = bool_param(p, "expand").unwrap_or(true);
+    let headings = bool_param(p, "headings").unwrap_or(true);
+    const HEADINGS: [&str; 4] = ["Last lesson", "Last week", "Last topic", "Last year"];
     let cols = 2usize;
     let rows = picked.len().div_ceil(cols).max(1);
-    let (margin, top, bottom, gap) = (20.0_f64, 104.0_f64, 16.0_f64, 14.0_f64);
+    let (margin, top, bottom, gap) = (20.0_f64, 64.0_f64, 16.0_f64, 14.0_f64);
     let card_w = (960.0 - 2.0 * margin - gap * (cols as f64 - 1.0)) / cols as f64;
     let card_h = (540.0 - top - bottom - gap * (rows as f64 - 1.0)) / rows as f64;
-    let accents = ["#E8735F", "#4FA37A", "#4A7BD0", "#8A62C9"];
-    let tints = ["#FFF3F0", "#F0F9F4", "#EFF4FD", "#F6F1FC"];
-    let (tab, pad) = (34.0_f64, 10.0_f64);
 
     let mut ids = vec![];
     let mut answers = String::new();
+    let mut buttons: Vec<(u64, u64)> = vec![];
     for (i, q) in picked.iter().enumerate() {
         let (col, row) = ((i % cols) as f64, (i / cols) as f64);
-        let (cx, cy) = (margin + col * (card_w + gap), top + row * (card_h + gap));
-        let (accent, tint) = (accents[i % accents.len()], tints[i % tints.len()]);
-
-        let card = draw_shape(s, "roundRect", [cx, cy, card_w, card_h], Some(tint), Some((accent, 2.0)))?;
-        s.execute("shape.rename", &json!({"id": card, "name": format!("Question {} card", i + 1)}))?;
-        let badge = draw_shape(s, "ellipse", [cx + pad, cy + pad, tab, tab], Some(accent), None)?;
-        s.execute("shape.rename", &json!({"id": badge, "name": format!("Question {} number", i + 1)}))?;
-        set_shape_text(s, badge, &(i + 1).to_string(), 18.0, "#FFFFFF", true)?;
-
-        // The figure takes the right-hand side of the card when the question has one.
-        let figure = q.diagram.as_ref().filter(|d| questions::is_drawable(d));
-        let text_w = if figure.is_some() { card_w * 0.52 } else { card_w - 2.0 * pad - tab - 6.0 };
-        let text_x = cx + pad + tab + 6.0;
-        // Longer questions, and those beside a figure, take a smaller size so they stay in the card.
-        let len = plain_answer(&q.text).chars().count();
-        let q_size = match (len, figure.is_some()) {
-            (0..=60, false) => 22.0,
-            (0..=100, false) | (0..=45, true) => 18.0,
-            (_, false) => 16.0,
-            (_, true) => 14.0,
-        };
-        let q_id = rich_text_box(s, &q.text, [text_x, cy + pad, text_w - tab, card_h * 0.58], q_size, "#1F2937")?;
-        s.execute("shape.rename", &json!({"id": q_id, "name": format!("Question {} text", i + 1)}))?;
-        if let Some(d) = figure {
-            let area = [cx + card_w * 0.55, cy + pad, card_w * 0.43, card_h * 0.62];
-            draw_figure(s, d, area)?;
-        }
-
-        // The answer sits along the bottom of the card and appears on click.
-        let a_h = (card_h * 0.24).clamp(30.0, 56.0);
-        let a_rect = [cx + pad, cy + card_h - a_h - pad, card_w - 2.0 * pad, a_h];
-        let a_id = draw_shape(s, "roundRect", a_rect, Some("#E3F4E8"), Some(("#2E7D4F", 1.5)))?;
-        s.execute("shape.rename", &json!({"id": a_id, "name": format!("Question {} answer", i + 1)}))?;
-        let a_size = if plain_answer(&q.answer).chars().count() > 26 { 16.0 } else { 22.0 };
-        set_rich_shape_text(s, a_id, &q.answer, a_size, "#14532D")?;
-        s.execute("animation.set", &json!({"ids": [a_id], "effect": "appear"}))?;
-
+        let rect = [margin + col * (card_w + gap), top + row * (card_h + gap), card_w, card_h];
+        let heading = headings.then(|| HEADINGS.get(i).copied()).flatten();
+        let card = draw_card(s, q, i, rect, 1.0, heading, expand)?;
+        buttons.push((card.badge, card.expand));
         ids.push(q.id.clone());
         answers.push_str(&format!("{}. {}\n", i + 1, plain_answer(&q.answer)));
     }
-
     s.execute("slide.notes", &json!({"text": format!("Answers:\n{answers}")}))?;
+
+    // One full-screen slide per question, straight after this one.
+    if expand {
+        for (i, q) in picked.iter().enumerate() {
+            s.execute("slide.new", &json!({"layout": "blank", "at": new_index + 1 + i}))?;
+            let here = s.doc()?.selection.slide;
+            s.execute("slide.rename", &json!({"name": format!("{GET_READY_NAME} Q{}", i + 1), "index": here}))?;
+            draw_card(s, q, i, [20.0, 20.0, 920.0, 500.0], 2.0, headings.then(|| HEADINGS.get(i).copied()).flatten(), false)?;
+            let back = draw_shape(s, "roundRect", [786.0, 34.0, 130.0, 36.0], Some("#FFFFFF"), Some(("#6B7280", 1.5)))?;
+            s.execute("shape.rename", &json!({"id": back, "name": "Back"}))?;
+            set_shape_text(s, back, "Back", 16.0, "#374151", true)?;
+            link_to_slide(s, &[back], new_index, "Back to the questions")?;
+            s.execute("slide.notes", &json!({"text": format!("Answer: {}", plain_answer(&q.answer))}))?;
+        }
+        s.execute("slide.go", &json!({"index": new_index}))?;
+        for (i, (badge, button)) in buttons.iter().enumerate() {
+            link_to_slide(s, &[*badge, *button], new_index + 1 + i, "Open this question full screen")?;
+        }
+    }
+
     if replace {
-        s.execute("slide.delete", &json!({"index": new_index + 1}))?;
+        // The old Get Ready slide, and the full-screen slides that followed it, are replaced.
+        let old = new_index + 1 + if expand { picked.len() } else { 0 };
+        s.execute("slide.delete", &json!({"index": old}))?;
+        loop {
+            let more = s.doc()?.doc.slides.get(old).is_some_and(|sl| sl.name.starts_with("Get Ready Q"));
+            if !more {
+                break;
+            }
+            s.execute("slide.delete", &json!({"index": old}))?;
+        }
         s.execute("slide.go", &json!({"index": new_index}))?;
     }
     Ok(json!({"index": new_index, "questions": ids}))
+}
+
+/// Makes clicking the shapes (on the current slide) jump to slide `target` in a show.
+fn link_to_slide(s: &mut Session, ids: &[u64], target: usize, tip: &str) -> Result<()> {
+    use deckcraft_model::text::{Action, Hyperlink};
+    let slide = s.doc()?.doc.slides.get(target).map(|sl| sl.id).ok_or_else(|| bad("slide.getReady", "no such slide"))?;
+    s.edit(|doc, sel| {
+        let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
+        for sh in list.iter_mut().filter(|sh| ids.contains(&u64::from(sh.id.0))) {
+            sh.click = Some(Hyperlink {
+                action: Action::Slide { slide },
+                tooltip: tip.to_string(),
+                highlight_click: false,
+                sound: None,
+                stop_sound: false,
+                zoom_return: None,
+            });
+        }
+        Ok(())
+    })
+}
+
+/// Changes the properties of every run in one shape's text.
+fn edit_runs(s: &mut Session, id: u64, f: impl Fn(&mut deckcraft_model::text::RunProps)) -> Result<()> {
+    s.edit(|doc, sel| {
+        let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
+        for sh in list.iter_mut().filter(|sh| u64::from(sh.id.0) == id) {
+            if let Some(t) = sh.text.as_mut() {
+                for r in t.paragraphs.iter_mut().flat_map(|p| p.runs.iter_mut()) {
+                    f(&mut r.props);
+                }
+            }
+        }
+        Ok(())
+    })
+}
+
+struct Card {
+    badge: u64,
+    expand: u64,
+    #[allow(dead_code)]
+    answer: u64,
+}
+
+/// One question card in `rect`: number badge and heading, an Expand button, the question, its
+/// figure, and the answer (which appears on click). `k` scales text and figure: 1 for a quarter
+/// of the slide, 2 for a whole slide.
+fn draw_card(s: &mut Session, q: &questions::Question, i: usize, rect: [f64; 4], k: f64, heading: Option<&str>, expand: bool) -> Result<Card> {
+    let [cx, cy, card_w, card_h] = rect;
+    let kc = k.min(1.4);
+    let accents = ["#E8735F", "#4FA37A", "#4A7BD0", "#8A62C9"];
+    let tints = ["#FFF3F0", "#F0F9F4", "#EFF4FD", "#F6F1FC"];
+    let (accent, tint) = (accents[i % accents.len()], tints[i % tints.len()]);
+    let (tab, pad) = (34.0 * kc, 10.0 * kc);
+    let name = |what: &str| format!("Question {} {what}", i + 1);
+
+    let card = draw_shape(s, "roundRect", [cx, cy, card_w, card_h], Some(tint), Some((accent, 2.0)))?;
+    s.execute("shape.rename", &json!({"id": card, "name": name("card")}))?;
+    let badge = draw_shape(s, "ellipse", [cx + pad, cy + pad, tab, tab], Some(accent), None)?;
+    s.execute("shape.rename", &json!({"id": badge, "name": name("number")}))?;
+    set_shape_text(s, badge, &(i + 1).to_string(), 18.0 * kc, "#FFFFFF", true)?;
+    if let Some(h) = heading {
+        let id = rich_text_box(s, h, [cx + pad + tab + 6.0, cy + pad, card_w * 0.5, tab], 15.0 * kc, accent)?;
+        s.execute("shape.rename", &json!({"id": id, "name": name("heading")}))?;
+        edit_runs(s, id, |r| r.bold = Some(true))?;
+        s.edit(|doc, sel| {
+            let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
+            for sh in list.iter_mut().filter(|sh| u64::from(sh.id.0) == id) {
+                if let Some(t) = sh.text.as_mut() {
+                    t.body.anchor = Some(deckcraft_model::text::Anchor::Middle);
+                }
+            }
+            Ok(())
+        })?;
+    }
+    // The Expand button sits at the top right; on the full-screen slide it is not needed.
+    let button = if expand {
+        let b = draw_shape(s, "roundRect", [cx + card_w - pad - 72.0, cy + pad + 4.0, 72.0, 26.0], Some("#FFFFFF"), Some((accent, 1.5)))?;
+        s.execute("shape.rename", &json!({"id": b, "name": name("expand")}))?;
+        set_shape_text(s, b, "Expand", 12.0, accent, true)?;
+        b
+    } else {
+        badge
+    };
+
+    // The question and its answer fill the left of the card (all of it when there is no figure);
+    // a figure takes the right-hand side from the top row to the bottom of the card.
+    let figure = q.diagram.as_ref().filter(|d| questions::is_drawable(d));
+    let wide = figure.is_some_and(super::figures::is_wide);
+    let share = match (figure.is_some(), wide) {
+        (false, _) => 0.0,
+        (true, true) => 0.55,
+        (true, false) => 0.45,
+    };
+    let col_w = card_w * (1.0 - share) - 2.0 * pad;
+    let stacked =
+        crate::latex::segments(&q.answer).into_iter().any(|g| matches!(g, crate::latex::Segment::Math(m) if m.contains(")/(") || m.contains("sqrt")));
+    let answer_text = plain_answer(&q.answer);
+    let a_len = answer_text.chars().count().max(1) as f64;
+    let a_h = if stacked { 62.0 * k.min(1.6) } else { 40.0 * k.min(1.8) };
+    // As large as fits on one line, up to a comfortable size.
+    let a_cap = if stacked { 19.0 * k } else { 22.0 * k };
+    let a_size = a_cap.min(((col_w - 16.0) / (a_len * 0.58)).max(10.0 * k));
+    let a_rect = [cx + pad, cy + card_h - a_h - pad, col_w, a_h];
+    let answer = draw_shape(s, "roundRect", a_rect, Some("#E3F4E8"), Some(("#2E7D4F", 1.5)))?;
+    s.execute("shape.rename", &json!({"id": answer, "name": name("answer")}))?;
+    set_rich_shape_text(s, answer, &q.answer, if stacked { a_size.min(a_cap) } else { a_size }, "#14532D")?;
+    s.execute("animation.set", &json!({"ids": [answer], "effect": "appear"}))?;
+
+    let body_top = cy + pad + tab + 6.0 * kc;
+    let text_h = (a_rect[1] - body_top - 6.0).max(20.0);
+    // The largest size whose lines (with an allowance for a stacked fraction) fit the space.
+    let len = plain_answer(&q.text).chars().count() as f64;
+    let stacked_q = q.text.contains("\\frac") || q.text.contains("\\sqrt");
+    let size = [26.0, 24.0, 22.0, 20.0, 18.0, 16.0, 15.0, 14.0, 13.0, 12.0]
+        .into_iter()
+        .map(|c| c * k)
+        .find(|c| {
+            let per_line = (col_w / (c * 0.6)).max(1.0);
+            let lines = (len / per_line).ceil().max(1.0) + if stacked_q { 2.0 } else { 0.0 };
+            lines * c * 1.32 <= text_h
+        })
+        .unwrap_or(12.0 * k);
+    let q_id = rich_text_box(s, &q.text, [cx + pad, body_top, col_w, text_h], size, "#1F2937")?;
+    s.execute("shape.rename", &json!({"id": q_id, "name": name("text")}))?;
+    if let Some(d) = figure {
+        let area = [cx + card_w * (1.0 - share), body_top - 4.0, card_w * share - pad, cy + card_h - pad - body_top + 4.0];
+        super::figures::draw(s, d, area, k)?;
+    }
+    Ok(Card { badge, expand: button, answer })
 }
 
 /// An answer as plain text for the speaker notes (`$…$` removed).
@@ -780,7 +917,7 @@ fn plain_answer(text: &str) -> String {
 }
 
 /// A preset shape with an optional fill and outline (`#RRGGBB`, width in pt).
-fn draw_shape(s: &mut Session, preset: &str, rect: [f64; 4], fill: Option<&str>, line: Option<(&str, f64)>) -> Result<u64> {
+pub(super) fn draw_shape(s: &mut Session, preset: &str, rect: [f64; 4], fill: Option<&str>, line: Option<(&str, f64)>) -> Result<u64> {
     use super::insert::add_shape;
     use deckcraft_geom::Xfrm;
     use deckcraft_model::{Geom, Shape};
@@ -803,7 +940,7 @@ fn draw_shape(s: &mut Session, preset: &str, rect: [f64; 4], fill: Option<&str>,
 }
 
 /// A straight line from `a` to `b`.
-fn draw_line(s: &mut Session, a: [f64; 2], b: [f64; 2], color: &str, width: f64) -> Result<u64> {
+pub(super) fn draw_line(s: &mut Session, a: [f64; 2], b: [f64; 2], color: &str, width: f64) -> Result<u64> {
     use super::insert::add_shape;
     use deckcraft_geom::Xfrm;
     use deckcraft_model::{Geom, Shape};
@@ -917,7 +1054,7 @@ fn rich_paragraphs(text: &str, size: f64, color: &str) -> Vec<deckcraft_model::t
 }
 
 /// A text box holding one wrapped paragraph of text and equations.
-fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f64, color: &str) -> Result<u64> {
+pub(super) fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f64, color: &str) -> Result<u64> {
     use super::insert::{add_shape, new_text_box};
     use deckcraft_geom::Xfrm;
     let xfrm = Xfrm { x: rect[0], y: rect[1], w: rect[2].max(1.0), h: rect[3].max(1.0), ..Default::default() };
@@ -926,84 +1063,6 @@ fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f64, color: 
         t.paragraphs = rich_paragraphs(text, size, color);
     }
     Ok(u64::from(add_shape(s, "slide.getReady", shape, false)?.0))
-}
-
-/// A small text label at the centre `(x, y)`.
-fn label(s: &mut Session, text: &str, x: f64, y: f64) -> Result<()> {
-    let (w, h) = (60.0, 24.0);
-    let id = rich_text_box(s, text, [x - w / 2.0, y - h / 2.0, w, h], 16.0, "#111827")?;
-    s.edit(|doc, sel| {
-        let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
-        for para in list.iter_mut().filter(|sh| u64::from(sh.id.0) == id).filter_map(|sh| sh.text.as_mut()).flat_map(|t| t.paragraphs.iter_mut()) {
-            para.props.align = Some(deckcraft_model::text::Align::Center);
-        }
-        Ok(())
-    })
-}
-
-/// Draws a question's figure inside `area` ([x, y, w, h]). The figure is made of ordinary shapes
-/// and text, so it saves to PowerPoint like anything else.
-fn draw_figure(s: &mut Session, d: &Value, area: [f64; 4]) -> Result<()> {
-    let [ax, ay, aw, ah] = area;
-    let kind = d.get("kind").and_then(Value::as_str).unwrap_or("");
-    let text = |key: &str| d.get(key).and_then(Value::as_str).map(str::to_string);
-    let ink = "#111827";
-    match kind {
-        // A triangle with its angles marked; `null` is the unknown, written as the letter.
-        "triangle-angles" => {
-            let (a, b, c) = ([ax + aw * 0.08, ay + ah * 0.88], [ax + aw * 0.92, ay + ah * 0.88], [ax + aw * 0.62, ay + ah * 0.18]);
-            for (p, q) in [(a, b), (b, c), (c, a)] {
-                draw_line(s, p, q, ink, 2.5)?;
-            }
-            let unknown = text("unknown").unwrap_or_else(|| "x".into());
-            let angles: Vec<String> = d
-                .get("angles")
-                .and_then(Value::as_array)
-                .map(|v| v.iter().map(|x| x.as_str().map(str::to_string).unwrap_or_else(|| format!("${unknown}$"))).collect())
-                .unwrap_or_default();
-            let spots = [[a[0] + 34.0, a[1] - 12.0], [b[0] - 34.0, b[1] - 12.0], [c[0], c[1] + 34.0]];
-            for (t, at) in angles.iter().zip(spots) {
-                label(s, t, at[0], at[1])?;
-            }
-        }
-        // Equal sides ticked; the apex angle given and a base angle to find.
-        "isosceles-triangle" => {
-            let (a, b, c) = ([ax + aw * 0.5, ay + ah * 0.2], [ax + aw * 0.1, ay + ah * 0.86], [ax + aw * 0.9, ay + ah * 0.86]);
-            for (p, q) in [(a, b), (b, c), (c, a)] {
-                draw_line(s, p, q, ink, 2.5)?;
-            }
-            for (p, q) in [(a, b), (a, c)] {
-                let (mx, my) = ((p[0] + q[0]) / 2.0, (p[1] + q[1]) / 2.0);
-                let (dx, dy) = ((q[1] - p[1]).signum() * 5.0, 5.0);
-                draw_line(s, [mx - dx, my - dy], [mx + dx, my + dy], ink, 2.0)?;
-            }
-            label(s, "$A$", a[0], a[1] - 12.0)?;
-            label(s, "$B$", b[0] - 10.0, b[1] + 12.0)?;
-            label(s, "$C$", c[0] + 10.0, c[1] + 12.0)?;
-            label(s, &text("topAngle").unwrap_or_default(), a[0], a[1] + 38.0)?;
-            label(s, "?", b[0] + 40.0, b[1] - 12.0)?;
-        }
-        // Two parallel lines cut by a transversal, with arrow marks on the parallels.
-        "parallel-lines" => {
-            let (y1, y2) = (ay + ah * 0.3, ay + ah * 0.7);
-            for y in [y1, y2] {
-                draw_line(s, [ax + aw * 0.04, y], [ax + aw * 0.96, y], ink, 2.5)?;
-                draw_line(s, [ax + aw * 0.82, y - 5.0], [ax + aw * 0.82 + 8.0, y], ink, 2.0)?;
-                draw_line(s, [ax + aw * 0.82, y + 5.0], [ax + aw * 0.82 + 8.0, y], ink, 2.0)?;
-            }
-            // The transversal runs from (0.28, 0.04) to (0.72, 0.96) of the area.
-            let on_transversal = |y: f64| {
-                let t = ((y - ay) / ah - 0.04) / 0.92;
-                ax + aw * (0.28 + 0.44 * t)
-            };
-            draw_line(s, [ax + aw * 0.28, ay + ah * 0.04], [ax + aw * 0.72, ay + ah * 0.96], ink, 2.5)?;
-            // Co-interior angles: both between the lines, on the same (right-hand) side.
-            label(s, &text("knownAngle").unwrap_or_default(), on_transversal(y1) + 38.0, y1 + 22.0)?;
-            label(s, &format!("${}$", text("unknown").unwrap_or_else(|| "x".into())), on_transversal(y2) + 30.0, y2 - 22.0)?;
-        }
-        _ => {}
-    }
-    Ok(())
 }
 
 fn from_outline(s: &mut Session, p: &Value) -> Result<Value> {
@@ -1119,7 +1178,7 @@ mod tests {
         let many = json!({"topic": "Algebra", "difficulty": 1});
         let r = s.execute("slide.getReady", &json!({"slots": [many, many]}));
         assert!(r.is_ok(), "two different algebra level-1 questions exist");
-        assert_eq!(s.doc().expect("doc").doc.slides.len(), before + 1);
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), before + 3, "the slide and a full-screen slide for each question");
         let bad = s.execute("slide.getReady", &json!({"slots": [{"difficulty": 9}]})).err().map(|e| e.to_string()).unwrap_or_default();
         assert!(bad.contains("question 1") && bad.contains("difficulty"), "{bad}");
         assert!(s.execute("slide.getReady", &json!({"slots": []})).is_err());
@@ -1175,7 +1234,7 @@ mod tests {
         // Not on a Get Ready slide, a reroll inserts instead of overwriting.
         s.execute("slide.go", &json!({"index": 0})).expect("go");
         s.execute("slide.getReady", &json!({"reroll": true})).expect("insert");
-        assert_eq!(s.doc().expect("doc").doc.slides.len(), n + 1);
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), n + 5, "a slide and four full-screen slides");
     }
 
     #[test]
@@ -1215,6 +1274,39 @@ mod tests {
         assert_eq!(after_texts.len(), before_texts.len());
         assert_eq!(after_maths.len(), before_maths.len(), "every equation is still an equation");
         assert!(after_maths.iter().any(|m| m.contains("<m:f>")), "fractions are still stacked: {after_maths:?}");
+        let st = o.doc().expect("doc");
+        let badge = st.doc.slides[idx].shapes.iter().find(|x| x.name == "Question 1 number").expect("badge");
+        assert!(badge.click.is_some(), "the badge still opens its full-screen slide");
+    }
+
+    #[test]
+    fn each_card_expands_to_its_own_slide_and_comes_back() {
+        use deckcraft_model::text::Action;
+        let mut s = Session::with_new();
+        let r = s.execute("slide.getReady", &json!({"seed": 2})).expect("get ready");
+        let i = r["index"].as_u64().expect("index") as usize;
+        let st = s.doc().expect("doc");
+        assert_eq!(st.doc.slides.len(), 6, "the title slide, the starter and four full-screen slides");
+        let main = &st.doc.slides[i];
+        let target = |sh: &deckcraft_model::Shape| match sh.click.as_ref().map(|c| &c.action) {
+            Some(Action::Slide { slide }) => st.doc.slides.iter().position(|x| x.id == *slide),
+            _ => None,
+        };
+        for n in 1..=4usize {
+            let badge = main.shapes.iter().find(|x| x.name == format!("Question {n} number")).expect("badge");
+            let expand = main.shapes.iter().find(|x| x.name == format!("Question {n} expand")).expect("expand button");
+            assert_eq!(target(badge), Some(i + n), "the badge opens question {n}");
+            assert_eq!(target(expand), Some(i + n));
+            let full = &st.doc.slides[i + n];
+            assert_eq!(full.name, format!("Get Ready Q{n}"));
+            let back = full.shapes.iter().find(|x| x.name == "Back").expect("back button");
+            assert_eq!(target(back), Some(i), "Back returns to the four questions");
+            assert!(full.shapes.iter().any(|x| x.name == format!("Question {n} answer")));
+        }
+        // Without full-screen slides there is just the one.
+        let mut t = Session::with_new();
+        t.execute("slide.getReady", &json!({"seed": 2, "expand": false})).expect("get ready");
+        assert_eq!(t.doc().expect("doc").doc.slides.len(), 2);
     }
 
     #[test]

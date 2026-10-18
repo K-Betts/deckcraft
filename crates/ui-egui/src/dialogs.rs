@@ -2830,6 +2830,9 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             }
         });
     }
+    ui.add_space(4.0);
+    let expand = check(ui, d, "Add a full-screen slide for each question (the Expand buttons)", "expand", true);
+    let headings = check(ui, d, "Show Last lesson, Last week, Last topic and Last year", "headings", true);
     ui.label(
         egui::RichText::new("Four questions a slide. Answers appear on click in Slide Show and are in the speaker notes.")
             .size(11.0)
@@ -2875,7 +2878,7 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
                 s
             })
             .collect();
-        let mut params = json!({"seed": fresh_seed(), "slots": spec});
+        let mut params = json!({"seed": fresh_seed(), "slots": spec, "expand": expand, "headings": headings});
         if !app.ui.my_questions.is_empty() || !app.ui.removed_questions.is_empty() {
             match question_bank(app) {
                 Ok(bank) => params["bankJson"] = json!(bank.to_json()),

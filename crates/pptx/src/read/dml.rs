@@ -622,6 +622,21 @@ fn math_plain_text(math: &El) -> String {
         if depth > 64 {
             return;
         }
+        if e.is("d") && e.prefix() == "m" {
+            // Brackets round what they hold: `(` and `)` unless the equation names others.
+            let chr = |name: &str, default: &str| {
+                e.child("dPr").and_then(|p| p.child(name)).and_then(|c| c.attr("val")).map(str::to_string).unwrap_or_else(|| default.to_string())
+            };
+            out.push_str(&chr("begChr", "("));
+            for (i, c) in e.elements().filter(|c| c.is("e")).enumerate() {
+                if i > 0 {
+                    out.push_str(&chr("sepChr", "|"));
+                }
+                rec(c, out, depth + 1);
+            }
+            out.push_str(&chr("endChr", ")"));
+            return;
+        }
         if e.is("t") {
             out.push_str(&e.text());
             return;

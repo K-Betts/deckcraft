@@ -452,7 +452,11 @@
       "needsDiagram": true,
       "diagram": {
         "kind": "triangle-angles",
-        "angles": ["50°", "60°", null],
+        "angles": [
+          "50°",
+          "60°",
+          null
+        ],
         "unknown": "x"
       }
     },
@@ -555,6 +559,675 @@
       "difficulty": 1,
       "text": "In a pie chart, the sector for 'Football' has an angle of 90°. What fraction of people chose football?",
       "answer": "$\\frac{1}{4}$"
+    },
+    {
+      "id": "geo-911",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras",
+      "difficulty": 2,
+      "text": "Find the length $x$.",
+      "answer": "$x = 10\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "right-triangle",
+        "base": "8 cm",
+        "height": "6 cm",
+        "hyp": null,
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-912",
+      "topic": "Geometry",
+      "subtopic": "Pythagoras",
+      "difficulty": 2,
+      "text": "Find the length $x$.",
+      "answer": "$x = 5\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "right-triangle",
+        "base": "12 cm",
+        "height": null,
+        "hyp": "13 cm",
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-913",
+      "topic": "Geometry",
+      "subtopic": "Trigonometry",
+      "difficulty": 3,
+      "text": "Find $x$.",
+      "answer": "$x = 5\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "right-triangle",
+        "hyp": "10 cm",
+        "height": null,
+        "angle": "30°",
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-914",
+      "topic": "Geometry",
+      "subtopic": "Trigonometry",
+      "difficulty": 3,
+      "text": "Find $x$. Give your answer to 1 decimal place.",
+      "answer": "$x = 8.4\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "right-triangle",
+        "base": "12 cm",
+        "height": null,
+        "angle": "35°",
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-915",
+      "topic": "Geometry",
+      "subtopic": "Trigonometry",
+      "difficulty": 3,
+      "text": "Find angle $\\theta$. Give your answer to 1 decimal place.",
+      "answer": "$\\theta = 22.6°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "right-triangle",
+        "height": "5 cm",
+        "hyp": "13 cm",
+        "angle": null,
+        "unknown": "\\theta"
+      }
+    },
+    {
+      "id": "geo-921",
+      "topic": "Geometry",
+      "subtopic": "Angles on a line",
+      "difficulty": 1,
+      "text": "Find angle $x$.",
+      "answer": "$x = 70°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-line",
+        "angles": [
+          "110°",
+          null
+        ],
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-922",
+      "topic": "Geometry",
+      "subtopic": "Angles on a line",
+      "difficulty": 1,
+      "text": "Find angle $x$.",
+      "answer": "$x = 65°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-line",
+        "angles": [
+          "40°",
+          "75°",
+          null
+        ],
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "geo-923",
+      "topic": "Geometry",
+      "subtopic": "Angles at a point",
+      "difficulty": 1,
+      "text": "Find angle $y$.",
+      "answer": "$y = 145°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-point",
+        "angles": [
+          "120°",
+          "95°",
+          null
+        ],
+        "unknown": "y"
+      }
+    },
+    {
+      "id": "geo-924",
+      "topic": "Geometry",
+      "subtopic": "Angles at a point",
+      "difficulty": 2,
+      "text": "Find angle $z$.",
+      "answer": "$z = 75°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-point",
+        "angles": [
+          "90°",
+          "110°",
+          "85°",
+          null
+        ],
+        "unknown": "z"
+      }
+    },
+    {
+      "id": "geo-931",
+      "topic": "Geometry",
+      "subtopic": "Circles",
+      "difficulty": 2,
+      "text": "Find the area of the circle. Give your answer in terms of $\\pi$.",
+      "answer": "$25\\pi\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "circle",
+        "radius": "5 cm",
+        "centre": "O"
+      }
+    },
+    {
+      "id": "geo-932",
+      "topic": "Geometry",
+      "subtopic": "Circles",
+      "difficulty": 2,
+      "text": "Find the circumference of the circle. Give your answer in terms of $\\pi$.",
+      "answer": "$12\\pi\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "circle",
+        "diameter": "12 cm"
+      }
+    },
+    {
+      "id": "geo-933",
+      "topic": "Geometry",
+      "subtopic": "Sectors",
+      "difficulty": 3,
+      "text": "Find the area of the sector. Give your answer in terms of $\\pi$.",
+      "answer": "$6\\pi\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "circle",
+        "radius": "6 cm",
+        "sector": "60°",
+        "centre": "O"
+      }
+    },
+    {
+      "id": "geo-934",
+      "topic": "Geometry",
+      "subtopic": "Sectors",
+      "difficulty": 3,
+      "text": "Find the arc length of the sector. Give your answer in terms of $\\pi$.",
+      "answer": "$2\\pi\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "circle",
+        "radius": "9 cm",
+        "sector": "40°",
+        "centre": "O"
+      }
+    },
+    {
+      "id": "geo-941",
+      "topic": "Geometry",
+      "subtopic": "Polygons",
+      "difficulty": 2,
+      "text": "The shape is a regular pentagon. Find the size of one interior angle.",
+      "answer": "$108°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "regular-polygon",
+        "sides": 5,
+        "angle": null
+      }
+    },
+    {
+      "id": "geo-942",
+      "topic": "Geometry",
+      "subtopic": "Polygons",
+      "difficulty": 2,
+      "text": "The shape is a regular octagon. Find the size of one exterior angle.",
+      "answer": "$45°$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "regular-polygon",
+        "sides": 8,
+        "angle": null,
+        "at": "exterior"
+      }
+    },
+    {
+      "id": "geo-951",
+      "topic": "Geometry",
+      "subtopic": "Perimeter and area",
+      "difficulty": 1,
+      "text": "Find the perimeter and the area of the rectangle.",
+      "answer": "Perimeter $= 26\\text{ cm}$, Area $= 36\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "rectangle",
+        "width": "9 cm",
+        "height": "4 cm"
+      }
+    },
+    {
+      "id": "geo-952",
+      "topic": "Geometry",
+      "subtopic": "Compound shapes",
+      "difficulty": 2,
+      "text": "Work out the area of the shape.",
+      "answer": "$60\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "l-shape",
+        "labels": [
+          "4 cm",
+          null,
+          null,
+          "4 cm",
+          "10 cm",
+          "9 cm"
+        ]
+      }
+    },
+    {
+      "id": "geo-953",
+      "topic": "Geometry",
+      "subtopic": "Area",
+      "difficulty": 2,
+      "text": "Find the area of the trapezium.",
+      "answer": "$32\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "trapezium",
+        "top": "6 cm",
+        "bottom": "10 cm",
+        "height": "4 cm"
+      }
+    },
+    {
+      "id": "geo-954",
+      "topic": "Geometry",
+      "subtopic": "Area",
+      "difficulty": 1,
+      "text": "Find the area of the parallelogram.",
+      "answer": "$45\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "parallelogram",
+        "base": "9 cm",
+        "height": "5 cm",
+        "side": "6 cm"
+      }
+    },
+    {
+      "id": "geo-955",
+      "topic": "Geometry",
+      "subtopic": "Volume and surface area",
+      "difficulty": 2,
+      "text": "Find the volume and the surface area of the cuboid.",
+      "answer": "Volume $= 72\\text{ cm}^3$, Surface area $= 108\\text{ cm}^2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "cuboid",
+        "length": "6 cm",
+        "width": "4 cm",
+        "height": "3 cm"
+      }
+    },
+    {
+      "id": "geo-961",
+      "topic": "Geometry",
+      "subtopic": "Similarity",
+      "difficulty": 3,
+      "text": "The two triangles are similar. Find the missing length.",
+      "answer": "$12.5\\text{ cm}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "similar-triangles",
+        "small": [
+          "4 cm",
+          "5 cm",
+          "3 cm"
+        ],
+        "large": [
+          "10 cm",
+          null,
+          "7.5 cm"
+        ]
+      }
+    },
+    {
+      "id": "sta-911",
+      "topic": "Statistics",
+      "subtopic": "Bar charts",
+      "difficulty": 1,
+      "text": "The bar chart shows how many pupils chose each sport. How many more chose tennis than rugby?",
+      "answer": "7",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "bar-chart",
+        "categories": [
+          "Football",
+          "Rugby",
+          "Tennis",
+          "Hockey"
+        ],
+        "values": [
+          12,
+          8,
+          15,
+          5
+        ]
+      }
+    },
+    {
+      "id": "sta-912",
+      "topic": "Statistics",
+      "subtopic": "Bar charts",
+      "difficulty": 2,
+      "text": "The bar chart shows how many pupils chose each sport. What fraction of the pupils chose hockey?",
+      "answer": "$\\frac{1}{8}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "bar-chart",
+        "categories": [
+          "Football",
+          "Rugby",
+          "Tennis",
+          "Hockey"
+        ],
+        "values": [
+          12,
+          8,
+          15,
+          5
+        ]
+      }
+    },
+    {
+      "id": "sta-921",
+      "topic": "Statistics",
+      "subtopic": "Venn diagrams",
+      "difficulty": 3,
+      "text": "One of these pupils is chosen at random. Find $P(A \\cap B)$.",
+      "answer": "$\\frac{3}{17}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "venn",
+        "onlyA": "5",
+        "both": "3",
+        "onlyB": "7",
+        "outside": "2"
+      }
+    },
+    {
+      "id": "sta-922",
+      "topic": "Statistics",
+      "subtopic": "Venn diagrams",
+      "difficulty": 2,
+      "text": "There are 30 pupils in total. Find $x$.",
+      "answer": "$x = 5$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "venn",
+        "onlyA": "12",
+        "both": null,
+        "onlyB": "9",
+        "outside": "4",
+        "unknown": "x"
+      }
+    },
+    {
+      "id": "sta-931",
+      "topic": "Statistics",
+      "subtopic": "Tree diagrams",
+      "difficulty": 3,
+      "text": "Two counters are taken at random without replacement. Find the probability that both are red.",
+      "answer": "$\\frac{3}{10}$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "tree",
+        "first": [
+          [
+            "Red",
+            "3/5"
+          ],
+          [
+            "Blue",
+            "2/5"
+          ]
+        ],
+        "second": [
+          [
+            [
+              "Red",
+              "2/4"
+            ],
+            [
+              "Blue",
+              "2/4"
+            ]
+          ],
+          [
+            [
+              "Red",
+              "3/4"
+            ],
+            [
+              "Blue",
+              "1/4"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": "sta-932",
+      "topic": "Statistics",
+      "subtopic": "Tree diagrams",
+      "difficulty": 2,
+      "text": "The tree diagram shows whether a pupil is late. Find the probability marked $?$.",
+      "answer": "$0.6$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "tree",
+        "first": [
+          [
+            "Rain",
+            "0.3"
+          ],
+          [
+            "No rain",
+            "0.7"
+          ]
+        ],
+        "second": [
+          [
+            [
+              "Late",
+              "0.4"
+            ],
+            [
+              "On time",
+              null
+            ]
+          ],
+          [
+            [
+              "Late",
+              "0.1"
+            ],
+            [
+              "On time",
+              "0.9"
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "id": "alg-911",
+      "topic": "Algebra",
+      "subtopic": "Inequalities",
+      "difficulty": 1,
+      "text": "Write down the inequality shown on the number line.",
+      "answer": "$x \\geq 2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "number-line",
+        "min": -3,
+        "max": 6,
+        "marks": [
+          {
+            "at": 2,
+            "open": false,
+            "to": "right"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alg-912",
+      "topic": "Algebra",
+      "subtopic": "Inequalities",
+      "difficulty": 1,
+      "text": "Write down the inequality shown on the number line.",
+      "answer": "$x < 4$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "number-line",
+        "min": -3,
+        "max": 6,
+        "marks": [
+          {
+            "at": 4,
+            "open": true,
+            "to": "left"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alg-921",
+      "topic": "Algebra",
+      "subtopic": "Straight line graphs",
+      "difficulty": 2,
+      "text": "Find the equation of the line.",
+      "answer": "$y = 2x + 1$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "coordinate-grid",
+        "xmin": -4,
+        "xmax": 4,
+        "ymin": -5,
+        "ymax": 5,
+        "line": {
+          "m": 2,
+          "c": 1
+        }
+      }
+    },
+    {
+      "id": "alg-922",
+      "topic": "Algebra",
+      "subtopic": "Straight line graphs",
+      "difficulty": 2,
+      "text": "Write down the gradient and the $y$-intercept of the line.",
+      "answer": "Gradient $= -1$, $y$-intercept $= 3$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "coordinate-grid",
+        "xmin": -3,
+        "xmax": 5,
+        "ymin": -3,
+        "ymax": 5,
+        "line": {
+          "m": -1,
+          "c": 3
+        }
+      }
+    },
+    {
+      "id": "alg-923",
+      "topic": "Algebra",
+      "subtopic": "Straight line graphs",
+      "difficulty": 2,
+      "text": "Find the gradient of the line through $A$ and $B$.",
+      "answer": "$2$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "coordinate-grid",
+        "xmin": 0,
+        "xmax": 6,
+        "ymin": 0,
+        "ymax": 8,
+        "points": [
+          [
+            1,
+            1,
+            "A"
+          ],
+          [
+            4,
+            7,
+            "B"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "alg-931",
+      "topic": "Algebra",
+      "subtopic": "Forming equations",
+      "difficulty": 3,
+      "text": "The angles are on a straight line. Form and solve an equation to find $x$.",
+      "answer": "$3x + 30 = 180$, so $x = 50$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-line",
+        "angles": [
+          "$2x$°",
+          "$x + 30$°"
+        ]
+      }
+    },
+    {
+      "id": "alg-932",
+      "topic": "Algebra",
+      "subtopic": "Forming equations",
+      "difficulty": 3,
+      "text": "Form and solve an equation to find $x$.",
+      "answer": "$6x = 180$, so $x = 30$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "triangle-angles",
+        "angles": [
+          "$x$°",
+          "$2x$°",
+          "$3x$°"
+        ]
+      }
+    },
+    {
+      "id": "alg-933",
+      "topic": "Algebra",
+      "subtopic": "Forming equations",
+      "difficulty": 3,
+      "text": "The angles meet at a point. Form and solve an equation to find $x$.",
+      "answer": "$6x + 150 = 360$, so $x = 35$",
+      "needsDiagram": true,
+      "diagram": {
+        "kind": "angles-point",
+        "angles": [
+          "$3x$°",
+          "$x + 40$°",
+          "$2x$°",
+          "110°"
+        ]
+      }
     }
   ]
 }

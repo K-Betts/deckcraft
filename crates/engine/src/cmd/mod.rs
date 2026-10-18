@@ -7,6 +7,7 @@ pub mod background;
 pub mod compress;
 pub mod design;
 pub mod edit;
+pub mod figures;
 pub mod file;
 pub mod find;
 pub mod format;

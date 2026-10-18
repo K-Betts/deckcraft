@@ -47,13 +47,13 @@ fn the_dialog_inserts_a_starter_and_rerolls_it_in_place() {
     assert!(h.query_by_label("Reroll this slide").is_none(), "nothing to reroll yet");
     h.get_by_label("Insert").click();
     h.run_steps(3);
-    assert_eq!(slides(&h), before + 1);
+    assert_eq!(slides(&h), before + 5, "the starter and a full-screen slide for each question");
     assert!(h.state().dialog.is_none(), "the dialog closes");
     h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
     h.run_steps(3);
     h.get_by_label("Reroll this slide").click();
     h.run_steps(3);
-    assert_eq!(slides(&h), before + 1, "reroll replaces, it does not add");
+    assert_eq!(slides(&h), before + 5, "reroll replaces, it does not add");
 }
 
 fn slide_texts(h: &egui_kittest::Harness<'static, SlideApp>) -> Vec<String> {
