@@ -1,0 +1,1778 @@
+{
+ "version": 1,
+ "note": "Year 7 Autumn Block 2 Algebraic notation and substitution: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7a2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (number)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S1 1-step function machines (number)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       2,
+       40
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x + k - k == x"
+   ],
+   "text": "Work out the output.",
+   "answer": "[[x + k]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[x]]",
+    "steps": [
+     "+ [[k]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (number)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S1 1-step function machines (number)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * m / m == x"
+   ],
+   "text": "What number went into the function machine?",
+   "answer": "[[x]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": null,
+    "steps": [
+     "× [[m]]"
+    ],
+    "output": "[[x * m]]"
+   }
+  },
+  {
+   "id": "y7a2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (number)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S1 1-step function machines (number)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(b + k) - k == b"
+   ],
+   "text": "A function machine subtracts [[k]]. An input of [[a]] gives an output of [[a - k]]. What is the input when the output is [[b]]?",
+   "answer": "[[b + k]]"
+  },
+  {
+   "id": "y7a2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (number)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S1 1-step function machines (number)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "y * m / m == y"
+   ],
+   "text": "A function machine divides by [[m]]. (a) What is the output when the input is [[x * m]]? (b) The output is [[y]]. What was the input? (2 marks)",
+   "answer": "(a) [[x]]  (b) [[y * m]]"
+  },
+  {
+   "id": "y7a2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (algebra)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S2 1-step function machines (algebra)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$[[v]] + [[k]]$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "+ [[k]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (algebra)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S2 1-step function machines (algebra)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$[[m]][[v]]$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "× [[m]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (algebra)",
+   "difficulty": 3,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S2 1-step function machines (algebra)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$\\frac{[[v]]}{[[m]]}$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "÷ [[m]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "1-step function machines (algebra)",
+   "difficulty": 4,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S2 1-step function machines (algebra)",
+   "keywords": [
+    "1",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       15,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - k > 0"
+   ],
+   "text": "A function machine subtracts [[k]] from the input $[[v]]$. (a) Write the output in terms of $[[v]]$. (b) Work out the output when $[[v]] = [[a]]$. (2 marks)",
+   "answer": "(a) $[[v]] - [[k]]$  (b) [[a - k]]"
+  },
+  {
+   "id": "y7a2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Find a function (one step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S3 Find a function (one step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "one",
+    "step",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + k - a == k"
+   ],
+   "text": "What is the function?",
+   "answer": "Add [[k]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[a]]",
+    "steps": [
+     null
+    ],
+    "output": "[[a + k]]"
+   }
+  },
+  {
+   "id": "y7a2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Find a function (one step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S3 Find a function (one step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "one",
+    "step",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "What is the function?",
+   "answer": "Multiply by [[m]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[a]]",
+    "steps": [
+     null
+    ],
+    "output": "[[a * m]]"
+   }
+  },
+  {
+   "id": "y7a2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Find a function (one step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S3 Find a function (one step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "one",
+    "step",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       41,
+       70
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(b - k) - (a - k) == b - a"
+   ],
+   "text": "When the input to a one-step function machine is [[a]], the output is [[a - k]]. When the input is [[b]], the output is [[b - k]]. What does the function machine do?",
+   "answer": "Subtracts [[k]]"
+  },
+  {
+   "id": "y7a2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Find a function (one step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S3 Find a function (one step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "one",
+    "step",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * m / a == m"
+   ],
+   "text": "A function machine has one step. Input [[a]] gives output [[a * m]]. (a) What does the function machine do? (b) What is the output when the input is [[b]]? (2 marks)",
+   "answer": "(a) Multiplies by [[m]]  (b) [[b * m]]"
+  },
+  {
+   "id": "y7a2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Substitution (one step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S4 Substitution (one step)",
+   "keywords": [
+    "substitution",
+    "one",
+    "step",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + k > a"
+   ],
+   "text": "Work out $[[v]] + [[k]]$ when $[[v]] = [[a]]$.",
+   "answer": "[[a + k]]"
+  },
+  {
+   "id": "y7a2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Substitution (one step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S4 Substitution (one step)",
+   "keywords": [
+    "substitution",
+    "one",
+    "step",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * a / a == m"
+   ],
+   "text": "Work out $[[m]][[v]]$ when $[[v]] = [[a]]$.",
+   "answer": "[[m * a]]"
+  },
+  {
+   "id": "y7a2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Substitution (one step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S4 Substitution (one step)",
+   "keywords": [
+    "substitution",
+    "one",
+    "step",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * m / m == a"
+   ],
+   "text": "Work out $\\frac{[[v]]}{[[m]]}$ when $[[v]] = [[a * m]]$.",
+   "answer": "[[a]]"
+  },
+  {
+   "id": "y7a2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Substitution (one step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S4 Substitution (one step)",
+   "keywords": [
+    "substitution",
+    "one",
+    "step",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       21,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(k + b) - (k + a) == b - a"
+   ],
+   "text": "$P = [[k]] + w$. (a) Work out $P$ when $w = [[a]]$. (b) Work out $P$ when $w = [[b]]$. (2 marks)",
+   "answer": "(a) [[k + a]]  (b) [[k + b]]"
+  },
+  {
+   "id": "y7a2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (number)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S5 2-step function machines (number)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * m + k) - k == a * m"
+   ],
+   "text": "Work out the output.",
+   "answer": "[[a * m + k]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[a]]",
+    "steps": [
+     "× [[m]]",
+     "+ [[k]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (number)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S5 2-step function machines (number)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a * m + k) - k) / m == a"
+   ],
+   "text": "Work out the input.",
+   "answer": "[[a]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": null,
+    "steps": [
+     "× [[m]]",
+     "+ [[k]]"
+    ],
+    "output": "[[a * m + k]]"
+   }
+  },
+  {
+   "id": "y7a2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (number)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S5 2-step function machines (number)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a * m - k) + k) / m == a"
+   ],
+   "text": "A two-step function machine multiplies by [[m]] then subtracts [[k]]. The output is [[a * m - k]]. What was the input?",
+   "answer": "[[a]]"
+  },
+  {
+   "id": "y7a2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (number)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S5 2-step function machines (number)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "number",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(((b + k) * m) / m) - k == b"
+   ],
+   "text": "A function machine adds [[k]] then multiplies by [[m]]. (a) Work out the output when the input is [[a]]. (b) The output is [[(b + k) * m]]. Work out the input. (3 marks)",
+   "answer": "(a) [[(a + k) * m]]  (b) [[b]]"
+  },
+  {
+   "id": "y7a2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (algebra)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S6 2-step function machines (algebra)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$[[m]][[v]] + [[k]]$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "× [[m]]",
+     "+ [[k]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (algebra)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S6 2-step function machines (algebra)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$[[m]][[v]] - [[k]]$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "× [[m]]",
+     "− [[k]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (algebra)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S6 2-step function machines (algebra)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 1"
+   ],
+   "text": "Write the output in terms of $[[v]]$.",
+   "answer": "$[[m]]([[v]] + [[k]])$",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "$[[v]]$",
+    "steps": [
+     "+ [[k]]",
+     "× [[m]]"
+    ],
+    "output": null
+   }
+  },
+  {
+   "id": "y7a2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "2-step function machines (algebra)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S6 2-step function machines (algebra)",
+   "keywords": [
+    "2",
+    "step",
+    "function",
+    "machines",
+    "algebra",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "n",
+       "x",
+       "y",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * a + k - k == m * a"
+   ],
+   "text": "A function machine multiplies by [[m]] then adds [[k]]. The input is $[[v]]$. (a) Write the output in terms of $[[v]]$. (b) Work out the output when $[[v]] = [[a]]$. (2 marks)",
+   "answer": "(a) $[[m]][[v]] + [[k]]$  (b) [[m * a + k]]"
+  },
+  {
+   "id": "y7a2-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Find a function (two step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S7 Find a function (two step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "two",
+    "step",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * m + k) - a * m == k"
+   ],
+   "text": "What is the missing step in the function machine?",
+   "answer": "+ [[k]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[a]]",
+    "steps": [
+     "× [[m]]",
+     null
+    ],
+    "output": "[[a * m + k]]"
+   }
+  },
+  {
+   "id": "y7a2-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Find a function (two step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S7 Find a function (two step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "two",
+    "step",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m * 3 + k) - (m * 2 + k) == m"
+   ],
+   "text": "Find the function. Input and output are shown in the table.",
+   "answer": "Multiply by [[m]], then add [[k]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Input",
+     "Output"
+    ],
+    "rows": [
+     [
+      1,
+      "[[m + k]]"
+     ],
+     [
+      2,
+      "[[2 * m + k]]"
+     ],
+     [
+      3,
+      "[[3 * m + k]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7a2-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Find a function (two step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S7 Find a function (two step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "two",
+    "step",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * a - k > 0"
+   ],
+   "check": [
+    "((m * a - k) + k) / m == a"
+   ],
+   "text": "A two-step function machine multiplies by [[m]] then subtracts [[k]]. Which of these inputs gives an output of [[m * a - k]]: [[a]], [[a + 1]] or [[a - 1]]?",
+   "answer": "[[a]]"
+  },
+  {
+   "id": "y7a2-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Find a function (two step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S7 Find a function (two step)",
+   "keywords": [
+    "find",
+    "a",
+    "function",
+    "two",
+    "step",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(b * m + k) - (a * m + k) == (b - a) * m"
+   ],
+   "text": "Input [[a]] gives output [[a * m + k]] and input [[b]] gives output [[b * m + k]] in a two-step function machine. The first step is ‘multiply by [[m]]’. What is the second step? (2 marks)",
+   "answer": "Add [[k]]"
+  },
+  {
+   "id": "y7a2-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Substitution (two step)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S8 Substitution (two step)",
+   "keywords": [
+    "substitution",
+    "two",
+    "step",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m * a + k - k) / m == a"
+   ],
+   "text": "Work out $[[m]][[v]] + [[k]]$ when $[[v]] = [[a]]$.",
+   "answer": "[[m * a + k]]"
+  },
+  {
+   "id": "y7a2-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Substitution (two step)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S8 Substitution (two step)",
+   "keywords": [
+    "substitution",
+    "two",
+    "step",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * a > k"
+   ],
+   "check": [
+    "(m * a - k + k) / m == a"
+   ],
+   "text": "Work out $[[m]][[v]] - [[k]]$ when $[[v]] = [[a]]$.",
+   "answer": "[[m * a - k]]"
+  },
+  {
+   "id": "y7a2-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Substitution (two step)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S8 Substitution (two step)",
+   "keywords": [
+    "substitution",
+    "two",
+    "step",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "pick": [
+       "x",
+       "y",
+       "n",
+       "t"
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * (a + k) == m * a + m * k"
+   ],
+   "text": "Work out $[[m]]([[v]] + [[k]])$ when $[[v]] = [[a]]$.",
+   "answer": "[[m * (a + k)]]"
+  },
+  {
+   "id": "y7a2-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Substitution (two step)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y7 Autumn B2 Algebraic notation and substitution · S8 Substitution (two step)",
+   "keywords": [
+    "substitution",
+    "two",
+    "step",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       9,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m * b + k) - (m * a + k) == m * (b - a)"
+   ],
+   "text": "$T = [[m]]n + [[k]]$. (a) Work out $T$ when $n = [[a]]$. (b) Work out $T$ when $n = [[b]]$. (3 marks)",
+   "answer": "(a) [[m * a + k]]  (b) [[m * b + k]]"
+  }
+ ]
+}

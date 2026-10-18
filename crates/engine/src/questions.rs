@@ -8,8 +8,18 @@
 
 use serde::{Deserialize, Serialize};
 
-/// The bank compiled into the app.
-pub const STARTER: &str = include_str!("../../../assets/questions/bank.json");
+/// The question files compiled into the app, merged into one bank: the general questions, then one
+/// file for each block of the scheme of work (see `docs/question-writing-guide.md`).
+pub const STARTER_FILES: &[&str] = &[
+    include_str!("../../../assets/questions/bank.json"),
+    include_str!("../../../assets/questions/y7-autumn-b1-sequences.json"),
+    include_str!("../../../assets/questions/y7-autumn-b2-algebraic-notation.json"),
+    include_str!("../../../assets/questions/y7-autumn-b3-expressions-equations.json"),
+    include_str!("../../../assets/questions/y7-autumn-b4-place-value.json"),
+    include_str!("../../../assets/questions/y7-autumn-b5-four-operations.json"),
+    include_str!("../../../assets/questions/y7-autumn-b6-averages-range.json"),
+    include_str!("../../../assets/questions/y7-autumn-b7-rounding-estimation.json"),
+];
 
 const MAX_BYTES: usize = 4 << 20;
 const MAX_QUESTIONS: usize = 20_000;
@@ -35,6 +45,11 @@ pub const DRAWABLE: &[&str] = &[
     "coordinate-grid",
     "venn",
     "tree",
+    "function-machine",
+    "sequence-arrows",
+    "pattern",
+    "bar-model",
+    "table",
 ];
 
 /// Whether a question's `diagram` is one the slide can draw.
@@ -49,7 +64,13 @@ impl Question {
     }
 }
 
-pub const DIFFICULTIES: std::ops::RangeInclusive<u8> = 1..=3;
+pub const DIFFICULTIES: std::ops::RangeInclusive<u8> = 1..=4;
+
+/// The names of the four levels, from 1: support, core, stretch and exam style.
+pub const LEVEL_NAMES: [&str; 4] = ["Support", "Core", "Stretch", "Exam style"];
+
+/// What a question asks of a pupil, as tagged by the writer.
+pub const QUESTION_TYPES: [&str; 3] = ["fluency", "reasoning", "problem"];
 
 #[derive(Clone, Debug, Default, Deserialize, Serialize, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -58,11 +79,17 @@ pub struct Question {
     pub topic: String,
     #[serde(default, alias = "subtopics")]
     pub subtopic: String,
-    /// 1 = secure, 2 = core, 3 = stretch.
+    /// 1 = support, 2 = core, 3 = stretch, 4 = exam style.
     pub difficulty: u8,
     /// Words a teacher might search for, besides the topic and subtopic.
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub keywords: Vec<String>,
+    /// `fluency`, `reasoning` or `problem`: what the question asks of a pupil.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub qtype: String,
+    /// Where it sits in a scheme of work, e.g. “Y7 Autumn B3 S7 Solve 2-step equations”.
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub source: String,
     pub text: String,
     /// Shown in the slide's speaker notes, never on the slide.
     /// May contain LaTeX between `$…$` that is rendered as a real equation.
@@ -108,7 +135,7 @@ impl Filter {
 /// Whether every word of `words` appears in the question's searchable text (case and a plural
 /// "s" do not matter).
 pub fn matches_words(q: &Question, words: &str) -> bool {
-    let hay = format!("{} {} {} {}", q.topic, q.subtopic, q.keywords.join(" "), crate::latex::plain(&q.text)).to_lowercase();
+    let hay = format!("{} {} {} {} {} {}", q.topic, q.subtopic, q.keywords.join(" "), q.qtype, q.source, crate::latex::plain(&q.text)).to_lowercase();
     words.to_lowercase().split_whitespace().all(|w| {
         let stem = w.trim_end_matches('s');
         hay.contains(w) || (stem.len() >= 3 && hay.contains(stem))
@@ -116,6 +143,12 @@ pub fn matches_words(q: &Question, words: &str) -> bool {
 }
 
 pub fn parse(json: &str) -> Result<Bank, String> {
+    let bank = parse_raw(json)?;
+    validate(&bank)?;
+    Ok(bank)
+}
+
+fn parse_raw(json: &str) -> Result<Bank, String> {
     if json.len() > MAX_BYTES {
         return Err("the question bank is too large".into());
     }
@@ -123,6 +156,12 @@ pub fn parse(json: &str) -> Result<Bank, String> {
     if bank.version != 1 {
         return Err(format!("question bank version {} is not supported (expected 1)", bank.version));
     }
+    Ok(bank)
+}
+
+/// Everything that can be wrong with a bank: repeated ids, empty or over-long text, a level
+/// outside 1 to 4, and every template (it must make good questions for 25 different seeds).
+fn validate(bank: &Bank) -> Result<(), String> {
     if bank.questions.len() > MAX_QUESTIONS {
         return Err("too many questions in the bank".into());
     }
@@ -135,7 +174,7 @@ pub fn parse(json: &str) -> Result<Bank, String> {
             return Err(format!("question {} has no text, or too much", q.id));
         }
         if !DIFFICULTIES.contains(&q.difficulty) {
-            return Err(format!("question {} has difficulty {} (use 1, 2 or 3)", q.id, q.difficulty));
+            return Err(format!("question {} has difficulty {} (use 1 support, 2 core, 3 stretch or 4 exam style)", q.id, q.difficulty));
         }
     }
     let mut seen_t = std::collections::HashSet::new();
@@ -145,7 +184,7 @@ pub fn parse(json: &str) -> Result<Bank, String> {
         }
         tpl.check()?;
     }
-    Ok(bank)
+    Ok(())
 }
 
 /// Reads pasted text as a bank, for a teacher who copies an AI's answer into the app. It looks
@@ -185,8 +224,25 @@ pub fn parse_loose(input: &str) -> Result<Bank, String> {
     parse(&serde_json::to_string(&bank).map_err(|e| e.to_string())?)
 }
 
+/// The built-in bank: every file in `STARTER_FILES` merged and checked once (the first call does
+/// the work; later calls copy the result).
 pub fn starter() -> Result<Bank, String> {
-    parse(STARTER)
+    static CACHE: std::sync::OnceLock<Result<Bank, String>> = std::sync::OnceLock::new();
+    CACHE
+        .get_or_init(|| {
+            let mut all = Bank { version: 1, note: String::new(), questions: vec![], templates: vec![] };
+            for (i, file) in STARTER_FILES.iter().enumerate() {
+                let b = parse_raw(file).map_err(|e| format!("built-in question file {}: {e}", i + 1))?;
+                if all.note.is_empty() {
+                    all.note = b.note;
+                }
+                all.questions.extend(b.questions);
+                all.templates.extend(b.templates);
+            }
+            validate(&all)?;
+            Ok(all)
+        })
+        .clone()
 }
 
 impl Bank {
@@ -423,6 +479,33 @@ mod tests {
     }
 
     #[test]
+    fn every_built_in_template_makes_good_questions_for_many_seeds() {
+        let bank = starter().unwrap();
+        for t in &bank.templates {
+            for seed in 0..300u64 {
+                let q = t.instantiate(seed).unwrap_or_else(|e| panic!("{} seed {seed}: {e}", t.id));
+                assert!(!q.text.contains("[[") && !q.answer.contains("[["), "{} seed {seed}", t.id);
+                assert!(q.text.chars().count() <= 600, "{} seed {seed}: too long", t.id);
+            }
+        }
+    }
+
+    #[test]
+    fn every_scheme_of_work_step_has_questions_at_all_four_levels() {
+        let bank = starter().unwrap();
+        let mut steps: std::collections::BTreeMap<String, std::collections::BTreeSet<u8>> = Default::default();
+        for t in &bank.templates {
+            if t.source.starts_with("Y7 ") {
+                steps.entry(t.source.clone()).or_default().insert(t.difficulty);
+            }
+        }
+        assert!(steps.len() >= 50, "the Year 7 Autumn steps are all there: {}", steps.len());
+        for (step, levels) in &steps {
+            assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
+        }
+    }
+
+    #[test]
     fn pasted_text_is_read_past_fences_and_chatter_and_errors_say_where() {
         let good = "Here you go!\n```json\n{\"version\":1,\"templates\":[{\"id\":\"t\",\"topic\":\"Number\",\"difficulty\":1,\"vars\":[[\"a\",{\"int\":[1,5]}]],\"text\":\"Add [[a]] and 1.\",\"answer\":\"[[a + 1]]\"}]}\n```\nHope that helps";
         assert_eq!(parse_loose(good).unwrap().templates.len(), 1);
@@ -447,6 +530,8 @@ mod tests {
             subtopic: String::new(),
             difficulty: 2,
             keywords: vec![],
+            qtype: String::new(),
+            source: String::new(),
             text: "Work out $\\frac{1}{2} + \\frac{1}{3}$".into(),
             answer: "$\\frac{5}{6}$".into(),
             needs_diagram: false,

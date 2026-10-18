@@ -147,6 +147,8 @@ fn removing_and_adding_questions_changes_what_the_starter_can_pick() {
         subtopic: String::new(),
         difficulty: 2,
         keywords: vec![],
+        qtype: String::new(),
+        source: String::new(),
         text: "Share 20 in the ratio $2 : 3$".into(),
         answer: "8 and 12".into(),
         needs_diagram: false,
