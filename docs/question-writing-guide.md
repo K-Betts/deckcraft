@@ -107,6 +107,8 @@ whole string "[[expr|n]]". Kinds and their fields:
   bar-chart         categories:[...], values:[numbers], yLabel
   number-line       min, max, step, marks:[{"at":2,"open":false,"to":"right"}], dots:[...]
   coordinate-grid   xmin,xmax,ymin,ymax, line:{"m":2,"c":1}, points:[[1,2,"A"]]
+                    also lines:[{"m":1,"c":0}|{"x":3}|{"y":-2}, optional "color","label","dash":true],
+                    segments:[[x1,y1,x2,y2]], polygons:[{"points":[[x,y],...],"color":"#2F6FDB","label":"P"}]
   venn              a, b, onlyA, both, onlyB, outside (null = unknown), unknown
   tree              first:[["Red","3/5"],...], second:[ [[...],[...]], [[...],[...]] ]
   function-machine  input, steps:["× 3","+ 2"] (null step = hidden), output (null = ?)

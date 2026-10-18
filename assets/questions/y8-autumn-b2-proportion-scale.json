@@ -1,0 +1,1799 @@
+{
+ "version": 1,
+ "note": "Y8 Autumn Block 2 Proportion and scale: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8au2-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "choose": [
+       20,
+       30,
+       40,
+       45,
+       60,
+       75
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * u / n == u"
+   ],
+   "text": "[[n]] pens cost £[[n * u / 100|dp:2]]. How much do [[m]] pens cost?",
+   "answer": "£[[m * u / 100|dp:2]]"
+  },
+  {
+   "id": "y8au2-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "choose": [
+       25,
+       50,
+       75
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       14
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "q != p"
+   ],
+   "check": [
+    "p * u / p == u"
+   ],
+   "text": "A recipe for [[p]] people uses [[p * u]] g of flour. How much flour is needed for [[q]] people?",
+   "answer": "[[q * u]] g"
+  },
+  {
+   "id": "y8au2-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       40,
+       80,
+       100
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       120,
+       160,
+       240
+      ]
+     }
+    ],
+    [
+     "p1",
+     {
+      "int": [
+       180,
+       420
+      ]
+     }
+    ],
+    [
+     "p2",
+     {
+      "int": [
+       400,
+       900
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p1 * n2 != p2 * n1"
+   ],
+   "check": [
+    "n1 > 0"
+   ],
+   "text": "A box of [[n1]] teabags costs £[[p1 / 100|dp:2]]. A box of [[n2]] costs £[[p2 / 100|dp:2]]. Which box is better value? Show your working.",
+   "answer": "[[p1 / n1|dp:2]]p each and [[p2 / n2|dp:2]]p each, so the [[p1 * n2 < p2 * n1|if:first/second]] box is better value"
+  },
+  {
+   "id": "y8au2-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S1 Direct proportion",
+   "keywords": [
+    "direct",
+    "proportion",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "choose": [
+       8,
+       10,
+       12,
+       15
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       11,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "f * u / f == u"
+   ],
+   "text": "A car uses [[f]] litres of fuel to travel [[f * u]] km. (a) How much fuel is needed for [[u * r]] km? (b) How far can it travel on [[g]] litres? (3 marks)",
+   "answer": "(a) [[r]] litres  (b) [[g * u]] km"
+  },
+  {
+   "id": "y8au2-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S2 Direct proportion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "graphs",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * k / k == r"
+   ],
+   "text": "The graph shows the cost of apples. How much do [[k]] kg of apples cost?",
+   "answer": "£[[r * k]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 1,
+    "ystep": "[[r|n]]",
+    "xlabel": "Mass (kg)",
+    "ylabel": "Cost (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S2 Direct proportion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "graphs",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * k / k == r"
+   ],
+   "text": "The graph shows the cost of grapes. How much does 1 kg cost? How much do [[k]] kg cost?",
+   "answer": "£[[r]] per kg; £[[r * k]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 1,
+    "ystep": "[[r|n]]",
+    "xlabel": "Mass (kg)",
+    "ylabel": "Cost (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S2 Direct proportion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "graphs",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * k / k == r"
+   ],
+   "text": "The graph shows the cost of nuts. (a) How can you tell cost is directly proportional to mass? (b) Work out the cost of [[k]] kg.",
+   "answer": "(a) it is a straight line through the origin  (b) £[[r * k]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 1,
+    "ystep": "[[r|n]]",
+    "xlabel": "Mass (kg)",
+    "ylabel": "Cost (£)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Direct proportion graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S2 Direct proportion graphs",
+   "keywords": [
+    "direct",
+    "proportion",
+    "graphs",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "choose": [
+       4,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       7,
+       9,
+       11
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / 2 * 2 == v * t"
+   ],
+   "text": "The graph shows the distance travelled by a cyclist at a steady speed. (a) How far does the cyclist travel in [[t / 2]] hours? (b) How long does it take to travel [[v * h / 2]] km? (3 marks)",
+   "answer": "(a) [[v * t / 2]] km  (b) [[h / 2]] hours",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 5,
+    "ymin": 0,
+    "ymax": "[[5 * v|n]]",
+    "xstep": 1,
+    "ystep": "[[v|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      5,
+      "[[5 * v|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph to change £[[x]] into euros.",
+   "answer": "€[[x * r / 10]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       10,
+       20,
+       30,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph to change €[[x * r / 10]] into pounds.",
+   "answer": "£[[x]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "y != x * r / 10"
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the graph. A hotel in France costs €[[y]] a night and a hotel in the UK costs £[[x]] a night. Which is cheaper?",
+   "answer": "£[[x]] is €[[x * r / 10]], so the [[y < x * r / 10|if:French/UK]] hotel is cheaper",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Conversion graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S3 Conversion graphs",
+   "keywords": [
+    "conversion",
+    "graphs",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       11,
+       12,
+       13
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "step": [
+       15,
+       45,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 10 * 10 == x * r"
+   ],
+   "text": "Use the conversion graph. (a) Change £[[x]] to euros. (b) Explain how the graph shows that the exchange rate is constant. (2 marks)",
+   "answer": "(a) €[[x * r / 10]]  (b) it is a straight line through the origin, so euros are directly proportional to pounds",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 50,
+    "ymin": 0,
+    "ymax": "[[5 * r|n]]",
+    "xstep": 10,
+    "ystep": 10,
+    "xlabel": "Pounds (£)",
+    "ylabel": "Euros (€)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      50,
+      "[[5 * r|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y8au2-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert between currencies",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S4 Convert between currencies",
+   "keywords": [
+    "convert",
+    "between",
+    "currencies",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       105,
+       135
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80,
+       100,
+       150,
+       200
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 * 100 == x * r"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Change £[[x]] into euros.",
+   "answer": "€[[x * r / 100|dp:2]]"
+  },
+  {
+   "id": "y8au2-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert between currencies",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S4 Convert between currencies",
+   "keywords": [
+    "convert",
+    "between",
+    "currencies",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       105,
+       135
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       20,
+       40,
+       50,
+       80,
+       100,
+       150,
+       200
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 * 100 == x * r"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. Sam has €[[x * r / 100|dp:2]]. How many pounds is this worth?",
+   "answer": "£[[x|dp:2]]"
+  },
+  {
+   "id": "y8au2-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert between currencies",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S4 Convert between currencies",
+   "keywords": [
+    "convert",
+    "between",
+    "currencies",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       125,
+       130,
+       125,
+       140
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       200,
+       300,
+       400,
+       500
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       25,
+       50,
+       75,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x * r / 100 - s > 0"
+   ],
+   "text": "Anna changes £[[x]] into euros at £1 = €[[r / 100|dp:2]]. She spends €[[s]] and changes the rest back to pounds at the same rate. How much does she get?",
+   "answer": "£[[(x * r / 100 - s) * 100 / r|dp:2]]"
+  },
+  {
+   "id": "y8au2-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert between currencies",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S4 Convert between currencies",
+   "keywords": [
+    "convert",
+    "between",
+    "currencies",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       110,
+       120,
+       125
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "choose": [
+       110,
+       120,
+       150,
+       180
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       80,
+       160
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "abs(y * 100 / r - p) > 0.5"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "£1 = €[[r / 100|dp:2]]. A coat costs €[[y]] in Paris and £[[p]] in London. Which is cheaper and by how much, in pounds? (3 marks)",
+   "answer": "Paris coat is £[[y * 100 / r|dp:2]]; the [[y * 100 / r < p|if:Paris/London]] coat is cheaper by £[[abs(y * 100 / r - p)|dp:2]]"
+  },
+  {
+   "id": "y8au2-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert metric units",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S5 Convert metric units",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * 100 / 100 == a"
+   ],
+   "text": "Convert (a) [[a]] m to cm (b) [[b]] kg to g (c) [[c]] litres to ml.",
+   "answer": "(a) [[a * 100]] cm  (b) [[b * 1000]] g  (c) [[c * 1000]] ml"
+  },
+  {
+   "id": "y8au2-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert metric units",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S5 Convert metric units",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       60
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       29
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       29
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * 10 / 10 == a"
+   ],
+   "text": "Convert (a) [[a]] cm to mm (b) [[b * 100]] g to kg (c) [[c * 100]] ml to litres.",
+   "answer": "(a) [[a * 10]] mm  (b) [[b / 10]] kg  (c) [[c / 10]] litres"
+  },
+  {
+   "id": "y8au2-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert metric units",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S5 Convert metric units",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1500,
+       9500
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * 1000 != b"
+   ],
+   "check": [
+    "a * 1000 / 1000 == a"
+   ],
+   "text": "Which is heavier, [[a]] kg or [[b]] g? Show how you know.",
+   "answer": "[[a]] kg = [[a * 1000]] g, so the [[a * 1000 > b|if:first/second]] amount is heavier"
+  },
+  {
+   "id": "y8au2-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert metric units",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S5 Convert metric units",
+   "keywords": [
+    "convert",
+    "metric",
+    "units",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       150,
+       200,
+       250,
+       300,
+       350
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * 1000 % b != 0"
+   ],
+   "check": [
+    "a * 1000 > b"
+   ],
+   "text": "A jug holds [[a]] litres. How many cups of [[b]] ml can be filled from the jug, and how much is left over? (3 marks)",
+   "answer": "[[floor(a * 1000 / b)]] cups with [[a * 1000 - floor(a * 1000 / b) * b]] ml left over"
+  },
+  {
+   "id": "y8au2-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Similar shapes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S6 Similar shapes",
+   "keywords": [
+    "similar",
+    "shapes",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$.",
+   "answer": "$x = [[k * c]]$ cm",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8au2-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Similar shapes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S6 Similar shapes",
+   "keywords": [
+    "similar",
+    "shapes",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / c == k"
+   ],
+   "text": "The two triangles are similar. (a) Write the scale factor of the enlargement. (b) Find $x$.",
+   "answer": "(a) [[k]]  (b) $x = [[k * c]]$",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     "[[c]] cm",
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     null,
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8au2-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Similar shapes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S6 Similar shapes",
+   "keywords": [
+    "similar",
+    "shapes",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * c / k == c"
+   ],
+   "text": "The two triangles are similar. Find the length marked $x$ on the smaller triangle.",
+   "answer": "$x = [[c]]$",
+   "diagram": {
+    "kind": "similar-triangles",
+    "small": [
+     "[[b]] cm",
+     null,
+     "[[d]] cm"
+    ],
+    "large": [
+     "[[k * b]] cm",
+     "[[k * c]] cm",
+     "[[k * d]] cm"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8au2-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Similar shapes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S6 Similar shapes",
+   "keywords": [
+    "similar",
+    "shapes",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * w / w == k"
+   ],
+   "text": "A photo is [[w]] cm by [[h]] cm. It is enlarged so that its longer side is [[k * w]] cm. (a) Work out the scale factor. (b) Work out the length of the shorter side of the enlargement. (c) What is the ratio of the area of the photo to the area of the enlargement? (3 marks)",
+   "answer": "(a) [[k]]  (b) [[k * h]] cm  (c) 1 : [[k * k]]"
+  },
+  {
+   "id": "y8au2-s07-l1",
+   "topic": "Ratio",
+   "subtopic": "Scale diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S7 Scale diagrams",
+   "keywords": [
+    "scale",
+    "diagrams",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       50,
+       100,
+       200,
+       250
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * s / s == m"
+   ],
+   "text": "A scale drawing of a room uses 1 cm to represent [[s]] cm. A wall is [[m]] cm long on the drawing. How long is the real wall in metres?",
+   "answer": "[[m * s / 100]] m"
+  },
+  {
+   "id": "y8au2-s07-l2",
+   "topic": "Ratio",
+   "subtopic": "Scale diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S7 Scale diagrams",
+   "keywords": [
+    "scale",
+    "diagrams",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       50,
+       100,
+       200,
+       250
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * s / s == m"
+   ],
+   "text": "A scale drawing uses 1 cm to represent [[s]] cm. A real wall is [[m * s / 100]] m long. How long is the wall on the drawing?",
+   "answer": "[[m]] cm"
+  },
+  {
+   "id": "y8au2-s07-l3",
+   "topic": "Ratio",
+   "subtopic": "Scale diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S7 Scale diagrams",
+   "keywords": [
+    "scale",
+    "diagrams",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       100,
+       200,
+       500
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m * s / s == m"
+   ],
+   "text": "A plan has the scale 1 : [[s]]. A line on the plan is [[m]] cm long. Zoe says the real length is [[m * s]] m. Explain her mistake and work out the correct length.",
+   "answer": "[[m * s]] is in cm, not m; the real length is [[m * s / 100]] m"
+  },
+  {
+   "id": "y8au2-s07-l4",
+   "topic": "Ratio",
+   "subtopic": "Scale diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S7 Scale diagrams",
+   "keywords": [
+    "scale",
+    "diagrams",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       100,
+       200,
+       500
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n"
+   ],
+   "check": [
+    "m * s / s == m"
+   ],
+   "text": "A plot of land is drawn on a plan with the scale 1 : [[s]]. On the plan it is [[m]] cm by [[n]] cm. (a) What are the real dimensions in metres? (b) What is the real perimeter? (3 marks)",
+   "answer": "(a) [[m * s / 100]] m by [[n * s / 100]] m  (b) [[2 * (m + n) * s / 100]] m"
+  },
+  {
+   "id": "y8au2-s08-l1",
+   "topic": "Ratio",
+   "subtopic": "Interpret maps using scale and ratios",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S8 Interpret maps using scale and ratios",
+   "keywords": [
+    "interpret",
+    "maps",
+    "using",
+    "scale",
+    "and",
+    "ratios",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       2,
+       5,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       14
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * k / k == d"
+   ],
+   "text": "On a map, 1 cm represents [[k]] km. Two towns are [[d]] cm apart on the map. How far apart are they in real life?",
+   "answer": "[[d * k]] km"
+  },
+  {
+   "id": "y8au2-s08-l2",
+   "topic": "Ratio",
+   "subtopic": "Interpret maps using scale and ratios",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S8 Interpret maps using scale and ratios",
+   "keywords": [
+    "interpret",
+    "maps",
+    "using",
+    "scale",
+    "and",
+    "ratios",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       20000,
+       25000,
+       50000,
+       100000
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * s / s == d"
+   ],
+   "text": "A map has the scale 1 : [[s]]. Two villages are [[d]] cm apart on the map. How many kilometres apart are they?",
+   "answer": "[[d * s / 100000]] km"
+  },
+  {
+   "id": "y8au2-s08-l3",
+   "topic": "Ratio",
+   "subtopic": "Interpret maps using scale and ratios",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S8 Interpret maps using scale and ratios",
+   "keywords": [
+    "interpret",
+    "maps",
+    "using",
+    "scale",
+    "and",
+    "ratios",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       20000,
+       25000,
+       50000,
+       100000
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r * 100000 / s * s == r * 100000"
+   ],
+   "text": "A road is [[r]] km long. How long is it on a map with the scale 1 : [[s]]? Give your answer in cm.",
+   "answer": "[[r * 100000 / s]] cm"
+  },
+  {
+   "id": "y8au2-s08-l4",
+   "topic": "Ratio",
+   "subtopic": "Interpret maps using scale and ratios",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Autumn B2 Proportion and scale · S8 Interpret maps using scale and ratios",
+   "keywords": [
+    "interpret",
+    "maps",
+    "using",
+    "scale",
+    "and",
+    "ratios",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       25000,
+       50000,
+       100000
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       6,
+       24
+      ]
+     }
+    ],
+    [
+     "v",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(d * s / 100000 / v * 60)"
+   ],
+   "check": [
+    "d * s / s == d"
+   ],
+   "text": "A walking route is [[d]] cm long on a map with the scale 1 : [[s]]. Jo walks at [[v]] km/h. How many minutes does the walk take? (3 marks)",
+   "answer": "[[d * s / 100000 / v * 60]] minutes"
+  }
+ ]
+}
