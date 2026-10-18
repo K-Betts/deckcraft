@@ -420,6 +420,16 @@ fn rich_paragraphs(text: &str, size: f64, color: &str) -> Vec<deckcraft_model::t
     use crate::latex::{Segment, segments};
     use deckcraft_model::text::{Align, Paragraph, Run, RunKind, RunProps};
     let fill = parse_fill(color);
+    let segs = segments(text);
+    let maths = segs.iter().filter(|g| matches!(g, Segment::Math(_))).count();
+    let is_stacked = |m: &str| {
+        let omml = crate::equation::to_omml(&crate::equation::parse(m));
+        omml.contains("<m:f>") || omml.contains("<m:rad>") || omml.contains("<m:nary>")
+    };
+    // A lone fraction or root at the end of a line ("Work out ⅗ + ⅛") goes on its own centred
+    // line, larger; maths among other words stays in the sentence, which the text engine now lays
+    // out as maths too.
+    let own_line = maths == 1 && matches!(segs.last(), Some(Segment::Math(m)) if is_stacked(m));
     let mut paras: Vec<Paragraph> = vec![];
     let mut line: Vec<Run> = vec![];
     let flush = |line: &mut Vec<Run>, paras: &mut Vec<Paragraph>| {
@@ -428,22 +438,18 @@ fn rich_paragraphs(text: &str, size: f64, color: &str) -> Vec<deckcraft_model::t
         }
         line.clear();
     };
-    for seg in segments(text) {
+    for seg in segs {
         match seg {
             Segment::Text(t) => line.push(Run::with(t, RunProps { size: Some(size), fill: Some(fill.clone()), ..Default::default() })),
             Segment::Math(m) => {
                 let parsed = crate::equation::parse(&m);
-                let stacked = {
-                    let omml = crate::equation::to_omml(&parsed);
-                    omml.contains("<m:f>") || omml.contains("<m:rad>") || omml.contains("<m:nary>")
-                };
-                let size = if stacked { size * 1.2 } else { size };
+                let size = if own_line { size * 1.2 } else { size };
                 let run = Run {
                     text: crate::equation::to_plain(&parsed),
                     props: RunProps { font: Some("Cambria Math".into()), size: Some(size), fill: Some(fill.clone()), ..Default::default() },
                     kind: RunKind::Math { omml: crate::equation::to_omml_sized(&parsed, Some(size)) },
                 };
-                if stacked {
+                if own_line {
                     flush(&mut line, &mut paras);
                     let mut para = Paragraph { runs: vec![run], ..Default::default() };
                     para.props.align = Some(Align::Center);

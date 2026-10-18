@@ -114,6 +114,8 @@ whole string "[[expr|n]]". Kinds and their fields:
   pattern           cells:[[rows, columns], ...] drawn as growing squares
   bar-model         bars:[[{"label":"12","size":12},{"label":null,"size":8}], ...], total:"20"
   table             headers:[...], rows:[[...],...]  (also place-value charts, frequency tables)
+  fraction-bar      parts, shaded (one bar) or bars:[{"parts":8,"shaded":3,"label":"A"},...] (same-length bars)
+  shade-grid        rows, cols (default 10 x 10), shaded: how many squares are coloured (hundredths, percentages)
   number-line       also: labelEvery, hideLabels, blank:[values shown as ?], dots:[{"at":0.3,"label":"A"}]
 DIAGRAM RULES (these are shown on a classroom screen, so they must not mislead):
   - Angles are drawn to the sizes in "sizes". ALWAYS give "sizes" for algebraic angle questions

@@ -1,0 +1,2610 @@
+{
+ "version": 1,
+ "note": "Y7 Spring Block 2 Fractions, decimals and percentages: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7s2-s01-l1",
+   "topic": "Number",
+   "subtopic": "Represent tenths and hundredths",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S1 Represent tenths and hundredths",
+   "keywords": [
+    "represent",
+    "tenths",
+    "and",
+    "hundredths",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 10 != 0"
+   ],
+   "check": [
+    "k < 100"
+   ],
+   "text": "What fraction of the grid is shaded? Write it as hundredths.",
+   "answer": "$\\frac{[[k]]}{100}$",
+   "diagram": {
+    "kind": "shade-grid",
+    "rows": 10,
+    "cols": 10,
+    "shaded": "[[k|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s01-l2",
+   "topic": "Number",
+   "subtopic": "Represent tenths and hundredths",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S1 Represent tenths and hundredths",
+   "keywords": [
+    "represent",
+    "tenths",
+    "and",
+    "hundredths",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 10 * 10 == k"
+   ],
+   "text": "Write the shaded part of the bar as a decimal.",
+   "answer": "[[k / 10]]",
+   "diagram": {
+    "kind": "fraction-bar",
+    "parts": 10,
+    "shaded": "[[k|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s01-l3",
+   "topic": "Number",
+   "subtopic": "Represent tenths and hundredths",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S1 Represent tenths and hundredths",
+   "keywords": [
+    "represent",
+    "tenths",
+    "and",
+    "hundredths",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 10 != 0"
+   ],
+   "check": [
+    "k / 100 * 100 == k"
+   ],
+   "text": "Write [[k]] hundredths as a decimal and as a fraction.",
+   "answer": "[[k / 100]] and $\\frac{[[k]]}{100}$"
+  },
+  {
+   "id": "y7s2-s01-l4",
+   "topic": "Number",
+   "subtopic": "Represent tenths and hundredths",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S1 Represent tenths and hundredths",
+   "keywords": [
+    "represent",
+    "tenths",
+    "and",
+    "hundredths",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       11,
+       89
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 10 != 0"
+   ],
+   "check": [
+    "k / 100 * 100 == k"
+   ],
+   "text": "(a) What fraction of the grid is shaded? (b) Write this fraction as a decimal. (2 marks)",
+   "answer": "(a) $\\frac{[[k]]}{100}$  (b) [[k / 100]]",
+   "diagram": {
+    "kind": "shade-grid",
+    "rows": 10,
+    "cols": 10,
+    "shaded": "[[k|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s02-l1",
+   "topic": "Number",
+   "subtopic": "Number lines with fractions and decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S2 Number lines with fractions and decimals",
+   "keywords": [
+    "number",
+    "lines",
+    "with",
+    "fractions",
+    "and",
+    "decimals",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       3,
+       7,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 10 * 10 == k"
+   ],
+   "text": "What fraction and what decimal does A show?",
+   "answer": "$\\frac{[[k]]}{10}$ = [[k / 10]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "labelEvery": 10,
+    "dots": [
+     {
+      "at": "[[k / 10|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s02-l2",
+   "topic": "Number",
+   "subtopic": "Number lines with fractions and decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S2 Number lines with fractions and decimals",
+   "keywords": [
+    "number",
+    "lines",
+    "with",
+    "fractions",
+    "and",
+    "decimals",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 4 * 4 == k"
+   ],
+   "text": "What fraction and what decimal does A show?",
+   "answer": "$\\frac{[[k]]}{4}$ = [[k / 4]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": 0.25,
+    "labelEvery": 4,
+    "dots": [
+     {
+      "at": "[[k / 4|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s02-l3",
+   "topic": "Number",
+   "subtopic": "Number lines with fractions and decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S2 Number lines with fractions and decimals",
+   "keywords": [
+    "number",
+    "lines",
+    "with",
+    "fractions",
+    "and",
+    "decimals",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       2,
+       3,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 5 * 5 == k"
+   ],
+   "text": "What fraction and what decimal does A show?",
+   "answer": "$\\frac{[[k]]}{5}$ = [[k / 5]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": 0.2,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[k / 5|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s02-l4",
+   "topic": "Number",
+   "subtopic": "Number lines with fractions and decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S2 Number lines with fractions and decimals",
+   "keywords": [
+    "number",
+    "lines",
+    "with",
+    "fractions",
+    "and",
+    "decimals",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "j",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "j != k"
+   ],
+   "check": [
+    "j != k"
+   ],
+   "text": "(a) What decimal does A show? (b) What decimal does B show? (c) Which is larger, A or B? (3 marks)",
+   "answer": "(a) [[j / 10]]  (b) [[k / 10]]  (c) [[j > k|if:A/B]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": 0.1,
+    "labelEvery": 10,
+    "dots": [
+     {
+      "at": "[[j / 10|n]]",
+      "label": "A"
+     },
+     {
+      "at": "[[k / 10|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s03-l1",
+   "topic": "Number",
+   "subtopic": "Tenths, hundredths, fifths and quarters",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S3 Tenths, hundredths, fifths and quarters",
+   "keywords": [
+    "tenths",
+    "hundredths",
+    "fifths",
+    "and",
+    "quarters",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 10 * 10 == k"
+   ],
+   "text": "Write $\\frac{[[k]]}{10}$ as a decimal.",
+   "answer": "[[k / 10]]"
+  },
+  {
+   "id": "y7s2-s03-l2",
+   "topic": "Number",
+   "subtopic": "Tenths, hundredths, fifths and quarters",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S3 Tenths, hundredths, fifths and quarters",
+   "keywords": [
+    "tenths",
+    "hundredths",
+    "fifths",
+    "and",
+    "quarters",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k < d"
+   ],
+   "check": [
+    "k / d * d == k"
+   ],
+   "text": "Write $\\frac{[[k]]}{[[d]]}$ as a decimal.",
+   "answer": "[[k / d]]"
+  },
+  {
+   "id": "y7s2-s03-l3",
+   "topic": "Number",
+   "subtopic": "Tenths, hundredths, fifths and quarters",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S3 Tenths, hundredths, fifths and quarters",
+   "keywords": [
+    "tenths",
+    "hundredths",
+    "fifths",
+    "and",
+    "quarters",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       0.2,
+       0.4,
+       0.6,
+       0.8,
+       0.25,
+       0.75,
+       0.3,
+       0.7,
+       0.9,
+       0.5,
+       0.1
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x < 1"
+   ],
+   "text": "Write [[x]] as a fraction in its simplest form.",
+   "answer": "$[[x|frac]]$"
+  },
+  {
+   "id": "y7s2-s03-l4",
+   "topic": "Number",
+   "subtopic": "Tenths, hundredths, fifths and quarters",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S3 Tenths, hundredths, fifths and quarters",
+   "keywords": [
+    "tenths",
+    "hundredths",
+    "fifths",
+    "and",
+    "quarters",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       0.2,
+       0.4,
+       0.6,
+       0.8,
+       0.25,
+       0.75,
+       0.3,
+       0.7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k < d"
+   ],
+   "check": [
+    "k / d * d == k"
+   ],
+   "text": "(a) Write $\\frac{[[k]]}{[[d]]}$ as a decimal. (b) Write [[x]] as a fraction in its simplest form. (2 marks)",
+   "answer": "(a) [[k / d]]  (b) $[[x|frac]]$"
+  },
+  {
+   "id": "y7s2-s04-l1",
+   "topic": "Number",
+   "subtopic": "Eighths and thousandths",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S4 Eighths and thousandths",
+   "keywords": [
+    "eighths",
+    "and",
+    "thousandths",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 8 * 8 == k"
+   ],
+   "text": "Write $\\frac{[[k]]}{8}$ as a decimal.",
+   "answer": "[[k / 8]]"
+  },
+  {
+   "id": "y7s2-s04-l2",
+   "topic": "Number",
+   "subtopic": "Eighths and thousandths",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S4 Eighths and thousandths",
+   "keywords": [
+    "eighths",
+    "and",
+    "thousandths",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 10 != 0"
+   ],
+   "check": [
+    "k / 1000 * 1000 == k"
+   ],
+   "text": "Write $\\frac{[[k]]}{1000}$ as a decimal.",
+   "answer": "[[k / 1000]]"
+  },
+  {
+   "id": "y7s2-s04-l3",
+   "topic": "Number",
+   "subtopic": "Eighths and thousandths",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S4 Eighths and thousandths",
+   "keywords": [
+    "eighths",
+    "and",
+    "thousandths",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       3,
+       5,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k / 8 * 8 == k"
+   ],
+   "text": "Write [[k / 8]] as a fraction in its simplest form.",
+   "answer": "$[[k / 8|frac]]$"
+  },
+  {
+   "id": "y7s2-s04-l4",
+   "topic": "Number",
+   "subtopic": "Eighths and thousandths",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S4 Eighths and thousandths",
+   "keywords": [
+    "eighths",
+    "and",
+    "thousandths",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       1,
+       3,
+       5,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       11,
+       899
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 10 != 0"
+   ],
+   "check": [
+    "k / 8 * 8 == k"
+   ],
+   "text": "(a) Write $\\frac{[[k]]}{8}$ as a decimal. (b) Write [[n / 1000]] as a fraction with denominator 1000. (2 marks)",
+   "answer": "(a) [[k / 8]]  (b) $\\frac{[[n]]}{1000}$"
+  },
+  {
+   "id": "y7s2-s05-l1",
+   "topic": "Number",
+   "subtopic": "Understand percentages",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S5 Understand percentages",
+   "keywords": [
+    "understand",
+    "percentages",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k < 100"
+   ],
+   "text": "What percentage of the grid is shaded?",
+   "answer": "[[k]]%",
+   "diagram": {
+    "kind": "shade-grid",
+    "rows": 10,
+    "cols": 10,
+    "shaded": "[[k|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s05-l2",
+   "topic": "Number",
+   "subtopic": "Understand percentages",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S5 Understand percentages",
+   "keywords": [
+    "understand",
+    "percentages",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p < 100"
+   ],
+   "text": "Write [[p]]% as a fraction out of 100.",
+   "answer": "$\\frac{[[p]]}{100}$"
+  },
+  {
+   "id": "y7s2-s05-l3",
+   "topic": "Number",
+   "subtopic": "Understand percentages",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S5 Understand percentages",
+   "keywords": [
+    "understand",
+    "percentages",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 10 != 0"
+   ],
+   "check": [
+    "p / 100 * 100 == p"
+   ],
+   "text": "Write [[p]]% as a decimal and as a fraction out of 100.",
+   "answer": "[[p / 100]] and $\\frac{[[p]]}{100}$"
+  },
+  {
+   "id": "y7s2-s05-l4",
+   "topic": "Number",
+   "subtopic": "Understand percentages",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S5 Understand percentages",
+   "keywords": [
+    "understand",
+    "percentages",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       11,
+       89
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k + (100 - k) == 100"
+   ],
+   "text": "A grid has 100 squares. [[k]] squares are shaded. (a) What percentage is shaded? (b) What percentage is not shaded? (2 marks)",
+   "answer": "(a) [[k]]%  (b) [[100 - k]]%",
+   "diagram": {
+    "kind": "shade-grid",
+    "rows": 10,
+    "cols": 10,
+    "shaded": "[[k|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s06-l1",
+   "topic": "Number",
+   "subtopic": "Convert simple fractions, decimals and percentages",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S6 Convert simple fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "simple",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n / d * 100 < 100"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a decimal and as a percentage.",
+   "answer": "[[n / d]] and [[n / d * 100]]%"
+  },
+  {
+   "id": "y7s2-s06-l2",
+   "topic": "Number",
+   "subtopic": "Convert simple fractions, decimals and percentages",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S6 Convert simple fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "simple",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       0.5,
+       0.25,
+       0.75,
+       0.2,
+       0.4,
+       0.6,
+       0.8,
+       0.1,
+       0.3,
+       0.7,
+       0.9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x < 1"
+   ],
+   "text": "Write [[x]] as a fraction in its simplest form and as a percentage.",
+   "answer": "$[[x|frac]]$ and [[x * 100]]%"
+  },
+  {
+   "id": "y7s2-s06-l3",
+   "topic": "Number",
+   "subtopic": "Convert simple fractions, decimals and percentages",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S6 Convert simple fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "simple",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       40,
+       50,
+       60,
+       70,
+       75,
+       80,
+       90
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p < 100"
+   ],
+   "text": "Write [[p]]% as a decimal and as a fraction in its simplest form.",
+   "answer": "[[p / 100]] and $[[p / 100|frac]]$"
+  },
+  {
+   "id": "y7s2-s06-l4",
+   "topic": "Number",
+   "subtopic": "Convert simple fractions, decimals and percentages",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S6 Convert simple fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "simple",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "choose": [
+       0.3,
+       0.35,
+       0.45,
+       0.55,
+       0.65,
+       0.7,
+       0.8,
+       0.85
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n / d != x"
+   ],
+   "check": [
+    "n / d != x"
+   ],
+   "text": "(a) Write $\\frac{[[n]]}{[[d]]}$ as a percentage. (b) Write [[x]] as a percentage. (c) Which is larger: $\\frac{[[n]]}{[[d]]}$ or [[x]]? (3 marks)",
+   "answer": "(a) [[n / d * 100]]%  (b) [[x * 100]]%  (c) [[n / d > x|if:the fraction/the decimal]]"
+  },
+  {
+   "id": "y7s2-s07-l1",
+   "topic": "Number",
+   "subtopic": "Fractions as diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S7 Fractions as diagrams",
+   "keywords": [
+    "fractions",
+    "as",
+    "diagrams",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m < n"
+   ],
+   "text": "What fraction of the bar is shaded?",
+   "answer": "$\\frac{[[m]]}{[[n]]}$",
+   "diagram": {
+    "kind": "fraction-bar",
+    "parts": "[[n|n]]",
+    "shaded": "[[m|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s07-l2",
+   "topic": "Number",
+   "subtopic": "Fractions as diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S7 Fractions as diagrams",
+   "keywords": [
+    "fractions",
+    "as",
+    "diagrams",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n - m > 0"
+   ],
+   "text": "What fraction of the bar is not shaded?",
+   "answer": "$\\frac{[[n - m]]}{[[n]]}$",
+   "diagram": {
+    "kind": "fraction-bar",
+    "parts": "[[n|n]]",
+    "shaded": "[[m|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s07-l3",
+   "topic": "Number",
+   "subtopic": "Fractions as diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S7 Fractions as diagrams",
+   "keywords": [
+    "fractions",
+    "as",
+    "diagrams",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "m1",
+     {
+      "int": [
+       1,
+       "n1 - 1"
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "int": [
+       1,
+       "n2 - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 / n1 != m2 / n2"
+   ],
+   "check": [
+    "m1 < n1",
+    "m2 < n2"
+   ],
+   "text": "The two bars are the same length. Which bar has the larger fraction shaded, A or B? Explain.",
+   "answer": "[[m1 / n1 > m2 / n2|if:A/B]]: $\\frac{[[m1]]}{[[n1]]}$ [[m1 / n1 > m2 / n2|if:is larger than/is smaller than]] $\\frac{[[m2]]}{[[n2]]}$",
+   "diagram": {
+    "kind": "fraction-bar",
+    "bars": [
+     {
+      "parts": "[[n1|n]]",
+      "shaded": "[[m1|n]]",
+      "label": "A"
+     },
+     {
+      "parts": "[[n2|n]]",
+      "shaded": "[[m2|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s07-l4",
+   "topic": "Number",
+   "subtopic": "Fractions as diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S7 Fractions as diagrams",
+   "keywords": [
+    "fractions",
+    "as",
+    "diagrams",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "g",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       5,
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "g * m / (g * n) == m / n"
+   ],
+   "text": "The bar is split into equal parts. Write the shaded fraction in its simplest form. (2 marks)",
+   "answer": "$[[g * m / (g * n)|frac]]$",
+   "diagram": {
+    "kind": "fraction-bar",
+    "parts": "[[g * n|n]]",
+    "shaded": "[[g * m|n]]"
+   }
+  },
+  {
+   "id": "y7s2-s08-l1",
+   "topic": "Number",
+   "subtopic": "Fractions on a number line",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S8 Fractions on a number line",
+   "keywords": [
+    "fractions",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8,
+       10
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k < n"
+   ],
+   "text": "What fraction does A show?",
+   "answer": "$\\frac{[[k]]}{[[n]]}$",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": "[[1 / n|n]]",
+    "labelEvery": "[[n|n]]",
+    "dots": [
+     {
+      "at": "[[k / n|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s08-l2",
+   "topic": "Number",
+   "subtopic": "Fractions on a number line",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S8 Fractions on a number line",
+   "keywords": [
+    "fractions",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k < n"
+   ],
+   "text": "What mixed number does A show?",
+   "answer": "$[[w]]\\frac{[[k]]}{[[n]]}$",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[w|n]]",
+    "max": "[[w + 1|n]]",
+    "step": "[[1 / n|n]]",
+    "labelEvery": "[[n|n]]",
+    "dots": [
+     {
+      "at": "[[w + k / n|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s08-l3",
+   "topic": "Number",
+   "subtopic": "Fractions on a number line",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S8 Fractions on a number line",
+   "keywords": [
+    "fractions",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k < n"
+   ],
+   "text": "What improper fraction does A show?",
+   "answer": "$\\frac{[[w * n + k]]}{[[n]]}$",
+   "diagram": {
+    "kind": "number-line",
+    "min": "[[w|n]]",
+    "max": "[[w + 1|n]]",
+    "step": "[[1 / n|n]]",
+    "labelEvery": "[[n|n]]",
+    "dots": [
+     {
+      "at": "[[w + k / n|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s08-l4",
+   "topic": "Number",
+   "subtopic": "Fractions on a number line",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S8 Fractions on a number line",
+   "keywords": [
+    "fractions",
+    "on",
+    "a",
+    "number",
+    "line",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "j",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "k",
+     "j + 2 * g"
+    ]
+   ],
+   "where": [
+    "k < 2 * n"
+   ],
+   "check": [
+    "k > j"
+   ],
+   "text": "(a) What fraction does A show? (b) What fraction does B show? (c) What fraction is halfway between A and B? (3 marks)",
+   "answer": "(a) $\\frac{[[j]]}{[[2 * n]]}$  (b) $\\frac{[[k]]}{[[2 * n]]}$  (c) $[[(j + k) / (4 * n)|frac]]$",
+   "diagram": {
+    "kind": "number-line",
+    "min": 0,
+    "max": 1,
+    "step": "[[1 / (2 * n)|n]]",
+    "labelEvery": "[[2 * n|n]]",
+    "dots": [
+     {
+      "at": "[[j / (2 * n)|n]]",
+      "label": "A"
+     },
+     {
+      "at": "[[k / (2 * n)|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s09-l1",
+   "topic": "Number",
+   "subtopic": "Equivalent fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S9 Equivalent fractions",
+   "keywords": [
+    "equivalent",
+    "fractions",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1",
+    "n * g <= 24"
+   ],
+   "check": [
+    "m * g / (n * g) == m / n"
+   ],
+   "text": "Write the missing number: $\\frac{[[m]]}{[[n]]}$ = $\\frac{?}{[[n * g]]}$",
+   "answer": "[[m * g]]",
+   "diagram": {
+    "kind": "fraction-bar",
+    "bars": [
+     {
+      "parts": "[[n|n]]",
+      "shaded": "[[m|n]]"
+     },
+     {
+      "parts": "[[n * g|n]]",
+      "shaded": "[[m * g|n]]"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s09-l2",
+   "topic": "Number",
+   "subtopic": "Equivalent fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S9 Equivalent fractions",
+   "keywords": [
+    "equivalent",
+    "fractions",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "m * g / (n * g) == m / n"
+   ],
+   "text": "Write the missing number: $\\frac{[[m]]}{[[n]]}$ = $\\frac{[[m * g]]}{?}$",
+   "answer": "[[n * g]]"
+  },
+  {
+   "id": "y7s2-s09-l3",
+   "topic": "Number",
+   "subtopic": "Equivalent fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S9 Equivalent fractions",
+   "keywords": [
+    "equivalent",
+    "fractions",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1"
+   ],
+   "check": [
+    "2 * m / (2 * n) == m / n"
+   ],
+   "text": "Write two fractions that are equivalent to $\\frac{[[m]]}{[[n]]}$.",
+   "answer": "$\\frac{[[2 * m]]}{[[2 * n]]}$ and $\\frac{[[3 * m]]}{[[3 * n]]}$"
+  },
+  {
+   "id": "y7s2-s09-l4",
+   "topic": "Number",
+   "subtopic": "Equivalent fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S9 Equivalent fractions",
+   "keywords": [
+    "equivalent",
+    "fractions",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(m, n) == 1",
+    "m * g + e < n * g"
+   ],
+   "check": [
+    "e == 0 || e == 1"
+   ],
+   "text": "Ali says that $\\frac{[[m]]}{[[n]]}$ and $\\frac{[[m * g + e]]}{[[n * g]]}$ are equivalent fractions. Is he correct? Show how you know. (2 marks)",
+   "answer": "[[e == 0|if:Yes/No]]: $\\frac{[[m]]}{[[n]]}$ = $\\frac{[[m * g]]}{[[n * g]]}$ so the second fraction is [[e == 0|if:equal to it/different]]"
+  },
+  {
+   "id": "y7s2-s10-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S10 Compare and order fractions",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "fractions",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a != b"
+   ],
+   "text": "Write < or > in the space: $\\frac{[[a]]}{[[n]]}$ ? $\\frac{[[b]]}{[[n]]}$",
+   "answer": "[[a < b|if:</>]]"
+  },
+  {
+   "id": "y7s2-s10-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S10 Compare and order fractions",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "fractions",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "n - 1"
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       "n * m - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * m != c"
+   ],
+   "check": [
+    "a * m != c"
+   ],
+   "text": "Which is larger, $\\frac{[[a]]}{[[n]]}$ or $\\frac{[[c]]}{[[n * m]]}$?",
+   "answer": "[[a * m > c|if:First/Second]] fraction",
+   "diagram": {
+    "kind": "fraction-bar",
+    "bars": [
+     {
+      "parts": "[[n|n]]",
+      "shaded": "[[a|n]]",
+      "label": "1st"
+     },
+     {
+      "parts": "[[n * m|n]]",
+      "shaded": "[[c|n]]",
+      "label": "2nd"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7s2-s10-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S10 Compare and order fractions",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "fractions",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ]
+   ],
+   "where": [
+    "n3 < 12"
+   ],
+   "check": [
+    "n1 < n2",
+    "n2 < n3"
+   ],
+   "text": "Write these fractions in order, smallest first: $\\frac{[[n3]]}{12}$, $\\frac{[[n1]]}{12}$, $\\frac{[[n2]]}{12}$",
+   "answer": "$\\frac{[[n1]]}{12}$, $\\frac{[[n2]]}{12}$, $\\frac{[[n3]]}{12}$"
+  },
+  {
+   "id": "y7s2-s10-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S10 Compare and order fractions",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "fractions",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ],
+    [
+     "n4",
+     "n3 + g3"
+    ]
+   ],
+   "where": [
+    "n4 < 12"
+   ],
+   "check": [
+    "n1 < n2",
+    "n2 < n3",
+    "n3 < n4"
+   ],
+   "text": "Write these fractions in order, smallest first. (2 marks) $[[n3 / 12|frac]]$, $[[n1 / 12|frac]]$, $[[n2 / 12|frac]]$, $[[n4 / 12|frac]]$",
+   "answer": "$[[n1 / 12|frac]]$, $[[n2 / 12|frac]]$, $[[n3 / 12|frac]]$, $[[n4 / 12|frac]]$"
+  },
+  {
+   "id": "y7s2-s11-l1",
+   "topic": "Number",
+   "subtopic": "Fractions as division",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S11 Fractions as division",
+   "keywords": [
+    "fractions",
+    "as",
+    "division",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "gcd(a, b) == 1"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "Write [[a]] ÷ [[b]] as a fraction.",
+   "answer": "$\\frac{[[a]]}{[[b]]}$"
+  },
+  {
+   "id": "y7s2-s11-l2",
+   "topic": "Number",
+   "subtopic": "Fractions as division",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S11 Fractions as division",
+   "keywords": [
+    "fractions",
+    "as",
+    "division",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       8,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "b - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a / b * b == a"
+   ],
+   "text": "Write $\\frac{[[a]]}{[[b]]}$ as a decimal.",
+   "answer": "[[a / b]]"
+  },
+  {
+   "id": "y7s2-s11-l3",
+   "topic": "Number",
+   "subtopic": "Fractions as division",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S11 Fractions as division",
+   "keywords": [
+    "fractions",
+    "as",
+    "division",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       4,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a > b",
+    "a % b != 0"
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "Write [[a]] ÷ [[b]] as a fraction in its simplest form. Give an improper fraction.",
+   "answer": "$[[a / b|frac]]$"
+  },
+  {
+   "id": "y7s2-s11-l4",
+   "topic": "Number",
+   "subtopic": "Fractions as division",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S11 Fractions as division",
+   "keywords": [
+    "fractions",
+    "as",
+    "division",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       1,
+       "b - 1"
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a / b * b == a"
+   ],
+   "text": "[[a]] litres of juice are shared equally between [[b]] jugs. (a) What fraction of a litre is in each jug? (b) Write your answer as a decimal. (2 marks)",
+   "answer": "(a) $\\frac{[[a]]}{[[b]]}$  (b) [[a / b]]"
+  },
+  {
+   "id": "y7s2-s12-l1",
+   "topic": "Number",
+   "subtopic": "Convert fractions, decimals and percentages",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S12 Convert fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       20,
+       25,
+       50
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 5 != 0"
+   ],
+   "check": [
+    "n / d * d == n"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a decimal.",
+   "answer": "[[n / d]]"
+  },
+  {
+   "id": "y7s2-s12-l2",
+   "topic": "Number",
+   "subtopic": "Convert fractions, decimals and percentages",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S12 Convert fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       1,
+       99
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x % 10 != 0"
+   ],
+   "check": [
+    "x < 100"
+   ],
+   "text": "Write [[x / 100]] as a percentage.",
+   "answer": "[[x]]%"
+  },
+  {
+   "id": "y7s2-s12-l3",
+   "topic": "Number",
+   "subtopic": "Convert fractions, decimals and percentages",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S12 Convert fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       8,
+       20,
+       25,
+       40
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 5 != 0 || d == 20 || d == 25",
+    "(n / d * 1000) % 1 == 0"
+   ],
+   "check": [
+    "n / d * d == n"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a percentage.",
+   "answer": "[[n / d * 100]]%"
+  },
+  {
+   "id": "y7s2-s12-l4",
+   "topic": "Number",
+   "subtopic": "Convert fractions, decimals and percentages",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S12 Convert fractions, decimals and percentages",
+   "keywords": [
+    "convert",
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       40,
+       55
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       60,
+       90
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k * 12.5 < x",
+    "x < p"
+   ],
+   "text": "Write these in order, starting with the smallest: [[p]]%, $\\frac{[[k]]}{8}$ and [[x / 100]]. (3 marks)",
+   "answer": "$\\frac{[[k]]}{8}$, [[x / 100]], [[p]]%"
+  },
+  {
+   "id": "y7s2-s13-l1",
+   "topic": "Number",
+   "subtopic": "Fractions, decimals and percentages greater than 1 (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S13 Fractions, decimals and percentages greater than 1 (E)",
+   "keywords": [
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "greater",
+    "than",
+    "1",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       110,
+       290
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p % 10 == 0"
+   ],
+   "check": [
+    "p / 100 * 100 == p"
+   ],
+   "text": "Write [[p]]% as a decimal.",
+   "answer": "[[p / 100]]"
+  },
+  {
+   "id": "y7s2-s13-l2",
+   "topic": "Number",
+   "subtopic": "Fractions, decimals and percentages greater than 1 (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S13 Fractions, decimals and percentages greater than 1 (E)",
+   "keywords": [
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "greater",
+    "than",
+    "1",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       4,
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n > d",
+    "n % d != 0"
+   ],
+   "check": [
+    "n / d * d == n"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a decimal and as a percentage.",
+   "answer": "[[n / d]] and [[n / d * 100]]%"
+  },
+  {
+   "id": "y7s2-s13-l3",
+   "topic": "Number",
+   "subtopic": "Fractions, decimals and percentages greater than 1 (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S13 Fractions, decimals and percentages greater than 1 (E)",
+   "keywords": [
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "greater",
+    "than",
+    "1",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       2,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n < d"
+   ],
+   "text": "Write $[[w]]\\frac{[[n]]}{[[d]]}$ as a decimal and as a percentage.",
+   "answer": "[[w + n / d]] and [[(w + n / d) * 100]]%"
+  },
+  {
+   "id": "y7s2-s13-l4",
+   "topic": "Number",
+   "subtopic": "Fractions, decimals and percentages greater than 1 (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B2 Fractions, decimals and percentages · S13 Fractions, decimals and percentages greater than 1 (E)",
+   "keywords": [
+    "fractions",
+    "decimals",
+    "and",
+    "percentages",
+    "greater",
+    "than",
+    "1",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       125,
+       150,
+       175,
+       225,
+       250,
+       120,
+       140,
+       160
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 100"
+   ],
+   "text": "A shop's sales were [[p]]% of last year's sales. (a) Write [[p]]% as a decimal. (b) Write [[p]]% as a mixed number in its simplest form. (2 marks)",
+   "answer": "(a) [[p / 100]]  (b) $[[p / 100|mixed]]$"
+  }
+ ]
+}

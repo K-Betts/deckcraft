@@ -19,6 +19,9 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y7-autumn-b5-four-operations.json"),
     include_str!("../../../assets/questions/y7-autumn-b6-averages-range.json"),
     include_str!("../../../assets/questions/y7-autumn-b7-rounding-estimation.json"),
+    include_str!("../../../assets/questions/y7-spring-b2-fractions-decimals-percentages.json"),
+    include_str!("../../../assets/questions/y7-spring-b4-fractions-percentages-of-amounts.json"),
+    include_str!("../../../assets/questions/y7-summer-b3-add-subtract-fractions.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -50,6 +53,8 @@ pub const DRAWABLE: &[&str] = &[
     "pattern",
     "bar-model",
     "table",
+    "fraction-bar",
+    "shade-grid",
 ];
 
 /// Whether a question's `diagram` is one the slide can draw.
@@ -635,7 +640,7 @@ mod tests {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 50, "the Year 7 Autumn steps are all there: {}", steps.len());
+        assert!(steps.len() >= 80, "the Year 7 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }
