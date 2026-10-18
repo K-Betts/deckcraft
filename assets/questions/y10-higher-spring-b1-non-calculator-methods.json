@@ -1,0 +1,1024 @@
+{
+ "version": 1,
+ "note": "Year 10 Higher Higher Spring Block 1 Non-calculator methods: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y10hsp1-s01-l1",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S1 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * c == a + c * b"
+   ],
+   "text": "Work out [[a]] + [[b]] × [[c]]",
+   "answer": "[[a + b * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp1-s01-l2",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S1 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a + b) * c == a * c + b * c"
+   ],
+   "text": "Work out ([[a]] + [[b]]) × [[c]]",
+   "answer": "[[(a + b) * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp1-s01-l3",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S1 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * b * c == a + (b * b) * c"
+   ],
+   "text": "Work out [[a]] + [[b]]² × [[c]]",
+   "answer": "[[a + b * b * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp1-s01-l4",
+   "topic": "Number",
+   "subtopic": "Order of operations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S1 Order of operations",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b * c > q"
+   ],
+   "check": [
+    "q * e / e == q"
+   ],
+   "text": "Work out (a) [[a]] + [[b]] × [[c]] − [[q * e]] ÷ [[e]]  (b) ([[a]] + [[b]]) × [[c]] (2 marks)",
+   "answer": "(a) [[a + b * c - q]]  (b) [[(a + b) * c]]",
+   "year": "Y10"
+  },
+  {
+   "id": "y10hsp1-s02-l1",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S2 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a * 10]] × [[b]].",
+   "answer": "[[a * b * 10]]"
+  },
+  {
+   "id": "y10hsp1-s02-l2",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S2 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a / 10]] × [[b]] and [[a * b]] ÷ [[b]].",
+   "answer": "[[a * b / 10]]; [[a]]"
+  },
+  {
+   "id": "y10hsp1-s02-l3",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S2 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out [[a / 10]] × [[b / 10]] and [[a * b / 10]] ÷ [[b]].",
+   "answer": "[[a * b / 100]]; [[a / 10]]"
+  },
+  {
+   "id": "y10hsp1-s02-l4",
+   "topic": "Number",
+   "subtopic": "Related calculations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S2 Related calculations",
+   "keywords": [
+    "related",
+    "calculations",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       12,
+       48
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Given that [[a]] × [[b]] = [[a * b]], work out (a) [[a * 100]] × [[b * 10]] (b) [[a * b * 10]] ÷ [[a / 10]] (c) [[a / 100]] × [[b / 10]]. (3 marks)",
+   "answer": "(a) [[a * b * 1000]]  (b) [[b * 100]]  (c) [[a * b / 1000]]"
+  },
+  {
+   "id": "y10hsp1-s03-l1",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S3 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       20,
+       30,
+       40,
+       50,
+       60,
+       75
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Pens cost £[[p / 100|dp:2]] each. Work out the cost of [[n]] pens without a calculator.",
+   "answer": "£[[p * n / 100|dp:2]]"
+  },
+  {
+   "id": "y10hsp1-s03-l2",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S3 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((n * p + 1) / 10) * 10"
+    ]
+   ],
+   "check": [
+    "R > n * p"
+   ],
+   "text": "Tom buys [[n]] books at £[[p]] each and pays with a £[[R]] note. How much change does he get?",
+   "answer": "£[[R - n * p]]"
+  },
+  {
+   "id": "y10hsp1-s03-l3",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S3 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       14
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((f + m * d + 1) / 10) * 10"
+    ]
+   ],
+   "check": [
+    "R > f + m * d"
+   ],
+   "text": "A taxi costs £[[f]] plus £[[m]] per mile. Mia travels [[d]] miles and pays with a £[[R]] note. How much change does she get?",
+   "answer": "£[[R - f - m * d]]"
+  },
+  {
+   "id": "y10hsp1-s03-l4",
+   "topic": "Number",
+   "subtopic": "Solve multi-step problems",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S3 Solve multi-step problems",
+   "keywords": [
+    "solve",
+    "multi",
+    "step",
+    "problems",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       150,
+       180,
+       200
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       250,
+       300,
+       350
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "R",
+     "ceil((n * t + k * c) / 1000) * 10"
+    ]
+   ],
+   "where": [
+    "R * 100 > n * t + k * c"
+   ],
+   "check": [
+    "t > 0"
+   ],
+   "text": "A café sells tea for £[[t / 100|dp:2]] and cake for £[[c / 100|dp:2]]. A group buys [[n]] teas and [[k]] cakes and pays with £[[R]]. How much change? (3 marks)",
+   "answer": "£[[R - (n * t + k * c) / 100|dp:2]]"
+  },
+  {
+   "id": "y10hsp1-s04-l1",
+   "topic": "Number",
+   "subtopic": "Convert recurring decimals to fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S4 Convert recurring decimals to fractions",
+   "keywords": [
+    "convert",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Write the recurring decimal 0.[[d]][[d]][[d]]… (the [[d]] repeats) as a fraction.",
+   "answer": "$[[d / 9|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s04-l2",
+   "topic": "Number",
+   "subtopic": "Convert recurring decimals to fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S4 Convert recurring decimals to fractions",
+   "keywords": [
+    "convert",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write the recurring decimal 0.[[a]][[b]][[a]][[b]]… (the digits [[a]][[b]] repeat) as a fraction in its simplest form.",
+   "answer": "$\\frac{[[10 * a + b]]}{99} = [[(10 * a + b) / 99|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s04-l3",
+   "topic": "Number",
+   "subtopic": "Convert recurring decimals to fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S4 Convert recurring decimals to fractions",
+   "keywords": [
+    "convert",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Let $x = 0.[[a]][[b]][[a]][[b]]…$. Show that $x = \\frac{[[10 * a + b]]}{99}$.",
+   "answer": "$100x = [[10 * a + b]].[[a]][[b]]…$; $100x - x = [[10 * a + b]]$, so $99x = [[10 * a + b]]$ and $x = \\frac{[[10 * a + b]]}{99}$"
+  },
+  {
+   "id": "y10hsp1-s04-l4",
+   "topic": "Number",
+   "subtopic": "Convert recurring decimals to fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S4 Convert recurring decimals to fractions",
+   "keywords": [
+    "convert",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write 0.[[a]][[b]][[b]][[b]]… (only the [[b]] repeats) as a fraction in its simplest form. (3 marks)",
+   "answer": "$\\frac{[[9 * a + b]]}{90} = [[(9 * a + b) / 90|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s05-l1",
+   "topic": "Number",
+   "subtopic": "Convert more complex recurring decimals to fractions (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S5 Convert more complex recurring decimals to fractions (E)",
+   "keywords": [
+    "convert",
+    "more",
+    "complex",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write 0.[[a]][[b]][[c]][[a]][[b]][[c]]… (the digits [[a]][[b]][[c]] repeat) as a fraction.",
+   "answer": "$\\frac{[[100 * a + 10 * b + c]]}{999} = [[(100 * a + 10 * b + c) / 999|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s05-l2",
+   "topic": "Number",
+   "subtopic": "Convert more complex recurring decimals to fractions (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S5 Convert more complex recurring decimals to fractions (E)",
+   "keywords": [
+    "convert",
+    "more",
+    "complex",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write 0.[[a]][[b]][[c]][[b]][[c]]… (the digits [[b]][[c]] repeat) as a fraction in its simplest form.",
+   "answer": "$\\frac{[[100 * a + 10 * b + c - a]]}{990} = [[(100 * a + 10 * b + c - a) / 990|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s05-l3",
+   "topic": "Number",
+   "subtopic": "Convert more complex recurring decimals to fractions (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S5 Convert more complex recurring decimals to fractions (E)",
+   "keywords": [
+    "convert",
+    "more",
+    "complex",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that 0.[[a]][[b]][[c]][[b]][[c]]… $= \\frac{[[100 * a + 10 * b + c - a]]}{990}$.",
+   "answer": "$x = 0.[[a]][[b]][[c]][[b]][[c]]…$: $1000x - 10x = [[100 * a + 10 * b + c]] - [[a]]$, so $990x = [[100 * a + 10 * b + c - a]]$ and $x = \\frac{[[100 * a + 10 * b + c - a]]}{990}$"
+  },
+  {
+   "id": "y10hsp1-s05-l4",
+   "topic": "Number",
+   "subtopic": "Convert more complex recurring decimals to fractions (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S5 Convert more complex recurring decimals to fractions (E)",
+   "keywords": [
+    "convert",
+    "more",
+    "complex",
+    "recurring",
+    "decimals",
+    "to",
+    "fractions",
+    "e",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out 0.[[a]][[b]][[b]]… (with [[b]] recurring) + 0.[[b]][[b]][[b]]… (with [[b]] recurring) as a fraction in its simplest form. (4 marks)",
+   "answer": "$\\frac{[[9 * a + b]]}{90} + \\frac{[[b]]}{9} = \\frac{[[9 * a + 11 * b]]}{90} = [[(9 * a + 11 * b) / 90|frac]]$"
+  }
+ ]
+}
