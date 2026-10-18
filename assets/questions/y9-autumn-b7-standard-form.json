@@ -1,0 +1,1013 @@
+{
+ "version": 1,
+ "note": "Y9 Autumn Block 7 Standard form: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9au7-s01-l1",
+   "topic": "Number",
+   "subtopic": "Numbers in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S1 Numbers in standard form",
+   "keywords": [
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.4,
+       2.7,
+       3.8,
+       4.6,
+       5.2,
+       6.9,
+       7.1,
+       8.3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Write [[x * 10^n|group]] in standard form.",
+   "answer": "$[[x]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y9au7-s01-l2",
+   "topic": "Number",
+   "subtopic": "Numbers in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S1 Numbers in standard form",
+   "keywords": [
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.4,
+       2.7,
+       3.8,
+       4.6,
+       5.2,
+       6.9,
+       7.1,
+       8.3
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Write $[[x]] \\times 10^{-[[n]]}$ as an ordinary number.",
+   "answer": "[[x / 10^n]]"
+  },
+  {
+   "id": "y9au7-s01-l3",
+   "topic": "Number",
+   "subtopic": "Numbers in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S1 Numbers in standard form",
+   "keywords": [
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.4,
+       2.7,
+       3.8,
+       4.6,
+       5.2,
+       6.9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Is $[[x * 10]] \\times 10^{[[n]]}$ in standard form? If not, write it correctly.",
+   "answer": "No: [[x * 10]] is not between 1 and 10. It is $[[x]] \\times 10^{[[n + 1]]}$"
+  },
+  {
+   "id": "y9au7-s01-l4",
+   "topic": "Number",
+   "subtopic": "Numbers in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S1 Numbers in standard form",
+   "keywords": [
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "choose": [
+       1.2,
+       1.5,
+       1.7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "x * k < 10"
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "A grain of pollen has a mass of $[[x]] \\times 10^{-[[n]]}$ kg. (a) Write this as an ordinary number. (b) Write the mass of [[k]] grains in standard form. (3 marks)",
+   "answer": "(a) [[x / 10^n]] kg  (b) $[[x * k]] \\times 10^{-[[n]]}$ kg"
+  },
+  {
+   "id": "y9au7-s02-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S2 Compare and order numbers in standard form",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       3.2,
+       4.8,
+       7.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2.4,
+       5.5,
+       6.3,
+       9.2
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       4,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Which is larger, $[[a]] \\times 10^{[[m]]}$ or $[[b]] \\times 10^{[[n]]}$?",
+   "answer": "The [[a * 10^m > b * 10^n|if:first/second]]"
+  },
+  {
+   "id": "y9au7-s02-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S2 Compare and order numbers in standard form",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       3.2,
+       4.8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2.4,
+       5.5,
+       6.3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       5.1,
+       7.6,
+       9.2
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n",
+    "n != k",
+    "m != k"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Write these in order, smallest first: $[[a]] \\times 10^{[[m]]}$, $[[b]] \\times 10^{[[n]]}$, $[[c]] \\times 10^{[[k]]}$.",
+   "answer": "[[a * 10^m < b * 10^n && a * 10^m < c * 10^k|if:first/]][[b * 10^n < a * 10^m && b * 10^n < c * 10^k|if:second/]][[c * 10^k < a * 10^m && c * 10^k < b * 10^n|if:third/]] is smallest; [[a * 10^m > b * 10^n && a * 10^m > c * 10^k|if:first/]][[b * 10^n > a * 10^m && b * 10^n > c * 10^k|if:second/]][[c * 10^k > a * 10^m && c * 10^k > b * 10^n|if:third/]] is largest"
+  },
+  {
+   "id": "y9au7-s02-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S2 Compare and order numbers in standard form",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       3.2,
+       4.8,
+       7.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2.4,
+       5.5,
+       6.3,
+       9.2
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Compare $[[a]] \\times 10^{-[[m]]}$ and $[[b]] \\times 10^{-[[n]]}$. Which is smaller and why?",
+   "answer": "The [[a / 10^m < b / 10^n|if:first/second]] is smaller: compare the powers of 10 first ($-[[m]]$ and $-[[n]]$)"
+  },
+  {
+   "id": "y9au7-s02-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order numbers in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S2 Compare and order numbers in standard form",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       3.3,
+       4.9,
+       6.4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.9,
+       5.9,
+       8.7
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "choose": [
+       2.7,
+       4.9,
+       7.3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       23,
+       26
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       23,
+       26
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       23,
+       26
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m != n",
+    "n != k",
+    "m != k"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The masses of three planets are $[[a]] \\times 10^{[[m]]}$ kg, $[[b]] \\times 10^{[[n]]}$ kg and $[[c]] \\times 10^{[[k]]}$ kg. Which is heaviest, and how many times heavier is it than the lightest? Give your answer to 1 significant figure. (3 marks)",
+   "answer": "The heaviest is the [[a * 10^m > b * 10^n && a * 10^m > c * 10^k|if:first/]][[b * 10^n > a * 10^m && b * 10^n > c * 10^k|if:second/]][[c * 10^k > a * 10^m && c * 10^k > b * 10^n|if:third/]], about [[sf(max(a * 10^m, max(b * 10^n, c * 10^k)) / min(a * 10^m, min(b * 10^n, c * 10^k)), 1)|group]] times heavier than the lightest"
+  },
+  {
+   "id": "y9au7-s03-l1",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S3 Add and subtract numbers in standard form",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2.2,
+       3.4,
+       4.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.5,
+       2.3,
+       3.2,
+       4.4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} + [[b]] \\times 10^{[[n]]}$. Give your answer in standard form.",
+   "answer": "$[[a + b]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y9au7-s03-l2",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S3 Add and subtract numbers in standard form",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       6.5,
+       7.2,
+       8.4,
+       9.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1.5,
+       2.3,
+       3.2,
+       4.4
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > b"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} - [[b]] \\times 10^{[[n]]}$. Give your answer in standard form.",
+   "answer": "$[[a - b]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y9au7-s03-l3",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S3 Add and subtract numbers in standard form",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2.2,
+       3.4,
+       4.1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b / 10 < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $[[a]] \\times 10^{[[n]]} + [[b]] \\times 10^{[[n - 1]]}$. Give your answer in standard form.",
+   "answer": "$[[a + b / 10]] \\times 10^{[[n]]}$"
+  },
+  {
+   "id": "y9au7-s03-l4",
+   "topic": "Number",
+   "subtopic": "Add and subtract numbers in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S3 Add and subtract numbers in standard form",
+   "keywords": [
+    "add",
+    "and",
+    "subtract",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.2,
+       1.5,
+       1.8,
+       2.4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b / 10 < 10",
+    "a - b / 10 >= 1"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A school has $[[a]] \\times 10^{3}$ pupils and a second school has $[[b]] \\times 10^{2}$ pupils. Write the total number of pupils in standard form and the difference in standard form. (3 marks)",
+   "answer": "Total $[[a + b / 10]] \\times 10^{3}$; difference $[[a - b / 10]] \\times 10^{3}$"
+  },
+  {
+   "id": "y9au7-s04-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S4 Multiply and divide numbers in standard form",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2,
+       2.5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b < 10"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $([[a]] \\times 10^{[[m]]}) \\times ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a * b]] \\times 10^{[[m + n]]}$"
+  },
+  {
+   "id": "y9au7-s04-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S4 Multiply and divide numbers in standard form",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       1.5,
+       2,
+       2.5,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b < 10"
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a * b]] \\times 10^{[[m]]}) \\div ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a]] \\times 10^{[[m - n]]}$"
+  },
+  {
+   "id": "y9au7-s04-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S4 Multiply and divide numbers in standard form",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * b >= 10",
+    "a * b < 100"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Work out $([[a]] \\times 10^{[[m]]}) \\times ([[b]] \\times 10^{[[n]]})$. Give your answer in standard form.",
+   "answer": "$[[a * b / 10]] \\times 10^{[[m + n + 1]]}$"
+  },
+  {
+   "id": "y9au7-s04-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide numbers in standard form",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Autumn B7 Standard form · S4 Multiply and divide numbers in standard form",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "numbers",
+    "in",
+    "standard",
+    "form",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       4,
+       5,
+       6,
+       7
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "9.5 * k >= 10",
+    "9.5 * k < 100"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A light-year is about $9.5 \\times 10^{12}$ km. A star is $[[k]] \\times 10^{[[n]]}$ light-years away. How far away is it in km? Give your answer in standard form to 2 significant figures. (3 marks)",
+   "answer": "$[[9.5 * k / 10]] \\times 10^{[[n + 13]]}$ km"
+  }
+ ]
+}
