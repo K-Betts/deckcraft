@@ -1,0 +1,605 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 5 Constructions and loci: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp5-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Constructions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S1 Constructions",
+   "keywords": [
+    "constructions",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       100,
+       120,
+       150
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "An angle of [[a]]° is bisected. How big is each half?",
+   "answer": "[[a / 2]]°"
+  },
+  {
+   "id": "y11hsp5-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Constructions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S1 Constructions",
+   "keywords": [
+    "constructions",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       20,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The bisector of angle $ABC$ makes an angle of [[a]]° with $BA$. How big is angle $ABC$?",
+   "answer": "[[2 * a]]°"
+  },
+  {
+   "id": "y11hsp5-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Constructions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S1 Constructions",
+   "keywords": [
+    "constructions",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "You construct a 60° angle and bisect it [[n]] times. What angle do you get?",
+   "answer": "[[60 / 2^n]]°"
+  },
+  {
+   "id": "y11hsp5-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Constructions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S1 Constructions",
+   "keywords": [
+    "constructions",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       30,
+       45,
+       15,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Describe how to construct an angle of [[k]]° using only compasses and a straight edge, starting from a 60° angle. (3 marks)",
+   "answer": "[[k == 30|if:Bisect the 60° angle/]][[k == 45|if:Construct a 90° angle then bisect it/]][[k == 15|if:Bisect the 60° angle to make 30° then bisect again/]][[k == 120|if:Construct two 60° angles next to each other/]]"
+  },
+  {
+   "id": "y11hsp5-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Loci",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S2 Loci",
+   "keywords": [
+    "loci",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Describe the locus of points that are [[r]] cm from a fixed point $A$.",
+   "answer": "A circle with centre $A$ and radius [[r]] cm"
+  },
+  {
+   "id": "y11hsp5-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Loci",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S2 Loci",
+   "keywords": [
+    "loci",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Points are exactly [[r]] cm from a line segment $AB$ of length [[l]] cm. Describe the shape and work out its perimeter in terms of $\\pi$.",
+   "answer": "Two straight lines [[l]] cm long and two semicircular ends: perimeter [[2 * l]] + [[2 * r]]$\\pi$ cm"
+  },
+  {
+   "id": "y11hsp5-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Loci",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S2 Loci",
+   "keywords": [
+    "loci",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A dog is tied by a [[r]] m rope to a post. Describe the region it can reach and work out its area in terms of $\\pi$.",
+   "answer": "A circle of radius [[r]] m; area $[[r * r]]\\pi$ m²"
+  },
+  {
+   "id": "y11hsp5-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Loci",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S2 Loci",
+   "keywords": [
+    "loci",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "The region within [[r]] cm of a line segment $AB$ of length [[l]] cm is shaded. Work out its area in terms of $\\pi$. (3 marks)",
+   "answer": "[[2 * r * l]] + [[r * r]]$\\pi$ cm²"
+  },
+  {
+   "id": "y11hsp5-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Loci with regions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S3 Loci with regions",
+   "keywords": [
+    "loci",
+    "with",
+    "regions",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Describe the locus of points equidistant from two points $A$ and $B$ that are [[d]] cm apart.",
+   "answer": "The perpendicular bisector of $AB$, passing through the midpoint [[d / 2]] cm from each"
+  },
+  {
+   "id": "y11hsp5-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Loci with regions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S3 Loci with regions",
+   "keywords": [
+    "loci",
+    "with",
+    "regions",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ is (0, 0) and $B$ is ([[2 * a]], 0). Write the equation of the locus of points equidistant from $A$ and $B$.",
+   "answer": "$x = [[a]]$"
+  },
+  {
+   "id": "y11hsp5-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Loci with regions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S3 Loci with regions",
+   "keywords": [
+    "loci",
+    "with",
+    "regions",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ is (0, [[a]]) and $B$ is (0, [[b]]). The locus of points equidistant from $A$ and $B$ is a line. Write its equation.",
+   "answer": "$y = [[(a + b) / 2]]$"
+  },
+  {
+   "id": "y11hsp5-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Loci with regions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S3 Loci with regions",
+   "keywords": [
+    "loci",
+    "with",
+    "regions",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0",
+    "r > d / 2"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A mast must be equidistant from two towns $A$ and $B$ that are [[d]] km apart and within [[r]] km of $A$. Describe the possible positions and the nearest distance from $A$. (3 marks)",
+   "answer": "On the perpendicular bisector of $AB$ and inside the circle of radius [[r]] km about $A$; the nearest point is the midpoint, [[d / 2]] km from $A$"
+  },
+  {
+   "id": "y11hsp5-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Problem solving with loci",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S4 Problem solving with loci",
+   "keywords": [
+    "problem",
+    "solving",
+    "with",
+    "loci",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A treasure is within [[r]] m of a tree. Describe the region.",
+   "answer": "Inside (and on) a circle of radius [[r]] m centred on the tree"
+  },
+  {
+   "id": "y11hsp5-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Problem solving with loci",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S4 Problem solving with loci",
+   "keywords": [
+    "problem",
+    "solving",
+    "with",
+    "loci",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A point must be within [[r]] m of a post $P$ and closer to $A$ than $B$. Describe the region.",
+   "answer": "Inside the circle of radius [[r]] m about $P$ and on $A$'s side of the perpendicular bisector of $AB$"
+  },
+  {
+   "id": "y11hsp5-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Problem solving with loci",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S4 Problem solving with loci",
+   "keywords": [
+    "problem",
+    "solving",
+    "with",
+    "loci",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       6,
+       9
+      ]
+     }
+    ],
+    [
+     "l",
+     {
+      "int": [
+       8,
+       12
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A goat is tied to the corner of a [[w]] m by [[l]] m shed with a [[r]] m rope. What fraction of a full circle can the goat reach outside the shed, and what is the area in terms of $\\pi$?",
+   "answer": "Three quarters of a circle: area $\\frac{3}{4} \\times [[r * r]]\\pi$ = $[[3 * r * r / 4|dp:2]]\\pi$ m²"
+  },
+  {
+   "id": "y11hsp5-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Problem solving with loci",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B5 Constructions and loci · S4 Problem solving with loci",
+   "keywords": [
+    "problem",
+    "solving",
+    "with",
+    "loci",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d < 2 * r"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A radio mast covers points within [[r]] km. Two towns are [[d]] km apart . Describe the region covered by both masts (one at each town). (3 marks)",
+   "answer": "The overlapping lens between the two circles of radius [[r]] km; its width along the line joining them is [[2 * r - d]] km"
+  }
+ ]
+}

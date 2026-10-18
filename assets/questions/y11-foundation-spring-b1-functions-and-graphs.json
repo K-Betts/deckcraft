@@ -1,0 +1,1199 @@
+{
+ "version": 1,
+ "note": "Year 11 Foundation Foundation Spring Block 1 Functions and graphs: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11fsp1-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Function machines",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S1 Function machines",
+   "keywords": [
+    "function",
+    "machines",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(a * m + k) - k == a * m"
+   ],
+   "text": "Work out the output.",
+   "answer": "[[a * m + k]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": "[[a]]",
+    "steps": [
+     "× [[m]]",
+     "+ [[k]]"
+    ],
+    "output": null
+   },
+   "year": "Y11"
+  },
+  {
+   "id": "y11fsp1-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Function machines",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S1 Function machines",
+   "keywords": [
+    "function",
+    "machines",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a * m + k) - k) / m == a"
+   ],
+   "text": "Work out the input.",
+   "answer": "[[a]]",
+   "diagram": {
+    "kind": "function-machine",
+    "input": null,
+    "steps": [
+     "× [[m]]",
+     "+ [[k]]"
+    ],
+    "output": "[[a * m + k]]"
+   },
+   "year": "Y11"
+  },
+  {
+   "id": "y11fsp1-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Function machines",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S1 Function machines",
+   "keywords": [
+    "function",
+    "machines",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "((a * m - k) + k) / m == a"
+   ],
+   "text": "A two-step function machine multiplies by [[m]] then subtracts [[k]]. The output is [[a * m - k]]. What was the input?",
+   "answer": "[[a]]",
+   "year": "Y11"
+  },
+  {
+   "id": "y11fsp1-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Function machines",
+   "difficulty": 4,
+   "qtype": "problem",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S1 Function machines",
+   "keywords": [
+    "function",
+    "machines",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(((b + k) * m) / m) - k == b"
+   ],
+   "text": "A function machine adds [[k]] then multiplies by [[m]]. (a) Work out the output when the input is [[a]]. (b) The output is [[(b + k) * m]]. Work out the input. (3 marks)",
+   "answer": "(a) [[(a + k) * m]]  (b) [[b]]",
+   "year": "Y11"
+  },
+  {
+   "id": "y11fsp1-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Write an expression or formula from a function machine",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S2 Write an expression or formula from a function machine",
+   "keywords": [
+    "write",
+    "an",
+    "expression",
+    "or",
+    "formula",
+    "from",
+    "a",
+    "function",
+    "machine",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "A function machine multiplies the input $x$ by [[m]] then adds [[c]]. Write an expression for the output.",
+   "answer": "$[[m]]x + [[c]]$"
+  },
+  {
+   "id": "y11fsp1-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Write an expression or formula from a function machine",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S2 Write an expression or formula from a function machine",
+   "keywords": [
+    "write",
+    "an",
+    "expression",
+    "or",
+    "formula",
+    "from",
+    "a",
+    "function",
+    "machine",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "A function machine adds [[c]] to the input $x$ then multiplies by [[m]]. Write an expression for the output.",
+   "answer": "$[[m]](x + [[c]])$"
+  },
+  {
+   "id": "y11fsp1-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Write an expression or formula from a function machine",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S2 Write an expression or formula from a function machine",
+   "keywords": [
+    "write",
+    "an",
+    "expression",
+    "or",
+    "formula",
+    "from",
+    "a",
+    "function",
+    "machine",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "A machine squares the input $n$, subtracts [[c]] then multiplies by [[m]]. Write a formula for the output $y$ and find $y$ when $n = [[k]]$.",
+   "answer": "$y = [[m]](n^2 - [[c]])$; $y = [[m * (k * k - c)]]$"
+  },
+  {
+   "id": "y11fsp1-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Write an expression or formula from a function machine",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S2 Write an expression or formula from a function machine",
+   "keywords": [
+    "write",
+    "an",
+    "expression",
+    "or",
+    "formula",
+    "from",
+    "a",
+    "function",
+    "machine",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The output of a machine is $[[m]]x - [[c]]$. (a) Describe the machine. (b) Find the input when the output is [[m * k - c]]. (3 marks)",
+   "answer": "(a) multiply by [[m]] then subtract [[c]]  (b) $x = [[k]]$"
+  },
+  {
+   "id": "y11fsp1-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S3 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 + [[c]]$.",
+   "answer": "$y$ = [[9 + c]], [[4 + c]], [[1 + c]], [[c]], [[1 + c]], [[4 + c]], [[9 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S3 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x$.",
+   "answer": "$y$ = [[9 + 3 * b]], [[4 + 2 * b]], [[1 + b]], 0, [[1 - b]], [[4 - 2 * b]], [[9 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S3 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = [[c]] - x^2$ and write down the maximum value of $y$.",
+   "answer": "$y$ = [[c - 9]], [[c - 4]], [[c - 1]], [[c]], [[c - 1]], [[c - 4]], [[c - 9]]; maximum [[c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S3 Quadratic graphs",
+   "keywords": [
+    "quadratic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x - [[c]]$ and write down the lowest value in the table. (3 marks)",
+   "answer": "$y$ = [[9 + 3 * b - c]], [[4 + 2 * b - c]], [[1 + b - c]], [[-c]], [[1 - b - c]], [[4 - 2 * b - c]], [[9 - 3 * b - c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 + [[c]]$.",
+   "answer": "$y$ = [[-27 + c]], [[-8 + c]], [[-1 + c]], [[c]], [[1 + c]], [[8 + c]], [[27 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 - [[b]]x$.",
+   "answer": "$y$ = [[-27 + 3 * b]], [[-8 + 2 * b]], [[-1 + b]], 0, [[1 - b]], [[8 - 2 * b]], [[27 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^3$, what happens to $y$ when $x$ is negative? Describe the shape of the graph.",
+   "answer": "$y$ is negative for negative $x$ ([[-k * k * k]] when $x = -[[k]]$); the graph rises from bottom left to top right through the origin with a flat point at the origin"
+  },
+  {
+   "id": "y11fsp1-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Cubic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S4 Cubic graphs",
+   "keywords": [
+    "cubic",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table for $y = x^3 - [[b]]x$ and write down the values of $x$ in the table where $y = 0$. Is the graph symmetrical about the origin? (4 marks)",
+   "answer": "$y = 0$ when $x = 0$ [[b == 1|if: and x = ±1/ ]][[b == 4|if: and x = ±2/ ]][[b == 9|if: and x = ±3/ ]]; yes, it has rotational symmetry about the origin",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S5 Reciprocal graphs",
+   "keywords": [
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       4,
+       8,
+       12,
+       16,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Complete the table of values for $y = \\frac{[[k]]}{x}$.",
+   "answer": "$y$ for $x$ = 1, 2, 4: [[k]], [[k / 2]], [[k / 4]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "1",
+     "2",
+     "4"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S5 Reciprocal graphs",
+   "keywords": [
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Complete the table of values for $y = [[k]] \\times 2^x$.",
+   "answer": "$y$ for $x$ = 0 to 4: [[k]], [[2 * k]], [[4 * k]], [[8 * k]], [[16 * k]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y11fsp1-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S5 Reciprocal graphs",
+   "keywords": [
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Which graph shape belongs to $y = \\frac{[[k]]}{x}$, $y = [[k]]^x$ and $y = [[k]]x$? Choose from: straight line, curve that falls and never touches the axes, curve that rises faster and faster.",
+   "answer": "$y = [[k]]x$ straight line; $y = \\frac{[[k]]}{x}$ falling curve; $y = [[k]]^x$ rises faster and faster"
+  },
+  {
+   "id": "y11fsp1-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S5 Reciprocal graphs",
+   "keywords": [
+    "reciprocal",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       10,
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A culture has [[A]] bacteria and doubles every hour: $N = [[A]] \\times 2^t$. (a) How many bacteria after [[t]] hours? (b) After how many hours does it first exceed [[A * 100]]? (3 marks)",
+   "answer": "(a) [[A * 2^t]]  (b) [[ceil(log10(100) / log10(2))]] hours (2^7 = 128)"
+  },
+  {
+   "id": "y11fsp1-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Recognise and sketch graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S6 Recognise and sketch graphs",
+   "keywords": [
+    "recognise",
+    "and",
+    "sketch",
+    "graphs",
+    "year 11",
+    "foundation",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "What shape is the graph of [[k == 0|if:y = 2x + 3/]][[k == 1|if:y = x² + 4/]][[k == 2|if:y = 6 ÷ x/]][[k == 3|if:y = x³ - 2/]]?",
+   "answer": "[[k == 0|if:a straight line/]][[k == 1|if:a U-shaped curve (parabola)/]][[k == 2|if:a curve with two separate branches (hyperbola)/]][[k == 3|if:an S-shaped curve/]]"
+  },
+  {
+   "id": "y11fsp1-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Recognise and sketch graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S6 Recognise and sketch graphs",
+   "keywords": [
+    "recognise",
+    "and",
+    "sketch",
+    "graphs",
+    "year 11",
+    "foundation",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Which type of equation gives [[k == 0|if:a straight line/]][[k == 1|if:a U-shaped curve (parabola)/]][[k == 2|if:a curve with two separate branches (hyperbola)/]][[k == 3|if:an S-shaped curve/]]: linear, quadratic, cubic or reciprocal?",
+   "answer": "[[k == 0|if:linear/]][[k == 1|if:quadratic/]][[k == 2|if:reciprocal/]][[k == 3|if:cubic/]]"
+  },
+  {
+   "id": "y11fsp1-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Recognise and sketch graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S6 Recognise and sketch graphs",
+   "keywords": [
+    "recognise",
+    "and",
+    "sketch",
+    "graphs",
+    "year 11",
+    "foundation",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Where does the graph of [[k == 0|if:y = 2x + 3/]][[k == 1|if:y = x² + 4/]][[k == 2|if:y = 6 ÷ x/]][[k == 3|if:y = x³ - 2/]] cross the $y$-axis (if it does)?",
+   "answer": "[[k == 0|if:(0, 3)/]][[k == 1|if:(0, 4)/]][[k == 2|if:it never crosses the y-axis (x cannot be 0)/]][[k == 3|if:(0, -2)/]]"
+  },
+  {
+   "id": "y11fsp1-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Recognise and sketch graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Foundation Spring B1 Functions and graphs · S6 Recognise and sketch graphs",
+   "keywords": [
+    "recognise",
+    "and",
+    "sketch",
+    "graphs",
+    "year 11",
+    "foundation",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Sketch the graph of $y = x^2 - [[c]]$ and write down its line of symmetry, the minimum point and where it crosses the $y$-axis. (3 marks)",
+   "answer": "Line of symmetry $x = 0$; minimum (0, [[-c]]); crosses the $y$-axis at (0, [[-c]])"
+  }
+ ]
+}

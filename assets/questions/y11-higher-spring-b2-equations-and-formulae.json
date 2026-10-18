@@ -1,0 +1,980 @@
+{
+ "version": 1,
+ "note": "Year 11 Higher Higher Spring Block 2 Equations and formulae: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y11hsp2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic inequalities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S1 Solve quadratic inequalities",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "inequalities",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Solve $x^2 > [[n * n]]$.",
+   "answer": "$x < [[-n]]$ or $x > [[n]]$"
+  },
+  {
+   "id": "y11hsp2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic inequalities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S1 Solve quadratic inequalities",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "inequalities",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "Solve $x^2 \\le [[n * n]]$.",
+   "answer": "$[[-n]] \\le x \\le [[n]]$"
+  },
+  {
+   "id": "y11hsp2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic inequalities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S1 Solve quadratic inequalities",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "inequalities",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $x^2 - [[p + q]]x + [[p * q]] < 0$.",
+   "answer": "$[[p]] < x < [[q]]$"
+  },
+  {
+   "id": "y11hsp2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve quadratic inequalities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S1 Solve quadratic inequalities",
+   "keywords": [
+    "solve",
+    "quadratic",
+    "inequalities",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != q"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $x^2 + [[p - q|signed]]x - [[p * q]] \\ge 0$. (3 marks)",
+   "answer": "$x \\le [[-p]]$ or $x \\ge [[q]]$"
+  },
+  {
+   "id": "y11hsp2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve equations by iteration",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S2 Solve equations by iteration",
+   "keywords": [
+    "solve",
+    "equations",
+    "by",
+    "iteration",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $x_{n+1} = [[a]] + \\frac{1}{x_n}$ with $x_0 = 1$ to find $x_1$.",
+   "answer": "[[a + 1]]"
+  },
+  {
+   "id": "y11hsp2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve equations by iteration",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S2 Solve equations by iteration",
+   "keywords": [
+    "solve",
+    "equations",
+    "by",
+    "iteration",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $x_{n+1} = \\sqrt{x_n + [[a]]}$ with $x_0 = 1$ to find $x_1$ (2 decimal places).",
+   "answer": "[[sqrt(1 + a)|dp:2]]"
+  },
+  {
+   "id": "y11hsp2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve equations by iteration",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S2 Solve equations by iteration",
+   "keywords": [
+    "solve",
+    "equations",
+    "by",
+    "iteration",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Show that $x^3 - x - [[a]] = 0$ has a solution between 1 and 2 when $a = 1$ using a sign change.",
+   "answer": "$f(1) = -1$, $f(2) = 5$: sign change so a root between 1 and 2"
+  },
+  {
+   "id": "y11hsp2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve equations by iteration",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S2 Solve equations by iteration",
+   "keywords": [
+    "solve",
+    "equations",
+    "by",
+    "iteration",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$x^3 + [[a]]x - [[b]] = 0$ is rearranged to $x = \\sqrt[3]{[[b]] - [[a]]x}$. Starting from $x_0 = 1$ find $x_1$ and $x_2$ (3 decimal places). (3 marks)",
+   "answer": "$x_1$ = [[(b - a)^(1/3)|dp:3]]; $x_2$ = [[(b - a * (b - a)^(1/3))^(1/3)|dp:3]]"
+  },
+  {
+   "id": "y11hsp2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Simultaneous equations (one linear, one quadratic)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S3 Simultaneous equations (one linear, one quadratic)",
+   "keywords": [
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "quadratic",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Find the intersection of $y = x + [[c]]$ and $y = x^2 - [[k]]$ when the equation reduces to $x^2 - x - [[c + k]] = 0$.",
+   "answer": "$x$ satisfies $x^2 - x - [[c + k]] = 0$"
+  },
+  {
+   "id": "y11hsp2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Simultaneous equations (one linear, one quadratic)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S3 Simultaneous equations (one linear, one quadratic)",
+   "keywords": [
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "quadratic",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Solve $x^2 + y^2 = [[r * r]]$ and $y = 0$.",
+   "answer": "$(\\pm [[r]], 0)$"
+  },
+  {
+   "id": "y11hsp2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Simultaneous equations (one linear, one quadratic)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S3 Simultaneous equations (one linear, one quadratic)",
+   "keywords": [
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "quadratic",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $x^2 - [[p + q]]x + [[p * q]] = 0$ and give the matching $y = x + 1$ values.",
+   "answer": "$x = [[p]]$ ($y = [[p + 1]]$) or $x = [[q]]$ ($y = [[q + 1]]$)"
+  },
+  {
+   "id": "y11hsp2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Simultaneous equations (one linear, one quadratic)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S3 Simultaneous equations (one linear, one quadratic)",
+   "keywords": [
+    "simultaneous",
+    "equations",
+    "one",
+    "linear",
+    "quadratic",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       6,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $y = x^2 - [[p + q]]x + [[p * q]]$ and $y = 0$, and state the line the points lie on. (3 marks)",
+   "answer": "$x = [[p]]$ or $x = [[q]]$, on the line $y = 0$"
+  },
+  {
+   "id": "y11hsp2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Equations with algebraic fractions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S4 Equations with algebraic fractions",
+   "keywords": [
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $\\frac{x}{[[m]]} = [[k]]$",
+   "answer": "$x = [[m * k]]$"
+  },
+  {
+   "id": "y11hsp2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Equations with algebraic fractions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S4 Equations with algebraic fractions",
+   "keywords": [
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $\\frac{[[a]]}{x} = [[b]]$ for $x$ (give $x$ as a fraction or decimal).",
+   "answer": "$x = [[a / b|dp:2]]$"
+  },
+  {
+   "id": "y11hsp2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Equations with algebraic fractions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S4 Equations with algebraic fractions",
+   "keywords": [
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $\\frac{x + [[a]]}{2} = \\frac{x - [[b]]}{3}$.",
+   "answer": "$x = [[-3 * a - 2 * b]]$"
+  },
+  {
+   "id": "y11hsp2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Equations with algebraic fractions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S4 Equations with algebraic fractions",
+   "keywords": [
+    "equations",
+    "with",
+    "algebraic",
+    "fractions",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $\\frac{[[a]]}{x} + \\frac{[[b]]}{x + 1} = 1$ and show it reduces to $x^2 - [[a + b - 1]]x - [[a]] = 0$. (4 marks)",
+   "answer": "$[[a]](x+1) + [[b]]x = x(x+1)$ gives $x^2 - [[a + b - 1]]x - [[a]] = 0$"
+  },
+  {
+   "id": "y11hsp2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Rearrange formulae where the subject appears twice",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S5 Rearrange formulae where the subject appears twice",
+   "keywords": [
+    "rearrange",
+    "formulae",
+    "where",
+    "the",
+    "subject",
+    "appears",
+    "twice",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = [[m]]x + ax$",
+   "answer": "$x = \\frac{y}{[[m]] + a}$"
+  },
+  {
+   "id": "y11hsp2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Rearrange formulae where the subject appears twice",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S5 Rearrange formulae where the subject appears twice",
+   "keywords": [
+    "rearrange",
+    "formulae",
+    "where",
+    "the",
+    "subject",
+    "appears",
+    "twice",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $[[m]]x + y = ax + b$.",
+   "answer": "$x = \\frac{b - y}{[[m]] - a}$"
+  },
+  {
+   "id": "y11hsp2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Rearrange formulae where the subject appears twice",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S5 Rearrange formulae where the subject appears twice",
+   "keywords": [
+    "rearrange",
+    "formulae",
+    "where",
+    "the",
+    "subject",
+    "appears",
+    "twice",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{x + [[a]]}{x - [[b]]}$.",
+   "answer": "$x = \\frac{[[b]]y + [[a]]}{y - 1}$"
+  },
+  {
+   "id": "y11hsp2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Rearrange formulae where the subject appears twice",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S5 Rearrange formulae where the subject appears twice",
+   "keywords": [
+    "rearrange",
+    "formulae",
+    "where",
+    "the",
+    "subject",
+    "appears",
+    "twice",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Make $x$ the subject of $y = \\frac{[[m]]x + 1}{x - [[b]]}$. (4 marks)",
+   "answer": "$x = \\frac{[[b]]y + 1}{y - [[m]]}$"
+  },
+  {
+   "id": "y11hsp2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Form and solve problems with quadratics",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S6 Form and solve problems with quadratics",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "problems",
+    "with",
+    "quadratics",
+    "year 11",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A rectangle has length $(x + [[a]])$ cm and width $x$ cm. Its area is [[x * (x + a)]] cm². Form an equation.",
+   "answer": "$x^2 + [[a]]x = [[x * (x + a)]]$"
+  },
+  {
+   "id": "y11hsp2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Form and solve problems with quadratics",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S6 Form and solve problems with quadratics",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "problems",
+    "with",
+    "quadratics",
+    "year 11",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $x^2 + [[a]]x = [[x * (x + a)]]$ for positive $x$.",
+   "answer": "$x = [[x]]$"
+  },
+  {
+   "id": "y11hsp2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Form and solve problems with quadratics",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S6 Form and solve problems with quadratics",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "problems",
+    "with",
+    "quadratics",
+    "year 11",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "The sum of the squares of two consecutive positive integers is [[n * n + (n + 1) * (n + 1)]]. Find the integers.",
+   "answer": "[[n]] and [[n + 1]]"
+  },
+  {
+   "id": "y11hsp2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Form and solve problems with quadratics",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y11",
+   "source": "Y11 Higher Spring B2 Equations and formulae · S6 Form and solve problems with quadratics",
+   "keywords": [
+    "form",
+    "and",
+    "solve",
+    "problems",
+    "with",
+    "quadratics",
+    "year 11",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A right-angled triangle has sides $x$, $x + [[a]]$ and $x + [[b]]$ cm (hypotenuse longest). Form an equation using Pythagoras and simplify. (3 marks)",
+   "answer": "$x^2 + (x + [[a]])^2 = (x + [[b]])^2$ so $x^2 + [[2 * a - 2 * b|signed]]x + [[a * a - b * b|signed]] = 0$"
+  }
+ ]
+}

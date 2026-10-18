@@ -117,6 +117,18 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y11-higher-autumn-b6-circle-theorems.json"),
     include_str!("../../../assets/questions/y11-higher-autumn-b7-set-notation-venn.json"),
     include_str!("../../../assets/questions/y11-higher-autumn-b8-vectors.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b1-functions-and-graphs.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b2-equations-and-formulae.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b3-rates.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b4-angles-bearings-trigonometry.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b5-constructions-and-loci.json"),
+    include_str!("../../../assets/questions/y11-foundation-spring-b6-transformations.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b1-functions-and-graphs.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b2-equations-and-formulae.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b3-rates.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b4-angles-bearings-trigonometry.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b5-constructions-and-loci.json"),
+    include_str!("../../../assets/questions/y11-higher-spring-b6-transformations.json"),
 ];
 
 const MAX_BYTES: usize = 16 << 20;
