@@ -1,0 +1,1841 @@
+{
+ "version": 1,
+ "note": "Y7 Spring Block 3 Directed number: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7sp3-s01-l1",
+   "topic": "Number",
+   "subtopic": "Directed number and number lines",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S1 Directed number and number lines",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "lines",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 5 != 0"
+   ],
+   "check": [
+    "k != 0"
+   ],
+   "text": "What number does A show?",
+   "answer": "[[k]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": -10,
+    "max": 10,
+    "step": 1,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[k|n]]",
+      "label": "A"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp3-s01-l2",
+   "topic": "Number",
+   "subtopic": "Directed number and number lines",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S1 Directed number and number lines",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "lines",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       -25,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k < 0"
+   ],
+   "text": "The temperature in a freezer is [[k]]°C. Is this above or below 0°C? How many degrees from 0°C is it?",
+   "answer": "Below 0°C, [[abs(k)]] degrees below"
+  },
+  {
+   "id": "y7sp3-s01-l3",
+   "topic": "Number",
+   "subtopic": "Directed number and number lines",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S1 Directed number and number lines",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "lines",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       1,
+       -1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "m",
+     "s * b"
+    ]
+   ],
+   "check": [
+    "a + m - a == m"
+   ],
+   "text": "Start at [[a]] on a number line. Move [[m]] places to the [[m > 0|if:right/left]]. Where do you finish?",
+   "answer": "[[a + m]]"
+  },
+  {
+   "id": "y7sp3-s01-l4",
+   "topic": "Number",
+   "subtopic": "Directed number and number lines",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S1 Directed number and number lines",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "lines",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "j",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "j % 5 != 0",
+    "k % 5 != 0"
+   ],
+   "check": [
+    "k - j > 0"
+   ],
+   "text": "(a) What number does A show? (b) What number does B show? (c) How far apart are A and B? (3 marks)",
+   "answer": "(a) [[j]]  (b) [[k]]  (c) [[k - j]]",
+   "diagram": {
+    "kind": "number-line",
+    "min": -10,
+    "max": 10,
+    "step": 1,
+    "labelEvery": 5,
+    "dots": [
+     {
+      "at": "[[j|n]]",
+      "label": "A"
+     },
+     {
+      "at": "[[k|n]]",
+      "label": "B"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp3-s02-l1",
+   "topic": "Number",
+   "subtopic": "Compare and order directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S2 Compare and order directed numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -12,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       12
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "choose": [
+       0,
+       1
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "left",
+     "f * a + (1 - f) * b"
+    ],
+    [
+     "right",
+     "f * b + (1 - f) * a"
+    ]
+   ],
+   "where": [
+    "a != b",
+    "a * b < 0"
+   ],
+   "check": [
+    "left != right"
+   ],
+   "text": "Write < or > in the space: [[left]] ? [[right]]",
+   "answer": "[[left < right|if:</>]]"
+  },
+  {
+   "id": "y7sp3-s02-l2",
+   "topic": "Number",
+   "subtopic": "Compare and order directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S2 Compare and order directed numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       -15,
+       -8
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ],
+    [
+     "n4",
+     "n3 + g3"
+    ]
+   ],
+   "check": [
+    "n1 < n2",
+    "n3 < n4"
+   ],
+   "text": "Write these numbers in order, smallest first: [[n3]], [[n1]], [[n4]], [[n2]]",
+   "answer": "[[n1]], [[n2]], [[n3]], [[n4]]"
+  },
+  {
+   "id": "y7sp3-s02-l3",
+   "topic": "Number",
+   "subtopic": "Compare and order directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S2 Compare and order directed numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       -60,
+       -35
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ]
+   ],
+   "where": [
+    "n1 % 10 != 0",
+    "n2 % 10 != 0",
+    "n3 % 10 != 0"
+   ],
+   "check": [
+    "n1 < n2",
+    "n2 < n3"
+   ],
+   "text": "Write these in order, smallest first: [[n3 / 10]], [[n1 / 10]], [[n2 / 10]]",
+   "answer": "[[n1 / 10]], [[n2 / 10]], [[n3 / 10]]"
+  },
+  {
+   "id": "y7sp3-s02-l4",
+   "topic": "Number",
+   "subtopic": "Compare and order directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S2 Compare and order directed numbers",
+   "keywords": [
+    "compare",
+    "and",
+    "order",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n1",
+     {
+      "int": [
+       -14,
+       -6
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "n2",
+     "n1 + g1"
+    ],
+    [
+     "n3",
+     "n2 + g2"
+    ],
+    [
+     "n4",
+     "n3 + g3"
+    ]
+   ],
+   "check": [
+    "n1 < n2",
+    "n3 < n4"
+   ],
+   "text": "The temperatures in four cities are A [[n3]]°C, B [[n1]]°C, C [[n4]]°C and D [[n2]]°C. (a) Which city is the coldest? (b) Write the temperatures in order, starting with the coldest. (2 marks)",
+   "answer": "(a) B  (b) [[n1]], [[n2]], [[n3]], [[n4]]"
+  },
+  {
+   "id": "y7sp3-s03-l1",
+   "topic": "Number",
+   "subtopic": "Calculations that cross zero",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S3 Calculations that cross zero",
+   "keywords": [
+    "calculations",
+    "that",
+    "cross",
+    "zero",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + r > 0"
+   ],
+   "check": [
+    "a + r - r == a"
+   ],
+   "text": "The temperature is [[a]]°C. It rises by [[r]]°C. What is the new temperature?",
+   "answer": "[[a + r]]°C"
+  },
+  {
+   "id": "y7sp3-s03-l2",
+   "topic": "Number",
+   "subtopic": "Calculations that cross zero",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S3 Calculations that cross zero",
+   "keywords": [
+    "calculations",
+    "that",
+    "cross",
+    "zero",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       3,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a - f < 0"
+   ],
+   "check": [
+    "a - f + f == a"
+   ],
+   "text": "The temperature is [[a]]°C. It falls by [[f]]°C. What is the new temperature?",
+   "answer": "[[a - f]]°C"
+  },
+  {
+   "id": "y7sp3-s03-l3",
+   "topic": "Number",
+   "subtopic": "Calculations that cross zero",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S3 Calculations that cross zero",
+   "keywords": [
+    "calculations",
+    "that",
+    "cross",
+    "zero",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - (a - b) == b"
+   ],
+   "text": "The temperature falls from [[a]]°C to [[b]]°C. By how many degrees does it fall?",
+   "answer": "[[a - b]]°C"
+  },
+  {
+   "id": "y7sp3-s03-l4",
+   "topic": "Number",
+   "subtopic": "Calculations that cross zero",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S3 Calculations that cross zero",
+   "keywords": [
+    "calculations",
+    "that",
+    "cross",
+    "zero",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "f",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       3,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a - f < 0",
+    "r != f"
+   ],
+   "check": [
+    "a - f + r - r + f == a"
+   ],
+   "text": "At midnight the temperature is [[a]]°C. By 6 am it has fallen by [[f]]°C. By noon it has risen by [[r]]°C. What is the temperature at noon? (2 marks)",
+   "answer": "[[a - f + r]]°C"
+  },
+  {
+   "id": "y7sp3-s04-l1",
+   "topic": "Number",
+   "subtopic": "Directed number and zero pairs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S4 Directed number and zero pairs",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "zero",
+    "pairs",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != n"
+   ],
+   "check": [
+    "p - n != 0"
+   ],
+   "text": "The counters show positive and negative numbers. What is the total value of the counters?",
+   "answer": "[[p - n]]",
+   "diagram": {
+    "kind": "counters",
+    "pos": "[[p|n]]",
+    "neg": "[[n|n]]"
+   }
+  },
+  {
+   "id": "y7sp3-s04-l2",
+   "topic": "Number",
+   "subtopic": "Directed number and zero pairs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S4 Directed number and zero pairs",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "zero",
+    "pairs",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != n"
+   ],
+   "check": [
+    "min(p, n) > 0"
+   ],
+   "text": "How many zero pairs are in the counters? What is left over?",
+   "answer": "[[min(p, n)]] zero pairs; [[abs(p - n)]] [[p > n|if:positive/negative]] counters left",
+   "diagram": {
+    "kind": "counters",
+    "pos": "[[p|n]]",
+    "neg": "[[n|n]]"
+   }
+  },
+  {
+   "id": "y7sp3-s04-l3",
+   "topic": "Number",
+   "subtopic": "Directed number and zero pairs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S4 Directed number and zero pairs",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "zero",
+    "pairs",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p - n - m + m == p - n"
+   ],
+   "text": "A set of counters has [[p]] positive and [[n]] negative counters. Then [[m]] negative counters are added. What is the total value now?",
+   "answer": "[[p - n - m]]"
+  },
+  {
+   "id": "y7sp3-s04-l4",
+   "topic": "Number",
+   "subtopic": "Directed number and zero pairs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S4 Directed number and zero pairs",
+   "keywords": [
+    "directed",
+    "number",
+    "and",
+    "zero",
+    "pairs",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "b - a != 0"
+   ],
+   "text": "Use counters to work out (−[[a]]) + [[b]]. Explain using zero pairs. (2 marks)",
+   "answer": "[[b - a]]: [[min(a, b)]] zero pairs cancel, leaving [[abs(b - a)]] [[b > a|if:positive/negative]] counters"
+  },
+  {
+   "id": "y7sp3-s05-l1",
+   "topic": "Number",
+   "subtopic": "Add directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S5 Add directed numbers",
+   "keywords": [
+    "add",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b - b == a"
+   ],
+   "text": "Work out $[[a]] + ([[b]])$",
+   "answer": "[[a + b]]"
+  },
+  {
+   "id": "y7sp3-s05-l2",
+   "topic": "Number",
+   "subtopic": "Add directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S5 Add directed numbers",
+   "keywords": [
+    "add",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b - b == a"
+   ],
+   "text": "Work out $([[a]]) + ([[b]])$",
+   "answer": "[[a + b]]"
+  },
+  {
+   "id": "y7sp3-s05-l3",
+   "topic": "Number",
+   "subtopic": "Add directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S5 Add directed numbers",
+   "keywords": [
+    "add",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -14,
+       -3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       15
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b != 0"
+   ],
+   "check": [
+    "a + b - b == a"
+   ],
+   "text": "Work out $([[a]]) + [[b]]$",
+   "answer": "[[a + b]]"
+  },
+  {
+   "id": "y7sp3-s05-l4",
+   "topic": "Number",
+   "subtopic": "Add directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S5 Add directed numbers",
+   "keywords": [
+    "add",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < 0",
+    "b < 0",
+    "c > 0",
+    "d > 0"
+   ],
+   "check": [
+    "a + b + c + d - d == a + b + c"
+   ],
+   "text": "The temperatures at four times are [[a]]°C, [[b]]°C, [[c]]°C and [[d]]°C. What is the sum of the temperatures? (2 marks)",
+   "answer": "[[a + b + c + d]]"
+  },
+  {
+   "id": "y7sp3-s06-l1",
+   "topic": "Number",
+   "subtopic": "Subtract directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S6 Subtract directed numbers",
+   "keywords": [
+    "subtract",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - b - a == -b"
+   ],
+   "text": "Work out $[[a]] - ([[b]])$",
+   "answer": "[[a - b]]"
+  },
+  {
+   "id": "y7sp3-s06-l2",
+   "topic": "Number",
+   "subtopic": "Subtract directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S6 Subtract directed numbers",
+   "keywords": [
+    "subtract",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a - b + b == a"
+   ],
+   "text": "Work out $([[a]]) - [[b]]$",
+   "answer": "[[a - b]]"
+  },
+  {
+   "id": "y7sp3-s06-l3",
+   "topic": "Number",
+   "subtopic": "Subtract directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S6 Subtract directed numbers",
+   "keywords": [
+    "subtract",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -12,
+       -2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a - b + b == a"
+   ],
+   "text": "Work out $([[a]]) - ([[b]])$",
+   "answer": "[[a - b]]"
+  },
+  {
+   "id": "y7sp3-s06-l4",
+   "topic": "Number",
+   "subtopic": "Subtract directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S6 Subtract directed numbers",
+   "keywords": [
+    "subtract",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -14,
+       -3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b - a > 0"
+   ],
+   "text": "The temperature in Oslo is [[a]]°C and in Madrid it is [[b]]°C. How many degrees warmer is Madrid? (2 marks)",
+   "answer": "[[b - a]]°C"
+  },
+  {
+   "id": "y7sp3-s07-l1",
+   "topic": "Number",
+   "subtopic": "Multiply and divide directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S7 Multiply and divide directed numbers",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a]]) \\times [[b]]$",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y7sp3-s07-l2",
+   "topic": "Number",
+   "subtopic": "Multiply and divide directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S7 Multiply and divide directed numbers",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * b / b == a"
+   ],
+   "text": "Work out $([[a]]) \\times ([[b]])$",
+   "answer": "[[a * b]]"
+  },
+  {
+   "id": "y7sp3-s07-l3",
+   "topic": "Number",
+   "subtopic": "Multiply and divide directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S7 Multiply and divide directed numbers",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -9,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -9,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b != 0"
+   ],
+   "check": [
+    "a * b / a == b"
+   ],
+   "text": "Work out $([[a * b]]) \\div ([[a]])$",
+   "answer": "[[b]]"
+  },
+  {
+   "id": "y7sp3-s07-l4",
+   "topic": "Number",
+   "subtopic": "Multiply and divide directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S7 Multiply and divide directed numbers",
+   "keywords": [
+    "multiply",
+    "and",
+    "divide",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "f",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s - f * h + f * h == s"
+   ],
+   "text": "The temperature falls by [[f]]°C every hour for [[h]] hours. It starts at [[s]]°C. What is the temperature at the end? (2 marks)",
+   "answer": "[[s - f * h]]°C"
+  },
+  {
+   "id": "y7sp3-s08-l1",
+   "topic": "Number",
+   "subtopic": "Order of operations with directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S8 Order of operations with directed numbers",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       -6,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + b * c - a == b * c"
+   ],
+   "text": "Work out $[[a]] + [[b]] \\times ([[c]])$",
+   "answer": "[[a + b * c]]"
+  },
+  {
+   "id": "y7sp3-s08-l2",
+   "topic": "Number",
+   "subtopic": "Order of operations with directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S8 Order of operations with directed numbers",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -6,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * (b - c) == a * b - a * c"
+   ],
+   "text": "Work out $([[a]]) \\times ([[b]] - [[c]])$",
+   "answer": "[[a * (b - c)]]"
+  },
+  {
+   "id": "y7sp3-s08-l3",
+   "topic": "Number",
+   "subtopic": "Order of operations with directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S8 Order of operations with directed numbers",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -6,
+       -2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       -5,
+       -2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * a == (-a) * (-a)"
+   ],
+   "text": "Work out $([[a]])^2 - [[b]] \\times ([[c]])$",
+   "answer": "[[a * a - b * c]]"
+  },
+  {
+   "id": "y7sp3-s08-l4",
+   "topic": "Number",
+   "subtopic": "Order of operations with directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S8 Order of operations with directed numbers",
+   "keywords": [
+    "order",
+    "of",
+    "operations",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -6,
+       6
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a - b * c != (a - b) * c"
+   ],
+   "check": [
+    "(a - b) * c == a * c - b * c"
+   ],
+   "text": "Work out (a) $[[a]] - [[b]] \\times [[c]]$  (b) $([[a]] - [[b]]) \\times [[c]]$ (2 marks)",
+   "answer": "(a) [[a - b * c]]  (b) [[(a - b) * c]]"
+  },
+  {
+   "id": "y7sp3-s09-l1",
+   "topic": "Number",
+   "subtopic": "Use a calculator with directed numbers",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S9 Use a calculator with directed numbers",
+   "keywords": [
+    "use",
+    "a",
+    "calculator",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       11,
+       99
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -99,
+       -11
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "a + b != 0"
+   ],
+   "check": [
+    "(a + b) / 10 - b / 10 == a / 10"
+   ],
+   "text": "Use a calculator to work out $[[a / 10]] + ([[b / 10]])$",
+   "answer": "[[(a + b) / 10]]"
+  },
+  {
+   "id": "y7sp3-s09-l2",
+   "topic": "Number",
+   "subtopic": "Use a calculator with directed numbers",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S9 Use a calculator with directed numbers",
+   "keywords": [
+    "use",
+    "a",
+    "calculator",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -99,
+       -11
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       -99,
+       -11
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0"
+   ],
+   "check": [
+    "a * b / 100 * 100 == a * b"
+   ],
+   "text": "Use a calculator to work out $([[a / 10]]) \\times ([[b / 10]])$",
+   "answer": "[[a * b / 100]]"
+  },
+  {
+   "id": "y7sp3-s09-l3",
+   "topic": "Number",
+   "subtopic": "Use a calculator with directed numbers",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S9 Use a calculator with directed numbers",
+   "keywords": [
+    "use",
+    "a",
+    "calculator",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -90,
+       -20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % b != 0",
+    "(a / b * 1000) % 10 != 5"
+   ],
+   "check": [
+    "a / b * b == a"
+   ],
+   "text": "Use a calculator to work out $([[a]]) \\div ([[b]])$. Give your answer to 2 decimal places.",
+   "answer": "[[(a / b)|dp:2]]"
+  },
+  {
+   "id": "y7sp3-s09-l4",
+   "topic": "Number",
+   "subtopic": "Use a calculator with directed numbers",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B3 Directed number · S9 Use a calculator with directed numbers",
+   "keywords": [
+    "use",
+    "a",
+    "calculator",
+    "with",
+    "directed",
+    "numbers",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -99,
+       -21
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       11,
+       60
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       11,
+       50
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a % 10 != 0",
+    "b % 10 != 0",
+    "c % 10 != 0"
+   ],
+   "check": [
+    "(a - b + c) / 10 * 10 == a - b + c"
+   ],
+   "text": "A diver is at [[a / 10]] m (below sea level is negative). She dives a further [[b / 10]] m down, then rises [[c / 10]] m. Where is she now? (3 marks)",
+   "answer": "[[(a - b + c) / 10]] m"
+  }
+ ]
+}

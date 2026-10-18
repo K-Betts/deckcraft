@@ -1,0 +1,2385 @@
+{
+ "version": 1,
+ "note": "Y7 Summer Block 1 Speed, distance and time: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7su1-s01-l1",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours, days and years",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S1 Convert between hours, days and years",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "days",
+    "and",
+    "years",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       14
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * 24 / 24 == d"
+   ],
+   "text": "How many hours are there in [[d]] days?",
+   "answer": "[[d * 24]] hours"
+  },
+  {
+   "id": "y7su1-s01-l2",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours, days and years",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S1 Convert between hours, days and years",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "days",
+    "and",
+    "years",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       5,
+       55
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % 5 == 0"
+   ],
+   "check": [
+    "h * 60 + m - m == h * 60"
+   ],
+   "text": "Write [[h]] hours [[m]] minutes in minutes.",
+   "answer": "[[h * 60 + m]] minutes"
+  },
+  {
+   "id": "y7su1-s01-l3",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours, days and years",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S1 Convert between hours, days and years",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "days",
+    "and",
+    "years",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       15,
+       95
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 7 != 0"
+   ],
+   "check": [
+    "floor(d / 7) * 7 + d % 7 == d"
+   ],
+   "text": "Write [[d]] days as weeks and days.",
+   "answer": "[[floor(d / 7)]] weeks [[d % 7]] days"
+  },
+  {
+   "id": "y7su1-s01-l4",
+   "topic": "Ratio",
+   "subtopic": "Convert between hours, days and years",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S1 Convert between hours, days and years",
+   "keywords": [
+    "convert",
+    "between",
+    "hours",
+    "days",
+    "and",
+    "years",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       95,
+       175
+      ]
+     }
+    ],
+    [
+     "sh",
+     {
+      "int": [
+       12,
+       19
+      ]
+     }
+    ],
+    [
+     "sm",
+     {
+      "choose": [
+       0,
+       15,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m % 60 != 0"
+   ],
+   "check": [
+    "floor(m / 60) * 60 + m % 60 == m"
+   ],
+   "text": "A film lasts [[m]] minutes. (a) Write this in hours and minutes. (b) It starts at [[sh]]:[[sm < 10|if:0/]][[sm]]. At what time does it finish? (2 marks)",
+   "answer": "(a) [[floor(m / 60)]] h [[m % 60]] min  (b) [[floor((sh * 60 + sm + m) / 60)]]:[[(sh * 60 + sm + m) % 60 < 10|if:0/]][[(sh * 60 + sm + m) % 60]]"
+  },
+  {
+   "id": "y7su1-s02-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with tables and timetables",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S2 Solve problems with tables and timetables",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "tables",
+    "and",
+    "timetables",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ts",
+     "h * 60 + m"
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "The table shows part of a bus timetable. What time does the bus leave the market?",
+   "answer": "[[floor((ts + a) / 60)]]:[[(ts + a) % 60 < 10|if:0/]][[(ts + a) % 60]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stop",
+     "Time"
+    ],
+    "rows": [
+     [
+      "School",
+      "[[floor(ts / 60)]]:[[m < 10|if:0/]][[m]]"
+     ],
+     [
+      "Market",
+      "[[floor((ts + a) / 60)]]:[[(ts + a) % 60 < 10|if:0/]][[(ts + a) % 60]]"
+     ],
+     [
+      "Station",
+      "[[floor((ts + a + b) / 60)]]:[[(ts + a + b) % 60 < 10|if:0/]][[(ts + a + b) % 60]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s02-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with tables and timetables",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S2 Solve problems with tables and timetables",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "tables",
+    "and",
+    "timetables",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ts",
+     "h * 60 + m"
+    ]
+   ],
+   "check": [
+    "a + b > 0"
+   ],
+   "text": "The table shows part of a bus timetable. How long does the journey from the school to the station take?",
+   "answer": "[[a + b]] minutes",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "Stop",
+     "Time"
+    ],
+    "rows": [
+     [
+      "School",
+      "[[floor(ts / 60)]]:[[m < 10|if:0/]][[m]]"
+     ],
+     [
+      "Market",
+      "[[floor((ts + a) / 60)]]:[[(ts + a) % 60 < 10|if:0/]][[(ts + a) % 60]]"
+     ],
+     [
+      "Station",
+      "[[floor((ts + a + b) / 60)]]:[[(ts + a + b) % 60 < 10|if:0/]][[(ts + a + b) % 60]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s02-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with tables and timetables",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S2 Solve problems with tables and timetables",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "tables",
+    "and",
+    "timetables",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       0,
+       10,
+       20,
+       30,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "late",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ts",
+     "h * 60 + m"
+    ]
+   ],
+   "check": [
+    "late > 0"
+   ],
+   "text": "A bus is due at the station at [[floor((ts + a + b) / 60)]]:[[(ts + a + b) % 60 < 10|if:0/]][[(ts + a + b) % 60]] but arrives [[late]] minutes late. At what time does it arrive?",
+   "answer": "[[floor((ts + a + b + late) / 60)]]:[[(ts + a + b + late) % 60 < 10|if:0/]][[(ts + a + b + late) % 60]]"
+  },
+  {
+   "id": "y7su1-s02-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with tables and timetables",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S2 Solve problems with tables and timetables",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "tables",
+    "and",
+    "timetables",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       9,
+       15
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       0,
+       15,
+       30,
+       45
+      ]
+     }
+    ],
+    [
+     "hh",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "mm",
+     {
+      "choose": [
+       10,
+       20,
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ts",
+     "h * 60 + m"
+    ]
+   ],
+   "check": [
+    "ts - w - q > 0"
+   ],
+   "text": "A train leaves at [[floor(ts / 60)]]:[[ts % 60 < 10|if:0/]][[ts % 60]] and the journey takes [[hh]] hour[[hh > 1|if:s/]] [[mm]] minutes. Ali needs to be at the station [[w]] minutes before the train leaves. The walk to the station takes [[q]] minutes. What is the latest time he should leave home, and when does the train arrive? (3 marks)",
+   "answer": "Leave home at [[floor((ts - w - q) / 60)]]:[[(ts - w - q) % 60 < 10|if:0/]][[(ts - w - q) % 60]]; train arrives at [[floor((ts + hh * 60 + mm) / 60)]]:[[(ts + hh * 60 + mm) % 60 < 10|if:0/]][[(ts + hh * 60 + mm) % 60]]"
+  },
+  {
+   "id": "y7su1-s03-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with time and the calendar",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S3 Solve problems with time and the calendar",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "time",
+    "and",
+    "the",
+    "calendar",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       8,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "n % 7 != 0"
+   ],
+   "check": [
+    "n % 7 < 7"
+   ],
+   "text": "Today is Monday. What day of the week will it be in [[n]] days?",
+   "answer": "[[(n) % 7 == 0|if:Monday/]][[(n) % 7 == 1|if:Tuesday/]][[(n) % 7 == 2|if:Wednesday/]][[(n) % 7 == 3|if:Thursday/]][[(n) % 7 == 4|if:Friday/]][[(n) % 7 == 5|if:Saturday/]][[(n) % 7 == 6|if:Sunday/]]"
+  },
+  {
+   "id": "y7su1-s03-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with time and the calendar",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S3 Solve problems with time and the calendar",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "time",
+    "and",
+    "the",
+    "calendar",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "int": [
+       5,
+       28
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "int": [
+       3,
+       25
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "31 - d1 + d2 > 0"
+   ],
+   "text": "How many days are there from [[d1]] March to [[d2]] April? (March has 31 days.)",
+   "answer": "[[31 - d1 + d2]] days"
+  },
+  {
+   "id": "y7su1-s03-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with time and the calendar",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S3 Solve problems with time and the calendar",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "time",
+    "and",
+    "the",
+    "calendar",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "y",
+     {
+      "choose": [
+       2024,
+       2025,
+       2026,
+       2028,
+       2030,
+       1900,
+       2000,
+       2100,
+       2032,
+       2023
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "y > 1000"
+   ],
+   "text": "Is [[y]] a leap year? Explain.",
+   "answer": "[[(y % 4 == 0) && ((y % 100 != 0) || (y % 400 == 0))|if:Yes/No]]: [[y]] [[(y % 4 == 0) && ((y % 100 != 0) || (y % 400 == 0))|if:can be divided by 4 (and the rules for centuries are met)/cannot be divided by 4, or is a century year that cannot be divided by 400]]"
+  },
+  {
+   "id": "y7su1-s03-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with time and the calendar",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S3 Solve problems with time and the calendar",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "time",
+    "and",
+    "the",
+    "calendar",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       28
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "k % 7 != 0"
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Maya's birthday is on [[d]] March and it is a Monday. Her party is [[k]] days later. (a) What day of the week is the party? (b) What is the date of the party if March has 31 days? (2 marks)",
+   "answer": "(a) [[(k) % 7 == 0|if:Monday/]][[(k) % 7 == 1|if:Tuesday/]][[(k) % 7 == 2|if:Wednesday/]][[(k) % 7 == 3|if:Thursday/]][[(k) % 7 == 4|if:Friday/]][[(k) % 7 == 5|if:Saturday/]][[(k) % 7 == 6|if:Sunday/]]  (b) [[(d + k > 31) * (d + k - 31) + (d + k <= 31) * (d + k)]] [[d + k > 31|if:April/March]]"
+  },
+  {
+   "id": "y7su1-s04-l1",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S4 Calculate speed",
+   "keywords": [
+    "calculate",
+    "speed",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * t / t == s"
+   ],
+   "text": "A car travels [[s * t]] km in [[t]] hours. Work out its average speed.",
+   "answer": "[[s]] km/h"
+  },
+  {
+   "id": "y7su1-s04-l2",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S4 Calculate speed",
+   "keywords": [
+    "calculate",
+    "speed",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       8,
+       25
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * t / t == s"
+   ],
+   "text": "A cyclist rides [[s * t]] km in [[t]] hours. Work out her average speed.",
+   "answer": "[[s]] km/h"
+  },
+  {
+   "id": "y7su1-s04-l3",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S4 Calculate speed",
+   "keywords": [
+    "calculate",
+    "speed",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t % 10 == 0"
+   ],
+   "check": [
+    "s * t / t == s"
+   ],
+   "text": "A runner covers [[s * t]] m in [[t]] seconds. Work out her speed in metres per second.",
+   "answer": "[[s]] m/s"
+  },
+  {
+   "id": "y7su1-s04-l4",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S4 Calculate speed",
+   "keywords": [
+    "calculate",
+    "speed",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "hh",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       15,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "h",
+     "hh"
+    ],
+    [
+     "d",
+     "s * (hh + m / 60)"
+    ]
+   ],
+   "where": [
+    "isint(d)",
+    "isint(d / (h + m / 60))"
+   ],
+   "check": [
+    "d / (h + m / 60) == s"
+   ],
+   "text": "A train travels [[d]] km in [[h]] hours [[m]] minutes. Work out its average speed. (2 marks)",
+   "answer": "[[d / (h + m / 60)]] km/h"
+  },
+  {
+   "id": "y7su1-s05-l1",
+   "topic": "Ratio",
+   "subtopic": "Calculate time and distance",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S5 Calculate time and distance",
+   "keywords": [
+    "calculate",
+    "time",
+    "and",
+    "distance",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       30,
+       90
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * t / t == s"
+   ],
+   "text": "A car travels at [[s]] km/h for [[t]] hours. How far does it travel?",
+   "answer": "[[s * t]] km"
+  },
+  {
+   "id": "y7su1-s05-l2",
+   "topic": "Ratio",
+   "subtopic": "Calculate time and distance",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S5 Calculate time and distance",
+   "keywords": [
+    "calculate",
+    "time",
+    "and",
+    "distance",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       10,
+       25
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * t / s == t"
+   ],
+   "text": "A cyclist rides [[s * t]] km at [[s]] km/h. How long does the journey take?",
+   "answer": "[[t]] hours"
+  },
+  {
+   "id": "y7su1-s05-l3",
+   "topic": "Ratio",
+   "subtopic": "Calculate time and distance",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S5 Calculate time and distance",
+   "keywords": [
+    "calculate",
+    "time",
+    "and",
+    "distance",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       50
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       15,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "s * (q + m / 60)"
+    ]
+   ],
+   "where": [
+    "isint(d)",
+    "isint((q + m / 60) * 60)"
+   ],
+   "check": [
+    "d / s == q + m / 60"
+   ],
+   "text": "A train travels [[d]] km at [[s]] km/h. How long does the journey take? Give your answer in hours and minutes.",
+   "answer": "[[floor(d / s)]] h [[(d / s - floor(d / s)) * 60]] min"
+  },
+  {
+   "id": "y7su1-s05-l4",
+   "topic": "Ratio",
+   "subtopic": "Calculate time and distance",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S5 Calculate time and distance",
+   "keywords": [
+    "calculate",
+    "time",
+    "and",
+    "distance",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       0,
+       15,
+       30,
+       45
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "choose": [
+       40,
+       60,
+       80
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "mm",
+     {
+      "choose": [
+       0,
+       30
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ts",
+     "h * 60 + m"
+    ],
+    [
+     "d",
+     "s * (q + mm / 60)"
+    ]
+   ],
+   "where": [
+    "isint(d)"
+   ],
+   "check": [
+    "d / s == q + mm / 60"
+   ],
+   "text": "A coach leaves at [[floor(ts / 60)]]:[[ts % 60 < 10|if:0/]][[ts % 60]] and travels [[d]] km at [[s]] km/h. At what time does it arrive? (3 marks)",
+   "answer": "[[floor((ts + d / s * 60) / 60)]]:[[(ts + d / s * 60) % 60 < 10|if:0/]][[(ts + d / s * 60) % 60]]"
+  },
+  {
+   "id": "y7su1-s06-l1",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with speed, distance and time",
+   "difficulty": 1,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S6 Solve problems with speed, distance and time",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "s1",
+     {
+      "choose": [
+       40,
+       50,
+       60,
+       30
+      ]
+     }
+    ],
+    [
+     "s2",
+     {
+      "choose": [
+       30,
+       40,
+       50,
+       60,
+       70
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "s1 * t1"
+    ],
+    [
+     "d2",
+     "s2 * t2"
+    ]
+   ],
+   "where": [
+    "s1 != s2",
+    "isint((d1 + d2) / (t1 + t2))"
+   ],
+   "check": [
+    "(d1 + d2) / (t1 + t2) * (t1 + t2) == d1 + d2"
+   ],
+   "text": "Tom drives [[d1]] km in [[t1]] hours and then [[d2]] km in [[t2]] hours. What is his average speed for the whole journey?",
+   "answer": "[[(d1 + d2) / (t1 + t2)]] km/h"
+  },
+  {
+   "id": "y7su1-s06-l2",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with speed, distance and time",
+   "difficulty": 2,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S6 Solve problems with speed, distance and time",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       100,
+       200,
+       400
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       20,
+       60
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "t1 != t2"
+   ],
+   "check": [
+    "t1 != t2"
+   ],
+   "text": "Ana runs [[d]] m in [[t1]] seconds. Ben runs [[d]] m in [[t2]] seconds. Who is faster, and by how much in metres per second?",
+   "answer": "[[t1 < t2|if:Ana/Ben]] is faster, by [[abs(d / t1 - d / t2)|dp:2]] m/s"
+  },
+  {
+   "id": "y7su1-s06-l3",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with speed, distance and time",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S6 Solve problems with speed, distance and time",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "choose": [
+       30,
+       60,
+       90,
+       48,
+       72
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       10,
+       15,
+       20,
+       30,
+       45
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(s * m / 60)"
+   ],
+   "check": [
+    "s * m / 60 * 60 == s * m"
+   ],
+   "text": "A car travels at [[s]] km/h. How far does it travel in [[m]] minutes?",
+   "answer": "[[s * m / 60]] km"
+  },
+  {
+   "id": "y7su1-s06-l4",
+   "topic": "Ratio",
+   "subtopic": "Solve problems with speed, distance and time",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S6 Solve problems with speed, distance and time",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "speed",
+    "distance",
+    "and",
+    "time",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s1",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "q1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "s2",
+     {
+      "choose": [
+       20,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "q2",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "s1 * q1"
+    ],
+    [
+     "d2",
+     "s2 * q2"
+    ]
+   ],
+   "where": [
+    "isint((d1 / s1 + d2 / s2 - floor(d1 / s1 + d2 / s2)) * 60)"
+   ],
+   "check": [
+    "d1 / s1 + d2 / s2 == q1 + q2"
+   ],
+   "text": "A bus travels [[d1]] km at [[s1]] km/h and then [[d2]] km at [[s2]] km/h. Work out the total time for the journey in hours and minutes. (3 marks)",
+   "answer": "[[floor(d1 / s1 + d2 / s2)]] h [[(d1 / s1 + d2 / s2 - floor(d1 / s1 + d2 / s2)) * 60]] min"
+  },
+  {
+   "id": "y7su1-s07-l1",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S7 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d1 == v1 * t1"
+   ],
+   "text": "The distance-time graph shows a journey. How far had the person travelled after [[t1]] hour[[t1 > 1|if:s/]]?",
+   "answer": "[[d1]] km",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s07-l2",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S7 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "t2 - t1 == gap"
+   ],
+   "text": "The distance-time graph shows a journey. For how long did the person stop?",
+   "answer": "[[gap]] hour[[gap > 1|if:s/]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s07-l3",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S7 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d2 - d1 == v2 * t4"
+   ],
+   "text": "The distance-time graph shows a journey. How far did the person travel after the stop?",
+   "answer": "[[d2 - d1]] km",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s07-l4",
+   "topic": "Ratio",
+   "subtopic": "Interpret distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S7 Interpret distance-time graphs",
+   "keywords": [
+    "interpret",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v1",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "gap",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       24
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "t2",
+     "t1 + gap"
+    ],
+    [
+     "t3",
+     "t2 + t4"
+    ],
+    [
+     "d2",
+     "d1 + v2 * t4"
+    ],
+    [
+     "ymax",
+     "ceil((d2 + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "v1 != v2"
+   ],
+   "check": [
+    "d2 == v1 * t1 + v2 * t4"
+   ],
+   "text": "The distance-time graph shows a journey. (a) How far had the person travelled in total? (b) How long did the whole journey take? (c) During which part was the person travelling fastest, the first or the last? (3 marks)",
+   "answer": "(a) [[d2]] km  (b) [[t3]] hours  (c) the [[v1 > v2|if:first/last]] part",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": "[[t3|n]]",
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Time (hours)",
+    "ylabel": "Distance (km)",
+    "points": [
+     [
+      0,
+      0
+     ],
+     [
+      "[[t1|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t2|n]]",
+      "[[d1|n]]"
+     ],
+     [
+      "[[t3|n]]",
+      "[[d2|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7su1-s08-l1",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S8 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / t == v"
+   ],
+   "text": "A cyclist rides at [[v]] km/h. How far does she go in [[t]] hours? Write the point to plot on a distance-time graph.",
+   "answer": "([[t]], [[v * t]])"
+  },
+  {
+   "id": "y7su1-s08-l2",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S8 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v * t1"
+    ]
+   ],
+   "check": [
+    "d1 == v * t1"
+   ],
+   "text": "A walker travels [[d1]] km in [[t1]] hours and then stops for [[g]] hour[[g > 1|if:s/]]. Write the three points that join to show this journey, starting at (0, 0).",
+   "answer": "(0, 0), ([[t1]], [[d1]]), ([[t1 + g]], [[d1]])"
+  },
+  {
+   "id": "y7su1-s08-l3",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S8 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d1",
+     "v1 * t1"
+    ],
+    [
+     "d2",
+     "v2 * t2"
+    ]
+   ],
+   "check": [
+    "d1 + d2 == v1 * t1 + v2 * t2"
+   ],
+   "text": "A car travels [[d1]] km in [[t1]] hours, stops for [[g]] hour and then travels a further [[d2]] km in [[t2]] hours. Write the coordinates of the end of each section of the graph.",
+   "answer": "([[t1]], [[d1]]), ([[t1 + g]], [[d1]]), ([[t1 + g + t2]], [[d1 + d2]])"
+  },
+  {
+   "id": "y7su1-s08-l4",
+   "topic": "Ratio",
+   "subtopic": "Draw distance-time graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S8 Draw distance-time graphs",
+   "keywords": [
+    "draw",
+    "distance",
+    "time",
+    "graphs",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v1 * t1 / t1 == v1"
+   ],
+   "text": "Draw a distance-time graph for this journey. A person walks at [[v1]] km/h for [[t1]] hours, rests for [[g]] hour and then walks back to the start at [[v1]] km/h. Write the coordinates you would plot and the total time. (3 marks)",
+   "answer": "(0, 0), ([[t1]], [[v1 * t1]]), ([[t1 + g]], [[v1 * t1]]), ([[t1 + g + t1]], 0); total time [[2 * t1 + g]] hours"
+  },
+  {
+   "id": "y7su1-s09-l1",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed from a distance-time graph (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S9 Calculate speed from a distance-time graph (E)",
+   "keywords": [
+    "calculate",
+    "speed",
+    "from",
+    "a",
+    "distance",
+    "time",
+    "graph",
+    "e",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       40
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * t / t == v"
+   ],
+   "text": "The straight line on a distance-time graph goes from (0, 0) to ([[t]], [[v * t]]). Work out the speed.",
+   "answer": "[[v]] km/h"
+  },
+  {
+   "id": "y7su1-s09-l2",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed from a distance-time graph (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S9 Calculate speed from a distance-time graph (E)",
+   "keywords": [
+    "calculate",
+    "speed",
+    "from",
+    "a",
+    "distance",
+    "time",
+    "graph",
+    "e",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       40
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "dt",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "d1",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "t2",
+     "t1 + dt"
+    ],
+    [
+     "d2",
+     "d1 + v * dt"
+    ]
+   ],
+   "check": [
+    "(d2 - d1) / (t2 - t1) == v"
+   ],
+   "text": "A distance-time graph has a straight line from ([[t1]], [[d1]]) to ([[t2]], [[d2]]). Work out the speed.",
+   "answer": "[[(d2 - d1) / (t2 - t1)]] km/h"
+  },
+  {
+   "id": "y7su1-s09-l3",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed from a distance-time graph (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S9 Calculate speed from a distance-time graph (E)",
+   "keywords": [
+    "calculate",
+    "speed",
+    "from",
+    "a",
+    "distance",
+    "time",
+    "graph",
+    "e",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       8,
+       40
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       8,
+       40
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "v1 != v2"
+   ],
+   "check": [
+    "v1 != v2"
+   ],
+   "text": "Section A of a graph goes from (0, 0) to ([[t1]], [[v1 * t1]]). Section B goes from ([[t1]], [[v1 * t1]]) to ([[t1 + t2]], [[v1 * t1 + v2 * t2]]). Which section shows the greater speed?",
+   "answer": "[[v1 > v2|if:A/B]] ([[v1]] km/h and [[v2]] km/h)"
+  },
+  {
+   "id": "y7su1-s09-l4",
+   "topic": "Ratio",
+   "subtopic": "Calculate speed from a distance-time graph (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Summer B1 Speed, distance and time · S9 Calculate speed from a distance-time graph (E)",
+   "keywords": [
+    "calculate",
+    "speed",
+    "from",
+    "a",
+    "distance",
+    "time",
+    "graph",
+    "e",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "int": [
+       8,
+       40
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v * (t + 2) / (t + 2) == v"
+   ],
+   "text": "A distance-time graph has a straight line from (0, 0) to ([[t]], [[v * t]]). (a) Work out the speed. (b) How far would the person travel in [[t + 2]] hours at this speed? (3 marks)",
+   "answer": "(a) [[v]] km/h  (b) [[v * (t + 2)]] km"
+  }
+ ]
+}

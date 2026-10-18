@@ -1,0 +1,4635 @@
+{
+ "version": 1,
+ "note": "Y7 Spring Block 1 Graphing data: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y7sp1-s01-l1",
+   "topic": "Statistics",
+   "subtopic": "Pictograms",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S1 Pictograms",
+   "keywords": [
+    "pictograms",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "key",
+     {
+      "choose": [
+       2,
+       4,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "j1",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j3",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j4",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c1",
+     "key * j1 / 2"
+    ],
+    [
+     "c2",
+     "key * j2 / 2"
+    ],
+    [
+     "c3",
+     "key * j3 / 2"
+    ],
+    [
+     "c4",
+     "key * j4 / 2"
+    ]
+   ],
+   "check": [
+    "c2 * 2 / key == j2"
+   ],
+   "text": "The pictogram shows the number of books read each day. How many books were read on Tuesday?",
+   "answer": "[[c2]]",
+   "diagram": {
+    "kind": "pictogram",
+    "key": "[[key|n]]",
+    "keyLabel": "= [[key]] items",
+    "rows": [
+     {
+      "label": "Mon",
+      "count": "[[c1|n]]"
+     },
+     {
+      "label": "Tue",
+      "count": "[[c2|n]]"
+     },
+     {
+      "label": "Wed",
+      "count": "[[c3|n]]"
+     },
+     {
+      "label": "Thu",
+      "count": "[[c4|n]]"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s01-l2",
+   "topic": "Statistics",
+   "subtopic": "Pictograms",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S1 Pictograms",
+   "keywords": [
+    "pictograms",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "key",
+     {
+      "choose": [
+       2,
+       4,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "j1",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j3",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j4",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c1",
+     "key * j1 / 2"
+    ],
+    [
+     "c2",
+     "key * j2 / 2"
+    ],
+    [
+     "c3",
+     "key * j3 / 2"
+    ],
+    [
+     "c4",
+     "key * j4 / 2"
+    ]
+   ],
+   "where": [
+    "c4 > c1"
+   ],
+   "check": [
+    "c4 - c1 == key * (j4 - j1) / 2"
+   ],
+   "text": "The pictogram shows the number of books read each day. How many more books were read on Thursday than on Monday?",
+   "answer": "[[c4 - c1]]",
+   "diagram": {
+    "kind": "pictogram",
+    "key": "[[key|n]]",
+    "keyLabel": "= [[key]] items",
+    "rows": [
+     {
+      "label": "Mon",
+      "count": "[[c1|n]]"
+     },
+     {
+      "label": "Tue",
+      "count": "[[c2|n]]"
+     },
+     {
+      "label": "Wed",
+      "count": "[[c3|n]]"
+     },
+     {
+      "label": "Thu",
+      "count": "[[c4|n]]"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s01-l3",
+   "topic": "Statistics",
+   "subtopic": "Pictograms",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S1 Pictograms",
+   "keywords": [
+    "pictograms",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "key",
+     {
+      "choose": [
+       2,
+       4,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "j1",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j3",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j4",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "s",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c1",
+     "key * j1 / 2"
+    ],
+    [
+     "c2",
+     "key * j2 / 2"
+    ],
+    [
+     "c3",
+     "key * j3 / 2"
+    ],
+    [
+     "c4",
+     "key * j4 / 2"
+    ]
+   ],
+   "check": [
+    "key * s / key == s"
+   ],
+   "text": "The pictogram shows the number of books read each day. How many symbols are needed to show [[key * s]] books?",
+   "answer": "[[s]] symbols",
+   "diagram": {
+    "kind": "pictogram",
+    "key": "[[key|n]]",
+    "keyLabel": "= [[key]] items",
+    "rows": [
+     {
+      "label": "Mon",
+      "count": "[[c1|n]]"
+     },
+     {
+      "label": "Tue",
+      "count": "[[c2|n]]"
+     },
+     {
+      "label": "Wed",
+      "count": "[[c3|n]]"
+     },
+     {
+      "label": "Thu",
+      "count": "[[c4|n]]"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s01-l4",
+   "topic": "Statistics",
+   "subtopic": "Pictograms",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S1 Pictograms",
+   "keywords": [
+    "pictograms",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "key",
+     {
+      "choose": [
+       2,
+       4,
+       10,
+       20
+      ]
+     }
+    ],
+    [
+     "j1",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j2",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j3",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "j4",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c1",
+     "key * j1 / 2"
+    ],
+    [
+     "c2",
+     "key * j2 / 2"
+    ],
+    [
+     "c3",
+     "key * j3 / 2"
+    ],
+    [
+     "c4",
+     "key * j4 / 2"
+    ]
+   ],
+   "check": [
+    "c1 + c2 + c3 + c4 > 0"
+   ],
+   "text": "The pictogram shows the number of books read each day. (a) How many books were read altogether? (b) On Friday [[c3 + c4]] books were read. How many symbols are needed to show this? (3 marks)",
+   "answer": "(a) [[c1 + c2 + c3 + c4]]  (b) [[(c3 + c4) / key]]",
+   "diagram": {
+    "kind": "pictogram",
+    "key": "[[key|n]]",
+    "keyLabel": "= [[key]] items",
+    "rows": [
+     {
+      "label": "Mon",
+      "count": "[[c1|n]]"
+     },
+     {
+      "label": "Tue",
+      "count": "[[c2|n]]"
+     },
+     {
+      "label": "Wed",
+      "count": "[[c3|n]]"
+     },
+     {
+      "label": "Thu",
+      "count": "[[c4|n]]"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s02-l1",
+   "topic": "Statistics",
+   "subtopic": "Bar charts",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S2 Bar charts",
+   "keywords": [
+    "bar",
+    "charts",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v3",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v4",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v2 > 0"
+   ],
+   "text": "The bar chart shows the favourite sport of some pupils. How many pupils chose rugby?",
+   "answer": "[[v2]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "Football",
+     "Rugby",
+     "Tennis",
+     "Hockey"
+    ],
+    "values": [
+     "[[v1|n]]",
+     "[[v2|n]]",
+     "[[v3|n]]",
+     "[[v4|n]]"
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s02-l2",
+   "topic": "Statistics",
+   "subtopic": "Bar charts",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S2 Bar charts",
+   "keywords": [
+    "bar",
+    "charts",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v3",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v4",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "v3 > v4"
+   ],
+   "check": [
+    "v3 - v4 > 0"
+   ],
+   "text": "The bar chart shows the favourite sport of some pupils. How many more pupils chose tennis than hockey?",
+   "answer": "[[v3 - v4]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "Football",
+     "Rugby",
+     "Tennis",
+     "Hockey"
+    ],
+    "values": [
+     "[[v1|n]]",
+     "[[v2|n]]",
+     "[[v3|n]]",
+     "[[v4|n]]"
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s02-l3",
+   "topic": "Statistics",
+   "subtopic": "Bar charts",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S2 Bar charts",
+   "keywords": [
+    "bar",
+    "charts",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v3",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v4",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "v1 != v2",
+    "v1 != v3",
+    "v1 != v4",
+    "v2 != v3",
+    "v2 != v4",
+    "v3 != v4"
+   ],
+   "check": [
+    "v1 + v2 > 0"
+   ],
+   "text": "The bar chart shows the favourite sport of some pupils. How many pupils were asked altogether? What is the modal sport?",
+   "answer": "[[v1 + v2 + v3 + v4]] pupils; [[v1 == max(v1, v2, v3, v4)|if:Football/]][[v2 == max(v1, v2, v3, v4)|if:Rugby/]][[v3 == max(v1, v2, v3, v4)|if:Tennis/]][[v4 == max(v1, v2, v3, v4)|if:Hockey/]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "Football",
+     "Rugby",
+     "Tennis",
+     "Hockey"
+    ],
+    "values": [
+     "[[v1|n]]",
+     "[[v2|n]]",
+     "[[v3|n]]",
+     "[[v4|n]]"
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s02-l4",
+   "topic": "Statistics",
+   "subtopic": "Bar charts",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S2 Bar charts",
+   "keywords": [
+    "bar",
+    "charts",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v1",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v2",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v3",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ],
+    [
+     "v4",
+     {
+      "int": [
+       3,
+       18
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v4 / (v1 + v2 + v3 + v4) < 1"
+   ],
+   "text": "The bar chart shows the favourite sport of some pupils. (a) How many pupils were asked? (b) What fraction chose hockey? Write your answer in its simplest form. (3 marks)",
+   "answer": "(a) [[v1 + v2 + v3 + v4]]  (b) $[[v4 / (v1 + v2 + v3 + v4)|frac]]$",
+   "diagram": {
+    "kind": "bar-chart",
+    "categories": [
+     "Football",
+     "Rugby",
+     "Tennis",
+     "Hockey"
+    ],
+    "values": [
+     "[[v1|n]]",
+     "[[v2|n]]",
+     "[[v3|n]]",
+     "[[v4|n]]"
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s03-l1",
+   "topic": "Statistics",
+   "subtopic": "Dual bar charts",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S3 Dual bar charts",
+   "keywords": [
+    "dual",
+    "bar",
+    "charts",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g2 > 0"
+   ],
+   "text": "The dual bar chart shows the number of boys and girls who bought a school lunch. How many girls bought a lunch on Tuesday?",
+   "answer": "[[g2]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": false,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s03-l2",
+   "topic": "Statistics",
+   "subtopic": "Dual bar charts",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S3 Dual bar charts",
+   "keywords": [
+    "dual",
+    "bar",
+    "charts",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b3 > g3"
+   ],
+   "check": [
+    "b3 - g3 > 0"
+   ],
+   "text": "The dual bar chart shows the number of boys and girls who bought a school lunch. On Wednesday, how many more boys than girls bought a lunch?",
+   "answer": "[[b3 - g3]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": false,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s03-l3",
+   "topic": "Statistics",
+   "subtopic": "Dual bar charts",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S3 Dual bar charts",
+   "keywords": [
+    "dual",
+    "bar",
+    "charts",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "g1 != g2",
+    "g1 != g3",
+    "g2 != g3"
+   ],
+   "check": [
+    "b1 + g1 > 0"
+   ],
+   "text": "The dual bar chart shows the number of boys and girls who bought a school lunch. How many pupils bought a lunch on Monday? Which day had the most girls?",
+   "answer": "[[b1 + g1]] pupils; [[g1 == max(g1, g2, g3)|if:Monday/]][[g2 == max(g1, g2, g3)|if:Tuesday/]][[g3 == max(g1, g2, g3)|if:Wednesday/]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": false,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s03-l4",
+   "topic": "Statistics",
+   "subtopic": "Dual bar charts",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S3 Dual bar charts",
+   "keywords": [
+    "dual",
+    "bar",
+    "charts",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "g1 + g2 + g3 > b1 + b2 + b3"
+   ],
+   "check": [
+    "b1 + b2 + b3 > 0"
+   ],
+   "text": "The dual bar chart shows the number of boys and girls who bought a school lunch. (a) How many boys bought a lunch altogether? (b) How many more girls than boys bought a lunch altogether? (3 marks)",
+   "answer": "(a) [[b1 + b2 + b3]]  (b) [[g1 + g2 + g3 - b1 - b2 - b3]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": false,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s04-l1",
+   "topic": "Statistics",
+   "subtopic": "Composite bar charts",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S4 Composite bar charts",
+   "keywords": [
+    "composite",
+    "bar",
+    "charts",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b2 + g2 > 0"
+   ],
+   "text": "The composite bar chart shows how many boys and girls bought a school lunch. How many pupils bought a lunch on Tuesday?",
+   "answer": "[[b2 + g2]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": true,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s04-l2",
+   "topic": "Statistics",
+   "subtopic": "Composite bar charts",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S4 Composite bar charts",
+   "keywords": [
+    "composite",
+    "bar",
+    "charts",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "g1 > 0"
+   ],
+   "text": "The composite bar chart shows how many boys and girls bought a school lunch. How many girls bought a lunch on Monday?",
+   "answer": "[[g1]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": true,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s04-l3",
+   "topic": "Statistics",
+   "subtopic": "Composite bar charts",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S4 Composite bar charts",
+   "keywords": [
+    "composite",
+    "bar",
+    "charts",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "b1 + g1 != b2 + g2",
+    "b1 + g1 != b3 + g3",
+    "b2 + g2 != b3 + g3"
+   ],
+   "check": [
+    "b1 + g1 > 0"
+   ],
+   "text": "The composite bar chart shows how many boys and girls bought a school lunch. On which day did the most pupils buy a lunch, and how many was that?",
+   "answer": "[[(b1 + g1) == max(b1 + g1, b2 + g2, b3 + g3)|if:Monday/]][[(b2 + g2) == max(b1 + g1, b2 + g2, b3 + g3)|if:Tuesday/]][[(b3 + g3) == max(b1 + g1, b2 + g2, b3 + g3)|if:Wednesday/]]: [[max(b1 + g1, b2 + g2, b3 + g3)]]",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": true,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s04-l4",
+   "topic": "Statistics",
+   "subtopic": "Composite bar charts",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S4 Composite bar charts",
+   "keywords": [
+    "composite",
+    "bar",
+    "charts",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "b3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g1",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g2",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ],
+    [
+     "g3",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b1 + b2 + b3 > 0"
+   ],
+   "text": "The composite bar chart shows how many boys and girls bought a school lunch. (a) How many pupils bought a lunch on the three days altogether? (b) What fraction of them were boys? Give your answer in its simplest form. (3 marks)",
+   "answer": "(a) [[b1 + g1 + b2 + g2 + b3 + g3]]  (b) $[[(b1 + b2 + b3) / (b1 + g1 + b2 + g2 + b3 + g3)|frac]]$",
+   "diagram": {
+    "kind": "bar-chart",
+    "stacked": true,
+    "categories": [
+     "Mon",
+     "Tue",
+     "Wed"
+    ],
+    "series": [
+     {
+      "name": "Boys",
+      "values": [
+       "[[b1|n]]",
+       "[[b2|n]]",
+       "[[b3|n]]"
+      ]
+     },
+     {
+      "name": "Girls",
+      "values": [
+       "[[g1|n]]",
+       "[[g2|n]]",
+       "[[g3|n]]"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s05-l1",
+   "topic": "Statistics",
+   "subtopic": "Coordinates in the first quadrant",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S5 Coordinates in the first quadrant",
+   "keywords": [
+    "coordinates",
+    "in",
+    "the",
+    "first",
+    "quadrant",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "ax",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "ay",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "ax > 0"
+   ],
+   "text": "Write down the coordinates of point A.",
+   "answer": "([[ax]], [[ay]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": 0,
+    "xmax": 10,
+    "ymin": 0,
+    "ymax": 8,
+    "points": [
+     [
+      "[[ax|n]]",
+      "[[ay|n]]",
+      "A"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s05-l2",
+   "topic": "Statistics",
+   "subtopic": "Coordinates in the first quadrant",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S5 Coordinates in the first quadrant",
+   "keywords": [
+    "coordinates",
+    "in",
+    "the",
+    "first",
+    "quadrant",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "ax",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "ay",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "bx",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "by",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "ay != by"
+   ],
+   "check": [
+    "bx > ax"
+   ],
+   "text": "Write down the coordinates of points A and B.",
+   "answer": "A ([[ax]], [[ay]]) and B ([[bx]], [[by]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": 0,
+    "xmax": 10,
+    "ymin": 0,
+    "ymax": 8,
+    "points": [
+     [
+      "[[ax|n]]",
+      "[[ay|n]]",
+      "A"
+     ],
+     [
+      "[[bx|n]]",
+      "[[by|n]]",
+      "B"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s05-l3",
+   "topic": "Statistics",
+   "subtopic": "Coordinates in the first quadrant",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S5 Coordinates in the first quadrant",
+   "keywords": [
+    "coordinates",
+    "in",
+    "the",
+    "first",
+    "quadrant",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "ax",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "bx",
+     {
+      "int": [
+       5,
+       8
+      ]
+     }
+    ],
+    [
+     "ay",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "hh",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "bx > ax"
+   ],
+   "text": "A and B are two corners of a rectangle with sides parallel to the axes. A is ([[ax]], [[ay]]) and B is ([[bx]], [[ay]]). The rectangle has height [[hh]]. Write down the other two corners.",
+   "answer": "C ([[bx]], [[ay + hh]]) and D ([[ax]], [[ay + hh]])"
+  },
+  {
+   "id": "y7sp1-s05-l4",
+   "topic": "Statistics",
+   "subtopic": "Coordinates in the first quadrant",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S5 Coordinates in the first quadrant",
+   "keywords": [
+    "coordinates",
+    "in",
+    "the",
+    "first",
+    "quadrant",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "ax",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "ay",
+     {
+      "int": [
+       1,
+       7
+      ]
+     }
+    ],
+    [
+     "d1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "e",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "bx",
+     "ax + 2 * d1"
+    ],
+    [
+     "by",
+     "ay + e"
+    ]
+   ],
+   "where": [
+    "by <= 7"
+   ],
+   "check": [
+    "(ax + bx) / 2 * 2 == ax + bx"
+   ],
+   "text": "A is ([[ax]], [[ay]]) and B is ([[bx]], [[by]]). (a) What is the distance from A to B in the x-direction? (b) Find the coordinates of the midpoint of AB. (3 marks)",
+   "answer": "(a) [[bx - ax]]  (b) ([[(ax + bx) / 2]], [[(ay + by) / 2]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": 0,
+    "xmax": 10,
+    "ymin": 0,
+    "ymax": 8,
+    "points": [
+     [
+      "[[ax|n]]",
+      "[[ay|n]]",
+      "A"
+     ],
+     [
+      "[[bx|n]]",
+      "[[by|n]]",
+      "B"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s06-l1",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S6 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. What score did the pupil who revised for [[k]] hours get?",
+   "answer": "[[m * k + c + (k == 1) * n1 + (k == 2) * n2 + (k == 3) * n3 + (k == 4) * n4 + (k == 5) * n5 + (k == 6) * n6 + (k == 7) * n7 + (k == 8) * n8]]",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s06-l2",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S6 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "8 - k > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. How many pupils revised for more than [[k]] hours?",
+   "answer": "[[8 - k]]",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s06-l3",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S6 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "m >= 4"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score (out of [[ymax]]) for 8 pupils. Describe how the test score changes as revision time increases.",
+   "answer": "As the hours of revision go up, the test score goes up",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s06-l4",
+   "topic": "Statistics",
+   "subtopic": "Scatter graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S6 Scatter graphs",
+   "keywords": [
+    "scatter",
+    "graphs",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "m >= 4"
+   ],
+   "check": [
+    "m * 5 + c > 0"
+   ],
+   "text": "The scatter graph shows revision time and test score for 8 pupils. (a) Estimate the score of a pupil who revised for 5 hours. (b) Pupil X revised for 9 hours. Explain why you should not use the graph to predict X's score. (3 marks)",
+   "answer": "(a) about [[m * 5 + c]]  (b) 9 hours is outside the range of the data (1 to 8 hours)",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s07-l1",
+   "topic": "Statistics",
+   "subtopic": "Correlation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S7 Correlation",
+   "keywords": [
+    "correlation",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "choose": [
+       3,
+       4,
+       -3,
+       -4,
+       0
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       35,
+       45
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((max(m * 8, 0) + c + 12) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "c + m * 8 > 12"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "What type of correlation does the scatter graph show?",
+   "answer": "[[m > 0|if:Positive/]][[m < 0|if:Negative/]][[m == 0|if:No/]] correlation",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + 3 * n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + 3 * n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + 3 * n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + 3 * n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + 3 * n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + 3 * n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + 3 * n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + 3 * n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s07-l2",
+   "topic": "Statistics",
+   "subtopic": "Correlation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S7 Correlation",
+   "keywords": [
+    "correlation",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "choose": [
+       -3,
+       -4,
+       -5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       40,
+       50
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((c + 5) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0",
+    "c + m * 8 > 8"
+   ],
+   "check": [
+    "m < 0"
+   ],
+   "text": "The scatter graph shows the age and value of used cars (a new car is worth about £[[c * 100]]). Describe the correlation and say what it means.",
+   "answer": "Negative correlation: the older the car, the lower its value",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Age (years)",
+    "ylabel": "Value (£100s)",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s07-l3",
+   "topic": "Statistics",
+   "subtopic": "Correlation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S7 Correlation",
+   "keywords": [
+    "correlation",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "h",
+     {
+      "int": [
+       140,
+       170
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "h > 0"
+   ],
+   "text": "A scatter graph shows height (x, about [[h]] cm) and arm span (y). The points lie close to a straight line sloping up. Describe the correlation. Does it prove that a longer arm span causes extra height? Explain.",
+   "answer": "Strong positive correlation. No: correlation does not prove one thing causes the other"
+  },
+  {
+   "id": "y7sp1-s07-l4",
+   "topic": "Statistics",
+   "subtopic": "Correlation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S7 Correlation",
+   "keywords": [
+    "correlation",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       18,
+       32
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > t - 6"
+   ],
+   "text": "A shop owner plots the temperature (x) and the number of ice creams sold (y) each day. The points slope upwards. (a) What type of correlation is this? (b) Predict whether sales on a [[t]]°C day will be higher or lower than on a [[t - 6]]°C day. (2 marks)",
+   "answer": "(a) Positive correlation  (b) Higher"
+  },
+  {
+   "id": "y7sp1-s08-l1",
+   "topic": "Statistics",
+   "subtopic": "Lines of best fit",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S8 Lines of best fit",
+   "keywords": [
+    "lines",
+    "of",
+    "best",
+    "fit",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "m * k + c - c == m * k"
+   ],
+   "text": "The scatter graph shows a line of best fit. Use the line to estimate the test score for a pupil who revised for [[k]] hours.",
+   "answer": "[[m * k + c]]",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ],
+    "line": [
+     [
+      0,
+      "[[c|n]]"
+     ],
+     [
+      9,
+      "[[9 * m + c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s08-l2",
+   "topic": "Statistics",
+   "subtopic": "Lines of best fit",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S8 Lines of best fit",
+   "keywords": [
+    "lines",
+    "of",
+    "best",
+    "fit",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "(m * k + c - c) / m == k"
+   ],
+   "text": "Use the line of best fit to estimate how many hours of revision gives a test score of [[m * k + c]].",
+   "answer": "[[k]] hours",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ],
+    "line": [
+     [
+      0,
+      "[[c|n]]"
+     ],
+     [
+      9,
+      "[[9 * m + c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s08-l3",
+   "topic": "Statistics",
+   "subtopic": "Lines of best fit",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S8 Lines of best fit",
+   "keywords": [
+    "lines",
+    "of",
+    "best",
+    "fit",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "(9 * m + c - c) / 9 == m"
+   ],
+   "text": "The line of best fit passes through (0, [[c]]) and (9, [[9 * m + c]]). By how much does the score rise for each extra hour of revision, according to the line?",
+   "answer": "[[m]] marks per hour",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ],
+    "line": [
+     [
+      0,
+      "[[c|n]]"
+     ],
+     [
+      9,
+      "[[9 * m + c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s08-l4",
+   "topic": "Statistics",
+   "subtopic": "Lines of best fit",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S8 Lines of best fit",
+   "keywords": [
+    "lines",
+    "of",
+    "best",
+    "fit",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       15
+      ]
+     }
+    ],
+    [
+     "n1",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n2",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n3",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n4",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n5",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n6",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n7",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "n8",
+     {
+      "int": [
+       -3,
+       3
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((m * 8 + c + 4) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "m * k + c > c"
+   ],
+   "text": "The graph shows a line of best fit. (a) Estimate the score for [[k]] hours of revision. (b) Is it sensible to use the line to estimate the score for [[k + 8]] hours? Explain. (3 marks)",
+   "answer": "(a) [[m * k + c]]  (b) No: [[k + 8]] hours is outside the range of the data",
+   "diagram": {
+    "kind": "scatter",
+    "xmin": 0,
+    "xmax": 9,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "Hours of revision",
+    "ylabel": "Test score",
+    "points": [
+     [
+      1,
+      "[[m * 1 + c + n1|n]]"
+     ],
+     [
+      2,
+      "[[m * 2 + c + n2|n]]"
+     ],
+     [
+      3,
+      "[[m * 3 + c + n3|n]]"
+     ],
+     [
+      4,
+      "[[m * 4 + c + n4|n]]"
+     ],
+     [
+      5,
+      "[[m * 5 + c + n5|n]]"
+     ],
+     [
+      6,
+      "[[m * 6 + c + n6|n]]"
+     ],
+     [
+      7,
+      "[[m * 7 + c + n7|n]]"
+     ],
+     [
+      8,
+      "[[m * 8 + c + n8|n]]"
+     ]
+    ],
+    "line": [
+     [
+      0,
+      "[[c|n]]"
+     ],
+     [
+      9,
+      "[[9 * m + c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s09-l1",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S9 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the temperature in month [[k]]?",
+   "answer": "[[(k == 1) * p1 + (k == 2) * p2 + (k == 3) * p3 + (k == 4) * p4 + (k == 5) * p5 + (k == 6) * p6]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s09-l2",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S9 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ],
+    [
+     "mx",
+     "max(p1, p2, p3, p4, p5, p6)"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "(p1 == mx) + (p2 == mx) + (p3 == mx) + (p4 == mx) + (p5 == mx) + (p6 == mx) == 1"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the highest temperature, and in which month did it happen?",
+   "answer": "[[mx]]°C in month [[(p1 == mx) * 1 + (p2 == mx) * 2 + (p3 == mx) * 3 + (p4 == mx) * 4 + (p5 == mx) * 5 + (p6 == mx) * 6]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s09-l3",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S9 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "max(p1, p2, p3, p4, p5, p6) > min(p1, p2, p3, p4, p5, p6)"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. What was the range of the temperatures?",
+   "answer": "[[max(p1, p2, p3, p4, p5, p6) - min(p1, p2, p3, p4, p5, p6)]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s09-l4",
+   "topic": "Statistics",
+   "subtopic": "Time series graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S9 Time series graphs",
+   "keywords": [
+    "time",
+    "series",
+    "graphs",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "base",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t2",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t3",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t4",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t5",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "t6",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "p1",
+     "base + t1"
+    ],
+    [
+     "p2",
+     "p1 + t2"
+    ],
+    [
+     "p3",
+     "p2 + t3"
+    ],
+    [
+     "p4",
+     "p3 - t4"
+    ],
+    [
+     "p5",
+     "p4 + t5 - 3"
+    ],
+    [
+     "p6",
+     "p5 + t6 - 3"
+    ],
+    [
+     "ymax",
+     "ceil((max(p1, p2, p3, p4, p5, p6) + 2) / 5) * 5"
+    ]
+   ],
+   "where": [
+    "min(p1, p2, p3, p4, p5, p6) > 0",
+    "(p2 - p1 > 0 || p3 - p2 > 0 || p4 - p3 > 0 || p5 - p4 > 0 || p6 - p5 > 0)",
+    "(p2 - p1 != p3 - p2)",
+    "(p2 - p1 != p4 - p3)",
+    "(p2 - p1 != p5 - p4)",
+    "(p2 - p1 != p6 - p5)",
+    "(p3 - p2 != p4 - p3)",
+    "(p3 - p2 != p5 - p4)",
+    "(p3 - p2 != p6 - p5)",
+    "(p4 - p3 != p5 - p4)",
+    "(p4 - p3 != p6 - p5)",
+    "(p5 - p4 != p6 - p5)",
+    "max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5) > 0"
+   ],
+   "check": [
+    "ymax > 0"
+   ],
+   "text": "The time series graph shows the average temperature each month. (a) Between which two months was the biggest rise? (b) What was the rise? (3 marks)",
+   "answer": "(a) months [[(p2 - p1) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:1 and 2/]][[(p3 - p2) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:2 and 3/]][[(p4 - p3) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:3 and 4/]][[(p5 - p4) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:4 and 5/]][[(p6 - p5) == max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)|if:5 and 6/]]  (b) [[max(p2 - p1, p3 - p2, p4 - p3, p5 - p4, p6 - p5)]]°C",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 1,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": 5,
+    "xlabel": "Month",
+    "ylabel": "Temperature (°C)",
+    "points": [
+     [
+      1,
+      "[[p1|n]]"
+     ],
+     [
+      2,
+      "[[p2|n]]"
+     ],
+     [
+      3,
+      "[[p3|n]]"
+     ],
+     [
+      4,
+      "[[p4|n]]"
+     ],
+     [
+      5,
+      "[[p5|n]]"
+     ],
+     [
+      6,
+      "[[p6|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s10-l1",
+   "topic": "Statistics",
+   "subtopic": "Non-linear relationships",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S10 Non-linear relationships",
+   "keywords": [
+    "non",
+    "linear",
+    "relationships",
+    "year 7",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       0,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "ymax",
+     "ceil((36 + c + 1) / 10) * 10"
+    ],
+    [
+     "ystep",
+     "ymax / 5"
+    ]
+   ],
+   "where": [
+    "ystep % 1 == 0"
+   ],
+   "check": [
+    "k * k + c >= c"
+   ],
+   "text": "The graph shows y = x² + [[c]]. Read off the value of y when x = [[k]].",
+   "answer": "[[k * k + c]]",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": 0,
+    "xmax": 6,
+    "ymin": 0,
+    "ymax": "[[ymax|n]]",
+    "xstep": 1,
+    "ystep": "[[ystep|n]]",
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      0,
+      "[[0 + c|n]]"
+     ],
+     [
+      1,
+      "[[1 + c|n]]"
+     ],
+     [
+      2,
+      "[[4 + c|n]]"
+     ],
+     [
+      3,
+      "[[9 + c|n]]"
+     ],
+     [
+      4,
+      "[[16 + c|n]]"
+     ],
+     [
+      5,
+      "[[25 + c|n]]"
+     ],
+     [
+      6,
+      "[[36 + c|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y7sp1-s10-l2",
+   "topic": "Statistics",
+   "subtopic": "Non-linear relationships",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S10 Non-linear relationships",
+   "keywords": [
+    "non",
+    "linear",
+    "relationships",
+    "year 7",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       0,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(c + 4) - (c + 1) != (c + 1) - c"
+   ],
+   "text": "The points (0, [[c]]), (1, [[c + 1]]), (2, [[c + 4]]), (3, [[c + 9]]) lie on a graph. Is the graph a straight line? Explain.",
+   "answer": "No: y goes up by 1, then 3, then 5, so the steps are not equal"
+  },
+  {
+   "id": "y7sp1-s10-l3",
+   "topic": "Statistics",
+   "subtopic": "Non-linear relationships",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S10 Non-linear relationships",
+   "keywords": [
+    "non",
+    "linear",
+    "relationships",
+    "year 7",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "x1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x2",
+     {
+      "int": [
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "x3",
+     {
+      "int": [
+       7,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x2 > x1"
+   ],
+   "text": "Complete the table of values for y = x² + [[c]]: x = [[x1]], [[x2]], [[x3]].",
+   "answer": "y = [[x1 * x1 + c]], [[x2 * x2 + c]], [[x3 * x3 + c]]"
+  },
+  {
+   "id": "y7sp1-s10-l4",
+   "topic": "Statistics",
+   "subtopic": "Non-linear relationships",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y7",
+   "source": "Y7 Spring B1 Graphing data · S10 Non-linear relationships",
+   "keywords": [
+    "non",
+    "linear",
+    "relationships",
+    "year 7",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "t1",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a * 4 * t1 * t1 == 4 * a * t1 * t1"
+   ],
+   "text": "A ball is dropped. Its distance fallen is d = [[a]]t² metres after t seconds. (a) Work out d when t = [[t1]]. (b) Is d proportional to t? Explain using t = [[t1]] and t = [[2 * t1]]. (3 marks)",
+   "answer": "(a) [[a * t1 * t1]] m  (b) No: doubling t from [[t1]] to [[2 * t1]] makes d go from [[a * t1 * t1]] to [[a * 4 * t1 * t1]], which is 4 times as much, not 2 times"
+  }
+ ]
+}

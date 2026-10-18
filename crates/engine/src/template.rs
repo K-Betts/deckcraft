@@ -375,6 +375,20 @@ impl Parser<'_> {
     }
 }
 
+fn is_prime(n: i64) -> bool {
+    if n < 2 {
+        return false;
+    }
+    let mut d = 2;
+    while d * d <= n {
+        if n % d == 0 {
+            return false;
+        }
+        d += 1;
+    }
+    true
+}
+
 fn gcd(a: i64, b: i64) -> i64 {
     let (mut a, mut b) = (a.abs(), b.abs());
     while b != 0 {
@@ -401,6 +415,19 @@ fn call(name: &str, a: &[f64]) -> Result<f64, String> {
         "acos" => one(|x| x.acos().to_degrees()),
         "atan" => one(|x| x.atan().to_degrees()),
         "round" => one(f64::round),
+        // Whole-number helpers for properties of number.
+        "isprime" => one(|x| f64::from(is_prime(x.round() as i64))),
+        "nextprime" => one(|x| {
+            let mut n = x.floor() as i64 + 1;
+            while !is_prime(n) {
+                n += 1;
+            }
+            n as f64
+        }),
+        "ndiv" => one(|x| {
+            let n = x.round().abs() as i64;
+            (1..=n.min(100_000)).filter(|d| n % d == 0).count() as f64
+        }),
         "log10" => match a {
             [x] if *x > 0.0 => Ok(x.log10()),
             _ => Err("log10() needs a positive number".into()),
@@ -561,8 +588,11 @@ fn words(n: u64) -> String {
 
 /// One placeholder's `expr` or `expr|filter[:argument]` as text, or as a number for `|n`.
 fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
-    let (expr, filter) = match inner.split_once('|') {
-        Some((e, f)) => (e.trim(), Some(f.trim())),
+    // The filter follows a single `|`; the `||` of an expression is not a filter.
+    let bytes = inner.as_bytes();
+    let bar = (0..bytes.len()).find(|&i| bytes[i] == b'|' && bytes.get(i + 1) != Some(&b'|') && (i == 0 || bytes[i - 1] != b'|'));
+    let (expr, filter) = match bar {
+        Some(i) => (inner[..i].trim(), Some(inner[i + 1..].trim())),
         None => (inner.trim(), None),
     };
     if let Some(Val::Text(t)) = scope.get(expr) {
@@ -983,6 +1013,8 @@ mod tests {
         assert_eq!(f("[[r|frac]]"), "\\frac{3}{4}");
         assert_eq!(f("[[b|sgn]] and [[a|sgn]]"), "-3 and +1");
         assert_eq!(f("[[b < 0|if:Subtract/Add]]"), "Subtract");
+        assert_eq!(f("[[(a == 1) || (a == 5)|if:one/other]]"), "one");
+        assert_eq!(f("[[isprime(13)]][[isprime(15)]] [[nextprime(24)]] [[ndiv(36)]]"), "10 29 9");
         assert_eq!(f("[[4032|words]]"), "four thousand and thirty-two");
         assert_eq!(f("[[82000000|group]] [[4000|group]] [[12345.5|group]]"), "82\u{2009}000\u{2009}000 4000 12\u{2009}345.5");
         assert_eq!(f("[[56208|words]]"), "fifty-six thousand two hundred and eight");

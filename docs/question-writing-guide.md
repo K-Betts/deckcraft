@@ -116,6 +116,16 @@ whole string "[[expr|n]]". Kinds and their fields:
   table             headers:[...], rows:[[...],...]  (also place-value charts, frequency tables)
   fraction-bar      parts, shaded (one bar) or bars:[{"parts":8,"shaded":3,"label":"A"},...] (same-length bars)
   shade-grid        rows, cols (default 10 x 10), shaded: how many squares are coloured (hundredths, percentages)
+  pictogram         key, keyLabel, rows:[{"label","count"}] (symbols = count / key; a half symbol if it does not divide)
+  scatter           xmin,xmax,ymin,ymax,xstep,ystep,xlabel,ylabel, points:[[x,y]] (3rd item = point name), line:[[x1,y1],[x2,y2]]
+  line-graph        same as scatter, with the points joined in order (time series, distance-time graph)
+  polygon-shape     shape: square, rectangle, parallelogram, rhombus, trapezium, kite, equilateral, isosceles, scalene, right-angled
+  polygon-angles    angles:[labels], sizes:[true degrees], unknown (a quadrilateral drawn with those angles)
+  ruler             length (cm): a line above a ruler
+  factor-tree       root: {"v": 60, "l": {...}, "r": {...}}, "?" as a value hides it
+  counters          positive, negative (zero-pair and charged-counter questions)
+  crossing-lines    theta, labels:[4 sectors anticlockwise from the first line], unknown
+  bar-chart         also series:[...] with stacked:true for dual and stacked bars
   number-line       also: labelEvery, hideLabels, blank:[values shown as ?], dots:[{"at":0.3,"label":"A"}]
 DIAGRAM RULES (these are shown on a classroom screen, so they must not mislead):
   - Angles are drawn to the sizes in "sizes". ALWAYS give "sizes" for algebraic angle questions
