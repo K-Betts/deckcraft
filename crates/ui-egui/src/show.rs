@@ -1095,6 +1095,9 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     if keep {
         app.show = Some(show);
     } else {
+        if let Some(t) = show.teacher.take() {
+            app.teacher_stash = Some(t);
+        }
         app.media.stop_owned(crate::media::Owner::Show);
         if !show.reading {
             ctx.send_viewport_cmd(egui::ViewportCommand::Fullscreen(false));

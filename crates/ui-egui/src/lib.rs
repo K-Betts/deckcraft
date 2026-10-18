@@ -555,6 +555,8 @@ pub struct SlideApp {
     /// The word looked up in the Thesaurus pane.
     pub thesaurus_query: String,
     pub show: Option<show::Show>,
+    /// Teacher Mode's writing, kept when the show ends so it is still there next time.
+    pub teacher_stash: Option<teacher_overlay::TeacherOverlay>,
     /// Current slide's animations playing on the editor canvas (not the full-screen show).
     anim_preview: Option<AnimPreview>,
     /// Audio/video playback (editor control bar, slide show, `media.*` commands).
@@ -659,6 +661,7 @@ impl SlideApp {
             dialog: None,
             thesaurus_query: String::new(),
             show: None,
+            teacher_stash: None,
             anim_preview: None,
             media: media::MediaHost::new(audio_out),
             status: None,
@@ -1119,6 +1122,7 @@ impl SlideApp {
             "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
             "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
+                self.stash_teacher();
                 self.show = None;
                 self.media.stop_owned(media::Owner::Show);
             }
@@ -1245,8 +1249,22 @@ impl SlideApp {
             let from = self.session.active().map(|d| d.selection.slide).unwrap_or(0);
             self.start_show(from, false);
         }
-        if let Some(show) = self.show.as_mut() {
-            show.teacher = on.then(teacher_overlay::TeacherOverlay::new);
+        if on {
+            // The writing from the last time is still on its slides.
+            let mut t = self.teacher_stash.take().unwrap_or_default();
+            t.timers.clear();
+            if let Some(show) = self.show.as_mut() {
+                show.teacher = Some(t);
+            }
+        } else {
+            self.stash_teacher();
+        }
+    }
+
+    /// Puts the Teacher Mode overlay of a show that is ending (or being turned off) aside.
+    pub fn stash_teacher(&mut self) {
+        if let Some(t) = self.show.as_mut().and_then(|s| s.teacher.take()) {
+            self.teacher_stash = Some(t);
         }
     }
 
@@ -1740,6 +1758,7 @@ impl SlideApp {
         // Closing the window with unsaved changes asks first.
         if ctx.input(|i| i.viewport().close_requested()) && !self.quit_confirmed && self.session.documents().iter().any(|d| d.is_dirty()) {
             ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
+            self.stash_teacher();
             self.show = None;
             if self.dialog.as_ref().is_none_or(|d| d.id != "quit") {
                 self.dialog = Some(dialogs::Dialog::new("quit"));

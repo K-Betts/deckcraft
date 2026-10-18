@@ -292,6 +292,9 @@ pub struct TeacherOverlay {
     palette_drag: Option<Pos2>,
     /// Whether the tool palette is out; the tab on the left edge toggles it.
     pub palette_open: bool,
+    /// Whether the colours and sizes of the chosen tool are showing. They pop out when the tool is
+    /// chosen and tuck away again once a choice is made.
+    pub options_open: bool,
     /// The maths tools chooser and its transient canvas widgets.
     pub maths_tools_panel: crate::maths_tools::MathsToolsPanel,
     /// The Maths subject pack is on: show its tool group (set every frame by `ui`).
@@ -328,6 +331,7 @@ impl Default for TeacherOverlay {
             along: 0.5,
             palette_drag: None,
             palette_open: false,
+            options_open: false,
             maths_tools_panel: crate::maths_tools::MathsToolsPanel::default(),
             maths: false,
             palette_rect: None,
@@ -400,6 +404,8 @@ impl TeacherOverlay {
     pub fn set_tool(&mut self, tool: Tool) {
         self.draft = None;
         self.revealer_drag = false;
+        // Choosing a tool opens its choices; choosing it again opens or closes them.
+        self.options_open = if tool == self.tool { !self.options_open } else { true };
         if tool == Tool::Revealer {
             if self.tool == Tool::Revealer {
                 // Choosing the revealer again puts it away.
@@ -707,7 +713,8 @@ impl TeacherOverlay {
         let out = egui::Area::new(Id::new("teacher_palette")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
             egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(10, 6)).show(ui, |ui| {
                 ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                let has_options = matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
+                let has_options =
+                    self.options_open && matches!(self.tool, Tool::Pen | Tool::Highlighter | Tool::Shape | Tool::Revealer | Tool::Eraser);
                 let mut body = |this: &mut Self, ui: &mut Ui| {
                     if has_options {
                         lay(ui, horizontal, |ui| this.options(ui));
@@ -734,6 +741,8 @@ impl TeacherOverlay {
             if on || resp.hovered() {
                 ui.painter().circle_stroke(r.center(), 16.0, egui::Stroke::new(2.5, Color32::WHITE));
             }
+            let name = tip.to_string();
+            resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
             resp.on_hover_text(tip)
         };
         match self.tool {
@@ -741,6 +750,7 @@ impl TeacherOverlay {
                 for (name, c) in PEN_COLOURS {
                     if swatch(ui, c, self.pen_colour == c, name).clicked() {
                         self.pen_colour = c;
+                        self.options_open = false;
                     }
                 }
                 for (name, w) in WIDTHS {
@@ -771,6 +781,7 @@ impl TeacherOverlay {
                     let c = highlight_colour(rgb);
                     if swatch(ui, c, self.highlight_colour == c, name).clicked() {
                         self.highlight_colour = c;
+                        self.options_open = false;
                     }
                 }
             }
@@ -784,6 +795,7 @@ impl TeacherOverlay {
                     let on = self.reveal_from == edge;
                     if icon_button(ui, on, name, |p, r, c| paint_edge_icon(p, r, c, edge)).clicked() {
                         self.set_reveal_from(edge);
+                        self.options_open = false;
                     }
                 }
             }
@@ -794,6 +806,7 @@ impl TeacherOverlay {
                 .clicked()
                 {
                     self.erase_mode = EraseMode::Pixel;
+                    self.options_open = false;
                 }
                 if icon_button(ui, self.erase_mode == EraseMode::Stroke, "Stroke eraser: removes a whole mark at a touch", |p, r, c| {
                     p.line_segment([r.left_bottom(), r.right_top()], egui::Stroke::new(2.0, c));
@@ -801,6 +814,7 @@ impl TeacherOverlay {
                 .clicked()
                 {
                     self.erase_mode = EraseMode::Stroke;
+                    self.options_open = false;
                 }
             }
             _ => {}
@@ -844,9 +858,6 @@ impl TeacherOverlay {
         tool_btn(self, ui, Tool::Revealer, "Revealer (click again to put it away)");
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
-        }
-        if icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
-            self.maths_tools_panel.toggle();
         }
         if self.maths && icon_button(ui, self.maths_tools_panel.open, "Maths tools", paint_math_tools_icon).clicked() {
             self.maths_tools_panel.toggle();
@@ -899,6 +910,8 @@ fn icon_button(ui: &mut Ui, selected: bool, tip: &str, paint: impl FnOnce(&Paint
         p.rect_filled(r, CornerRadius::same(12), Color32::from_white_alpha(28));
     }
     paint(p, r.shrink(11.0), Color32::WHITE);
+    let name = tip.to_string();
+    resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
     resp.on_hover_text(tip)
 }
 

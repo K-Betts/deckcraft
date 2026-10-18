@@ -369,3 +369,77 @@ fn screenshot_timer() {
     h.run_steps(4);
     h.render().unwrap().save("/Users/kieranbetts/maths-office/deckcraft-ui/docs/design/img/teacher-after-timer.png").unwrap();
 }
+
+fn click(h: &mut egui_kittest::Harness<'static, SlideApp>, at: Pos2) {
+    h.event(Event::PointerMoved(at));
+    h.run_steps(1);
+    for pressed in [true, false] {
+        h.event(Event::PointerButton { pos: at, button: PointerButton::Primary, pressed, modifiers: Modifiers::NONE });
+        h.run_steps(1);
+    }
+    h.run_steps(2);
+}
+
+#[test]
+fn the_arrow_on_the_left_edge_brings_the_tools_out() {
+    let mut h = harness();
+    teacher(&mut h);
+    assert!(!overlay(&mut h).palette_open);
+    click(&mut h, pos2(14.0, 400.0));
+    assert!(overlay(&mut h).palette_open, "clicking the arrow brings the tools out");
+}
+
+#[test]
+fn a_tools_colours_pop_out_when_it_is_chosen_and_tuck_away_after_a_pick() {
+    let mut o = TeacherOverlay::new();
+    assert!(!o.options_open);
+    o.set_tool(Tool::Pen);
+    assert!(o.options_open, "choosing the pen shows its colours");
+    // Picking a colour tucks them away (the palette code does this on a swatch click).
+    o.options_open = false;
+    o.set_tool(Tool::Pen);
+    assert!(o.options_open, "choosing the pen again brings them back");
+    o.set_tool(Tool::Pen);
+    assert!(!o.options_open, "and once more puts them away");
+    o.set_tool(Tool::Highlighter);
+    assert!(o.options_open, "a different tool opens its own");
+}
+
+#[test]
+fn clicking_a_colour_in_the_running_palette_closes_the_options() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).palette_open = true;
+    overlay(&mut h).set_tool(Tool::Pen);
+    h.run_steps(3);
+    let before = overlay(&mut h).pen_colour;
+    let swatch = h.get_all_by_label("Blue").next().expect("a blue swatch");
+    swatch.click();
+    h.run_steps(3);
+    assert!(!overlay(&mut h).options_open, "the colours tuck away after a pick");
+    assert_ne!(overlay(&mut h).pen_colour, before);
+}
+
+#[test]
+fn the_maths_tools_button_is_on_the_toolbar_once() {
+    let mut h = harness();
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    teacher(&mut h);
+    overlay(&mut h).palette_open = true;
+    h.run_steps(3);
+    assert_eq!(h.query_all_by_label("Maths tools").count(), 1);
+}
+
+#[test]
+fn writing_is_still_there_after_leaving_teacher_mode_and_coming_back() {
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).set_tool(Tool::Pen);
+    drag(&mut h, pos2(300.0, 300.0), pos2(500.0, 360.0));
+    assert_eq!(overlay(&mut h).strokes.len(), 1);
+    h.state_mut().run("show.end", json!({})).unwrap();
+    h.run_steps(2);
+    assert!(h.state().show.is_none());
+    teacher(&mut h);
+    assert_eq!(overlay(&mut h).strokes.len(), 1, "the writing came back with the slide");
+}
