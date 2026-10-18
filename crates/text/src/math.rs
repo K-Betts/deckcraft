@@ -385,7 +385,11 @@ mod tests {
         let ys: Vec<f64> = b.glyphs.iter().map(|g| g.y).collect();
         assert_eq!(ys.len(), 2);
         assert!(ys.iter().any(|y| *y < bar.y0) && ys.iter().any(|y| *y > bar.y1), "one glyph above the bar and one below: {ys:?}");
-        let (n, d) = (b.glyphs[0].x, b.glyphs[1].x);
+        // Compare the middles of the two digits: a font whose digits differ in width (the CI
+        // machine's) puts their left edges at different places even when they are centred.
+        let f = face();
+        let mid = |g: &MathGlyph| g.x + f.advance(g.gid) * g.size / f.upem.max(1.0) / 2.0;
+        let (n, d) = (mid(&b.glyphs[0]), mid(&b.glyphs[1]));
         assert!((n - d).abs() < 1.0, "the two digits are centred on each other: {n} {d}");
         assert!(b.asc > 20.0 && b.desc > 5.0);
     }
