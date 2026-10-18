@@ -1,0 +1,1718 @@
+{
+ "version": 1,
+ "note": "Y9 Summer Block 2 Non-linear graphs: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9su2-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Substitute into quadratic expressions",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S1 Substitute into quadratic expressions",
+   "keywords": [
+    "substitute",
+    "into",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       8
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Work out the value of $x^2 + [[b]]x - [[c]]$ when $x = [[k]]$.",
+   "answer": "[[k * k + b * k - c]]"
+  },
+  {
+   "id": "y9su2-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Substitute into quadratic expressions",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S1 Substitute into quadratic expressions",
+   "keywords": [
+    "substitute",
+    "into",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Work out the value of $[[a]]x^2 - [[b]]x + [[c]]$ when $x = -[[k]]$.",
+   "answer": "[[a * k * k + b * k + c]]"
+  },
+  {
+   "id": "y9su2-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Substitute into quadratic expressions",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S1 Substitute into quadratic expressions",
+   "keywords": [
+    "substitute",
+    "into",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Work out $y = [[a]]x^2 - [[b]]$ when $x = -[[k]]$ and when $x = [[k]]$. What do you notice?",
+   "answer": "[[a * k * k - b]] both times: $x^2$ is the same for $x$ and $-x$"
+  },
+  {
+   "id": "y9su2-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Substitute into quadratic expressions",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S1 Substitute into quadratic expressions",
+   "keywords": [
+    "substitute",
+    "into",
+    "quadratic",
+    "expressions",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "v",
+     {
+      "choose": [
+       20,
+       25,
+       30
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "v > 0"
+   ],
+   "text": "The height of a ball is $h = [[v]]t - 5t^2$ metres after $t$ seconds. Work out $h$ when $t = [[t]]$ and when $t = [[t + 1]]$. (3 marks)",
+   "answer": "[[v * t - 5 * t * t]] m; [[v * (t + 1) - 5 * (t + 1) * (t + 1)]] m"
+  },
+  {
+   "id": "y9su2-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Draw quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S2 Draw quadratic graphs",
+   "keywords": [
+    "draw",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 + [[c]]$.",
+   "answer": "$y$ = [[9 + c]], [[4 + c]], [[1 + c]], [[c]], [[1 + c]], [[4 + c]], [[9 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Draw quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S2 Draw quadratic graphs",
+   "keywords": [
+    "draw",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x$.",
+   "answer": "$y$ = [[9 + 3 * b]], [[4 + 2 * b]], [[1 + b]], 0, [[1 - b]], [[4 - 2 * b]], [[9 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Draw quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S2 Draw quadratic graphs",
+   "keywords": [
+    "draw",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = [[c]] - x^2$ and write down the maximum value of $y$.",
+   "answer": "$y$ = [[c - 9]], [[c - 4]], [[c - 1]], [[c]], [[c - 1]], [[c - 4]], [[c - 9]]; maximum [[c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Draw quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S2 Draw quadratic graphs",
+   "keywords": [
+    "draw",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[b]]x - [[c]]$ and write down the lowest value in the table. (3 marks)",
+   "answer": "$y$ = [[9 + 3 * b - c]], [[4 + 2 * b - c]], [[1 + b - c]], [[-c]], [[1 - b - c]], [[4 - 2 * b - c]], [[9 - 3 * b - c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Interpret quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S3 Interpret quadratic graphs",
+   "keywords": [
+    "interpret",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the coordinates of the minimum point.",
+   "answer": "([[a]], [[-b]])",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Interpret quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S3 Interpret quadratic graphs",
+   "keywords": [
+    "interpret",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Write down the equation of the line of symmetry.",
+   "answer": "$x = [[a]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Interpret quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S3 Interpret quadratic graphs",
+   "keywords": [
+    "interpret",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph shows $y = (x - [[a]])^2 - [[b]]$. Use it to solve $(x - [[a]])^2 - [[b]] = 0$.",
+   "answer": "$x = [[a - sqrt(b)]]$ or $x = [[a + sqrt(b)]]$",
+   "diagram": {
+    "kind": "line-graph",
+    "xmin": "[[a - 3|n]]",
+    "xmax": "[[a + 3|n]]",
+    "ymin": "[[-b|n]]",
+    "ymax": "[[9 - b|n]]",
+    "xstep": 1,
+    "ystep": 3,
+    "xlabel": "x",
+    "ylabel": "y",
+    "points": [
+     [
+      "[[a - 3|n]]",
+      "[[9 - b|n]]"
+     ],
+     [
+      "[[a - 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a - 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a|n]]",
+      "[[-b|n]]"
+     ],
+     [
+      "[[a + 1|n]]",
+      "[[1 - b|n]]"
+     ],
+     [
+      "[[a + 2|n]]",
+      "[[4 - b|n]]"
+     ],
+     [
+      "[[a + 3|n]]",
+      "[[9 - b|n]]"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Interpret quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S3 Interpret quadratic graphs",
+   "keywords": [
+    "interpret",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "For $y = (x - [[a]])^2 - [[b]]$: (a) where does the graph cross the $y$-axis? (b) What is the minimum value of $y$? (c) For which values of $x$ is $y$ less than 0? (3 marks)",
+   "answer": "(a) (0, [[a * a - b]])  (b) [[-b]]  (c) [[a - sqrt(b)]] < $x$ < [[a + sqrt(b)]]"
+  },
+  {
+   "id": "y9su2-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Draw more complex quadratic graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S4 Draw more complex quadratic graphs",
+   "keywords": [
+    "draw",
+    "more",
+    "complex",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = 2x^2 + x - [[c]]$ for $x$ from -2 to 3.",
+   "answer": "$y$ = [[8 - 2 - c]], [[2 - 1 - c]], [[-c]], [[2 + 1 - c]], [[8 + 2 - c]], [[18 + 3 - c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Draw more complex quadratic graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S4 Draw more complex quadratic graphs",
+   "keywords": [
+    "draw",
+    "more",
+    "complex",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Complete the table of values for $y = x^2 - [[a + b]]x + [[a * b]]$ for $x$ from -2 to 3.",
+   "answer": "$y$ = [[4 + 2 * (a + b) + a * b]], [[1 + (a + b) + a * b]], [[a * b]], [[1 - (a + b) + a * b]], [[4 - 2 * (a + b) + a * b]], [[9 - 3 * (a + b) + a * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Draw more complex quadratic graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S4 Draw more complex quadratic graphs",
+   "keywords": [
+    "draw",
+    "more",
+    "complex",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "A quadratic is $y = (2x + [[a]])(x - [[b]])$. Write down where it crosses the $x$-axis and the $y$-axis.",
+   "answer": "$x$-axis at $x = -[[a / 2]]$ and $x = [[b]]$; $y$-axis at $y = -[[a * b]]$"
+  },
+  {
+   "id": "y9su2-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Draw more complex quadratic graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S4 Draw more complex quadratic graphs",
+   "keywords": [
+    "draw",
+    "more",
+    "complex",
+    "quadratic",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != 2 * b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Use $y = (2x + [[a]])(x - [[b]]) = 2x^2 + [[a - 2 * b|signed]]x - [[a * b]]$ to find the values of $x$ for which $y = 0$ and the $y$-intercept. (4 marks)",
+   "answer": "$x = -[[a / 2]]$ and $x = [[b]]$; $y$-intercept [[-a * b]]"
+  },
+  {
+   "id": "y9su2-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal and exponential graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S5 Reciprocal and exponential graphs",
+   "keywords": [
+    "reciprocal",
+    "and",
+    "exponential",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "choose": [
+       4,
+       8,
+       12,
+       16,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Complete the table of values for $y = \\frac{[[k]]}{x}$.",
+   "answer": "$y$ for $x$ = 1, 2, 4: [[k]], [[k / 2]], [[k / 4]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "1",
+     "2",
+     "4"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal and exponential graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S5 Reciprocal and exponential graphs",
+   "keywords": [
+    "reciprocal",
+    "and",
+    "exponential",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Complete the table of values for $y = [[k]] \\times 2^x$.",
+   "answer": "$y$ for $x$ = 0 to 4: [[k]], [[2 * k]], [[4 * k]], [[8 * k]], [[16 * k]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "0",
+     "1",
+     "2",
+     "3",
+     "4"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal and exponential graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S5 Reciprocal and exponential graphs",
+   "keywords": [
+    "reciprocal",
+    "and",
+    "exponential",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Which graph shape belongs to $y = \\frac{[[k]]}{x}$, $y = [[k]]^x$ and $y = [[k]]x$? Choose from: straight line, curve that falls and never touches the axes, curve that rises faster and faster.",
+   "answer": "$y = [[k]]x$ straight line; $y = \\frac{[[k]]}{x}$ falling curve; $y = [[k]]^x$ rises faster and faster"
+  },
+  {
+   "id": "y9su2-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Reciprocal and exponential graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S5 Reciprocal and exponential graphs",
+   "keywords": [
+    "reciprocal",
+    "and",
+    "exponential",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "A",
+     {
+      "choose": [
+       10,
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "A > 0"
+   ],
+   "text": "A culture has [[A]] bacteria and doubles every hour: $N = [[A]] \\times 2^t$. (a) How many bacteria after [[t]] hours? (b) After how many hours does it first exceed [[A * 100]]? (3 marks)",
+   "answer": "(a) [[A * 2^t]]  (b) [[ceil(log10(100) / log10(2))]] hours (2^7 = 128)"
+  },
+  {
+   "id": "y9su2-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Draw cubic graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S6 Draw cubic graphs (E)",
+   "keywords": [
+    "draw",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 + [[c]]$.",
+   "answer": "$y$ = [[-27 + c]], [[-8 + c]], [[-1 + c]], [[c]], [[1 + c]], [[8 + c]], [[27 + c]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Draw cubic graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S6 Draw cubic graphs (E)",
+   "keywords": [
+    "draw",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table of values for $y = x^3 - [[b]]x$.",
+   "answer": "$y$ = [[-27 + 3 * b]], [[-8 + 2 * b]], [[-1 + b]], 0, [[1 - b]], [[8 - 2 * b]], [[27 - 3 * b]]",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Draw cubic graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S6 Draw cubic graphs (E)",
+   "keywords": [
+    "draw",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "For $y = x^3$, what happens to $y$ when $x$ is negative? Describe the shape of the graph.",
+   "answer": "$y$ is negative for negative $x$ ([[-k * k * k]] when $x = -[[k]]$); the graph rises from bottom left to top right through the origin with a flat point at the origin"
+  },
+  {
+   "id": "y9su2-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Draw cubic graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S6 Draw cubic graphs (E)",
+   "keywords": [
+    "draw",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Complete the table for $y = x^3 - [[b]]x$ and write down the values of $x$ in the table where $y = 0$. Is the graph symmetrical about the origin? (4 marks)",
+   "answer": "$y = 0$ when $x = 0$ [[b == 1|if: and x = ±1/ ]][[b == 4|if: and x = ±2/ ]][[b == 9|if: and x = ±3/ ]]; yes, it has rotational symmetry about the origin",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "x",
+     "-3",
+     "-2",
+     "-1",
+     "0",
+     "1",
+     "2",
+     "3"
+    ],
+    "rows": [
+     [
+      "y",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?",
+      "?"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su2-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Interpret cubic graphs (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S7 Interpret cubic graphs (E)",
+   "keywords": [
+    "interpret",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -3,
+       -1
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "The cubic $y = (x [[-a|signed]])(x [[-b|signed]])(x [[-c|signed]])$ is drawn. Where does it cross the $x$-axis?",
+   "answer": "$x$ = [[a]], [[b]] and [[c]]"
+  },
+  {
+   "id": "y9su2-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Interpret cubic graphs (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S7 Interpret cubic graphs (E)",
+   "keywords": [
+    "interpret",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a < b",
+    "b < c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Where does $y = (x - [[a]])(x - [[b]])(x - [[c]])$ cross the $y$-axis?",
+   "answer": "(0, [[-a * b * c]])"
+  },
+  {
+   "id": "y9su2-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Interpret cubic graphs (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S7 Interpret cubic graphs (E)",
+   "keywords": [
+    "interpret",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "Can the cubic $y = (x - [[a]])(x^2 + [[b]])$ cross the $x$-axis more than once? Explain.",
+   "answer": "No: $x^2 + [[b]]$ is always positive, so the only root is $x = [[a]]$"
+  },
+  {
+   "id": "y9su2-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Interpret cubic graphs (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S7 Interpret cubic graphs (E)",
+   "keywords": [
+    "interpret",
+    "cubic",
+    "graphs",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "choose": [
+       1,
+       4,
+       9,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The graph of $y = x^3 - [[b]]x$ crosses the $x$-axis at 0, [[sqrt(b)]] and -[[sqrt(b)]]. Write it in factorised form and say where $y$ is negative between the roots. (3 marks)",
+   "answer": "$y = x(x - [[sqrt(b)]])(x + [[sqrt(b)]])$; $y < 0$ for $x < -[[sqrt(b)]]$ and for $0 < x < [[sqrt(b)]]$"
+  },
+  {
+   "id": "y9su2-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Interpret roots, intercepts and turning points (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S8 Interpret roots, intercepts and turning points (E)",
+   "keywords": [
+    "interpret",
+    "roots",
+    "intercepts",
+    "and",
+    "turning",
+    "points",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "The graph of $y = (x [[-a|signed]])(x [[-b|signed]])$ crosses the $x$-axis at which points?",
+   "answer": "([[a]], 0) and ([[b]], 0)"
+  },
+  {
+   "id": "y9su2-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Interpret roots, intercepts and turning points (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S8 Interpret roots, intercepts and turning points (E)",
+   "keywords": [
+    "interpret",
+    "roots",
+    "intercepts",
+    "and",
+    "turning",
+    "points",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Write down the line of symmetry and the $x$-coordinate of the turning point.",
+   "answer": "$x = [[(a + b) / 2]]$"
+  },
+  {
+   "id": "y9su2-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Interpret roots, intercepts and turning points (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S8 Interpret roots, intercepts and turning points (E)",
+   "keywords": [
+    "interpret",
+    "roots",
+    "intercepts",
+    "and",
+    "turning",
+    "points",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       -4,
+       2
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0"
+   ],
+   "check": [
+    "a < b"
+   ],
+   "text": "$y = (x [[-a|signed]])(x [[-b|signed]])$. Work out the coordinates of the turning point and say if it is a maximum or minimum.",
+   "answer": "([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]]): a minimum"
+  },
+  {
+   "id": "y9su2-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Interpret roots, intercepts and turning points (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B2 Non-linear graphs · S8 Interpret roots, intercepts and turning points (E)",
+   "keywords": [
+    "interpret",
+    "roots",
+    "intercepts",
+    "and",
+    "turning",
+    "points",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(a + b) % 2 == 0",
+    "a < b"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$y = x^2 - [[a + b]]x + [[a * b]]$. (a) Factorise to find the roots. (b) Write down the turning point. (c) Write down the $y$-intercept. (4 marks)",
+   "answer": "(a) $x = [[a]]$ and $x = [[b]]$  (b) ([[(a + b) / 2]], [[-(b - a) * (b - a) / 4]])  (c) [[a * b]]"
+  }
+ ]
+}

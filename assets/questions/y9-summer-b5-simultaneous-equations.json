@@ -1,0 +1,1959 @@
+{
+ "version": 1,
+ "note": "Y9 Summer Block 5 Simultaneous equations: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9su5-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Use one value to find another",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S1 Use one value to find another",
+   "keywords": [
+    "use",
+    "one",
+    "value",
+    "to",
+    "find",
+    "another",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 + y0 - x0 == y0"
+   ],
+   "text": "$x + y = [[x0 + y0]]$ and $x = [[x0]]$. Find $y$.",
+   "answer": "$y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Use one value to find another",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S1 Use one value to find another",
+   "keywords": [
+    "use",
+    "one",
+    "value",
+    "to",
+    "find",
+    "another",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p * x0 + y0 - p * x0 == y0"
+   ],
+   "text": "$[[p]]x + y = [[p * x0 + y0]]$ and $x = [[x0]]$. Find $y$.",
+   "answer": "$y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Use one value to find another",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S1 Use one value to find another",
+   "keywords": [
+    "use",
+    "one",
+    "value",
+    "to",
+    "find",
+    "another",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(m + 1) * x0 / (m + 1) == x0"
+   ],
+   "text": "$y = [[m]]x$ and $x + y = [[(m + 1) * x0]]$. Find $x$ and $y$.",
+   "answer": "$x = [[x0]]$, $y = [[m * x0]]$"
+  },
+  {
+   "id": "y9su5-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Use one value to find another",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S1 Use one value to find another",
+   "keywords": [
+    "use",
+    "one",
+    "value",
+    "to",
+    "find",
+    "another",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "p0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       7,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n * p0 / n == p0"
+   ],
+   "text": "A pen costs £$p$ and a pencil costs £[[q]]. [[n]] pens and a pencil cost £[[n * p0 + q]]. Find $p$, then the cost of [[m]] pens. (3 marks)",
+   "answer": "$[[n]]p + [[q]] = [[n * p0 + q]]$, so $p$ = £[[p0]]; [[m]] pens cost £[[m * p0]]"
+  },
+  {
+   "id": "y9su5-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Introduction to simultaneous equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S2 Introduction to simultaneous equations",
+   "keywords": [
+    "introduction",
+    "to",
+    "simultaneous",
+    "equations",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Which pair of values satisfies both $x + y = [[x0 + y0]]$ and $x - y = [[x0 - y0]]$: ([[x0]], [[y0]]) or ([[y0]], [[x0]])?",
+   "answer": "([[x0]], [[y0]])"
+  },
+  {
+   "id": "y9su5-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Introduction to simultaneous equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S2 Introduction to simultaneous equations",
+   "keywords": [
+    "introduction",
+    "to",
+    "simultaneous",
+    "equations",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Find two numbers with sum [[x0 + y0]] and difference [[x0 - y0]].",
+   "answer": "[[x0]] and [[y0]]"
+  },
+  {
+   "id": "y9su5-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Introduction to simultaneous equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S2 Introduction to simultaneous equations",
+   "keywords": [
+    "introduction",
+    "to",
+    "simultaneous",
+    "equations",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Why can't $x + y = [[a]]$ alone give one answer for $x$ and $y$? Give two solutions.",
+   "answer": "Many pairs fit, for example ([[a - 1]], 1) and ([[a - 2]], 2); you need a second equation"
+  },
+  {
+   "id": "y9su5-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Introduction to simultaneous equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S2 Introduction to simultaneous equations",
+   "keywords": [
+    "introduction",
+    "to",
+    "simultaneous",
+    "equations",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       14
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Two adults and one child pay £[[2 * a + c]] for tickets. One adult and one child pay £[[a + c]]. Write two equations and find the price of an adult ticket and a child ticket. (4 marks)",
+   "answer": "$2a + c = [[2 * a + c]]$, $a + c = [[a + c]]$; subtract: $a$ = £[[a]], $c$ = £[[c]]"
+  },
+  {
+   "id": "y9su5-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S3 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "The graph shows two lines. Write down the solution of the simultaneous equations.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y9su5-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S3 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5",
+    "y0 - m1 * x0 != 0",
+    "y0 - m2 * x0 != 0",
+    "m2 != 0.5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "The lines $y = [[m1|coef]]x[[y0 - m1 * x0|signed]]$ and $y = [[m2|coef]]x[[y0 - m2 * x0|signed]]$ are drawn. Where do they cross?",
+   "answer": "([[x0]], [[y0]])",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y9su5-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S3 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Explain why the simultaneous equations $y = [[m]]x + [[c]]$ and $y = [[m]]x + [[c + d]]$ have no solution.",
+   "answer": "The lines are parallel (same gradient [[m]]) so they never cross"
+  },
+  {
+   "id": "y9su5-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations using graphs",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S3 Solve simultaneous equations using graphs",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "using",
+    "graphs",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m1",
+     {
+      "choose": [
+       1,
+       2,
+       -1
+      ]
+     }
+    ],
+    [
+     "m2",
+     {
+      "choose": [
+       -2,
+       -1,
+       1,
+       0.5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       -2,
+       2
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m1 != m2",
+    "abs(y0 - m1 * x0) <= 5",
+    "abs(y0 - m2 * x0) <= 5"
+   ],
+   "check": [
+    "m1 != m2"
+   ],
+   "text": "Use the graph to solve the equations and check your answer by substituting into both. (3 marks)",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$; check: [[m1 * x0 + y0 - m1 * x0]] = [[y0]]",
+   "diagram": {
+    "kind": "coordinate-grid",
+    "xmin": -6,
+    "xmax": 6,
+    "ymin": -6,
+    "ymax": 6,
+    "lines": [
+     {
+      "m": "[[m1|n]]",
+      "c": "[[y0 - m1 * x0|n]]",
+      "color": "#D0453A"
+     },
+     {
+      "m": "[[m2|n]]",
+      "c": "[[y0 - m2 * x0|n]]",
+      "color": "#2F6FDB"
+     }
+    ]
+   }
+  },
+  {
+   "id": "y9su5-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Manipulating equations",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S4 Manipulating equations",
+   "keywords": [
+    "manipulating",
+    "equations",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Multiply the equation $[[a|coef]]x + [[b|coef]]y = [[c]]$ by [[k]].",
+   "answer": "$[[a * k]]x + [[b * k]]y = [[c * k]]$"
+  },
+  {
+   "id": "y9su5-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Manipulating equations",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S4 Manipulating equations",
+   "keywords": [
+    "manipulating",
+    "equations",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "Multiply $x + [[b]]y = [[c]]$ so that the coefficient of $x$ becomes [[k]].",
+   "answer": "$[[k]]x + [[b * k]]y = [[c * k]]$"
+  },
+  {
+   "id": "y9su5-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Manipulating equations",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S4 Manipulating equations",
+   "keywords": [
+    "manipulating",
+    "equations",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Add the equations $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[b]]y = [[c * x0 - b * y0]]$. What do you get?",
+   "answer": "$[[a + c]]x = [[(a + c) * x0]]$, so $x = [[x0]]$"
+  },
+  {
+   "id": "y9su5-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Manipulating equations",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S4 Manipulating equations",
+   "keywords": [
+    "manipulating",
+    "equations",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "T1",
+     "a * x0 + b * y0"
+    ],
+    [
+     "T2",
+     "c * x0 + d * y0"
+    ]
+   ],
+   "where": [
+    "b != d",
+    "a * d != c * b"
+   ],
+   "check": [
+    "b * d > 0"
+   ],
+   "text": "Make the coefficients of $y$ equal in $[[a]]x + [[b]]y = [[T1]]$ and $[[c]]x + [[d]]y = [[T2]]$ by multiplying. Write the new equations. (3 marks)",
+   "answer": "Multiply the first by [[d]] and the second by [[b]]: $[[a * d]]x + [[b * d]]y = [[T1 * d]]$ and $[[c * b]]x + [[d * b]]y = [[T2 * b]]$"
+  },
+  {
+   "id": "y9su5-s05-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S5 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Solve $x + y = [[x0 + y0]]$ and $x - y = [[x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s05-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S5 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + y = [[a * x0 + y0]]$ and $[[a]]x - y = [[a * x0 - y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s05-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S5 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a + c > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[b]]y = [[c * x0 - b * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s05-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (no adjustments)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S5 Solve simultaneous equations (no adjustments)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "no",
+    "adjustments",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x0",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x0 > y0"
+   ],
+   "text": "Two numbers add to [[x0 + y0]] and differ by [[x0 - y0]]. Form simultaneous equations and find the numbers. Then find their product. (3 marks)",
+   "answer": "$x + y = [[x0 + y0]]$, $x - y = [[x0 - y0]]$: [[x0]] and [[y0]]; product [[x0 * y0]]"
+  },
+  {
+   "id": "y9su5-s06-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S6 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * p != r"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p]]x + [[q]]y = [[p * x0 + q * y0]]$ and $[[r]]x + [[2 * q]]y = [[r * x0 + 2 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s06-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S6 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != 3"
+   ],
+   "check": [
+    "q > 0"
+   ],
+   "text": "Solve $x + [[q]]y = [[x0 + q * y0]]$ and $[[r]]x + [[3 * q]]y = [[r * x0 + 3 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s06-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S6 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       3,
+       6
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * p + r != 0"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Solve $[[p]]x + [[q]]y = [[p * x0 + q * y0]]$ and $[[r]]x - [[2 * q]]y = [[r * x0 - 2 * q * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s06-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust one)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S6 Solve simultaneous equations (adjust one)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "one",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "[[a]] teas and [[b]] coffees cost £[[a * t + b * c]]. [[a + 1]] teas and [[2 * b]] coffees cost £[[(a + 1) * t + 2 * b * c]]. Find the price of a tea and of a coffee. (4 marks)",
+   "answer": "Tea £[[t]], coffee £[[c]]"
+  },
+  {
+   "id": "y9su5-s07-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both) (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S7 Solve simultaneous equations (adjust both) (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x + [[d]]y = [[c * x0 + d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s07-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both) (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S7 Solve simultaneous equations (adjust both) (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * (-d) != b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x + [[b]]y = [[a * x0 + b * y0]]$ and $[[c]]x - [[d]]y = [[c * x0 - d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s07-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both) (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S7 Solve simultaneous equations (adjust both) (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "y0",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a * d != -b * c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Solve $[[a]]x - [[b]]y = [[a * x0 - b * y0]]$ and $[[c]]x + [[d]]y = [[c * x0 + d * y0]]$.",
+   "answer": "$x = [[x0]]$, $y = [[y0]]$"
+  },
+  {
+   "id": "y9su5-s07-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations (adjust both) (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S7 Solve simultaneous equations (adjust both) (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "adjust",
+    "both",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       6,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != c"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "Three adult and two child tickets cost £[[3 * a + 2 * c]]; two adult and three child tickets cost £[[2 * a + 3 * c]]. Find both prices and the cost of 4 adults and 1 child. (4 marks)",
+   "answer": "Adult £[[a]], child £[[c]]; 4 adults and 1 child cost £[[4 * a + c]]"
+  },
+  {
+   "id": "y9su5-s08-l1",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S8 Solve simultaneous equations by substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $y = [[m]]x$ and $x + y = [[(m + 1) * x0]]$ by substitution.",
+   "answer": "$x + [[m]]x = [[(m + 1) * x0]]$, so $x = [[x0]]$ and $y = [[m * x0]]$"
+  },
+  {
+   "id": "y9su5-s08-l2",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S8 Solve simultaneous equations by substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "Solve $y = x + [[c]]$ and $[[p]]x + y = [[p * x0 + x0 + c]]$.",
+   "answer": "$x = [[x0]]$, $y = [[x0 + c]]$"
+  },
+  {
+   "id": "y9su5-s08-l3",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S8 Solve simultaneous equations by substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "m * x0 > c"
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "Solve $y = [[m]]x - [[c]]$ and $[[p]]x + [[q]]y = [[p * x0 + q * (m * x0 - c)]]$ by substitution.",
+   "answer": "$x = [[x0]]$, $y = [[m * x0 - c]]$"
+  },
+  {
+   "id": "y9su5-s08-l4",
+   "topic": "Algebra",
+   "subtopic": "Solve simultaneous equations by substitution (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B5 Simultaneous equations · S8 Solve simultaneous equations by substitution (E)",
+   "keywords": [
+    "solve",
+    "simultaneous",
+    "equations",
+    "by",
+    "substitution",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       5
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The line $y = [[m]]x + [[c]]$ meets the line $[[p]]x + y = [[p * x0 + m * x0 + c]]$. Find the point of intersection. (4 marks)",
+   "answer": "([[x0]], [[m * x0 + c]])"
+  }
+ ]
+}

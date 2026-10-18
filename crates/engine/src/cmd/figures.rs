@@ -277,7 +277,10 @@ impl Fig<'_> {
 
     /// `base`, `height`, `hyp`: side labels; `angle`: the angle at the right-hand end of the base.
     fn right_triangle(&self, s: &mut Session) -> Result<()> {
-        let [x, y, w, h] = self.fit(1.35, 26.0);
+        // `baseLength` and `heightLength` (numbers) draw the triangle to the right proportions.
+        let (bl, hl) = (self.num("baseLength", 0.0), self.num("heightLength", 0.0));
+        let aspect = if bl > 0.0 && hl > 0.0 { (bl / hl).clamp(0.45, 2.4) } else { 1.35 };
+        let [x, y, w, h] = self.fit(aspect, 26.0);
         let (c, b, a) = ([x, y + h], [x + w, y + h], [x, y]);
         poly(s, &[a, b, c])?;
         right_angle(s, c, a, b)?;
@@ -1535,7 +1538,14 @@ impl Fig<'_> {
                 }
                 if let Some(t) = l.get("label").and_then(Value::as_str) {
                     let e = if b[1] >= a[1] { b } else { a };
-                    label(s, t, [(px(e[0]) - 6.0).clamp(x + 24.0, x + w - 24.0), (py(e[1]) + 14.0).clamp(y + 10.0, y + h - 10.0)])?;
+                    label(
+                        s,
+                        t,
+                        [
+                            (px(e[0]) - 6.0).clamp(x + 24.0, (x + w - 24.0).max(x + 24.0)),
+                            (py(e[1]) + 14.0).clamp(y + 10.0, (y + h - 10.0).max(y + 10.0)),
+                        ],
+                    )?;
                 }
             }
         }

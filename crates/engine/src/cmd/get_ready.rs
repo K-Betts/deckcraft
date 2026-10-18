@@ -591,7 +591,7 @@ mod tests {
         // Many seeds, so every question gets drawn: the text on the slide must be the bank's text.
         let starter = crate::questions::starter().expect("bank");
         let mut seen = std::collections::HashSet::new();
-        for seed in 0..400u64 {
+        for seed in 0..900u64 {
             // Templates make their question from the seed, as the slide will.
             let bank = starter.instantiate(seed);
             let mut s = Session::with_new();
@@ -608,7 +608,7 @@ mod tests {
             }
         }
         let usable = starter.questions.iter().filter(|q| q.usable()).count() + starter.templates.len();
-        // With this many questions, 400 slides of eight will not reach every one: most are drawn.
+        // With this many questions, 900 slides of eight will not reach every one: most are drawn.
         assert!(seen.len() * 10 >= usable * 8, "only {} of {usable} questions were drawn", seen.len());
     }
 
