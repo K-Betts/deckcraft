@@ -1,0 +1,2178 @@
+{
+ "version": 1,
+ "note": "Y9 Summer Block 3 Sets and probability: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y9su3-s01-l1",
+   "topic": "Probability",
+   "subtopic": "Identify and represent sets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S1 Identify and represent sets",
+   "keywords": [
+    "identify",
+    "and",
+    "represent",
+    "sets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$A = {x : x$ is a multiple of [[k]] and $x \\leq [[4 * k]]}$. List the elements of $A$.",
+   "answer": "$A = {[[k]], [[2 * k]], [[3 * k]], [[4 * k]]}$"
+  },
+  {
+   "id": "y9su3-s01-l2",
+   "topic": "Probability",
+   "subtopic": "Identify and represent sets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S1 Identify and represent sets",
+   "keywords": [
+    "identify",
+    "and",
+    "represent",
+    "sets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "$A = {[[k]], [[2 * k]], [[3 * k]], [[4 * k]]}$. Is [[t]] in $A$? Write your answer using $\\in$ or $∉$.",
+   "answer": "$[[t]] [[t % k == 0 && t <= 4 * k|if:\\in/∉]] A$"
+  },
+  {
+   "id": "y9su3-s01-l3",
+   "topic": "Probability",
+   "subtopic": "Identify and represent sets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S1 Identify and represent sets",
+   "keywords": [
+    "identify",
+    "and",
+    "represent",
+    "sets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       12,
+       18,
+       20,
+       24,
+       30,
+       36
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, 3, \\dots, [[N]]}$. $A$ is the set of factors of [[N]]. Write down $n(A)$.",
+   "answer": "[[ndiv(N)]]"
+  },
+  {
+   "id": "y9su3-s01-l4",
+   "topic": "Probability",
+   "subtopic": "Identify and represent sets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S1 Identify and represent sets",
+   "keywords": [
+    "identify",
+    "and",
+    "represent",
+    "sets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]] and $B$ = multiples of [[b]]. Find $n(A)$ and $n(B)$. (2 marks)",
+   "answer": "$n(A) = [[floor(N / a)]]$, $n(B) = [[floor(N / b)]]$"
+  },
+  {
+   "id": "y9su3-s02-l1",
+   "topic": "Probability",
+   "subtopic": "Intersection of sets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S2 Intersection of sets",
+   "keywords": [
+    "intersection",
+    "of",
+    "sets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       3,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "3 * lcm(a, b) < 70"
+   ],
+   "check": [
+    "a > 0"
+   ],
+   "text": "$A$ = multiples of [[a]] up to [[3 * lcm(a, b)]] and $B$ = multiples of [[b]] up to [[3 * lcm(a, b)]]. List $A \\cap B$.",
+   "answer": "$A \\cap B = {[[lcm(a, b)]], [[2 * lcm(a, b)]], [[3 * lcm(a, b)]]}$"
+  },
+  {
+   "id": "y9su3-s02-l2",
+   "topic": "Probability",
+   "subtopic": "Intersection of sets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S2 Intersection of sets",
+   "keywords": [
+    "intersection",
+    "of",
+    "sets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b",
+    "floor(N / lcm(a, b)) > 0"
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]], $B$ = multiples of [[b]]. How many elements are in $A \\cap B$?",
+   "answer": "[[floor(N / lcm(a, b))]]"
+  },
+  {
+   "id": "y9su3-s02-l3",
+   "topic": "Probability",
+   "subtopic": "Intersection of sets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S2 Intersection of sets",
+   "keywords": [
+    "intersection",
+    "of",
+    "sets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$A \\cap B = \\emptyset$ means no common elements. $A$ = even numbers and $B$ = odd numbers up to [[N]]. Is $A \\cap B$ empty? Explain.",
+   "answer": "Yes: a number cannot be both even and odd, so $A \\cap B = \\emptyset$"
+  },
+  {
+   "id": "y9su3-s02-l4",
+   "topic": "Probability",
+   "subtopic": "Intersection of sets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S2 Intersection of sets",
+   "keywords": [
+    "intersection",
+    "of",
+    "sets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       28,
+       32
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       15
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       3,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "In a class of [[T]], [[a]] study French, [[b]] study Spanish and [[c]] study both. Write down $n(F \\cap S)$ and how many study only French. (2 marks)",
+   "answer": "$n(F \\cap S) = [[c]]$; only French [[a - c]]"
+  },
+  {
+   "id": "y9su3-s03-l1",
+   "topic": "Probability",
+   "subtopic": "Union of sets",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S3 Union of sets",
+   "keywords": [
+    "union",
+    "of",
+    "sets",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "$n(A) = [[a]]$, $n(B) = [[b]]$ and $n(A \\cap B) = [[c]]$. Work out $n(A ∪ B)$.",
+   "answer": "[[a + b - c]]"
+  },
+  {
+   "id": "y9su3-s03-l2",
+   "topic": "Probability",
+   "subtopic": "Union of sets",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S3 Union of sets",
+   "keywords": [
+    "union",
+    "of",
+    "sets",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       30,
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       2,
+       3,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a != b"
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]], $B$ = multiples of [[b]]. How many elements are in $A ∪ B$?",
+   "answer": "[[floor(N / a) + floor(N / b) - floor(N / lcm(a, b))]]"
+  },
+  {
+   "id": "y9su3-s03-l3",
+   "topic": "Probability",
+   "subtopic": "Union of sets",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S3 Union of sets",
+   "keywords": [
+    "union",
+    "of",
+    "sets",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "a > c"
+   ],
+   "text": "Explain why $n(A ∪ B) = n(A) + n(B) - n(A \\cap B)$ with $n(A) = [[a]]$, $n(B) = [[b]]$, $n(A \\cap B) = [[c]]$.",
+   "answer": "The [[c]] common elements are counted twice when adding [[a]] + [[b]], so subtract them once: [[a + b - c]]"
+  },
+  {
+   "id": "y9su3-s03-l4",
+   "topic": "Probability",
+   "subtopic": "Union of sets",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S3 Union of sets",
+   "keywords": [
+    "union",
+    "of",
+    "sets",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       30,
+       36
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       14,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       12,
+       18
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b - (T - n) > 0",
+    "a + b - (T - n) < 12"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "[[T]] pupils: [[a]] play football, [[b]] play rugby and [[n]] play neither. How many play both? (3 marks)",
+   "answer": "[[a + b - (T - n)]]"
+  },
+  {
+   "id": "y9su3-s04-l1",
+   "topic": "Probability",
+   "subtopic": "Complement of a set (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S4 Complement of a set (E)",
+   "keywords": [
+    "complement",
+    "of",
+    "a",
+    "set",
+    "e",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       6,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > a"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$ and $n(A) = [[a]]$. Work out $n(A')$.",
+   "answer": "[[N - a]]"
+  },
+  {
+   "id": "y9su3-s04-l2",
+   "topic": "Probability",
+   "subtopic": "Complement of a set (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S4 Complement of a set (E)",
+   "keywords": [
+    "complement",
+    "of",
+    "a",
+    "set",
+    "e",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "int": [
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       18,
+       28
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > u"
+   ],
+   "text": "$\\xi$ has [[N]] elements, $n(A ∪ B) = [[u]]$. Work out $n((A ∪ B)')$.",
+   "answer": "[[N - u]]"
+  },
+  {
+   "id": "y9su3-s04-l3",
+   "topic": "Probability",
+   "subtopic": "Complement of a set (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S4 Complement of a set (E)",
+   "keywords": [
+    "complement",
+    "of",
+    "a",
+    "set",
+    "e",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "choose": [
+       3,
+       4,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "$\\xi = {1, 2, \\dots, [[N]]}$, $A$ = multiples of [[a]]. Write down $n(A')$ and describe $A'$.",
+   "answer": "$n(A') = [[N - floor(N / a)]]$: the numbers that are not multiples of [[a]]"
+  },
+  {
+   "id": "y9su3-s04-l4",
+   "topic": "Probability",
+   "subtopic": "Complement of a set (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S4 Complement of a set (E)",
+   "keywords": [
+    "complement",
+    "of",
+    "a",
+    "set",
+    "e",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "T",
+     {
+      "int": [
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "a",
+     {
+      "int": [
+       10,
+       16
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       8,
+       14
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       6
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "T > a + b - c"
+   ],
+   "check": [
+    "T > 0"
+   ],
+   "text": "$n(\\xi) = [[T]]$, $n(A) = [[a]]$, $n(B) = [[b]]$ and $n(A \\cap B) = [[c]]$. Find $n(A ∪ B)$ and $n((A ∪ B)')$. (3 marks)",
+   "answer": "$n(A ∪ B) = [[a + b - c]]$; $n((A ∪ B)') = [[T - a - b + c]]$"
+  },
+  {
+   "id": "y9su3-s05-l1",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S5 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A fair six-sided dice is rolled. Work out the probability of rolling a number greater than [[k]].",
+   "answer": "$[[(6 - k) / 6|frac]]$"
+  },
+  {
+   "id": "y9su3-s05-l2",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S5 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "N",
+     {
+      "choose": [
+       20,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       3,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "N > 0"
+   ],
+   "text": "A card is chosen from 1 to [[N]]. Work out the probability that it is a multiple of [[m]].",
+   "answer": "$[[floor(N / m) / N|frac]]$"
+  },
+  {
+   "id": "y9su3-s05-l3",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S5 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "g",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != b"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A bag has [[r]] red, [[b]] blue and [[g]] green counters. One is chosen. Find P(red), P(not red) and P(red or blue) as fractions.",
+   "answer": "$[[r / (r + b + g)|frac]]$, $[[(b + g) / (r + b + g)|frac]]$, $[[(r + b) / (r + b + g)|frac]]$"
+  },
+  {
+   "id": "y9su3-s05-l4",
+   "topic": "Probability",
+   "subtopic": "Probability of a single event",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S5 Probability of a single event",
+   "keywords": [
+    "probability",
+    "of",
+    "a",
+    "single",
+    "event",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       15,
+       20
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       5,
+       10
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       100,
+       200,
+       400
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "The probability that a bus is late is [[p / 100]] and that it is cancelled is [[q / 100]]. Work out the probability that it is on time. If there are [[n]] buses, how many do you expect to be on time? (3 marks)",
+   "answer": "P(on time) = [[(100 - p - q) / 100]]; [[n * (100 - p - q) / 100]] buses"
+  },
+  {
+   "id": "y9su3-s06-l1",
+   "topic": "Probability",
+   "subtopic": "Use diagrams to work out probabilities",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S6 Use diagrams to work out probabilities",
+   "keywords": [
+    "use",
+    "diagrams",
+    "to",
+    "work",
+    "out",
+    "probabilities",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 1"
+   ],
+   "text": "The table shows the totals when two fair dice are rolled. Work out the probability of a total of [[t]].",
+   "answer": "[[t == 2 || t == 12|if:1/]][[t == 3 || t == 11|if:2/]][[t == 4 || t == 10|if:3/]][[t == 5 || t == 9|if:4/]][[t == 6 || t == 8|if:5/]][[t == 7|if:6/]] out of 36",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "+",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "rows": [
+     [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+     ],
+     [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+     ],
+     [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ],
+     [
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+     ],
+     [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su3-s06-l2",
+   "topic": "Probability",
+   "subtopic": "Use diagrams to work out probabilities",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S6 Use diagrams to work out probabilities",
+   "keywords": [
+    "use",
+    "diagrams",
+    "to",
+    "work",
+    "out",
+    "probabilities",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "int": [
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 1"
+   ],
+   "text": "Use the sample space diagram for two dice. Work out the probability of a total of at least [[t]].",
+   "answer": "[[t == 8|if:15/]][[t == 9|if:10/]][[t == 10|if:6/]][[t == 11|if:3/]][[t == 12|if:1/]] out of 36",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "+",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "rows": [
+     [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+     ],
+     [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+     ],
+     [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ],
+     [
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+     ],
+     [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su3-s06-l3",
+   "topic": "Probability",
+   "subtopic": "Use diagrams to work out probabilities",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S6 Use diagrams to work out probabilities",
+   "keywords": [
+    "use",
+    "diagrams",
+    "to",
+    "work",
+    "out",
+    "probabilities",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "t",
+     {
+      "choose": [
+       7,
+       12,
+       3,
+       11
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "t > 1"
+   ],
+   "text": "Use the sample space diagram for two dice. Work out the probability that the total is [[t]]. Which total is most likely?",
+   "answer": "[[t == 7|if:6/]][[t == 12|if:1/]][[t == 3|if:2/]][[t == 11|if:2/]] out of 36; the most likely total is 7 (6 out of 36)",
+   "diagram": {
+    "kind": "table",
+    "headers": [
+     "+",
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6"
+    ],
+    "rows": [
+     [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+     ],
+     [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8"
+     ],
+     [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ],
+     [
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10"
+     ],
+     [
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11"
+     ],
+     [
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "y9su3-s06-l4",
+   "topic": "Probability",
+   "subtopic": "Use diagrams to work out probabilities",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S6 Use diagrams to work out probabilities",
+   "keywords": [
+    "use",
+    "diagrams",
+    "to",
+    "work",
+    "out",
+    "probabilities",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       6,
+       12,
+       4,
+       36
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two fair dice are rolled and the numbers are multiplied. Use a sample space diagram to find P(product is [[p]]). (2 marks)",
+   "answer": "[[p == 6|if:4/]][[p == 12|if:4/]][[p == 4|if:3/]][[p == 36|if:1/]] out of 36"
+  },
+  {
+   "id": "y9su3-s07-l1",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S7 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       10,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A spinner lands on red [[r]] times in [[n]] spins. Work out the relative frequency of red.",
+   "answer": "$[[r / n|frac]]$ = [[r / n|dp:2]]"
+  },
+  {
+   "id": "y9su3-s07-l2",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S7 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       30,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "h < n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A coin is flipped [[n]] times and lands on heads [[h]] times. Is the coin fair? Work out the relative frequency of heads.",
+   "answer": "[[h / n|dp:2]]: [[abs(h / n - 0.5) < 0.06|if:close to 0.5, so it seems fair/not close to 0.5, so it may be biased]]"
+  },
+  {
+   "id": "y9su3-s07-l3",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S7 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "u",
+     {
+      "int": [
+       20,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "u < n"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "In an experiment, a drawing pin lands point up [[u]] times in [[n]] trials. Estimate the probability it lands point up, and the probability it lands point down.",
+   "answer": "[[u / n|dp:2]] and [[(n - u) / n|dp:2]]"
+  },
+  {
+   "id": "y9su3-s07-l4",
+   "topic": "Probability",
+   "subtopic": "Relative frequency",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S7 Relative frequency",
+   "keywords": [
+    "relative",
+    "frequency",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       20,
+       50
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "choose": [
+       500,
+       1000
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "g",
+     "n - r - b"
+    ]
+   ],
+   "where": [
+    "g > 10"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A spinner is spun [[n]] times: red [[r]], blue [[b]], green [[g]]. (a) Work out the relative frequency of each colour. (b) Estimate how many greens in [[m]] spins. (3 marks)",
+   "answer": "(a) [[r / n|dp:2]], [[b / n|dp:2]], [[g / n|dp:2]]  (b) [[g * m / n|dp:0]]"
+  },
+  {
+   "id": "y9su3-s08-l1",
+   "topic": "Probability",
+   "subtopic": "Expected outcomes",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S8 Expected outcomes",
+   "keywords": [
+    "expected",
+    "outcomes",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       30,
+       50,
+       100,
+       200
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(p * n / 100)"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "The probability of rain is [[p / 100]]. How many rainy days would you expect in [[n]] days?",
+   "answer": "[[p * n / 100]]"
+  },
+  {
+   "id": "y9su3-s08-l2",
+   "topic": "Probability",
+   "subtopic": "Expected outcomes",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S8 Expected outcomes",
+   "keywords": [
+    "expected",
+    "outcomes",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A fair dice is rolled [[n * 6]] times. How many times would you expect a 5?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y9su3-s08-l3",
+   "topic": "Probability",
+   "subtopic": "Expected outcomes",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S8 Expected outcomes",
+   "keywords": [
+    "expected",
+    "outcomes",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       50,
+       100,
+       200
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r != b"
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A bag has [[r]] red and [[b]] blue counters. A counter is picked and replaced [[n]] times. How many red do you expect?",
+   "answer": "[[r * n / (r + b)|dp:1]]"
+  },
+  {
+   "id": "y9su3-s08-l4",
+   "topic": "Probability",
+   "subtopic": "Expected outcomes",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S8 Expected outcomes",
+   "keywords": [
+    "expected",
+    "outcomes",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       25
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       100,
+       200
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       5,
+       8,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 0"
+   ],
+   "text": "A game is won with probability [[p / 100]]. It is played [[n]] times and costs £[[c]] to play. A win pays £[[w]]. Work out the expected profit. (4 marks)",
+   "answer": "Expected wins [[p * n / 100]]; income £[[p * n / 100 * w]]; cost £[[n * c]]; expected profit £[[p * n / 100 * w - n * c]]"
+  },
+  {
+   "id": "y9su3-s09-l1",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S9 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "A fair coin is flipped and a fair dice is rolled. Work out the probability of a head and a [[k]].",
+   "answer": "$\\frac{1}{12}$"
+  },
+  {
+   "id": "y9su3-s09-l2",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S9 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       5,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "$P(A) = \\frac{[[a]]}{[[b]]}$ and $P(B) = \\frac{[[c]]}{[[d]]}$ and the events are independent. Work out $P(A \\text{ and } B)$.",
+   "answer": "$[[a * c / (b * d)|frac]]$"
+  },
+  {
+   "id": "y9su3-s09-l3",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S9 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "choose": [
+       20,
+       40,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "The probability that Ali is late is [[p / 100]] and that Ben is late is [[q / 100]], independently. Work out P(both late) and P(neither late).",
+   "answer": "[[p * q / 10000|dp:3]]; [[(100 - p) * (100 - q) / 10000|dp:3]]"
+  },
+  {
+   "id": "y9su3-s09-l4",
+   "topic": "Probability",
+   "subtopic": "Independent events",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S9 Independent events",
+   "keywords": [
+    "independent",
+    "events",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "choose": [
+       5,
+       6,
+       8
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "choose": [
+       4,
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(a, b) == 1",
+    "gcd(c, d) == 1"
+   ],
+   "check": [
+    "b > 0"
+   ],
+   "text": "The probability of rain on Saturday is $\\frac{[[a]]}{[[b]]}$ and on Sunday is $\\frac{[[c]]}{[[d]]}$ (independent). Work out the probability that it rains on at least one of the days. (4 marks)",
+   "answer": "$1 - [[(b - a) * (d - c) / (b * d)|frac]] = [[1 - (b - a) * (d - c) / (b * d)|frac]]$"
+  },
+  {
+   "id": "y9su3-s10-l1",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S10 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 9",
+    "support"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "The Venn diagram shows the number of pupils in each region. A pupil is chosen at random. Work out P(A).",
+   "answer": "$[[(x + y) / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y9su3-s10-l2",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S10 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 9",
+    "core"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. Work out P(A and B).",
+   "answer": "$[[y / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y9su3-s10-l3",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S10 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 9",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. Work out P(A or B) and P(neither).",
+   "answer": "$[[(x + y + z) / (x + y + z + w)|frac]]$; $[[w / (x + y + z + w)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  },
+  {
+   "id": "y9su3-s10-l4",
+   "topic": "Probability",
+   "subtopic": "Probabilities from Venn diagrams",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y9",
+   "source": "Y9 Summer B3 Sets and probability · S10 Probabilities from Venn diagrams",
+   "keywords": [
+    "probabilities",
+    "from",
+    "venn",
+    "diagrams",
+    "year 9",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "x",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "y",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ],
+    [
+     "z",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "x > 0"
+   ],
+   "text": "Use the Venn diagram. A pupil in A is chosen. Work out the probability that they are also in B. (3 marks)",
+   "answer": "$[[y / (x + y)|frac]]$",
+   "diagram": {
+    "kind": "venn",
+    "a": "A",
+    "b": "B",
+    "onlyA": "[[x]]",
+    "both": "[[y]]",
+    "onlyB": "[[z]]",
+    "outside": "[[w]]"
+   }
+  }
+ ]
+}

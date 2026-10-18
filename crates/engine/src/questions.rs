@@ -58,6 +58,12 @@ pub const STARTER_FILES: &[&str] = &[
     include_str!("../../../assets/questions/y9-spring-b4-constructions-congruence.json"),
     include_str!("../../../assets/questions/y9-spring-b5-similarity.json"),
     include_str!("../../../assets/questions/y9-spring-b6-algebraic-manipulation.json"),
+    include_str!("../../../assets/questions/y9-summer-b1-pythagoras.json"),
+    include_str!("../../../assets/questions/y9-summer-b2-non-linear-graphs.json"),
+    include_str!("../../../assets/questions/y9-summer-b3-sets-probability.json"),
+    include_str!("../../../assets/questions/y9-summer-b4-transformations.json"),
+    include_str!("../../../assets/questions/y9-summer-b5-simultaneous-equations.json"),
+    include_str!("../../../assets/questions/y9-summer-b6-trigonometry.json"),
 ];
 
 const MAX_BYTES: usize = 4 << 20;
@@ -698,7 +704,7 @@ mod tests {
                 steps.entry(t.source.clone()).or_default().insert(t.difficulty);
             }
         }
-        assert!(steps.len() >= 360, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
+        assert!(steps.len() >= 410, "the Year 7 and 8 steps written so far are all there: {}", steps.len());
         for (step, levels) in &steps {
             assert_eq!(levels.iter().copied().collect::<Vec<_>>(), vec![1, 2, 3, 4], "{step} needs support, core, stretch and exam style");
         }
