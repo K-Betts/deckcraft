@@ -137,18 +137,13 @@ fn buttons_if(ui: &mut Ui, ok_label: &str, can_ok: bool) -> (bool, bool) {
     ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
         let t = Tokens::get(ui.ctx());
         // The one main action is a filled accent button; the way out is quiet text.
-        if ui
-            .add(
-                egui::Button::new(egui::RichText::new(ok_label).color(t.accent_text).font(theme::bold(13.0)))
-                    .fill(t.accent)
-                    .corner_radius(theme::radius::CONTROL)
-                    .min_size(vec2(88.0, 32.0)),
-            )
-            .clicked()
-            || ui.input(|i| i.key_pressed(egui::Key::Enter))
-        {
-        let go =
-            ui.add_enabled(can_ok, egui::Button::new(egui::RichText::new(ok_label).color(t.accent_text)).fill(t.accent).min_size(vec2(72.0, 24.0)));
+        let go = ui.add_enabled(
+            can_ok,
+            egui::Button::new(egui::RichText::new(ok_label).color(t.accent_text).font(theme::bold(13.0)))
+                .fill(t.accent)
+                .corner_radius(theme::radius::CONTROL)
+                .min_size(vec2(88.0, 32.0)),
+        );
         if can_ok && (go.clicked() || ui.input(|i| i.key_pressed(egui::Key::Enter))) {
             ok = true;
         }
