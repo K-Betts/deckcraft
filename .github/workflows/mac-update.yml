@@ -1,8 +1,10 @@
 name: Publish Mac update
 
 # Builds DeckCraft for Apple Silicon Macs and publishes it as a GitHub Release that the app's
-# "Update available" check finds. NOTHING runs automatically: you start it yourself from
-# GitHub > Actions > "Publish Mac update" > Run workflow. Until you do, no build is public.
+# "Update available" check finds. It runs by itself whenever something is merged to main (a pull
+# request merge, not a push to a branch), and you can still start it by hand from
+# GitHub > Actions > "Publish Mac update" > Run workflow. Merges that only change Markdown files
+# or docs/ do not publish a build.
 #
 # What the app looks for (crates/update/src/release.rs): the latest release must contain
 #   DeckCraft-macos-aarch64-<7 character commit>.zip   and   <same name>.sha256
@@ -10,6 +12,11 @@ name: Publish Mac update
 # The app is ad-hoc signed (no Apple Developer account): fine for the Mac that builds and
 # updates itself; another Mac's Gatekeeper will warn on a first manual download.
 on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - "**.md"
+      - "docs/**"
   workflow_dispatch:
     inputs:
       notes:
@@ -68,7 +75,14 @@ jobs:
           NOTES: ${{ inputs.notes }}
         run: |
           TAG="build-${{ steps.pack.outputs.sha7 }}"
-          BODY="${NOTES:-Built from $(git log -1 --pretty=%s).}"
+          # A merged pull request's own title is in the merge commit's body, not its subject.
+          WHAT="$(git log -1 --pretty=%s)"
+          case "${WHAT}" in "Merge pull request"*) WHAT="$(git log -1 --pretty=%b | head -1)";; esac
+          BODY="${NOTES:-${WHAT}}"
+          if gh release view "${TAG}" >/dev/null 2>&1; then
+            echo "Release ${TAG} already exists; nothing to publish."
+            exit 0
+          fi
           gh release create "${TAG}" \
             "out/${{ steps.pack.outputs.name }}" "out/${{ steps.pack.outputs.name }}.sha256" \
             --title "DeckCraft ${TAG}" --notes "${BODY}" --latest

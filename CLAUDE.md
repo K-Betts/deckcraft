@@ -4,7 +4,8 @@ This is Kieran's fork of DeckCraft (K-Betts/deckcraft), being turned into a free
 maths teachers. Read in this order:
 
 1. **[MATHS.md](MATHS.md)**: the goal, the phase plan and where things stand. Start there.
-2. **[AGENTS.md](AGENTS.md)**: the project's rules (asset policy, clean room, never crash,
+2. **[docs/how-it-fits-together.md](docs/how-it-fits-together.md)**: one page on how the crates fit and how a change reaches teachers.
+3. **[AGENTS.md](AGENTS.md)**: the project's rules (asset policy, clean room, never crash,
    architecture). They bind you, except where the fork rules below change them.
 
 ## Fork rules (these win over AGENTS.md and craftrules on git, publishing and asking)

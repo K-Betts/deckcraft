@@ -8,7 +8,7 @@
 
 use serde_json::{Value, json};
 
-use super::slide::{draw_line, draw_shape, rich_text_box};
+use super::get_ready::{draw_line, draw_shape, rich_text_box};
 use crate::{Result, Session};
 
 const INK: &str = "#111827";
