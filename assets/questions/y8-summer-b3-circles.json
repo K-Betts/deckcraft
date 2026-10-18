@@ -1,0 +1,1477 @@
+{
+ "version": 1,
+ "note": "Y8 Summer Block 3 Circles: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8su3-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Circle vocabulary",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S1 Circle vocabulary",
+   "keywords": [
+    "circle",
+    "vocabulary",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       7
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "What is the name for [[k == 0|if:a straight line from the centre to the edge of a circle/]][[k == 1|if:a straight line through the centre that touches the edge twice/]][[k == 2|if:a straight line joining two points on a circle that does not pass through the centre/]][[k == 3|if:the distance around the outside of a circle/]][[k == 4|if:part of the circumference/]][[k == 5|if:a region bounded by two radii and an arc/]][[k == 6|if:the region between a chord and an arc/]][[k == 7|if:a line that touches a circle at one point/]]?",
+   "answer": "[[k == 0|if:radius/]][[k == 1|if:diameter/]][[k == 2|if:chord/]][[k == 3|if:circumference/]][[k == 4|if:arc/]][[k == 5|if:sector/]][[k == 6|if:segment/]][[k == 7|if:tangent/]]"
+  },
+  {
+   "id": "y8su3-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Circle vocabulary",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S1 Circle vocabulary",
+   "keywords": [
+    "circle",
+    "vocabulary",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       6,
+       30
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "2 * r / 2 == r"
+   ],
+   "text": "A circle has a radius of [[r]] cm. Work out its diameter. A second circle has a diameter of [[d]] cm. Work out its radius.",
+   "answer": "[[2 * r]] cm; [[d / 2]] cm",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm",
+    "centre": "O"
+   }
+  },
+  {
+   "id": "y8su3-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Circle vocabulary",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S1 Circle vocabulary",
+   "keywords": [
+    "circle",
+    "vocabulary",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Ali says that a diameter is a chord. Is he right? Which is the longest chord? Explain.",
+   "answer": "Yes: a diameter joins two points on the circle, so it is a chord. It is the longest chord, with length [[2 * r]] cm when the radius is [[r]] cm"
+  },
+  {
+   "id": "y8su3-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Circle vocabulary",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S1 Circle vocabulary",
+   "keywords": [
+    "circle",
+    "vocabulary",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d - c < d"
+   ],
+   "text": "A circle has a diameter of [[d]] cm. (a) Write down its radius. (b) A chord is [[d - c]] cm long. Is this the longest chord? Explain. (3 marks)",
+   "answer": "(a) [[d / 2]] cm  (b) No: the longest chord is the diameter, [[d]] cm"
+  },
+  {
+   "id": "y8su3-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Pi as a ratio",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S2 Pi as a ratio",
+   "keywords": [
+    "pi",
+    "as",
+    "a",
+    "ratio",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       5,
+       10,
+       20,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d * 314 / 100 / d == 3.14"
+   ],
+   "text": "A circle has a diameter of [[d]] cm and a circumference of [[d * 314 / 100]] cm. Work out the circumference ÷ diameter.",
+   "answer": "3.14"
+  },
+  {
+   "id": "y8su3-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Pi as a ratio",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S2 Pi as a ratio",
+   "keywords": [
+    "pi",
+    "as",
+    "a",
+    "ratio",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       5,
+       10,
+       20,
+       30,
+       50
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Use $\\pi = 3.14$ to work out the circumference of a circle with diameter [[d]] cm.",
+   "answer": "[[d * 314 / 100]] cm"
+  },
+  {
+   "id": "y8su3-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Pi as a ratio",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S2 Pi as a ratio",
+   "keywords": [
+    "pi",
+    "as",
+    "a",
+    "ratio",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d1",
+     {
+      "choose": [
+       2,
+       4,
+       5
+      ]
+     }
+    ],
+    [
+     "d2",
+     {
+      "choose": [
+       10,
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "d3",
+     {
+      "choose": [
+       50,
+       60,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d1 > 0"
+   ],
+   "text": "Three circles are measured: diameters [[d1]] cm, [[d2]] cm and [[d3]] cm have circumferences [[d1 * 314 / 100]] cm, [[d2 * 314 / 100]] cm and [[d3 * 314 / 100]] cm. What do you notice about circumference ÷ diameter?",
+   "answer": "It is always 3.14 (that is the value of $\\pi$): circumference ÷ diameter is the same for every circle"
+  },
+  {
+   "id": "y8su3-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Pi as a ratio",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S2 Pi as a ratio",
+   "keywords": [
+    "pi",
+    "as",
+    "a",
+    "ratio",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       50,
+       60,
+       70,
+       80
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "choose": [
+       10,
+       20,
+       50,
+       100
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A bicycle wheel has a diameter of [[d]] cm. (a) Use $\\pi = 3.14$ to work out how far it travels in one turn. (b) How far does it travel in [[n]] turns? Give your answer in metres. (3 marks)",
+   "answer": "(a) [[d * 314 / 100]] cm  (b) [[d * 314 * n / 10000]] m"
+  },
+  {
+   "id": "y8su3-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Circumference of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S3 Circumference of a circle",
+   "keywords": [
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the circumference of the circle. Give your answer in terms of $\\pi$.",
+   "answer": "$[[d]]\\pi$ cm",
+   "diagram": {
+    "kind": "circle",
+    "diameter": "[[d]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Circumference of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S3 Circumference of a circle",
+   "keywords": [
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has a radius of [[r]] cm. Work out its circumference in terms of $\\pi$.",
+   "answer": "$[[2 * r]]\\pi$ cm",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Circumference of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S3 Circumference of a circle",
+   "keywords": [
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       7,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the circumference of a circle with diameter [[d]] cm. Give your answer to 1 decimal place.",
+   "answer": "[[d * 3.14159265|dp:1]] cm",
+   "diagram": {
+    "kind": "circle",
+    "diameter": "[[d]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Circumference of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S3 Circumference of a circle",
+   "keywords": [
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "The circumference of a circle is [[2 * r * 3.14159265|dp:1]] cm. Work out its radius to 1 decimal place. (3 marks)",
+   "answer": "[[r|dp:1]] cm"
+  },
+  {
+   "id": "y8su3-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S4 Area of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the area of the circle. Give your answer in terms of $\\pi$.",
+   "answer": "$[[r * r]]\\pi$ cm²",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S4 Area of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d * d / 4 * 4 == d * d"
+   ],
+   "text": "A circle has a diameter of [[d]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[d * d / 4]]\\pi$ cm²",
+   "diagram": {
+    "kind": "circle",
+    "diameter": "[[d]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S4 Area of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "Work out the area of a circle with radius [[r]] cm. Give your answer to 1 decimal place.",
+   "answer": "[[r * r * 3.14159265|dp:1]] cm²",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S4 Area of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k > 0"
+   ],
+   "text": "The area of a circle is $[[k * k]]\\pi$ cm². (a) Work out its radius. (b) Work out its circumference in terms of $\\pi$. (3 marks)",
+   "answer": "(a) [[k]] cm  (b) $[[2 * k]]\\pi$ cm"
+  },
+  {
+   "id": "y8su3-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S5 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d * d / 4 * 4 == d * d"
+   ],
+   "text": "A circle has a diameter of [[d]] cm. Work out (a) its circumference (b) its area, both in terms of $\\pi$.",
+   "answer": "(a) $[[d]]\\pi$ cm  (b) $[[d * d / 4]]\\pi$ cm²",
+   "diagram": {
+    "kind": "circle",
+    "diameter": "[[d]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S5 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has a radius of [[r]] cm. Work out its circumference and area to 1 decimal place.",
+   "answer": "Circumference [[2 * r * 3.14159265|dp:1]] cm; area [[r * r * 3.14159265|dp:1]] cm²",
+   "diagram": {
+    "kind": "circle",
+    "radius": "[[r]] cm"
+   }
+  },
+  {
+   "id": "y8su3-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S5 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "choose": [
+       2,
+       3,
+       4,
+       5,
+       6
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circle has radius [[r]] cm. Mia says its circumference and its area are the same number. Is she right? Work out both in terms of $\\pi$.",
+   "answer": "Circumference $[[2 * r]]\\pi$, area $[[r * r]]\\pi$: [[r == 2|if:she is right only because the radius is 2/she is not right: the numbers are different]]"
+  },
+  {
+   "id": "y8su3-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Area and circumference of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S5 Area and circumference of a circle",
+   "keywords": [
+    "area",
+    "and",
+    "circumference",
+    "of",
+    "a",
+    "circle",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       1,
+       3
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "choose": [
+       4,
+       5,
+       8,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A circular table has a circumference of $[[2 * r]]\\pi$ m. (a) Work out its radius. (b) Work out its area in terms of $\\pi$. (c) A tablecloth costs £[[p]] per m². Work out the cost to cover the table, to the nearest penny. (4 marks)",
+   "answer": "(a) [[r]] m  (b) $[[r * r|coef]]\\pi$ m²  (c) £[[r * r * 3.14159265 * p|dp:2]]"
+  },
+  {
+   "id": "y8su3-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of parts of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S6 Perimeter of parts of a circle",
+   "keywords": [
+    "perimeter",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       4,
+       24
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "d % 2 == 0"
+   ],
+   "check": [
+    "d / 2 * 2 == d"
+   ],
+   "text": "A semicircle has a diameter of [[d]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[d / 2|coef]]\\pi + [[d]]$ cm"
+  },
+  {
+   "id": "y8su3-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of parts of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S6 Perimeter of parts of a circle",
+   "keywords": [
+    "perimeter",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r / 2 * 2 == r"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[r / 2|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y8su3-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of parts of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S6 Perimeter of parts of a circle",
+   "keywords": [
+    "perimeter",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the perimeter of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * 3.14159265 / 2 + d|dp:1]] cm"
+  },
+  {
+   "id": "y8su3-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of parts of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S6 Perimeter of parts of a circle",
+   "keywords": [
+    "perimeter",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * t / 180)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. (a) Work out the length of its arc in terms of $\\pi$. (b) Work out its perimeter in terms of $\\pi$. (3 marks)",
+   "answer": "(a) $[[r * t / 180|coef]]\\pi$ cm  (b) $[[r * t / 180|coef]]\\pi + [[2 * r]]$ cm"
+  },
+  {
+   "id": "y8su3-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Area of parts of a circle",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S7 Area of parts of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A semicircle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 2|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y8su3-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Area of parts of a circle",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S7 Area of parts of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       2,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "r % 2 == 0"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A quarter circle has a radius of [[r]] cm. Work out its area in terms of $\\pi$.",
+   "answer": "$[[r * r / 4|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y8su3-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Area of parts of a circle",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S7 Area of parts of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       5,
+       30
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Work out the area of a semicircle with diameter [[d]] cm, to 1 decimal place.",
+   "answer": "[[d * d * 3.14159265 / 8|dp:1]] cm²"
+  },
+  {
+   "id": "y8su3-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Area of parts of a circle",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S7 Area of parts of a circle",
+   "keywords": [
+    "area",
+    "of",
+    "parts",
+    "a",
+    "circle",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "r",
+     {
+      "int": [
+       3,
+       12
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "choose": [
+       60,
+       90,
+       120,
+       180,
+       45,
+       72
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint(r * r * t / 360)"
+   ],
+   "check": [
+    "r > 0"
+   ],
+   "text": "A sector has radius [[r]] cm and angle [[t]]°. Work out its area in terms of $\\pi$ and to 1 decimal place. (3 marks)",
+   "answer": "$[[r * r * t / 360|coef]]\\pi$ cm² = [[r * r * t / 360 * 3.14159265|dp:1]] cm²"
+  },
+  {
+   "id": "y8su3-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape with circles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S8 Perimeter of a compound shape with circles",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "with",
+    "circles",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 2 == 0"
+   ],
+   "check": [
+    "w / 2 * 2 == w"
+   ],
+   "text": "A shape is a rectangle [[l]] cm by [[w]] cm with a semicircle on one of the [[w]] cm sides. Work out the perimeter in terms of $\\pi$.",
+   "answer": "$[[2 * l + w]] + [[w / 2|coef]]\\pi$ cm"
+  },
+  {
+   "id": "y8su3-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape with circles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S8 Perimeter of a compound shape with circles",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "with",
+    "circles",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A running track is a rectangle [[l]] m long and [[w]] m wide with a semicircle at each end (the diameters are the [[w]] m sides). Work out its perimeter in terms of $\\pi$.",
+   "answer": "$[[2 * l]] + [[w]]\\pi$ m"
+  },
+  {
+   "id": "y8su3-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape with circles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S8 Perimeter of a compound shape with circles",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "with",
+    "circles",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A running track is a rectangle [[l]] m long and [[w]] m wide with a semicircle at each end. Work out its perimeter to the nearest metre.",
+   "answer": "[[2 * l + w * 3.14159265|dp:0]] m"
+  },
+  {
+   "id": "y8su3-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Perimeter of a compound shape with circles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S8 Perimeter of a compound shape with circles",
+   "keywords": [
+    "perimeter",
+    "of",
+    "a",
+    "compound",
+    "shape",
+    "with",
+    "circles",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       60,
+       100
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "int": [
+       40,
+       60
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A track has straight sides of [[l]] m and semicircular ends of diameter [[w]] m. An athlete runs [[n]] laps. How far does the athlete run, to the nearest metre? (3 marks)",
+   "answer": "[[n * (2 * l + w * 3.14159265)|dp:0]] m"
+  },
+  {
+   "id": "y8su3-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Perimeter and area of compound shapes with circles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S9 Perimeter and area of compound shapes with circles",
+   "keywords": [
+    "perimeter",
+    "and",
+    "area",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       4,
+       8,
+       12,
+       16
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "w % 4 == 0"
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A shape is a rectangle [[l]] cm by [[w]] cm with a semicircle on one of the [[w]] cm sides. Work out the area in terms of $\\pi$.",
+   "answer": "$[[l * w]] + [[w * w / 8|coef]]\\pi$ cm²"
+  },
+  {
+   "id": "y8su3-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Perimeter and area of compound shapes with circles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S9 Perimeter and area of compound shapes with circles",
+   "keywords": [
+    "perimeter",
+    "and",
+    "area",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "l",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ],
+    [
+     "w",
+     {
+      "choose": [
+       40,
+       60,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A running track is a rectangle [[l]] m by [[w]] m with a semicircle at each end. Work out the area inside the track in terms of $\\pi$.",
+   "answer": "$[[l * w]] + [[w * w / 4|coef]]\\pi$ m²"
+  },
+  {
+   "id": "y8su3-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Perimeter and area of compound shapes with circles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S9 Perimeter and area of compound shapes with circles",
+   "keywords": [
+    "perimeter",
+    "and",
+    "area",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "int": [
+       4,
+       16
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A square of side [[w]] cm has a semicircle on one side. Work out its perimeter and area, both to 1 decimal place.",
+   "answer": "Perimeter [[3 * w + w * 3.14159265 / 2|dp:1]] cm; area [[w * w + w * w * 3.14159265 / 8|dp:1]] cm²"
+  },
+  {
+   "id": "y8su3-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Perimeter and area of compound shapes with circles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B3 Circles · S9 Perimeter and area of compound shapes with circles",
+   "keywords": [
+    "perimeter",
+    "and",
+    "area",
+    "of",
+    "compound",
+    "shapes",
+    "with",
+    "circles",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "w",
+     {
+      "choose": [
+       40,
+       60,
+       80,
+       100
+      ]
+     }
+    ],
+    [
+     "h",
+     {
+      "int": [
+       60,
+       120
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "w > 0"
+   ],
+   "text": "A window is a rectangle [[w]] cm wide and [[h]] cm high with a semicircle on top. (a) Work out the area of the window in terms of $\\pi$. (b) Work out the perimeter, to 1 decimal place. (4 marks)",
+   "answer": "(a) $[[w * h]] + [[w * w / 8|coef]]\\pi$ cm²  (b) [[w + 2 * h + w * 3.14159265 / 2|dp:1]] cm"
+  }
+ ]
+}

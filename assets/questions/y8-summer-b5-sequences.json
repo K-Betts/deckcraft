@@ -1,0 +1,784 @@
+{
+ "version": 1,
+ "note": "Y8 Summer Block 5 Sequences: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8su5-s01-l1",
+   "topic": "Algebra",
+   "subtopic": "Generate and describe a sequence given a rule in words",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S1 Generate and describe a sequence given a rule in words",
+   "keywords": [
+    "generate",
+    "and",
+    "describe",
+    "a",
+    "sequence",
+    "given",
+    "rule",
+    "in",
+    "words",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s + d > s"
+   ],
+   "text": "A sequence starts at [[s]] and the rule is 'add [[d]]'. Write down the first five terms.",
+   "answer": "[[s]], [[s + d]], [[s + 2 * d]], [[s + 3 * d]], [[s + 4 * d]]",
+   "diagram": {
+    "kind": "sequence-arrows",
+    "terms": [
+     "[[s|n]]",
+     "[[s + d|n]]",
+     "[[s + 2 * d|n]]",
+     null,
+     null
+    ],
+    "rule": "+ [[d]]"
+   }
+  },
+  {
+   "id": "y8su5-s01-l2",
+   "topic": "Algebra",
+   "subtopic": "Generate and describe a sequence given a rule in words",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S1 Generate and describe a sequence given a rule in words",
+   "keywords": [
+    "generate",
+    "and",
+    "describe",
+    "a",
+    "sequence",
+    "given",
+    "rule",
+    "in",
+    "words",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       1,
+       6
+      ]
+     }
+    ],
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s * m > s"
+   ],
+   "text": "A sequence starts at [[s]] and the rule is 'multiply by [[m]]'. Write down the first four terms.",
+   "answer": "[[s]], [[s * m]], [[s * m * m]], [[s * m * m * m]]"
+  },
+  {
+   "id": "y8su5-s01-l3",
+   "topic": "Algebra",
+   "subtopic": "Generate and describe a sequence given a rule in words",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S1 Generate and describe a sequence given a rule in words",
+   "keywords": [
+    "generate",
+    "and",
+    "describe",
+    "a",
+    "sequence",
+    "given",
+    "rule",
+    "in",
+    "words",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       2,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s + d > s"
+   ],
+   "text": "Describe the rule for the sequence [[s]], [[s + d]], [[s + 2 * d]], [[s + 3 * d]], ... and write down the next two terms.",
+   "answer": "Add [[d]] each time: [[s + 4 * d]], [[s + 5 * d]]"
+  },
+  {
+   "id": "y8su5-s01-l4",
+   "topic": "Algebra",
+   "subtopic": "Generate and describe a sequence given a rule in words",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S1 Generate and describe a sequence given a rule in words",
+   "keywords": [
+    "generate",
+    "and",
+    "describe",
+    "a",
+    "sequence",
+    "given",
+    "rule",
+    "in",
+    "words",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "2 * s - c > s"
+   ],
+   "check": [
+    "s > 0"
+   ],
+   "text": "A sequence starts at [[s]]. The rule is 'multiply by 2, then subtract [[c]]'. Write down the first five terms. (3 marks)",
+   "answer": "[[s]], [[2 * s - c]], [[2 * (2 * s - c) - c]], [[2 * (2 * (2 * s - c) - c) - c]], [[2 * (2 * (2 * (2 * s - c) - c) - c) - c]]"
+  },
+  {
+   "id": "y8su5-s02-l1",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a simple algebraic rule",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S2 Generate a sequence given a simple algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "simple",
+    "algebraic",
+    "rule",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n + [[c]]$. Write down the first four terms.",
+   "answer": "[[m + c]], [[2 * m + c]], [[3 * m + c]], [[4 * m + c]]"
+  },
+  {
+   "id": "y8su5-s02-l2",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a simple algebraic rule",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S2 Generate a sequence given a simple algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "simple",
+    "algebraic",
+    "rule",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > c"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n - [[c]]$. Work out the 1st, 2nd and 10th terms.",
+   "answer": "[[m - c]], [[2 * m - c]], [[10 * m - c]]"
+  },
+  {
+   "id": "y8su5-s02-l3",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a simple algebraic rule",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S2 Generate a sequence given a simple algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "simple",
+    "algebraic",
+    "rule",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       30,
+       80
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n + [[c]]$. Is [[t]] a term of the sequence? Show how you know.",
+   "answer": "[[(t - c) % m == 0|if:Yes: n is a whole number/No: n is not a whole number]]: n = ([[t]] − [[c]]) ÷ [[m]] = [[(t - c) / m|dp:2]]"
+  },
+  {
+   "id": "y8su5-s02-l4",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a simple algebraic rule",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S2 Generate a sequence given a simple algebraic rule",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "simple",
+    "algebraic",
+    "rule",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       12,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > 0"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n + [[c]]$. (a) Work out the 50th term. (b) Which term is equal to [[m * k + c]]? (3 marks)",
+   "answer": "(a) [[50 * m + c]]  (b) term number [[k]]"
+  },
+  {
+   "id": "y8su5-s03-l1",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S3 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       3,
+       20
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s != d"
+   ],
+   "check": [
+    "s + d > s"
+   ],
+   "text": "Find the $n$th term of the sequence [[s]], [[s + d]], [[s + 2 * d]], [[s + 3 * d]], ...",
+   "answer": "$[[d]]n[[s - d|signed]]$"
+  },
+  {
+   "id": "y8su5-s03-l2",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S3 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       30,
+       60
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s > d"
+   ],
+   "text": "Find the $n$th term of the sequence [[s]], [[s - d]], [[s - 2 * d]], [[s - 3 * d]], ...",
+   "answer": "$[[0 - d|term:n]] + [[s + d]]$"
+  },
+  {
+   "id": "y8su5-s03-l3",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S3 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "int": [
+       2,
+       9
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       -5,
+       9
+      ]
+     }
+    ],
+    [
+     "t",
+     {
+      "int": [
+       40,
+       120
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "c != 0"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "A sequence has the $n$th term $[[d]]n[[c|signed]]$. Find the 20th term. Then use the $n$th term to say whether [[t]] is in the sequence.",
+   "answer": "20th term: [[20 * d + c]]; [[t]] [[(t - c) % d == 0|if:is/is not]] in the sequence"
+  },
+  {
+   "id": "y8su5-s03-l4",
+   "topic": "Algebra",
+   "subtopic": "nth term of a linear sequence",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S3 nth term of a linear sequence",
+   "keywords": [
+    "nth",
+    "term",
+    "of",
+    "a",
+    "linear",
+    "sequence",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       10
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       2,
+       5
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       8,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "s != d"
+   ],
+   "check": [
+    "d > 0"
+   ],
+   "text": "Matchstick patterns are made: pattern 1 uses [[s]] sticks, pattern 2 uses [[s + d]], pattern 3 uses [[s + 2 * d]]. (a) Find the $n$th term. (b) How many sticks are in pattern [[k]]? (c) Which pattern uses [[s + (k + 4) * d]] sticks? (3 marks)",
+   "answer": "(a) $[[d]]n[[s - d|signed]]$  (b) [[d * k + s - d]]  (c) pattern [[k + 5]]"
+  },
+  {
+   "id": "y8su5-s04-l1",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a complex algebraic rule (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S4 Generate a sequence given a complex algebraic rule (E)",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "complex",
+    "algebraic",
+    "rule",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n^2 + [[c]]$. Write down the first four terms.",
+   "answer": "[[1 + c]], [[4 + c]], [[9 + c]], [[16 + c]]"
+  },
+  {
+   "id": "y8su5-s04-l2",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a complex algebraic rule (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S4 Generate a sequence given a complex algebraic rule (E)",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "complex",
+    "algebraic",
+    "rule",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       3,
+       5
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       1,
+       2
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "m > c"
+   ],
+   "text": "The $n$th term of a sequence is $[[m]]n^2 - [[c]]$. Work out the 1st, 2nd and 5th terms.",
+   "answer": "[[m - c]], [[4 * m - c]], [[25 * m - c]]"
+  },
+  {
+   "id": "y8su5-s04-l3",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a complex algebraic rule (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S4 Generate a sequence given a complex algebraic rule (E)",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "complex",
+    "algebraic",
+    "rule",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       9
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       4,
+       15
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n^2 + [[c]]$. Which term is equal to [[k * k + c]]?",
+   "answer": "Term number [[k]] (since [[k * k + c]] − [[c]] = [[k * k]] and $[[k]]^2 = [[k * k]]$)"
+  },
+  {
+   "id": "y8su5-s04-l4",
+   "topic": "Algebra",
+   "subtopic": "Generate a sequence given a complex algebraic rule (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B5 Sequences · S4 Generate a sequence given a complex algebraic rule (E)",
+   "keywords": [
+    "generate",
+    "a",
+    "sequence",
+    "given",
+    "complex",
+    "algebraic",
+    "rule",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       1,
+       4
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "c > 0"
+   ],
+   "text": "The $n$th term of a sequence is $n(n + [[c]])$. (a) Write down the first four terms. (b) Is [[(k) * (k + c)]] a term? Show how you know. (3 marks)",
+   "answer": "(a) [[1 + c]], [[2 * (2 + c)]], [[3 * (3 + c)]], [[4 * (4 + c)]]  (b) Yes: term number [[k]], since [[k]] × [[k + c]] = [[k * (k + c)]]"
+  }
+ ]
+}

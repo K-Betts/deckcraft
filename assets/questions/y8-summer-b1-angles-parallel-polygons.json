@@ -1,0 +1,2108 @@
+{
+ "version": 1,
+ "note": "Y8 Summer Block 1 Angles in parallel lines and polygons: one set of templates per small step of the White Rose Maths scheme of learning.",
+ "templates": [
+  {
+   "id": "y8su1-s01-l1",
+   "topic": "Geometry",
+   "subtopic": "Basic angle rules and notation",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S1 Basic angle rules and notation",
+   "keywords": [
+    "basic",
+    "angle",
+    "rules",
+    "and",
+    "notation",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "abs(p - 90) >= 12"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[180 - p]]°$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "[[p]]°",
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[180 - p|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8su1-s01-l2",
+   "topic": "Geometry",
+   "subtopic": "Basic angle rules and notation",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S1 Basic angle rules and notation",
+   "keywords": [
+    "basic",
+    "angle",
+    "rules",
+    "and",
+    "notation",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       60,
+       110
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - p - q - r > 30"
+   ],
+   "check": [
+    "p + q + r + (360 - p - q - r) == 360"
+   ],
+   "text": "Find angle $y$.",
+   "answer": "$y = [[360 - p - q - r]]°$",
+   "diagram": {
+    "kind": "angles-point",
+    "angles": [
+     "[[p]]°",
+     "[[q]]°",
+     "[[r]]°",
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[q|n]]",
+     "[[r|n]]",
+     "[[360 - p - q - r|n]]"
+    ],
+    "unknown": "y"
+   }
+  },
+  {
+   "id": "y8su1-s01-l3",
+   "topic": "Geometry",
+   "subtopic": "Basic angle rules and notation",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S1 Basic angle rules and notation",
+   "keywords": [
+    "basic",
+    "angle",
+    "rules",
+    "and",
+    "notation",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       12,
+       40
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "c",
+     "180 - (m + 1) * x0"
+    ]
+   ],
+   "where": [
+    "c >= 10",
+    "c <= 80",
+    "m * x0 >= 25",
+    "abs(m * x0 - 90) >= 12",
+    "abs(x0 + c - 90) >= 12"
+   ],
+   "check": [
+    "(m + 1) * x0 + c == 180"
+   ],
+   "text": "Two angles on a straight line are $[[m|coef]]x$° and $(x + [[c]])$°. Form and solve an equation to find $x$.",
+   "answer": "$[[m + 1]]x + [[c]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "angles-line",
+    "angles": [
+     "$[[m|coef]]x$°",
+     "$x + [[c]]$°"
+    ],
+    "sizes": [
+     "[[m * x0|n]]",
+     "[[x0 + c|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8su1-s01-l4",
+   "topic": "Geometry",
+   "subtopic": "Basic angle rules and notation",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S1 Basic angle rules and notation",
+   "keywords": [
+    "basic",
+    "angle",
+    "rules",
+    "and",
+    "notation",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "r",
+     {
+      "int": [
+       40,
+       80
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(360 - p - q - r) % 2 == 0",
+    "360 - p - q - r > 30"
+   ],
+   "check": [
+    "p + q + r + (360 - p - q - r) == 360"
+   ],
+   "text": "Four angles meet at a point $B$: [[p]]°, [[q]]°, $2x$° and [[r]]°. Work out $x$. (3 marks)",
+   "answer": "$2x = 360 - [[p + q + r]] = [[360 - p - q - r]]$, so $x = [[(360 - p - q - r) / 2]]$"
+  },
+  {
+   "id": "y8su1-s02-l1",
+   "topic": "Geometry",
+   "subtopic": "Angles in parallel lines",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S2 Angles in parallel lines",
+   "keywords": [
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "The two lines are parallel. Find the co-interior angle $z$.",
+   "answer": "$z = [[180 - p]]°$",
+   "diagram": {
+    "kind": "parallel-lines",
+    "knownAngle": "[[p]]°",
+    "unknown": "z"
+   }
+  },
+  {
+   "id": "y8su1-s02-l2",
+   "topic": "Geometry",
+   "subtopic": "Angles in parallel lines",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S2 Angles in parallel lines",
+   "keywords": [
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "The two lines are parallel. What is the sum of a pair of co-interior angles? Use it to find $z$.",
+   "answer": "180°; $z = [[180 - p]]°$",
+   "diagram": {
+    "kind": "parallel-lines",
+    "knownAngle": "[[p]]°",
+    "unknown": "z"
+   }
+  },
+  {
+   "id": "y8su1-s02-l3",
+   "topic": "Geometry",
+   "subtopic": "Angles in parallel lines",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S2 Angles in parallel lines",
+   "keywords": [
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "The two lines are parallel. Explain why $z = [[180 - p]]°$.",
+   "answer": "Co-interior angles between parallel lines add up to 180°, so $z = 180 - [[p]] = [[180 - p]]°$",
+   "diagram": {
+    "kind": "parallel-lines",
+    "knownAngle": "[[p]]°",
+    "unknown": "z"
+   }
+  },
+  {
+   "id": "y8su1-s02-l4",
+   "topic": "Geometry",
+   "subtopic": "Angles in parallel lines",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S2 Angles in parallel lines",
+   "keywords": [
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       2,
+       4
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       20,
+       30
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "180 - (m + 1) * x0 - c"
+    ]
+   ],
+   "where": [
+    "d > 5",
+    "d < 70"
+   ],
+   "check": [
+    "(m + 1) * x0 + c + d == 180"
+   ],
+   "text": "The two lines are parallel. The co-interior angles are $([[m]]x + [[c]])°$ and $(x + [[d]])°$. Find $x$. (3 marks)",
+   "answer": "$[[m + 1]]x + [[c + d]] = 180$, so $x = [[x0]]$",
+   "diagram": {
+    "kind": "parallel-lines",
+    "knownAngle": "$([[m]]x + [[c]])$°",
+    "unknown": "(x + [[d]])^{\\circ}"
+   }
+  },
+  {
+   "id": "y8su1-s03-l1",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S3 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the alternate angle and give a reason.",
+   "answer": "[[p]]°: alternate angles are equal"
+  },
+  {
+   "id": "y8su1-s03-l2",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S3 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the corresponding angle and give a reason.",
+   "answer": "[[p]]°: corresponding angles are equal"
+  },
+  {
+   "id": "y8su1-s03-l3",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S3 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Angle $a$ = [[p]]° between two parallel lines. Angle $b$ is alternate to $a$ and angle $c$ is on a straight line with $b$. Find $b$ and $c$, with reasons.",
+   "answer": "$b = [[p]]°$ (alternate angles); $c = [[180 - p]]°$ (angles on a straight line)"
+  },
+  {
+   "id": "y8su1-s03-l4",
+   "topic": "Geometry",
+   "subtopic": "Alternate and corresponding angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S3 Alternate and corresponding angles",
+   "keywords": [
+    "alternate",
+    "and",
+    "corresponding",
+    "angles",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "m",
+     {
+      "int": [
+       4,
+       6
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       3
+      ]
+     }
+    ],
+    [
+     "x0",
+     {
+      "int": [
+       8,
+       16
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "d",
+     "(m - n) * x0 + c"
+    ]
+   ],
+   "where": [
+    "d > 0",
+    "m * x0 + c < 170"
+   ],
+   "check": [
+    "m * x0 + c == n * x0 + d"
+   ],
+   "text": "Two alternate angles between parallel lines are $([[m]]x + [[c]])°$ and $([[n]]x + [[d]])°$. Find $x$ and the size of the angles. (3 marks)",
+   "answer": "$[[m]]x + [[c]] = [[n]]x + [[d]]$, so $x = [[x0]]$; the angles are [[m * x0 + c]]°"
+  },
+  {
+   "id": "y8su1-s04-l1",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S4 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ],
+    [
+     "k",
+     {
+      "int": [
+       0,
+       2
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "v",
+     "p + floor(k / 2) * (180 - 2 * p)"
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p > 0"
+   ],
+   "text": "Two parallel lines are cut by a transversal. Angle $a$ is [[p]]°. Write down the size of the angle that is [[k == 0|if:alternate/]][[k == 1|if:corresponding/]][[k == 2|if:co-interior/]] to $a$ and say which rule you used.",
+   "answer": "[[v]]°, because [[k == 0|if:alternate angles are equal/]][[k == 1|if:corresponding angles are equal/]][[k == 2|if:co-interior angles add up to 180°/]]"
+  },
+  {
+   "id": "y8su1-s04-l2",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S4 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       40,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Lines $AB$ and $CD$ are parallel. Angle $a$ is [[p]]°. Find angles $b$ (alternate to $a$), $c$ (corresponding to $a$) and $d$ (co-interior to $a$).",
+   "answer": "$b = [[p]]°$, $c = [[p]]°$, $d = [[180 - p]]°$"
+  },
+  {
+   "id": "y8su1-s04-l3",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S4 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       40,
+       70
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(d - c) % 2 == 0",
+    "d > c",
+    "3 * (d - c) / 2 + c < 170"
+   ],
+   "check": [
+    "d > c"
+   ],
+   "text": "Two angles between parallel lines are $(3x + [[c]])°$ and $(x + [[d]])°$ and they are alternate angles. Find $x$ and the size of each angle.",
+   "answer": "$3x + [[c]] = x + [[d]]$, so $x = [[(d - c) / 2]]$; each angle is [[3 * (d - c) / 2 + c]]°"
+  },
+  {
+   "id": "y8su1-s04-l4",
+   "topic": "Geometry",
+   "subtopic": "Alternate, corresponding and co-interior angles",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S4 Alternate, corresponding and co-interior angles",
+   "keywords": [
+    "alternate",
+    "corresponding",
+    "and",
+    "co",
+    "interior",
+    "angles",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       5,
+       25
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(180 - c - d) % 4 == 0"
+   ],
+   "check": [
+    "(180 - c - d) / 4 * 4 == 180 - c - d"
+   ],
+   "text": "Two angles between parallel lines are $(3x + [[c]])°$ and $(x + [[d]])°$ and they are co-interior angles. Find $x$ and the size of each angle. (4 marks)",
+   "answer": "$4x + [[c + d]] = 180$, so $x = [[(180 - c - d) / 4]]$; the angles are [[3 * (180 - c - d) / 4 + c]]° and [[(180 - c - d) / 4 + d]]°"
+  },
+  {
+   "id": "y8su1-s05-l1",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in parallel lines",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S5 Solve problems with angles in parallel lines",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "$ABCD$ is a trapezium with $AB$ parallel to $DC$. Angle $A$ is [[p]]°. Find angle $D$.",
+   "answer": "[[180 - p]]° (co-interior angles)"
+  },
+  {
+   "id": "y8su1-s05-l2",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in parallel lines",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S5 Solve problems with angles in parallel lines",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       35,
+       75
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p + q < 150"
+   ],
+   "check": [
+    "p + q + (180 - p - q) == 180"
+   ],
+   "text": "A triangle $PQR$ lies between two parallel lines. The angle at $P$ with the top line is [[p]]° and at $Q$ with the bottom line is [[q]]° (alternate angles inside the triangle). Find angle $R$.",
+   "answer": "[[180 - p - q]]° (angles in a triangle, using alternate angles)"
+  },
+  {
+   "id": "y8su1-s05-l3",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in parallel lines",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S5 Solve problems with angles in parallel lines",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "c",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       10,
+       40
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(180 - c - d) % 3 == 0"
+   ],
+   "check": [
+    "(180 - c - d) / 3 * 3 == 180 - c - d"
+   ],
+   "text": "$ABCD$ is a trapezium with $AB$ parallel to $DC$. Angle $A$ = $(2x + [[c]])°$ and angle $D$ = $(x + [[d]])°$. Find $x$ and angle $D$.",
+   "answer": "$3x + [[c + d]] = 180$, so $x = [[(180 - c - d) / 3]]$ and angle $D$ = [[(180 - c - d) / 3 + d]]°"
+  },
+  {
+   "id": "y8su1-s05-l4",
+   "topic": "Geometry",
+   "subtopic": "Solve problems with angles in parallel lines",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S5 Solve problems with angles in parallel lines",
+   "keywords": [
+    "solve",
+    "problems",
+    "with",
+    "angles",
+    "in",
+    "parallel",
+    "lines",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       30,
+       70
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "p + q > 0"
+   ],
+   "text": "$AB$ and $CD$ are parallel. $E$ is a point between them. Angle $BAE$ is [[p]]° and angle $ECD$ is [[q]]°. Find angle $AEC$ by drawing a line through $E$ parallel to $AB$. (3 marks)",
+   "answer": "[[p + q]]° (alternate angles on each side of the parallel line added together)"
+  },
+  {
+   "id": "y8su1-s06-l1",
+   "topic": "Geometry",
+   "subtopic": "Properties of special quadrilaterals and their diagonals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S6 Properties of special quadrilaterals and their diagonals",
+   "keywords": [
+    "properties",
+    "of",
+    "special",
+    "quadrilaterals",
+    "and",
+    "their",
+    "diagonals",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       0,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s >= 0"
+   ],
+   "text": "Do the diagonals of a [[s == 0|if:square/]][[s == 1|if:rectangle/]][[s == 2|if:rhombus/]][[s == 3|if:parallelogram/]][[s == 4|if:kite/]][[s == 5|if:trapezium/]] bisect each other? Answer yes or no.",
+   "answer": "[[floor(15 / 2^s) % 2 == 1|if:Yes/No]]"
+  },
+  {
+   "id": "y8su1-s06-l2",
+   "topic": "Geometry",
+   "subtopic": "Properties of special quadrilaterals and their diagonals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S6 Properties of special quadrilaterals and their diagonals",
+   "keywords": [
+    "properties",
+    "of",
+    "special",
+    "quadrilaterals",
+    "and",
+    "their",
+    "diagonals",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       0,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s >= 0"
+   ],
+   "text": "Are the diagonals of a [[s == 0|if:square/]][[s == 1|if:rectangle/]][[s == 2|if:rhombus/]][[s == 3|if:parallelogram/]][[s == 4|if:kite/]][[s == 5|if:trapezium/]] equal in length? Answer yes or no.",
+   "answer": "[[floor(3 / 2^s) % 2 == 1|if:Yes/No]]"
+  },
+  {
+   "id": "y8su1-s06-l3",
+   "topic": "Geometry",
+   "subtopic": "Properties of special quadrilaterals and their diagonals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S6 Properties of special quadrilaterals and their diagonals",
+   "keywords": [
+    "properties",
+    "of",
+    "special",
+    "quadrilaterals",
+    "and",
+    "their",
+    "diagonals",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       0,
+       5
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "s >= 0"
+   ],
+   "text": "Do the diagonals of a [[s == 0|if:square/]][[s == 1|if:rectangle/]][[s == 2|if:rhombus/]][[s == 3|if:parallelogram/]][[s == 4|if:kite/]][[s == 5|if:trapezium/]] cross at right angles? Explain with another shape that does or does not.",
+   "answer": "[[floor(21 / 2^s) % 2 == 1|if:Yes/No]]: the diagonals cross at right angles in a square, a rhombus and a kite only"
+  },
+  {
+   "id": "y8su1-s06-l4",
+   "topic": "Geometry",
+   "subtopic": "Properties of special quadrilaterals and their diagonals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S6 Properties of special quadrilaterals and their diagonals",
+   "keywords": [
+    "properties",
+    "of",
+    "special",
+    "quadrilaterals",
+    "and",
+    "their",
+    "diagonals",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "k",
+     {
+      "int": [
+       0,
+       3
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "k >= 0"
+   ],
+   "text": "Name the quadrilateral: [[k == 0|if:its diagonals are equal, bisect each other and cross at right angles/]][[k == 1|if:its diagonals bisect each other at right angles but are not equal/]][[k == 2|if:its diagonals are equal and bisect each other but do not cross at right angles/]][[k == 3|if:one diagonal bisects the other at right angles but they are not equal and do not bisect each other/]]. (2 marks)",
+   "answer": "[[k == 0|if:square/]][[k == 1|if:rhombus/]][[k == 2|if:rectangle/]][[k == 3|if:kite/]]"
+  },
+  {
+   "id": "y8su1-s07-l1",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in special quadrilaterals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S7 Find unknown lengths and angles in special quadrilaterals",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "special",
+    "quadrilaterals",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "$ABCD$ is a parallelogram. Angle $A$ is [[p]]°. Find angles $B$, $C$ and $D$.",
+   "answer": "$B = [[180 - p]]°$, $C = [[p]]°$, $D = [[180 - p]]°$",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[p]]°",
+     null,
+     null,
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[180 - p|n]]",
+     "[[p|n]]",
+     "[[180 - p|n]]"
+    ],
+    "unknown": "?"
+   }
+  },
+  {
+   "id": "y8su1-s07-l2",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in special quadrilaterals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S7 Find unknown lengths and angles in special quadrilaterals",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "special",
+    "quadrilaterals",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "s",
+     {
+      "int": [
+       4,
+       12
+      ]
+     }
+    ],
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "4 * s / 4 == s"
+   ],
+   "text": "A rhombus has sides of [[s]] cm. Find its perimeter. Its angle at $A$ is [[p]]°; find the angle at $B$.",
+   "answer": "Perimeter [[4 * s]] cm; angle $B$ = [[180 - p]]°",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[p]]°",
+     null,
+     null,
+     null
+    ],
+    "sizes": [
+     "[[p|n]]",
+     "[[180 - p|n]]",
+     "[[p|n]]",
+     "[[180 - p|n]]"
+    ],
+    "unknown": "?"
+   }
+  },
+  {
+   "id": "y8su1-s07-l3",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in special quadrilaterals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S7 Find unknown lengths and angles in special quadrilaterals",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "special",
+    "quadrilaterals",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       100
+      ]
+     }
+    ],
+    [
+     "q",
+     {
+      "int": [
+       60,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - 2 * p - q > 25",
+    "abs(q - (360 - 2 * p - q)) > 15"
+   ],
+   "check": [
+    "2 * p + q + (360 - 2 * p - q) == 360"
+   ],
+   "text": "A kite has two equal angles of [[p]]° and one angle of [[q]]°. Find the fourth angle.",
+   "answer": "[[360 - 2 * p - q]]°",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[q]]°",
+     "[[p]]°",
+     null,
+     "[[p]]°"
+    ],
+    "sizes": [
+     "[[q|n]]",
+     "[[p|n]]",
+     "[[360 - 2 * p - q|n]]",
+     "[[p|n]]"
+    ],
+    "unknown": "?"
+   }
+  },
+  {
+   "id": "y8su1-s07-l4",
+   "topic": "Geometry",
+   "subtopic": "Find unknown lengths and angles in special quadrilaterals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S7 Find unknown lengths and angles in special quadrilaterals",
+   "keywords": [
+    "find",
+    "unknown",
+    "lengths",
+    "and",
+    "angles",
+    "in",
+    "special",
+    "quadrilaterals",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       20,
+       40
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "2 * p + (180 - 2 * p) == 180"
+   ],
+   "text": "The diagonals of a rhombus cross at right angles. One diagonal makes an angle of [[p]]° with a side. Find the four angles of the rhombus. (3 marks)",
+   "answer": "The angles are [[2 * p]]°, [[180 - 2 * p]]°, [[2 * p]]° and [[180 - 2 * p]]°"
+  },
+  {
+   "id": "y8su1-s08-l1",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S8 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "Work out the size of one exterior angle of a regular polygon with [[n]] sides.",
+   "answer": "[[360 / n]]°"
+  },
+  {
+   "id": "y8su1-s08-l2",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S8 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20,
+       24
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "One exterior angle of a regular polygon is [[360 / n]]°. How many sides does it have?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y8su1-s08-l3",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S8 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       50,
+       90
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "360 - a - b - c - d > 20"
+   ],
+   "check": [
+    "a + b + c + d + (360 - a - b - c - d) == 360"
+   ],
+   "text": "A pentagon has exterior angles of [[a]]°, [[b]]°, [[c]]° and [[d]]° and one other. Work out the fifth exterior angle.",
+   "answer": "[[360 - a - b - c - d]]°"
+  },
+  {
+   "id": "y8su1-s08-l4",
+   "topic": "Geometry",
+   "subtopic": "Exterior angles of a polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S8 Exterior angles of a polygon",
+   "keywords": [
+    "exterior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "360 / n * n == 360"
+   ],
+   "text": "A regular polygon has exterior angles of [[360 / n]]°. (a) How many sides does it have? (b) What is the size of each interior angle? (3 marks)",
+   "answer": "(a) [[n]]  (b) [[180 - 360 / n]]°"
+  },
+  {
+   "id": "y8su1-s09-l1",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S9 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       12
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(n - 2) * 180 / 180 == n - 2"
+   ],
+   "text": "Work out the sum of the interior angles of a polygon with [[n]] sides.",
+   "answer": "[[(n - 2) * 180]]°"
+  },
+  {
+   "id": "y8su1-s09-l2",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S9 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       90,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "540 - a - b - c - d > 50",
+    "540 - a - b - c - d < 170"
+   ],
+   "check": [
+    "a + b + c + d + (540 - a - b - c - d) == 540"
+   ],
+   "text": "Four of the angles in a pentagon are [[a]]°, [[b]]°, [[c]]° and [[d]]°. Find the fifth angle.",
+   "answer": "[[540 - a - b - c - d]]°"
+  },
+  {
+   "id": "y8su1-s09-l3",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S9 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       90,
+       125
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "540 - a - b - c - d > 60",
+    "540 - a - b - c - d < 150"
+   ],
+   "check": [
+    "a + b + c + d + (540 - a - b - c - d) == 540"
+   ],
+   "text": "Find angle $x$.",
+   "answer": "$x = [[540 - a - b - c - d]]°$",
+   "diagram": {
+    "kind": "polygon-angles",
+    "angles": [
+     "[[a]]°",
+     "[[b]]°",
+     "[[c]]°",
+     "[[d]]°",
+     null
+    ],
+    "sizes": [
+     "[[a|n]]",
+     "[[b|n]]",
+     "[[c|n]]",
+     "[[d|n]]",
+     "[[540 - a - b - c - d|n]]"
+    ],
+    "unknown": "x"
+   }
+  },
+  {
+   "id": "y8su1-s09-l4",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S9 Interior angles of a polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "polygon",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       5,
+       20
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       10,
+       30
+      ]
+     }
+    ],
+    [
+     "c",
+     {
+      "int": [
+       100,
+       130
+      ]
+     }
+    ],
+    [
+     "d",
+     {
+      "int": [
+       100,
+       140
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "(720 - a - b - 2 * c - d) % 3 == 0",
+    "(720 - a - b - 2 * c - d) / 3 > 60"
+   ],
+   "check": [
+    "3 * ((720 - a - b - 2 * c - d) / 3) == 720 - a - b - 2 * c - d"
+   ],
+   "text": "The interior angles of a hexagon are $x$, $x + [[a]]$, $x + [[b]]$, $[[c]]$, $[[c]]$ and $[[d]]$ (all in degrees). Find $x$. (3 marks)",
+   "answer": "$3x + [[a + b + 2 * c + d]] = 720$, so $x = [[(720 - a - b - 2 * c - d) / 3]]$"
+  },
+  {
+   "id": "y8su1-s10-l1",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a regular polygon",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S10 Interior angles of a regular polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "regular",
+    "polygon",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((n - 2) * 180 / n)"
+   ],
+   "check": [
+    "(n - 2) * 180 / n * n == (n - 2) * 180"
+   ],
+   "text": "Work out the size of one interior angle of a regular polygon with [[n]] sides.",
+   "answer": "[[(n - 2) * 180 / n]]°"
+  },
+  {
+   "id": "y8su1-s10-l2",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a regular polygon",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S10 Interior angles of a regular polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "regular",
+    "polygon",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((n - 2) * 180 / n)"
+   ],
+   "check": [
+    "(n - 2) * 180 / n * n == (n - 2) * 180"
+   ],
+   "text": "Each interior angle of a regular polygon is [[(n - 2) * 180 / n]]°. How many sides does it have?",
+   "answer": "[[n]]"
+  },
+  {
+   "id": "y8su1-s10-l3",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a regular polygon",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S10 Interior angles of a regular polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "regular",
+    "polygon",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       3,
+       4,
+       5,
+       6,
+       8
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "n > 2"
+   ],
+   "text": "Do regular [[n]]-sided polygons fit together around a point with no gaps? Explain using interior angles.",
+   "answer": "Interior angle [[(n - 2) * 180 / n]]°; [[360 % ((n - 2) * 180 / n) == 0|if:360 divided by the angle is a whole number, so they do fit/360 divided by the angle is not a whole number, so they do not fit]]"
+  },
+  {
+   "id": "y8su1-s10-l4",
+   "topic": "Geometry",
+   "subtopic": "Interior angles of a regular polygon",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S10 Interior angles of a regular polygon",
+   "keywords": [
+    "interior",
+    "angles",
+    "of",
+    "a",
+    "regular",
+    "polygon",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "choose": [
+       5,
+       6,
+       8,
+       9,
+       10,
+       12,
+       15,
+       18,
+       20
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "isint((n - 2) * 180 / n)"
+   ],
+   "check": [
+    "(n - 2) * 180 / n * n == (n - 2) * 180"
+   ],
+   "text": "A regular polygon has an interior angle of [[(n - 2) * 180 / n]]°. (a) Work out the exterior angle. (b) Work out the number of sides. (c) Work out the sum of the interior angles. (4 marks)",
+   "answer": "(a) [[360 / n]]°  (b) [[n]]  (c) [[(n - 2) * 180]]°"
+  },
+  {
+   "id": "y8su1-s11-l1",
+   "topic": "Geometry",
+   "subtopic": "Prove simple geometric facts (E)",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S11 Prove simple geometric facts (E)",
+   "keywords": [
+    "prove",
+    "simple",
+    "geometric",
+    "facts",
+    "e",
+    "year 8",
+    "support"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       35,
+       145
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "$AB$ and $CD$ are parallel. Angle $a$ = [[p]]°. Work out angle $b$ (alternate to $a$) and angle $c$ (on a straight line with $b$), giving a reason for each step.",
+   "answer": "$b = [[p]]°$ (alternate angles are equal); $c = [[180 - p]]°$ (angles on a straight line add up to 180°)"
+  },
+  {
+   "id": "y8su1-s11-l2",
+   "topic": "Geometry",
+   "subtopic": "Prove simple geometric facts (E)",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S11 Prove simple geometric facts (E)",
+   "keywords": [
+    "prove",
+    "simple",
+    "geometric",
+    "facts",
+    "e",
+    "year 8",
+    "core"
+   ],
+   "vars": [
+    [
+     "p",
+     {
+      "int": [
+       50,
+       130
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "p != 90"
+   ],
+   "check": [
+    "p + (180 - p) == 180"
+   ],
+   "text": "Prove that the opposite angles of a parallelogram are equal. In parallelogram $ABCD$, angle $A$ is [[p]]°. Show that angle $C$ is also [[p]]°.",
+   "answer": "Angle $B$ = 180 − [[p]] = [[180 - p]]° (co-interior angles); angle $C$ = 180 − [[180 - p]] = [[p]]° (co-interior angles)"
+  },
+  {
+   "id": "y8su1-s11-l3",
+   "topic": "Geometry",
+   "subtopic": "Prove simple geometric facts (E)",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S11 Prove simple geometric facts (E)",
+   "keywords": [
+    "prove",
+    "simple",
+    "geometric",
+    "facts",
+    "e",
+    "year 8",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "a",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ],
+    [
+     "b",
+     {
+      "int": [
+       35,
+       85
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "a + b < 150"
+   ],
+   "check": [
+    "a + b + (180 - a - b) == 180"
+   ],
+   "text": "A triangle has angles [[a]]° and [[b]]° inside it. Prove that its exterior angle at the third vertex is [[a + b]]°.",
+   "answer": "The third angle is 180 − [[a]] − [[b]] = [[180 - a - b]]° (angles in a triangle). The exterior angle is 180 − [[180 - a - b]] = [[a + b]]° (angles on a straight line)"
+  },
+  {
+   "id": "y8su1-s11-l4",
+   "topic": "Geometry",
+   "subtopic": "Prove simple geometric facts (E)",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y8",
+   "source": "Y8 Summer B1 Angles in parallel lines and polygons · S11 Prove simple geometric facts (E)",
+   "keywords": [
+    "prove",
+    "simple",
+    "geometric",
+    "facts",
+    "e",
+    "year 8",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "n",
+     {
+      "int": [
+       5,
+       10
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "(n - 2) * 180 / 180 == n - 2"
+   ],
+   "text": "Prove that the interior angles of a [[n]]-sided polygon add up to [[(n - 2) * 180]]°. (3 marks)",
+   "answer": "Split the polygon into [[n - 2]] triangles from one vertex. Each triangle has angles adding to 180°, so the total is [[n - 2]] × 180 = [[(n - 2) * 180]]°"
+  }
+ ]
+}

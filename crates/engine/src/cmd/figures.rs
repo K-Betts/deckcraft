@@ -49,6 +49,7 @@ pub(crate) fn draw(s: &mut Session, d: &Value, area: [f64; 4], scale: f64) -> Re
         "coordinate-grid" => f.grid(s),
         "venn" => f.venn(s),
         "tree" => f.tree(s),
+        "pie" => f.pie(s),
         "regular-polygon" => f.polygon(s),
         "similar-triangles" => f.similar(s),
         "function-machine" => f.function_machine(s),
@@ -79,6 +80,7 @@ pub(crate) fn is_wide(d: &Value) -> bool {
             "bar-chart"
                 | "number-line"
                 | "tree"
+                | "pie"
                 | "similar-triangles"
                 | "venn"
                 | "l-shape"
@@ -370,11 +372,16 @@ impl Fig<'_> {
         }
         let on_t = |y: f64| {
             let t = ((y - ay) / ah - 0.04) / 0.92;
-            ax + aw * (0.28 + 0.44 * t)
+            ax + aw * (0.16 + 0.34 * t)
         };
-        ln(s, [ax + aw * 0.28, ay + ah * 0.04], [ax + aw * 0.72, ay + ah * 0.96])?;
-        label(s, &self.text("knownAngle").unwrap_or_default(), [on_t(y1) + 38.0, y1 + 22.0])?;
-        label(s, &format!("${}$", self.text("unknown").unwrap_or_else(|| "x".into())), [on_t(y2) + 30.0, y2 - 22.0])
+        ln(s, [ax + aw * 0.16, ay + ah * 0.04], [ax + aw * 0.5, ay + ah * 0.96])?;
+        // Longer labels are moved right, clear of the transversal.
+        let known = self.text("knownAngle").unwrap_or_default();
+        let unknown = self.text("unknown").unwrap_or_else(|| "x".into());
+        let reach = |t: &str| 22.0 + crate::latex::plain(t).chars().count() as f64 * 4.5;
+        let right = |y: f64, t: &str| (on_t(y) + reach(t)).min(ax + aw - reach(t) * 0.6);
+        label(s, &known, [right(y1, &known), y1 + 22.0])?;
+        label(s, &format!("${unknown}$"), [right(y2, &unknown), y2 - 22.0])
     }
 
     // ── circles and polygons ─────────────────────────────────────────────────────────────────
@@ -410,6 +417,35 @@ impl Fig<'_> {
             ln(s, c, pt(c, r * half.cos(), -r * half.sin()))?;
             ln(s, c, pt(c, r * half.cos(), r * half.sin()))?;
             label_sized(s, &t, pt(c, r * 0.62, 0.0), 13.0)?;
+        }
+        Ok(())
+    }
+
+    /// `values`: the sizes of the slices, clockwise from the top (drawn to scale); `labels`: the
+    /// text beside each slice.
+    fn pie(&self, s: &mut Session) -> Result<()> {
+        let values: Vec<f64> =
+            self.d.get("values").and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_f64).collect()).unwrap_or_default();
+        let total: f64 = values.iter().sum();
+        if values.len() < 2 || total <= 0.0 {
+            return Ok(());
+        }
+        let labels = self.list("labels");
+        let [x, y, w, h] = self.fit(1.45, 12.0);
+        let r = h.min(w * 0.55) / 2.0 * 0.82;
+        let c = [x + w / 2.0, y + h / 2.0];
+        draw_shape(s, "ellipse", [c[0] - r, c[1] - r, 2.0 * r, 2.0 * r], None, Some((INK, 2.5)))?;
+        let at = |t: f64, d: f64| [c[0] + d * t.sin(), c[1] - d * t.cos()];
+        let mut start = 0.0;
+        for (i, v) in values.iter().enumerate() {
+            let t0 = std::f64::consts::TAU * start / total;
+            draw_line(s, c, at(t0, r), INK, 2.0)?;
+            let mid = std::f64::consts::TAU * (start + v / 2.0) / total;
+            if let Some(Some(t)) = labels.get(i) {
+                let out = at(mid, r + 8.0 + crate::latex::plain(t).chars().count() as f64 * 4.0);
+                label_sized(s, t, out, 12.0)?;
+            }
+            start += v;
         }
         Ok(())
     }
@@ -571,32 +607,41 @@ impl Fig<'_> {
         if n == 0 {
             return Ok(());
         }
+        // `yMin` starts the axis above zero (to show a misleading graph); `lines` draws a vertical
+        // line chart instead of bars.
+        let lo = self.num("yMin", 0.0);
+        let lines = self.d.get("lines").and_then(Value::as_bool).unwrap_or(false);
         let top = vals.iter().cloned().fold(1.0, f64::max);
-        let step = if top <= 10.0 {
-            2.0
-        } else if top <= 30.0 {
+        let span = top - lo;
+        let step = if span <= 10.0 {
+            if span <= 5.0 { 1.0 } else { 2.0 }
+        } else if span <= 30.0 {
             5.0
-        } else if top <= 60.0 {
+        } else if span <= 60.0 {
             10.0
         } else {
             20.0
         };
-        let max = (top / step).ceil() * step;
+        let max = lo + (span / step).ceil() * step;
         let (left, bottom) = (x + 34.0, y + h - 22.0);
         let (pw, ph) = (w - 40.0, h - 30.0);
-        let mut v = 0.0;
+        let mut v = lo;
         while v <= max + 1e-9 {
-            let yy = bottom - ph * v / max;
+            let yy = bottom - ph * (v - lo) / (max - lo);
             thin(s, [left, yy], [left + pw, yy], LIGHT)?;
-            label_sized(s, &format!("{v}"), [left - 14.0, yy], 11.0)?;
+            label_sized(s, &num_text(v), [left - 14.0, yy], 11.0)?;
             v += step;
         }
         ln(s, [left, bottom - ph], [left, bottom])?;
         ln(s, [left, bottom], [left + pw, bottom])?;
         let slot = pw / n as f64;
         for (i, val) in vals.iter().take(n).enumerate() {
-            let bh = ph * val / max;
-            draw_shape(s, "rect", [left + slot * i as f64 + slot * 0.2, bottom - bh, slot * 0.6, bh], Some(BLUE), Some((INK, 1.5)))?;
+            let bh = ph * (val - lo) / (max - lo);
+            if lines {
+                draw_line(s, [left + slot * (i as f64 + 0.5), bottom], [left + slot * (i as f64 + 0.5), bottom - bh], BLUE, 6.0)?;
+            } else {
+                draw_shape(s, "rect", [left + slot * i as f64 + slot * 0.2, bottom - bh, slot * 0.6, bh], Some(BLUE), Some((INK, 1.5)))?;
+            }
             if let Some(Some(c)) = cats.get(i) {
                 label_sized(s, c, [left + slot * (i as f64 + 0.5), bottom + 12.0], 10.0)?;
             }
