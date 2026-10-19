@@ -40,13 +40,50 @@ fn height(scale: f32) -> f32 {
 // ---- Natural display -----------------------------------------------------------------------
 
 enum Node {
-    Tok { idx: usize, tok: Tok },
-    Frac { open: usize, top: Row, bottom: Row },
-    Sqrt { open: usize, body: Row },
-    Root { open: usize, index: Row, body: Row },
-    Sup { open: usize, body: Row },
-    Log { open: usize, base: Row, arg: Row },
-    Mix { open: usize, whole: Row, top: Row, bottom: Row },
+    Tok {
+        idx: usize,
+        tok: Tok,
+    },
+    Frac {
+        open: usize,
+        top: Row,
+        bottom: Row,
+    },
+    Sqrt {
+        open: usize,
+        body: Row,
+    },
+    Root {
+        open: usize,
+        index: Row,
+        body: Row,
+    },
+    Sup {
+        open: usize,
+        body: Row,
+    },
+    Log {
+        open: usize,
+        base: Row,
+        arg: Row,
+    },
+    Mix {
+        open: usize,
+        whole: Row,
+        top: Row,
+        bottom: Row,
+    },
+    /// `×10▭`
+    Exp {
+        open: usize,
+        body: Row,
+    },
+    /// d/dx (`kind` 0), ∫ (1) and Σ (2): the function, then the point or the two limits.
+    Calculus {
+        open: usize,
+        kind: u8,
+        slots: Vec<Row>,
+    },
 }
 
 struct Row {
@@ -64,7 +101,9 @@ impl Node {
             | Node::Root { open, .. }
             | Node::Sup { open, .. }
             | Node::Log { open, .. }
-            | Node::Mix { open, .. } => *open,
+            | Node::Mix { open, .. }
+            | Node::Exp { open, .. }
+            | Node::Calculus { open, .. } => *open,
         }
     }
 }
@@ -118,6 +157,20 @@ fn build(toks: &[Tok], i: &mut usize, inside: bool) -> Row {
                     *i += 1;
                 }
                 Node::Mix { open: at, whole, top, bottom: build(toks, i, true) }
+            }
+            Tok::Exp10Open => Node::Exp { open: at, body: build(toks, i, true) },
+            Tok::DerivOpen | Tok::IntOpen | Tok::SumOpen => {
+                let kind = match t {
+                    Tok::DerivOpen => 0,
+                    Tok::IntOpen => 1,
+                    _ => 2,
+                };
+                let mut slots = vec![build(toks, i, true)];
+                while toks.get(*i) == Some(&Tok::SlotMid) {
+                    *i += 1;
+                    slots.push(build(toks, i, true));
+                }
+                Node::Calculus { open: at, kind, slots }
             }
             tok => Node::Tok { idx: at, tok },
         };
@@ -205,6 +258,13 @@ impl Set<'_> {
                 let word = self.text_size("log", fs);
                 Size { w: word + b.w + fs * 0.2 + a.w + fs * 0.2, above: line.above.max(a.above), below: (fs * 0.25 + b.below).max(a.below) }
             }
+            Node::Exp { body, .. } => {
+                let f = (fs * 0.66).max(MIN_SIZE);
+                let b = self.row_size(body, f);
+                let raise = fs * 0.42;
+                Size { w: self.text_size("\u{00D7}10", fs) + b.w + fs * 0.04, above: (raise + b.above).max(line.above), below: line.below }
+            }
+            Node::Calculus { kind, slots, .. } => self.calculus_layout(*kind, slots, fs).0,
             Node::Mix { whole, top, bottom, .. } => {
                 let (w, t, b) = (self.row_size(whole, fs), self.row_size(top, fs), self.row_size(bottom, fs));
                 let gap = fs * 0.12;
@@ -213,6 +273,114 @@ impl Set<'_> {
                     above: (fs * AXIS + gap + t.above + t.below).max(w.above),
                     below: (gap + b.above + b.below - fs * AXIS).max(0.0).max(w.below),
                 }
+            }
+        }
+    }
+
+    fn slot(slots: &[Row], k: usize) -> Option<&Row> {
+        slots.get(k)
+    }
+
+    /// The size of a d/dx, ∫ or Σ, and the widths of its lead-in (the d/dx, ∫ or Σ part).
+    fn calculus_layout(&self, kind: u8, slots: &[Row], fs: f32) -> (Size, f32) {
+        let small = (fs * 0.62).max(MIN_SIZE);
+        let empty = Size { w: fs * 0.5, above: fs * 0.7, below: fs * 0.2 };
+        let size = |k: usize, f: f32| Self::slot(slots, k).map_or(empty, |r| self.row_size(r, f));
+        let f = size(0, fs);
+        match kind {
+            0 => {
+                let lead = self.text_size("dx", fs * 0.75) + fs * 0.15;
+                let paren = self.text_size("(", fs);
+                let at = size(1, small);
+                let tail = self.text_size("|", fs) + self.text_size("x=", small) + at.w;
+                (Size { w: lead + 2.0 * paren + f.w + tail, above: f.above.max(fs * 1.05), below: f.below.max(fs * 0.45 + at.below) }, lead)
+            }
+            1 => {
+                let (lo, hi) = (size(1, small), size(2, small));
+                let lead = fs * 0.45 + lo.w.max(hi.w) + fs * 0.1;
+                let dx = self.text_size(" dx", fs);
+                (Size { w: lead + f.w + dx, above: f.above.max(fs * 1.0 + hi.above), below: f.below.max(fs * 0.45 + lo.below + lo.above) }, lead)
+            }
+            _ => {
+                let (lo, hi) = (size(1, small), size(2, small));
+                let sigma = self.text_size("\u{03A3}", fs * 1.25);
+                let under = self.text_size("x=", small) + lo.w;
+                let lead = sigma.max(under).max(hi.w) + fs * 0.1;
+                let paren = self.text_size("(", fs);
+                (
+                    Size {
+                        w: lead + 2.0 * paren + f.w,
+                        above: f.above.max(fs * 1.0 + hi.above + hi.below),
+                        below: f.below.max(fs * 0.35 + lo.above + lo.below),
+                    },
+                    lead,
+                )
+            }
+        }
+    }
+
+    fn paint_calculus(&mut self, kind: u8, slots: &[Row], x: f32, base: f32, fs: f32) {
+        let small = (fs * 0.62).max(MIN_SIZE);
+        let (_, lead) = self.calculus_layout(kind, slots, fs);
+        let empty = Row { start: 0, end: 0, nodes: vec![] };
+        let row = |k: usize| Self::slot(slots, k).unwrap_or(&empty);
+        match kind {
+            0 => {
+                // d over dx, then (f), then |x=a
+                let f75 = fs * 0.75;
+                let axis = base - fs * AXIS;
+                let w = self.text_size("dx", f75);
+                self.text(x + (w - self.text_size("d", f75)) / 2.0, axis - fs * 0.1, "d", f75);
+                self.text(x, axis + fs * 0.62, "dx", f75);
+                if !self.dry {
+                    self.p.line_segment([pos2(x, axis), pos2(x + w, axis)], Stroke::new((fs * 0.05).max(1.0), self.ink));
+                }
+                let mut cx = x + lead;
+                self.text(cx, base, "(", fs);
+                cx += self.text_size("(", fs);
+                cx += self.paint_row(row(0), cx, base, fs);
+                self.text(cx, base, ")", fs);
+                cx += self.text_size(")", fs);
+                self.text(cx, base, "|", fs);
+                cx += self.text_size("|", fs);
+                self.text(cx, base + fs * 0.3, "x=", small);
+                cx += self.text_size("x=", small);
+                self.paint_row(row(1), cx, base + fs * 0.3, small);
+            }
+            1 => {
+                // The integral sign, drawn: a long S.
+                if !self.dry {
+                    let (top, bottom, w) = (base - fs * 1.0, base + fs * 0.4, fs * 0.35);
+                    let pts: Vec<Pos2> = (0..=20)
+                        .map(|k| {
+                            let t = k as f32 / 20.0;
+                            let y = egui::lerp(bottom..=top, t);
+                            let bend = (t * std::f32::consts::PI).sin();
+                            pos2(x + w * 0.5 + w * 0.35 * (t * 2.0 - 1.0) - w * 0.15 * bend, y)
+                        })
+                        .collect();
+                    self.p.add(Shape::line(pts, Stroke::new((fs * 0.07).max(1.3), self.ink)));
+                }
+                let lx = x + fs * 0.45;
+                self.paint_row(row(2), lx, base - fs * 0.85, small);
+                self.paint_row(row(1), lx, base + fs * 0.45, small);
+                let fw = self.paint_row(row(0), x + lead, base, fs);
+                self.text(x + lead + fw, base, " dx", fs);
+            }
+            _ => {
+                let sigma = self.text_size("\u{03A3}", fs * 1.25);
+                let under = self.text_size("x=", small) + Self::slot(slots, 1).map_or(fs * 0.3, |r| self.row_size(r, small).w);
+                let hi_w = Self::slot(slots, 2).map_or(fs * 0.3, |r| self.row_size(r, small).w);
+                let centre = x + (lead - fs * 0.1) / 2.0;
+                self.text(centre - sigma / 2.0, base + fs * 0.1, "\u{03A3}", fs * 1.25);
+                self.paint_row(row(2), centre - hi_w / 2.0, base - fs * 1.05, small);
+                self.text(centre - under / 2.0, base + fs * 0.62, "x=", small);
+                self.paint_row(row(1), centre - under / 2.0 + self.text_size("x=", small), base + fs * 0.62, small);
+                let mut cx = x + lead;
+                self.text(cx, base, "(", fs);
+                cx += self.text_size("(", fs);
+                cx += self.paint_row(row(0), cx, base, fs);
+                self.text(cx, base, ")", fs);
             }
         }
     }
@@ -298,6 +466,13 @@ impl Set<'_> {
                 let aw = self.paint_row(arg, x + word + bw + fs * 0.05 + open, base, fs);
                 self.text(x + word + bw + fs * 0.05 + open + aw, base, ")", fs);
             }
+            Node::Exp { body, .. } => {
+                let f = (fs * 0.66).max(MIN_SIZE);
+                let w = self.text_size("\u{00D7}10", fs);
+                self.text(x, base, "\u{00D7}10", fs);
+                self.paint_row(body, x + w, base - fs * 0.42, f);
+            }
+            Node::Calculus { kind, slots, .. } => self.paint_calculus(*kind, slots, x, base, fs),
             Node::Mix { whole, top, bottom, .. } => {
                 let w = self.paint_row(whole, x, base, fs);
                 let (t, b) = (self.row_size(top, fs), self.row_size(bottom, fs));
@@ -455,10 +630,10 @@ fn keys() -> Vec<KeyDef> {
     use Style::{Func as F, Num, Pad, Shift};
     let cols6 = [645.0, 773.0, 900.0, 1030.0, 1160.0, 1287.0];
     let cols5 = [650.0, 808.0, 965.0, 1123.0, 1282.0];
-    let small = Pill(88.0, 72.0);
+    let small = Round(42.0);
     let big = Round(54.0);
     let mut v = vec![
-        key((645.0, 757.0), Round(33.0), Text("ON"), On, F),
+        labelled(key((645.0, 757.0), Round(33.0), Text(""), On, Pad), "ON"),
         labelled(key((773.0, 765.0), Round(37.0), I(Icon::Home), Home, F), "HOME"),
         labelled(key((645.0, 878.0), Round(42.0), I(Icon::Settings), Settings, F), "SETTINGS"),
         key((773.0, 878.0), Round(42.0), I(Icon::Back), Back, F),
@@ -476,7 +651,7 @@ fn keys() -> Vec<KeyDef> {
         labelled(key((1287.0, 1013.0), Round(40.0), I(Icon::Tools), Tools, F), "TOOLS"),
     ];
     let row_d = [
-        key((cols6[0], 1127.0), small, Text("x"), X, F),
+        with(key((cols6[0], 1127.0), small, Text("x"), X, F), Text("QR"), Qr),
         with(key((cols6[1], 1127.0), small, Toks(FRAC), Frac, F), Toks(MIXED), Mixed),
         with(key((cols6[2], 1127.0), small, Toks(SQRT), Sqrt, F), Toks(NROOT), NRoot),
         with(key((cols6[3], 1127.0), small, Sup("x", ""), Pow, F), Sup("x", MINUS_ONE), Inverse),
@@ -490,8 +665,8 @@ fn keys() -> Vec<KeyDef> {
         trig(Func_::Sin, Func_::ASin, "sin", 1),
         trig(Func_::Cos, Func_::ACos, "cos", 2),
         trig(Func_::Tan, Func_::ATan, "tan", 3),
-        key((cols6[4], 1240.0), small, Text("("), LParen, F),
-        key((cols6[5], 1240.0), small, Text(")"), RParen, F),
+        with(key((cols6[4], 1240.0), small, Text("("), LParen, F), Text("="), EqSign),
+        with(key((cols6[5], 1240.0), small, Text(")"), RParen, F), Text(","), Comma),
     ]);
     let digit = |d: u8, label: &'static str, row: usize, col: usize, y: f32, letter: Option<(&'static str, Key)>| {
         let k = key((cols5[col], y), big, Text(label), Digit(d), Num);
@@ -504,8 +679,8 @@ fn keys() -> Vec<KeyDef> {
     v.extend([
         digit(7, "7", 0, 0, 1365.0, Some(("\u{03C0}", Pi))),
         digit(8, "8", 0, 1, 1365.0, Some(("e", E))),
-        key((cols5[2], 1365.0), big, Text("9"), Digit(9), Num),
-        key((cols5[3], 1365.0), big, Icon_(Icon::Backspace), Del, Num),
+        with(key((cols5[2], 1365.0), big, Text("9"), Digit(9), Num), Text("i"), ImagI),
+        with(key((cols5[3], 1365.0), big, Icon_(Icon::Backspace), Del, Num), Text("INS"), Ins),
         with(key((cols5[4], 1365.0), big, Text("AC"), Ac, Num), Text("OFF"), Off),
         digit(4, "4", 1, 0, 1498.0, Some(("A", Var(0)))),
         digit(5, "5", 1, 1, 1498.0, Some(("B", Var(1)))),
@@ -515,7 +690,7 @@ fn keys() -> Vec<KeyDef> {
         digit(1, "1", 2, 0, 1630.0, Some(("D", Var(3)))),
         digit(2, "2", 2, 1, 1630.0, Some(("E", Var(4)))),
         digit(3, "3", 2, 2, 1630.0, Some(("F", Var(5)))),
-        key((cols5[3], 1630.0), big, Text("+"), Plus, Num),
+        with(key((cols5[3], 1630.0), big, Text("+"), Plus, Num), Text("\u{00B0}\u{2032}\u{2033}"), Dms),
         with(key((cols5[4], 1630.0), big, Text("\u{2212}"), Minus, Num), Text("(\u{2212})"), Neg),
         digit(0, "0", 3, 0, 1762.0, Some(("x", Var(6)))),
         with(key((cols5[1], 1762.0), big, Text("."), Dot, Num), Text("y"), Var(7)),
@@ -723,6 +898,8 @@ fn status_bar(clip: &Painter, inside: Rect, dev: &Device, s: f32) {
     let mut x = inside.min.x + 2.0 * s;
     if dev.shift {
         clip.text(pos2(x, y), Align2::LEFT_CENTER, "S", f.clone(), LCD_INK);
+    } else if dev.calc.ins {
+        clip.text(pos2(x - 1.0 * s, y), Align2::LEFT_CENTER, "INS", FontId::proportional(7.0 * s), LCD_INK);
     }
     x += 12.0 * s;
     let io = match dev.cfg.io {
@@ -772,6 +949,25 @@ fn draw_calculate(clip: &Painter, inside: Rect, calc: &Calc, s: f32, blink: bool
         clip.line_segment([pos2(at.x, at.y - fs * 0.85), pos2(at.x, at.y + fs * 0.28)], Stroke::new(1.6 * s, LCD_INK));
     }
     let answer_base = inside.max.y - 12.0 * s;
+    if let (Outcome::Answer(_), Some((a, b, polar))) = (calc.outcome, calc.pair) {
+        let names = if polar { ["r=", "\u{03B8}="] } else { ["x=", "y="] };
+        for (k, (name, v)) in names.iter().zip([a, b]).enumerate() {
+            let y = answer_base - (1 - k) as f32 * 22.0 * s;
+            clip.text(pos2(inside.min.x + 4.0 * s, y), Align2::LEFT_BOTTOM, *name, FontId::proportional(15.0 * s), LCD_INK);
+            typeset(
+                clip,
+                &crate::calculator::result_tokens(v, calc.format, &calc.cfg),
+                inside.max.x - 4.0 * s,
+                y - 3.0 * s,
+                18.0 * s,
+                LCD_INK,
+                true,
+                None,
+                None,
+            );
+        }
+        return;
+    }
     match calc.outcome {
         Outcome::Answer(v) => {
             typeset(
@@ -1105,6 +1301,11 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
                     None => draw_list(&clip, inside, &EQUATIONS, dev.eq_sel, ss),
                 },
             },
+        }
+        if let Some(note) = dev.note.filter(|_| dev.app != App::Home) {
+            let r = Rect::from_center_size(inside.center(), vec2(inside.width() * 0.9, 24.0 * ss));
+            clip.rect_filled(r, CornerRadius::same((4.0 * ss) as u8), LCD_INK);
+            clip.text(r.center(), Align2::CENTER_CENTER, note, FontId::proportional(11.0 * ss), LCD);
         }
         ui.ctx().request_repaint_after(std::time::Duration::from_millis(400));
     }

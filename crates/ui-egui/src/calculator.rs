@@ -28,9 +28,22 @@ pub enum Func {
     /// `f(` and `g(`: the functions the teacher has defined.
     F,
     G,
+    /// Two arguments, separated by a comma.
+    RanInt,
+    Gcd,
+    Lcm,
+    Pol,
+    Rec,
+    /// Round off to the Number Format setting.
+    Rnd,
 }
 
 impl Func {
+    /// Takes two arguments (`a, b`).
+    pub fn two_args(self) -> bool {
+        matches!(self, Func::RanInt | Func::Gcd | Func::Lcm | Func::Pol | Func::Rec)
+    }
+
     pub fn text(self) -> &'static str {
         match self {
             Func::Sin => "sin(",
@@ -50,6 +63,12 @@ impl Func {
             Func::ATanh => "tanh\u{207B}\u{00B9}(",
             Func::F => "f(",
             Func::G => "g(",
+            Func::RanInt => "RanInt#(",
+            Func::Gcd => "GCD(",
+            Func::Lcm => "LCM(",
+            Func::Pol => "Pol(",
+            Func::Rec => "Rec(",
+            Func::Rnd => "Rnd(",
         }
     }
 }
@@ -98,16 +117,151 @@ pub enum Tok {
     MixOpen,
     /// The bar of a fraction in a linear answer (`LineI/LineO`).
     Slash,
+    /// `×10▭` as one number (the ×10ˣ key in its Sci Notat setting): binds tighter than × and ÷.
+    Exp10Open,
+    /// `d/dx(f)|x=a`, `∫ f dx` from a to b, `Σ f` for x from a to b: slots split by `SlotMid`.
+    DerivOpen,
+    IntOpen,
+    SumOpen,
+    SlotMid,
+    /// `=` and `,` (SHIFT on the bracket keys).
+    EqSign,
+    Comma,
+    /// The sexagesimal mark: `12°34°56°` is 12° 34′ 56″.
+    Dms,
+    /// The imaginary unit (the Complex app only).
+    I,
+    /// Angle marks: the value is in degrees, radians or gradians whatever the setting.
+    AngD,
+    AngR,
+    AngG,
+    Ran,
+    /// A scientific constant, by index into [`CONSTANTS`].
+    Const(u8),
+    /// A unit conversion, by index into [`CONVERSIONS`].
+    Conv(u8),
+    /// Shown in answers only: minutes and seconds marks, the digit separator and a decimal comma.
+    MinMark,
+    SecMark,
+    Sep,
+    DecComma,
     Close,
 }
 
+/// The built-in scientific constants (CODATA 2022), by category: symbol and value.
+pub const CONSTANTS: [(&str, &str, f64); 47] = [
+    ("Universal", "h", 6.626_070_15e-34),
+    ("Universal", "\u{0127}", 1.054_571_817e-34),
+    ("Universal", "c\u{2080}", 299_792_458.0),
+    ("Universal", "\u{03B5}\u{2080}", 8.854_187_818_8e-12),
+    ("Universal", "\u{03BC}\u{2080}", 1.256_637_061_27e-6),
+    ("Universal", "Z\u{2080}", 376.730_313_412),
+    ("Universal", "G", 6.674_30e-11),
+    ("Universal", "l\u{209A}", 1.616_255e-35),
+    ("Universal", "t\u{209A}", 5.391_247e-44),
+    ("Electromagnetic", "\u{03BC}N", 5.050_783_739_3e-27),
+    ("Electromagnetic", "\u{03BC}B", 9.274_010_065_7e-24),
+    ("Electromagnetic", "e", 1.602_176_634e-19),
+    ("Electromagnetic", "\u{03A6}\u{2080}", 2.067_833_848e-15),
+    ("Electromagnetic", "G\u{2080}", 7.748_091_729e-5),
+    ("Electromagnetic", "KJ", 483_597.848_4e9),
+    ("Electromagnetic", "RK", 25_812.807_45),
+    ("Atomic&Nuclear", "mp", 1.672_621_925_95e-27),
+    ("Atomic&Nuclear", "mn", 1.674_927_500_56e-27),
+    ("Atomic&Nuclear", "me", 9.109_383_713_9e-31),
+    ("Atomic&Nuclear", "m\u{03BC}", 1.883_531_627e-28),
+    ("Atomic&Nuclear", "a\u{2080}", 5.291_772_105_44e-11),
+    ("Atomic&Nuclear", "\u{03B1}", 7.297_352_564_3e-3),
+    ("Atomic&Nuclear", "re", 2.817_940_320_5e-15),
+    ("Atomic&Nuclear", "\u{03BB}C", 2.426_310_235_38e-12),
+    ("Atomic&Nuclear", "\u{03B3}p", 2.675_221_870_8e8),
+    ("Atomic&Nuclear", "\u{03BB}Cp", 1.321_409_853_60e-15),
+    ("Atomic&Nuclear", "\u{03BB}Cn", 1.319_590_903_82e-15),
+    ("Atomic&Nuclear", "R\u{221E}", 10_973_731.568_157),
+    ("Atomic&Nuclear", "\u{03BC}p", 1.410_606_795_45e-26),
+    ("Atomic&Nuclear", "\u{03BC}e", -9.284_764_691_7e-24),
+    ("Atomic&Nuclear", "\u{03BC}n", -9.662_365_3e-27),
+    ("Atomic&Nuclear", "\u{03BC}\u{03BC}", -4.490_448_30e-26),
+    ("Atomic&Nuclear", "m\u{03C4}", 3.167_54e-27),
+    ("Physico-Chem", "mu", 1.660_539_068_92e-27),
+    ("Physico-Chem", "F", 96_485.332_12),
+    ("Physico-Chem", "NA", 6.022_140_76e23),
+    ("Physico-Chem", "k", 1.380_649e-23),
+    ("Physico-Chem", "Vm", 22.413_969_54e-3),
+    ("Physico-Chem", "R", 8.314_462_618),
+    ("Physico-Chem", "c\u{2081}", 3.741_771_852e-16),
+    ("Physico-Chem", "c\u{2082}", 1.438_776_877e-2),
+    ("Physico-Chem", "\u{03C3}", 5.670_374_419e-8),
+    ("Adopted Values", "gn", 9.806_65),
+    ("Adopted Values", "atm", 101_325.0),
+    ("Adopted Values", "RK-90", 25_812.807),
+    ("Adopted Values", "KJ-90", 483_597.9e9),
+    ("Other", "t", 273.15),
+];
+
+/// Unit conversions (NIST SP 811), by category: the command and `to = from × factor + offset`.
+pub const CONVERSIONS: [(&str, &str, f64, f64); 40] = [
+    ("Length", "in\u{2192}cm", 2.54, 0.0),
+    ("Length", "cm\u{2192}in", 1.0 / 2.54, 0.0),
+    ("Length", "ft\u{2192}m", 0.3048, 0.0),
+    ("Length", "m\u{2192}ft", 1.0 / 0.3048, 0.0),
+    ("Length", "yd\u{2192}m", 0.9144, 0.0),
+    ("Length", "m\u{2192}yd", 1.0 / 0.9144, 0.0),
+    ("Length", "mile\u{2192}km", 1.609_344, 0.0),
+    ("Length", "km\u{2192}mile", 1.0 / 1.609_344, 0.0),
+    ("Length", "n mile\u{2192}m", 1852.0, 0.0),
+    ("Length", "m\u{2192}n mile", 1.0 / 1852.0, 0.0),
+    ("Length", "pc\u{2192}km", 3.085_677_581_491_367e13, 0.0),
+    ("Length", "km\u{2192}pc", 1.0 / 3.085_677_581_491_367e13, 0.0),
+    ("Area", "acre\u{2192}m\u{00B2}", 4_046.856_422_4, 0.0),
+    ("Area", "m\u{00B2}\u{2192}acre", 1.0 / 4_046.856_422_4, 0.0),
+    ("Volume", "gal(US)\u{2192}L", 3.785_411_784, 0.0),
+    ("Volume", "L\u{2192}gal(US)", 1.0 / 3.785_411_784, 0.0),
+    ("Volume", "gal(UK)\u{2192}L", 4.546_09, 0.0),
+    ("Volume", "L\u{2192}gal(UK)", 1.0 / 4.546_09, 0.0),
+    ("Mass", "oz\u{2192}g", 28.349_523_125, 0.0),
+    ("Mass", "g\u{2192}oz", 1.0 / 28.349_523_125, 0.0),
+    ("Mass", "lb\u{2192}kg", 0.453_592_37, 0.0),
+    ("Mass", "kg\u{2192}lb", 1.0 / 0.453_592_37, 0.0),
+    ("Velocity", "km/h\u{2192}m/s", 1.0 / 3.6, 0.0),
+    ("Velocity", "m/s\u{2192}km/h", 3.6, 0.0),
+    ("Pressure", "atm\u{2192}Pa", 101_325.0, 0.0),
+    ("Pressure", "Pa\u{2192}atm", 1.0 / 101_325.0, 0.0),
+    ("Pressure", "mmHg\u{2192}Pa", 133.322_387_415, 0.0),
+    ("Pressure", "Pa\u{2192}mmHg", 1.0 / 133.322_387_415, 0.0),
+    ("Pressure", "kgf/cm\u{00B2}\u{2192}Pa", 98_066.5, 0.0),
+    ("Pressure", "Pa\u{2192}kgf/cm\u{00B2}", 1.0 / 98_066.5, 0.0),
+    ("Pressure", "lbf/in\u{00B2}\u{2192}kPa", 6.894_757_293_168, 0.0),
+    ("Pressure", "kPa\u{2192}lbf/in\u{00B2}", 1.0 / 6.894_757_293_168, 0.0),
+    ("Energy", "kgf\u{00B7}m\u{2192}J", 9.806_65, 0.0),
+    ("Energy", "J\u{2192}kgf\u{00B7}m", 1.0 / 9.806_65, 0.0),
+    ("Energy", "J\u{2192}cal\u{2081}\u{2085}", 1.0 / 4.1855, 0.0),
+    ("Energy", "cal\u{2081}\u{2085}\u{2192}J", 4.1855, 0.0),
+    ("Power", "hp\u{2192}kW", 0.745_699_872, 0.0),
+    ("Power", "kW\u{2192}hp", 1.0 / 0.745_699_872, 0.0),
+    ("Temperature", "\u{00B0}F\u{2192}\u{00B0}C", 5.0 / 9.0, -32.0 * 5.0 / 9.0),
+    ("Temperature", "\u{00B0}C\u{2192}\u{00B0}F", 1.8, 32.0),
+];
+
 impl Tok {
     pub fn opens(self) -> bool {
-        matches!(self, Tok::FracOpen | Tok::SqrtOpen | Tok::RootOpen | Tok::SupOpen | Tok::LogOpen | Tok::MixOpen)
+        matches!(
+            self,
+            Tok::FracOpen
+                | Tok::SqrtOpen
+                | Tok::RootOpen
+                | Tok::SupOpen
+                | Tok::LogOpen
+                | Tok::MixOpen
+                | Tok::Exp10Open
+                | Tok::DerivOpen
+                | Tok::IntOpen
+                | Tok::SumOpen
+        )
     }
 
     pub fn is_mid(self) -> bool {
-        matches!(self, Tok::FracMid | Tok::RootMid | Tok::LogMid)
+        matches!(self, Tok::FracMid | Tok::RootMid | Tok::LogMid | Tok::SlotMid)
     }
 
     /// What the token looks like when it is drawn as plain text.
@@ -126,6 +280,17 @@ impl Tok {
             Tok::X => "x".into(),
             Tok::Var(i) => ["A", "B", "C", "D", "E", "F", "x", "y", "z"].get(usize::from(i)).copied().unwrap_or("?").into(),
             Tok::Slash => "/".into(),
+            Tok::EqSign => "=".into(),
+            Tok::Comma | Tok::DecComma | Tok::Sep => ",".into(),
+            Tok::Dms | Tok::AngD => "\u{00B0}".into(),
+            Tok::MinMark => "\u{2032}".into(),
+            Tok::SecMark => "\u{2033}".into(),
+            Tok::I => "i".into(),
+            Tok::AngR => "r".into(),
+            Tok::AngG => "g".into(),
+            Tok::Ran => "Ran#".into(),
+            Tok::Const(i) => CONSTANTS.get(usize::from(i)).map_or("?", |c| c.1).into(),
+            Tok::Conv(i) => CONVERSIONS.get(usize::from(i)).map_or("?", |c| c.1).into(),
             Tok::Ans => "Ans".into(),
             Tok::Fact => "!".into(),
             Tok::Percent => "%".into(),
@@ -141,6 +306,11 @@ impl Tok {
             | Tok::LogOpen
             | Tok::LogMid
             | Tok::MixOpen
+            | Tok::Exp10Open
+            | Tok::DerivOpen
+            | Tok::IntOpen
+            | Tok::SumOpen
+            | Tok::SlotMid
             | Tok::Close => String::new(),
         }
     }
@@ -248,6 +418,8 @@ pub enum ResultFormat {
     ImproperFraction,
     MixedNumber,
     StandardForm,
+    /// Degrees, minutes and seconds.
+    Sexagesimal,
 }
 
 /// The calculator's settings.
@@ -257,11 +429,17 @@ pub struct Config {
     pub num: NumFmt,
     /// Fractions in answers as mixed numbers rather than improper.
     pub mixed: bool,
+    /// The ×10ˣ key types `×10^(` (Power) rather than the Sci Notat `×10▭` that binds as one number.
+    pub exp_power: bool,
+    /// Commas every three digits in answers (Digit Separator, on at first).
+    pub separator: bool,
+    /// A comma for the decimal point in answers.
+    pub comma_mark: bool,
 }
 
 impl Default for Config {
     fn default() -> Self {
-        Config { io: Io::MathMath, num: NumFmt::Norm(2), mixed: false }
+        Config { io: Io::MathMath, num: NumFmt::Norm(2), mixed: false, exp_power: false, separator: true, comma_mark: false }
     }
 }
 
@@ -285,6 +463,8 @@ pub struct Env<'a> {
     pub angle: Angle,
     pub x: Option<Value>,
     pub mem: &'a Memory,
+    /// For Rnd(.
+    pub num: NumFmt,
 }
 
 // ---- Exact numbers -------------------------------------------------------------------------
@@ -366,12 +546,25 @@ fn iroot(x: i128, k: u32) -> Option<i128> {
 #[derive(Clone, Copy, PartialEq, Debug)]
 pub enum Value {
     Rat(Rat),
-    /// `coef × √rad`, with `rad` a whole number above 1 and free of square factors.
-    Surd {
-        coef: Rat,
-        rad: i128,
-    },
+    /// A sum of a rational and one or two roots, such as `1/3 + 2√3` or `45√3 + 10√2`.
+    Surd(Surds),
+    /// A rational multiple of π, such as `π/6`.
+    Pi(Rat),
     Float(f64),
+}
+
+/// `rat + Σ coef × √rad`: each `rad` a whole number above 1, free of square factors, and different.
+#[derive(Clone, Copy, PartialEq, Debug)]
+pub struct Surds {
+    pub rat: Rat,
+    pub terms: [(Rat, i128); 2],
+    pub n: usize,
+}
+
+impl Surds {
+    pub fn roots(&self) -> &[(Rat, i128)] {
+        &self.terms[..self.n.min(2)]
+    }
 }
 
 impl Value {
@@ -382,13 +575,27 @@ impl Value {
     pub fn to_f64(self) -> f64 {
         match self {
             Value::Rat(r) => r.to_f64(),
-            Value::Surd { coef, rad } => coef.to_f64() * (rad as f64).sqrt(),
+            Value::Surd(s) => s.rat.to_f64() + s.roots().iter().map(|(c, r)| c.to_f64() * (*r as f64).sqrt()).sum::<f64>(),
+            Value::Pi(k) => k.to_f64() * std::f64::consts::PI,
             Value::Float(f) => f,
         }
     }
 
     fn is_zero(self) -> bool {
         matches!(self, Value::Rat(r) if r.n == 0) || matches!(self, Value::Float(f) if f == 0.0)
+    }
+
+    /// The value as `(coefficient, radicand)` parts, radicand 1 for the rational part.
+    fn parts(self) -> Option<Vec<(Rat, i128)>> {
+        match self {
+            Value::Rat(r) => Some(vec![(r, 1)]),
+            Value::Surd(s) => {
+                let mut v = vec![(s.rat, 1)];
+                v.extend_from_slice(s.roots());
+                Some(v)
+            }
+            _ => None,
+        }
     }
 }
 
@@ -400,12 +607,12 @@ fn from_rat(r: Option<Rat>, fallback: f64) -> Result<Value, CalcError> {
     r.map_or_else(|| float(fallback), |r| Ok(Value::Rat(r)))
 }
 
-/// `coef × √rad` in simplest form, or an exact rational when the root comes out whole.
-fn surd(coef: Rat, rad: i128) -> Value {
-    if rad <= 1 || coef.n == 0 {
-        return Value::Rat(if rad <= 1 { coef } else { Rat::int(0) });
+/// `k` and `m` with `k² × m = n` and `m` free of square factors.
+fn simplify_root(n: i128) -> Option<(i128, i128)> {
+    if !(0..=1_000_000_000_000).contains(&n) {
+        return None;
     }
-    let (mut outside, mut inside, mut f) = (1i128, rad, 2i128);
+    let (mut outside, mut inside, mut f) = (1i128, n, 2i128);
     while f * f <= inside {
         while inside % (f * f) == 0 {
             inside /= f * f;
@@ -413,11 +620,44 @@ fn surd(coef: Rat, rad: i128) -> Value {
         }
         f += 1;
     }
-    match coef.mul(Rat::int(outside)) {
-        Some(c) if inside == 1 => Value::Rat(c),
-        Some(c) => Value::Surd { coef: c, rad: inside },
-        None => Value::Float(coef.to_f64() * (rad as f64).sqrt()),
+    Some((outside, inside))
+}
+
+/// Gather parts into a value: like roots combined, zeros dropped. More than two roots is not
+/// something the screen can show exactly, so that is `None`.
+fn from_parts(parts: Vec<(Rat, i128)>) -> Option<Value> {
+    let mut rat = Rat::int(0);
+    let mut roots: Vec<(Rat, i128)> = vec![];
+    for (c, r) in parts {
+        let (k, m) = simplify_root(r)?;
+        let c = c.mul(Rat::int(k))?;
+        if m == 1 {
+            rat = rat.add(c)?;
+        } else if let Some(slot) = roots.iter_mut().find(|(_, rr)| *rr == m) {
+            slot.0 = slot.0.add(c)?;
+        } else {
+            roots.push((c, m));
+        }
     }
+    roots.retain(|(c, _)| c.n != 0);
+    // The bigger root first, as the calculator writes 45√3 + 10√2.
+    roots.sort_by_key(|t| std::cmp::Reverse(t.1));
+    match roots.len() {
+        0 => Some(Value::Rat(rat)),
+        1 | 2 => {
+            let mut terms = [(Rat::int(0), 1); 2];
+            for (i, t) in roots.iter().enumerate() {
+                terms[i] = *t;
+            }
+            Some(Value::Surd(Surds { rat, terms, n: roots.len() }))
+        }
+        _ => None,
+    }
+}
+
+/// `coef × √rad` in simplest form, or an exact rational when the root comes out whole.
+fn surd(coef: Rat, rad: i128) -> Value {
+    from_parts(vec![(coef, rad)]).unwrap_or(Value::Float(coef.to_f64() * (rad as f64).sqrt()))
 }
 
 fn sqrt_rat(r: Rat) -> Result<Value, CalcError> {
@@ -442,25 +682,40 @@ fn sqrt(v: Value) -> Result<Value, CalcError> {
     }
 }
 
+fn scale(v: Value, k: Rat) -> Result<Value, CalcError> {
+    match v {
+        Value::Pi(p) => Ok(p.mul(k).map_or(Value::Float(v.to_f64() * k.to_f64()), |c| if c.n == 0 { Value::int(0) } else { Value::Pi(c) })),
+        _ => mul(v, Value::Rat(k)),
+    }
+}
+
 fn neg(v: Value) -> Result<Value, CalcError> {
     match v {
-        Value::Rat(r) => from_rat(r.neg(), -r.to_f64()),
-        Value::Surd { coef, rad } => Ok(coef.neg().map_or(Value::Float(-v.to_f64()), |c| Value::Surd { coef: c, rad })),
         Value::Float(f) => Ok(Value::Float(-f)),
+        _ => scale(v, Rat::int(-1)),
     }
 }
 
 fn add(a: Value, b: Value) -> Result<Value, CalcError> {
+    if a.is_zero() && !matches!(a, Value::Float(_)) {
+        return Ok(b);
+    }
+    if b.is_zero() && !matches!(b, Value::Float(_)) {
+        return Ok(a);
+    }
     match (a, b) {
-        (Value::Rat(x), Value::Rat(y)) => from_rat(x.add(y), x.to_f64() + y.to_f64()),
-        (Value::Surd { coef: c1, rad: r1 }, Value::Surd { coef: c2, rad: r2 }) if r1 == r2 => match c1.add(c2) {
-            Some(c) if c.n == 0 => Ok(Value::int(0)),
-            Some(c) => Ok(Value::Surd { coef: c, rad: r1 }),
-            None => float(a.to_f64() + b.to_f64()),
+        (Value::Pi(x), Value::Pi(y)) => Ok(match x.add(y) {
+            Some(c) if c.n == 0 => Value::int(0),
+            Some(c) => Value::Pi(c),
+            None => Value::Float(a.to_f64() + b.to_f64()),
+        }),
+        _ => match (a.parts(), b.parts()) {
+            (Some(mut x), Some(y)) => {
+                x.extend(y);
+                from_parts(x).map_or_else(|| float(a.to_f64() + b.to_f64()), Ok)
+            }
+            _ => float(a.to_f64() + b.to_f64()),
         },
-        _ if a.is_zero() && !matches!(a, Value::Float(_)) => Ok(b),
-        _ if b.is_zero() && !matches!(b, Value::Float(_)) => Ok(a),
-        _ => float(a.to_f64() + b.to_f64()),
     }
 }
 
@@ -471,14 +726,26 @@ fn sub(a: Value, b: Value) -> Result<Value, CalcError> {
 fn mul(a: Value, b: Value) -> Result<Value, CalcError> {
     match (a, b) {
         (Value::Rat(x), Value::Rat(y)) => from_rat(x.mul(y), x.to_f64() * y.to_f64()),
-        (Value::Rat(k), Value::Surd { coef, rad }) | (Value::Surd { coef, rad }, Value::Rat(k)) => {
-            Ok(coef.mul(k).map_or(Value::Float(a.to_f64() * b.to_f64()), |c| surd(c, rad)))
-        }
-        (Value::Surd { coef: c1, rad: r1 }, Value::Surd { coef: c2, rad: r2 }) => match (c1.mul(c2), r1.checked_mul(r2)) {
-            (Some(c), Some(r)) => Ok(surd(c, r)),
+        (Value::Pi(p), Value::Rat(k)) | (Value::Rat(k), Value::Pi(p)) => Ok(match p.mul(k) {
+            Some(c) if c.n == 0 => Value::int(0),
+            Some(c) => Value::Pi(c),
+            None => Value::Float(a.to_f64() * b.to_f64()),
+        }),
+        _ => match (a.parts(), b.parts()) {
+            (Some(x), Some(y)) => {
+                let mut out = vec![];
+                for (c1, r1) in &x {
+                    for (c2, r2) in &y {
+                        match (c1.mul(*c2), r1.checked_mul(*r2)) {
+                            (Some(c), Some(r)) => out.push((c, r)),
+                            _ => return float(a.to_f64() * b.to_f64()),
+                        }
+                    }
+                }
+                from_parts(out).map_or_else(|| float(a.to_f64() * b.to_f64()), Ok)
+            }
             _ => float(a.to_f64() * b.to_f64()),
         },
-        _ => float(a.to_f64() * b.to_f64()),
     }
 }
 
@@ -486,25 +753,30 @@ fn div(a: Value, b: Value) -> Result<Value, CalcError> {
     if b.is_zero() {
         return Err(CalcError::Math);
     }
-    match (a, b) {
-        (Value::Rat(x), Value::Rat(y)) => from_rat(y.recip().and_then(|r| x.mul(r)), x.to_f64() / y.to_f64()),
-        (Value::Surd { coef, rad }, Value::Rat(k)) => {
-            Ok(k.recip().and_then(|r| coef.mul(r)).map_or(Value::Float(a.to_f64() / b.to_f64()), |c| surd(c, rad)))
-        }
-        // a / (c√r) = a√r / (c·r)
-        (Value::Rat(x), Value::Surd { coef, rad }) => {
-            let denom = coef.mul(Rat::int(rad)).and_then(Rat::recip).and_then(|r| r.mul(x));
-            Ok(denom.map_or(Value::Float(a.to_f64() / b.to_f64()), |c| surd(c, rad)))
-        }
-        (Value::Surd { coef: c1, rad: r1 }, Value::Surd { coef: c2, rad: r2 }) => {
-            let ratio = c2.recip().and_then(|r| c1.mul(r));
-            let radicand = Rat::new(r1, r2);
-            match (ratio, radicand) {
-                (Some(k), Some(q)) => mul(Value::Rat(k), sqrt_rat(q)?),
-                _ => float(a.to_f64() / b.to_f64()),
+    let fallback = || float(a.to_f64() / b.to_f64());
+    match b {
+        Value::Rat(k) => match k.recip() {
+            Some(r) => scale(a, r),
+            None => fallback(),
+        },
+        Value::Pi(q) => match a {
+            Value::Pi(p) => from_rat(q.recip().and_then(|r| p.mul(r)), a.to_f64() / b.to_f64()),
+            _ => fallback(),
+        },
+        // Clear the root from the bottom: multiply top and bottom by the conjugate.
+        Value::Surd(s) if s.n == 1 => {
+            let (c, r) = s.terms[0];
+            let conj = sub(Value::Rat(s.rat), surd(c, r))?;
+            let bottom = match (s.rat.mul(s.rat), c.mul(c).and_then(|cc| cc.mul(Rat::int(r)))) {
+                (Some(p2), Some(q2r)) => p2.add(q2r.neg().unwrap_or(Rat::int(0))),
+                _ => None,
+            };
+            match bottom {
+                Some(d) if d.n != 0 => div(mul(a, conj)?, Value::Rat(d)),
+                _ => fallback(),
             }
         }
-        _ => float(a.to_f64() / b.to_f64()),
+        _ => fallback(),
     }
 }
 
@@ -520,7 +792,7 @@ fn pow(a: Value, b: Value) -> Result<Value, CalcError> {
                         return Ok(Value::Rat(r));
                     }
                 }
-                Value::Surd { .. } => {
+                Value::Surd(_) | Value::Pi(_) => {
                     let mut out = Value::int(1);
                     for _ in 0..e.n.unsigned_abs() {
                         out = mul(out, a)?;
@@ -587,7 +859,15 @@ fn snap_trig(x: f64) -> Value {
     }
 }
 
-fn snap_angle(x: f64) -> Value {
+/// An angle answer: a whole or simple fraction of degrees, or of π in radians.
+fn snap_angle(x: f64, unit: Angle) -> Value {
+    if unit == Angle::Radian {
+        return match snap(x / std::f64::consts::PI, 12) {
+            Some(r) if r.n == 0 => Value::int(0),
+            Some(r) => Value::Pi(r),
+            None => Value::Float(x),
+        };
+    }
     snap(x, 100).map_or(Value::Float(x), Value::Rat)
 }
 
@@ -604,8 +884,8 @@ fn apply(f: Func, v: Value, unit: Angle) -> Result<Value, CalcError> {
         Func::ACosh => float(x.acosh()),
         Func::ATanh if x.abs() >= 1.0 => Err(CalcError::Math),
         Func::ATanh => float(x.atanh()),
-        // Handled by the parser, which knows the definitions.
-        Func::F | Func::G => Err(CalcError::Syntax),
+        // Handled by the parser, which knows the definitions and reads the second argument.
+        Func::F | Func::G | Func::RanInt | Func::Gcd | Func::Lcm | Func::Pol | Func::Rec | Func::Rnd => Err(CalcError::Syntax),
         Func::Sin => Ok(snap_trig(radians.sin())),
         Func::Cos => Ok(snap_trig(radians.cos())),
         Func::Tan => {
@@ -615,16 +895,17 @@ fn apply(f: Func, v: Value, unit: Angle) -> Result<Value, CalcError> {
             Ok(snap_trig(radians.tan()))
         }
         Func::ASin | Func::ACos if x.abs() > 1.0 => Err(CalcError::Math),
-        Func::ASin => Ok(snap_angle(angle(x.asin()))),
-        Func::ACos => Ok(snap_angle(angle(x.acos()))),
-        Func::ATan => Ok(snap_angle(angle(x.atan()))),
+        Func::ASin => Ok(snap_angle(angle(x.asin()), unit)),
+        Func::ACos => Ok(snap_angle(angle(x.acos()), unit)),
+        Func::ATan => Ok(snap_angle(angle(x.atan()), unit)),
         Func::Log | Func::Ln if x <= 0.0 => Err(CalcError::Math),
         Func::Log => Ok(snap(x.log10(), 1).map_or(Value::Float(x.log10()), Value::Rat)),
         Func::Ln => Ok(snap(x.ln(), 1).map_or(Value::Float(x.ln()), Value::Rat)),
         Func::Abs => match v {
             Value::Rat(r) => from_rat(Rat::new(r.n.abs(), r.d), r.to_f64().abs()),
-            Value::Surd { coef, rad } => Ok(Value::Surd { coef: Rat { n: coef.n.abs(), d: coef.d }, rad }),
             Value::Float(f) => Ok(Value::Float(f.abs())),
+            other if other.to_f64() < 0.0 => neg(other),
+            other => Ok(other),
         },
     }
 }
@@ -672,6 +953,8 @@ struct Parser<'a> {
     env: Env<'a>,
     /// How deep f and g are calling each other.
     depth: u8,
+    /// Pol( and Rec( give two answers: (first, second, polar).
+    pair: Option<(Value, Value, bool)>,
 }
 
 fn starts_factor(t: Tok) -> bool {
@@ -691,10 +974,128 @@ fn starts_factor(t: Tok) -> bool {
             | Tok::FracOpen
             | Tok::LogOpen
             | Tok::MixOpen
+            | Tok::Ran
+            | Tok::Const(_)
+            | Tok::DerivOpen
+            | Tok::IntOpen
+            | Tok::SumOpen
     )
 }
 
 impl Parser<'_> {
+    /// `f` with `x` standing for `x`.
+    fn at(&self, f: &[Tok], x: f64) -> Result<f64, CalcError> {
+        let env = Env { x: Some(Value::Float(x)), ..self.env };
+        let mut p = Parser { toks: f, i: 0, env, depth: self.depth + 1, pair: None };
+        let v = p.expr()?;
+        if p.i == f.len() { Ok(v.to_f64()) } else { Err(CalcError::Syntax) }
+    }
+
+    fn slot_value(&self, slot: &[Tok]) -> Result<Value, CalcError> {
+        let mut p = Parser { toks: slot, i: 0, env: self.env, depth: self.depth + 1, pair: None };
+        let v = p.expr()?;
+        if p.i == slot.len() { Ok(v) } else { Err(CalcError::Syntax) }
+    }
+
+    /// d/dx, ∫ and Σ: their slots are read straight from the tokens, so the function can be
+    /// evaluated again and again.
+    fn calculus(&mut self) -> Result<Value, CalcError> {
+        let open = self.i;
+        let kind = self.peek().ok_or(CalcError::Syntax)?;
+        let (mids, close) = template_end(self.toks, open);
+        let close = close.min(self.toks.len());
+        self.i = (close + 1).min(self.toks.len());
+        let mut starts = vec![open + 1];
+        starts.extend(mids.iter().map(|m| m + 1));
+        let mut ends = mids.clone();
+        ends.push(close);
+        let toks = self.toks;
+        let slot = |k: usize| -> Result<&[Tok], CalcError> {
+            match (starts.get(k), ends.get(k)) {
+                (Some(&a), Some(&b)) if a <= b => Ok(&toks[a..b]),
+                _ => Err(CalcError::Syntax),
+            }
+        };
+        let f = slot(0)?;
+        if f.is_empty() {
+            return Err(CalcError::Syntax);
+        }
+        match kind {
+            Tok::DerivOpen => {
+                let a = self.slot_value(slot(1)?)?.to_f64();
+                let h = 1.0e-3 * a.abs().max(1.0);
+                let d = (-self.at(f, a + 2.0 * h)? + 8.0 * self.at(f, a + h)? - 8.0 * self.at(f, a - h)? + self.at(f, a - 2.0 * h)?) / (12.0 * h);
+                if d.is_finite() { Ok(tidy(d)) } else { Err(CalcError::Math) }
+            }
+            Tok::IntOpen => {
+                let (a, b) = (self.slot_value(slot(1)?)?.to_f64(), self.slot_value(slot(2)?)?.to_f64());
+                // Gauss–Legendre, five points on each of 200 pieces.
+                const X: [f64; 5] = [0.0, -0.538_469_310_105_683, 0.538_469_310_105_683, -0.906_179_845_938_664, 0.906_179_845_938_664];
+                const W: [f64; 5] =
+                    [0.568_888_888_888_889, 0.478_628_670_499_366, 0.478_628_670_499_366, 0.236_926_885_056_189, 0.236_926_885_056_189];
+                let n = 200;
+                let step = (b - a) / n as f64;
+                let mut total = 0.0;
+                for k in 0..n {
+                    let mid = a + (k as f64 + 0.5) * step;
+                    for (x, w) in X.iter().zip(W) {
+                        total += w * self.at(f, mid + x * step / 2.0)?;
+                    }
+                }
+                let r = total * step / 2.0;
+                if r.is_finite() { Ok(tidy(r)) } else { Err(CalcError::Math) }
+            }
+            _ => {
+                let (a, b) = (self.slot_value(slot(1)?)?, self.slot_value(slot(2)?)?);
+                let (a, b) = match (a, b) {
+                    (Value::Rat(a), Value::Rat(b)) if a.is_int() && b.is_int() && b.n >= a.n && b.n - a.n <= 100_000 => (a.n, b.n),
+                    _ => return Err(CalcError::Math),
+                };
+                let mut total = Value::int(0);
+                for k in a..=b {
+                    let env = Env { x: Some(Value::int(k)), ..self.env };
+                    let mut p = Parser { toks: f, i: 0, env, depth: self.depth + 1, pair: None };
+                    total = add(total, p.expr()?)?;
+                }
+                Ok(total)
+            }
+        }
+    }
+
+    fn two(&mut self, f: Func, a: Value, b: Value) -> Result<Value, CalcError> {
+        let int = |v: Value| match v {
+            Value::Rat(r) if r.is_int() => Ok(r.n),
+            _ => Err(CalcError::Math),
+        };
+        match f {
+            Func::RanInt => {
+                let (lo, hi) = (int(a)?, int(b)?);
+                if hi < lo {
+                    return Err(CalcError::Math);
+                }
+                let span = u64::try_from(hi - lo + 1).map_err(|_| CalcError::Math)?;
+                Ok(Value::int(lo + i128::from(random() % span)))
+            }
+            Func::Gcd | Func::Lcm => {
+                let (x, y) = (int(a)?.abs(), int(b)?.abs());
+                let g = gcd(x, y);
+                if f == Func::Gcd { Ok(Value::int(g)) } else { Ok(Value::int((x / g.max(1)).checked_mul(y).ok_or(CalcError::Math)?)) }
+            }
+            Func::Pol => {
+                let r = sqrt(add(mul(a, a)?, mul(b, b)?)?)?;
+                let theta = snap_angle(self.env.angle.from_radians(b.to_f64().atan2(a.to_f64())), self.env.angle);
+                self.pair = Some((r, theta, true));
+                Ok(r)
+            }
+            _ => {
+                let t = self.env.angle.to_radians(b.to_f64());
+                let (x, y) = (mul(a, snap_trig(t.cos()))?, mul(a, snap_trig(t.sin()))?);
+                self.pair = Some((x, y, false));
+                Ok(x)
+            }
+        }
+    }
+
     fn peek(&self) -> Option<Tok> {
         self.toks.get(self.i).copied()
     }
@@ -794,6 +1195,43 @@ impl Parser<'_> {
                     self.i += 1;
                     v = div(v, Value::int(100))?;
                 }
+                Some(Tok::Exp10Open) => {
+                    self.i += 1;
+                    let e = self.expr()?;
+                    self.close(Tok::Close)?;
+                    v = mul(v, pow(Value::int(10), e)?)?;
+                }
+                Some(Tok::Dms) => {
+                    self.i += 1;
+                    // Minutes and seconds may follow: 12°34°56°.
+                    let mut unit = 60;
+                    while unit <= 3600 && matches!(self.peek(), Some(Tok::Digit(_) | Tok::Dot)) {
+                        let save = self.i;
+                        let part = self.number()?;
+                        if !self.eat(Tok::Dms) {
+                            self.i = save;
+                            break;
+                        }
+                        let step = div(part, Value::int(unit))?;
+                        v = if v.to_f64() < 0.0 { sub(v, step)? } else { add(v, step)? };
+                        unit *= 60;
+                    }
+                }
+                Some(t @ (Tok::AngD | Tok::AngR | Tok::AngG)) => {
+                    self.i += 1;
+                    let from = match t {
+                        Tok::AngD => Angle::Degree,
+                        Tok::AngR => Angle::Radian,
+                        _ => Angle::Gradian,
+                    };
+                    v = convert_angle(v, from, self.env.angle)?;
+                }
+                Some(Tok::Conv(c)) => {
+                    self.i += 1;
+                    let (_, _, factor, offset) = CONVERSIONS.get(usize::from(c)).copied().ok_or(CalcError::Syntax)?;
+                    v = tidy(float(v.to_f64() * factor + offset)?.to_f64());
+                }
+
                 _ => return Ok(v),
             }
         }
@@ -829,7 +1267,7 @@ impl Parser<'_> {
             Tok::Digit(_) | Tok::Dot => self.number(),
             Tok::Pi => {
                 self.i += 1;
-                Ok(Value::Float(std::f64::consts::PI))
+                Ok(Value::Pi(Rat::int(1)))
             }
             Tok::E => {
                 self.i += 1;
@@ -853,6 +1291,34 @@ impl Parser<'_> {
                 self.close(Tok::RParen)?;
                 Ok(v)
             }
+            // `×10▭` with nothing before it is 1 × 10▭; postfix does the rest.
+            Tok::Exp10Open => Ok(Value::int(1)),
+            Tok::Ran => {
+                self.i += 1;
+                Ok(Value::Rat(Rat::new(i128::from((random() % 1000) as u16), 1000).unwrap_or(Rat::int(0))))
+            }
+            Tok::Const(c) => {
+                self.i += 1;
+                CONSTANTS.get(usize::from(c)).map(|k| Value::Float(k.2)).ok_or(CalcError::Syntax)
+            }
+            Tok::I => Err(CalcError::Math),
+            Tok::Func(f) if f.two_args() => {
+                self.i += 1;
+                let a = self.expr()?;
+                if !self.eat(Tok::Comma) {
+                    return Err(CalcError::Syntax);
+                }
+                let b = self.expr()?;
+                self.close(Tok::RParen)?;
+                self.two(f, a, b)
+            }
+            Tok::Func(Func::Rnd) => {
+                self.i += 1;
+                let v = self.expr()?;
+                self.close(Tok::RParen)?;
+                round_off(v, self.env.num)
+            }
+            Tok::DerivOpen | Tok::IntOpen | Tok::SumOpen => self.calculus(),
             Tok::Func(f @ (Func::F | Func::G)) => {
                 self.i += 1;
                 let v = self.expr()?;
@@ -862,7 +1328,7 @@ impl Parser<'_> {
                     return Err(CalcError::Syntax);
                 }
                 let env = Env { x: Some(v), ..self.env };
-                let mut inner = Parser { toks: def, i: 0, env, depth: self.depth + 1 };
+                let mut inner = Parser { toks: def, i: 0, env, depth: self.depth + 1, pair: None };
                 let out = inner.expr()?;
                 if inner.i == def.len() { Ok(out) } else { Err(CalcError::Syntax) }
             }
@@ -941,14 +1407,77 @@ pub fn evaluate(toks: &[Tok], ans: Value, degrees: bool) -> Result<Value, CalcEr
 /// As `evaluate`, with the variable `x` standing for a value (a table row, a root being checked).
 pub fn evaluate_with(toks: &[Tok], ans: Value, degrees: bool, x: Option<Value>) -> Result<Value, CalcError> {
     let mem = Memory::default();
-    evaluate_env(toks, &Env { ans, angle: if degrees { Angle::Degree } else { Angle::Radian }, x, mem: &mem })
+    evaluate_env(toks, &Env { ans, angle: if degrees { Angle::Degree } else { Angle::Radian }, x, mem: &mem, num: NumFmt::Norm(2) })
 }
 
 /// Evaluate with everything the sum can refer to.
 pub fn evaluate_env(toks: &[Tok], env: &Env) -> Result<Value, CalcError> {
-    let mut p = Parser { toks, i: 0, env: *env, depth: 0 };
+    evaluate_full(toks, env).map(|(v, _)| v)
+}
+
+/// As `evaluate_env`, with the second answer of Pol( or Rec( if there is one.
+pub fn evaluate_full(toks: &[Tok], env: &Env) -> Result<(Value, Option<(Value, Value, bool)>), CalcError> {
+    let mut p = Parser { toks, i: 0, env: *env, depth: 0, pair: None };
     let v = p.expr()?;
-    if p.i == toks.len() { Ok(v) } else { Err(CalcError::Syntax) }
+    if p.i == toks.len() { Ok((v, p.pair)) } else { Err(CalcError::Syntax) }
+}
+
+/// A cheap random number generator (xorshift), seeded from the clock: for Ran# and RanInt#.
+fn random() -> u64 {
+    use std::sync::atomic::{AtomicU64, Ordering};
+    static STATE: AtomicU64 = AtomicU64::new(0);
+    let mut x = STATE.load(Ordering::Relaxed);
+    if x == 0 {
+        x = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0x9E37_79B9_7F4A_7C15, |d| d.as_nanos() as u64) | 1;
+    }
+    x ^= x << 13;
+    x ^= x >> 7;
+    x ^= x << 17;
+    STATE.store(x, Ordering::Relaxed);
+    x
+}
+
+/// `v`, given in `from`, in `to`. Exact where it can be: 90° is π/2 radians.
+pub fn convert_angle(v: Value, from: Angle, to: Angle) -> Result<Value, CalcError> {
+    match (from, to) {
+        _ if from == to => Ok(v),
+        (Angle::Degree, Angle::Radian) => mul(v, Value::Pi(Rat { n: 1, d: 180 })),
+        (Angle::Gradian, Angle::Radian) => mul(v, Value::Pi(Rat { n: 1, d: 200 })),
+        (Angle::Radian, _) => {
+            let full = if to == Angle::Degree { 180 } else { 200 };
+            match v {
+                Value::Pi(k) => from_rat(k.mul(Rat::int(full)), v.to_f64() * full as f64 / std::f64::consts::PI),
+                _ => float(v.to_f64() * full as f64 / std::f64::consts::PI),
+            }
+        }
+        (Angle::Degree, _) => mul(v, Value::Rat(Rat { n: 10, d: 9 })),
+        (Angle::Gradian, _) => mul(v, Value::Rat(Rat { n: 9, d: 10 })),
+    }
+}
+
+/// Round off as the screen would show it (Rnd): to the Fix places, the Sci figures, or ten figures.
+fn round_off(v: Value, num: NumFmt) -> Result<Value, CalcError> {
+    let x = v.to_f64();
+    let text = match num {
+        NumFmt::Fix(n) => format!("{x:.*}", usize::from(n)),
+        NumFmt::Sci(n) => format!("{x:.*e}", usize::from(n.max(1)) - 1),
+        NumFmt::Norm(_) => format!("{x:.9e}"),
+    };
+    let r: f64 = text.parse().map_err(|_| CalcError::Math)?;
+    Ok(snap(r, 1000).map_or(Value::Float(r), Value::Rat))
+}
+
+/// Round noise off a numerical answer (derivative, integral) when it is a simple number.
+fn tidy(x: f64) -> Value {
+    if x.abs() < 1.0e-10 {
+        return Value::int(0);
+    }
+    (1..=1000)
+        .find_map(|d| {
+            let n = (x * d as f64).round();
+            ((n / d as f64 - x).abs() < 1.0e-9 * x.abs().max(1.0)).then(|| Rat::new(n as i128, d)).flatten()
+        })
+        .map_or(Value::Float(x), Value::Rat)
 }
 
 // ---- Showing an answer ---------------------------------------------------------------------
@@ -1094,6 +1623,63 @@ fn linearise(toks: Vec<Tok>) -> Vec<Tok> {
     out
 }
 
+fn count_digits(n: u128) -> usize {
+    n.to_string().len()
+}
+
+/// How many digits a fraction takes as a mixed number, counting the bars: more than ten and the
+/// calculator shows a decimal instead (whichever way the fraction is shown).
+fn fraction_digits(r: Rat) -> usize {
+    let (n, d) = (r.n.unsigned_abs(), r.d.unsigned_abs());
+    if n > d { count_digits(n / d) + count_digits(n % d) + count_digits(d) + 2 } else { count_digits(n) + count_digits(d) + 1 }
+}
+
+/// One part of a √-form answer: `a√b`, `a√b/c`, a whole number or a fraction (no sign).
+fn surd_term(c: Rat, rad: i128, out: &mut Vec<Tok>) {
+    let body = |out: &mut Vec<Tok>| {
+        if rad == 1 {
+            digits(c.n.unsigned_abs(), out);
+        } else {
+            root_tokens(i128::try_from(c.n.unsigned_abs()).unwrap_or(1), rad, out);
+        }
+    };
+    if c.d == 1 {
+        body(out);
+    } else {
+        out.push(Tok::FracOpen);
+        body(out);
+        out.push(Tok::FracMid);
+        digits(c.d.unsigned_abs(), out);
+        out.push(Tok::Close);
+    }
+}
+
+/// A √-form answer, if it is inside the ranges the calculator shows that way (a < 100, b < 1000,
+/// c < 100, and at most two parts).
+fn surd_tokens(s: &Surds) -> Option<Vec<Tok>> {
+    let mut parts: Vec<(Rat, i128)> = s.roots().to_vec();
+    if s.rat.n != 0 {
+        if parts.len() >= 2 {
+            return None;
+        }
+        // A whole number goes first (d ± a√b); a fraction goes after the root.
+        if s.rat.is_int() { parts.insert(0, (s.rat, 1)) } else { parts.push((s.rat, 1)) }
+    }
+    if parts.iter().any(|(c, r)| c.n.unsigned_abs() >= 100 || c.d >= 100 || *r >= 1000) {
+        return None;
+    }
+    let mut out = vec![];
+    for (i, (c, r)) in parts.iter().enumerate() {
+        if c.n < 0 {
+            out.push(Tok::Minus);
+        } else if i > 0 {
+            out.push(Tok::Plus);
+        }
+        surd_term(*c, *r, &mut out);
+    }
+    Some(out)
+}
+
 fn natural_tokens(v: Value, decimal: bool, cfg: &Config) -> Vec<Tok> {
     let mut out = vec![];
     let v = match v {
@@ -1112,6 +1698,8 @@ fn natural_tokens(v: Value, decimal: bool, cfg: &Config) -> Vec<Tok> {
                 float_tokens(r.to_f64(), cfg.num, &mut out);
             }
         }
+        // A fraction needing more than ten digits (counting the bar) is shown as a decimal.
+        Value::Rat(r) if fraction_digits(r) > 10 => float_tokens(r.to_f64(), cfg.num, &mut out),
         Value::Rat(r) => {
             if r.n < 0 {
                 out.push(Tok::Minus);
@@ -1126,21 +1714,28 @@ fn natural_tokens(v: Value, decimal: bool, cfg: &Config) -> Vec<Tok> {
             digits(r.d.unsigned_abs(), &mut out);
             out.push(Tok::Close);
         }
-        Value::Surd { .. } if decimal => float_tokens(v.to_f64(), cfg.num, &mut out),
-        Value::Surd { coef, rad } => {
-            if coef.n < 0 {
+        Value::Surd(_) | Value::Pi(_) if decimal => float_tokens(v.to_f64(), cfg.num, &mut out),
+        Value::Surd(sd) => match surd_tokens(&sd) {
+            Some(t) => out = t,
+            // Outside the ranges the screen shows in √ form: a decimal, as the real one does.
+            None => float_tokens(v.to_f64(), cfg.num, &mut out),
+        },
+        Value::Pi(k) if k.n.unsigned_abs() < 1000 && k.d < 1000 => {
+            if k.n < 0 {
                 out.push(Tok::Minus);
             }
-            if coef.d == 1 {
-                root_tokens(coef.n, rad, &mut out);
-            } else {
+            if k.d != 1 {
                 out.push(Tok::FracOpen);
-                root_tokens(coef.n, rad, &mut out);
+                digits(k.n.unsigned_abs(), &mut out);
                 out.push(Tok::FracMid);
-                digits(coef.d.unsigned_abs(), &mut out);
+                digits(k.d.unsigned_abs(), &mut out);
                 out.push(Tok::Close);
+            } else if k.n.unsigned_abs() != 1 {
+                digits(k.n.unsigned_abs(), &mut out);
             }
+            out.push(Tok::Pi);
         }
+        Value::Pi(_) => float_tokens(v.to_f64(), cfg.num, &mut out),
         Value::Float(f) => float_tokens(f, cfg.num, &mut out),
     }
     out
@@ -1171,8 +1766,61 @@ pub fn result_tokens(v: Value, format: ResultFormat, cfg: &Config) -> Vec<Tok> {
             Value::Rat(r) if r.is_int() => prime_tokens(r.n).unwrap_or_else(|| natural_tokens(v, false, cfg)),
             _ => natural_tokens(v, false, cfg),
         },
+        ResultFormat::Sexagesimal => dms_tokens(v.to_f64()),
     };
-    if cfg.io.line_output() { linearise(out) } else { out }
+    let out = if cfg.io.line_output() { linearise(out) } else { out };
+    decorate(out, cfg)
+}
+
+/// `12°34′56.7″`: whole degrees, whole minutes and seconds to two places.
+fn dms_tokens(x: f64) -> Vec<Tok> {
+    let mut out = vec![];
+    if x < 0.0 {
+        out.push(Tok::Minus);
+    }
+    let total = (x.abs() * 360_000.0).round() / 100.0;
+    let deg = (total / 3600.0).floor();
+    let min = ((total - deg * 3600.0) / 60.0).floor();
+    let sec = total - deg * 3600.0 - min * 60.0;
+    digits(deg as u128, &mut out);
+    out.push(Tok::Dms);
+    digits(min as u128, &mut out);
+    out.push(Tok::MinMark);
+    push_text(format!("{sec:.2}").trim_end_matches('0').trim_end_matches('.'), &mut out);
+    out.push(Tok::SecMark);
+    out
+}
+
+/// The Digit Separator (a comma every three digits of a whole part) and the Decimal Mark.
+fn decorate(toks: Vec<Tok>, cfg: &Config) -> Vec<Tok> {
+    let mut out = Vec::with_capacity(toks.len() + 4);
+    let mut i = 0;
+    let mut depth = 0usize;
+    let mut after_point = false;
+    while i < toks.len() {
+        let t = toks[i];
+        match t {
+            Tok::SupOpen | Tok::Exp10Open => depth += 1,
+            Tok::Close => depth = depth.saturating_sub(1),
+            _ => {}
+        }
+        if let Tok::Digit(_) = t {
+            let run = toks[i..].iter().take_while(|t| matches!(t, Tok::Digit(_))).count();
+            let group = cfg.separator && depth == 0 && !after_point && run > 3;
+            for (k, d) in toks[i..i + run].iter().enumerate() {
+                if group && k > 0 && (run - k) % 3 == 0 {
+                    out.push(Tok::Sep);
+                }
+                out.push(*d);
+            }
+            i += run;
+            continue;
+        }
+        after_point = t == Tok::Dot;
+        out.push(if t == Tok::Dot && cfg.comma_mark { Tok::DecComma } else { t });
+        i += 1;
+    }
+    out
 }
 
 /// The answer under the default settings, exact or decimal.
@@ -1201,7 +1849,7 @@ pub fn table_rows(
     let mut rows = vec![];
     for k in 0..=(count as i128) {
         let x = add(start, mul(step, Value::int(k))?)?;
-        rows.push((x, evaluate_env(f, &Env { ans: Value::int(0), angle, x: Some(x), mem })));
+        rows.push((x, evaluate_env(f, &Env { ans: Value::int(0), angle, x: Some(x), mem, num: NumFmt::Norm(2) })));
     }
     Ok(rows)
 }
@@ -1294,6 +1942,22 @@ pub enum Key {
     /// Run the sum and show the answer as a decimal (SHIFT + EXE).
     ExeDecimal,
     SetFormat(ResultFormat),
+    EqSign,
+    Comma,
+    Dms,
+    ImagI,
+    Qr,
+    /// The next template takes what follows the cursor as its argument (SHIFT + DEL).
+    Ins,
+    AngD,
+    AngR,
+    AngG,
+    Ran,
+    Const(u8),
+    Conv(u8),
+    Deriv,
+    Integral,
+    Sum,
     // The keys that open menus and screens belong to the device, not the sum.
     Back,
     Settings,
@@ -1329,6 +1993,10 @@ pub struct Calc {
     pub format: ResultFormat,
     pub cfg: Config,
     pub mem: Memory,
+    /// INS is on: the next template wraps what follows the cursor.
+    pub ins: bool,
+    /// The two answers of Pol( or Rec( (r and θ, or x and y), shown on two lines.
+    pub pair: Option<(Value, Value, bool)>,
     ans: Value,
     history: Vec<Entry>,
     replay: Option<usize>,
@@ -1349,6 +2017,8 @@ impl Default for Calc {
             format: ResultFormat::Standard,
             cfg: Config::default(),
             mem: Memory::default(),
+            pair: None,
+            ins: false,
             ans: Value::int(0),
             history: vec![],
             replay: None,
@@ -1379,7 +2049,7 @@ fn template_end(toks: &[Tok], open: usize) -> (Vec<usize>, usize) {
 impl Calc {
     /// The value of what is typed, without running it as a sum: for the fields of a table or equation.
     pub fn value(&self, x: Option<Value>) -> Result<Value, CalcError> {
-        evaluate_env(&self.tokens, &Env { ans: self.ans, angle: self.angle, x, mem: &self.mem })
+        evaluate_env(&self.tokens, &Env { ans: self.ans, angle: self.angle, x, mem: &self.mem, num: self.cfg.num })
     }
 
     /// A blank line that works with the same settings and memory as `like`.
@@ -1442,7 +2112,22 @@ impl Calc {
             self.fresh = false;
             let carries_on = matches!(
                 toks.first(),
-                Some(Tok::Plus | Tok::Minus | Tok::Times | Tok::Divide | Tok::Fact | Tok::Percent | Tok::SupOpen | Tok::Ncr | Tok::Npr)
+                Some(
+                    Tok::Plus
+                        | Tok::Minus
+                        | Tok::Times
+                        | Tok::Divide
+                        | Tok::Fact
+                        | Tok::Percent
+                        | Tok::SupOpen
+                        | Tok::Exp10Open
+                        | Tok::Ncr
+                        | Tok::Npr
+                        | Tok::AngD
+                        | Tok::AngR
+                        | Tok::AngG
+                        | Tok::Conv(_)
+                )
             );
             self.tokens.clear();
             self.cursor = 0;
@@ -1456,8 +2141,47 @@ impl Calc {
         self.replay = None;
         self.format = ResultFormat::Standard;
         let at = self.cursor.min(self.tokens.len());
+        // INS: a template takes what follows the cursor into its first slot.
+        if std::mem::take(&mut self.ins)
+            && toks.first().is_some_and(|t| t.opens())
+            && let Some(end) = self.argument_end(at)
+        {
+            let arg: Vec<Tok> = self.tokens.drain(at..end).collect();
+            let mut piece = vec![toks[0]];
+            piece.extend(&arg);
+            piece.extend(&toks[1..]);
+            self.tokens.splice(at..at, piece);
+            self.cursor = at + 1 + arg.len();
+            return;
+        }
         self.tokens.splice(at..at, toks.iter().copied());
         self.cursor = at + cursor_in;
+    }
+
+    /// Where the argument starting at `at` ends: a number, a bracket, a function's bracket or a template.
+    fn argument_end(&self, at: usize) -> Option<usize> {
+        let t = *self.tokens.get(at)?;
+        match t {
+            Tok::Digit(_) | Tok::Dot => Some(at + self.tokens[at..].iter().take_while(|t| matches!(t, Tok::Digit(_) | Tok::Dot)).count()),
+            t if t.opens() => Some((template_end(&self.tokens, at).1 + 1).min(self.tokens.len())),
+            Tok::LParen | Tok::Func(_) => {
+                let mut depth = 0i32;
+                for (j, u) in self.tokens.iter().enumerate().skip(at) {
+                    match u {
+                        Tok::LParen | Tok::Func(_) => depth += 1,
+                        Tok::RParen => {
+                            depth -= 1;
+                            if depth == 0 {
+                                return Some(j + 1);
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+                Some(self.tokens.len())
+            }
+            _ => Some(at + 1),
+        }
     }
 
     fn add(&mut self, t: Tok) {
@@ -1499,7 +2223,23 @@ impl Calc {
                     self.format = ResultFormat::Decimal;
                 }
             }
-            Key::Exp10 => self.insert(&[Tok::Times, Tok::Digit(1), Tok::Digit(0), Tok::SupOpen, Tok::Close], 4),
+            Key::Exp10 if self.cfg.exp_power => self.insert(&[Tok::Times, Tok::Digit(1), Tok::Digit(0), Tok::SupOpen, Tok::Close], 4),
+            Key::Exp10 => self.insert(&[Tok::Exp10Open, Tok::Close], 1),
+            Key::EqSign => self.add(Tok::EqSign),
+            Key::Comma => self.add(Tok::Comma),
+            Key::Dms => self.add(Tok::Dms),
+            Key::AngD => self.add(Tok::AngD),
+            Key::AngR => self.add(Tok::AngR),
+            Key::AngG => self.add(Tok::AngG),
+            Key::Ran => self.add(Tok::Ran),
+            Key::Const(c) => self.add(Tok::Const(c)),
+            Key::Conv(c) => self.add(Tok::Conv(c)),
+            Key::Deriv => self.insert(&[Tok::DerivOpen, Tok::SlotMid, Tok::Close], 1),
+            Key::Integral => self.insert(&[Tok::IntOpen, Tok::SlotMid, Tok::SlotMid, Tok::Close], 1),
+            Key::Sum => self.insert(&[Tok::SumOpen, Tok::SlotMid, Tok::SlotMid, Tok::Close], 1),
+            Key::Ins => self.ins = !self.ins,
+            // The device answers these (complex numbers and QR codes are not in the emulator).
+            Key::ImagI | Key::Qr => {}
             Key::Frac => self.frac(),
             Key::Sqrt => self.insert(&[Tok::SqrtOpen, Tok::Close], 1),
             Key::Cbrt => self.insert(&[Tok::RootOpen, Tok::Digit(3), Tok::RootMid, Tok::Close], 3),
@@ -1597,8 +2337,15 @@ impl Calc {
         if self.tokens.is_empty() {
             return;
         }
-        match evaluate_env(&self.tokens, &Env { ans: self.ans, angle: self.angle, x: None, mem: &self.mem }) {
-            Ok(v) => {
+        self.pair = None;
+        match evaluate_full(&self.tokens, &Env { ans: self.ans, angle: self.angle, x: None, mem: &self.mem, num: self.cfg.num }) {
+            Ok((v, pair)) => {
+                // Pol( and Rec( answer twice, and keep the two answers in x and y.
+                if let Some((a, b, _)) = pair {
+                    self.mem.vars[6] = a;
+                    self.mem.vars[7] = b;
+                }
+                self.pair = pair;
                 self.ans = v;
                 self.outcome = Outcome::Answer(v);
                 self.fresh = true;
@@ -1757,7 +2504,7 @@ mod tests {
     #[test]
     fn powers_and_squares() {
         assert_eq!(shown(&eq([num("5"), vec![Key::Square]].concat())), "25");
-        assert_eq!(shown(&eq([num("2"), vec![Key::Pow], num("10")].concat())), "1024");
+        assert_eq!(shown(&eq([num("2"), vec![Key::Pow], num("10")].concat())), "1,024", "the digit separator is on at first");
         assert_eq!(shown(&eq([num("2"), vec![Key::Inverse]].concat())), "{1/2}");
         let neg_square = eq(vec![Key::Neg, Key::Digit(3), Key::Square]);
         assert_eq!(shown(&neg_square), "\u{2212}9", "(\u{2212})3\u{00B2} is \u{2212}(3\u{00B2}), as on a Casio");
@@ -1894,6 +2641,6 @@ mod tests {
         assert_eq!(shown(&eq([vec![Key::Func(Func::Log)], num("1000")].concat())), "3");
         assert_eq!(shown(&eq(vec![Key::Func(Func::Ln), Key::E])), "1");
         assert_eq!(eq(vec![Key::Func(Func::Log), Key::Digit(0)]).outcome, Outcome::Error(CalcError::Math));
-        assert_eq!(shown(&eq([vec![Key::TenPow], num("3")].concat())), "1000");
+        assert_eq!(shown(&eq([vec![Key::TenPow], num("3")].concat())), "1,000");
     }
 }
