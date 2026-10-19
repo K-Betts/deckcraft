@@ -103,15 +103,27 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         picked
     };
 
-    // Where it goes: after the current slide, or in place of the current Get Ready slide.
-    let (cur, replace) = {
+    // Where it goes: after the current slide, or in place of the current Get Ready slide. A deck
+    // with its own "Get Ready Task" layout (a teacher's template) gets that layout, and an empty
+    // slide already on it is filled in place.
+    let (cur, replace, template) = {
         let st = s.doc()?;
         let cur = st.selection.slide;
-        let is_ready = st.doc.slides.get(cur).is_some_and(|sl| sl.name == GET_READY_NAME);
-        (cur, bool_param(p, "reroll").unwrap_or(false) && is_ready)
+        let slide = st.doc.slides.get(cur);
+        let is_ready = slide.is_some_and(|sl| sl.name == GET_READY_NAME);
+        let master = slide.and_then(|sl| st.doc.masters.iter().position(|m| m.layout(sl.layout).is_some())).unwrap_or(0);
+        let template = template_layout(&st.doc, master).map(|l| (l.name.clone(), l.id));
+        let blank_template = match (&template, slide) {
+            (Some((_, id)), Some(sl)) => sl.layout == *id && slide_is_empty(sl),
+            _ => false,
+        };
+        (cur, (bool_param(p, "reroll").unwrap_or(false) && is_ready) || blank_template, template)
     };
     let at = if replace { cur } else { usize_param(p, "at").unwrap_or(cur + 1) };
-    s.execute("slide.new", &json!({"layout": "titleOnly", "title": GET_READY_NAME, "at": at}))?;
+    match &template {
+        Some((name, _)) => s.execute("slide.new", &json!({"layout": name, "at": at}))?,
+        None => s.execute("slide.new", &json!({"layout": "titleOnly", "title": GET_READY_NAME, "at": at}))?,
+    };
     let new_index = {
         let st = s.doc()?;
         st.selection.slide
@@ -136,7 +148,9 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     const HEADINGS: [&str; 4] = ["Last lesson", "Last week", "Last topic", "Last year"];
     let cols = 2usize;
     let rows = picked.len().div_ceil(cols).max(1);
-    let (margin, top, bottom, gap) = (20.0_f64, 64.0_f64, 16.0_f64, 14.0_f64);
+    // A template's header band (label pills) takes the top of the slide.
+    let top = if template.is_some() { 78.0_f64 } else { 64.0_f64 };
+    let (margin, bottom, gap) = (20.0_f64, 16.0_f64, 14.0_f64);
     let card_w = (960.0 - 2.0 * margin - gap * (cols as f64 - 1.0)) / cols as f64;
     let card_h = (540.0 - top - bottom - gap * (rows as f64 - 1.0)) / rows as f64;
 
@@ -156,8 +170,14 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
 
     // One full-screen slide per question, straight after this one.
     if expand {
+        // A template may have no "Blank" layout: use one with no placeholders, else the plainest.
+        let plain = {
+            let st = s.doc()?;
+            let master = st.doc.slides.get(new_index).and_then(|sl| st.doc.masters.iter().position(|m| m.layout(sl.layout).is_some())).unwrap_or(0);
+            plain_layout_name(&st.doc, master)
+        };
         for (i, q) in picked.iter().enumerate() {
-            s.execute("slide.new", &json!({"layout": "blank", "at": new_index + 1 + i}))?;
+            s.execute("slide.new", &json!({"layout": &plain, "at": new_index + 1 + i}))?;
             let here = s.doc()?.selection.slide;
             s.execute("slide.rename", &json!({"name": format!("{GET_READY_NAME} Q{}", i + 1), "index": here}))?;
             draw_card(s, q, i, [20.0, 20.0, 920.0, 500.0], 2.0, headings.then(|| HEADINGS.get(i).copied()).flatten(), false)?;
@@ -318,6 +338,36 @@ fn draw_card(s: &mut Session, q: &questions::Question, i: usize, rect: [f64; 4],
         super::figures::draw(s, d, area, k)?;
     }
     Ok(Card { badge, expand: button, answer })
+}
+
+/// The deck's own "Get Ready" layout (for example "Get Ready Task"), if its master has one.
+fn template_layout(doc: &deckcraft_model::Presentation, master: usize) -> Option<&deckcraft_model::Layout> {
+    let norm = |x: &str| x.chars().filter(|c| c.is_alphanumeric()).collect::<String>().to_ascii_lowercase();
+    doc.masters.get(master).or(doc.masters.first())?.layouts.iter().find(|l| norm(&l.name).starts_with("getready"))
+}
+
+/// True when a slide holds only empty placeholders (and its slide number): nothing a teacher typed.
+fn slide_is_empty(slide: &deckcraft_model::Slide) -> bool {
+    use deckcraft_model::PhType;
+    slide
+        .shapes
+        .iter()
+        .filter(|sh| sh.ph_type() != Some(PhType::SlideNum))
+        .all(|sh| sh.is_placeholder() && sh.text.as_ref().is_none_or(|t| t.paragraphs.iter().all(|p| p.text().trim().is_empty())))
+}
+
+/// The layout to use for a slide with nothing on it: "blank" when the master has the standard one,
+/// else a layout without placeholders (a template's "DEFAULT"), else the title-only layout.
+fn plain_layout_name(doc: &deckcraft_model::Presentation, master: usize) -> String {
+    let Some(m) = doc.masters.get(master).or(doc.masters.first()) else {
+        return "blank".to_string();
+    };
+    m.layouts
+        .iter()
+        .find(|l| l.kind == deckcraft_model::LayoutType::Blank)
+        .or_else(|| m.layouts.iter().find(|l| l.shapes.iter().all(|sh| !sh.is_placeholder())))
+        .map(|l| l.name.clone())
+        .unwrap_or_else(|| "titleOnly".to_string())
 }
 
 /// An answer as plain text for the speaker notes (`$…$` removed).
@@ -727,5 +777,99 @@ mod tests {
         let mut t = Session::with_new();
         t.execute("slide.getReady", &json!({"seed": 2, "expand": false})).expect("get ready");
         assert_eq!(t.doc().expect("doc").doc.slides.len(), 2);
+    }
+
+    /// Adds a layout called "Get Ready Task" (header only, like a teacher's template) and returns its id.
+    fn add_template_layout(s: &mut Session, drop_blank: bool) -> deckcraft_model::LayoutId {
+        use deckcraft_model::{LayoutId, LayoutType};
+        s.edit(|doc, _| {
+            let id = LayoutId(doc.alloc_id().expect("id"));
+            let m = std::sync::Arc::make_mut(&mut doc.masters[0]);
+            let mut layout = m.layouts.iter().find(|l| l.kind == LayoutType::Blank).or(m.layouts.first()).cloned().expect("a layout");
+            layout.id = id;
+            layout.name = "Get Ready Task".to_string();
+            layout.kind = LayoutType::Custom;
+            layout.shapes.clear();
+            m.layouts.push(layout);
+            if drop_blank {
+                m.layouts.retain(|l| l.kind != LayoutType::Blank);
+            }
+            Ok(id)
+        })
+        .expect("layout")
+    }
+
+    #[test]
+    fn a_deck_with_a_get_ready_task_layout_gets_a_starter_on_that_layout() {
+        let mut s = Session::with_new();
+        let layout = add_template_layout(&mut s, false);
+        let r = s.execute("slide.getReady", &json!({"seed": 1})).expect("get ready");
+        let i = r["index"].as_u64().expect("index") as usize;
+        let st = s.doc().expect("doc");
+        let slide = st.doc.slides.get(i).expect("slide");
+        assert_eq!(slide.layout, layout, "the starter uses the template's layout");
+        assert_eq!(slide.name, super::GET_READY_NAME);
+        assert!(slide.notes.paragraphs.iter().map(|p| p.text()).collect::<String>().contains("Answers:"));
+    }
+
+    #[test]
+    fn an_empty_slide_on_the_get_ready_task_layout_is_filled_in_place() {
+        let mut s = Session::with_new();
+        add_template_layout(&mut s, false);
+        s.execute("slide.new", &json!({"layout": "Get Ready Task"})).expect("empty template slide");
+        let here = s.doc().expect("doc").selection.slide;
+        let before = s.doc().expect("doc").doc.slides.len();
+        let r = s.execute("slide.getReady", &json!({"seed": 2})).expect("get ready");
+        assert_eq!(r["index"].as_u64().expect("index") as usize, here, "it lands where the empty slide was");
+        let st = s.doc().expect("doc");
+        // The empty slide is replaced (not kept), and the four full-screen slides follow.
+        assert_eq!(st.doc.slides.len(), before + 4);
+        assert_eq!(st.doc.slides.iter().filter(|sl| sl.name == super::GET_READY_NAME).count(), 1);
+    }
+
+    #[test]
+    fn a_slide_with_your_own_content_on_the_template_layout_is_not_replaced() {
+        let mut s = Session::with_new();
+        add_template_layout(&mut s, false);
+        s.execute("slide.new", &json!({"layout": "Get Ready Task"})).expect("template slide");
+        s.execute("insert.textBox", &json!({"rect": [50.0, 100.0, 300.0, 60.0], "text": "My own notes"})).expect("text");
+        let before = s.doc().expect("doc").doc.slides.len();
+        s.execute("slide.getReady", &json!({"seed": 2})).expect("get ready");
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), before + 1 + 4, "added after, nothing replaced");
+    }
+
+    #[test]
+    fn the_starter_still_works_when_the_template_has_no_blank_layout() {
+        let mut s = Session::with_new();
+        add_template_layout(&mut s, true);
+        let before = s.doc().expect("doc").doc.slides.len();
+        let r = s.execute("slide.getReady", &json!({"seed": 3}));
+        assert!(r.is_ok(), "{r:?}");
+        assert_eq!(s.doc().expect("doc").doc.slides.len(), before + 1 + 4);
+    }
+
+    #[test]
+    fn text_set_draws_dollar_maths_as_equations_only_when_asked() {
+        use deckcraft_model::text::RunKind;
+        let mut s = Session::with_new();
+        let r = s.execute("insert.textBox", &json!({"rect": [40.0, 100.0, 400.0, 80.0], "text": "x"})).expect("box");
+        let id = r["id"].as_u64().expect("id");
+        let math_runs = |s: &Session| -> usize {
+            let st = s.doc().expect("doc");
+            let slide = st.doc.slides.get(st.selection.slide).expect("slide");
+            let sh = slide.shapes.iter().find(|x| u64::from(x.id.0) == id).expect("shape");
+            sh.text
+                .as_ref()
+                .map(|t| t.paragraphs.iter().flat_map(|p| p.runs.iter()).filter(|r| matches!(r.kind, RunKind::Math { .. })).count())
+                .unwrap_or(0)
+        };
+        s.execute("text.set", &json!({"id": id, "text": "$\\frac{1}{2}+\\frac{1}{3}$"})).expect("plain");
+        assert_eq!(math_runs(&s), 0, "without `maths` the dollars stay as typed");
+        s.execute("text.set", &json!({"id": id, "text": "Work out\n$\\frac{1}{2}+\\frac{1}{3}$", "maths": true})).expect("maths");
+        assert_eq!(math_runs(&s), 1, "with `maths` the equation is a maths run");
+        let st = s.doc().expect("doc");
+        let slide = st.doc.slides.get(st.selection.slide).expect("slide");
+        let sh = slide.shapes.iter().find(|x| u64::from(x.id.0) == id).expect("shape");
+        assert_eq!(sh.text.as_ref().expect("text").paragraphs.len(), 2, "the two lines stay two paragraphs");
     }
 }
