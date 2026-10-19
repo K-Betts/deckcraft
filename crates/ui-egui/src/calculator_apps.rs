@@ -2,8 +2,8 @@
 //! others on the menu (Statistics, Inequality, Distribution) are listed but say so when opened.
 
 use crate::calculator::{
-    Angle, Calc, CalcError, Config, Func, Io, Key, Memory, NumFmt, Outcome, ResultFormat, Tok, Value, quadratic, simultaneous, table_rows,
-    value_tokens,
+    Angle, CONSTANTS, CONVERSIONS, Calc, CalcError, Config, Func, Io, Key, Memory, NumFmt, Outcome, ResultFormat, Tok, Value, quadratic,
+    simultaneous, table_rows, value_tokens,
 };
 
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
@@ -177,6 +177,13 @@ pub enum MenuId {
     Reset,
     Catalog,
     CatalogCategory(u8),
+    ConstCategories,
+    ConstCategory(u8),
+    ConvCategories,
+    ConvCategory(u8),
+    ExpKey,
+    DecimalMark,
+    DigitSeparator,
     Tools,
     Format,
     Function,
@@ -194,6 +201,9 @@ pub enum Act {
     SetNum(NumFmt),
     SetMixed(bool),
     SetFormatKeyMenu(bool),
+    SetExpPower(bool),
+    SetCommaMark(bool),
+    SetSeparator(bool),
     SetOptionNumbers(bool),
     SetFormat(ResultFormat),
     Undo,
@@ -261,6 +271,17 @@ fn radio(label: &str, on: bool, act: Act) -> Item {
 
 fn keys(label: &str, k: &[Key]) -> Item {
     line(label, Act::Keys(k.to_vec()))
+}
+
+/// The categories in a table, in the order they first appear.
+fn category_names<'a>(names: impl Iterator<Item = &'a str>) -> Vec<&'a str> {
+    let mut out: Vec<&str> = vec![];
+    for n in names {
+        if !out.contains(&n) {
+            out.push(n);
+        }
+    }
+    out
 }
 
 /// The whole device: which app is showing and the state of each.
@@ -365,6 +386,20 @@ impl Device {
             _ => {}
         }
         self.sync();
+        if self.app != App::Home {
+            self.note = None;
+        }
+        match key {
+            Key::Qr => {
+                self.note = Some("QR codes are not in this emulator");
+                return;
+            }
+            Key::ImagI => {
+                self.note = Some("i works in the Complex app");
+                return;
+            }
+            _ => {}
+        }
         if !self.stack.is_empty() {
             self.overlay_key(key);
             return;
@@ -395,7 +430,11 @@ impl Device {
             }
             _ => match self.app {
                 App::Home => self.home_key(key),
-                App::Calculate => self.calc.press(key),
+                App::Calculate => {
+                    self.calc.press(key);
+                    // Pol( and Rec( store their answers in x and y.
+                    self.mem.vars = self.calc.mem.vars;
+                }
                 App::Table => self.table.press(key, solve_table),
                 App::Equation => self.equation_key(key),
             },
@@ -436,8 +475,17 @@ impl Device {
                 sub("Angle Unit", MenuId::AngleUnit),
                 sub("Number Format", MenuId::NumberFormat),
                 sub("Fraction Result", MenuId::FractionResult),
+                sub("Decimal Mark", MenuId::DecimalMark),
+                sub("Digit Separator", MenuId::DigitSeparator),
+                sub("\u{00D7}10\u{02E3} Key", MenuId::ExpKey),
                 sub("FORMAT Key", MenuId::FormatKey),
             ],
+            MenuId::ExpKey => vec![
+                radio("\u{00D7}10 (Sci Notat)", !c.exp_power, Act::SetExpPower(false)),
+                radio("^(10) (Power)", c.exp_power, Act::SetExpPower(true)),
+            ],
+            MenuId::DecimalMark => vec![radio("Dot", !c.comma_mark, Act::SetCommaMark(false)), radio("Comma", c.comma_mark, Act::SetCommaMark(true))],
+            MenuId::DigitSeparator => vec![radio("On", c.separator, Act::SetSeparator(true)), radio("Off", !c.separator, Act::SetSeparator(false))],
             MenuId::SystemSettings => vec![
                 radio("Show Option Num: On", self.option_numbers, Act::SetOptionNumbers(true)),
                 radio("Show Option Num: Off", !self.option_numbers, Act::SetOptionNumbers(false)),
@@ -475,37 +523,92 @@ impl Device {
             MenuId::Reset => {
                 vec![line("Settings & Data", Act::ResetSettings), line("Variable Memory", Act::ResetVariables), line("Initialize All", Act::ResetAll)]
             }
-            MenuId::Catalog => vec![
-                sub("Probability", MenuId::CatalogCategory(0)),
-                sub("Logarithm", MenuId::CatalogCategory(1)),
-                sub("Power & Root", MenuId::CatalogCategory(2)),
-                sub("Hyperbolic Func", MenuId::CatalogCategory(3)),
-                sub("Others", MenuId::CatalogCategory(4)),
-            ],
-            MenuId::CatalogCategory(0) => {
-                vec![keys("nPr", &[Key::Npr]), keys("nCr", &[Key::Ncr]), keys("x!", &[Key::Fact]), keys("%", &[Key::Percent])]
+            MenuId::Catalog => {
+                ["Func Analysis", "Probability", "Numeric Calc", "Angle/Coord/Sexa", "Hyperbolic/Trig", "Sci Constants", "Unit Conversions", "Other"]
+                    .iter()
+                    .enumerate()
+                    .map(|(i, n)| match i {
+                        5 => sub(n, MenuId::ConstCategories),
+                        6 => sub(n, MenuId::ConvCategories),
+                        _ => sub(n, MenuId::CatalogCategory(i as u8)),
+                    })
+                    .collect()
             }
+            MenuId::CatalogCategory(0) => vec![
+                keys("Derivative(d/dx)", &[Key::Deriv]),
+                keys("Integration(\u{222B})", &[Key::Integral]),
+                keys("Summation(\u{03A3})", &[Key::Sum]),
+                keys("Logarithm(log\u{2090}b)", &[Key::LogBase]),
+                keys("Logarithm(log)", &[Key::Func(Func::Log)]),
+                keys("Natural Logarithm", &[Key::Func(Func::Ln)]),
+            ],
             MenuId::CatalogCategory(1) => vec![
-                keys("log_a b", &[Key::LogBase]),
-                keys("log", &[Key::Func(Func::Log)]),
-                keys("ln", &[Key::Func(Func::Ln)]),
-                keys("10^x", &[Key::TenPow]),
-                keys("e^x", &[Key::EPow]),
+                keys("%", &[Key::Percent]),
+                keys("Factorial(!)", &[Key::Fact]),
+                keys("Permutation(P)", &[Key::Npr]),
+                keys("Combination(C)", &[Key::Ncr]),
+                keys("Random Number", &[Key::Ran]),
+                keys("Random Integer", &[Key::Func(Func::RanInt)]),
             ],
             MenuId::CatalogCategory(2) => vec![
-                keys("x^2", &[Key::Square]),
-                keys("x^3", &[Key::Cube]),
-                keys("x^-1", &[Key::Inverse]),
-                keys("x^y", &[Key::Pow]),
-                keys("square root", &[Key::Sqrt]),
-                keys("cube root", &[Key::Cbrt]),
-                keys("nth root", &[Key::NRoot]),
+                keys("GCD", &[Key::Func(Func::Gcd)]),
+                keys("LCM", &[Key::Func(Func::Lcm)]),
+                keys("Absolute Value", &[Key::Func(Func::Abs)]),
+                keys("Round Off", &[Key::Func(Func::Rnd)]),
             ],
-            MenuId::CatalogCategory(3) => [Func::Sinh, Func::Cosh, Func::Tanh, Func::ASinh, Func::ACosh, Func::ATanh]
-                .iter()
-                .map(|f| keys(f.text().trim_end_matches('('), &[Key::Func(*f)]))
-                .collect(),
-            MenuId::CatalogCategory(_) => vec![keys("Abs", &[Key::Func(Func::Abs)]), keys("pi", &[Key::Pi]), keys("e", &[Key::E])],
+            MenuId::CatalogCategory(3) => vec![
+                keys("Degrees", &[Key::AngD]),
+                keys("Radians", &[Key::AngR]),
+                keys("Gradians", &[Key::AngG]),
+                keys("Rect to Polar", &[Key::Func(Func::Pol)]),
+                keys("Polar to Rect", &[Key::Func(Func::Rec)]),
+                keys("Degs Mins Secs", &[Key::Dms]),
+            ],
+            MenuId::CatalogCategory(4) => [
+                Func::Sinh,
+                Func::Cosh,
+                Func::Tanh,
+                Func::ASinh,
+                Func::ACosh,
+                Func::ATanh,
+                Func::Sin,
+                Func::Cos,
+                Func::Tan,
+                Func::ASin,
+                Func::ACos,
+                Func::ATan,
+            ]
+            .iter()
+            .map(|f| keys(f.text().trim_end_matches('('), &[Key::Func(*f)]))
+            .collect(),
+            MenuId::CatalogCategory(_) => vec![
+                keys("Ans", &[Key::Ans]),
+                keys("\u{03C0}", &[Key::Pi]),
+                keys("e", &[Key::E]),
+                keys("\u{221A}(", &[Key::Sqrt]),
+                keys("\u{02E3}\u{221A}(", &[Key::NRoot]),
+                keys("\u{207B}\u{00B9}", &[Key::Inverse]),
+                keys("\u{00B2}", &[Key::Square]),
+                keys("^(", &[Key::Pow]),
+                keys("(\u{2212})", &[Key::Neg]),
+                keys(",", &[Key::Comma]),
+                keys("(", &[Key::LParen]),
+                keys(")", &[Key::RParen]),
+            ],
+            MenuId::ConstCategories => {
+                category_names(CONSTANTS.iter().map(|c| c.0)).into_iter().enumerate().map(|(i, n)| sub(n, MenuId::ConstCategory(i as u8))).collect()
+            }
+            MenuId::ConstCategory(k) => {
+                let cat = category_names(CONSTANTS.iter().map(|c| c.0)).get(usize::from(k)).copied().unwrap_or("");
+                CONSTANTS.iter().enumerate().filter(|(_, c)| c.0 == cat).map(|(i, c)| keys(c.1, &[Key::Const(i as u8)])).collect()
+            }
+            MenuId::ConvCategories => {
+                category_names(CONVERSIONS.iter().map(|c| c.0)).into_iter().enumerate().map(|(i, n)| sub(n, MenuId::ConvCategory(i as u8))).collect()
+            }
+            MenuId::ConvCategory(k) => {
+                let cat = category_names(CONVERSIONS.iter().map(|c| c.0)).get(usize::from(k)).copied().unwrap_or("");
+                CONVERSIONS.iter().enumerate().filter(|(_, c)| c.0 == cat).map(|(i, c)| keys(c.1, &[Key::Conv(i as u8)])).collect()
+            }
             MenuId::Tools => vec![line("Undo", Act::Undo), line("Clear History", Act::ClearHistory)],
             MenuId::Format => [
                 ("Standard", ResultFormat::Standard),
@@ -514,6 +617,7 @@ impl Device {
                 ("Improper Fraction", ResultFormat::ImproperFraction),
                 ("Mixed Number", ResultFormat::MixedNumber),
                 ("Standard Form", ResultFormat::StandardForm),
+                ("Sexagesimal", ResultFormat::Sexagesimal),
             ]
             .iter()
             .map(|(n, f)| radio(n, self.calc.format == *f, Act::SetFormat(*f)))
@@ -664,6 +768,18 @@ impl Device {
             }
             Act::SetMixed(m) => {
                 self.cfg.mixed = m;
+                back(self);
+            }
+            Act::SetExpPower(v) => {
+                self.cfg.exp_power = v;
+                back(self);
+            }
+            Act::SetCommaMark(v) => {
+                self.cfg.comma_mark = v;
+                back(self);
+            }
+            Act::SetSeparator(v) => {
+                self.cfg.separator = v;
                 back(self);
             }
             Act::SetFormatKeyMenu(m) => {
@@ -1080,7 +1196,7 @@ mod tests {
         let mut d = Device::default();
         d.press(Key::Digit(2));
         d.press(Key::Catalog);
-        pick(&mut d, &[4, 1]); // Hyperbolic > sinh
+        pick(&mut d, &[5, 1]); // Hyperbolic/Trig > sinh
         assert_eq!(d.calc.tokens.last(), Some(&Tok::Func(Func::Sinh)));
         assert!(d.stack.is_empty());
         d.press(Key::Tools);
@@ -1126,5 +1242,239 @@ mod tests {
         pick(&mut d, &[3, 2]); // Reset > Variable Memory
         assert_eq!(d.mem.vars[0], Value::int(0));
         assert_eq!(d.mem.defs[0], vec![Tok::X]);
+    }
+
+    // ---- examples from the fx-991CW+ user's guide ----
+
+    fn calc(keys: &[Key]) -> String {
+        let mut d = Device::default();
+        press_all(&mut d, keys);
+        d.press(Key::Equals);
+        answer_text(&d)
+    }
+
+    /// The answer's tokens with templates marked: `{a/b}` fractions, `√[n]` roots, `^[e]` powers.
+    fn shape(d: &Device) -> String {
+        let Outcome::Answer(v) = d.calc.outcome else { return "-".into() };
+        crate::calculator::result_tokens(v, d.calc.format, &d.calc.cfg)
+            .iter()
+            .map(|t| match t {
+                Tok::FracOpen => "{".into(),
+                Tok::FracMid => "/".into(),
+                Tok::SqrtOpen => "\u{221A}[".into(),
+                Tok::SupOpen => "^[".into(),
+                Tok::Close => "]".into(),
+                other => other.text(),
+            })
+            .collect()
+    }
+
+    fn run_shape(keys: &[Key]) -> String {
+        let mut d = Device::default();
+        press_all(&mut d, keys);
+        d.press(Key::Equals);
+        shape(&d)
+    }
+
+    use Key::{Digit as D, Divide, Equals, Minus, Plus, Right, Sqrt, Times};
+
+    #[test]
+    fn manual_arithmetic_and_powers() {
+        assert_eq!(calc(&[D(7), Times, D(8), Minus, D(4), Times, D(5)]), "36");
+        // (5²)³ = 15625
+        assert_eq!(calc(&[Key::LParen, D(5), Key::Square, Key::RParen, Key::Pow, D(3)]), "15,625");
+        // (1 + 1)^(2+2) = 16
+        assert_eq!(calc(&[Key::LParen, D(1), Plus, D(1), Key::RParen, Key::Pow, D(2), Plus, D(2)]), "16");
+        // 5th root of 32 = 2
+        assert_eq!(calc(&[Key::NRoot, D(5), Right, D(3), D(2)]), "2");
+        // 10^-1 = 1/10
+        assert_eq!(run_shape(&[D(1), D(0), Key::Inverse]), "{1/10]");
+    }
+
+    #[test]
+    fn manual_surds_stay_exact_within_the_display_ranges() {
+        // √2 × 3 = 3√2
+        assert_eq!(run_shape(&[Sqrt, D(2), Right, Times, D(3)]), "3\u{221A}[2]");
+        // 10√2 + 15 × 3√3 = 45√3 + 10√2
+        let keys = [D(1), D(0), Sqrt, D(2), Right, Plus, D(1), D(5), Times, D(3), Sqrt, D(3)];
+        assert_eq!(run_shape(&keys), "45\u{221A}[3]+10\u{221A}[2]");
+        // 99√999 (= 297√111) is out of range: 3129.089165
+        assert_eq!(calc(&[D(9), D(9), Sqrt, D(9), D(9), D(9)]), "3,129.089165");
+        // 1/3 + √12 = 2√3 + 1/3
+        assert_eq!(run_shape(&[Key::Frac, D(1), Right, D(3), Right, Plus, Sqrt, D(1), D(2)]), "2\u{221A}[3]+{1/3]");
+        // 1 ÷ (1 + √2) rationalises to √2 − 1
+        assert_eq!(
+            run_shape(&[D(1), Divide, Key::LParen, D(1), Plus, Sqrt, D(2), Right, Key::RParen]),
+            "\u{2212}1+\u{221A}[2]",
+            "a whole number goes first, as d ± a√b"
+        );
+    }
+
+    #[test]
+    fn manual_pi_answers_keep_pi() {
+        // π ÷ 6 = 1/6 π
+        let mut d = Device::default();
+        press_all(&mut d, &[Key::Pi, Divide, D(6), Equals]);
+        assert_eq!(shape(&d), "{1/6]\u{03C0}");
+        d.press(Key::Sd);
+        assert_eq!(answer_text(&d), "0.5235987756");
+        assert_eq!(run_shape(&[D(2), Key::Pi]), "2\u{03C0}");
+        // sin⁻¹(1) in radians is π/2
+        let mut d = Device::default();
+        d.calc.angle = Angle::Radian;
+        press_all(&mut d, &[Key::Func(Func::ASin), D(1), Equals]);
+        assert_eq!(shape(&d), "{1/2]\u{03C0}");
+    }
+
+    #[test]
+    fn manual_fractions() {
+        // 2/3 + 1 1/2 = 13/6
+        let keys = [Key::Frac, D(2), Right, D(3), Right, Plus, Key::Mixed, D(1), Right, D(1), Right, D(2)];
+        assert_eq!(run_shape(&keys), "{13/6]");
+        // 1 1/123456 fits in ten digits as a fraction; 1 1/1234567 does not.
+        let mut d = Device::default();
+        press_all(&mut d, &[Key::Mixed, D(1), Right, D(1), Right, D(1), D(2), D(3), D(4), D(5), D(6), Equals]);
+        assert_eq!(shape(&d), "{123,457/123,456]");
+        press_all(&mut d, &[Key::Ac, Key::Mixed, D(1), Right, D(1), Right, D(1), D(2), D(3), D(4), D(5), D(6), D(7), Equals]);
+        assert_eq!(answer_text(&d), "1.00000081");
+    }
+
+    #[test]
+    fn manual_times_ten_binds_as_one_number() {
+        // 4 × 10⁷ ÷ 3 × 10⁸ = 2/15 with the Sci Notat key (the default)
+        let keys = [D(4), Key::Exp10, D(7), Right, Divide, D(3), Key::Exp10, D(8)];
+        assert_eq!(run_shape(&keys), "{2/15]");
+        // With the Power setting the same keys work left to right.
+        let mut d = Device::default();
+        d.cfg.exp_power = true;
+        press_all(&mut d, &keys);
+        d.press(Equals);
+        assert_eq!(answer_text(&d), "1.333333333\u{00D7}1015", "4×10⁷ ÷ 3, then × 10⁸: left to right");
+    }
+
+    #[test]
+    fn manual_probability_and_numeric_functions() {
+        assert_eq!(calc(&[D(1), D(5), D(0), Times, D(2), D(0), Key::Percent]), "30");
+        assert_eq!(calc(&[Key::LParen, D(5), Plus, D(3), Key::RParen, Key::Fact]), "40,320");
+        assert_eq!(calc(&[D(1), D(0), Key::Npr, D(4)]), "5,040");
+        assert_eq!(calc(&[D(1), D(0), Key::Ncr, D(4)]), "210");
+        assert_eq!(calc(&[Key::Func(Func::Gcd), D(2), D(8), Key::Comma, D(3), D(5), Key::RParen]), "7");
+        assert_eq!(calc(&[Key::Func(Func::Lcm), D(9), Key::Comma, D(1), D(5), Key::RParen]), "45");
+        assert_eq!(calc(&[Key::Func(Func::Abs), D(2), Minus, D(7), Key::RParen]), "5");
+        for _ in 0..20 {
+            let r = calc(&[Key::Func(Func::RanInt), D(1), Key::Comma, D(6), Key::RParen]);
+            assert!(["1", "2", "3", "4", "5", "6"].contains(&r.as_str()), "{r}");
+        }
+        assert_eq!(calc(&[Key::Func(Func::Gcd), D(2), D(8), Key::RParen]), "Syntax ERROR", "GCD needs two arguments");
+    }
+
+    #[test]
+    fn manual_round_off_follows_the_number_format() {
+        let mut d = Device::default();
+        d.cfg.num = NumFmt::Fix(3);
+        d.cfg.io = Io::MathDecimal;
+        press_all(&mut d, &[D(1), D(0), Divide, D(3), Times, D(3), Equals]);
+        assert_eq!(answer_text(&d), "10.000");
+        press_all(&mut d, &[Key::Ac, Key::Func(Func::Rnd), D(1), D(0), Divide, D(3), Key::RParen, Times, D(3), Equals]);
+        assert_eq!(answer_text(&d), "9.999");
+    }
+
+    #[test]
+    fn manual_angles_sexagesimal_and_coordinates() {
+        // π/2 radians = 90° (Angle Unit: Degree)
+        assert_eq!(calc(&[Key::LParen, Key::Pi, Divide, D(2), Key::RParen, Key::AngR]), "90");
+        // 2°20′30″ + 0°39′30″ = 3°0′0″
+        let mut d = Device::default();
+        press_all(
+            &mut d,
+            &[D(2), Key::Dms, D(2), D(0), Key::Dms, D(3), D(0), Key::Dms, Plus, D(0), Key::Dms, D(3), D(9), Key::Dms, D(3), D(0), Key::Dms, Equals],
+        );
+        assert_eq!(answer_text(&d), "3");
+        d.press(Key::SetFormat(ResultFormat::Sexagesimal));
+        assert_eq!(answer_text(&d), "3\u{00B0}0\u{2032}0\u{2033}");
+        // Pol(√2, √2): r = 2, θ = 45, stored in x and y
+        let mut d = Device::default();
+        press_all(&mut d, &[Key::Func(Func::Pol), Sqrt, D(2), Right, Key::Comma, Sqrt, D(2), Right, Key::RParen, Equals]);
+        assert_eq!(d.calc.pair, Some((Value::int(2), Value::int(45), true)));
+        assert_eq!((d.mem.vars[6], d.mem.vars[7]), (Value::int(2), Value::int(45)));
+        // Rec(√2, 45) = (1, 1)
+        let mut d = Device::default();
+        press_all(&mut d, &[Key::Func(Func::Rec), Sqrt, D(2), Right, Key::Comma, D(4), D(5), Key::RParen, Equals]);
+        assert_eq!(d.calc.pair.map(|(a, b, _)| (a, b)), Some((Value::int(1), Value::int(1))));
+    }
+
+    #[test]
+    fn manual_calculus_functions() {
+        // d/dx(sin x) at π/2 in radians is 0
+        let mut d = Device::default();
+        d.calc.angle = Angle::Radian;
+        press_all(&mut d, &[Key::Deriv, Key::Func(Func::Sin), Key::X, Key::RParen, Right, Key::Pi, Divide, D(2), Equals]);
+        assert_eq!(answer_text(&d), "0");
+        // d/dx(x³) at 2 is 12
+        assert_eq!(calc(&[Key::Deriv, Key::X, Key::Cube, Right, D(2)]), "12");
+        // ∫ ln x dx from 1 to e = 1
+        assert_eq!(calc(&[Key::Integral, Key::Func(Func::Ln), Key::X, Key::RParen, Right, D(1), Right, Key::E]), "1");
+        // Σ (x + 1) for x = 1 to 5 is 20
+        assert_eq!(calc(&[Key::Sum, Key::X, Plus, D(1), Right, D(1), Right, D(5)]), "20");
+    }
+
+    #[test]
+    fn constants_and_conversions_come_from_the_catalog() {
+        let mut d = Device::default();
+        d.press(Key::Catalog);
+        pick(&mut d, &[6, 1, 3]); // Sci Constants > Universal > c
+        d.press(Equals);
+        assert_eq!(answer_text(&d), "299,792,458");
+        // 5 cm into inches
+        let mut d = Device::default();
+        d.press(D(5));
+        d.press(Key::Catalog);
+        pick(&mut d, &[7, 1, 2]); // Unit Conversions > Length > cm→in
+        d.press(Key::ExeDecimal);
+        assert_eq!(answer_text(&d), "1.968503937");
+        // 100 °C in °F
+        let mut d = Device::default();
+        press_all(&mut d, &[D(1), D(0), D(0)]);
+        d.press(Key::Catalog);
+        pick(&mut d, &[7, 9, 2]);
+        d.press(Equals);
+        assert_eq!(answer_text(&d), "212");
+    }
+
+    #[test]
+    fn ins_makes_the_next_template_take_what_follows() {
+        // Type 1 + 7/6, put the cursor before the fraction, INS, √: 1 + √(7/6)
+        let mut d = Device::default();
+        press_all(&mut d, &[D(1), Plus, Key::Frac, D(7), Right, D(6), Right, Key::Left, Key::Left, Key::Left, Key::Left, Key::Left]);
+        assert_eq!(d.calc.cursor, 2);
+        d.tap(Key::Shift, None);
+        d.tap(Key::Del, Some(Key::Ins));
+        d.press(Sqrt);
+        assert_eq!(d.calc.tokens[2], Tok::SqrtOpen);
+        assert_eq!(d.calc.tokens[3], Tok::FracOpen);
+        assert_eq!(d.calc.tokens.last(), Some(&Tok::Close));
+        assert_eq!(d.calc.tokens.len(), 9, "1 + √( 7/6 )");
+    }
+
+    #[test]
+    fn digit_separator_and_decimal_mark_are_settings() {
+        let mut d = Device::default();
+        press_all(&mut d, &[D(1), D(2), D(3), D(4), D(5), Key::Dot, D(5), Equals]);
+        assert_eq!(answer_text(&d), "12,345.5");
+        d.cfg.separator = false;
+        d.cfg.comma_mark = true;
+        d.press(Equals);
+        assert_eq!(answer_text(&d), "12345,5");
+    }
+
+    #[test]
+    fn qr_and_i_say_they_are_not_here() {
+        let mut d = Device::default();
+        d.tap(Key::Shift, None);
+        d.tap(Key::X, Some(Key::Qr));
+        assert!(d.note.is_some());
+        assert!(d.calc.tokens.is_empty());
+        d.press(D(1));
+        assert!(d.note.is_none(), "the note goes with the next key");
     }
 }

@@ -734,4 +734,32 @@ fn screenshots_for_review() {
         o.set_whiteboard(true);
     }
     shot(&mut h, "8-whiteboard.png");
+    // The calculator close up: a surd sum, an integral being typed, the CATALOG and SETTINGS menus.
+    let calc_shot = |h: &mut egui_kittest::Harness<'static, SlideApp>, keys: &[Key], name: &str| {
+        {
+            let o = overlay(h);
+            o.set_whiteboard(false);
+            o.maths_tools_panel = Default::default();
+            o.maths_tools_panel.open_tool(MathsTool::Calculator);
+            let d = o.maths_tools_panel.calculator();
+            for k in keys {
+                d.press(*k);
+            }
+        }
+        h.run_steps(4);
+        h.render().unwrap().save(dir.join(name)).unwrap();
+    };
+    use Key::{Digit as D, Right};
+    calc_shot(
+        &mut h,
+        &[D(1), D(0), Key::Sqrt, D(2), Right, Key::Plus, D(1), D(5), Key::Times, D(3), Key::Sqrt, D(3), Key::Equals],
+        "9-calc-surds.png",
+    );
+    calc_shot(
+        &mut h,
+        &[Key::Integral, Key::Func(crate::calculator::Func::Ln), Key::X, Key::RParen, Right, D(1), Right, Key::E],
+        "10-calc-integral.png",
+    );
+    calc_shot(&mut h, &[Key::Catalog], "11-calc-catalog.png");
+    calc_shot(&mut h, &[Key::Settings, D(1)], "12-calc-settings.png");
 }
