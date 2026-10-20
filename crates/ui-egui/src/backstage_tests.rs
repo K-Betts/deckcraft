@@ -559,6 +559,10 @@ fn your_own_templates_are_listed_first_on_the_new_page_and_open_as_a_copy() {
     assert_eq!(h.state().session.documents().len(), before + 1, "a new presentation opened");
     assert!(st.path.is_none(), "an untitled copy, not the template file");
     assert_eq!(st.doc.slides.len(), slides);
+    let _ = std::fs::remove_dir_all(&dir);
+}
+
+#[test]
 fn a_new_presentation_is_saved_as_pptx_unless_it_already_is_a_deckcraft_file() {
     let dir = temp_dir("default-format");
     let (services, asked) = saving_into(&dir);

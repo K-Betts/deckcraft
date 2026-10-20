@@ -4,7 +4,7 @@
 use egui::{Align2, Color32, CornerRadius, Event, FontId, Key as EKey, Painter, Pos2, Rect, Sense, Shape, Stroke, Ui, pos2, vec2};
 
 use crate::calculator::{Calc, Key, Outcome, Tok};
-use crate::calculator_apps::{App, Device, EQUATIONS, Form, HOME_APPS, Menu, Overlay, Prompt};
+use crate::calculator_apps::{App, Device, Form, HOME_APPS, Menu, Overlay, Prompt, Tap};
 
 const LCD: Color32 = Color32::from_rgb(0xD9, 0xDF, 0xD6);
 const LCD_INK: Color32 = Color32::from_rgb(0x10, 0x13, 0x16);
@@ -78,6 +78,11 @@ enum Node {
         open: usize,
         body: Row,
     },
+    /// A bar over the repeating digits of a recurring decimal.
+    Over {
+        open: usize,
+        body: Row,
+    },
     /// d/dx (`kind` 0), ∫ (1) and Σ (2): the function, then the point or the two limits.
     Calculus {
         open: usize,
@@ -103,6 +108,7 @@ impl Node {
             | Node::Log { open, .. }
             | Node::Mix { open, .. }
             | Node::Exp { open, .. }
+            | Node::Over { open, .. }
             | Node::Calculus { open, .. } => *open,
         }
     }
@@ -159,6 +165,7 @@ fn build(toks: &[Tok], i: &mut usize, inside: bool) -> Row {
                 Node::Mix { open: at, whole, top, bottom: build(toks, i, true) }
             }
             Tok::Exp10Open => Node::Exp { open: at, body: build(toks, i, true) },
+            Tok::RecurOpen => Node::Over { open: at, body: build(toks, i, true) },
             Tok::DerivOpen | Tok::IntOpen | Tok::SumOpen => {
                 let kind = match t {
                     Tok::DerivOpen => 0,
@@ -265,6 +272,10 @@ impl Set<'_> {
                 Size { w: self.text_size("\u{00D7}10", fs) + b.w + fs * 0.04, above: (raise + b.above).max(line.above), below: line.below }
             }
             Node::Calculus { kind, slots, .. } => self.calculus_layout(*kind, slots, fs).0,
+            Node::Over { body, .. } => {
+                let b = self.row_size(body, fs);
+                Size { w: b.w, above: b.above + fs * 0.12, below: b.below }
+            }
             Node::Mix { whole, top, bottom, .. } => {
                 let (w, t, b) = (self.row_size(whole, fs), self.row_size(top, fs), self.row_size(bottom, fs));
                 let gap = fs * 0.12;
@@ -473,6 +484,13 @@ impl Set<'_> {
                 self.paint_row(body, x + w, base - fs * 0.42, f);
             }
             Node::Calculus { kind, slots, .. } => self.paint_calculus(*kind, slots, x, base, fs),
+            Node::Over { body, .. } => {
+                let w = self.paint_row(body, x, base, fs);
+                if !self.dry {
+                    let y = base - fs * 0.86;
+                    self.p.line_segment([pos2(x + fs * 0.05, y), pos2(x + w - fs * 0.05, y)], Stroke::new((fs * 0.06).max(1.2), self.ink));
+                }
+            }
             Node::Mix { whole, top, bottom, .. } => {
                 let w = self.paint_row(whole, x, base, fs);
                 let (t, b) = (self.row_size(top, fs), self.row_size(bottom, fs));
@@ -929,7 +947,7 @@ fn status_bar(clip: &Painter, inside: Rect, dev: &Device, s: f32) {
 }
 
 fn draw_calculate(clip: &Painter, inside: Rect, calc: &Calc, s: f32, blink: bool) {
-    let editing = !matches!(calc.outcome, Outcome::Answer(_) | Outcome::Error(_));
+    let editing = !matches!(calc.outcome, Outcome::Answer(_) | Outcome::Complex(_) | Outcome::Error(_));
     let line_base = inside.min.y + 40.0 * s;
     let cursor = typeset(
         clip,
@@ -973,6 +991,19 @@ fn draw_calculate(clip: &Painter, inside: Rect, calc: &Calc, s: f32, blink: bool
             typeset(
                 clip,
                 &crate::calculator::result_tokens(v, calc.format, &calc.cfg),
+                inside.max.x - 4.0 * s,
+                answer_base,
+                28.0 * s,
+                LCD_INK,
+                true,
+                None,
+                None,
+            );
+        }
+        Outcome::Complex(z) => {
+            typeset(
+                clip,
+                &crate::calculator_forms::complex_tokens(z, &calc.cfg),
                 inside.max.x - 4.0 * s,
                 answer_base,
                 28.0 * s,
@@ -1053,7 +1084,7 @@ fn pictogram(p: &Painter, i: usize, c: Pos2, s: f32, ink: Color32) {
 }
 
 /// The home screen: six apps a page, three across.
-fn draw_home(clip: &Painter, inside: Rect, dev: &Device, s: f32) {
+fn draw_home(clip: &Painter, inside: Rect, dev: &Device, s: f32, taps: &mut Vec<(Rect, Tap)>) {
     let body = Rect::from_min_max(inside.min + vec2(0.0, 14.0 * s), inside.max);
     let (cw, ch) = (body.width() / 3.0, body.height() / 2.0);
     let page = dev.home_sel / 6;
@@ -1061,6 +1092,7 @@ fn draw_home(clip: &Painter, inside: Rect, dev: &Device, s: f32) {
         let i = page * 6 + slot;
         let Some((name, app)) = HOME_APPS.get(i) else { break };
         let cell = Rect::from_min_size(body.min + vec2((slot % 3) as f32 * cw, (slot / 3) as f32 * ch), vec2(cw, ch)).shrink(2.0 * s);
+        taps.push((cell, Tap::HomeApp(i)));
         let on = dev.home_sel == i;
         let (bg, ink) = if on {
             (LCD_INK, LCD)
@@ -1089,7 +1121,7 @@ fn draw_home(clip: &Painter, inside: Rect, dev: &Device, s: f32) {
     }
 }
 
-fn draw_menu(clip: &Painter, inside: Rect, m: &Menu, dev: &Device, s: f32) {
+fn draw_menu(clip: &Painter, inside: Rect, m: &Menu, dev: &Device, s: f32, taps: &mut Vec<(Rect, Tap)>) {
     let body = Rect::from_min_max(inside.min + vec2(0.0, 14.0 * s), inside.max);
     let line_h = 22.0 * s;
     let visible = ((body.height() / line_h).floor() as usize).max(1);
@@ -1097,6 +1129,7 @@ fn draw_menu(clip: &Painter, inside: Rect, m: &Menu, dev: &Device, s: f32) {
     let first = if m.sel < first { m.sel } else { first };
     for (n, (i, it)) in m.items.iter().enumerate().skip(first).take(visible).enumerate() {
         let r = Rect::from_min_size(body.min + vec2(0.0, n as f32 * line_h), vec2(body.width() - 6.0 * s, line_h));
+        taps.push((r, Tap::MenuItem(i)));
         let on = i == m.sel;
         if on {
             clip.rect_filled(r, CornerRadius::ZERO, LCD_INK);
@@ -1129,13 +1162,14 @@ fn draw_menu(clip: &Painter, inside: Rect, m: &Menu, dev: &Device, s: f32) {
     }
 }
 
-fn draw_variables(clip: &Painter, inside: Rect, sel: usize, dev: &Device, s: f32) {
+fn draw_variables(clip: &Painter, inside: Rect, sel: usize, dev: &Device, s: f32, taps: &mut Vec<(Rect, Tap)>) {
     let body = Rect::from_min_max(inside.min + vec2(0.0, 14.0 * s), inside.max);
     let line_h = 22.0 * s;
     let visible = ((body.height() / line_h).floor() as usize).max(1);
     let first = sel.saturating_sub(visible - 1);
     for (n, i) in (first..9).take(visible).enumerate() {
         let r = Rect::from_min_size(body.min + vec2(0.0, n as f32 * line_h), vec2(body.width() - 6.0 * s, line_h));
+        taps.push((r, Tap::Variable(i)));
         if i == sel {
             clip.rect_filled(r, CornerRadius::ZERO, LCD_INK);
         }
@@ -1183,37 +1217,31 @@ fn draw_prompt(clip: &Painter, inside: Rect, p: &Prompt, s: f32, blink: bool) {
     );
 }
 
-/// A short list with one line lit.
-fn draw_list(clip: &Painter, inside: Rect, items: &[&str], sel: usize, s: f32) {
-    for (i, name) in items.iter().enumerate() {
-        let r = Rect::from_min_size(inside.min + vec2(0.0, 16.0 * s + i as f32 * 26.0 * s), vec2(inside.width(), 24.0 * s));
-        let on = i == sel;
-        if on {
-            clip.rect_filled(r, CornerRadius::ZERO, LCD_INK);
-        }
-        clip.text(
-            r.left_center() + vec2(5.0 * s, 0.0),
-            Align2::LEFT_CENTER,
-            format!("{}  {name}", i + 1),
-            FontId::proportional(13.5 * s),
-            if on { LCD } else { LCD_INK },
-        );
-    }
-}
-
-/// A form (a table's setting, an equation's coefficients) or, once solved, its answer lines.
-fn draw_form(clip: &Painter, inside: Rect, f: &Form, s: f32, blink: bool) {
+/// A form (a table's setting, an equation's coefficients, a data editor) or, once solved, its
+/// answer lines.
+fn draw_form(clip: &Painter, inside: Rect, f: &Form, s: f32, blink: bool, taps: &mut Vec<(Rect, Tap)>) {
     let line_h = 27.0 * s;
     let visible = 3usize;
     let top = inside.min.y + 16.0 * s;
     if let Some(rows) = &f.rows {
         for (n, row) in rows.iter().skip(f.scroll).take(visible).enumerate() {
             let base = top + 20.0 * s + n as f32 * line_h;
-            clip.text(pos2(inside.min.x + 6.0 * s, base), Align2::LEFT_BOTTOM, &row.label, FontId::proportional(15.0 * s), LCD_INK);
+            let tall = row.value.is_empty() && row.note.is_empty();
+            clip.text(
+                pos2(inside.min.x + 6.0 * s, base),
+                Align2::LEFT_BOTTOM,
+                &row.label,
+                FontId::proportional(if tall { 15.0 } else { 14.0 } * s),
+                LCD_INK,
+            );
+            let x0 = inside.min.x + (if row.label.chars().count() > 4 { 62.0 } else { 40.0 }) * s;
             if row.note.is_empty() {
-                typeset(clip, &row.value, inside.min.x + 70.0 * s, base - 2.0 * s, 19.0 * s, LCD_INK, false, None, None);
+                typeset(clip, &row.value, x0, base - 2.0 * s, 19.0 * s, LCD_INK, false, None, None);
+                if !row.value2.is_empty() {
+                    typeset(clip, &row.value2, inside.min.x + 150.0 * s, base - 2.0 * s, 19.0 * s, LCD_INK, false, None, None);
+                }
             } else {
-                clip.text(pos2(inside.min.x + 70.0 * s, base), Align2::LEFT_BOTTOM, row.note, FontId::proportional(13.0 * s), LCD_INK);
+                clip.text(pos2(x0, base), Align2::LEFT_BOTTOM, row.note, FontId::proportional(13.0 * s), LCD_INK);
             }
         }
         if rows.len() > visible {
@@ -1231,20 +1259,13 @@ fn draw_form(clip: &Painter, inside: Rect, f: &Form, s: f32, blink: bool) {
     for (n, i) in (first..f.fields.len().min(first + visible)).enumerate() {
         let base = top + 20.0 * s + n as f32 * line_h;
         let on = i == f.focus;
+        let row = Rect::from_min_max(pos2(inside.min.x, base - 20.0 * s), pos2(inside.max.x, base + 5.0 * s));
+        taps.push((row, Tap::Field(i)));
         if on {
-            clip.rect_filled(
-                Rect::from_min_max(pos2(inside.min.x, base - 20.0 * s), pos2(inside.max.x, base + 5.0 * s)),
-                CornerRadius::ZERO,
-                Color32::from_black_alpha(22),
-            );
+            clip.rect_filled(row, CornerRadius::ZERO, Color32::from_black_alpha(22));
         }
-        clip.text(
-            pos2(inside.min.x + 6.0 * s, base),
-            Align2::LEFT_BOTTOM,
-            f.labels.get(i).copied().unwrap_or(""),
-            FontId::proportional(13.0 * s),
-            LCD_DIM,
-        );
+        let label = f.labels.get(i).map_or("", String::as_str);
+        clip.text(pos2(inside.min.x + 6.0 * s, base), Align2::LEFT_BOTTOM, label, FontId::proportional(13.0 * s), LCD_DIM);
         if let Some(field) = f.fields.get(i) {
             let cursor = typeset(
                 clip,
@@ -1263,6 +1284,118 @@ fn draw_form(clip: &Painter, inside: Rect, f: &Form, s: f32, blink: bool) {
                 clip.line_segment([pos2(at.x, at.y - fs * 0.85), pos2(at.x, at.y + fs * 0.28)], Stroke::new(1.6 * s, LCD_INK));
             }
         }
+    }
+}
+
+/// The spreadsheet: a column of row numbers and three columns of cells, with the cell being
+/// typed in shown on the line below.
+fn draw_sheet(clip: &Painter, inside: Rect, dev: &Device, s: f32, blink: bool, taps: &mut Vec<(Rect, Tap)>) {
+    let sh = &dev.sheet;
+    let (cw, rh) = ((inside.width() - 22.0 * s) / 3.0, 20.0 * s);
+    let first_col = sh.cursor.0.saturating_sub(2).min(crate::calc_sheet::COLS - 3);
+    let first_row = sh.cursor.1.saturating_sub(2).max(1);
+    let head_y = inside.min.y + 14.0 * s;
+    for c in 0..3u8 {
+        let col = first_col + c;
+        let r = Rect::from_min_size(pos2(inside.min.x + 22.0 * s + f32::from(c) * cw, head_y), vec2(cw, rh * 0.8));
+        clip.rect_filled(r.shrink(0.5), CornerRadius::ZERO, Color32::from_black_alpha(20));
+        clip.text(r.center(), Align2::CENTER_CENTER, ["A", "B", "C", "D", "E"][usize::from(col)], FontId::proportional(11.0 * s), LCD_INK);
+    }
+    for n in 0..3u32 {
+        let row = first_row + n;
+        let y = head_y + rh * 0.8 + n as f32 * rh;
+        clip.text(pos2(inside.min.x + 10.0 * s, y + rh / 2.0), Align2::CENTER_CENTER, row.to_string(), FontId::proportional(10.0 * s), LCD_DIM);
+        for c in 0..3u8 {
+            let col = first_col + c;
+            let r = Rect::from_min_size(pos2(inside.min.x + 22.0 * s + f32::from(c) * cw, y), vec2(cw, rh));
+            taps.push((r, Tap::Cell(col, row)));
+            let here = sh.cursor == (col, row);
+            clip.rect_stroke(
+                r,
+                CornerRadius::ZERO,
+                Stroke::new(if here { 2.0 } else { 0.5 } * s, if here { LCD_INK } else { LCD_DIM }),
+                egui::StrokeKind::Inside,
+            );
+            if sh.is_empty(col, row) {
+                continue;
+            }
+            match sh.value(col, row, &dev.calc) {
+                Ok(v) => {
+                    let toks = crate::calculator::result_tokens(
+                        v,
+                        crate::calculator::ResultFormat::Decimal,
+                        &crate::calculator::Config { io: crate::calculator::Io::MathDecimal, ..dev.cfg },
+                    );
+                    typeset(
+                        &clip.with_clip_rect(r.shrink(1.0)),
+                        &toks,
+                        r.max.x - 3.0 * s,
+                        r.center().y + 5.0 * s,
+                        13.0 * s,
+                        LCD_INK,
+                        true,
+                        None,
+                        None,
+                    );
+                }
+                Err(_) => {
+                    clip.text(r.right_center() - vec2(3.0 * s, 0.0), Align2::RIGHT_CENTER, "ERR", FontId::proportional(10.0 * s), LCD_INK);
+                }
+            }
+        }
+    }
+    let line = Rect::from_min_max(pos2(inside.min.x, inside.max.y - 24.0 * s), inside.max);
+    clip.rect_filled(line, CornerRadius::ZERO, Color32::from_black_alpha(14));
+    let name = format!("{}{}", ["A", "B", "C", "D", "E"][usize::from(sh.cursor.0)], sh.cursor.1);
+    clip.text(pos2(line.min.x + 3.0 * s, line.center().y), Align2::LEFT_CENTER, &name, FontId::proportional(10.0 * s), LCD_DIM);
+    let toks = sh.edit.as_ref().map(|e| e.tokens.clone()).or_else(|| sh.cells.get(&sh.cursor).cloned()).unwrap_or_default();
+    let cursor = typeset(
+        clip,
+        &toks,
+        line.min.x + 26.0 * s,
+        line.center().y + 6.0 * s,
+        15.0 * s,
+        LCD_INK,
+        false,
+        sh.edit.as_ref().map(|e| e.cursor),
+        Some(line.width() - 60.0 * s),
+    );
+    if let Some((at, fs)) = cursor
+        && blink
+    {
+        clip.line_segment([pos2(at.x, at.y - fs * 0.85), pos2(at.x, at.y + fs * 0.28)], Stroke::new(1.6 * s, LCD_INK));
+    }
+}
+
+/// Base-N: the expression, and the answer in the current base.
+fn draw_basen(clip: &Painter, inside: Rect, dev: &Device, s: f32, blink: bool) {
+    let b = &dev.basen;
+    clip.text(pos2(inside.max.x - 4.0 * s, inside.min.y + 6.0 * s), Align2::RIGHT_CENTER, b.base.label(), FontId::proportional(10.0 * s), LCD_INK);
+    let cursor = typeset(
+        clip,
+        &b.calc.tokens,
+        inside.min.x + 2.0 * s,
+        inside.min.y + 40.0 * s,
+        22.0 * s,
+        LCD_INK,
+        false,
+        b.result.is_none().then_some(b.calc.cursor),
+        Some(inside.width() - 14.0 * s),
+    );
+    if let Some((at, fs)) = cursor
+        && blink
+    {
+        clip.line_segment([pos2(at.x, at.y - fs * 0.85), pos2(at.x, at.y + fs * 0.28)], Stroke::new(1.6 * s, LCD_INK));
+    }
+    let base = inside.max.y - 12.0 * s;
+    match b.result {
+        Some(Ok(v)) => {
+            typeset(clip, &crate::calc_basen::tokens(v, b.base), inside.max.x - 4.0 * s, base, 28.0 * s, LCD_INK, true, None, None);
+        }
+        Some(Err(e)) => {
+            clip.text(pos2(inside.max.x - 4.0 * s, base), Align2::RIGHT_BOTTOM, e.message(), FontId::proportional(19.0 * s), LCD_INK);
+        }
+        None => {}
     }
 }
 
@@ -1286,20 +1419,25 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
     let inside = screen.shrink(7.0 * ss);
     let clip = p.with_clip_rect(inside);
     let blink = ui.input(|i| (i.time * 1.6) as i64 % 2 == 0);
+    let mut taps: Vec<(Rect, Tap)> = vec![];
     if dev.on {
         status_bar(&clip, inside, dev, ss);
         match dev.stack.last() {
-            Some(Overlay::Menu(m)) => draw_menu(&clip, inside, m, dev, ss),
-            Some(Overlay::Variables { sel }) => draw_variables(&clip, inside, *sel, dev, ss),
+            Some(Overlay::Menu(m)) => draw_menu(&clip, inside, m, dev, ss, &mut taps),
+            Some(Overlay::Variables { sel }) => draw_variables(&clip, inside, *sel, dev, ss, &mut taps),
             Some(Overlay::Prompt(pr)) => draw_prompt(&clip, inside, pr, ss, blink),
             None => match dev.app {
                 App::Calculate => draw_calculate(&clip, inside, &dev.calc, ss, blink),
-                App::Home => draw_home(&clip, inside, dev, ss),
-                App::Table => draw_form(&clip, inside, &dev.table, ss, blink),
-                App::Equation => match &dev.equation {
-                    Some((_, f)) => draw_form(&clip, inside, f, ss, blink),
-                    None => draw_list(&clip, inside, &EQUATIONS, dev.eq_sel, ss),
-                },
+                App::Home => draw_home(&clip, inside, dev, ss, &mut taps),
+                App::Complex => draw_calculate(&clip, inside, &dev.complex, ss, blink),
+                App::BaseN => draw_basen(&clip, inside, dev, ss, blink),
+                App::Spreadsheet => draw_sheet(&clip, inside, dev, ss, blink, &mut taps),
+                App::Statistics if dev.stats_calc => draw_calculate(&clip, inside, &dev.calc, ss, blink),
+                app => {
+                    if let Some(f) = app.kind().and_then(|k| dev.forms.get(&k)) {
+                        draw_form(&clip, inside, f, ss, blink, &mut taps);
+                    }
+                }
             },
         }
         if let Some(note) = dev.note.filter(|_| dev.app != App::Home) {
@@ -1320,6 +1458,30 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
         Color32::from_rgb(0x0F, 0x10, 0x12),
     );
 
+    // Touching the screen: a swipe scrolls, a tap chooses.
+    if dev.on {
+        let swipe = ui.interact(inside, ui.id().with("calc_swipe"), Sense::drag());
+        let step = 20.0 * ss;
+        let moved = ui.data_mut(|d| {
+            let acc = d.get_temp_mut_or_default::<f32>(swipe.id);
+            *acc += if swipe.dragged() { swipe.drag_delta().y } else { 0.0 };
+            if !swipe.dragged() {
+                *acc = 0.0;
+            }
+            let n = (*acc / step).trunc();
+            *acc -= n * step;
+            n as i32
+        });
+        for _ in 0..moved.abs() {
+            // Dragging down brings earlier lines back, like a phone.
+            dev.press(if moved > 0 { Key::Up } else { Key::Down });
+        }
+        for (n, (r, tap)) in taps.iter().enumerate() {
+            if ui.interact(*r, ui.id().with(("calc_tap", n)), Sense::click()).clicked() {
+                dev.touch(*tap);
+            }
+        }
+    }
     let mut pressed = None;
     for (n, def) in keys().iter().enumerate() {
         let c = at(def.at.0, def.at.1);

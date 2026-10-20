@@ -36,6 +36,19 @@ pub enum Func {
     Rec,
     /// Round off to the Number Format setting.
     Rnd,
+    /// Complex numbers: argument, conjugate, real and imaginary parts.
+    Arg,
+    Conj,
+    Re,
+    Im,
+    /// Base-N logic on whole numbers.
+    Not,
+    NegB,
+    /// The Spreadsheet app's range functions: `Sum(A1:A5)`.
+    SheetSum,
+    SheetMean,
+    SheetMin,
+    SheetMax,
 }
 
 impl Func {
@@ -69,6 +82,16 @@ impl Func {
             Func::Pol => "Pol(",
             Func::Rec => "Rec(",
             Func::Rnd => "Rnd(",
+            Func::Arg => "Arg(",
+            Func::Conj => "Conjg(",
+            Func::Re => "ReP(",
+            Func::Im => "ImP(",
+            Func::Not => "Not(",
+            Func::NegB => "Neg(",
+            Func::SheetSum => "Sum(",
+            Func::SheetMean => "Mean(",
+            Func::SheetMin => "Min(",
+            Func::SheetMax => "Max(",
         }
     }
 }
@@ -136,6 +159,19 @@ pub enum Tok {
     AngR,
     AngG,
     Ran,
+    /// `:` in a cell range, `A1:A5`.
+    Colon,
+    /// A statistic from the Statistics app, by index into the device's names.
+    Stat(u8),
+    /// ŷ (estimate y for the x before it) and x̂, x̂₁, x̂₂ (estimate x for a y).
+    YHat,
+    XHat(u8),
+    /// A gap between columns in a matrix or vector answer.
+    Space,
+    /// Base-N logic between two whole numbers: and, or, xor, xnor.
+    Logic(u8),
+    /// A repeating block of decimal digits, drawn with a bar over it: `0.1(6)`.
+    RecurOpen,
     /// A scientific constant, by index into [`CONSTANTS`].
     Const(u8),
     /// A unit conversion, by index into [`CONVERSIONS`].
@@ -257,6 +293,7 @@ impl Tok {
                 | Tok::DerivOpen
                 | Tok::IntOpen
                 | Tok::SumOpen
+                | Tok::RecurOpen
         )
     }
 
@@ -289,6 +326,13 @@ impl Tok {
             Tok::AngR => "r".into(),
             Tok::AngG => "g".into(),
             Tok::Ran => "Ran#".into(),
+            Tok::Colon => ":".into(),
+            Tok::YHat => "\u{0177}".into(),
+            Tok::XHat(0) => "x^".into(),
+            Tok::XHat(k) => format!("x^{k}"),
+            Tok::Stat(i) => crate::calculator_forms::STAT_NAMES.get(usize::from(i)).copied().unwrap_or("?").into(),
+            Tok::Space => "  ".into(),
+            Tok::Logic(k) => ["and", "or", "xor", "xnor"].get(usize::from(k)).copied().unwrap_or("?").into(),
             Tok::Const(i) => CONSTANTS.get(usize::from(i)).map_or("?", |c| c.1).into(),
             Tok::Conv(i) => CONVERSIONS.get(usize::from(i)).map_or("?", |c| c.1).into(),
             Tok::Ans => "Ans".into(),
@@ -311,6 +355,7 @@ impl Tok {
             | Tok::IntOpen
             | Tok::SumOpen
             | Tok::SlotMid
+            | Tok::RecurOpen
             | Tok::Close => String::new(),
         }
     }
@@ -420,6 +465,8 @@ pub enum ResultFormat {
     StandardForm,
     /// Degrees, minutes and seconds.
     Sexagesimal,
+    /// A repeating decimal, with a bar over the repeating digits.
+    Recurring,
 }
 
 /// The calculator's settings.
@@ -448,11 +495,15 @@ impl Default for Config {
 pub struct Memory {
     pub vars: [Value; 9],
     pub defs: [Vec<Tok>; 2],
+    /// The Statistics app's values for the Statistics Calc screen, by [`STAT_NAMES`] index.
+    pub stats: [f64; 27],
+    /// The regression the Statistics Calc screen estimates with.
+    pub reg: Option<crate::calc_stats::Reg>,
 }
 
 impl Default for Memory {
     fn default() -> Self {
-        Memory { vars: [Value::Rat(Rat { n: 0, d: 1 }); 9], defs: [vec![], vec![]] }
+        Memory { vars: [Value::Rat(Rat { n: 0, d: 1 }); 9], defs: [vec![], vec![]], stats: [f64::NAN; 27], reg: None }
     }
 }
 
@@ -465,11 +516,13 @@ pub struct Env<'a> {
     pub mem: &'a Memory,
     /// For Rnd(.
     pub num: NumFmt,
+    /// The Spreadsheet app's cells: `A1` is column 0, row 1.
+    pub cells: Option<&'a dyn Fn(u8, u32) -> Result<Value, CalcError>>,
 }
 
 // ---- Exact numbers -------------------------------------------------------------------------
 
-fn gcd(mut a: i128, mut b: i128) -> i128 {
+pub(crate) fn gcd(mut a: i128, mut b: i128) -> i128 {
     a = a.abs();
     b = b.abs();
     while b != 0 {
@@ -507,23 +560,23 @@ impl Rat {
         self.n as f64 / self.d as f64
     }
 
-    fn add(self, o: Rat) -> Option<Rat> {
+    pub(crate) fn add(self, o: Rat) -> Option<Rat> {
         Rat::new(self.n.checked_mul(o.d)?.checked_add(o.n.checked_mul(self.d)?)?, self.d.checked_mul(o.d)?)
     }
 
-    fn mul(self, o: Rat) -> Option<Rat> {
+    pub(crate) fn mul(self, o: Rat) -> Option<Rat> {
         Rat::new(self.n.checked_mul(o.n)?, self.d.checked_mul(o.d)?)
     }
 
-    fn neg(self) -> Option<Rat> {
+    pub(crate) fn neg(self) -> Option<Rat> {
         Some(Rat { n: self.n.checked_neg()?, d: self.d })
     }
 
-    fn recip(self) -> Option<Rat> {
+    pub(crate) fn recip(self) -> Option<Rat> {
         Rat::new(self.d, self.n)
     }
 
-    fn powi(self, k: i128) -> Option<Rat> {
+    pub(crate) fn powi(self, k: i128) -> Option<Rat> {
         let base = if k < 0 { self.recip()? } else { self };
         let mut out = Rat::int(1);
         for _ in 0..k.unsigned_abs() {
@@ -581,7 +634,7 @@ impl Value {
         }
     }
 
-    fn is_zero(self) -> bool {
+    pub(crate) fn is_zero(self) -> bool {
         matches!(self, Value::Rat(r) if r.n == 0) || matches!(self, Value::Float(f) if f == 0.0)
     }
 
@@ -656,7 +709,7 @@ fn from_parts(parts: Vec<(Rat, i128)>) -> Option<Value> {
 }
 
 /// `coef × √rad` in simplest form, or an exact rational when the root comes out whole.
-fn surd(coef: Rat, rad: i128) -> Value {
+pub(crate) fn surd(coef: Rat, rad: i128) -> Value {
     from_parts(vec![(coef, rad)]).unwrap_or(Value::Float(coef.to_f64() * (rad as f64).sqrt()))
 }
 
@@ -672,7 +725,7 @@ fn sqrt_rat(r: Rat) -> Result<Value, CalcError> {
     Ok(Rat::new(1, r.d).map_or_else(|| Value::Float(r.to_f64().sqrt()), |c| surd(c, prod)))
 }
 
-fn sqrt(v: Value) -> Result<Value, CalcError> {
+pub(crate) fn sqrt(v: Value) -> Result<Value, CalcError> {
     match v {
         Value::Rat(r) => sqrt_rat(r),
         other => {
@@ -689,14 +742,14 @@ fn scale(v: Value, k: Rat) -> Result<Value, CalcError> {
     }
 }
 
-fn neg(v: Value) -> Result<Value, CalcError> {
+pub(crate) fn neg(v: Value) -> Result<Value, CalcError> {
     match v {
         Value::Float(f) => Ok(Value::Float(-f)),
         _ => scale(v, Rat::int(-1)),
     }
 }
 
-fn add(a: Value, b: Value) -> Result<Value, CalcError> {
+pub(crate) fn add(a: Value, b: Value) -> Result<Value, CalcError> {
     if a.is_zero() && !matches!(a, Value::Float(_)) {
         return Ok(b);
     }
@@ -719,11 +772,11 @@ fn add(a: Value, b: Value) -> Result<Value, CalcError> {
     }
 }
 
-fn sub(a: Value, b: Value) -> Result<Value, CalcError> {
+pub(crate) fn sub(a: Value, b: Value) -> Result<Value, CalcError> {
     add(a, neg(b)?)
 }
 
-fn mul(a: Value, b: Value) -> Result<Value, CalcError> {
+pub(crate) fn mul(a: Value, b: Value) -> Result<Value, CalcError> {
     match (a, b) {
         (Value::Rat(x), Value::Rat(y)) => from_rat(x.mul(y), x.to_f64() * y.to_f64()),
         (Value::Pi(p), Value::Rat(k)) | (Value::Rat(k), Value::Pi(p)) => Ok(match p.mul(k) {
@@ -749,7 +802,7 @@ fn mul(a: Value, b: Value) -> Result<Value, CalcError> {
     }
 }
 
-fn div(a: Value, b: Value) -> Result<Value, CalcError> {
+pub(crate) fn div(a: Value, b: Value) -> Result<Value, CalcError> {
     if b.is_zero() {
         return Err(CalcError::Math);
     }
@@ -780,7 +833,7 @@ fn div(a: Value, b: Value) -> Result<Value, CalcError> {
     }
 }
 
-fn pow(a: Value, b: Value) -> Result<Value, CalcError> {
+pub(crate) fn pow(a: Value, b: Value) -> Result<Value, CalcError> {
     if let Value::Rat(e) = b {
         if e.is_int() && e.n.abs() <= 64 {
             if a.is_zero() && e.n <= 0 {
@@ -838,7 +891,7 @@ fn root(index: Value, radicand: Value) -> Result<Value, CalcError> {
 }
 
 /// Round a float that is only off by rounding noise to the whole number or small fraction it is.
-fn snap(x: f64, max_den: i128) -> Option<Rat> {
+pub(crate) fn snap(x: f64, max_den: i128) -> Option<Rat> {
     if !x.is_finite() || x.abs() > 1.0e12 {
         return None;
     }
@@ -885,7 +938,24 @@ fn apply(f: Func, v: Value, unit: Angle) -> Result<Value, CalcError> {
         Func::ATanh if x.abs() >= 1.0 => Err(CalcError::Math),
         Func::ATanh => float(x.atanh()),
         // Handled by the parser, which knows the definitions and reads the second argument.
-        Func::F | Func::G | Func::RanInt | Func::Gcd | Func::Lcm | Func::Pol | Func::Rec | Func::Rnd => Err(CalcError::Syntax),
+        Func::F
+        | Func::G
+        | Func::RanInt
+        | Func::Gcd
+        | Func::Lcm
+        | Func::Pol
+        | Func::Rec
+        | Func::Rnd
+        | Func::Arg
+        | Func::Conj
+        | Func::Re
+        | Func::Im
+        | Func::Not
+        | Func::NegB
+        | Func::SheetSum
+        | Func::SheetMean
+        | Func::SheetMin
+        | Func::SheetMax => Err(CalcError::Syntax),
         Func::Sin => Ok(snap_trig(radians.sin())),
         Func::Cos => Ok(snap_trig(radians.cos())),
         Func::Tan => {
@@ -983,6 +1053,20 @@ fn starts_factor(t: Tok) -> bool {
 }
 
 impl Parser<'_> {
+    /// A cell reference: a column letter (`A` to `E`, typed as the variable keys) and a row number.
+    fn cell_ref(&mut self) -> Result<(u8, u32), CalcError> {
+        let Some(Tok::Var(col)) = self.peek() else { return Err(CalcError::Syntax) };
+        self.i += 1;
+        let mut row = 0u32;
+        let mut any = false;
+        while let Some(Tok::Digit(d)) = self.peek() {
+            row = row.saturating_mul(10).saturating_add(u32::from(d));
+            any = true;
+            self.i += 1;
+        }
+        if any && (1..=45).contains(&row) { Ok((col, row)) } else { Err(CalcError::Syntax) }
+    }
+
     /// `f` with `x` standing for `x`.
     fn at(&self, f: &[Tok], x: f64) -> Result<f64, CalcError> {
         let env = Env { x: Some(Value::Float(x)), ..self.env };
@@ -1226,6 +1310,17 @@ impl Parser<'_> {
                     };
                     v = convert_angle(v, from, self.env.angle)?;
                 }
+                Some(Tok::YHat) => {
+                    self.i += 1;
+                    let reg = self.env.mem.reg.ok_or(CalcError::Math)?;
+                    v = tidy(reg.y_hat(v.to_f64()));
+                }
+                Some(Tok::XHat(k)) => {
+                    self.i += 1;
+                    let reg = self.env.mem.reg.ok_or(CalcError::Math)?;
+                    let xs = reg.x_hat(v.to_f64());
+                    v = tidy(*xs.get(usize::from(k.saturating_sub(1))).ok_or(CalcError::Math)?);
+                }
                 Some(Tok::Conv(c)) => {
                     self.i += 1;
                     let (_, _, factor, offset) = CONVERSIONS.get(usize::from(c)).copied().ok_or(CalcError::Syntax)?;
@@ -1252,6 +1347,28 @@ impl Parser<'_> {
         }
         if dots > 1 || text == "." {
             return Err(CalcError::Syntax);
+        }
+        if self.peek() == Some(Tok::RecurOpen) {
+            // `0.12(34)`: the digits in the bracket repeat for ever.
+            self.i += 1;
+            let mut rep = String::new();
+            while let Some(Tok::Digit(d)) = self.peek() {
+                rep.push(char::from(b'0' + d));
+                self.i += 1;
+            }
+            self.close(Tok::Close)?;
+            if rep.is_empty() {
+                return Err(CalcError::Syntax);
+            }
+            let (whole, frac) = text.split_once('.').unwrap_or((&text, ""));
+            let (k, m) = (u32::try_from(frac.len()).map_err(|_| CalcError::Syntax)?, u32::try_from(rep.len()).map_err(|_| CalcError::Syntax)?);
+            let pow = |e: u32| 10i128.checked_pow(e).ok_or(CalcError::Math);
+            let head: i128 = format!("{whole}{frac}").parse().map_err(|_| CalcError::Syntax)?;
+            let tail: i128 = rep.parse().map_err(|_| CalcError::Syntax)?;
+            // head/10^k + tail / (10^k (10^m − 1))
+            let den = pow(k)?.checked_mul(pow(m)? - 1).ok_or(CalcError::Math)?;
+            let num = head.checked_mul(pow(m)? - 1).and_then(|h| h.checked_add(tail)).ok_or(CalcError::Math)?;
+            return Rat::new(num, den).map(Value::Rat).ok_or(CalcError::Math);
         }
         let (whole, frac) = text.split_once('.').unwrap_or((&text, ""));
         let digits = format!("{whole}{frac}");
@@ -1281,6 +1398,32 @@ impl Parser<'_> {
                 self.i += 1;
                 Ok(self.env.x.unwrap_or(self.env.mem.vars[6]))
             }
+            Tok::Var(i) if self.env.cells.is_some() && i < 5 && matches!(self.toks.get(self.i + 1), Some(Tok::Digit(_))) => {
+                let (col, row) = self.cell_ref()?;
+                (self.env.cells.ok_or(CalcError::Syntax)?)(col, row)
+            }
+            Tok::Func(f @ (Func::SheetSum | Func::SheetMean | Func::SheetMin | Func::SheetMax)) if self.env.cells.is_some() => {
+                self.i += 1;
+                let (c1, r1) = self.cell_ref()?;
+                let (c2, r2) = if self.eat(Tok::Colon) { self.cell_ref()? } else { (c1, r1) };
+                self.close(Tok::RParen)?;
+                let cells = self.env.cells.ok_or(CalcError::Syntax)?;
+                let mut vals = vec![];
+                for col in c1.min(c2)..=c1.max(c2) {
+                    for row in r1.min(r2)..=r1.max(r2) {
+                        vals.push(cells(col, row)?);
+                    }
+                }
+                match f {
+                    Func::SheetSum => vals.into_iter().try_fold(Value::int(0), add),
+                    Func::SheetMean => {
+                        let n = i128::try_from(vals.len()).map_err(|_| CalcError::Math)?;
+                        div(vals.into_iter().try_fold(Value::int(0), add)?, Value::int(n))
+                    }
+                    Func::SheetMin => vals.into_iter().min_by(|a, b| a.to_f64().total_cmp(&b.to_f64())).ok_or(CalcError::Math),
+                    _ => vals.into_iter().max_by(|a, b| a.to_f64().total_cmp(&b.to_f64())).ok_or(CalcError::Math),
+                }
+            }
             Tok::Var(i) => {
                 self.i += 1;
                 self.env.mem.vars.get(usize::from(i)).copied().ok_or(CalcError::Syntax)
@@ -1296,6 +1439,11 @@ impl Parser<'_> {
             Tok::Ran => {
                 self.i += 1;
                 Ok(Value::Rat(Rat::new(i128::from((random() % 1000) as u16), 1000).unwrap_or(Rat::int(0))))
+            }
+            Tok::Stat(i) => {
+                self.i += 1;
+                let x = self.env.mem.stats.get(usize::from(i)).copied().ok_or(CalcError::Syntax)?;
+                if x.is_nan() { Err(CalcError::Math) } else { Ok(tidy(x)) }
             }
             Tok::Const(c) => {
                 self.i += 1;
@@ -1407,7 +1555,7 @@ pub fn evaluate(toks: &[Tok], ans: Value, degrees: bool) -> Result<Value, CalcEr
 /// As `evaluate`, with the variable `x` standing for a value (a table row, a root being checked).
 pub fn evaluate_with(toks: &[Tok], ans: Value, degrees: bool, x: Option<Value>) -> Result<Value, CalcError> {
     let mem = Memory::default();
-    evaluate_env(toks, &Env { ans, angle: if degrees { Angle::Degree } else { Angle::Radian }, x, mem: &mem, num: NumFmt::Norm(2) })
+    evaluate_env(toks, &Env { ans, angle: if degrees { Angle::Degree } else { Angle::Radian }, x, mem: &mem, num: NumFmt::Norm(2), cells: None })
 }
 
 /// Evaluate with everything the sum can refer to.
@@ -1468,7 +1616,7 @@ fn round_off(v: Value, num: NumFmt) -> Result<Value, CalcError> {
 }
 
 /// Round noise off a numerical answer (derivative, integral) when it is a simple number.
-fn tidy(x: f64) -> Value {
+pub(crate) fn tidy(x: f64) -> Value {
     if x.abs() < 1.0e-10 {
         return Value::int(0);
     }
@@ -1767,9 +1915,50 @@ pub fn result_tokens(v: Value, format: ResultFormat, cfg: &Config) -> Vec<Tok> {
             _ => natural_tokens(v, false, cfg),
         },
         ResultFormat::Sexagesimal => dms_tokens(v.to_f64()),
+        ResultFormat::Recurring => match v {
+            Value::Rat(r) => recurring_tokens(r).unwrap_or_else(|| natural_tokens(v, true, cfg)),
+            _ => natural_tokens(v, true, cfg),
+        },
     };
     let out = if cfg.io.line_output() { linearise(out) } else { out };
     decorate(out, cfg)
+}
+
+/// The decimal expansion of a fraction with its repeating digits marked, if it fits in ten digits.
+fn recurring_tokens(r: Rat) -> Option<Vec<Tok>> {
+    if r.is_int() {
+        return None;
+    }
+    let (n, d) = (r.n.unsigned_abs(), r.d.unsigned_abs());
+    let mut out = vec![];
+    if r.n < 0 {
+        out.push(Tok::Minus);
+    }
+    digits(n / d, &mut out);
+    out.push(Tok::Dot);
+    let mut rem = n % d;
+    let mut seen: std::collections::HashMap<u128, usize> = std::collections::HashMap::new();
+    let mut frac: Vec<u8> = vec![];
+    while rem != 0 && !seen.contains_key(&rem) && frac.len() < 40 {
+        seen.insert(rem, frac.len());
+        rem *= 10;
+        frac.push((rem / d) as u8);
+        rem %= d;
+    }
+    let start = if rem == 0 { None } else { seen.get(&rem).copied() };
+    if frac.len() > 10 || (rem != 0 && start.is_none()) {
+        return None;
+    }
+    for (i, dgt) in frac.iter().enumerate() {
+        if Some(i) == start {
+            out.push(Tok::RecurOpen);
+        }
+        out.push(Tok::Digit(*dgt));
+    }
+    if start.is_some() {
+        out.push(Tok::Close);
+    }
+    Some(out)
 }
 
 /// `12°34′56.7″`: whole degrees, whole minutes and seconds to two places.
@@ -1849,7 +2038,7 @@ pub fn table_rows(
     let mut rows = vec![];
     for k in 0..=(count as i128) {
         let x = add(start, mul(step, Value::int(k))?)?;
-        rows.push((x, evaluate_env(f, &Env { ans: Value::int(0), angle, x: Some(x), mem, num: NumFmt::Norm(2) })));
+        rows.push((x, evaluate_env(f, &Env { ans: Value::int(0), angle, x: Some(x), mem, num: NumFmt::Norm(2), cells: None })));
     }
     Ok(rows)
 }
@@ -1885,6 +2074,8 @@ pub fn simultaneous(a1: Value, b1: Value, c1: Value, a2: Value, b2: Value, c2: V
 pub enum Outcome {
     Nothing,
     Answer(Value),
+    /// A complex answer (the Complex app).
+    Complex(crate::calc_poly::C),
     Error(CalcError),
 }
 
@@ -1958,6 +2149,15 @@ pub enum Key {
     Deriv,
     Integral,
     Sum,
+    /// A statistic by index, ŷ, x̂ (0 is the single x̂, 1 and 2 are the quadratic's pair).
+    Stat(u8),
+    YHat,
+    XHat(u8),
+    Colon,
+    /// A repeating block of digits, with a bar over it.
+    Recur,
+    /// Base-N logic: and, or, xor, xnor.
+    Logic(u8),
     // The keys that open menus and screens belong to the device, not the sum.
     Back,
     Settings,
@@ -1995,6 +2195,9 @@ pub struct Calc {
     pub mem: Memory,
     /// INS is on: the next template wraps what follows the cursor.
     pub ins: bool,
+    /// The Complex app: sums are over complex numbers and answers are `a+bi`.
+    pub complex: bool,
+    pub ans_c: crate::calc_poly::C,
     /// The two answers of Pol( or Rec( (r and θ, or x and y), shown on two lines.
     pub pair: Option<(Value, Value, bool)>,
     ans: Value,
@@ -2019,6 +2222,8 @@ impl Default for Calc {
             mem: Memory::default(),
             pair: None,
             ins: false,
+            complex: false,
+            ans_c: crate::calc_poly::C::new(0.0, 0.0),
             ans: Value::int(0),
             history: vec![],
             replay: None,
@@ -2049,7 +2254,7 @@ fn template_end(toks: &[Tok], open: usize) -> (Vec<usize>, usize) {
 impl Calc {
     /// The value of what is typed, without running it as a sum: for the fields of a table or equation.
     pub fn value(&self, x: Option<Value>) -> Result<Value, CalcError> {
-        evaluate_env(&self.tokens, &Env { ans: self.ans, angle: self.angle, x, mem: &self.mem, num: self.cfg.num })
+        evaluate_env(&self.tokens, &Env { ans: self.ans, angle: self.angle, x, mem: &self.mem, num: self.cfg.num, cells: None })
     }
 
     /// A blank line that works with the same settings and memory as `like`.
@@ -2237,9 +2442,16 @@ impl Calc {
             Key::Deriv => self.insert(&[Tok::DerivOpen, Tok::SlotMid, Tok::Close], 1),
             Key::Integral => self.insert(&[Tok::IntOpen, Tok::SlotMid, Tok::SlotMid, Tok::Close], 1),
             Key::Sum => self.insert(&[Tok::SumOpen, Tok::SlotMid, Tok::SlotMid, Tok::Close], 1),
+            Key::Stat(i) => self.add(Tok::Stat(i)),
+            Key::YHat => self.add(Tok::YHat),
+            Key::XHat(k) => self.add(Tok::XHat(k)),
+            Key::Colon => self.add(Tok::Colon),
+            Key::Recur => self.insert(&[Tok::RecurOpen, Tok::Close], 1),
+            Key::Logic(k) => self.add(Tok::Logic(k)),
             Key::Ins => self.ins = !self.ins,
-            // The device answers these (complex numbers and QR codes are not in the emulator).
-            Key::ImagI | Key::Qr => {}
+            Key::ImagI => self.add(Tok::I),
+            // The device answers this one.
+            Key::Qr => {}
             Key::Frac => self.frac(),
             Key::Sqrt => self.insert(&[Tok::SqrtOpen, Tok::Close], 1),
             Key::Cbrt => self.insert(&[Tok::RootOpen, Tok::Digit(3), Tok::RootMid, Tok::Close], 3),
@@ -2338,7 +2550,24 @@ impl Calc {
             return;
         }
         self.pair = None;
-        match evaluate_full(&self.tokens, &Env { ans: self.ans, angle: self.angle, x: None, mem: &self.mem, num: self.cfg.num }) {
+        if self.complex {
+            let vars: [f64; 9] = std::array::from_fn(|i| self.mem.vars[i].to_f64());
+            match crate::calc_complex::evaluate(&self.tokens, self.ans_c, self.angle, vars) {
+                Ok(z) => {
+                    self.ans_c = z;
+                    self.ans = Value::Float(z.re);
+                    self.outcome = Outcome::Complex(z);
+                    self.fresh = true;
+                }
+                Err(e) => {
+                    self.outcome = Outcome::Error(e);
+                    self.fresh = false;
+                }
+            }
+            self.cursor = self.tokens.len();
+            return;
+        }
+        match evaluate_full(&self.tokens, &Env { ans: self.ans, angle: self.angle, x: None, mem: &self.mem, num: self.cfg.num, cells: None }) {
             Ok((v, pair)) => {
                 // Pol( and Rec( answer twice, and keep the two answers in x and y.
                 if let Some((a, b, _)) = pair {
@@ -2419,6 +2648,7 @@ mod tests {
         match c.outcome {
             Outcome::Answer(v) => text(&result_tokens(v, c.format, &c.cfg)),
             Outcome::Error(e) => e.message().into(),
+            Outcome::Complex(_) => "complex".into(),
             Outcome::Nothing => "-".into(),
         }
     }

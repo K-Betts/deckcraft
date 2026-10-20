@@ -221,6 +221,8 @@ pub struct MathsToolsPanel {
     /// Typing goes to the calculator: it is open and the pointer is over it.
     keys_to_calculator: bool,
     chooser_rect: Option<Rect>,
+    /// A tool was just picked from the chooser (the overlay reads this once).
+    opened: bool,
     /// Draw the instruments on this layer (the whiteboard's, so they sit on top of it).
     pub layer: Option<LayerId>,
 }
@@ -246,6 +248,7 @@ impl Default for MathsToolsPanel {
             calculator_rect: None,
             keys_to_calculator: false,
             chooser_rect: None,
+            opened: false,
             layer: None,
         }
     }
@@ -335,6 +338,11 @@ impl MathsToolsPanel {
     /// The calculator's state, so a test (or a later feature) can drive it.
     pub fn calculator(&mut self) -> &mut Device {
         &mut self.calculator
+    }
+
+    /// Whether a tool was picked from the chooser since last asked.
+    pub fn take_opened(&mut self) -> bool {
+        std::mem::take(&mut self.opened)
     }
 
     /// Where the chooser is showing, if it is.
@@ -687,6 +695,7 @@ impl MathsToolsPanel {
     fn chooser(&mut self, ctx: &egui::Context, canvas: Rect, settings: &mut MathsToolsSettings) -> Option<Rect> {
         let (pos, pivot) = self.anchor.unwrap_or((canvas.min + vec2(88.0, canvas.height() * 0.25), Align2::LEFT_TOP));
         let mut close = false;
+        let mut pick_close = false;
         let out =
             egui::Area::new(Id::new("maths_tools_panel")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
                 light_frame().show(ui, |ui| {
@@ -737,6 +746,9 @@ impl MathsToolsPanel {
                                         self.close_tool(*tool);
                                     } else {
                                         self.open_tool(*tool);
+                                        // Picked: the chooser has done its job, and the overlay can go.
+                                        self.opened = true;
+                                        pick_close = true;
                                     }
                                 }
                             }
@@ -756,7 +768,7 @@ impl MathsToolsPanel {
                     });
                 });
             });
-        if close {
+        if close || pick_close {
             self.open = false;
         }
         Some(out.response.rect)
@@ -1250,6 +1262,9 @@ mod tests {
         let mut h = harness(MathsToolsPanel { open: true, ..Default::default() }, settings);
         h.run_steps(2);
         for tool in MathsTool::ALL {
+            // Picking a tool closes the chooser, so open it again for the next.
+            h.state_mut().panel.open = true;
+            h.run_steps(2);
             h.get_by_label(tool.label()).click();
             h.run_steps(2);
         }
