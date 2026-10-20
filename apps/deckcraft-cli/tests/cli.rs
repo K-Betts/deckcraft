@@ -105,7 +105,7 @@ Run it with: deckcraft-cli run --cmd 'format.size={…}'
 "
     );
     assert!(stdout(&cli(&["describe", "edit.copy"])).contains("Answers with {text, html?}.\n\nRun it with: deckcraft-cli run --cmd edit.copy\n"));
-    assert!(stdout(&cli(&["describe", "text.set"])).contains("Note: replaces the whole text, keeping the first run's formatting\n"));
+    assert!(stdout(&cli(&["describe", "text.set"])).contains("Note: replaces the whole text, keeping the first run's formatting; with `maths`, `$…$` is drawn as equations"));
     assert_eq!(
         stdout(&cli(&["describe", "shape.setDefault"])),
         "shape.setDefault: Set as Default Shape.\n\nTakes no parameters.\nActs on the selected shapes.\n\nRun it with: deckcraft-cli run --cmd shape.setDefault\n"
