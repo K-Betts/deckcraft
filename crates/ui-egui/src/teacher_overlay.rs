@@ -21,6 +21,8 @@ const PALETTE_MARGIN: f32 = 16.0;
 /// The toolbar tucks itself away this long after the last time it was used, so the board has
 /// the whole screen. Double-tapping its grip keeps it out.
 pub const AUTO_HIDE_SECS: f64 = 4.0;
+/// After a maths tool is picked the bar is gone within this long, whatever the pointer does.
+pub const TOOL_PICK_HIDE_SECS: f64 = 2.0;
 /// A timer's digits can be scaled between these multiples of the standard size.
 pub const TIMER_SCALE_MIN: f32 = 0.25;
 pub const TIMER_SCALE_MAX: f32 = 1.6;
@@ -331,6 +333,8 @@ pub struct TeacherOverlay {
     pub auto_hide_secs: f64,
     /// When the toolbar was last used. `None` until it has been drawn once since it came out.
     last_used: Option<f64>,
+    /// The latest time the bar may stay out: set when a maths tool is picked.
+    hide_at: Option<f64>,
     /// Where the button of the chosen tool is, so its choices open beside it.
     active_tool_rect: Option<Rect>,
     maths_button_rect: Option<Rect>,
@@ -384,6 +388,7 @@ impl Default for TeacherOverlay {
             pinned: false,
             auto_hide_secs: AUTO_HIDE_SECS,
             last_used: None,
+            hide_at: None,
             active_tool_rect: None,
             maths_button_rect: None,
             options_rect: None,
@@ -694,6 +699,12 @@ impl TeacherOverlay {
             self.maths_tools_panel.anchor = self.palette_rect.zip(self.maths_button_rect).map(|(pal, btn)| popover_anchor(self.edge, pal, btn, 6.0));
             self.hit_rects.extend(self.maths_tools_panel.ui(&ctx, full, settings));
         }
+        if self.maths && self.maths_tools_panel.take_opened() {
+            // A tool is on the board: the bar has nothing more to do, so it goes within a couple of
+            // seconds whatever the pointer is doing.
+            self.hide_at = Some(now + TOOL_PICK_HIDE_SECS);
+            self.options_open = false;
+        }
         self.auto_collapse(&ctx, now, hover);
         if self.timers.iter().any(|t| t.running || t.expired) {
             ctx.request_repaint_after(std::time::Duration::from_millis(100));
@@ -713,6 +724,13 @@ impl TeacherOverlay {
             || near(self.palette_rect)
             || near(self.options_rect)
             || (self.maths_tools_panel.open && near(self.maths_tools_panel.chooser_rect()));
+        if let Some(at) = self.hide_at {
+            if !self.pinned && now >= at {
+                self.collapse_palette();
+                return;
+            }
+            ctx.request_repaint_after(std::time::Duration::from_millis(100));
+        }
         let last = self.last_used.get_or_insert(now);
         if busy {
             *last = now;
@@ -733,10 +751,12 @@ impl TeacherOverlay {
         self.options_open = false;
         self.maths_tools_panel.open = false;
         self.last_used = None;
+        self.hide_at = None;
     }
 
     /// Bring the toolbar out and start the clock on tucking it away again.
     pub fn open_palette(&mut self) {
+        self.hide_at = None;
         self.palette_open = true;
         self.last_used = None;
     }

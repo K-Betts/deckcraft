@@ -8,8 +8,15 @@
 
 pub mod animtimeline;
 pub mod backstage;
+pub mod calc_basen;
+pub mod calc_complex;
+pub mod calc_matrix;
+pub mod calc_poly;
+pub mod calc_sheet;
+pub mod calc_stats;
 pub mod calculator;
 pub mod calculator_apps;
+pub mod calculator_forms;
 pub mod calculator_ui;
 pub mod canvas;
 pub mod control;

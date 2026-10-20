@@ -1,142 +1,68 @@
 //! The fx-991CW's home menu and the apps this emulator has: Calculate, Table and Equation. The
 //! others on the menu (Statistics, Inequality, Distribution) are listed but say so when opened.
 
-use crate::calculator::{
-    Angle, CONSTANTS, CONVERSIONS, Calc, CalcError, Config, Func, Io, Key, Memory, NumFmt, Outcome, ResultFormat, Tok, Value, quadratic,
-    simultaneous, table_rows, value_tokens,
-};
+use std::collections::HashMap;
 
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+use crate::calc_basen::{self, Base};
+use crate::calc_sheet::Sheet;
+use crate::calc_stats::RegKind;
+use crate::calculator::{Angle, CONSTANTS, CONVERSIONS, Calc, CalcError, Config, Func, Io, Key, Memory, NumFmt, Outcome, ResultFormat, Tok};
+use crate::calculator_forms::{self, EQUATION_TYPES, STAT_NAMES, Store};
+pub use crate::calculator_forms::{Form, Kind, Row};
+
+#[derive(Clone, Copy, PartialEq, Eq, Debug, Hash)]
 pub enum App {
     Home,
     Calculate,
+    Statistics,
     Table,
     Equation,
+    Inequality,
+    Distribution,
+    Complex,
+    Matrix,
+    Vector,
+    Spreadsheet,
+    Ratio,
+    MathBox,
+    BaseN,
 }
 
-/// What the equation app can solve.
-pub const EQUATIONS: [&str; 2] = ["Simultaneous (2 unknowns)", "Quadratic"];
-
-/// One line of an answer: a label and a value.
-#[derive(Clone, Debug)]
-pub struct Row {
-    pub label: String,
-    pub value: Vec<Tok>,
-    /// Shown instead of a value when this row has none (an error).
-    pub note: &'static str,
-}
-
-/// A page of fields you fill in one by one and then solve.
-#[derive(Clone)]
-pub struct Form {
-    pub title: &'static str,
-    pub labels: Vec<&'static str>,
-    pub fields: Vec<Calc>,
-    pub focus: usize,
-    pub rows: Option<Vec<Row>>,
-    pub scroll: usize,
-}
-
-impl Form {
-    fn new(title: &'static str, labels: &[&'static str], defaults: &[&str], angle: Angle) -> Form {
-        let fields = labels
-            .iter()
-            .enumerate()
-            .map(|(i, _)| {
-                let mut c = Calc::blank(angle);
-                for ch in defaults.get(i).copied().unwrap_or("").chars() {
-                    c.press(match ch {
-                        '.' => Key::Dot,
-                        '-' => Key::Neg,
-                        d => Key::Digit(d as u8 - b'0'),
-                    });
-                }
-                c
-            })
-            .collect();
-        Form { title, labels: labels.to_vec(), fields, focus: 0, rows: None, scroll: 0 }
-    }
-
-    fn value(&self, i: usize) -> Result<Value, CalcError> {
-        self.fields.get(i).ok_or(CalcError::Syntax)?.value(None)
-    }
-
-    fn press(&mut self, key: Key, solve: fn(&Form) -> Result<Vec<Row>, CalcError>) {
-        let last = self.fields.len().saturating_sub(1);
-        match key {
-            Key::Up => {
-                if self.rows.is_some() {
-                    self.scroll = self.scroll.saturating_sub(1);
-                } else {
-                    self.focus = self.focus.saturating_sub(1);
-                }
-            }
-            Key::Down => {
-                if let Some(rows) = &self.rows {
-                    self.scroll = (self.scroll + 1).min(rows.len().saturating_sub(1));
-                } else {
-                    self.focus = (self.focus + 1).min(last);
-                }
-            }
-            Key::Ok | Key::Equals => {
-                if self.rows.is_some() {
-                    self.rows = None;
-                } else if self.focus < last {
-                    self.focus += 1;
-                } else {
-                    self.scroll = 0;
-                    self.rows = Some(solve(self).unwrap_or_else(|e| vec![Row { label: e.message().into(), value: vec![], note: "" }]));
-                }
-            }
-            Key::Ac => {
-                if self.rows.is_some() {
-                    self.rows = None;
-                } else if let Some(f) = self.fields.get_mut(self.focus) {
-                    *f = Calc::blank(f.angle);
-                }
-            }
-            other => {
-                self.rows = None;
-                if let Some(f) = self.fields.get_mut(self.focus) {
-                    f.press(other);
-                }
-            }
+impl App {
+    /// The form-style app this is, if it is one.
+    pub fn kind(self) -> Option<Kind> {
+        match self {
+            App::Statistics => Some(Kind::Statistics),
+            App::Table => Some(Kind::Table),
+            App::Equation => Some(Kind::Equation),
+            App::Inequality => Some(Kind::Inequality),
+            App::Distribution => Some(Kind::Distribution),
+            App::Matrix => Some(Kind::Matrix),
+            App::Vector => Some(Kind::Vector),
+            App::Ratio => Some(Kind::Ratio),
+            App::MathBox => Some(Kind::MathBox),
+            _ => None,
         }
     }
 
-    fn set_angle(&mut self, d: Angle) {
-        for f in &mut self.fields {
-            f.angle = d;
+    pub fn title(self) -> &'static str {
+        match self {
+            App::Home => "HOME",
+            App::Calculate => "Calculate",
+            App::Statistics => "Statistics",
+            App::Table => "Table",
+            App::Equation => "Equation",
+            App::Inequality => "Inequality",
+            App::Distribution => "Distribution",
+            App::Complex => "Complex",
+            App::Matrix => "Matrix",
+            App::Vector => "Vector",
+            App::Spreadsheet => "Spreadsheet",
+            App::Ratio => "Ratio",
+            App::MathBox => "Math Box",
+            App::BaseN => "Base-N",
         }
     }
-}
-
-fn solve_table(f: &Form) -> Result<Vec<Row>, CalcError> {
-    let expr = f.fields.first().ok_or(CalcError::Syntax)?;
-    if expr.tokens.is_empty() {
-        return Err(CalcError::Syntax);
-    }
-    let rows = table_rows(&expr.tokens, f.value(1)?, f.value(2)?, f.value(3)?, expr.angle, &expr.mem)?;
-    Ok(rows
-        .into_iter()
-        .map(|(x, y)| match y {
-            Ok(v) => Row { label: tokens_text(&value_tokens(x, true)), value: value_tokens(v, false), note: "" },
-            Err(e) => Row { label: tokens_text(&value_tokens(x, true)), value: vec![], note: e.message() },
-        })
-        .collect())
-}
-
-fn solve_simultaneous(f: &Form) -> Result<Vec<Row>, CalcError> {
-    let v = |i| f.value(i);
-    let (x, y) = simultaneous(v(0)?, v(1)?, v(2)?, v(3)?, v(4)?, v(5)?)?;
-    Ok(vec![Row { label: "x".into(), value: value_tokens(x, false), note: "" }, Row { label: "y".into(), value: value_tokens(y, false), note: "" }])
-}
-
-fn solve_quadratic(f: &Form) -> Result<Vec<Row>, CalcError> {
-    Ok(quadratic(f.value(0)?, f.value(1)?, f.value(2)?)?
-        .into_iter()
-        .map(|(n, v)| Row { label: n.into(), value: value_tokens(v, false), note: "" })
-        .collect())
 }
 
 /// Flat tokens (digits, a point, a sign) as text.
@@ -147,18 +73,18 @@ pub fn tokens_text(toks: &[Tok]) -> String {
 /// The home screen's apps, three to a row and two rows to a page.
 pub const HOME_APPS: [(&str, Option<App>); 13] = [
     ("Calculate", Some(App::Calculate)),
-    ("Statistics", None),
+    ("Statistics", Some(App::Statistics)),
     ("Table", Some(App::Table)),
     ("Equation", Some(App::Equation)),
-    ("Inequality", None),
-    ("Distribution", None),
-    ("Complex", None),
-    ("Matrix", None),
-    ("Vector", None),
-    ("Spreadsheet", None),
-    ("Ratio", None),
-    ("Math Box", None),
-    ("Base-N", None),
+    ("Inequality", Some(App::Inequality)),
+    ("Distribution", Some(App::Distribution)),
+    ("Complex", Some(App::Complex)),
+    ("Matrix", Some(App::Matrix)),
+    ("Vector", Some(App::Vector)),
+    ("Spreadsheet", Some(App::Spreadsheet)),
+    ("Ratio", Some(App::Ratio)),
+    ("Math Box", Some(App::MathBox)),
+    ("Base-N", Some(App::BaseN)),
 ];
 
 /// Which menu a [`Menu`] is.
@@ -188,6 +114,19 @@ pub enum MenuId {
     Format,
     Function,
     VarAction(u8),
+    /// The first menu an app shows, to choose what to do.
+    AppMenu(App),
+    /// Simultaneous equations by number of unknowns, and polynomials by degree.
+    EqSimul,
+    EqPoly,
+    IneqDegree(u8),
+    /// What to do with the data in the Statistics editor.
+    StatsMenu,
+    /// Which regression to use: for results, or for the Statistics Calc screen.
+    RegType(bool),
+    StatsFrequency,
+    StatCatalog,
+    BaseSettings,
 }
 
 /// What choosing a menu line does.
@@ -215,6 +154,15 @@ pub enum Act {
     ResetSettings,
     ResetVariables,
     ResetAll,
+    /// Make the form for a type in an app.
+    Build(Kind, usize),
+    StatsResults(usize),
+    StatsReg {
+        calc: bool,
+        which: usize,
+    },
+    StatsFreq(bool),
+    SetBase(Base),
 }
 
 #[derive(Clone, Debug)]
@@ -284,6 +232,24 @@ fn category_names<'a>(names: impl Iterator<Item = &'a str>) -> Vec<&'a str> {
     out
 }
 
+/// Something on the screen you can touch.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub enum Tap {
+    HomeApp(usize),
+    MenuItem(usize),
+    Variable(usize),
+    Field(usize),
+    Cell(u8, u32),
+}
+
+/// The Base-N app: an expression typed in the current base and its whole-number answer.
+#[derive(Clone)]
+pub struct BaseApp {
+    pub calc: Calc,
+    pub base: Base,
+    pub result: Option<Result<i64, CalcError>>,
+}
+
 /// The whole device: which app is showing and the state of each.
 #[derive(Clone)]
 pub struct Device {
@@ -294,10 +260,17 @@ pub struct Device {
     pub shift: bool,
     pub on: bool,
     pub calc: Calc,
-    pub table: Form,
-    /// The kind of equation being chosen (before one is open).
-    pub eq_sel: usize,
-    pub equation: Option<(usize, Form)>,
+    /// The form each form-style app is showing, if it has one open.
+    pub forms: HashMap<Kind, Form>,
+    pub store: Store,
+    pub reg: RegKind,
+    /// The Statistics app is on its calculation screen rather than its editor.
+    pub stats_calc: bool,
+    pub complex: Calc,
+    pub basen: BaseApp,
+    pub sheet: Sheet,
+    /// The matrix or vector being filled in: which of the four, and its size.
+    pub mat_edit: Option<(usize, usize, usize)>,
     /// Open menus, newest last, or an editor, or the variable list.
     pub stack: Vec<Overlay>,
     pub cfg: Config,
@@ -309,6 +282,8 @@ pub struct Device {
 
 impl Default for Device {
     fn default() -> Self {
+        let mut complex = Calc::default();
+        complex.complex = true;
         Device {
             app: App::Calculate,
             home_sel: 0,
@@ -316,9 +291,14 @@ impl Default for Device {
             shift: false,
             on: true,
             calc: Calc::default(),
-            table: Form::new("Table", &["f(x) =", "Start", "End", "Step"], &["", "1", "5", "1"], Angle::Degree),
-            eq_sel: 0,
-            equation: None,
+            forms: HashMap::new(),
+            store: Store::default(),
+            reg: RegKind::Linear,
+            stats_calc: false,
+            complex,
+            basen: BaseApp { calc: Calc::default(), base: Base::Dec, result: None },
+            sheet: Sheet::default(),
+            mat_edit: None,
             stack: vec![],
             cfg: Config::default(),
             mem: Memory::default(),
@@ -333,6 +313,50 @@ const NUM_FORMATS: [(&str, NumFmt); 2] = [("Norm 1", NumFmt::Norm(1)), ("Norm 2"
 impl Device {
     pub fn angle(&self) -> Angle {
         self.calc.angle
+    }
+
+    /// A touch on the screen: choose the app, menu line, variable, field or cell touched.
+    pub fn touch(&mut self, tap: Tap) {
+        if !self.on {
+            return;
+        }
+        self.sync();
+        match tap {
+            Tap::HomeApp(i) if self.stack.is_empty() && self.app == App::Home => self.open(i),
+            Tap::MenuItem(i) => {
+                if let Some(Overlay::Menu(m)) = self.stack.last_mut()
+                    && let Some(it) = m.items.get(i)
+                {
+                    m.sel = i;
+                    let act = it.act.clone();
+                    self.act(act);
+                }
+            }
+            Tap::Variable(i) => {
+                if let Some(Overlay::Variables { sel }) = self.stack.last_mut() {
+                    *sel = i;
+                    self.open_menu(MenuId::VarAction(i as u8));
+                }
+            }
+            Tap::Field(i) if self.stack.is_empty() => {
+                if let Some(f) = self.app.kind().and_then(|k| self.forms.get_mut(&k))
+                    && i < f.fields.len()
+                {
+                    f.focus = i;
+                    f.replace = true;
+                }
+            }
+            Tap::Cell(c, r) if self.stack.is_empty() && self.app == App::Spreadsheet => {
+                let like = self.like();
+                self.sheet.commit();
+                if self.sheet.cursor == (c, r) {
+                    self.sheet.press(Key::Ok, &like);
+                } else {
+                    self.sheet.cursor = (c, r);
+                }
+            }
+            _ => {}
+        }
     }
 
     pub fn menu(&self) -> Option<&Menu> {
@@ -355,19 +379,63 @@ impl Device {
     }
 
     fn sync(&mut self) {
-        self.calc.cfg = self.cfg;
-        self.calc.mem = self.mem.clone();
+        // The Statistics Calc screen recalls the numbers of the data in the editor.
+        if self.stats_calc
+            && let Some(f) = self.forms.get(&Kind::Statistics)
+        {
+            self.mem.stats = calculator_forms::stat_values(f, self.reg);
+            self.mem.reg = crate::calc_stats::regression(self.reg, &calculator_forms::stat_two(f).unwrap_or_default());
+        }
         let (cfg, mem) = (self.cfg, self.mem.clone());
+        self.calc.cfg = cfg;
+        self.calc.mem = mem.clone();
+        self.complex.cfg = cfg;
+        self.complex.mem = mem.clone();
+        self.basen.calc.cfg = cfg;
         let set = |f: &mut Form| {
             for field in &mut f.fields {
                 field.cfg = cfg;
                 field.mem = mem.clone();
             }
         };
-        set(&mut self.table);
-        if let Some((_, f)) = &mut self.equation {
-            set(f);
+        self.forms.values_mut().for_each(set);
+    }
+
+    /// A blank line with the current settings, memory and angle unit.
+    fn like(&self) -> Calc {
+        Calc::blank_like(&self.calc)
+    }
+
+    /// A key to whatever is being typed into: the Calculate line, a form field, a cell...
+    fn type_key(&mut self, key: Key) {
+        match self.app {
+            App::Complex => self.complex.press(key),
+            App::BaseN => {
+                self.basen.calc.press(key);
+                self.basen.result = None;
+            }
+            App::Spreadsheet => {
+                let like = self.like();
+                self.sheet.press(key, &like);
+            }
+            App::Calculate => self.calc.press(key),
+            app => {
+                if app == App::Statistics && self.stats_calc {
+                    self.calc.press(key);
+                } else if let Some(f) = app.kind().and_then(|k| self.forms.get_mut(&k))
+                    && let Some(field) = f.fields.get_mut(f.focus)
+                {
+                    field.press(key);
+                }
+            }
         }
+    }
+
+    fn set_angle_all(&mut self, a: Angle) {
+        self.calc.angle = a;
+        self.complex.angle = a;
+        self.basen.calc.angle = a;
+        self.forms.values_mut().for_each(|f| f.set_angle(a));
     }
 
     pub fn press(&mut self, key: Key) {
@@ -389,16 +457,9 @@ impl Device {
         if self.app != App::Home {
             self.note = None;
         }
-        match key {
-            Key::Qr => {
-                self.note = Some("QR codes are not in this emulator");
-                return;
-            }
-            Key::ImagI => {
-                self.note = Some("i works in the Complex app");
-                return;
-            }
-            _ => {}
+        if key == Key::Qr {
+            self.note = Some("QR codes are not in this emulator");
+            return;
         }
         if !self.stack.is_empty() {
             self.overlay_key(key);
@@ -408,26 +469,29 @@ impl Device {
             Key::Home => {
                 self.app = App::Home;
                 self.note = None;
+                self.stats_calc = false;
             }
             Key::AngleMode => {
                 let d = self.calc.angle.next();
-                self.calc.angle = d;
-                self.table.set_angle(d);
-                if let Some((_, f)) = &mut self.equation {
-                    f.set_angle(d);
-                }
+                self.set_angle_all(d);
             }
             Key::Settings if self.app != App::Home => self.open_menu(MenuId::Settings),
             Key::Catalog if self.app != App::Home => self.open_menu(MenuId::Catalog),
+            Key::Tools if self.app == App::BaseN => self.open_menu(MenuId::BaseSettings),
+            Key::Tools if self.app == App::Statistics && !self.stats_calc => self.open_menu(MenuId::StatsFrequency),
             Key::Tools if self.app != App::Home => self.open_menu(MenuId::Tools),
             Key::Function if self.app != App::Home => self.open_menu(MenuId::Function),
             Key::Variable if self.app != App::Home => self.stack.push(Overlay::Variables { sel: 0 }),
-            Key::FormatMenu | Key::Sd | Key::SetFormat(_) if self.app == App::Calculate => self.format_key(key),
-            Key::Back => {
-                if self.app == App::Equation && self.equation.is_some() {
-                    self.equation = None;
-                }
+            Key::ImagI if self.app != App::Complex => {
+                self.note = Some("i works in the Complex app");
             }
+            Key::FormatMenu | Key::Sd | Key::SetFormat(_) | Key::ExeDecimal
+                if self.app == App::Calculate || (self.app == App::Statistics && self.stats_calc) =>
+            {
+                self.format_key(key)
+            }
+            Key::FormatMenu | Key::Sd | Key::SetFormat(_) | Key::ExeDecimal => {}
+            Key::Back => self.back(),
             _ => match self.app {
                 App::Home => self.home_key(key),
                 App::Calculate => {
@@ -435,9 +499,146 @@ impl Device {
                     // Pol( and Rec( store their answers in x and y.
                     self.mem.vars = self.calc.mem.vars;
                 }
-                App::Table => self.table.press(key, solve_table),
-                App::Equation => self.equation_key(key),
+                App::Complex => self.complex.press(key),
+                App::BaseN => self.basen_key(key),
+                App::Spreadsheet => {
+                    let like = self.like();
+                    self.sheet.press(key, &like);
+                }
+                App::Statistics if self.stats_calc => {
+                    self.calc.press(key);
+                }
+                app => {
+                    if let Some(kind) = app.kind() {
+                        self.form_key(kind, key);
+                    }
+                }
             },
+        }
+    }
+
+    /// The back key: out of a result, out of a form to the app's menu, out of an app to HOME.
+    fn back(&mut self) {
+        match self.app {
+            App::Statistics if self.stats_calc => self.stats_calc = false,
+            App::Spreadsheet | App::Complex | App::BaseN | App::Calculate => {}
+            app => {
+                if let Some(kind) = app.kind() {
+                    // A matrix or vector operation has no form to go back to, only its menu.
+                    let op = self
+                        .forms
+                        .get(&kind)
+                        .is_some_and(|f| matches!(kind, Kind::Matrix | Kind::Vector) && f.variant >= 4 && f.variant < 20 && f.variant != 10);
+                    if self.forms.get(&kind).is_some_and(|f| f.rows.is_some()) && !op {
+                        if let Some(f) = self.forms.get_mut(&kind) {
+                            f.rows = None;
+                        }
+                    } else if self.mat_edit.take().is_some() || self.forms.remove(&kind).is_some() {
+                        self.open_app_menu(app);
+                    }
+                }
+            }
+        }
+    }
+
+    fn basen_key(&mut self, key: Key) {
+        match key {
+            Key::Equals | Key::Ok => {
+                if !self.basen.calc.tokens.is_empty() {
+                    self.basen.result = Some(calc_basen::evaluate(&self.basen.calc.tokens, self.basen.base));
+                }
+            }
+            Key::Ac => {
+                self.basen.calc.press(Key::Ac);
+                self.basen.result = None;
+            }
+            other => {
+                self.basen.calc.press(other);
+                self.basen.result = None;
+            }
+        }
+    }
+
+    fn form_key(&mut self, kind: Kind, key: Key) {
+        let asked = self.forms.get_mut(&kind).is_some_and(|f| f.press(key));
+        if asked {
+            self.submit(kind);
+        }
+    }
+
+    /// What the form's last field (or EXE in a data editor) asks for.
+    fn submit(&mut self, kind: Kind) {
+        let Some(f) = self.forms.get(&kind) else { return };
+        let (variant, like) = (f.variant, self.like());
+        match (kind, variant) {
+            (Kind::Statistics, _) => self.open_menu(MenuId::StatsMenu),
+            (Kind::Matrix, 0..=3) | (Kind::Vector, 0..=3) => {
+                let Ok((rows, cols)) = (|| -> Result<(usize, usize), CalcError> {
+                    let r = f.real(0)? as usize;
+                    let c = if kind == Kind::Matrix { f.real(1)? as usize } else { 1 };
+                    Ok((r, c))
+                })() else {
+                    self.fail(kind, CalcError::Syntax);
+                    return;
+                };
+                let ok = if kind == Kind::Matrix { (1..=4).contains(&rows) && (1..=4).contains(&cols) } else { (2..=3).contains(&rows) };
+                if !ok {
+                    self.fail(kind, CalcError::Math);
+                    return;
+                }
+                let slot = variant;
+                let (r, c) = if kind == Kind::Matrix { (rows, cols) } else { (1, rows) };
+                self.mat_edit = Some((slot, r, c));
+                let labels: Vec<String> =
+                    (0..r * c).map(|i| if kind == Kind::Matrix { format!("{},{}", i / c + 1, i % c + 1) } else { format!("{}", i + 1) }).collect();
+                let refs: Vec<&str> = labels.iter().map(String::as_str).collect();
+                let title =
+                    if kind == Kind::Matrix { format!("Mat{}", ["A", "B", "C", "D"][slot]) } else { format!("Vct{}", ["A", "B", "C", "D"][slot]) };
+                let mut grid = Form::new(kind, 20 + slot, &title, &refs, &[], &like);
+                // Start from what is stored when the size is the same.
+                if kind == Kind::Matrix && self.store.mats[slot].rows == r && self.store.mats[slot].cols == c {
+                    for (i, field) in grid.fields.iter_mut().enumerate() {
+                        let v = self.store.mats[slot].data[i];
+                        field.tokens = calculator_forms::val(v, &self.cfg);
+                        field.cursor = field.tokens.len();
+                    }
+                } else if kind == Kind::Vector && self.store.vcts[slot].len() == c {
+                    for (i, field) in grid.fields.iter_mut().enumerate() {
+                        field.tokens = calculator_forms::val(self.store.vcts[slot][i], &self.cfg);
+                        field.cursor = field.tokens.len();
+                    }
+                }
+                self.forms.insert(kind, grid);
+            }
+            (Kind::Matrix, 20..=23) | (Kind::Vector, 20..=23) => {
+                let Some((slot, r, c)) = self.mat_edit else { return };
+                let stored = if kind == Kind::Matrix {
+                    calculator_forms::matrix_from(f, r, c).map(|m| self.store.mats[slot] = m)
+                } else {
+                    (0..c).map(|i| f.value(i)).collect::<Result<Vec<_>, _>>().map(|v| self.store.vcts[slot] = v)
+                };
+                match stored {
+                    Ok(()) => {
+                        self.mat_edit = None;
+                        self.forms.remove(&kind);
+                        self.open_app_menu(if kind == Kind::Matrix { App::Matrix } else { App::Vector });
+                    }
+                    Err(e) => self.fail(kind, e),
+                }
+            }
+            _ => {
+                let rows = calculator_forms::solve(f, &self.store, &self.cfg).unwrap_or_else(|e| vec![Row::text(e.message())]);
+                if let Some(f) = self.forms.get_mut(&kind) {
+                    f.scroll = 0;
+                    f.rows = Some(rows);
+                }
+            }
+        }
+    }
+
+    fn fail(&mut self, kind: Kind, e: CalcError) {
+        if let Some(f) = self.forms.get_mut(&kind) {
+            f.rows = Some(vec![Row::text(e.message())]);
         }
     }
 
@@ -455,6 +656,28 @@ impl Device {
             self.calc.press(Key::Sd);
         } else if matches!(self.calc.outcome, Outcome::Answer(_)) {
             self.open_menu(MenuId::Format);
+        }
+    }
+
+    fn app_menu_items(&self, app: App) -> Vec<Item> {
+        let build = |kind: Kind, names: &[&str]| -> Vec<Item> { names.iter().enumerate().map(|(i, n)| line(n, Act::Build(kind, i))).collect() };
+        match app {
+            App::Statistics => build(Kind::Statistics, &["1-Variable", "2-Variable"]),
+            App::Table => build(Kind::Table, &calculator_forms::TABLE_TYPES),
+            App::Equation => vec![
+                sub(EQUATION_TYPES[0], MenuId::EqSimul),
+                sub(EQUATION_TYPES[1], MenuId::EqPoly),
+                line(EQUATION_TYPES[2], Act::Build(Kind::Equation, 6)),
+            ],
+            App::Inequality => (2..=4u8)
+                .map(|d| sub(["ax\u{00B2}+bx+c", "ax\u{00B3}+bx\u{00B2}+cx+d", "ax\u{2074}+\u{2026}"][usize::from(d) - 2], MenuId::IneqDegree(d)))
+                .collect(),
+            App::Distribution => build(Kind::Distribution, &calculator_forms::DISTRIBUTION_TYPES),
+            App::Ratio => build(Kind::Ratio, &calculator_forms::RATIO_TYPES),
+            App::MathBox => build(Kind::MathBox, &calculator_forms::MATHBOX_TYPES),
+            App::Matrix => build(Kind::Matrix, &calculator_forms::MATRIX_OPS),
+            App::Vector => build(Kind::Vector, &calculator_forms::VECTOR_OPS),
+            _ => vec![],
         }
     }
 
@@ -524,16 +747,109 @@ impl Device {
                 vec![line("Settings & Data", Act::ResetSettings), line("Variable Memory", Act::ResetVariables), line("Initialize All", Act::ResetAll)]
             }
             MenuId::Catalog => {
-                ["Func Analysis", "Probability", "Numeric Calc", "Angle/Coord/Sexa", "Hyperbolic/Trig", "Sci Constants", "Unit Conversions", "Other"]
+                let mut v: Vec<Item> = vec![];
+                match self.app {
+                    App::Statistics if self.stats_calc => v.push(sub("Statistics", MenuId::StatCatalog)),
+                    App::Complex => v.push(sub("Complex", MenuId::CatalogCategory(10))),
+                    App::BaseN => v.push(sub("Logic", MenuId::CatalogCategory(11))),
+                    App::Spreadsheet => v.push(sub("Spreadsheet", MenuId::CatalogCategory(12))),
+                    _ => {}
+                }
+                v.extend(
+                    [
+                        "Func Analysis",
+                        "Probability",
+                        "Numeric Calc",
+                        "Angle/Coord/Sexa",
+                        "Hyperbolic/Trig",
+                        "Sci Constants",
+                        "Unit Conversions",
+                        "Other",
+                    ]
                     .iter()
                     .enumerate()
                     .map(|(i, n)| match i {
                         5 => sub(n, MenuId::ConstCategories),
                         6 => sub(n, MenuId::ConvCategories),
                         _ => sub(n, MenuId::CatalogCategory(i as u8)),
-                    })
+                    }),
+                );
+                v
+            }
+            MenuId::CatalogCategory(10) => vec![
+                keys("i", &[Key::ImagI]),
+                keys("Absolute Value", &[Key::Func(Func::Abs)]),
+                keys("Arg", &[Key::Func(Func::Arg)]),
+                keys("Conjg", &[Key::Func(Func::Conj)]),
+                keys("ReP", &[Key::Func(Func::Re)]),
+                keys("ImP", &[Key::Func(Func::Im)]),
+            ],
+            MenuId::CatalogCategory(11) => vec![
+                keys("and", &[Key::Logic(0)]),
+                keys("or", &[Key::Logic(1)]),
+                keys("xor", &[Key::Logic(2)]),
+                keys("xnor", &[Key::Logic(3)]),
+                keys("Not(", &[Key::Func(Func::Not)]),
+                keys("Neg(", &[Key::Func(Func::NegB)]),
+            ],
+            MenuId::CatalogCategory(12) => vec![
+                keys("Sum(", &[Key::Func(Func::SheetSum)]),
+                keys("Mean(", &[Key::Func(Func::SheetMean)]),
+                keys("Min(", &[Key::Func(Func::SheetMin)]),
+                keys("Max(", &[Key::Func(Func::SheetMax)]),
+                keys(":", &[Key::Colon]),
+                keys("=", &[Key::EqSign]),
+            ],
+            MenuId::StatCatalog => {
+                let paired = self.forms.get(&Kind::Statistics).is_some_and(|f| f.variant & 1 == 1);
+                let mut v: Vec<Item> = STAT_NAMES
+                    .iter()
+                    .enumerate()
+                    .filter(|(i, _)| paired || *i < 11 || *i == 26)
+                    .filter(|(i, _)| !(paired && (7..=9).contains(i)))
+                    .map(|(i, n)| keys(n, &[Key::Stat(i as u8)]))
+                    .collect();
+                if paired {
+                    v.push(keys("\u{0177}", &[Key::YHat]));
+                    if self.reg == RegKind::Quadratic {
+                        v.push(keys("x^1", &[Key::XHat(1)]));
+                        v.push(keys("x^2", &[Key::XHat(2)]));
+                    } else {
+                        v.push(keys("x^", &[Key::XHat(1)]));
+                    }
+                }
+                v
+            }
+            MenuId::AppMenu(app) => self.app_menu_items(app),
+            MenuId::EqSimul => (0..3usize).map(|i| line(&format!("{} unknowns", i + 2), Act::Build(Kind::Equation, i))).collect(),
+            MenuId::EqPoly => (0..3usize).map(|i| line(&format!("Degree {}", i + 2), Act::Build(Kind::Equation, 3 + i))).collect(),
+            MenuId::IneqDegree(d) => {
+                let title =
+                    ["ax\u{00B2}+bx+c", "ax\u{00B3}+bx\u{00B2}+cx+d", "ax\u{2074}+bx\u{00B3}+cx\u{00B2}+dx+e"][usize::from(d.clamp(2, 4)) - 2];
+                crate::calc_poly::Cmp::ALL
+                    .iter()
+                    .enumerate()
+                    .map(|(c, cmp)| line(&format!("{title}{}0", cmp.text()), Act::Build(Kind::Inequality, (usize::from(d) - 2) * 4 + c)))
                     .collect()
             }
+            MenuId::StatsMenu => {
+                let paired = self.forms.get(&Kind::Statistics).is_some_and(|f| f.variant & 1 == 1);
+                if paired {
+                    vec![
+                        line("2-Var Results", Act::StatsResults(0)),
+                        sub("Reg Results", MenuId::RegType(false)),
+                        sub("Statistics Calc", MenuId::RegType(true)),
+                    ]
+                } else {
+                    vec![line("1-Var Results", Act::StatsResults(0)), line("Statistics Calc", Act::StatsReg { calc: true, which: 0 })]
+                }
+            }
+            MenuId::RegType(calc) => RegKind::ALL.iter().enumerate().map(|(i, r)| line(r.label(), Act::StatsReg { calc, which: i })).collect(),
+            MenuId::StatsFrequency => {
+                let on = self.forms.get(&Kind::Statistics).is_some_and(|f| f.variant & 2 == 2);
+                vec![radio("Frequency: On", on, Act::StatsFreq(true)), radio("Frequency: Off", !on, Act::StatsFreq(false))]
+            }
+            MenuId::BaseSettings => calc_basen::Base::ALL.iter().map(|b| radio(b.label(), self.basen.base == *b, Act::SetBase(*b))).collect(),
             MenuId::CatalogCategory(0) => vec![
                 keys("Derivative(d/dx)", &[Key::Deriv]),
                 keys("Integration(\u{222B})", &[Key::Integral]),
@@ -554,6 +870,7 @@ impl Device {
                 keys("GCD", &[Key::Func(Func::Gcd)]),
                 keys("LCM", &[Key::Func(Func::Lcm)]),
                 keys("Absolute Value", &[Key::Func(Func::Abs)]),
+                keys("Recurring Decimal", &[Key::Recur]),
                 keys("Round Off", &[Key::Func(Func::Rnd)]),
             ],
             MenuId::CatalogCategory(3) => vec![
@@ -614,6 +931,7 @@ impl Device {
                 ("Standard", ResultFormat::Standard),
                 ("Decimal", ResultFormat::Decimal),
                 ("Prime Factor", ResultFormat::PrimeFactor),
+                ("Recurring Decimal", ResultFormat::Recurring),
                 ("Improper Fraction", ResultFormat::ImproperFraction),
                 ("Mixed Number", ResultFormat::MixedNumber),
                 ("Standard Form", ResultFormat::StandardForm),
@@ -657,6 +975,7 @@ impl Device {
                     }
                     Key::Back | Key::Left | Key::Ac => {
                         self.stack.pop();
+                        self.after_pop();
                     }
                     Key::Home => {
                         self.stack.clear();
@@ -743,7 +1062,7 @@ impl Device {
             Act::Keys(ks) => {
                 self.close_all();
                 for k in ks {
-                    self.calc.press(k);
+                    self.type_key(k);
                 }
             }
             Act::SetIo(io) => {
@@ -751,11 +1070,7 @@ impl Device {
                 back(self);
             }
             Act::SetAngle(a) => {
-                self.calc.angle = a;
-                self.table.set_angle(a);
-                if let Some((_, f)) = &mut self.equation {
-                    f.set_angle(a);
-                }
+                self.set_angle_all(a);
                 back(self);
             }
             Act::SetNum(n) => {
@@ -796,7 +1111,7 @@ impl Device {
             }
             Act::Undo => {
                 self.close_all();
-                self.calc.undo();
+                self.undo_target();
             }
             Act::ClearHistory => {
                 self.close_all();
@@ -811,7 +1126,48 @@ impl Device {
             }
             Act::Recall(i) => {
                 self.close_all();
-                self.calc.press(Key::Var(i));
+                self.type_key(Key::Var(i));
+            }
+            Act::Build(kind, variant) => {
+                self.close_all();
+                let form = calculator_forms::build(kind, variant, &self.like());
+                self.forms.insert(kind, form);
+                if matches!((kind, variant), (Kind::Matrix, 4..=9) | (Kind::Vector, 4..=10)) {
+                    self.submit(kind);
+                }
+            }
+            Act::StatsResults(view) => {
+                self.close_all();
+                if let Some(f) = self.forms.get_mut(&Kind::Statistics) {
+                    f.view = view;
+                }
+                self.solve_into(Kind::Statistics);
+            }
+            Act::StatsReg { calc, which } => {
+                self.close_all();
+                self.reg = RegKind::ALL.get(which).copied().unwrap_or(RegKind::Linear);
+                if calc {
+                    self.stats_calc = true;
+                    self.calc = Calc::blank_like(&self.calc);
+                } else {
+                    if let Some(f) = self.forms.get_mut(&Kind::Statistics) {
+                        f.view = which + 1;
+                    }
+                    self.solve_into(Kind::Statistics);
+                }
+            }
+            Act::StatsFreq(on) => {
+                // Changing the Frequency setting clears the data, as the guide says.
+                let old = self.forms.get(&Kind::Statistics).map_or(0, |f| f.variant);
+                let variant = (old & 1) | if on { 2 } else { 0 };
+                self.close_all();
+                let form = calculator_forms::build(Kind::Statistics, variant, &self.like());
+                self.forms.insert(Kind::Statistics, form);
+            }
+            Act::SetBase(b) => {
+                self.basen.base = b;
+                self.basen.calc = Calc::blank_like(&self.basen.calc);
+                self.close_all();
             }
             Act::EditVar(i) => {
                 let label = format!("{}=", ["A", "B", "C", "D", "E", "F", "x", "y", "z"].get(usize::from(i)).copied().unwrap_or("?"));
@@ -848,15 +1204,58 @@ impl Device {
 
     fn open(&mut self, i: usize) {
         self.home_sel = i;
-        match HOME_APPS.get(i).and_then(|m| m.1) {
-            Some(app) => {
-                self.app = app;
-                self.note = None;
-                if app == App::Equation {
-                    self.equation = None;
+        let Some(app) = HOME_APPS.get(i).and_then(|m| m.1) else { return };
+        self.app = app;
+        self.note = None;
+        self.stats_calc = false;
+        if app.kind().is_some() {
+            self.open_app_menu(app);
+        }
+    }
+
+    /// The first menu an app shows, where you choose what to do in it.
+    fn open_app_menu(&mut self, app: App) {
+        self.stack.clear();
+        if let Some(kind) = app.kind() {
+            self.forms.remove(&kind);
+        }
+        self.open_menu(MenuId::AppMenu(app));
+    }
+
+    /// Choosing the result: compute the answer lines of the form.
+    fn solve_into(&mut self, kind: Kind) {
+        let Some(f) = self.forms.get(&kind) else { return };
+        let rows = calculator_forms::solve(f, &self.store, &self.cfg).unwrap_or_else(|e| vec![Row::text(e.message())]);
+        if let Some(f) = self.forms.get_mut(&kind) {
+            f.scroll = 0;
+            f.rows = Some(rows);
+        }
+    }
+
+    /// After a menu closes: an app that is a form needs a form, or there is nothing to show.
+    fn after_pop(&mut self) {
+        if self.stack.is_empty()
+            && let Some(kind) = self.app.kind()
+            && !self.forms.contains_key(&kind)
+        {
+            self.app = App::Home;
+        }
+    }
+
+    fn undo_target(&mut self) {
+        match self.app {
+            App::Complex => self.complex.undo(),
+            App::BaseN => self.basen.calc.undo(),
+            App::Calculate => self.calc.undo(),
+            app => {
+                if app == App::Statistics && self.stats_calc {
+                    self.calc.undo();
+                } else if let Some(f) = app.kind().and_then(|k| self.forms.get_mut(&k))
+                    && let Some(field) = f.fields.get_mut(f.focus)
+                {
+                    field.undo();
                 }
             }
-            None => self.note = Some("Not in this emulator yet"),
         }
     }
 
@@ -870,44 +1269,18 @@ impl Device {
             Key::PageUp => self.home_sel = self.home_sel.saturating_sub(6),
             Key::PageDown => self.home_sel = (self.home_sel + 6).min(n - 1),
             Key::Ok | Key::Equals => self.open(self.home_sel),
-            Key::Digit(d @ 1..=6) => self.open(usize::from(d) - 1),
+            Key::Digit(d @ 1..=6) => self.open(self.home_sel / 6 * 6 + usize::from(d) - 1),
             _ => {}
         }
-    }
-
-    fn equation_key(&mut self, key: Key) {
-        let Some((kind, form)) = &mut self.equation else {
-            match key {
-                Key::Up | Key::Down => self.eq_sel = (self.eq_sel + 1) % EQUATIONS.len(),
-                Key::Ok | Key::Equals => self.start_equation(self.eq_sel),
-                Key::Digit(d @ 1..=2) => self.start_equation(usize::from(d) - 1),
-                _ => {}
-            }
-            return;
-        };
-        let solve = if *kind == 0 { solve_simultaneous } else { solve_quadratic };
-        form.press(key, solve);
-    }
-
-    fn start_equation(&mut self, kind: usize) {
-        self.eq_sel = kind;
-        let d = self.calc.angle;
-        self.equation = Some((
-            kind,
-            if kind == 0 {
-                Form::new("a1x+b1y=c1, a2x+b2y=c2", &["a1", "b1", "c1", "a2", "b2", "c2"], &["", "", "", "", "", ""], d)
-            } else {
-                Form::new("ax\u{00B2}+bx+c=0", &["a", "b", "c"], &["", "", ""], d)
-            },
-        ));
-        self.sync();
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::calc_basen::Base;
     use crate::calculator::Func;
+    use crate::calculator::{Value, value_tokens};
 
     fn type_into(d: &mut Device, text: &str) {
         for ch in text.chars() {
@@ -922,28 +1295,23 @@ mod tests {
         }
     }
 
-    fn rows(f: &Form) -> Vec<(String, String)> {
-        f.rows.iter().flatten().map(|r| (r.label.clone(), tokens_text(&r.value))).collect()
-    }
-
     #[test]
-    fn the_home_menu_opens_the_apps_that_exist_and_says_so_for_those_that_do_not() {
+    fn the_home_menu_opens_every_app_and_pages_through_them() {
         let mut d = Device::default();
         d.press(Key::Home);
         assert_eq!(d.app, App::Home);
         d.press(Key::Digit(3));
         assert_eq!(d.app, App::Table);
+        assert!(matches!(d.menu().map(|m| m.id), Some(MenuId::AppMenu(App::Table))), "an app opens on its menu");
         d.press(Key::Home);
-        d.press(Key::Digit(2));
-        assert_eq!(d.app, App::Home);
-        assert_eq!(d.note, Some("Not in this emulator yet"));
-        d.press(Key::Right);
         d.press(Key::Right);
         d.press(Key::Ok);
         assert_eq!(d.app, App::Equation);
         d.press(Key::Home);
         d.press(Key::Down);
         assert_eq!(d.home_sel, 6, "Down moves a row; from the second row it goes to the next page");
+        d.press(Key::Ok);
+        assert_eq!(d.app, App::Complex);
     }
 
     #[test]
@@ -955,16 +1323,26 @@ mod tests {
         assert!(!d.shift);
     }
 
+    fn open_app(d: &mut Device, n: u8) {
+        d.press(Key::Home);
+        d.home_sel = usize::from(n) - 1;
+        d.press(Key::Ok);
+    }
+
+    fn form_rows(d: &Device, kind: Kind) -> Vec<(String, String)> {
+        d.forms[&kind].rows.iter().flatten().map(|r| (r.label.clone(), tokens_text(&r.value))).collect()
+    }
+
     #[test]
     fn a_table_lists_f_of_x_for_each_step() {
         let mut d = Device::default();
-        d.press(Key::Home);
-        d.press(Key::Digit(3));
+        open_app(&mut d, 3);
+        d.press(Key::Digit(1)); // f(x)
         type_into(&mut d, "2x+1");
         for _ in 0..4 {
             d.press(Key::Ok);
         }
-        let got = rows(&d.table);
+        let got = form_rows(&d, Kind::Table);
         assert_eq!(got.first(), Some(&("1".to_string(), "3".to_string())));
         assert_eq!(got.len(), 5);
         assert_eq!(got.last(), Some(&("5".to_string(), "11".to_string())));
@@ -973,68 +1351,49 @@ mod tests {
     #[test]
     fn a_table_with_no_function_is_a_syntax_error() {
         let mut d = Device::default();
-        d.press(Key::Home);
-        d.press(Key::Digit(3));
+        open_app(&mut d, 3);
+        d.press(Key::Digit(1));
         for _ in 0..4 {
             d.press(Key::Ok);
         }
-        assert_eq!(d.table.rows.as_ref().map(|r| r[0].label.as_str()), Some("Syntax ERROR"));
+        assert_eq!(d.forms[&Kind::Table].rows.as_ref().map(|r| r[0].label.as_str()), Some("Syntax ERROR"));
     }
 
     #[test]
-    fn simultaneous_equations_solve_exactly() {
+    fn equations_solve_through_the_device() {
         let mut d = Device::default();
-        d.press(Key::Home);
-        d.press(Key::Digit(4));
-        d.press(Key::Ok); // simultaneous
-        // 2x + 4y = 3 and 6x - 2y = 1 give x = 5/14, y = 4/7
+        open_app(&mut d, 4);
+        d.press(Key::Digit(1)); // Simul Equation
+        d.press(Key::Digit(1)); // 2 unknowns
         for v in ["2", "4", "3", "6", "-2", "1"] {
             type_into(&mut d, v);
             d.press(Key::Ok);
         }
-        let f = &d.equation.as_ref().unwrap().1;
-        let got = rows(f);
-        assert_eq!(got.len(), 2);
-        assert_eq!(got[0].0, "x");
-        let rat = |n, d| value_tokens(Value::Rat(crate::calculator::Rat::new(n, d).unwrap()), false);
-        assert_eq!(f.rows.as_ref().unwrap()[0].value, rat(5, 14));
-        assert_eq!(f.rows.as_ref().unwrap()[1].value, rat(4, 7));
-    }
-
-    #[test]
-    fn a_quadratic_gives_both_roots_in_order_and_one_when_they_meet() {
-        let mut d = Device::default();
-        d.press(Key::Home);
-        d.press(Key::Digit(4));
-        d.press(Key::Digit(2));
+        let rat = |n, dd| value_tokens(Value::Rat(crate::calculator::Rat::new(n, dd).unwrap()), false);
+        let rows = d.forms[&Kind::Equation].rows.as_ref().unwrap();
+        assert_eq!((rows[0].value.clone(), rows[1].value.clone()), (rat(5, 14), rat(4, 7)));
+        // x² − 5x + 6 = 0
+        open_app(&mut d, 4);
+        d.press(Key::Digit(2)); // Polynomial
+        d.press(Key::Digit(1)); // degree 2
         for v in ["1", "-5", "6"] {
             type_into(&mut d, v);
             d.press(Key::Ok);
         }
-        assert_eq!(rows(&d.equation.as_ref().unwrap().1), vec![("x1".into(), "2".into()), ("x2".into(), "3".into())]);
-        // x^2 - 2x + 1 = 0
-        d.press(Key::Ok);
-        d.press(Key::Home);
-        d.press(Key::Digit(4));
-        d.press(Key::Digit(2));
-        for v in ["1", "-2", "1"] {
-            type_into(&mut d, v);
-            d.press(Key::Ok);
-        }
-        assert_eq!(rows(&d.equation.as_ref().unwrap().1), vec![("x".into(), "1".into())]);
+        assert_eq!(&form_rows(&d, Kind::Equation)[..2], &[("x1".to_string(), "2".to_string()), ("x2".to_string(), "3".to_string())]);
     }
 
     #[test]
-    fn parallel_lines_and_a_zero_a_are_math_errors() {
+    fn parallel_lines_are_a_math_error() {
         let mut d = Device::default();
-        d.press(Key::Home);
-        d.press(Key::Digit(4));
+        open_app(&mut d, 4);
+        d.press(Key::Digit(1));
         d.press(Key::Digit(1));
         for v in ["1", "1", "1", "1", "1", "2"] {
             type_into(&mut d, v);
             d.press(Key::Ok);
         }
-        assert_eq!(d.equation.as_ref().unwrap().1.rows.as_ref().unwrap()[0].label, "Math ERROR");
+        assert_eq!(d.forms[&Kind::Equation].rows.as_ref().unwrap()[0].label, "Math ERROR");
     }
 
     // ---- the real key layout, menus and memory ----
@@ -1049,6 +1408,7 @@ mod tests {
         match d.calc.outcome {
             Outcome::Answer(v) => tokens_text(&crate::calculator::result_tokens(v, d.calc.format, &d.calc.cfg)),
             Outcome::Error(e) => e.message().into(),
+            Outcome::Complex(_) => "complex".into(),
             Outcome::Nothing => "-".into(),
         }
     }
@@ -1118,11 +1478,11 @@ mod tests {
         d.tap(Key::Shift, None);
         d.tap(Key::Sd, Some(Key::FormatMenu));
         assert_eq!(d.menu().map(|m| m.id), Some(MenuId::Format));
-        d.press(Key::Digit(5)); // Mixed Number
+        d.press(Key::Digit(6)); // Mixed Number
         assert_eq!(answer_text(&d), "112", "1 and 1/2");
         d.tap(Key::Shift, None);
         d.tap(Key::Sd, Some(Key::FormatMenu));
-        d.press(Key::Digit(6)); // Standard Form
+        d.press(Key::Digit(7)); // Standard Form
         assert_eq!(answer_text(&d), "1.5\u{00D7}100", "a x 10^0 (the exponent is a template)");
     }
 
@@ -1207,7 +1567,7 @@ mod tests {
     }
 
     #[test]
-    fn off_blanks_the_screen_until_on_and_back_steps_out_of_an_equation() {
+    fn off_blanks_the_screen_until_on_and_back_steps_out_of_a_form() {
         let mut d = Device::default();
         d.tap(Key::Shift, None);
         d.tap(Key::Ac, Some(Key::Off));
@@ -1216,12 +1576,15 @@ mod tests {
         assert!(d.calc.tokens.is_empty(), "keys do nothing while it is off");
         d.press(Key::On);
         assert!(d.on);
-        d.press(Key::Home);
-        d.press(Key::Digit(4));
+        open_app(&mut d, 4);
         d.press(Key::Digit(2));
-        assert!(d.equation.is_some());
+        d.press(Key::Digit(1));
+        assert!(d.forms.contains_key(&Kind::Equation));
         d.press(Key::Back);
-        assert!(d.equation.is_none(), "back returns to the list of equation types");
+        assert!(!d.forms.contains_key(&Kind::Equation), "back returns to the menu of equation types");
+        assert!(matches!(d.menu().map(|m| m.id), Some(MenuId::AppMenu(App::Equation))));
+        d.press(Key::Back);
+        assert_eq!(d.app, App::Home, "and back again leaves the app");
     }
 
     #[test]
@@ -1476,5 +1839,245 @@ mod tests {
         assert!(d.calc.tokens.is_empty());
         d.press(D(1));
         assert!(d.note.is_none(), "the note goes with the next key");
+    }
+
+    // ---- the other apps through the device ----
+
+    fn enter(d: &mut Device, keys: &[Key]) {
+        for k in keys {
+            d.press(*k);
+        }
+    }
+
+    fn fill(d: &mut Device, values: &[&str]) {
+        for v in values {
+            type_into(d, v);
+            d.press(Key::Ok);
+        }
+    }
+
+    #[test]
+    fn statistics_editor_results_and_calc_screen() {
+        let mut d = Device::default();
+        open_app(&mut d, 2);
+        d.press(Key::Digit(1)); // 1-Variable
+        fill(&mut d, &["1", "2", "3", "4", "5"]);
+        d.press(Key::Equals);
+        assert_eq!(d.menu().map(|m| m.id), Some(MenuId::StatsMenu));
+        d.press(Key::Digit(1)); // 1-Var Results
+        let rows = form_rows(&d, Kind::Statistics);
+        assert_eq!(rows.iter().find(|r| r.0 == "n").unwrap().1, "5", "the empty sixth cell is skipped");
+    }
+
+    #[test]
+    fn statistics_calc_recalls_values_and_estimates() {
+        let mut d = Device::default();
+        open_app(&mut d, 2);
+        d.press(Key::Digit(2)); // 2-Variable
+        fill(&mut d, &["1", "3", "2", "5", "3", "7"]);
+        d.press(Key::Equals);
+        d.press(Key::Digit(3)); // Statistics Calc
+        d.press(Key::Digit(1)); // y = a + bx
+        assert!(d.stats_calc);
+        // 5 ŷ: the line is y = 1 + 2x, so ŷ(5) = 11
+        enter(&mut d, &[Key::Digit(5)]);
+        d.press(Key::Catalog);
+        d.press(Key::Digit(1)); // Statistics
+        let n = d.menu().unwrap().items.len();
+        d.press(Key::Digit(n as u8)); // the last item: x̂
+        d.press(Key::Equals);
+        assert_eq!(answer_text(&d), "2", "x̂ of 5 is 2 on y = 1 + 2x");
+        enter(&mut d, &[Key::Ac, Key::Digit(5)]);
+        d.press(Key::Catalog);
+        d.press(Key::Digit(1));
+        d.press(Key::Digit(n as u8 - 1)); // ŷ
+        d.press(Key::Equals);
+        assert_eq!(answer_text(&d), "11");
+        // The mean of x is among the recallable values.
+        enter(&mut d, &[Key::Ac]);
+        d.press(Key::Catalog);
+        d.press(Key::Digit(1));
+        d.press(Key::Digit(2));
+        d.press(Key::Equals);
+        assert_eq!(answer_text(&d), "2");
+        d.press(Key::Back);
+        assert!(!d.stats_calc, "back returns to the editor");
+    }
+
+    #[test]
+    fn inequality_distribution_and_ratio_apps() {
+        let mut d = Device::default();
+        open_app(&mut d, 5);
+        d.press(Key::Digit(1)); // ax²+bx+c
+        d.press(Key::Digit(3)); // ≥ 0
+        fill(&mut d, &["1", "2", "-3"]);
+        let rows: Vec<String> = d.forms[&Kind::Inequality].rows.as_ref().unwrap().iter().map(|r| r.label.clone()).collect();
+        assert_eq!(rows[1], "x\u{2264}\u{2212}3");
+        let mut d = Device::default();
+        open_app(&mut d, 6);
+        d.press(Key::Digit(2)); // Binomial CD
+        fill(&mut d, &["5", "5", "0.5"]);
+        assert_eq!(form_rows(&d, Kind::Distribution), vec![("p=".to_string(), "1".to_string())]);
+        let mut d = Device::default();
+        open_app(&mut d, 11);
+        d.press(Key::Digit(1));
+        fill(&mut d, &["2", "3", "12"]);
+        assert_eq!(form_rows(&d, Kind::Ratio), vec![("X=".to_string(), "8".to_string())]);
+    }
+
+    #[test]
+    fn the_complex_app_answers_in_a_plus_bi() {
+        let mut d = Device::default();
+        open_app(&mut d, 7);
+        assert_eq!(d.app, App::Complex);
+        enter(
+            &mut d,
+            &[
+                Key::LParen,
+                Key::Digit(1),
+                Key::Plus,
+                Key::Digit(2),
+                Key::ImagI,
+                Key::RParen,
+                Key::LParen,
+                Key::Digit(3),
+                Key::Minus,
+                Key::ImagI,
+                Key::RParen,
+                Key::Equals,
+            ],
+        );
+        let Outcome::Complex(z) = d.complex.outcome else { panic!("{:?}", d.complex.outcome) };
+        assert_eq!((z.re, z.im), (5.0, 5.0));
+        assert_eq!(calculator_forms::complex_tokens(z, &d.cfg).iter().map(|t| t.text()).collect::<String>(), "5+5i");
+        // The Calculate app has no i.
+        let mut c = Device::default();
+        c.press(Key::ImagI);
+        assert!(c.note.is_some());
+    }
+
+    #[test]
+    fn matrices_are_filled_in_and_multiplied() {
+        let mut d = Device::default();
+        open_app(&mut d, 8);
+        d.press(Key::Digit(1)); // Edit MatA
+        enter(&mut d, &[Key::Ok, Key::Ok]); // 2 × 2
+        fill(&mut d, &["1", "2", "3", "4"]);
+        assert!(matches!(d.menu().map(|m| m.id), Some(MenuId::AppMenu(App::Matrix))), "back at the matrix menu");
+        d.press(Key::Digit(2)); // Edit MatB
+        enter(&mut d, &[Key::Ok, Key::Ok]);
+        fill(&mut d, &["0", "1", "1", "0"]);
+        d.press(Key::Digit(7)); // MatA×MatB
+        let rows = d.forms[&Kind::Matrix].rows.as_ref().unwrap();
+        assert_eq!(rows.iter().map(|r| tokens_text(&r.value)).collect::<Vec<_>>(), vec!["2  1".to_string(), "4  3".to_string()]);
+        d.press(Key::Back);
+        d.press(Key::Digit(8)); // Det MatA
+        assert_eq!(form_rows(&d, Kind::Matrix), vec![("Det=".to_string(), "\u{2212}2".to_string())]);
+    }
+
+    #[test]
+    fn vectors_dot_and_cross() {
+        let mut d = Device::default();
+        open_app(&mut d, 9);
+        d.press(Key::Digit(1)); // Edit VctA
+        d.press(Key::Ok); // 3 dimensions
+        fill(&mut d, &["1", "2", "3"]);
+        d.press(Key::Digit(2));
+        d.press(Key::Ok);
+        fill(&mut d, &["4", "5", "6"]);
+        d.press(Key::Digit(7)); // A·B
+        assert_eq!(form_rows(&d, Kind::Vector), vec![("A\u{00B7}B=".to_string(), "32".to_string())]);
+        d.press(Key::Back);
+        d.press(Key::Digit(8)); // A×B
+        assert_eq!(tokens_text(&d.forms[&Kind::Vector].rows.as_ref().unwrap()[0].value), "\u{2212}3  6  \u{2212}3");
+    }
+
+    #[test]
+    fn the_spreadsheet_calculates_with_formulas() {
+        let mut d = Device::default();
+        open_app(&mut d, 10);
+        assert_eq!(d.app, App::Spreadsheet);
+        enter(&mut d, &[Key::Digit(3), Key::Ok, Key::Digit(4), Key::Ok]);
+        d.sheet.cursor = (1, 1);
+        enter(&mut d, &[Key::EqSign, Key::Var(0), Key::Digit(1), Key::Times, Key::Var(0), Key::Digit(2), Key::Ok]);
+        assert_eq!(d.sheet.value(1, 1, &d.calc), Ok(Value::int(12)));
+        d.touch(Tap::Cell(0, 1));
+        assert_eq!(d.sheet.cursor, (0, 1), "touching a cell selects it");
+        d.touch(Tap::Cell(0, 1));
+        assert!(d.sheet.edit.is_some(), "touching the selected cell edits it");
+    }
+
+    #[test]
+    fn base_n_does_arithmetic_and_logic_in_the_chosen_base() {
+        let mut d = Device::default();
+        open_app(&mut d, 13);
+        d.press(Key::Tools);
+        d.press(Key::Digit(2)); // Hex
+        assert_eq!(d.basen.base, Base::Hex);
+        // 1F + 1 = 20
+        enter(&mut d, &[Key::Digit(1), Key::Var(5), Key::Plus, Key::Digit(1), Key::Equals]);
+        assert_eq!(d.basen.result, Some(Ok(0x20)));
+        enter(&mut d, &[Key::Ac, Key::Digit(5), Key::Logic(2), Key::Digit(3), Key::Equals]);
+        assert_eq!(d.basen.result, Some(Ok(6)), "5 xor 3");
+        d.press(Key::Tools);
+        d.press(Key::Digit(3)); // Bin
+        enter(&mut d, &[Key::Digit(1), Key::Digit(0), Key::Digit(1), Key::Plus, Key::Digit(1), Key::Equals]);
+        assert_eq!(d.basen.result, Some(Ok(6)));
+        enter(&mut d, &[Key::Ac, Key::Digit(2), Key::Equals]);
+        assert_eq!(d.basen.result, Some(Err(CalcError::Syntax)), "2 is not a binary digit");
+    }
+
+    #[test]
+    fn math_box_rolls_and_reads_the_circle() {
+        let mut d = Device::default();
+        open_app(&mut d, 12);
+        d.press(Key::Digit(1)); // Dice
+        enter(&mut d, &[Key::Ok, Key::Ok]);
+        assert!(d.forms[&Kind::MathBox].rows.as_ref().unwrap()[0].label.starts_with("1:"));
+        d.press(Key::Back);
+        d.press(Key::Back);
+        d.press(Key::Digit(3)); // Circle, 30°
+        d.press(Key::Ok);
+        assert_eq!(form_rows(&d, Kind::MathBox)[0], ("sin".to_string(), "12".to_string()), "sin 30° is 1/2");
+    }
+
+    #[test]
+    fn touching_the_screen_chooses_apps_menu_lines_and_fields() {
+        let mut d = Device::default();
+        d.press(Key::Home);
+        d.touch(Tap::HomeApp(2));
+        assert_eq!(d.app, App::Table);
+        d.touch(Tap::MenuItem(1)); // f(x),g(x)
+        assert_eq!(d.forms[&Kind::Table].variant, 1);
+        d.touch(Tap::Field(3));
+        assert_eq!(d.forms[&Kind::Table].focus, 3);
+        d.press(Key::Settings);
+        d.touch(Tap::MenuItem(1)); // Calc Settings after Settings? Settings has Calc Settings, System, Reset
+        assert_eq!(d.menu().map(|m| m.id), Some(MenuId::SystemSettings));
+        d.press(Key::Back);
+        d.press(Key::Back);
+        d.press(Key::Variable);
+        d.touch(Tap::Variable(2));
+        assert_eq!(d.menu().map(|m| m.id), Some(MenuId::VarAction(2)));
+    }
+
+    #[test]
+    fn recurring_decimals_are_typed_and_shown_with_a_bar() {
+        let mut d = Device::default();
+        // 0.1(6) typed with the recurring template is 1/6
+        d.calc.tokens = vec![Tok::Digit(0), Tok::Dot, Tok::Digit(1), Tok::RecurOpen, Tok::Digit(6), Tok::Close];
+        d.calc.cursor = 6;
+        d.press(Key::Equals);
+        d.press(Key::Sd);
+        assert_eq!(shape(&d), "{1/6]", "typing a point asks for a decimal; S⇔D gives the fraction");
+        d.press(Key::SetFormat(ResultFormat::Recurring));
+        assert_eq!(d.calc.format, ResultFormat::Recurring);
+        let toks = crate::calculator::result_tokens(d.calc.answer(), ResultFormat::Recurring, &d.cfg);
+        assert_eq!(toks, vec![Tok::Digit(0), Tok::Dot, Tok::Digit(1), Tok::RecurOpen, Tok::Digit(6), Tok::Close]);
+        // 1/7 has a six-digit period; 1/3 repeats one digit
+        let third = crate::calculator::result_tokens(Value::Rat(crate::calculator::Rat::new(1, 3).unwrap()), ResultFormat::Recurring, &d.cfg);
+        assert_eq!(third, vec![Tok::Digit(0), Tok::Dot, Tok::RecurOpen, Tok::Digit(3), Tok::Close]);
+        let half = crate::calculator::result_tokens(Value::Rat(crate::calculator::Rat::new(1, 2).unwrap()), ResultFormat::Recurring, &d.cfg);
+        assert_eq!(half, vec![Tok::Digit(0), Tok::Dot, Tok::Digit(5)], "a terminating decimal has no bar");
     }
 }

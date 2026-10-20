@@ -633,6 +633,30 @@ fn a_click_on_the_whiteboard_does_not_turn_the_page_and_choosing_black_swaps_a_b
     assert!(overlay(&mut h).whiteboard.is_none());
 }
 
+#[test]
+fn picking_a_maths_tool_closes_the_chooser_and_the_bar_is_gone_within_two_seconds() {
+    use crate::maths_tools::MathsTool;
+    let mut h = harness();
+    h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
+    h.state_mut().maths_tools.enabled = MathsTool::ALL.into_iter().collect();
+    teacher(&mut h);
+    overlay(&mut h).open_palette();
+    overlay(&mut h).maths_tools_panel.open = true;
+    h.run_steps(3);
+    h.get_by_label("Calculator").click();
+    h.run_steps(3);
+    assert!(!overlay(&mut h).maths_tools_panel.open, "the chooser closes as soon as a tool is picked");
+    assert!(overlay(&mut h).palette_open, "the bar waits a moment");
+    // The pointer resting on the bar does not keep it: two seconds at the most.
+    let on_bar = overlay(&mut h).palette_rect_for_test().center();
+    h.event(Event::PointerMoved(on_bar));
+    h.run_steps(60);
+    assert!(overlay(&mut h).palette_open, "a second in, still there");
+    h.run_steps(90);
+    assert!(!overlay(&mut h).palette_open, "gone after two");
+    assert!(overlay(&mut h).maths_tools_panel.has_visible_widgets(), "the calculator stays");
+}
+
 /// Writes pictures of the teacher overlay to `$DECKCRAFT_SHOTS` for a human to look at:
 /// `DECKCRAFT_SHOTS=/some/dir cargo test -p deckcraft-ui-egui --lib screenshots_for_review -- --ignored`.
 #[test]
@@ -762,4 +786,26 @@ fn screenshots_for_review() {
     );
     calc_shot(&mut h, &[Key::Catalog], "11-calc-catalog.png");
     calc_shot(&mut h, &[Key::Settings, D(1)], "12-calc-settings.png");
+    // The other apps.
+    let app_shot = |h: &mut egui_kittest::Harness<'static, SlideApp>, n: usize, keys: &[Key], name: &str| {
+        {
+            let o = overlay(h);
+            o.set_whiteboard(false);
+            o.maths_tools_panel = Default::default();
+            o.maths_tools_panel.open_tool(MathsTool::Calculator);
+            let d = o.maths_tools_panel.calculator();
+            d.press(Key::Home);
+            d.home_sel = n;
+            d.press(Key::Ok);
+            for k in keys {
+                d.press(*k);
+            }
+        }
+        h.run_steps(4);
+        h.render().unwrap().save(dir.join(name)).unwrap();
+    };
+    app_shot(&mut h, 1, &[D(1), D(1), Key::Ok, D(3), Key::Ok, D(5), Key::Ok, Key::Equals, D(1)], "13-stats-results.png");
+    app_shot(&mut h, 9, &[D(4), Key::Ok, Key::EqSign, Key::Var(0), D(1), Key::Times, D(2), Key::Ok, D(7), Key::Right], "14-sheet.png");
+    app_shot(&mut h, 12, &[Key::Tools, D(2), D(1), Key::Var(5), Key::Plus, D(1), Key::Equals], "15-basen.png");
+    app_shot(&mut h, 3, &[D(1), D(1), D(1), D(2), Key::Ok, Key::Ok, Key::Ok], "16-equation-menu.png");
 }
