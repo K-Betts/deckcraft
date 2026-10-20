@@ -2135,6 +2135,12 @@ fn animations(app: &mut SlideApp, ui: &mut Ui) {
             });
         });
     });
+    // Subject packs add; they never move what is already here (principle 4).
+    if app.pack_on(crate::packs::MATHS) {
+        group(ui, |ui| {
+            big(app, ui, Icon::Numbering, "Reveal\nSteps", "animation.steps", json!({}));
+        });
+    }
 }
 
 pub fn paint_anim_tile(p: &egui::Painter, r: Rect, label: &str, class: AnimClass, enabled: bool) {
