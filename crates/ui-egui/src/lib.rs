@@ -1188,7 +1188,7 @@ impl SlideApp {
             "app.insertAudioDialog" => self.pick_and_insert("audio", "insert.audio"),
             "app.reuseSlidesDialog" => self.pick_and_reuse(p.get("keepFormatting").and_then(Value::as_bool).unwrap_or(false)),
             "app.insertVideoDialog" => self.pick_and_insert("video", "insert.video"),
-            "app.saveAsDialog" => self.save_as_dialog("deckcraft"),
+            "app.saveAsDialog" => self.save_as_dialog(self.default_save_format()),
             "app.exportDialog" => self.dialog = Some(dialogs::Dialog::new("export")),
             "app.pasteSpecial" => self.dialog = Some(dialogs::Dialog::new("pasteSpecial")),
             "app.browseThemeDialog" => {
@@ -1504,8 +1504,15 @@ impl SlideApp {
                 Err(e) => self.set_status(e.to_string()),
             }
         } else {
-            self.save_as_dialog("deckcraft");
+            self.save_as_dialog(self.default_save_format());
         }
+    }
+
+    /// The format a Save dialog suggests: PowerPoint (`pptx`) for a new presentation, and the
+    /// presentation's own format when it already has a `.deckcraft` or `.pptx` file.
+    pub fn default_save_format(&self) -> &'static str {
+        let path = self.session.active().and_then(|d| d.path.clone()).unwrap_or_default().to_lowercase();
+        if path.ends_with(".deckcraft") { "deckcraft" } else { "pptx" }
     }
 
     /// Act on requests commands left for the UI.
@@ -1522,7 +1529,7 @@ impl SlideApp {
                 UiRequest::Message { text } => self.set_status(text),
                 UiRequest::PickFile { purpose } => {
                     if purpose == "saveAs" {
-                        self.save_as_dialog("deckcraft");
+                        self.save_as_dialog(self.default_save_format());
                     }
                 }
                 UiRequest::Media { action, shape, ms } => {
