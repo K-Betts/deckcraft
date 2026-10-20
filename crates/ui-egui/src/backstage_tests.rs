@@ -559,5 +559,18 @@ fn your_own_templates_are_listed_first_on_the_new_page_and_open_as_a_copy() {
     assert_eq!(h.state().session.documents().len(), before + 1, "a new presentation opened");
     assert!(st.path.is_none(), "an untitled copy, not the template file");
     assert_eq!(st.doc.slides.len(), slides);
+fn a_new_presentation_is_saved_as_pptx_unless_it_already_is_a_deckcraft_file() {
+    let dir = temp_dir("default-format");
+    let (services, asked) = saving_into(&dir);
+    let mut app = SlideApp::new(Session::with_new(), services);
+    app.save();
+    let first = asked.borrow()[0].clone();
+    assert!(first.ends_with(".pptx"), "a new presentation suggests PowerPoint: {first}");
+    assert!(dir.join(&first).is_file(), "and is saved as one");
+
+    let own = dir.join("kept.deckcraft").to_string_lossy().to_string();
+    app.session.execute("file.saveAs", &json!({"path": own})).unwrap();
+    app.run("app.saveAsDialog", json!({})).unwrap();
+    assert!(asked.borrow()[1].ends_with(".deckcraft"), "a .deckcraft file keeps its own format: {:?}", asked.borrow());
     let _ = std::fs::remove_dir_all(&dir);
 }
