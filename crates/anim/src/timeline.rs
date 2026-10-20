@@ -392,6 +392,30 @@ impl Timeline {
         v
     }
 
+    /// The lines a by-paragraph entrance of `shape` reveals one at a time in the main sequence
+    /// (Reveal Step by Step), in paragraph order: each first-level paragraph with the main step
+    /// that brings it in. The paragraphs that come with a line follow from
+    /// [`Timeline::paragraph_owner`].
+    pub fn step_lines(&self, shape: ShapeId) -> Vec<(usize, usize)> {
+        let mut v: Vec<(usize, usize)> = Vec::new();
+        for e in
+            self.effects.iter().filter(|e| e.timing.shape == shape && e.timing.sequence == Sequence::Main && e.timing.class == AnimClass::Entrance)
+        {
+            let Some(p) = e.timing.paragraph else { continue };
+            match v.iter_mut().find(|(q, _)| *q == p) {
+                Some(x) => x.1 = x.1.min(e.timing.step),
+                None => v.push((p, e.timing.step)),
+            }
+        }
+        v.sort_unstable();
+        v
+    }
+
+    /// The paragraph whose step `para` of `shape` appears with (itself when it leads its own).
+    pub fn paragraph_owner(&self, shape: ShapeId, para: usize) -> usize {
+        self.groups.iter().find(|g| g.0 == shape && g.1 == para).map(|g| g.2).unwrap_or(para)
+    }
+
     /// Shapes with any effect.
     pub fn animated_shapes(&self) -> Vec<ShapeId> {
         let mut v: Vec<ShapeId> = Vec::new();

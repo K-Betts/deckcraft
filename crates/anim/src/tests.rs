@@ -289,6 +289,23 @@ fn text_build_by_paragraph() {
 }
 
 #[test]
+fn step_lines_are_the_first_level_paragraphs_with_their_steps() {
+    let mut s = slide_with(vec![]);
+    let mut body = TextBody::from_text("2x + 3 = 11\nsubtract 3\n\n2x = 8\nx = 4");
+    body.paragraphs[1].level = 1;
+    s.shapes[0].text = Some(body);
+    let mut a = anim(1, AnimClass::Entrance, "appear", AnimStart::OnClick);
+    a.text_build = TextBuild::ByParagraph;
+    s.animations = vec![a];
+    let tl = Timeline::new(&s, W, H);
+    assert_eq!(tl.step_lines(ShapeId(1)), vec![(0, 0), (3, 1), (4, 2)]);
+    // The indented line and the blank line come with the line above them.
+    assert_eq!((tl.paragraph_owner(ShapeId(1), 1), tl.paragraph_owner(ShapeId(1), 2)), (0, 0));
+    assert_eq!(tl.paragraph_owner(ShapeId(1), 4), 4);
+    assert!(tl.step_lines(ShapeId(2)).is_empty());
+}
+
+#[test]
 fn by_paragraph_groups_sub_bullets_with_their_parent() {
     let mut s = slide_with(vec![]);
     let mut body = TextBody::from_text("one\nsub a\nsub b\ntwo");
