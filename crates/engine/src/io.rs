@@ -67,3 +67,31 @@ pub fn file_len(path: &str) -> Option<u64> {
 pub fn file_len(_path: &str) -> Option<u64> {
     None
 }
+
+/// The files (not folders) directly inside the folder `dir`: none when it can't be read, or is
+/// outside the automation read root.
+#[cfg(not(target_arch = "wasm32"))]
+pub fn list_files(dir: &str) -> Vec<String> {
+    if crate::file_access::check_read(dir).is_err() {
+        return vec![];
+    }
+    let Ok(entries) = std::fs::read_dir(dir) else { return vec![] };
+    entries.filter_map(|e| e.ok()).map(|e| e.path()).filter(|p| p.is_file()).filter_map(|p| p.to_str().map(String::from)).collect()
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn list_files(_dir: &str) -> Vec<String> {
+    vec![]
+}
+
+/// Create the folder `dir` and any missing parents, inside the automation write root.
+#[cfg(not(target_arch = "wasm32"))]
+pub fn create_dir(dir: &str) -> Result<(), String> {
+    crate::file_access::check_write(dir)?;
+    std::fs::create_dir_all(dir).map_err(|e| format!("{dir}: {e}"))
+}
+
+#[cfg(target_arch = "wasm32")]
+pub fn create_dir(dir: &str) -> Result<(), String> {
+    Err(format!("{dir}: folders are not available in the browser"))
+}

@@ -13,11 +13,11 @@ pub fn specs() -> Vec<CommandSpec> {
             "New Presentation",
             ["File"],
             Some("Cmd+N"),
-            "{theme?: name, template?: starter name, size?: [w,h] pt, blank?: bool}",
+            "{theme?: name, template?: starter or personal template name, templateFile?: path of a presentation to start a copy of, size?: [w,h] pt, blank?: bool}",
             always,
             new
         ),
-        cmd!(query "file.templates", "Starter Templates", [], None, "{} → [{name, summary, theme, slides}]", always, templates),
+        cmd!(query "file.templates", "Starter Templates", [], None, "{} → {templates: [{name, summary, theme, slides}], personal: [{name, path}], personalFolder}", always, templates),
         cmd!(noundo "file.open", "Open…", ["File"], Some("Cmd+O"), "{path}", always, open),
         cmd!(
             noundo "file.adopt",
@@ -31,7 +31,15 @@ pub fn specs() -> Vec<CommandSpec> {
         cmd!(noundo "file.openBytes", "Open Data", [], None, "{name, data: base64}", always, open_bytes),
         cmd!(noundo "file.save", "Save", ["File"], Some("Cmd+S"), "{path?, format?: deckcraft|pptx}", has_doc, save),
         cmd!(noundo "file.saveAs", "Save As…", ["File"], Some("Cmd+Shift+S"), "{path, format?}", has_doc, save_as),
-        cmd!(noundo "file.saveTemplate", "Save as Template…", ["File"], None, "{path}", has_doc, save_as),
+        cmd!(
+            noundo "file.saveTemplate",
+            "Save as Template…",
+            ["File"],
+            None,
+            "{name?: the template's name (default the presentation's)} → {name, path} — keeps a copy in your templates folder, which File › New lists; never overwrites one",
+            has_doc,
+            save_template
+        ),
         cmd!(query "file.saveBytes", "Save to Data", [], None, "{format?: deckcraft|pptx} → {data: base64}", has_doc, save_bytes_cmd),
         cmd!(noundo "file.export", "Export…", ["File"], None, "{path, format?: png|jpeg|pptx|deckcraft|outline|pdf|gif (else by path), slide?: index, all?: bool, scale?: px per pt, layout?: slides|notes|handouts (pdf), perPage?: 1|2|3|4|6|9, paper?: letter|a4|legal|a3 (pdf), orientation?: portrait|landscape (pdf), dpi?, slides?: [index]|range (\"1-3,5\"), includeHidden?, textLayer?, frame?, width?: px 16-3840|small|medium|large|extraLarge (gif), secondsPerSlide?: 0.1-600 (gif; 5), loop?: bool (gif; true: forever)} → {path, bytes} or {files} (png, jpeg); gif adds frames, width, height, secondsPerSlide", has_doc, export),
         cmd!(
@@ -92,12 +100,62 @@ fn templates(_s: &mut Session, _p: &Value) -> Result<Value> {
             "theme": t.theme,
             "slides": t.slides.len(),
         })).collect::<Vec<_>>(),
+        "personal": crate::templates::personal().iter().map(|t| json!({"name": t.name, "path": t.path.to_string_lossy()})).collect::<Vec<_>>(),
+        "personalFolder": crate::templates::personal_dir().map(|d| d.to_string_lossy().to_string()),
     }))
+}
+
+/// A new untitled presentation that is a copy of the file at `path`: a personal template.
+fn new_from_file(s: &mut Session, path: &str) -> Result<Value> {
+    let name = std::path::Path::new(path).file_name().and_then(|n| n.to_str()).unwrap_or(path).to_string();
+    let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
+    let doc = open_presentation(&name, &bytes)?;
+    let stem = std::path::Path::new(path).file_stem().and_then(|n| n.to_str()).unwrap_or(&name).to_string();
+    let slides = doc.slides.len();
+    let title = s.next_untitled();
+    let i = s.add_document(DocState::new(doc, None, title));
+    Ok(json!({"document": i, "slides": slides, "template": stem}))
+}
+
+fn save_template(s: &mut Session, p: &Value) -> Result<Value> {
+    let dir =
+        crate::templates::personal_dir().ok_or_else(|| bad("file.saveTemplate", "templates are kept by the desktop app, not in the browser"))?;
+    save_template_in(s, p, &dir)
+}
+
+/// [`save_template`] into the folder `dir`.
+fn save_template_in(s: &mut Session, p: &Value, dir: &std::path::Path) -> Result<Value> {
+    let name = match str_param(p, "name").filter(|n| !n.trim().is_empty()) {
+        Some(n) => n.to_string(),
+        None => {
+            let title = s.doc()?.title();
+            title.trim_end_matches(".deckcraft").trim_end_matches(".pptx").to_string()
+        }
+    };
+    let path = crate::templates::personal_path(dir, &name)?;
+    let (dir_s, path_s) = (dir.to_string_lossy().to_string(), path.to_string_lossy().to_string());
+    let bytes = save_bytes(&s.doc()?.doc, "deckcraft")?;
+    crate::io::create_dir(&dir_s).map_err(EngineError::Other)?;
+    crate::io::write_file(&path_s, &bytes).map_err(EngineError::Other)?;
+    let stem = path.file_stem().and_then(|n| n.to_str()).unwrap_or("").to_string();
+    Ok(json!({"name": stem, "path": path_s}))
 }
 
 fn new(s: &mut Session, p: &Value) -> Result<Value> {
     let template = str_param(p, "template").filter(|t| !t.is_empty());
     let theme_name = str_param(p, "theme").filter(|t| !t.is_empty());
+    if let Some(path) = str_param(p, "templateFile").filter(|t| !t.is_empty()) {
+        if template.is_some() || theme_name.is_some() || bool_or(p, "blank", false) {
+            return Err(bad("file.new", "`templateFile` stands alone: don't pass `template`, `theme` or `blank`"));
+        }
+        return new_from_file(s, path);
+    }
+    if let Some(name) = template
+        && crate::templates::find(name).is_none()
+        && let Some(own) = crate::templates::find_personal(name)
+    {
+        return new_from_file(s, &own.path.to_string_lossy());
+    }
     if template.is_some() && theme_name.is_some() {
         return Err(bad("file.new", "pass `theme` or `template`, not both"));
     }
@@ -666,7 +724,10 @@ mod color_at_tests;
 mod tests {
     #![allow(clippy::unwrap_used, clippy::expect_used)]
 
-    use super::write_file;
+    use serde_json::json;
+
+    use super::{save_template_in, write_file};
+    use crate::Session;
 
     fn scratch(name: &str) -> std::path::PathBuf {
         let dir = std::env::temp_dir().join(format!("deckcraft-write-file-{}-{name}", std::process::id()));
@@ -698,6 +759,46 @@ mod tests {
         assert!(write_file(dest.to_str().unwrap(), b"new").is_err());
         assert!(dest.is_dir());
         assert_eq!(std::fs::read_dir(&dir).unwrap().count(), 1);
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn save_template_keeps_a_copy_in_the_templates_folder_and_never_overwrites() {
+        let dir = std::env::temp_dir().join(format!("deckcraft-templates-{}-save", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let mut s = Session::with_new();
+        s.execute("slide.new", &json!({"layout": "titleOnly", "title": "Unit fractions"})).unwrap();
+        let r = save_template_in(&mut s, &json!({"name": "Lesson slides"}), &dir).unwrap();
+        assert_eq!(r["name"], "Lesson slides");
+        assert!(dir.join("Lesson slides.deckcraft").is_file(), "created the folder and the file");
+        assert!(s.active().unwrap().path.is_none(), "the open presentation is not attached to the template file");
+        let again = save_template_in(&mut s, &json!({"name": "lesson SLIDES"}), &dir);
+        assert!(again.is_err(), "an existing template (any case) is never overwritten");
+        let unsafe_name = save_template_in(&mut s, &json!({"name": "../../escape"}), &dir).unwrap();
+        assert!(unsafe_name["path"].as_str().unwrap().starts_with(dir.to_str().unwrap()), "the name cannot leave the folder: {unsafe_name}");
+        assert!(save_template_in(&mut s, &json!({"name": "  ...  "}), &dir).is_err(), "a name of nothing is refused");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn a_template_file_opens_as_an_untitled_copy_and_the_file_is_untouched() {
+        let dir = std::env::temp_dir().join(format!("deckcraft-templates-{}-open", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let mut s = Session::with_new();
+        s.execute("slide.new", &json!({"layout": "titleOnly", "title": "From my template"})).unwrap();
+        let saved = save_template_in(&mut s, &json!({"name": "Mine"}), &dir).unwrap();
+        let path = saved["path"].as_str().unwrap().to_string();
+        let before = std::fs::read(&path).unwrap();
+        let slides = s.active().unwrap().doc.slides.len();
+        let r = s.execute("file.new", &json!({"templateFile": path})).unwrap();
+        assert_eq!(r["template"], "Mine");
+        let st = s.active().unwrap();
+        assert!(st.path.is_none(), "a copy, not the template file itself");
+        assert_eq!(st.doc.slides.len(), slides);
+        assert!(st.doc.slides.iter().any(|sl| sl.title() == "From my template"));
+        s.execute("slide.new", &json!({})).unwrap();
+        assert_eq!(std::fs::read(&path).unwrap(), before, "editing the copy leaves the template alone");
+        assert!(s.execute("file.new", &json!({"templateFile": path, "blank": true})).is_err(), "templateFile stands alone");
         let _ = std::fs::remove_dir_all(&dir);
     }
 }

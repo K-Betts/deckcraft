@@ -557,15 +557,42 @@ fn new_tiles(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize, blank: 
     true
 }
 
-/// Starter decks whose name, summary, theme or a slide title matches `query`, at most `limit` tiles.
+/// The teacher's own templates, looked up at most every two seconds: the page is redrawn every
+/// frame, and the folder is the teacher's, so a template saved elsewhere shows up soon.
+fn personal_templates(ui: &Ui) -> Vec<deckcraft_engine::templates::PersonalTemplate> {
+    let id = egui::Id::new("deckcraft-personal-templates");
+    let now = ui.input(|i| i.time);
+    let cached: Option<(f64, Vec<deckcraft_engine::templates::PersonalTemplate>)> = ui.ctx().data(|d| d.get_temp(id));
+    match cached {
+        Some((at, list)) if now - at < 2.0 => list,
+        _ => {
+            let list = deckcraft_engine::templates::personal();
+            ui.ctx().data_mut(|d| d.insert_temp(id, (now, list.clone())));
+            list
+        }
+    }
+}
+
+/// Your own templates first, then the starter decks, whose name, summary, theme or a slide title
+/// matches `query`: at most `limit` tiles.
 fn template_tiles(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize) -> bool {
+    let q = query.trim().to_lowercase();
+    let own: Vec<_> = personal_templates(ui).into_iter().filter(|p| q.is_empty() || p.name.to_lowercase().contains(&q)).collect();
     let list = deckcraft_engine::templates::matching(query);
-    if list.is_empty() {
+    if list.is_empty() && own.is_empty() {
         return false;
     }
     ui.horizontal_wrapped(|ui| {
         ui.spacing_mut().item_spacing = vec2(10.0, 10.0);
-        for starter in list.into_iter().take(limit) {
+        let mut shown = 0;
+        for template in own.into_iter().take(limit) {
+            shown += 1;
+            let path = template.path.to_string_lossy().to_string();
+            if tile(ui, &template.name, None, false).on_hover_text(format!("Your template: {path}")).clicked() {
+                let _ = app.run("file.new", json!({"templateFile": path}));
+            }
+        }
+        for starter in list.into_iter().take(limit.saturating_sub(shown)) {
             let theme = deckcraft_model::theme::builtin_themes().into_iter().find(|th| th.name == starter.theme);
             if tile(ui, starter.name, theme.as_ref(), false).on_hover_text(starter.summary).clicked() {
                 let _ = app.run("file.new", json!({"template": starter.name}));
@@ -795,7 +822,14 @@ fn new_page(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage) {
     let templates = if q.trim().is_empty() || !deckcraft_engine::templates::matching(&q).is_empty() {
         ui.add_space(18.0);
         heading(ui, "Templates");
-        template_tiles(app, ui, &q, usize::MAX)
+        let shown = template_tiles(app, ui, &q, usize::MAX);
+        if q.trim().is_empty()
+            && let Some(dir) = deckcraft_engine::templates::personal_dir()
+        {
+            ui.add_space(8.0);
+            dim(ui, &format!("Your own templates: save a presentation here, or use File ▸ Save as Template.   {}", dir.display()));
+        }
+        shown
     } else {
         false
     };

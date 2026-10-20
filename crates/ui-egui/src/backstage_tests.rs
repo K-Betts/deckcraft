@@ -535,3 +535,29 @@ fn print_slides_follow_the_settings() {
     bs.print_layout = "slides";
     assert_eq!(print_page_size(&bs, &doc), (doc.slide_size.width as f32, doc.slide_size.height as f32), "slides print slide-shaped");
 }
+
+#[test]
+fn your_own_templates_are_listed_first_on_the_new_page_and_open_as_a_copy() {
+    let dir = temp_dir("personal-templates");
+    // A presentation saved as a template file.
+    let mut maker = Session::with_new();
+    maker.execute("slide.new", &json!({"layout": "titleOnly", "title": "My lesson layout"})).unwrap();
+    let file = dir.join("Lesson slides.deckcraft");
+    maker.execute("file.saveAs", &json!({"path": file.to_string_lossy()})).unwrap();
+    let slides = maker.active().unwrap().doc.slides.len();
+
+    let mut h = harness(new_app());
+    // The page looks the folder up at most every two seconds; seed that lookup with the file.
+    let template = deckcraft_engine::templates::PersonalTemplate { name: "Lesson slides".into(), path: file.clone() };
+    h.ctx.data_mut(|d| d.insert_temp(egui::Id::new("deckcraft-personal-templates"), (f64::MAX, vec![template])));
+    h.state_mut().run("app.backstage", json!({"page": "new"})).unwrap();
+    h.run_steps(3);
+    let before = h.state().session.documents().len();
+    click_on_page(&h, "Lesson slides");
+    h.run_steps(3);
+    let st = h.state().session.active().unwrap();
+    assert_eq!(h.state().session.documents().len(), before + 1, "a new presentation opened");
+    assert!(st.path.is_none(), "an untitled copy, not the template file");
+    assert_eq!(st.doc.slides.len(), slides);
+    let _ = std::fs::remove_dir_all(&dir);
+}
