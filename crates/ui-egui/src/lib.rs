@@ -2265,6 +2265,8 @@ mod drive_tests;
 #[cfg(test)]
 mod equation_tests;
 #[cfg(test)]
+mod exam_question_tests;
+#[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]
 mod get_ready_tests;

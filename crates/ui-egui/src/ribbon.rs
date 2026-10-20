@@ -1388,6 +1388,7 @@ fn insert(app: &mut SlideApp, ui: &mut Ui) {
     if app.pack_on(crate::packs::MATHS) {
         group(ui, |ui| {
             big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
+            big(app, ui, Icon::NewSlide, "Exam\nQuestion", "app.dialog", json!({"id": "examQuestion"}));
         });
     }
     group(ui, |ui| {
