@@ -31,16 +31,7 @@ pub const GET_READY_NAME: &str = "Get Ready";
 /// also go in the speaker notes. Cards save as ordinary shapes, so the deck opens in PowerPoint.
 fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     use crate::questions::{self, Filter};
-    let bank = match (str_param(p, "bankJson"), str_param(p, "bank")) {
-        (Some(json), _) => questions::parse(json),
-        (None, Some(path)) => {
-            let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
-            let text = String::from_utf8(bytes).map_err(|_| bad("slide.getReady", "the question bank is not text"))?;
-            questions::parse(&text)
-        }
-        (None, None) => questions::starter(),
-    }
-    .map_err(|e| bad("slide.getReady", e))?;
+    let bank = bank_from(p, "slide.getReady")?;
     let seed = p.get("seed").and_then(Value::as_u64).unwrap_or(0);
     // Templates become questions with this seed's numbers: a new seed is a reroll with new numbers.
     let bank = bank.instantiate(seed);
@@ -209,6 +200,20 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     Ok(json!({"index": new_index, "questions": ids}))
 }
 
+/// The question bank a command asks for: `bankJson` (text), `bank` (a file), else the built-in one.
+pub(super) fn bank_from(p: &Value, cmd: &str) -> Result<questions::Bank> {
+    match (str_param(p, "bankJson"), str_param(p, "bank")) {
+        (Some(json), _) => questions::parse(json),
+        (None, Some(path)) => {
+            let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
+            let text = String::from_utf8(bytes).map_err(|_| bad(cmd, "the question bank is not text"))?;
+            questions::parse(&text)
+        }
+        (None, None) => questions::starter(),
+    }
+    .map_err(|e| bad(cmd, e))
+}
+
 /// Makes clicking the shapes (on the current slide) jump to slide `target` in a show.
 fn link_to_slide(s: &mut Session, ids: &[u64], target: usize, tip: &str) -> Result<()> {
     use deckcraft_model::text::{Action, Hyperlink};
@@ -230,7 +235,7 @@ fn link_to_slide(s: &mut Session, ids: &[u64], target: usize, tip: &str) -> Resu
 }
 
 /// Changes the properties of every run in one shape's text.
-fn edit_runs(s: &mut Session, id: u64, f: impl Fn(&mut deckcraft_model::text::RunProps)) -> Result<()> {
+pub(super) fn edit_runs(s: &mut Session, id: u64, f: impl Fn(&mut deckcraft_model::text::RunProps)) -> Result<()> {
     s.edit(|doc, sel| {
         let list = crate::shapes_mut(doc, sel).ok_or_else(|| bad("slide.getReady", "no slide"))?;
         for sh in list.iter_mut().filter(|sh| u64::from(sh.id.0) == id) {
@@ -347,7 +352,7 @@ fn template_layout(doc: &deckcraft_model::Presentation, master: usize) -> Option
 }
 
 /// True when a slide holds only empty placeholders (and its slide number): nothing a teacher typed.
-fn slide_is_empty(slide: &deckcraft_model::Slide) -> bool {
+pub(super) fn slide_is_empty(slide: &deckcraft_model::Slide) -> bool {
     use deckcraft_model::PhType;
     slide
         .shapes
@@ -358,7 +363,7 @@ fn slide_is_empty(slide: &deckcraft_model::Slide) -> bool {
 
 /// The layout to use for a slide with nothing on it: "blank" when the master has the standard one,
 /// else a layout without placeholders (a template's "DEFAULT"), else the title-only layout.
-fn plain_layout_name(doc: &deckcraft_model::Presentation, master: usize) -> String {
+pub(super) fn plain_layout_name(doc: &deckcraft_model::Presentation, master: usize) -> String {
     let Some(m) = doc.masters.get(master).or(doc.masters.first()) else {
         return "blank".to_string();
     };
@@ -371,7 +376,7 @@ fn plain_layout_name(doc: &deckcraft_model::Presentation, master: usize) -> Stri
 }
 
 /// An answer as plain text for the speaker notes (`$…$` removed).
-fn plain_answer(text: &str) -> String {
+pub(super) fn plain_answer(text: &str) -> String {
     crate::latex::plain(text)
 }
 
@@ -422,7 +427,7 @@ pub(super) fn draw_line(s: &mut Session, a: [f64; 2], b: [f64; 2], color: &str, 
 }
 
 /// Text on a shape, one run, no maths.
-fn set_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str, bold: bool) -> Result<()> {
+pub(super) fn set_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str, bold: bool) -> Result<()> {
     use deckcraft_model::text::{Align, Anchor, Run, RunProps};
     let props = RunProps { size: Some(size), bold: Some(bold), fill: Some(parse_fill(color)), ..Default::default() };
     let para = deckcraft_model::text::Paragraph { runs: vec![Run::with(text, props)], ..Default::default() };
@@ -430,7 +435,7 @@ fn set_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str, 
 }
 
 /// Text on a shape with `$…$` drawn as equations.
-fn set_rich_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str) -> Result<()> {
+pub(super) fn set_rich_shape_text(s: &mut Session, id: u64, text: &str, size: f64, color: &str) -> Result<()> {
     use deckcraft_model::text::{Align, Anchor};
     edit_shape_paragraphs(s, id, rich_paragraphs(text, size, color), Align::Center, Anchor::Middle)
 }
