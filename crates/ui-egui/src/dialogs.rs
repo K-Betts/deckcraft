@@ -3102,6 +3102,11 @@ fn shows_as(text: &str) -> String {
         .collect()
 }
 
+#[cfg(test)]
+pub(crate) fn shows_as_for_tests(text: &str) -> String {
+    shows_as(text)
+}
+
 fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
     let mut v = d.get(key, "");
     ui.horizontal(|ui| {

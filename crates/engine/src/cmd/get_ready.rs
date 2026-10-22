@@ -16,7 +16,7 @@ pub fn specs() -> Vec<CommandSpec> {
         "Get Ready Starter",
         ["Insert", "Slides From"],
         None,
-        "{taught?: {curriculum?: path to a curriculum file, curriculumJson?: its text, year: Y7.., route?: Core|Support|Higher|Foundation.., unit: index or title, objective?: index or text (default: the first), level?: 0-4 (0 any, default 2)} (plan the four questions from what the class has just been taught: last lesson, last week, last topic, last year), questions?: [{text, answer?, diagram?, difficulty?, …}] (use exactly these questions, 1-8, e.g. after editing), slots?: [{topic?: text, difficulty?: 1|2|3|4, skill?: a skill key (see the skill picker), year?: Y7.., search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), headings?: bool or [text] (the card headings; default Last lesson, Last week, Last topic, Last year), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids], plan?: [{heading, objective, from, skills}]}",
+        "{taught?: {curriculum?: path to a curriculum file, curriculumJson?: its text, year: Y7.., route?: Core|Support|Higher|Foundation.., unit: index or title, objective?: index or text (default: the first), level?: \"mixed\" (default: a spread around the route's level) or 0-4 (0 any)} (plan the four questions from what the class has just been taught: last lesson, last week, last topic, last year), questions?: [{text, answer?, diagram?, difficulty?, …}] (use exactly these questions, 1-8, e.g. after editing), slots?: [{topic?: text, difficulty?: 1|2|3|4, skill?: a skill key (see the skill picker), year?: Y7.., search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), headings?: bool or [text] (the card headings; default Last lesson, Last week, Last topic, Last year), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids], plan?: [{heading, objective, from, skills}]}",
         has_doc,
         get_ready
     )]
@@ -273,13 +273,16 @@ fn taught_questions(bank: &questions::Bank, t: &Value, seed: u64) -> Result<(Vec
         None => Some(0),
     }
     .ok_or_else(|| bad(cmd, format!("“{}” has no such objective", u.title)))?;
-    let level = match t.get("level") {
-        None | Some(Value::Null) => 2,
-        Some(v) => v.as_u64().and_then(|l| u8::try_from(l).ok()).filter(|l| *l <= 4).ok_or_else(|| bad(cmd, "`level` must be 0 to 4"))?,
+    let levels: Vec<u8> = match t.get("level") {
+        None | Some(Value::Null) => curriculum::mixed_levels(&course.route).to_vec(),
+        Some(Value::String(m)) if m == "mixed" => curriculum::mixed_levels(&course.route).to_vec(),
+        Some(v) => {
+            vec![v.as_u64().and_then(|l| u8::try_from(l).ok()).filter(|l| *l <= 4).ok_or_else(|| bad(cmd, "`level` must be \"mixed\" or 0 to 4"))?; 4]
+        }
     };
     let m = curriculum::Matcher::new(bank.skills());
     let slots = curriculum::plan(&cur, course, unit, objective, &m, seed);
-    let picked = curriculum::questions_for(bank, &slots, level, seed);
+    let picked = curriculum::questions_at(bank, &slots, &levels, seed);
     let mut out = vec![];
     for (slot, q) in slots.iter().zip(picked) {
         match q {

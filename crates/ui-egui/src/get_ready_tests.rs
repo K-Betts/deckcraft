@@ -355,29 +355,35 @@ fn with_no_curriculum_the_dialog_offers_to_load_one_and_still_works_by_hand() {
     h.get_by_label("Use this curriculum").click();
     h.run_steps(3);
     assert_eq!(h.state().ui.curriculum, CURRICULUM);
-    assert!(h.query_by_label("Which lesson have you just taught?").is_some());
+    assert!(h.query_by_label("Lesson just taught").is_some());
 }
 
 #[test]
-fn a_teacher_says_what_they_taught_and_gets_four_planned_questions() {
+fn the_questions_show_at_once_and_follow_what_was_taught() {
     let mut h = taught_harness();
-    assert!(h.query_by_label("Which lesson have you just taught?").is_some(), "a loaded curriculum opens on this mode");
+    assert!(h.query_by_label("Lesson just taught").is_some(), "a loaded curriculum opens on this mode");
     assert_eq!(field(&h, "unit"), "1", "the unit under way (Equations) is chosen; Ratio has not started");
-    // Equations ended long ago, so the guess is its last lesson.
+    // Equations ended long ago, so the guess is its last lesson, and its questions are already there.
     assert_eq!(field(&h, "objective"), "2");
-    h.get_by_label("Solve two-step equations").click();
-    h.run_steps(2);
-    h.get_by_label("Make the questions").click();
-    h.run_steps(3);
-    assert_eq!(field(&h, "obj0"), "Solve two-step equations");
-    assert_eq!(field(&h, "h0"), "Last lesson");
-    assert!(field(&h, "from1").ends_with("Equations"), "last week: earlier in the unit");
-    assert!(field(&h, "from2").ends_with("Angles"), "last topic: the unit before");
+    assert_eq!(field(&h, "obj0"), "Solve equations with the unknown on both sides");
     for i in 0..4 {
         assert!(!field(&h, &format!("text{i}")).is_empty(), "card {i} has a question");
     }
     assert_eq!(h.query_all_by_label_contains("Answer: ").count(), 4, "each card shows its answer");
     assert!(h.query_all_by_label_contains("$").next().is_none(), "no maths code on show until Edit");
+    // Mixed difficulty: last week a step harder, last year a step easier.
+    assert_eq!(field(&h, "level"), "mixed");
+    assert_eq!((0..4).map(|i| field(&h, &format!("lvl{i}"))).collect::<Vec<_>>(), ["2", "3", "2", "1"]);
+    // Another lesson: new questions straight away.
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("objective".into(), "1".into());
+    h.run_steps(3);
+    assert_eq!(field(&h, "obj0"), "Solve two-step equations");
+    assert!(field(&h, "from1").ends_with("Equations"), "last week: earlier in the unit");
+    assert!(field(&h, "from2").ends_with("Angles"), "last topic: the unit before");
+    // All at one level.
+    h.get_by_label("All stretch").click();
+    h.run_steps(3);
+    assert_eq!((0..4).map(|i| field(&h, &format!("lvl{i}"))).collect::<Vec<_>>(), ["3", "3", "3", "3"]);
     // Edit card 1, rename card 3's heading, and insert.
     let d = h.state_mut().dialog.as_mut().unwrap();
     d.fields.insert("text0".into(), "My own two-step question: solve $2x + 3 = 11$".into());
@@ -397,13 +403,10 @@ fn a_teacher_says_what_they_taught_and_gets_four_planned_questions() {
 }
 
 #[test]
-fn another_question_and_a_new_skill_change_one_card_only() {
+fn new_question_pick_and_another_topic_change_one_card_only() {
     let mut h = taught_harness();
-    h.get_by_label("Make the questions").click();
-    h.run_steps(3);
     let (q1, q2) = (field(&h, "q1"), field(&h, "q2"));
-    // New question for card 2 changes card 2 (a recipe can give the same text only by chance,
-    // so the stored question, with its id and numbers, is compared).
+    // New question for card 2 changes card 2 (the stored question, with its numbers, is compared).
     let mut changed = false;
     for _ in 0..5 {
         h.query_all_by_label("New question").nth(1).unwrap().click();
@@ -412,9 +415,26 @@ fn another_question_and_a_new_skill_change_one_card_only() {
     }
     assert!(changed, "card 2 got a new question");
     assert_eq!(field(&h, "q2"), q2, "card 3 is untouched");
-    // Change card 2's skill in the picker; the other cards survive the trip.
+    // Pick… offers other questions to click.
+    h.query_all_by_label("Pick…").next().unwrap().click();
+    h.run_steps(3);
+    let alts: Vec<deckcraft_engine::questions::Question> = serde_json::from_str(&field(&h, "alts0")).unwrap();
+    assert!(alts.len() >= 2, "{} choices", alts.len());
+    assert!(h.query_by_label("Pick a question:").is_some());
+    let wanted = alts[1].clone();
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("alts0".into(), serde_json::to_string(std::slice::from_ref(&wanted)).unwrap());
+    h.run_steps(2);
+    let shown = crate::dialogs::shows_as_for_tests(&wanted.text);
+    h.get_by_label(&shown).click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "text0"), wanted.text, "the picked question is on the card");
+    assert_eq!(field(&h, "lvl0"), wanted.difficulty.to_string());
+    assert!(!h.state().dialog.as_ref().unwrap().fields.contains_key("alts0"), "the list closes");
+    // Something else… goes to the topic search; the other cards survive the trip.
     let (q0, q2) = (field(&h, "q0"), field(&h, "q2"));
-    h.query_all_by_label("Change topic…").nth(1).unwrap().click();
+    h.query_all_by_label("Pick…").nth(1).unwrap().click();
+    h.run_steps(3);
+    h.get_by_label("Something else…").click();
     h.run_steps(3);
     assert!(h.query_by_label_contains("Choose the skill for question 2").is_some());
     h.state_mut().dialog.as_mut().unwrap().fields.insert("q".into(), "2-step equations".into());
@@ -423,37 +443,48 @@ fn another_question_and_a_new_skill_change_one_card_only() {
     h.run_steps(3);
     assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("getReady"));
     assert_eq!((field(&h, "q0"), field(&h, "q2")), (q0, q2), "cards 1 and 3 kept their questions");
-    assert!(field(&h, "skills1").contains(TWO_STEP), "{}", field(&h, "skills1"));
     let q1: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
     assert_eq!(q1.skill_key(), TWO_STEP);
 }
 
 #[test]
-fn support_classes_start_at_the_support_level_and_a_new_choice_asks_for_new_questions() {
+fn support_classes_get_easier_questions() {
     let mut h = taught_harness();
-    // The route row comes before the level row, which has a Support button too.
-    h.query_all_by_label("Support").next().unwrap().click();
+    // As the Support class button does (the cards' level labels say Support too).
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("route".into(), "Support".into());
     h.run_steps(3);
     assert_eq!(field(&h, "route"), "Support");
-    assert_eq!(field(&h, "level"), "1", "a Support class starts at the Support level");
-    h.get_by_label("Make the questions").click();
+    assert_eq!(field(&h, "lvl0"), "1", "a Support class's last lesson is at the Support level");
+    assert_eq!(field(&h, "obj0"), "Round to the nearest 10");
+}
+
+#[test]
+fn a_card_is_edited_behind_edit_and_easier_and_harder_change_its_level() {
+    let mut h = taught_harness();
+    assert!(h.query_all_by_label("Question").next().is_none(), "no text boxes until Edit");
+    // Each card has an Edit button (the app's Edit menu is matched too, so card 1's is pressed
+    // through its field).
+    assert!(h.query_all_by_label("Edit").count() >= 4);
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("edit0".into(), "1".into());
     h.run_steps(3);
-    assert_eq!(field(&h, "lvl0"), "1", "Support classes get Support-level questions");
-    // The choices fold into one line once the questions are made; Change… opens them again.
-    assert!(h.query_by_label("Which lesson have you just taught?").is_none());
-    assert!(h.query_by_label_contains("Year 7 Support · Place value · just taught: Round to the nearest 10").is_some());
-    h.get_by_label("Change…").click();
+    assert_eq!(field(&h, "edit0"), "1");
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("text0".into(), "Solve $3x = 12$".into());
+    h.run_steps(2);
+    assert!(h.query_by_label_contains("Reads: Solve 3x = 12").is_some(), "the wording read back without the code");
+    h.get_by_label("Done").click();
     h.run_steps(3);
-    assert!(h.query_by_label("Which lesson have you just taught?").is_some());
-    // Back to Core (as the route button does: “Core” is also a level, so the button is ambiguous here).
-    h.state_mut().dialog.as_mut().unwrap().fields.insert("route".into(), "Core".into());
-    h.state_mut().dialog.as_mut().unwrap().fields.remove("level");
+    assert!(h.query_by_label("Solve 3x = 12").is_some(), "the card shows the edit as it will read");
+    // Easier moves card 2 (Core in a mixed starter, a step up: Stretch) down a level with a new question.
+    assert_eq!(field(&h, "lvl1"), "3");
+    h.query_all_by_label("Easier").nth(1).unwrap().click();
     h.run_steps(3);
-    assert!(h.query_by_label("Your choices changed: make the questions again.").is_some());
+    assert_eq!(field(&h, "lvl1"), "2");
+    let q: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
+    assert_eq!(q.difficulty, 2);
 }
 
 /// Pictures of the dialog to look at (not a check): run with
-/// `GET_READY_SHOTS=dir [GET_READY_CURRICULUM=file] cargo test -p deckcraft-ui-egui -- --ignored look_at`.
+/// `GET_READY_SHOTS=dir [GET_READY_CURRICULUM=file] [GET_READY_YEAR=Y9] cargo test -p deckcraft-ui-egui -- --ignored look_at`.
 #[test]
 #[ignore]
 fn look_at_the_dialog_planned_from_a_curriculum() {
@@ -464,43 +495,19 @@ fn look_at_the_dialog_planned_from_a_curriculum() {
     h.set_size(egui::vec2(1400.0, 1000.0));
     h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
     h.run_steps(4);
-    h.render().unwrap().save(format!("{dir}/get-ready-1-choose.png")).unwrap();
-    // A year group with a year before it, at its second lesson.
     if let Ok(year) = std::env::var("GET_READY_YEAR") {
         h.state_mut().dialog.as_mut().unwrap().fields.insert("year".into(), year);
         h.run_steps(2);
     }
     h.state_mut().dialog.as_mut().unwrap().fields.insert("objective".into(), "1".into());
-    h.run_steps(2);
-    h.get_by_label("Make the questions").click();
     h.run_steps(4);
-    h.render().unwrap().save(format!("{dir}/get-ready-2-cards.png")).unwrap();
+    h.render().unwrap().save(format!("{dir}/get-ready-1-cards.png")).unwrap();
+    h.query_all_by_label("Pick…").next().unwrap().click();
+    h.run_steps(4);
+    h.render().unwrap().save(format!("{dir}/get-ready-2-pick.png")).unwrap();
+    h.get_by_label("Close").click();
+    h.run_steps(2);
     h.get_by_label("Insert").click();
     h.run_steps(4);
     h.render().unwrap().save(format!("{dir}/get-ready-3-slide.png")).unwrap();
-}
-
-#[test]
-fn a_card_is_edited_behind_edit_and_easier_and_harder_change_its_level() {
-    let mut h = taught_harness();
-    h.get_by_label("Make the questions").click();
-    h.run_steps(3);
-    assert!(h.query_all_by_label("Question").next().is_none(), "no text boxes until Edit");
-    h.query_all_by_label("Edit").next().unwrap().click();
-    h.run_steps(3);
-    assert_eq!(field(&h, "edit0"), "1");
-    assert!(h.query_by_label("Done").is_some());
-    h.state_mut().dialog.as_mut().unwrap().fields.insert("text0".into(), "Solve $3x = 12$".into());
-    h.run_steps(2);
-    assert!(h.query_by_label_contains("Reads: Solve 3x = 12").is_some(), "the wording read back without the code");
-    h.get_by_label("Done").click();
-    h.run_steps(3);
-    assert!(h.query_by_label("Solve 3x = 12").is_some(), "the card shows the edit as it will read");
-    // Harder moves card 2 up a level with a new question; Easier at Support is not offered.
-    assert_eq!(field(&h, "lvl1"), "2");
-    h.query_all_by_label("Harder").nth(1).unwrap().click();
-    h.run_steps(3);
-    assert_eq!(field(&h, "lvl1"), "3");
-    let q: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
-    assert_eq!(q.difficulty, 3);
 }
