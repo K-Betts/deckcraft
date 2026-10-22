@@ -222,8 +222,10 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
 
     let mut done = false;
     if d.fields.contains_key("made") {
+        // Room for each card's buttons on one line.
+        ui.set_min_width(900.0);
         ui.separator();
-        if let Some(open_picker) = preview(ui, d, &p.matcher, bank) {
+        if let Some(open_picker) = preview(ui, d, bank) {
             let keep: serde_json::Map<String, Value> = d.fields.iter().map(|(k, v)| (k.clone(), json!(v))).collect();
             *d = Dialog::new("chooseSkill");
             d.params = json!({"slot": open_picker, "return": "getReadyTaught", "keep": keep});
@@ -256,7 +258,9 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
             }
         });
         if !ready {
-            ui.label(egui::RichText::new("Every card needs a question: type one, or choose a skill for it.").size(11.5).color(t.text_dim));
+            ui.label(
+                egui::RichText::new("Every card needs a question: pick a topic for it, or write your own with Edit.").size(11.5).color(t.text_dim),
+            );
         }
         if go || replace {
             match insert(app, d, expand, headings, replace) {
@@ -420,108 +424,157 @@ fn another(d: &mut Dialog, bank: &Bank, i: usize) {
     set_question(d, i, q.as_ref());
 }
 
-/// The four cards, each editable. Returns the card whose skill the teacher wants to change.
-fn preview(ui: &mut Ui, d: &mut Dialog, m: &Matcher, bank: Option<&Bank>) -> Option<usize> {
-    let t = Tokens::get(ui.ctx());
+/// The colours of the slide's cards (`cmd/get_ready.rs`), so the preview looks like the slide.
+const ACCENTS: [egui::Color32; 4] = [
+    egui::Color32::from_rgb(0xE8, 0x73, 0x5F),
+    egui::Color32::from_rgb(0x4F, 0xA3, 0x7A),
+    egui::Color32::from_rgb(0x4A, 0x7B, 0xD0),
+    egui::Color32::from_rgb(0x8A, 0x62, 0xC9),
+];
+const TINTS: [egui::Color32; 4] = [
+    egui::Color32::from_rgb(0xFF, 0xF3, 0xF0),
+    egui::Color32::from_rgb(0xF0, 0xF9, 0xF4),
+    egui::Color32::from_rgb(0xEF, 0xF4, 0xFD),
+    egui::Color32::from_rgb(0xF6, 0xF1, 0xFC),
+];
+const INK: egui::Color32 = egui::Color32::from_rgb(0x1F, 0x29, 0x37);
+const DIM_INK: egui::Color32 = egui::Color32::from_rgb(0x6B, 0x72, 0x80);
+const ANSWER_INK: egui::Color32 = egui::Color32::from_rgb(0x14, 0x53, 0x2D);
+
+/// Where a card's question comes from, in a teacher's words: the unit's name.
+fn plain_from(from: &str) -> String {
+    // “Y7 Core · Fractions” or “Y7 Core · Fractions · prior learning”.
+    let mut parts = from.split(" · ").skip(1);
+    let unit = parts.next().unwrap_or(from);
+    if parts.next().is_some() { format!("From: what pupils need for {unit}") } else { format!("From: {unit}") }
+}
+
+/// The four cards as a 2×2 grid that looks like the slide: the question as it will read, its
+/// answer, and plain buttons. The wording (with its maths code) shows only after Edit. Returns
+/// the card whose topic the teacher wants to change.
+fn preview(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>) -> Option<usize> {
     let mut open_picker = None;
     // Leave room below for the options and buttons.
-    let room = (ui.ctx().content_rect().height() - 420.0).clamp(220.0, 640.0);
+    let room = (ui.ctx().content_rect().height() - 380.0).clamp(240.0, 760.0);
     egui::ScrollArea::vertical().max_height(room).id_salt("gr-preview").show(ui, |ui| {
-        for i in 0..GET_READY_QUESTIONS {
-            egui::Frame::new().inner_margin(egui::Margin::symmetric(8, 6)).corner_radius(6.0).stroke(egui::Stroke::new(1.0, t.border)).show(
-                ui,
-                |ui| {
-                    ui.set_width(ui.available_width());
-                    ui.horizontal(|ui| {
-                        ui.label(egui::RichText::new(format!("{}", i + 1)).font(theme::bold(15.0)));
-                        let mut heading = d.get(&format!("h{i}"), "");
-                        ui.add(egui::TextEdit::singleline(&mut heading).desired_width(120.0).font(theme::bold(13.0)));
-                        d.fields.insert(format!("h{i}"), heading);
-                        let from = d.get(&format!("from{i}"), "");
-                        let obj = d.get(&format!("obj{i}"), "");
-                        ui.add(egui::Label::new(egui::RichText::new(format!("{from}: {obj}")).size(11.5).color(t.text_dim)).truncate())
-                            .on_hover_text(&obj);
-                    });
-                    let skills: Vec<String> = d.fields.get(&format!("skills{i}")).and_then(|j| serde_json::from_str(j).ok()).unwrap_or_default();
-                    let q = question(d, i);
-                    let practising = q
-                        .as_ref()
-                        .map(|q| q.skill_key())
-                        .or_else(|| skills.first().cloned())
-                        .and_then(|k| m.skills.iter().find(|s| s.key == k))
-                        .map(|s| if s.year.is_empty() { s.name.clone() } else { format!("{} ({})", s.name, s.year) });
-                    ui.horizontal(|ui| {
-                        // The buttons on the right keep their room; a long skill name is cut short.
-                        let width = (ui.available_width() - 350.0).max(120.0);
-                        let words = match &practising {
-                            Some(name) => egui::RichText::new(format!("Practises: {name}")).size(12.0),
-                            None => egui::RichText::new("Nothing in the question bank fits this: choose a skill or type a question.")
-                                .size(12.0)
-                                .color(egui::Color32::from_rgb(190, 110, 0)),
-                        };
-                        let full = words.text().to_string();
-                        ui.allocate_ui_with_layout(vec2(width, 20.0), egui::Layout::left_to_right(egui::Align::Center), |ui| {
-                            ui.set_width(width);
-                            ui.add(egui::Label::new(words).truncate()).on_hover_text(full);
-                        });
-                        ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-                            if ui.small_button("Change skill…").on_hover_text("Search the skills and choose another for this card").clicked() {
-                                open_picker = Some(i);
-                            }
-                            if ui
-                                .add_enabled(!skills.is_empty(), egui::Button::new("Another question").small())
-                                .on_hover_text("A different question on the same skill")
-                                .clicked()
-                                && let Some(bank) = bank
-                            {
-                                another(d, bank, i);
-                            }
-                            let level: u8 = d.get(&format!("lvl{i}"), "2").parse().unwrap_or(2);
-                            let mut new_level = level;
-                            egui::ComboBox::from_id_salt(format!("gr-lvl{i}"))
-                                .width(96.0)
-                                .selected_text(LEVEL_NAMES[usize::from(level.clamp(1, 4)) - 1])
-                                .show_ui(ui, |ui| {
-                                    for (k, name) in LEVEL_NAMES.iter().enumerate() {
-                                        ui.selectable_value(&mut new_level, k as u8 + 1, *name);
-                                    }
-                                });
-                            if new_level != level {
-                                d.fields.insert(format!("lvl{i}"), new_level.to_string());
-                                if let Some(bank) = bank {
-                                    another(d, bank, i);
-                                }
-                            }
-                        });
-                    });
-                    let mut text = d.get(&format!("text{i}"), "");
-                    ui.horizontal(|ui| {
-                        ui.add_sized(vec2(64.0, 20.0), egui::Label::new("Question"));
-                        ui.add(egui::TextEdit::multiline(&mut text).desired_rows(2).desired_width(f32::INFINITY));
-                    });
-                    d.fields.insert(format!("text{i}"), text.clone());
-                    let mut answer = d.get(&format!("answer{i}"), "");
-                    ui.horizontal(|ui| {
-                        ui.add_sized(vec2(64.0, 20.0), egui::Label::new("Answer"));
-                        ui.add(egui::TextEdit::singleline(&mut answer).desired_width(f32::INFINITY));
-                    });
-                    d.fields.insert(format!("answer{i}"), answer);
-                    if text.contains('$') {
-                        ui.label(egui::RichText::new(format!("Shows as: {}", shows_as(&text))).size(11.5).color(t.text_dim));
+        for row in 0..GET_READY_QUESTIONS.div_ceil(2) {
+            ui.columns(2, |cols| {
+                for (c, col) in cols.iter_mut().enumerate() {
+                    let i = row * 2 + c;
+                    if i < GET_READY_QUESTIONS && card(col, d, bank, i) {
+                        open_picker = Some(i);
                     }
-                    if q.as_ref().is_some_and(|q| q.diagram.is_some() && q.text != text) {
-                        ui.label(
-                            egui::RichText::new("This question has a figure, drawn from its first numbers: check it still matches your edit.")
-                                .size(11.0)
-                                .color(egui::Color32::from_rgb(190, 110, 0)),
-                        );
-                    }
-                },
-            );
-            ui.add_space(4.0);
+                }
+            });
+            ui.add_space(8.0);
         }
     });
     open_picker
+}
+
+/// One card of the preview. Returns true when the teacher asks to change its topic.
+fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, i: usize) -> bool {
+    let (accent, tint) = (ACCENTS[i % 4], TINTS[i % 4]);
+    let editing = d.get(&format!("edit{i}"), "") == "1";
+    let mut change_topic = false;
+    egui::Frame::new().fill(tint).stroke(egui::Stroke::new(2.0, accent)).corner_radius(12.0).inner_margin(egui::Margin::same(12)).show(ui, |ui| {
+        ui.set_min_height(200.0);
+        ui.set_width(ui.available_width());
+        // Number badge, heading and level, as on the slide.
+        let level: u8 = d.get(&format!("lvl{i}"), "2").parse().unwrap_or(2).clamp(1, 4);
+        ui.horizontal(|ui| {
+            let (r, _) = ui.allocate_exact_size(vec2(26.0, 26.0), egui::Sense::hover());
+            ui.painter().circle_filled(r.center(), 13.0, accent);
+            ui.painter().text(r.center(), egui::Align2::CENTER_CENTER, (i + 1).to_string(), theme::bold(14.0), egui::Color32::WHITE);
+            if editing {
+                let mut heading = d.get(&format!("h{i}"), "");
+                ui.add(egui::TextEdit::singleline(&mut heading).desired_width(150.0).font(theme::bold(14.0)));
+                d.fields.insert(format!("h{i}"), heading);
+            } else {
+                ui.label(egui::RichText::new(d.get(&format!("h{i}"), "")).font(theme::bold(15.0)).color(accent));
+            }
+            ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
+                ui.label(egui::RichText::new(LEVEL_NAMES[usize::from(level) - 1]).size(11.5).color(DIM_INK));
+            });
+        });
+        let objective = d.get(&format!("obj{i}"), "");
+        ui.add(egui::Label::new(egui::RichText::new(plain_from(&d.get(&format!("from{i}"), ""))).size(11.5).color(DIM_INK)).truncate())
+            .on_hover_text(objective);
+        ui.add_space(6.0);
+        let q = question(d, i);
+        let text = d.get(&format!("text{i}"), "");
+        let answer = d.get(&format!("answer{i}"), "");
+        if editing {
+            ui.label(egui::RichText::new("Question").size(12.0).color(INK));
+            let mut t = text.clone();
+            ui.add(egui::TextEdit::multiline(&mut t).desired_rows(3).desired_width(f32::INFINITY));
+            d.fields.insert(format!("text{i}"), t.clone());
+            ui.label(egui::RichText::new("Answer").size(12.0).color(INK));
+            let mut a = answer.clone();
+            ui.add(egui::TextEdit::singleline(&mut a).desired_width(f32::INFINITY));
+            d.fields.insert(format!("answer{i}"), a);
+            if t.contains('$') {
+                ui.label(egui::RichText::new(format!("Reads: {}", shows_as(&t))).size(12.0).color(INK));
+            }
+            ui.label(egui::RichText::new("Maths goes between $ signs: $x^2$, $\\frac{3}{4}$, $\\sqrt{50}$.").size(11.0).color(DIM_INK));
+            if q.as_ref().is_some_and(|q| q.diagram.is_some() && q.text != t) {
+                ui.label(
+                    egui::RichText::new("This question has a diagram: check it still matches your wording.")
+                        .size(11.0)
+                        .color(egui::Color32::from_rgb(190, 110, 0)),
+                );
+            }
+            ui.add_space(4.0);
+            if ui.button("Done").clicked() {
+                d.fields.remove(&format!("edit{i}"));
+            }
+        } else if text.trim().is_empty() {
+            ui.label(egui::RichText::new("No question for this yet.").size(15.0).color(INK));
+            ui.label(egui::RichText::new("Pick a topic for it, or write your own.").size(12.0).color(DIM_INK));
+        } else {
+            ui.add(egui::Label::new(egui::RichText::new(shows_as(&text)).size(17.0).color(INK)).wrap());
+            if q.as_ref().is_some_and(|q| q.diagram.is_some()) {
+                ui.label(egui::RichText::new("With a diagram on the slide.").size(11.5).color(DIM_INK));
+            }
+            ui.add_space(4.0);
+            egui::Frame::new().fill(egui::Color32::from_rgb(0xE3, 0xF4, 0xE8)).corner_radius(6.0).inner_margin(egui::Margin::symmetric(8, 3)).show(
+                ui,
+                |ui| {
+                    ui.label(egui::RichText::new(format!("Answer: {}", shows_as(&answer))).size(13.0).color(ANSWER_INK));
+                },
+            );
+        }
+        if !editing {
+            ui.add_space(6.0);
+            let has_skill = d.fields.get(&format!("skills{i}")).is_some_and(|j| j != "[]");
+            ui.horizontal_wrapped(|ui| {
+                ui.spacing_mut().item_spacing.x = 6.0;
+                if ui.add_enabled(has_skill, egui::Button::new("New question")).on_hover_text("Another question on the same thing").clicked()
+                    && let Some(bank) = bank
+                {
+                    another(d, bank, i);
+                }
+                for (label, to, tip) in [
+                    ("Easier", level.saturating_sub(1), "An easier question on the same thing"),
+                    ("Harder", level + 1, "A harder question on the same thing"),
+                ] {
+                    if ui.add_enabled(has_skill && (1..=4).contains(&to), egui::Button::new(label)).on_hover_text(tip).clicked()
+                        && let Some(bank) = bank
+                    {
+                        d.fields.insert(format!("lvl{i}"), to.to_string());
+                        another(d, bank, i);
+                    }
+                }
+                if ui.button("Edit").on_hover_text("Change the wording, the answer or the heading").clicked() {
+                    d.fields.insert(format!("edit{i}"), "1".into());
+                }
+                if ui.button("Change topic…").on_hover_text("Choose what this question is about").clicked() {
+                    change_topic = true;
+                }
+            });
+        }
+    });
+    change_topic
 }
 
 /// Makes the slide from the cards as edited.

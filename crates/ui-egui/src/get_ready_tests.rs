@@ -376,7 +376,8 @@ fn a_teacher_says_what_they_taught_and_gets_four_planned_questions() {
     for i in 0..4 {
         assert!(!field(&h, &format!("text{i}")).is_empty(), "card {i} has a question");
     }
-    assert!(h.query_all_by_label_contains("Practises:").count() == 4, "each card says what it practises");
+    assert_eq!(h.query_all_by_label_contains("Answer: ").count(), 4, "each card shows its answer");
+    assert!(h.query_all_by_label_contains("$").next().is_none(), "no maths code on show until Edit");
     // Edit card 1, rename card 3's heading, and insert.
     let d = h.state_mut().dialog.as_mut().unwrap();
     d.fields.insert("text0".into(), "My own two-step question: solve $2x + 3 = 11$".into());
@@ -401,11 +402,11 @@ fn another_question_and_a_new_skill_change_one_card_only() {
     h.get_by_label("Make the questions").click();
     h.run_steps(3);
     let (q1, q2) = (field(&h, "q1"), field(&h, "q2"));
-    // Another question for card 2 changes card 2 (a recipe can give the same text only by chance,
+    // New question for card 2 changes card 2 (a recipe can give the same text only by chance,
     // so the stored question, with its id and numbers, is compared).
     let mut changed = false;
     for _ in 0..5 {
-        h.query_all_by_label("Another question").nth(1).unwrap().click();
+        h.query_all_by_label("New question").nth(1).unwrap().click();
         h.run_steps(2);
         changed |= field(&h, "q1") != q1;
     }
@@ -413,7 +414,7 @@ fn another_question_and_a_new_skill_change_one_card_only() {
     assert_eq!(field(&h, "q2"), q2, "card 3 is untouched");
     // Change card 2's skill in the picker; the other cards survive the trip.
     let (q0, q2) = (field(&h, "q0"), field(&h, "q2"));
-    h.query_all_by_label("Change skill…").nth(1).unwrap().click();
+    h.query_all_by_label("Change topic…").nth(1).unwrap().click();
     h.run_steps(3);
     assert!(h.query_by_label_contains("Choose the skill for question 2").is_some());
     h.state_mut().dialog.as_mut().unwrap().fields.insert("q".into(), "2-step equations".into());
@@ -425,7 +426,6 @@ fn another_question_and_a_new_skill_change_one_card_only() {
     assert!(field(&h, "skills1").contains(TWO_STEP), "{}", field(&h, "skills1"));
     let q1: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
     assert_eq!(q1.skill_key(), TWO_STEP);
-    assert!(h.query_by_label_contains("Practises: Solve 2-step equations").is_some());
 }
 
 #[test]
@@ -478,4 +478,29 @@ fn look_at_the_dialog_planned_from_a_curriculum() {
     h.get_by_label("Insert").click();
     h.run_steps(4);
     h.render().unwrap().save(format!("{dir}/get-ready-3-slide.png")).unwrap();
+}
+
+#[test]
+fn a_card_is_edited_behind_edit_and_easier_and_harder_change_its_level() {
+    let mut h = taught_harness();
+    h.get_by_label("Make the questions").click();
+    h.run_steps(3);
+    assert!(h.query_all_by_label("Question").next().is_none(), "no text boxes until Edit");
+    h.query_all_by_label("Edit").next().unwrap().click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "edit0"), "1");
+    assert!(h.query_by_label("Done").is_some());
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("text0".into(), "Solve $3x = 12$".into());
+    h.run_steps(2);
+    assert!(h.query_by_label_contains("Reads: Solve 3x = 12").is_some(), "the wording read back without the code");
+    h.get_by_label("Done").click();
+    h.run_steps(3);
+    assert!(h.query_by_label("Solve 3x = 12").is_some(), "the card shows the edit as it will read");
+    // Harder moves card 2 up a level with a new question; Easier at Support is not offered.
+    assert_eq!(field(&h, "lvl1"), "2");
+    h.query_all_by_label("Harder").nth(1).unwrap().click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "lvl1"), "3");
+    let q: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
+    assert_eq!(q.difficulty, 3);
 }
