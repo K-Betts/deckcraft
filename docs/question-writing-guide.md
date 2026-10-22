@@ -218,10 +218,11 @@ Reply with the JSON object only.
    ask the AI to fix it, then check again. When happy press **Add these to my bank**.
 4. To share with colleagues, send them the file; they import it the same way.
 5. To make questions part of the built-in bank, add them to `assets/questions/bank.json` on a
-   branch and open a pull request.
+   branch and open a pull request. The built-in bank is templates only (new numbers every time);
+   a test refuses fixed questions there.
 
 ## Fixed questions
 
-A question that never changes can still be written the old way, in a `"questions"` list beside the
-templates: `id`, `topic`, `subtopic`, `difficulty` (1 to 3), optional `keywords`, `text`, `answer`,
+A question that never changes can still be written the old way, for a teacher's own bank (Manage
+Questions), in a `"questions"` list beside the templates: `id`, `topic`, `subtopic`, `difficulty` (1 to 3), optional `keywords`, `text`, `answer`,
 and optional `needsDiagram: true` with a `diagram` (same kinds as above, no `[[ ]]`).

@@ -169,7 +169,8 @@ fn the_manage_dialog_adds_a_question_and_removes_a_built_in_one() {
     h.state_mut().run("app.dialog", json!({"id": "questionBank"})).unwrap();
     h.run_steps(3);
     assert!(h.query_by_label_contains("questions in your bank").is_some());
-    let first = deckcraft_engine::questions::starter().unwrap().questions[0].id.clone();
+    // Every built-in question is a template; the list shows each once.
+    let first = deckcraft_engine::questions::starter().unwrap().templates[0].id.clone();
     h.query_all_by_label("Remove").next().unwrap().click();
     h.run_steps(3);
     assert_eq!(h.state().ui.removed_questions, vec![first]);
