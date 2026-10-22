@@ -320,6 +320,15 @@ pub struct UiState {
     pub get_ready_skill: Vec<String>,
     /// Ids of built-in questions the teacher has taken out of the bank.
     pub removed_questions: Vec<String>,
+    /// The department's curriculum (a curriculum file's JSON, see `deckcraft_engine::curriculum`),
+    /// loaded in the Get Ready dialog; empty until one is loaded.
+    pub curriculum: String,
+    /// Get Ready: `taught` (plan from the curriculum) or `choose` (each question by hand); empty
+    /// until the teacher picks, which means `taught` once a curriculum is loaded.
+    pub get_ready_mode: String,
+    /// Get Ready's last year group and route, e.g. `Y7` and `Core`.
+    pub get_ready_year: String,
+    pub get_ready_route: String,
 }
 
 impl Default for UiState {
@@ -364,6 +373,10 @@ impl Default for UiState {
             my_templates: vec![],
             get_ready_skill: vec![String::new(); 4],
             removed_questions: vec![],
+            curriculum: String::new(),
+            get_ready_mode: String::new(),
+            get_ready_year: String::new(),
+            get_ready_route: String::new(),
         }
     }
 }
@@ -423,6 +436,14 @@ impl UiState {
             w.truncate(200);
         }
         self.removed_questions.truncate(5_000);
+        if self.curriculum.len() > 8 << 20 {
+            self.curriculum.clear();
+        }
+        for short in [&mut self.get_ready_mode, &mut self.get_ready_year, &mut self.get_ready_route] {
+            if short.len() > 40 {
+                short.clear();
+            }
+        }
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);

@@ -16,7 +16,7 @@ pub fn specs() -> Vec<CommandSpec> {
         "Get Ready Starter",
         ["Insert", "Slides From"],
         None,
-        "{slots?: [{topic?: text, difficulty?: 1|2|3|4, skill?: a skill key (see the skill picker), year?: Y7.., search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids]}",
+        "{taught?: {curriculum?: path to a curriculum file, curriculumJson?: its text, year: Y7.., route?: Core|Support|Higher|Foundation.., unit: index or title, objective?: index or text (default: the first), level?: 0-4 (0 any, default 2)} (plan the four questions from what the class has just been taught: last lesson, last week, last topic, last year), questions?: [{text, answer?, diagram?, difficulty?, …}] (use exactly these questions, 1-8, e.g. after editing), slots?: [{topic?: text, difficulty?: 1|2|3|4, skill?: a skill key (see the skill picker), year?: Y7.., search?: words to find in the topic, subtopic, keywords or question}] (one entry per question, 1-8: each question gets its own topic and level), topic?, difficulty?, count?: 1-8 (default 4) (the same topic and level for all, used when `slots` is absent), headings?: bool or [text] (the card headings; default Last lesson, Last week, Last topic, Last year), seed?: number (a new seed is a reroll), reroll?: bool (replace the current Get Ready slide), bank?: path to a question bank, bankJson?: a question bank as JSON text (default: the built-in one), at?: index} → {index, questions: [ids], plan?: [{heading, objective, from, skills}]}",
         has_doc,
         get_ready
     )]
@@ -47,7 +47,14 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         }
     };
     // Always pick exactly 4 questions for the standard 2×2 retrieval grid.
-    let picked: Vec<_> = if let Some(slots) = p.get("slots") {
+    let mut plan: Option<Vec<crate::curriculum::Slot>> = None;
+    let picked: Vec<_> = if let Some(list) = p.get("questions") {
+        given_questions(list)?
+    } else if let Some(t) = p.get("taught") {
+        let (slots, qs) = taught_questions(&bank, t, seed)?;
+        plan = Some(slots);
+        qs
+    } else if let Some(slots) = p.get("slots") {
         let slots = slots.as_array().ok_or_else(|| bad("slide.getReady", "`slots` must be a list"))?;
         if !(1..=8).contains(&slots.len()) {
             return Err(bad("slide.getReady", "`slots` must have 1 to 8 entries"));
@@ -135,8 +142,16 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     // Each card has its number, question (with equations), figure and an answer that appears on
     // click; its Expand button opens it full screen on a slide of its own, with a Back button.
     let expand = bool_param(p, "expand").unwrap_or(true);
-    let headings = bool_param(p, "headings").unwrap_or(true);
-    const HEADINGS: [&str; 4] = ["Last lesson", "Last week", "Last topic", "Last year"];
+    let heading_texts: Vec<String> = match p.get("headings") {
+        Some(Value::Bool(false)) => vec![],
+        Some(Value::Array(list)) => list.iter().map(|v| v.as_str().unwrap_or_default().chars().take(40).collect()).collect(),
+        Some(Value::Null | Value::Bool(true)) | None => match &plan {
+            Some(slots) => slots.iter().map(|sl| sl.heading.clone()).collect(),
+            None => crate::curriculum::HEADINGS.iter().map(|h| h.to_string()).collect(),
+        },
+        Some(_) => return Err(bad("slide.getReady", "`headings` must be true, false or a list of text")),
+    };
+    let heading_for = |i: usize| heading_texts.get(i).map(String::as_str).filter(|h| !h.trim().is_empty());
     let cols = 2usize;
     let rows = picked.len().div_ceil(cols).max(1);
     // A template's header band (label pills) takes the top of the slide.
@@ -151,8 +166,7 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
     for (i, q) in picked.iter().enumerate() {
         let (col, row) = ((i % cols) as f64, (i / cols) as f64);
         let rect = [margin + col * (card_w + gap), top + row * (card_h + gap), card_w, card_h];
-        let heading = headings.then(|| HEADINGS.get(i).copied()).flatten();
-        let card = draw_card(s, q, i, rect, 1.0, heading, expand)?;
+        let card = draw_card(s, q, i, rect, 1.0, heading_for(i), expand)?;
         buttons.push((card.badge, card.expand));
         ids.push(q.id.clone());
         answers.push_str(&format!("{}. {}\n", i + 1, plain_answer(&q.answer)));
@@ -171,7 +185,7 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
             s.execute("slide.new", &json!({"layout": &plain, "at": new_index + 1 + i}))?;
             let here = s.doc()?.selection.slide;
             s.execute("slide.rename", &json!({"name": format!("{GET_READY_NAME} Q{}", i + 1), "index": here}))?;
-            draw_card(s, q, i, [20.0, 20.0, 920.0, 500.0], 2.0, headings.then(|| HEADINGS.get(i).copied()).flatten(), false)?;
+            draw_card(s, q, i, [20.0, 20.0, 920.0, 500.0], 2.0, heading_for(i), false)?;
             let back = draw_shape(s, "roundRect", [786.0, 34.0, 130.0, 36.0], Some("#FFFFFF"), Some(("#6B7280", 1.5)))?;
             s.execute("shape.rename", &json!({"id": back, "name": "Back"}))?;
             set_shape_text(s, back, "Back", 16.0, "#374151", true)?;
@@ -197,7 +211,83 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         }
         s.execute("slide.go", &json!({"index": new_index}))?;
     }
-    Ok(json!({"index": new_index, "questions": ids}))
+    let mut out = json!({"index": new_index, "questions": ids});
+    if let Some(plan) = plan {
+        out["plan"] = json!(plan);
+    }
+    Ok(out)
+}
+
+/// The questions a teacher has already chosen (and perhaps edited), used as they are. Only `text`
+/// is needed; a missing id, topic or level is filled in.
+fn given_questions(list: &Value) -> Result<Vec<questions::Question>> {
+    let list = list.as_array().ok_or_else(|| bad("slide.getReady", "`questions` must be a list"))?;
+    if !(1..=8).contains(&list.len()) {
+        return Err(bad("slide.getReady", "`questions` must have 1 to 8 entries"));
+    }
+    let mut out = vec![];
+    for (i, item) in list.iter().enumerate() {
+        let mut v = json!({"id": format!("given-{}", i + 1), "topic": "", "difficulty": 2});
+        let Some(fields) = item.as_object() else { return Err(bad("slide.getReady", format!("question {} must be an object", i + 1))) };
+        for (k, x) in fields {
+            v[k] = x.clone();
+        }
+        let q: questions::Question = serde_json::from_value(v).map_err(|e| bad("slide.getReady", format!("question {}: {e}", i + 1)))?;
+        if q.text.trim().is_empty() || q.text.chars().count() > 600 {
+            return Err(bad("slide.getReady", format!("question {} has no text, or too much", i + 1)));
+        }
+        out.push(q);
+    }
+    Ok(out)
+}
+
+/// Plans the starter from what the class was just taught (`taught`, see the command's params)
+/// and picks a question for each card from `bank` (already made with this seed).
+fn taught_questions(bank: &questions::Bank, t: &Value, seed: u64) -> Result<(Vec<crate::curriculum::Slot>, Vec<questions::Question>)> {
+    use crate::curriculum;
+    let cmd = "slide.getReady";
+    let text = match (str_param(t, "curriculumJson"), str_param(t, "curriculum")) {
+        (Some(json), _) => json.to_string(),
+        (None, Some(path)) => {
+            let bytes = crate::io::read_file(path).map_err(EngineError::Other)?;
+            String::from_utf8(bytes).map_err(|_| bad(cmd, "the curriculum file is not text"))?
+        }
+        (None, None) => return Err(bad(cmd, "`taught` needs `curriculum` (a file) or `curriculumJson`")),
+    };
+    let cur = curriculum::parse(&text).map_err(|e| bad(cmd, e))?;
+    let year = str_param(t, "year").ok_or_else(|| bad(cmd, "`taught` needs a `year`, e.g. Y7"))?;
+    let course = cur.course(year, str_param(t, "route").unwrap_or("")).ok_or_else(|| bad(cmd, format!("the curriculum has no {year}")))?;
+    let unit = match t.get("unit") {
+        Some(Value::String(title)) => course.units.iter().position(|u| u.title.eq_ignore_ascii_case(title.trim())),
+        Some(v) => v.as_u64().and_then(|i| usize::try_from(i).ok()).filter(|i| *i < course.units.len()),
+        None => None,
+    }
+    .ok_or_else(|| bad(cmd, format!("{} has no such unit", course.name())))?;
+    let u = &course.units[unit];
+    if u.objectives.is_empty() {
+        return Err(bad(cmd, format!("“{}” has no objectives to plan from", u.title)));
+    }
+    let objective = match t.get("objective") {
+        Some(Value::String(text)) => u.objectives.iter().position(|o| o.text.eq_ignore_ascii_case(text.trim())),
+        Some(v) => v.as_u64().and_then(|i| usize::try_from(i).ok()).filter(|i| *i < u.objectives.len()),
+        None => Some(0),
+    }
+    .ok_or_else(|| bad(cmd, format!("“{}” has no such objective", u.title)))?;
+    let level = match t.get("level") {
+        None | Some(Value::Null) => 2,
+        Some(v) => v.as_u64().and_then(|l| u8::try_from(l).ok()).filter(|l| *l <= 4).ok_or_else(|| bad(cmd, "`level` must be 0 to 4"))?,
+    };
+    let m = curriculum::Matcher::new(bank.skills());
+    let slots = curriculum::plan(&cur, course, unit, objective, &m, seed);
+    let picked = curriculum::questions_for(bank, &slots, level, seed);
+    let mut out = vec![];
+    for (slot, q) in slots.iter().zip(picked) {
+        match q {
+            Some(q) => out.push(q),
+            None => return Err(bad(cmd, format!("{}: nothing in the question bank fits “{}”", slot.heading, slot.objective))),
+        }
+    }
+    Ok((slots, out))
 }
 
 /// The question bank a command asks for: `bankJson` (text), `bank` (a file), else the built-in one.

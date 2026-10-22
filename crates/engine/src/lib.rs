@@ -10,6 +10,7 @@
 pub mod cmd;
 pub mod compare;
 pub mod connect;
+pub mod curriculum;
 pub mod drawtable;
 pub use deckcraft_text::equation;
 pub mod file_access;

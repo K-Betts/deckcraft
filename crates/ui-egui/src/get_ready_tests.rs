@@ -303,3 +303,178 @@ fn a_mistake_in_pasted_text_is_explained_and_nothing_is_added() {
     assert!(h.query_by_label_contains("Common causes").is_some());
     assert!(h.state().ui.my_templates.is_empty());
 }
+
+/// A small curriculum in our own words, with this school year's dates far in the past and
+/// future so “this week” does not depend on when the test runs.
+const CURRICULUM: &str = r#"{"version": 1, "name": "Test school", "courses": [
+  {"year": "Y7", "route": "Core", "units": [
+    {"title": "Angles", "start": "2000-01-03", "weeks": 3, "objectives": [
+      {"text": "Angles on a straight line"}, {"text": "Angles in a triangle"}]},
+    {"title": "Equations", "start": "2000-02-07", "weeks": 4, "objectives": [
+      {"text": "Solve one-step equations"}, {"text": "Solve two-step equations"},
+      {"text": "Solve equations with the unknown on both sides"}],
+      "prior": [{"text": "Substitute into an expression"}]},
+    {"title": "Ratio", "start": "2999-01-01", "weeks": 2, "objectives": [{"text": "Share an amount in a given ratio"}]}]},
+  {"year": "Y7", "route": "Support", "units": [
+    {"title": "Place value", "start": "2000-01-03", "weeks": 3, "objectives": [{"text": "Round to the nearest 10"}]}]}]}"#;
+
+fn taught_harness() -> egui_kittest::Harness<'static, SlideApp> {
+    let mut h = harness();
+    h.state_mut().ui.curriculum = CURRICULUM.into();
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    h
+}
+
+fn field(h: &egui_kittest::Harness<'static, SlideApp>, k: &str) -> String {
+    h.state().dialog.as_ref().unwrap().fields.get(k).cloned().unwrap_or_default()
+}
+
+#[test]
+fn with_no_curriculum_the_dialog_offers_to_load_one_and_still_works_by_hand() {
+    let mut h = harness();
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label("Question 1").is_some(), "no curriculum: choosing by hand, as before");
+    h.get_by_label("From what I just taught").click();
+    h.run_steps(3);
+    assert!(h.query_by_label("Load your department's curriculum").is_some());
+    assert_eq!(h.state().ui.get_ready_mode, "taught", "the choice is remembered");
+    // A broken paste is explained and nothing is kept.
+    h.query_by_label("Or paste a curriculum file's text").unwrap().click();
+    h.run_steps(3);
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("paste".into(), "{\"version\": 1}".into());
+    h.run_steps(2);
+    h.get_by_label("Use this curriculum").click();
+    h.run_steps(3);
+    assert!(field(&h, "load").starts_with("Not loaded"), "{}", field(&h, "load"));
+    assert!(h.state().ui.curriculum.is_empty());
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("paste".into(), CURRICULUM.into());
+    h.run_steps(2);
+    h.get_by_label("Use this curriculum").click();
+    h.run_steps(3);
+    assert_eq!(h.state().ui.curriculum, CURRICULUM);
+    assert!(h.query_by_label("Which lesson have you just taught?").is_some());
+}
+
+#[test]
+fn a_teacher_says_what_they_taught_and_gets_four_planned_questions() {
+    let mut h = taught_harness();
+    assert!(h.query_by_label("Which lesson have you just taught?").is_some(), "a loaded curriculum opens on this mode");
+    assert_eq!(field(&h, "unit"), "1", "the unit under way (Equations) is chosen; Ratio has not started");
+    // Equations ended long ago, so the guess is its last lesson.
+    assert_eq!(field(&h, "objective"), "2");
+    h.get_by_label("Solve two-step equations").click();
+    h.run_steps(2);
+    h.get_by_label("Make the questions").click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "obj0"), "Solve two-step equations");
+    assert_eq!(field(&h, "h0"), "Last lesson");
+    assert!(field(&h, "from1").ends_with("Equations"), "last week: earlier in the unit");
+    assert!(field(&h, "from2").ends_with("Angles"), "last topic: the unit before");
+    for i in 0..4 {
+        assert!(!field(&h, &format!("text{i}")).is_empty(), "card {i} has a question");
+    }
+    assert!(h.query_all_by_label_contains("Practises:").count() == 4, "each card says what it practises");
+    // Edit card 1, rename card 3's heading, and insert.
+    let d = h.state_mut().dialog.as_mut().unwrap();
+    d.fields.insert("text0".into(), "My own two-step question: solve $2x + 3 = 11$".into());
+    d.fields.insert("answer0".into(), "$x = 4$".into());
+    d.fields.insert("h2".into(), "Angles".into());
+    h.run_steps(2);
+    let before = slides(&h);
+    h.get_by_label("Insert").click();
+    h.run_steps(3);
+    assert!(h.state().dialog.is_none(), "the dialog closes");
+    assert_eq!(slides(&h), before + 5);
+    let texts = slide_texts(&h).join(" | ");
+    assert!(texts.contains("My own two-step question"), "{texts}");
+    assert!(texts.contains("Angles") && texts.contains("Last week") && !texts.contains("Last topic"), "{texts}");
+    assert_eq!(h.state().ui.get_ready_year, "Y7");
+    assert_eq!(h.state().ui.get_ready_route, "Core");
+}
+
+#[test]
+fn another_question_and_a_new_skill_change_one_card_only() {
+    let mut h = taught_harness();
+    h.get_by_label("Make the questions").click();
+    h.run_steps(3);
+    let (q1, q2) = (field(&h, "q1"), field(&h, "q2"));
+    // Another question for card 2 changes card 2 (a recipe can give the same text only by chance,
+    // so the stored question, with its id and numbers, is compared).
+    let mut changed = false;
+    for _ in 0..5 {
+        h.query_all_by_label("Another question").nth(1).unwrap().click();
+        h.run_steps(2);
+        changed |= field(&h, "q1") != q1;
+    }
+    assert!(changed, "card 2 got a new question");
+    assert_eq!(field(&h, "q2"), q2, "card 3 is untouched");
+    // Change card 2's skill in the picker; the other cards survive the trip.
+    let (q0, q2) = (field(&h, "q0"), field(&h, "q2"));
+    h.query_all_by_label("Change skill…").nth(1).unwrap().click();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("Choose the skill for question 2").is_some());
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("q".into(), "2-step equations".into());
+    h.run_steps(3);
+    h.query_all_by_label("Choose").next().unwrap().click();
+    h.run_steps(3);
+    assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("getReady"));
+    assert_eq!((field(&h, "q0"), field(&h, "q2")), (q0, q2), "cards 1 and 3 kept their questions");
+    assert!(field(&h, "skills1").contains(TWO_STEP), "{}", field(&h, "skills1"));
+    let q1: deckcraft_engine::questions::Question = serde_json::from_str(&field(&h, "q1")).unwrap();
+    assert_eq!(q1.skill_key(), TWO_STEP);
+    assert!(h.query_by_label_contains("Practises: Solve 2-step equations").is_some());
+}
+
+#[test]
+fn support_classes_start_at_the_support_level_and_a_new_choice_asks_for_new_questions() {
+    let mut h = taught_harness();
+    // The route row comes before the level row, which has a Support button too.
+    h.query_all_by_label("Support").next().unwrap().click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "route"), "Support");
+    assert_eq!(field(&h, "level"), "1", "a Support class starts at the Support level");
+    h.get_by_label("Make the questions").click();
+    h.run_steps(3);
+    assert_eq!(field(&h, "lvl0"), "1", "Support classes get Support-level questions");
+    // The choices fold into one line once the questions are made; Change… opens them again.
+    assert!(h.query_by_label("Which lesson have you just taught?").is_none());
+    assert!(h.query_by_label_contains("Year 7 Support · Place value · just taught: Round to the nearest 10").is_some());
+    h.get_by_label("Change…").click();
+    h.run_steps(3);
+    assert!(h.query_by_label("Which lesson have you just taught?").is_some());
+    // Back to Core (as the route button does: “Core” is also a level, so the button is ambiguous here).
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("route".into(), "Core".into());
+    h.state_mut().dialog.as_mut().unwrap().fields.remove("level");
+    h.run_steps(3);
+    assert!(h.query_by_label("Your choices changed: make the questions again.").is_some());
+}
+
+/// Pictures of the dialog to look at (not a check): run with
+/// `GET_READY_SHOTS=dir [GET_READY_CURRICULUM=file] cargo test -p deckcraft-ui-egui -- --ignored look_at`.
+#[test]
+#[ignore]
+fn look_at_the_dialog_planned_from_a_curriculum() {
+    let dir = std::env::var("GET_READY_SHOTS").unwrap_or_else(|_| std::env::temp_dir().to_string_lossy().into_owned());
+    let curriculum = std::env::var("GET_READY_CURRICULUM").ok().and_then(|p| std::fs::read_to_string(p).ok()).unwrap_or_else(|| CURRICULUM.into());
+    let mut h = harness();
+    h.state_mut().ui.curriculum = curriculum;
+    h.set_size(egui::vec2(1400.0, 1000.0));
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(4);
+    h.render().unwrap().save(format!("{dir}/get-ready-1-choose.png")).unwrap();
+    // A year group with a year before it, at its second lesson.
+    if let Ok(year) = std::env::var("GET_READY_YEAR") {
+        h.state_mut().dialog.as_mut().unwrap().fields.insert("year".into(), year);
+        h.run_steps(2);
+    }
+    h.state_mut().dialog.as_mut().unwrap().fields.insert("objective".into(), "1".into());
+    h.run_steps(2);
+    h.get_by_label("Make the questions").click();
+    h.run_steps(4);
+    h.render().unwrap().save(format!("{dir}/get-ready-2-cards.png")).unwrap();
+    h.get_by_label("Insert").click();
+    h.run_steps(4);
+    h.render().unwrap().save(format!("{dir}/get-ready-3-slide.png")).unwrap();
+}
