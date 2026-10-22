@@ -54,6 +54,7 @@ fn main() -> ExitCode {
         Some("fidelity") => report(fidelity(rest)),
         Some("bench") => report(bench(rest)),
         Some("bank") => report(bank(rest)),
+        Some("curriculum") => report(curriculum(rest)),
         Some("render") => report(render(rest)),
         Some("render-transition") => report(render_transition(rest)),
         Some("convert") => report(convert(rest)),
@@ -256,6 +257,60 @@ fn bank(args: &[String]) -> Result<(), String> {
             outln!("  Q: {}\n  A: {}", latex::plain(&q.text), latex::plain(&q.answer));
         }
     }
+    Ok(())
+}
+
+/// `curriculum check FILE`: read a curriculum file and show the question-bank skills each
+/// objective is matched to, flagging objectives nothing in the bank fits.
+fn curriculum(args: &[String]) -> Result<(), String> {
+    use deckcraft_engine::{curriculum, questions};
+    if args.first().is_some_and(|a| is_help(a)) {
+        outln!("{}", help_page("curriculum"));
+        return Ok(());
+    }
+    if args.first().map(String::as_str) != Some("check") {
+        return Err("curriculum needs a subcommand: curriculum check FILE".into());
+    }
+    let path = args.get(1).ok_or("curriculum check needs a FILE")?;
+    let text = String::from_utf8(std::fs::read(path).map_err(|e| format!("{path}: {e}"))?).map_err(|_| format!("{path} is not text"))?;
+    let cur = curriculum::parse(&text).map_err(|e| format!("PROBLEM: {e}"))?;
+    let bank = questions::starter()?.instantiate(0);
+    let m = curriculum::Matcher::new(bank.skills());
+    let name = |key: &str| {
+        m.skills
+            .iter()
+            .find(|s| s.key == key)
+            .map(|s| format!("{} ({})", s.name, if s.year.is_empty() { "general" } else { &s.year }))
+            .unwrap_or_default()
+    };
+    let (mut total, mut unmatched) = (0, 0);
+    for course in &cur.courses {
+        outln!("\n== {} ({} units)", course.name(), course.units.len());
+        for u in &course.units {
+            outln!("  {} {}", if u.start.is_empty() { "          " } else { &u.start }, u.title);
+            for (o, prior) in u.objectives.iter().map(|o| (o, "")).chain(u.prior.iter().map(|o| (o, "prior: "))) {
+                total += 1;
+                // Prior learning is matched on its own words, objectives with their unit's too.
+                let context = if prior.is_empty() { u.title.as_str() } else { "" };
+                let keys = m.skills_for(o, context, &course.year, &course.route);
+                // How well each fits (0 to 1), when the words chose them rather than the file.
+                let text = if o.search.trim().is_empty() { &o.text } else { &o.search };
+                let scores: Vec<(usize, f64)> = if o.skills.is_empty() { m.best_in(text, context, &course.year, &course.route, 3) } else { vec![] };
+                let fit = |k: &String| scores.iter().find(|(i, _)| &m.skills[*i].key == k).map(|(_, sc)| format!(" {sc:.2}")).unwrap_or_default();
+                if keys.is_empty() {
+                    unmatched += 1;
+                    outln!("    NO MATCH  {prior}{}", o.text);
+                } else {
+                    outln!(
+                        "    {prior}{}\n        -> {}",
+                        o.text,
+                        keys.iter().map(|k| format!("{}{}", name(k), fit(k))).collect::<Vec<_>>().join("  |  ")
+                    );
+                }
+            }
+        }
+    }
+    outln!("\nOK: {} courses, {total} objectives, {unmatched} with no matching skill", cur.courses.len());
     Ok(())
 }
 

@@ -2688,6 +2688,20 @@ fn choose_skill_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool 
             back = true;
         }
     });
+    // The Get Ready preview (planned from the curriculum) gets its cards back with the new skill.
+    if d.params.get("return").and_then(Value::as_str) == Some("getReadyTaught") && (chosen.is_some() || back) {
+        let keep = d.params.get("keep").cloned().unwrap_or_default();
+        *d = Dialog::new("getReady");
+        if let Some(map) = keep.as_object() {
+            for (k, v) in map {
+                d.fields.insert(k.clone(), v.as_str().unwrap_or_default().to_string());
+            }
+        }
+        if let Some(key) = chosen.filter(|k| !k.is_empty()) {
+            d.fields.insert(format!("pick{slot}"), key);
+        }
+        return false;
+    }
     if for_exam && (chosen.is_some() || back) {
         let keep = d.params.get("keep").cloned().unwrap_or_default();
         *d = Dialog::new("examQuestion");
@@ -2860,7 +2874,7 @@ fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
     );
     let text = d.get("nq_text", "");
     if !text.trim().is_empty() {
-        ui.label(egui::RichText::new(format!("Shows as: {}", deckcraft_engine::latex::plain(&text))).size(12.0));
+        ui.label(egui::RichText::new(format!("Shows as: {}", shows_as(&text))).size(12.0));
     }
     if let Some(e) = d.fields.get("error").cloned().filter(|e| !e.is_empty()) {
         ui.colored_label(egui::Color32::from_rgb(200, 60, 60), e);
@@ -3074,6 +3088,20 @@ fn paste_section(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) {
     });
 }
 
+/// A question as plain text for a dialog: `latex::plain`, with its maths-italic letters (𝑥, 𝑦…)
+/// made ordinary ones, which the dialog font has (it drew them as boxes).
+fn shows_as(text: &str) -> String {
+    deckcraft_engine::latex::plain(text)
+        .chars()
+        .map(|c| match c as u32 {
+            0x1D434..=0x1D44D => char::from_u32(c as u32 - 0x1D434 + 'A' as u32).unwrap_or(c),
+            0x1D44E..=0x1D467 => char::from_u32(c as u32 - 0x1D44E + 'a' as u32).unwrap_or(c),
+            0x210E => 'h',
+            _ => c,
+        })
+        .collect()
+}
+
 fn field_wide(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str) {
     let mut v = d.get(key, "");
     ui.horizontal(|ui| {
@@ -3104,6 +3132,28 @@ fn fresh_seed() -> u64 {
 fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     const LEVELS: [(u8, &str); 5] = [(0, "Any"), (1, "Support"), (2, "Core"), (3, "Stretch"), (4, "Exam style")];
     ui.set_min_width(760.0);
+    // Two ways to fill the four cards: from what the class has just been taught (the curriculum
+    // plans them), or each question chosen by hand. Until the teacher picks, a loaded curriculum
+    // means the first.
+    let default_mode = match app.ui.get_ready_mode.as_str() {
+        "" if app.ui.curriculum.is_empty() => "choose",
+        "" => "taught",
+        m => m,
+    }
+    .to_string();
+    let mode = d.get("mode", &default_mode);
+    ui.horizontal(|ui| {
+        for (value, label) in [("taught", "From what I just taught"), ("choose", "Choose each question")] {
+            if ui.selectable_label(mode == value, egui::RichText::new(label).size(14.0)).clicked() {
+                d.fields.insert("mode".into(), value.into());
+                app.ui.get_ready_mode = value.into();
+            }
+        }
+    });
+    if d.get("mode", &default_mode) == "taught" {
+        ui.separator();
+        return taught::dialog(app, ui, d);
+    }
     let bank = question_bank(app).ok();
     let topics = bank.as_ref().map(|b| b.topics()).unwrap_or_default();
     // The bank with each recipe made once, to count what a search finds.
@@ -3287,6 +3337,8 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     }
     d.fields.contains_key("cancel")
 }
+
+mod taught;
 
 /// Exam Question: one question set out as on an Edexcel paper, from the question bank's exam-style
 /// questions (by skill or topic) or blank to type into.

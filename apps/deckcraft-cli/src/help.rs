@@ -44,6 +44,17 @@ written.
   deckcraft-cli bank check my-questions.json --samples 6",
     },
     Subcommand {
+        name: "curriculum",
+        usage: "curriculum check FILE",
+        summary: "check a curriculum file and show the skills each objective is matched to",
+        details: "Reads a curriculum file (JSON: year groups, routes, units and their objectives) with the same
+checks the app makes, then lists every objective with the question-bank skills the Get Ready
+starter will use for it. NO MATCH marks an objective nothing in the bank fits; give it a `search`
+(other words to match) or `skills` (skill keys) in the file. Nothing is written.
+
+  deckcraft-cli curriculum check our-curriculum.json",
+    },
+    Subcommand {
         name: "render",
         usage: "render (FILE | --sample) [--slide N | --all] [--scale S] [--edit] OUT",
         summary: "draw slides as PNG images",
