@@ -1,0 +1,196 @@
+# PLAN.md — DeckCraft Maths Edition: the About box says EduDeck
+
+> Written by Claude for a local model (running in OpenCode via LM Studio).
+> The local model must follow this plan exactly, one stage at a time.
+
+---
+
+## 0. Rules for the local model (read first, every stage)
+
+1. Do **only the stage you are told to do**. Never start the next stage.
+2. Only edit the files listed under **Files** for that stage. If another file seems to need changing, stop and report it instead.
+3. Do not rename, move or delete files unless the stage says so.
+4. Do not add new dependencies (crates, packages) unless the stage says so.
+5. Keep changes small. Do not refactor or "tidy up" code outside the stage.
+6. When finished, run the stage's **Check** command.
+7. If the check fails, read the error, fix it, and run the check again. **Maximum 3 attempts.**
+8. After 3 failed attempts, or if anything in this plan is unclear: **stop** and write a short report (what you tried, the exact error). Do not guess.
+9. Do not repeat your plan back to me. Make the changes, then summarise them.
+10. End every stage with the **Stage report** (format in section 6).
+11. **Never find-and-replace `DeckCraft` across files.** Change only the exact lines a stage names. Most `DeckCraft` text in this project must stay for now.
+
+---
+
+## 1. Goal
+
+**What we are building:** Help ▸ About shows the name **EduDeck** and the line "Based on DeckCraft by the ArtCraft Team".
+
+**Why:** It is the first, smallest step of renaming the app to EduDeck, and it shows whether the local model can do a stage of this project well.
+
+**Done means:** the new test `about_shows_edudeck_and_credits_deckcraft` passes, all the other tests in the `backstage` group still pass, and Kieran sees "EduDeck" in Help ▸ About.
+
+**Out of scope (do not do):**
+- Changing "DeckCraft" anywhere else (window title, menus, other dialogs, the theme called DeckCraft, folders, file names).
+- Changing the logo, links or anything else in the About box.
+
+---
+
+## 2. Project context
+
+**Language / framework:** Rust (edition 2024), egui/eframe 0.36, a Cargo workspace.
+
+**Folder:** `/Users/kieranbetts/maths-office/deckcraft-fix`
+
+**How to build:** `cargo build -p deckcraft`
+
+**How to run tests:** `cargo test -p deckcraft-ui-egui backstage` (only the `backstage` tests, which takes a few minutes)
+
+**Full check (used at the end of every stage):** given in each stage.
+
+**Key folders and files:**
+
+| Path | What it contains |
+|---|---|
+| `crates/engine/src/lib.rs` | The engine crate's list of modules (`pub mod …;` lines near the top) |
+| `crates/engine/src/brand.rs` | **New in stage 1**: the app's name |
+| `crates/ui-egui/src/dialogs.rs` | All dialogs, including the About box (`pub fn about`, around line 3749) |
+| `crates/ui-egui/src/backstage_tests.rs` | UI tests for the File menu pages and dialogs |
+
+**Conventions to follow:**
+- No `unwrap()` outside tests.
+- Tests in the engine go in a `#[cfg(test)] mod tests { use super::*; … }` at the bottom of the file.
+- After editing, run `cargo fmt -p <package>`. Never reformat by hand.
+
+**Existing code to reuse (do not rewrite):**
+- `harness(app)` and `new_app()` in `backstage_tests.rs`: build the app for a test.
+- `h.state_mut().run("app.about", json!({}))`: opens the About box in a test.
+
+---
+
+## 3. Design decisions (already made — do not change)
+
+- The name lives in one place, `deckcraft_engine::brand`, so later stages can reuse it.
+- The About box credits the original project: "Based on DeckCraft by the ArtCraft Team".
+- Exact code:
+
+```rust
+// crates/engine/src/brand.rs  (the complete file)
+//! The app's name as teachers see it.
+
+/// The display name.
+pub const APP_NAME: &str = "EduDeck";
+
+/// The credit line in the About box.
+pub const BASED_ON: &str = "Based on DeckCraft by the ArtCraft Team";
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_name_is_edudeck_and_deckcraft_is_credited() {
+        assert_eq!(APP_NAME, "EduDeck");
+        assert!(BASED_ON.contains("DeckCraft"));
+    }
+}
+```
+
+```rust
+// crates/ui-egui/src/backstage_tests.rs  (add at the very end of the file)
+#[test]
+fn about_shows_edudeck_and_credits_deckcraft() {
+    let mut h = harness(new_app());
+    h.state_mut().run("app.about", json!({})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
+    assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
+}
+```
+
+---
+
+## 4. Stages
+
+### Stage 1 — Add the name
+
+**Goal:** The engine has a `brand` module holding the name EduDeck.
+
+**Files:**
+- `crates/engine/src/brand.rs` — create, with exactly the content in section 3.
+- `crates/engine/src/lib.rs` — edit: add one line.
+
+**Steps:**
+1. Create `crates/engine/src/brand.rs` with exactly the code in section 3.
+2. In `crates/engine/src/lib.rs`, find the line `pub mod cmd;` (near line 10). Add `pub mod brand;` on a new line **directly above it**.
+3. Run `cargo fmt -p deckcraft-engine`.
+
+**Check:** `cargo test -p deckcraft-engine brand`
+
+**Success looks like:** the output shows `test brand::tests::the_name_is_edudeck_and_deckcraft_is_credited ... ok`.
+
+**Watch out for:**
+- Write `pub mod brand;`, not `mod brand;`. Stage 2 uses it from another crate.
+- Put the line with the other `pub mod` lines at the top, not near the `mod tests` lines at the bottom of `lib.rs`.
+
+---
+
+### Stage 2 — Show it in the About box
+
+**Goal:** Help ▸ About says EduDeck and credits DeckCraft, and a test proves it.
+
+**Files:**
+- `crates/ui-egui/src/dialogs.rs` — edit: two lines in `pub fn about`.
+- `crates/ui-egui/src/backstage_tests.rs` — edit: add one test.
+
+**Steps:**
+1. In `dialogs.rs`, find `pub fn about` (near line 3749). Inside it, find:
+   `ui.label(egui::RichText::new("DeckCraft").font(theme::bold(22.0)));`
+   Change `"DeckCraft"` to `deckcraft_engine::brand::APP_NAME`. Nothing else on that line changes.
+2. In the same function, find the line containing `"An open-source, clean-room project. Not affiliated with Microsoft."`.
+   Directly after it, add:
+   `ui.label(egui::RichText::new(deckcraft_engine::brand::BASED_ON).color(t.text_dim));`
+3. Change nothing else in `dialogs.rs`.
+4. Add the test from section 3 at the very end of `backstage_tests.rs`.
+5. Run `cargo fmt -p deckcraft-ui-egui`.
+
+**Check:** `cargo test -p deckcraft-ui-egui backstage`
+
+**Success looks like:** every `backstage` test passes, including `about_shows_edudeck_and_credits_deckcraft`.
+
+**Watch out for:**
+- `dialogs.rs` has many other `"DeckCraft"` strings (the theme list, dialog titles). Leave all of them.
+- The test checks the Account page for the text "About DeckCraft". That still passes, because you did not change it. Don't change it.
+- `t` (the colours) is already defined at the top of `pub fn about`. If the compiler says `t` is not found, stop and report.
+- `query_by_label` fails if two things match, which is why the test uses `query_all_by_label(…).next()` for the name. Copy the test exactly.
+
+---
+
+## 5. Final check (after the last stage)
+
+- [ ] `cargo test -p deckcraft-engine brand` passes
+- [ ] `cargo test -p deckcraft-ui-egui backstage` passes
+- [ ] `cargo clippy -p deckcraft-engine -p deckcraft-ui-egui --all-targets -- -D warnings` shows no warnings
+- [ ] Manual test (Kieran): `cargo run -p deckcraft`, then Help ▸ About shows "EduDeck" and "Based on DeckCraft by the ArtCraft Team"
+- [ ] `git status` shows only the four files from stages 1–2 changed
+
+---
+
+## 6. Stage report format (the local model fills this in after each stage)
+
+```
+STAGE: [number and title]
+STATUS: PASSED / FAILED / STOPPED (unclear)
+FILES CHANGED: [list]
+WHAT I DID: [2–4 lines]
+CHECK OUTPUT: [last few lines of the check command]
+PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
+```
+
+---
+
+## 7. Progress log (update after each stage)
+
+| Stage | Status | Commit | Notes |
+|---|---|---|---|
+| 1 Add the name | Not started | | |
+| 2 Show it in the About box | Not started | | |
