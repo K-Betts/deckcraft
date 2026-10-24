@@ -245,6 +245,47 @@ fn about_shows_edudeck_and_credits_deckcraft() {
 
 ---
 
+### Stage 4 — The Presenter View window's name
+
+**Goal:** during a slide show, the Presenter View window is called "Presenter View — EduDeck".
+
+**Files:**
+- `crates/ui-egui/src/show.rs` — edit: one line.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c 'Presenter View — {}", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/show.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on.
+
+1. Edit `crates/ui-egui/src/show.rs`.
+   Find (it appears once; copy it exactly — the dash is a long dash `—`, not `-`):
+   ```
+   .with_title("Presenter View — DeckCraft")
+   ```
+   Replace with:
+   ```
+   .with_title(format!("Presenter View — {}", deckcraft_engine::brand::APP_NAME))
+   ```
+   Change only those characters. The rest of that line (`egui::ViewportBuilder::default()` before it and `.with_inner_size([1100.0, 700.0]),` after it) stays as it is.
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
+
+2. Run `cargo fmt -p deckcraft-ui-egui`. This splits the line into three, which is expected.
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 3 insertions(+), 1 deletion(-)`.
+
+**Check:** `cargo check -p deckcraft-ui-egui && grep -c 'Presenter View — {}", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/show.rs`
+
+**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (No test of its own, like Stage 3: a test cannot open the real window. In CHECK OUTPUT, paste the `Finished` line and the `1`.)
+
+**Watch out for:**
+- `show.rs` mentions "Presenter View" in other places (labels and comments). Change only the `.with_title(` one.
+- Use `format!(…)`, exactly as given. `"Presenter View — " + APP_NAME` does not compile in Rust.
+- Do not add a `use` line. Do not touch `apps/`.
+
+---
+
 ## 5. Final check (after the last stage)
 
 - [ ] `cargo test -p deckcraft-engine brand` passes
@@ -274,4 +315,5 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 |---|---|---|---|
 | 1 Add the name | **Done** — do not redo | d90694c | Gemma 4 26B |
 | 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
-| 3 The window's name | **Done** — do not redo | see git log | Qwen 3.6 35B, first try, 43 s |
+| 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
+| 4 The Presenter View window's name | Not started | | |
