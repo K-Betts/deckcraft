@@ -18,6 +18,10 @@
 9. Do not repeat your plan back to me. Make the changes, then summarise them.
 10. End every stage with the **Stage report** (format in section 6).
 11. **Never find-and-replace `DeckCraft` across files.** Change only the exact lines a stage names. Most `DeckCraft` text in this project must stay for now.
+12. **Start each stage in a new OpenCode session** (ctrl+p → new session). Never continue an earlier stage's session.
+13. **Edit only with the exact text the stage gives.** When a step says "Find" and "Replace with", the Find text appears once in the file; replace only that. Never retype, move or delete the lines around it. When a step gives a shell command, run it exactly as written.
+14. **After every edit, run `git diff --stat -- crates/`** and compare it with the numbers the stage gives. If they differ, run `git checkout -- <that file>` and do the step again.
+15. **STATUS: PASSED only if** the check output contains `test result: ok` and `0 failed`. Paste that line into CHECK OUTPUT. Always use the report format in section 6.
 
 ---
 
@@ -142,26 +146,59 @@ fn about_shows_edudeck_and_credits_deckcraft() {
 - `crates/ui-egui/src/dialogs.rs` — edit: two lines in `pub fn about`.
 - `crates/ui-egui/src/backstage_tests.rs` — edit: add one test.
 
-**Steps:**
-1. In `dialogs.rs`, find `pub fn about` (near line 3749). Inside it, find:
-   `ui.label(egui::RichText::new("DeckCraft").font(theme::bold(22.0)));`
-   Change `"DeckCraft"` to `deckcraft_engine::brand::APP_NAME`. Nothing else on that line changes.
-2. In the same function, find the line containing `"An open-source, clean-room project. Not affiliated with Microsoft."`.
-   Directly after it, add:
-   `ui.label(egui::RichText::new(deckcraft_engine::brand::BASED_ON).color(t.text_dim));`
-3. Change nothing else in `dialogs.rs`.
-4. Add the test from section 3 at the very end of `backstage_tests.rs`.
-5. Run `cargo fmt -p deckcraft-ui-egui`.
+**Steps:** (do them in this order; check `git diff --stat -- crates/` after each)
+
+1. Edit `crates/ui-egui/src/dialogs.rs`.
+   Find (exactly, 8 spaces at the start):
+   ```
+           ui.label(egui::RichText::new("DeckCraft").font(theme::bold(22.0)));
+   ```
+   Replace with:
+   ```
+           ui.label(egui::RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(22.0)));
+   ```
+   Then `git diff --stat -- crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
+
+2. Edit `crates/ui-egui/src/dialogs.rs` again.
+   Find (exactly):
+   ```
+           ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
+   ```
+   Replace with these two lines:
+   ```
+           ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
+           ui.label(egui::RichText::new(deckcraft_engine::brand::BASED_ON).color(t.text_dim));
+   ```
+   Then `git diff --stat -- crates/` must show: `1 file changed, 2 insertions(+), 1 deletion(-)`.
+
+3. Add the test. **Do not use the edit tool for this.** Run this exact command, which adds it to the end of the file:
+   ```bash
+   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
+
+   #[test]
+   fn about_shows_edudeck_and_credits_deckcraft() {
+       let mut h = harness(new_app());
+       h.state_mut().run("app.about", json!({})).unwrap();
+       h.run_steps(3);
+       assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
+       assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
+   }
+   EOF
+   ```
+   Then `git diff --stat -- crates/` must show: `2 files changed, 11 insertions(+), 1 deletion(-)`.
+   If `backstage_tests.rs` shows any deletion (`-`), run `git checkout -- crates/ui-egui/src/backstage_tests.rs` and run the command again.
+
+4. Run `cargo fmt -p deckcraft-ui-egui`.
 
 **Check:** `cargo test -p deckcraft-ui-egui backstage`
 
-**Success looks like:** every `backstage` test passes, including `about_shows_edudeck_and_credits_deckcraft`.
+**Success looks like:** the last `test result:` line says `ok` and `0 failed`, and the list includes `about_shows_edudeck_and_credits_deckcraft ... ok`.
 
 **Watch out for:**
+- Stage 1 is already done. Do not touch `crates/engine/` in this stage.
 - `dialogs.rs` has many other `"DeckCraft"` strings (the theme list, dialog titles). Leave all of them.
 - The test checks the Account page for the text "About DeckCraft". That still passes, because you did not change it. Don't change it.
-- `t` (the colours) is already defined at the top of `pub fn about`. If the compiler says `t` is not found, stop and report.
-- `query_by_label` fails if two things match, which is why the test uses `query_all_by_label(…).next()` for the name. Copy the test exactly.
+- If the compiler says `t` is not found, stop and report. Do not add it yourself.
 
 ---
 

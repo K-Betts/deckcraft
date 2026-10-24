@@ -12,27 +12,32 @@ committed.
 
 ---
 
-## Phases — fidelity and Mac app
+## Phases (rebuilt 2026-10-24)
 
-| Phase | Work | Done when |
-| --- | --- | --- |
-| 0. Baseline | Build and test on the Mac; know where the PPTX code lives (`crates/pptx`). | Build and tests pass on the Mac. ✅ |
-| 1. Fix the real deck | Equations in table cells, equation fallback text size/font/alignment, the slide 53 notes page. | Open-save-compare shows no lost equations; each fix has a test; Kieran confirms in PowerPoint. ✅ (equations done; notes page known gap) |
-| 2. Fidelity checks | A repeatable script comparing an original deck with the saved copy; run on more real decks. | Every deck has a difference report; each difference is fixed or listed as a known gap. |
-| 3. Maths features | Equations drawn properly in the editor, LaTeX input, review upstream PR #55 (OMML editor), graphs and number lines, step-by-step reveals, exam-question layouts. | Each works in a sample lesson deck that saves and reopens in PowerPoint. |
-| 4. Own app | New name and icon, ArtCraft branding removed, native Mac menu bar, signed .dmg (needs an Apple Developer account). | A colleague can install it. |
-| 5. Word and Excel | Fork WordCraft and GridCraft; repeat phases 0–2. | Same fidelity reports for .docx and .xlsx. |
+Rebuilt from an audit of what exists and Kieran's priorities: the next build is **for Kieran's own
+use**; colleagues come later. The app is being renamed **EduDeck**. The original phase tables are
+summarised under "Done so far"; their detail is in the status table below.
+
+| Phase | Work | Done when | State |
+| --- | --- | --- | --- |
+| E1. Rebrand, part 1 | Everything a teacher sees says EduDeck; new logo drawn in code. Internal names, settings folder, bundle and updater unchanged. Plan: `PLAN.md` (10 stages, for a local model). | `cargo xtask ci` passes; Kieran sees EduDeck in About, the title bar and the web app; settings and own questions survive. | Planned |
+| E2. Rebrand, part 2 | App icon, `EduDeck.app` bundle with an updater that accepts both names, release file names, bundle id, settings folder migration, theme name, file metadata, `docs/brand/` and README. Decisions listed in `PLAN.md` §8. | An updated install is called EduDeck everywhere, nothing is lost, and the old app updates itself to the new one. | Needs Kieran's decisions |
+| E3. PowerPoint fidelity | Run `deckcraft-cli fidelity` on more of Kieran's real decks (copies only); fix each difference or list it as a known gap. Old Phase 2. | Every deck in the test folder has a difference report; each difference is fixed or listed; Kieran confirms in PowerPoint. | Tool built; not run on more decks |
+| E4. iPad and touch | Touch maps to pointer events; Apple Pencil draws on the slide; palm wipe checked on real hardware. Old W2. | Kieran draws on the iPad (web app) with Pencil and fingers during a lesson. | Partly built, unchecked on hardware |
+| E5. Live projection | Presenter URL (editable) and viewer URL (read-only live view) through a tiny stateless relay; no slide content stored or logged. Old W3. | Kieran edits on the iPad and the board shows the change in real time. | Not started |
+| Later | Editable number lines and coordinate grids as slide shapes; high-contrast projector mode; colour-blind palettes (rest of old Phase 3). | | Not started |
+| Later | Sharing with colleagues: signed, notarised `.dmg` (Apple Developer account), app sandbox, `cargo audit`, privacy statement (rest of old Phase 4). | | Not started |
+| Later | Word and Excel: fork WordCraft and GridCraft, repeat E1–E3 for `.docx` and `.xlsx` (old Phase 5). | | Not started |
+
+**Done so far (old phases):** baseline build (0); the real deck's equations and notes (1); web build
+in the browser (W1); installable, offline web app (W4); Teacher Mode with maths tools; Get Ready
+starters (about 3,700 question templates, Years 7 to 11, curriculum mode); equation dialog with a
+live preview; Reveal Step by Step; Exam Question slides; local Mac install and in-app updates.
+
+**Before E1 starts:** `feat/exam-question` and `feat/get-ready-curriculum` are not merged into
+`main` yet. Merge them first (or branch the rebrand from them), so the rebrand covers their text too.
 
 ---
-
-## Phases — web and cross-device
-
-| Phase | Work | Done when |
-| --- | --- | --- |
-| W1. wasm build | The app compiles to wasm32 and runs in a browser on desktop (egui already has an eframe web target; check `cargo build --target wasm32-unknown-unknown`). | Can open and present a deck in Chrome/Safari. |
-| W2. iPad / touch | Touch input maps to pointer events; Apple Pencil draws on the slide (freehand ink → shape, or ink stays as annotation). | Teacher can draw on the iPad while the same URL projects on a Mac or Windows PC. |
-| W3. Live projection | Two-tab or two-device session: a presenter URL (editable) and a viewer URL (read-only live view). WebSockets or SSE to push slide changes; no server needed beyond static hosting + a tiny relay. | Kieran can open the editor on his iPad, project the viewer on a Mac via the same URL, and have changes appear in real time. |
-| W4. PWA / offline | Service worker caches the wasm bundle and the STIX font. App works without a network after first load; files are stored in the browser's origin (OPFS) or opened from local disk via the File System Access API. | Works fully offline on iPad and Mac. |
 
 ## Platform targets
 
