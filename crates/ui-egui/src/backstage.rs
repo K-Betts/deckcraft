@@ -1415,7 +1415,13 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             crate::theme::appearance_picker(app, ui, "backstage_appearance");
             ui.add_space(16.0);
             heading(ui, "User Information");
-            dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
+            dim(
+                ui,
+                &format!(
+                    "{} has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.",
+                    deckcraft_engine::brand::APP_NAME
+                ),
+            );
             if app.ui.drive_enabled {
                 crate::drive_ui::section(app, ui);
             }

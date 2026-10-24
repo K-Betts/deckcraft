@@ -598,3 +598,11 @@ fn file_home_and_account_show_the_edudeck_name() {
         assert!(h.query_all_by_label("EduDeck").next().is_some(), "{} shows EduDeck", p.label());
     }
 }
+
+#[test]
+fn the_account_page_says_edudeck_has_no_accounts() {
+    let mut h = harness(new_app());
+    h.state_mut().run("app.backstage", json!({"page": Page::Account.id()})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label_contains("EduDeck has no accounts of its own").is_some(), "the privacy line names EduDeck");
+}
