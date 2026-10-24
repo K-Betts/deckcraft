@@ -355,6 +355,163 @@ This stage is a little bigger: a test first, then one change in two places. Do t
 
 ---
 
+> **Stages 6, 7 and 8 are three separate jobs.** Do one per OpenCode session. Each starts from a tree
+> where the earlier stages are already committed, so `git diff --stat` starts empty.
+
+### Stage 6 — The privacy line on File ▸ Account
+
+**Goal:** the line under "User Information" on File ▸ Account says "EduDeck has no accounts of its own…", and a test proves it.
+
+**Files:**
+- `crates/ui-egui/src/backstage_tests.rs` — add one test (by a shell command).
+- `crates/ui-egui/src/backstage.rs` — edit: one line.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c '"{} has no accounts of its own' crates/ui-egui/src/backstage.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
+
+1. Add the test. **Do not use the edit tool for this.** Run exactly:
+   ```bash
+   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
+
+   #[test]
+   fn the_account_page_says_edudeck_has_no_accounts() {
+       let mut h = harness(new_app());
+       h.state_mut().run("app.backstage", json!({"page": Page::Account.id()})).unwrap();
+       h.run_steps(3);
+       assert!(h.query_by_label_contains("EduDeck has no accounts of its own").is_some(), "the privacy line names EduDeck");
+   }
+   EOF
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 8 insertions(+)`.
+
+2. Run the new test. **It must fail now:**
+   ```bash
+   cargo test -p deckcraft-ui-egui the_account_page_says
+   ```
+   Expected: `test result: FAILED. 0 passed; 1 failed` and the message `the privacy line names EduDeck`. Anything else: stop and report it.
+
+3. Edit `crates/ui-egui/src/backstage.rs`.
+   Find (it appears once):
+   ```
+   dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
+   ```
+   Replace with:
+   ```
+   dim(ui, &format!("{} has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.", deckcraft_engine::brand::APP_NAME));
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `2 files changed, 9 insertions(+), 1 deletion(-)`.
+
+4. Run `cargo fmt -p deckcraft-ui-egui`. It splits the long line, so now the stat must show: `2 files changed, 15 insertions(+), 1 deletion(-)`. The step 0 command must print `1`.
+
+**Check:** `cargo test -p deckcraft-ui-egui backstage`
+
+**Success looks like:** `test result: ok. 22 passed; 0 failed`, including `the_account_page_says_edudeck_has_no_accounts ... ok`.
+
+**Watch out for:**
+- The `&` before `format!` is needed: `dim` takes text by reference.
+- Step 2 failing is correct. Don't change the test.
+
+---
+
+### Stage 7 — The title on the toolbar when nothing is open
+
+**Goal:** when no presentation is open, the title in the middle of the top bar says EduDeck.
+
+**Files:**
+- `crates/ui-egui/src/ribbon.rs` — edit: one line.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c 'unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into())' crates/ui-egui/src/ribbon.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
+
+1. Edit `crates/ui-egui/src/ribbon.rs`.
+   Find (it appears once, at the end of a long line near line 82):
+   ```
+   .unwrap_or_else(|| "DeckCraft".into());
+   ```
+   Replace with:
+   ```
+   .unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into());
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
+
+2. Run `cargo fmt -p deckcraft-ui-egui`. It splits the long line, so the stat must now show: `1 file changed, 5 insertions(+), 2 deletions(-)`.
+
+**Check:** `cargo check -p deckcraft-ui-egui && grep -c 'unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into())' crates/ui-egui/src/ribbon.rs`
+
+**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (No test: this title is painted, and tests can only read labels. Paste the `Finished` line and the `1`.)
+
+**Watch out for:**
+- Change only the end of that line. The `" — Edited"` part on the same line stays.
+- `dialogs.rs` has a similar `unwrap_or_else(|| "DeckCraft".into())` line. Don't touch it: it is a theme name, not the app name.
+
+---
+
+### Stage 8 — "A new version of EduDeck is ready."
+
+**Goal:** the update screen says "A new version of EduDeck is ready." An existing test already checks this sentence, so this stage changes the test first.
+
+**Files:**
+- `crates/ui-egui/src/update_tests.rs` — edit: one line in an existing test.
+- `crates/ui-egui/src/update_ui.rs` — edit: one line.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c 'A new version of {} is ready.", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/update_ui.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
+
+1. Edit the test first: `crates/ui-egui/src/update_tests.rs`.
+   Find (it appears once, near line 132):
+   ```
+   assert!(h.query_by_label("A new version of DeckCraft is ready.").is_some());
+   ```
+   Replace with:
+   ```
+   assert!(h.query_by_label("A new version of EduDeck is ready.").is_some());
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
+
+2. Run that test. **It must fail now:**
+   ```bash
+   cargo test -p deckcraft-ui-egui the_status_bar_and_dialog
+   ```
+   Expected: `the_status_bar_and_dialog_tell_the_teacher_an_update_is_ready ... FAILED`, panicked at `update_tests.rs:132`, and `test result: FAILED. 0 passed; 1 failed`. Anything else: stop and report it.
+
+3. Edit `crates/ui-egui/src/update_ui.rs`.
+   Find (it appears once, near line 116):
+   ```
+   ui.label(RichText::new("A new version of DeckCraft is ready.").font(theme::bold(15.0)));
+   ```
+   Replace with:
+   ```
+   ui.label(RichText::new(format!("A new version of {} is ready.", deckcraft_engine::brand::APP_NAME)).font(theme::bold(15.0)));
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `2 files changed, 2 insertions(+), 2 deletions(-)`.
+
+4. Run `cargo fmt -p deckcraft-ui-egui`. The stat must stay the same.
+
+**Check:** `cargo test -p deckcraft-ui-egui update`
+
+**Success looks like:** `test result: ok. 9 passed; 0 failed`.
+
+**Watch out for:**
+- `update_ui.rs` has several other "DeckCraft" sentences (restart, check now, status bar). Change only this one. They come later.
+- In step 1 change only the word DeckCraft → EduDeck in that one test line. Leave every other line of the test alone.
+
+---
+
 ## 5. Final check (after the last stage)
 
 - [ ] `cargo test -p deckcraft-engine brand` passes
@@ -386,4 +543,7 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
 | 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
 | 4 The Presenter View window's name | **Done** — do not redo | 8167349 | Qwen 3.6 35B, first try, 50 s |
-| 5 The name on File ▸ Home and Account | **Done** — do not redo | see git log | Qwen 3.6 35B, first try, 52 s |
+| 5 The name on File ▸ Home and Account | **Done** — do not redo | e6013d4 | Qwen 3.6 35B, first try, 52 s |
+| 6 The privacy line on File ▸ Account | Not started | | |
+| 7 The title on the toolbar when nothing is open | Not started | | |
+| 8 "A new version of EduDeck is ready." | Not started | | |
