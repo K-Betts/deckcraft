@@ -316,4 +316,4 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 1 Add the name | **Done** — do not redo | d90694c | Gemma 4 26B |
 | 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
 | 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
-| 4 The Presenter View window's name | Not started | | |
+| 4 The Presenter View window's name | **Done** — do not redo | see git log | Qwen 3.6 35B, first try, 50 s |
