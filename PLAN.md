@@ -22,6 +22,10 @@
 13. **Edit only with the exact text the stage gives.** When a step says "Find" and "Replace with", the Find text appears once in the file; replace only that. Never retype, move or delete the lines around it. When a step gives a shell command, run it exactly as written.
 14. **After every edit, run `git diff --stat -- crates/`** and compare it with the numbers the stage gives. If they differ, run `git checkout -- <that file>` and do the step again.
 15. **STATUS: PASSED only if** the check output contains `test result: ok` and `0 failed`. Paste that line into CHECK OUTPUT. Always use the report format in section 6.
+16. **Trust the progress log (section 7).** A stage marked Done is finished: never redo it. If you are asked for a stage that is not in section 4, stop and report `STATUS: STOPPED (no such stage)`.
+17. **Every stage starts with an "already done?" command.** If it says the work is already there, report `STATUS: ALREADY DONE` and stop.
+18. **Stop if you are going round in circles.** If you run the same command twice and get the same result, or you have used 15 tool calls in this stage, stop and report what you saw.
+19. **Do not commit.** Claude checks your work and commits it.
 
 ---
 
@@ -34,7 +38,7 @@
 **Done means:** the new test `about_shows_edudeck_and_credits_deckcraft` passes, all the other tests in the `backstage` group still pass, and Kieran sees "EduDeck" in Help ▸ About.
 
 **Out of scope (do not do):**
-- Changing "DeckCraft" anywhere else (window title, menus, other dialogs, the theme called DeckCraft, folders, file names).
+- Changing "DeckCraft" anywhere a stage does not name (menus, other dialogs, the title drawn on the toolbar, the theme called DeckCraft, folders, file names).
 - Changing the logo, links or anything else in the About box.
 
 ---
@@ -202,13 +206,52 @@ fn about_shows_edudeck_and_credits_deckcraft() {
 
 ---
 
+### Stage 3 — The window's name
+
+**Goal:** the Mac window is named EduDeck (what you see in Mission Control and the Window menu).
+
+**Files:**
+- `apps/deckcraft/src/main.rs` — edit: one line.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c 'with_title(deckcraft_engine::brand::APP_NAME)' apps/deckcraft/src/main.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on.
+
+1. Edit `apps/deckcraft/src/main.rs`.
+   Find (exactly, 12 spaces at the start; it appears once):
+   ```
+               .with_title("DeckCraft")
+   ```
+   Replace with:
+   ```
+               .with_title(deckcraft_engine::brand::APP_NAME)
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
+
+2. Run `cargo fmt -p deckcraft`. The diff stat must still be the same.
+
+**Check:** `cargo check -p deckcraft && grep -c 'with_title(deckcraft_engine::brand::APP_NAME)' apps/deckcraft/src/main.rs`
+
+**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (This stage has no test of its own, because a test cannot open the real Mac window. In CHECK OUTPUT, paste the `Finished` line and the `1`.)
+
+**Watch out for:**
+- `main.rs` has other `"DeckCraft"` strings (a folder name on line ~65, a file-type filter on line ~115, the app name near line ~247). Leave all of them. Only the `.with_title(` line changes.
+- Do not add a `use` line. The full path `deckcraft_engine::brand::APP_NAME` works as it is.
+- Do not touch `crates/`. The title drawn on the toolbar is a later stage.
+
+---
+
 ## 5. Final check (after the last stage)
 
 - [ ] `cargo test -p deckcraft-engine brand` passes
 - [ ] `cargo test -p deckcraft-ui-egui backstage` passes
 - [ ] `cargo clippy -p deckcraft-engine -p deckcraft-ui-egui --all-targets -- -D warnings` shows no warnings
 - [ ] Manual test (Kieran): `cargo run -p deckcraft`, then Help ▸ About shows "EduDeck" and "Based on DeckCraft by the ArtCraft Team"
-- [ ] `git status` shows only the four files from stages 1–2 changed
+- [ ] Manual test (Kieran): with the app running, the Window menu and Mission Control show "EduDeck"
 
 ---
 
@@ -229,5 +272,6 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 
 | Stage | Status | Commit | Notes |
 |---|---|---|---|
-| 1 Add the name | Not started | | |
-| 2 Show it in the About box | Not started | | |
+| 1 Add the name | **Done** — do not redo | d90694c | Gemma 4 26B |
+| 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
+| 3 The window's name | Not started | | |
