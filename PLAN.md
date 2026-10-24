@@ -544,6 +544,6 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
 | 4 The Presenter View window's name | **Done** — do not redo | 8167349 | Qwen 3.6 35B, first try, 50 s |
 | 5 The name on File ▸ Home and Account | **Done** — do not redo | e6013d4 | Qwen 3.6 35B, first try, 52 s |
-| 6 The privacy line on File ▸ Account | Not started | | |
-| 7 The title on the toolbar when nothing is open | Not started | | |
-| 8 "A new version of EduDeck is ready." | Not started | | |
+| 6 The privacy line on File ▸ Account | **Done** — do not redo | c6a4a2c | Qwen 3.6 35B, all three in one session, first try |
+| 7 The title on the toolbar when nothing is open | **Done** — do not redo | 9f86b69 | (same session) |
+| 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
