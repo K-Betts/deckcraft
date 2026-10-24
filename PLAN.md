@@ -25,7 +25,7 @@
 16. **Trust the progress log (section 7).** A stage marked Done is finished: never redo it. If you are asked for a stage that is not in section 4, stop and report `STATUS: STOPPED (no such stage)`.
 17. **Every stage starts with an "already done?" command.** If it says the work is already there, report `STATUS: ALREADY DONE` and stop.
 18. **Stop if you are going round in circles.** If you run the same command twice and get the same result, or you have used 15 tool calls in this stage, stop and report what you saw.
-19. **Do not commit.** Claude checks your work and commits it.
+19. **Do not commit**, unless the stage has a **Commit** step (Stages 9 and later). Then follow section 4a.
 
 ---
 
@@ -512,6 +512,259 @@ This stage is a little bigger: a test first, then one change in two places. Do t
 
 ---
 
+## 4a. Checking and committing your own work (Stages 9 and later)
+
+From Stage 9 you check your own work and commit each stage yourself. Claude reviews the commits afterwards. You may do Stages 9–12 in one session, one after another, **in order**.
+
+1. **Commit only when every check in the stage matched**: the step 0 number, each diff stat, the "must fail" result, and the final `test result:` line. If any of them differed, do **not** commit. Stop, and report what you saw.
+2. **Commit with the exact command the stage gives.** It adds only the two named files. Never use `git add -A`, `git add .`, `git commit -a`, `--amend`, `git push`, `git reset`, `git checkout` or `git stash`.
+3. **After committing, run `git status --short`.** It must print nothing. If it prints anything, stop and report it.
+4. **Each stage starts from a clean tree**, because the stage before it was committed. So every diff stat in a stage counts that stage's changes only.
+5. **If you do anything differently from the plan, say so**, even if it worked: a different command, an extra step, a skipped step, a number you worked out yourself. Put it under DIFFERENT FROM THE PLAN in the report. "None" is fine when it's true.
+6. **One stage fails → stop the batch.** Do not start the next stage.
+
+Use this report after **each** stage (not one summary at the end):
+
+```
+STAGE: [number and title]
+STATUS: PASSED / FAILED / STOPPED / ALREADY DONE
+FILES CHANGED: [list]
+MUST-FAIL RESULT: [the FAILED line and the panic message from step 2]
+CHECK OUTPUT: [the final test result line]
+COMMIT: [the short hash from `git log --oneline -1`, or "not committed"]
+GIT STATUS AFTER COMMIT: [empty, or what it printed]
+DIFFERENT FROM THE PLAN: [anything you did differently, or "None"]
+PROBLEMS / QUESTIONS: [or "None"]
+```
+
+All four stages below change the same two files:
+- `crates/ui-egui/src/update_tests.rs` — add one test (by a shell command).
+- `crates/ui-egui/src/update_ui.rs` — edit one line.
+
+The panic line numbers (`update_tests.rs:171` and so on) are what Claude saw; yours may differ by a few lines. The message text must match exactly.
+
+---
+
+### Stage 9 — "Restart EduDeck to use the new version."
+
+**Goal:** after an update installs, the update screen says "Restart EduDeck to use the new version."
+
+**Steps:**
+
+0. Already done? `grep -c 'Restart {} to use the new version' crates/ui-egui/src/update_ui.rs` — `1`: report ALREADY DONE and go to the next stage. `0`: carry on.
+
+1. Add the test (run exactly; do not use the edit tool):
+   ```bash
+   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
+
+   #[test]
+   fn the_installed_screen_asks_to_restart_edudeck() {
+       let (app, log) = app();
+       log.borrow_mut().state = Some(UpdateState::Installed);
+       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+           |ui, app: &mut SlideApp| {
+               app.logic(ui.ctx());
+               app.ui(ui);
+           },
+           app,
+       );
+       h.run_steps(3);
+       h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
+       h.run_steps(3);
+       assert!(h.query_by_label("Restart EduDeck to use the new version.").is_some(), "the restart line names EduDeck");
+   }
+   EOF
+   ```
+   Stat must show: `1 file changed, 17 insertions(+)`.
+
+2. **Must fail:** `cargo test -p deckcraft-ui-egui the_installed_screen` → `test result: FAILED. 0 passed; 1 failed` with the message `the restart line names EduDeck`.
+
+3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
+   ```
+   ui.label("Restart DeckCraft to use the new version.");
+   ```
+   Replace with:
+   ```
+   ui.label(format!("Restart {} to use the new version.", deckcraft_engine::brand::APP_NAME));
+   ```
+   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
+
+4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
+
+**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 10 passed; 0 failed`.
+
+**Commit** (only if everything above matched):
+```bash
+git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 9: update screen asks to restart EduDeck"
+```
+Then `git status --short` must print nothing.
+
+---
+
+### Stage 10 — "Check GitHub for a newer version of EduDeck?"
+
+**Goal:** the first update screen asks "Check GitHub for a newer version of EduDeck? …"
+
+**Steps:**
+
+0. Already done? `grep -c 'newer version of {}? This sends' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE, next stage. `0`: carry on.
+
+1. Add the test (run exactly):
+   ```bash
+   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
+
+   #[test]
+   fn the_check_screen_names_edudeck() {
+       let (app, log) = app();
+       log.borrow_mut().state = Some(UpdateState::Idle);
+       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+           |ui, app: &mut SlideApp| {
+               app.logic(ui.ctx());
+               app.ui(ui);
+           },
+           app,
+       );
+       h.run_steps(3);
+       h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
+       h.run_steps(3);
+       assert!(h.query_by_label_contains("a newer version of EduDeck?").is_some(), "the check line names EduDeck");
+   }
+   EOF
+   ```
+   Stat must show: `1 file changed, 17 insertions(+)`.
+
+2. **Must fail:** `cargo test -p deckcraft-ui-egui the_check_screen` → `FAILED. 0 passed; 1 failed` with `the check line names EduDeck`.
+
+3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
+   ```
+   ui.label("Check GitHub for a newer version of DeckCraft? This sends no personal information.");
+   ```
+   Replace with:
+   ```
+   ui.label(format!("Check GitHub for a newer version of {}? This sends no personal information.", deckcraft_engine::brand::APP_NAME));
+   ```
+   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
+
+4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
+
+**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 11 passed; 0 failed`.
+
+**Commit:**
+```bash
+git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 10: update check screen names EduDeck"
+```
+Then `git status --short` must print nothing.
+
+---
+
+### Stage 11 — "restarting closes EduDeck"
+
+**Goal:** if you try to restart with unsaved work, the refusal says "save your work first: restarting closes EduDeck".
+
+**Steps:**
+
+0. Already done? `grep -c 'restarting closes {}' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE, next stage. `0`: carry on.
+
+1. Add the test (run exactly):
+   ```bash
+   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
+
+   #[test]
+   fn the_restart_refusal_names_edudeck() {
+       let (mut app, log) = app();
+       log.borrow_mut().state = Some(UpdateState::Installed);
+       app.session.execute("slide.new", &json!({})).unwrap();
+       let err = app.run("update.restart", json!({})).unwrap_err();
+       assert!(err.contains("restarting closes EduDeck"), "{err}");
+   }
+   EOF
+   ```
+   Stat must show: `1 file changed, 9 insertions(+)`.
+
+2. **Must fail:** `cargo test -p deckcraft-ui-egui the_restart_refusal` → `FAILED. 0 passed; 1 failed` with the message `save your work first: restarting closes DeckCraft` (the old text, printed by the test).
+
+3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
+   ```
+   return Err("save your work first: restarting closes DeckCraft".into());
+   ```
+   Replace with:
+   ```
+   return Err(format!("save your work first: restarting closes {}", deckcraft_engine::brand::APP_NAME));
+   ```
+   Stat must show: `2 files changed, 10 insertions(+), 1 deletion(-)`.
+
+4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
+
+**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 12 passed; 0 failed`.
+
+**Commit:**
+```bash
+git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 11: restart refusal names EduDeck"
+```
+Then `git status --short` must print nothing.
+
+**Watch out for:** `format!` already makes a `String`, so there is no `.into()` at the end of the new line.
+
+---
+
+### Stage 12 — "A new version of EduDeck is available"
+
+**Goal:** the card on File ▸ Home says "A new version of EduDeck is available (…)."
+
+**Steps:**
+
+0. Already done? `grep -c 'A new version of {} is available' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE. `0`: carry on.
+
+1. Add the test (run exactly):
+   ```bash
+   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
+
+   #[test]
+   fn the_home_card_says_a_new_version_of_edudeck_is_available() {
+       let (app, log) = app();
+       log.borrow_mut().state = Some(available());
+       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+           |ui, app: &mut SlideApp| {
+               app.logic(ui.ctx());
+               app.ui(ui);
+           },
+           app,
+       );
+       h.run_steps(3);
+       h.state_mut().run("app.backstage", json!({"page": "home"})).unwrap();
+       h.run_steps(3);
+       assert!(h.query_by_label("A new version of EduDeck is available (abc1234).").is_some(), "the Home card names EduDeck");
+   }
+   EOF
+   ```
+   Stat must show: `1 file changed, 17 insertions(+)`.
+
+2. **Must fail:** `cargo test -p deckcraft-ui-egui the_home_card_says` → `FAILED. 0 passed; 1 failed` with `the Home card names EduDeck`.
+
+3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
+   ```
+   ui.add(egui::Label::new(format!("A new version of DeckCraft is available ({sha}).")).wrap());
+   ```
+   Replace with:
+   ```
+   ui.add(egui::Label::new(format!("A new version of {} is available ({sha}).", deckcraft_engine::brand::APP_NAME)).wrap());
+   ```
+   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
+
+4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
+
+**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 13 passed; 0 failed`.
+
+**Commit:**
+```bash
+git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 12: Home update card names EduDeck"
+```
+Then `git status --short` must print nothing.
+
+**Watch out for:** keep `({sha})` exactly as it is; only the word DeckCraft becomes `{}`, with the name added at the end.
+
+---
+
 ## 5. Final check (after the last stage)
 
 - [ ] `cargo test -p deckcraft-engine brand` passes
@@ -547,3 +800,7 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 6 The privacy line on File ▸ Account | **Done** — do not redo | c6a4a2c | Qwen 3.6 35B, all three in one session, first try |
 | 7 The title on the toolbar when nothing is open | **Done** — do not redo | 9f86b69 | (same session) |
 | 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
+| 9 "Restart EduDeck to use the new version." | Not started | | Qwen commits itself |
+| 10 "Check GitHub for a newer version of EduDeck?" | Not started | | Qwen commits itself |
+| 11 "restarting closes EduDeck" | Not started | | Qwen commits itself |
+| 12 "A new version of EduDeck is available" | Not started | | Qwen commits itself |
