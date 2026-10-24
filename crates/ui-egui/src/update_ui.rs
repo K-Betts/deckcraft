@@ -113,7 +113,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
             });
         }
         UpdateState::Available { label, sha, notes } => {
-            ui.label(RichText::new("A new version of DeckCraft is ready.").font(theme::bold(15.0)));
+            ui.label(RichText::new(format!("A new version of {} is ready.", deckcraft_engine::brand::APP_NAME)).font(theme::bold(15.0)));
             ui.label(RichText::new(format!("You have: {}    New: {} ({label})", current.unwrap_or_else(|| "unknown".into()), sha)).color(t.text_dim));
             if !notes.trim().is_empty() {
                 egui::ScrollArea::vertical().max_height(120.0).show(ui, |ui| {

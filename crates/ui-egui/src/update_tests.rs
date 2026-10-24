@@ -129,7 +129,7 @@ fn the_status_bar_and_dialog_tell_the_teacher_an_update_is_ready() {
     assert!(h.query_by_label("Update available").is_some(), "a chip in the status bar");
     h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
     h.run_steps(3);
-    assert!(h.query_by_label("A new version of DeckCraft is ready.").is_some());
+    assert!(h.query_by_label("A new version of EduDeck is ready.").is_some());
     assert!(h.query_by_label_contains("Per-question Get Ready").is_some(), "the notes are shown");
     h.get_by_label("Update now").click();
     h.run_steps(3);
