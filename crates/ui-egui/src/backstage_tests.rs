@@ -587,3 +587,14 @@ fn about_shows_edudeck_and_credits_deckcraft() {
     assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
     assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
 }
+
+#[test]
+fn file_home_and_account_show_the_edudeck_name() {
+    let mut h = harness(new_app());
+    for p in [Page::Home, Page::Account] {
+        h.state_mut().run("app.backstage", json!({"page": p.id()})).unwrap();
+        h.run_steps(3);
+        assert_eq!(page(&h), Some(p));
+        assert!(h.query_all_by_label("EduDeck").next().is_some(), "{} shows EduDeck", p.label());
+    }
+}
