@@ -286,6 +286,75 @@ fn about_shows_edudeck_and_credits_deckcraft() {
 
 ---
 
+### Stage 5 — The name on File ▸ Home and File ▸ Account
+
+**Goal:** the big name next to the logo on the File ▸ Home page and on the File ▸ Account page says EduDeck, and a test proves it.
+
+This stage is a little bigger: a test first, then one change in two places. Do the steps in order.
+
+**Files:**
+- `crates/ui-egui/src/backstage_tests.rs` — add one test (by a shell command).
+- `crates/ui-egui/src/backstage.rs` — edit: the same line, in two places.
+
+**Steps:**
+
+0. Already done? Run:
+   ```bash
+   grep -c 'RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(24.0))' crates/ui-egui/src/backstage.rs
+   ```
+   If it prints `2`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on. Any other number: stop and report it.
+
+1. Add the test. **Do not use the edit tool for this.** Run this exact command, which adds it to the end of the file:
+   ```bash
+   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
+
+   #[test]
+   fn file_home_and_account_show_the_edudeck_name() {
+       let mut h = harness(new_app());
+       for p in [Page::Home, Page::Account] {
+           h.state_mut().run("app.backstage", json!({"page": p.id()})).unwrap();
+           h.run_steps(3);
+           assert_eq!(page(&h), Some(p));
+           assert!(h.query_all_by_label("EduDeck").next().is_some(), "{} shows EduDeck", p.label());
+       }
+   }
+   EOF
+   ```
+   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 11 insertions(+)`.
+
+2. Run the new test. **It must fail at this point** — that proves it tests something:
+   ```bash
+   cargo test -p deckcraft-ui-egui file_home_and_account
+   ```
+   Expected: `test result: FAILED. 0 passed; 1 failed` and the message `Home shows EduDeck`.
+   If it passes instead, or fails with a different message (for example a compile error), stop and report the output.
+
+3. Edit `crates/ui-egui/src/backstage.rs`. This line appears **exactly twice** (once on the Home page, once on the Account page), and both must change. Use the edit tool's **replace all** option.
+   Find:
+   ```
+   ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
+   ```
+   Replace with:
+   ```
+   ui.label(RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(24.0)).color(t.text));
+   ```
+   Then run the step 0 command again: it must print `2`.
+   And `git diff --stat -- apps/ crates/` must show: `2 files changed, 13 insertions(+), 2 deletions(-)`.
+
+4. Run `cargo fmt -p deckcraft-ui-egui`. The diff stat must stay the same.
+
+**Check:** `cargo test -p deckcraft-ui-egui backstage`
+
+**Success looks like:** the last `test result:` line says `ok. 21 passed; 0 failed`, and the list includes `file_home_and_account_show_the_edudeck_name ... ok`.
+
+**Watch out for:**
+- Step 2 failing is correct. Do not "fix" the test. Move on to step 3.
+- `backstage.rs` has other `"DeckCraft"` text (a theme name near line 549, comments). Change only the two `ui.label(RichText::new("DeckCraft")` lines.
+- If your edit tool has no replace-all option, do the same edit twice, then check that the step 0 command prints `2`.
+- The test file already has a test that looks for "About DeckCraft" on the Account page. It must still pass. Don't change it.
+
+---
+
 ## 5. Final check (after the last stage)
 
 - [ ] `cargo test -p deckcraft-engine brand` passes
@@ -316,4 +385,5 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 1 Add the name | **Done** — do not redo | d90694c | Gemma 4 26B |
 | 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
 | 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
-| 4 The Presenter View window's name | **Done** — do not redo | see git log | Qwen 3.6 35B, first try, 50 s |
+| 4 The Presenter View window's name | **Done** — do not redo | 8167349 | Qwen 3.6 35B, first try, 50 s |
+| 5 The name on File ▸ Home and Account | Not started | | |
