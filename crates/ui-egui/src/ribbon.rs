@@ -78,8 +78,11 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
         let has_doc = app.session.active().is_some();
         let dirty = app.session.active().is_some_and(|d| d.is_dirty());
         crate::qat::show(app, &mut child);
-        let title =
-            app.session.active().map(|d| format!("{}{}", d.title(), if dirty { " — Edited" } else { "" })).unwrap_or_else(|| "DeckCraft".into());
+        let title = app
+            .session
+            .active()
+            .map(|d| format!("{}{}", d.title(), if dirty { " — Edited" } else { "" }))
+            .unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into());
         // The title sits between the two button groups, so it needs the room for both.
         if rect.width() >= 760.0 {
             ui.painter().text(rect.center(), Align2::CENTER_CENTER, title, theme::font(13.0), t.text);
