@@ -196,3 +196,20 @@ fn the_check_screen_names_edudeck() {
     h.run_steps(3);
     assert!(h.query_all_by_label_contains("a newer version of EduDeck?").next().is_some(), "the check line names EduDeck");
 }
+
+#[test]
+fn the_home_card_says_a_new_version_of_edudeck_is_available() {
+    let (app, log) = app();
+    log.borrow_mut().state = Some(available());
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(3);
+    h.state_mut().run("app.backstage", json!({"page": "home"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label("A new version of EduDeck is available (abc1234).").is_some(), "the Home card names EduDeck");
+}
