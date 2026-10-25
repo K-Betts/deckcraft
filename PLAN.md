@@ -786,6 +786,6 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 7 The title on the toolbar when nothing is open | **Done** — do not redo | 9f86b69 | (same session) |
 | 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
 | 9 "Restart EduDeck to use the new version." | **Done** — do not redo | 6a9c33f | gemma-4-26b-a4b-it-mlx, via Workspace, 49s |
-| 10 "Check GitHub for a newer version of EduDeck?" | Not started | | Workspace commits |
+| 10 "Check GitHub for a newer version of EduDeck?" | **Done** — do not redo | 4f2fa7d | gemma-4-26b-a4b-it-mlx, via Workspace, 406s |
 | 11 "restarting closes EduDeck" | **Done** — do not redo | 169d024 | qwen3.6-35b-a3b, via Workspace, 45s |
 | 12 "A new version of EduDeck is available" | Not started | | Workspace commits |
