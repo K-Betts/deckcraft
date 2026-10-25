@@ -25,7 +25,7 @@
 16. **Trust the progress log (section 7).** A stage marked Done is finished: never redo it. If you are asked for a stage that is not in section 4, stop and report `STATUS: STOPPED (no such stage)`.
 17. **Every stage starts with an "already done?" command.** If it says the work is already there, report `STATUS: ALREADY DONE` and stop.
 18. **Stop if you are going round in circles.** If you run the same command twice and get the same result, or you have used 15 tool calls in this stage, stop and report what you saw.
-19. **Do not commit**, unless the stage has a **Commit** step (Stages 9 and later). Then follow section 4a.
+19. **Never commit.** Workspace runs the stage's Check itself and commits for you only if it passes. Never use `git add`, `git commit`, `git reset`, `git checkout` (except rule 14), `git stash` or `git push`.
 
 ---
 
@@ -512,18 +512,19 @@ This stage is a little bigger: a test first, then one change in two places. Do t
 
 ---
 
-## 4a. Checking and committing your own work (Stages 9 and later)
+## 4a. How Stages 9 and later run (Workspace)
 
-From Stage 9 you check your own work and commit each stage yourself. Claude reviews the commits afterwards. You may do Stages 9–12 in one session, one after another, **in order**.
+Workspace runs each stage in its own OpenCode session, then runs the **Check** itself. If the check passes,
+Workspace commits and ticks the progress log. If it fails, Workspace saves your attempt, resets the tree and
+moves on to the next stage that does not **Need** the failed one.
 
-1. **Commit only when every check in the stage matched**: the step 0 number, each diff stat, the "must fail" result, and the final `test result:` line. If any of them differed, do **not** commit. Stop, and report what you saw.
-2. **Commit with the exact command the stage gives.** It adds only the two named files. Never use `git add -A`, `git add .`, `git commit -a`, `--amend`, `git push`, `git reset`, `git checkout` or `git stash`.
-3. **After committing, run `git status --short`.** It must print nothing. If it prints anything, stop and report it.
-4. **Each stage starts from a clean tree**, because the stage before it was committed. So every diff stat in a stage counts that stage's changes only.
-5. **If you do anything differently from the plan, say so**, even if it worked: a different command, an extra step, a skipped step, a number you worked out yourself. Put it under DIFFERENT FROM THE PLAN in the report. "None" is fine when it's true.
-6. **One stage fails → stop the batch.** Do not start the next stage.
+1. Do **one stage only**, then stop. Never start the next stage.
+2. **Do not commit.** Leave your changes in the working tree for Workspace to check.
+3. **Every stage starts from a clean tree**, so every diff stat in a stage counts that stage's changes only.
+4. If any number in a stage differs from the plan (step 0, a diff stat, the "must fail" result), **stop and report it**. Do not try to make it match.
+5. **If you do anything differently from the plan, say so**, even if it worked, under DIFFERENT FROM THE PLAN. "None" is fine when it's true.
 
-Use this report after **each** stage (not one summary at the end):
+Use this report at the end of the stage:
 
 ```
 STAGE: [number and title]
@@ -531,8 +532,6 @@ STATUS: PASSED / FAILED / STOPPED / ALREADY DONE
 FILES CHANGED: [list]
 MUST-FAIL RESULT: [the FAILED line and the panic message from step 2]
 CHECK OUTPUT: [the final test result line]
-COMMIT: [the short hash from `git log --oneline -1`, or "not committed"]
-GIT STATUS AFTER COMMIT: [empty, or what it printed]
 DIFFERENT FROM THE PLAN: [anything you did differently, or "None"]
 PROBLEMS / QUESTIONS: [or "None"]
 ```
@@ -541,7 +540,9 @@ All four stages below change the same two files:
 - `crates/ui-egui/src/update_tests.rs` — add one test (by a shell command).
 - `crates/ui-egui/src/update_ui.rs` — edit one line.
 
-The panic line numbers (`update_tests.rs:171` and so on) are what Claude saw; yours may differ by a few lines. The message text must match exactly.
+Each of Stages 9–12 changes different lines, so none of them needs another to have passed.
+
+The panic line numbers are what Claude saw; yours may differ by a few lines. The message text must match exactly.
 
 ---
 
@@ -551,7 +552,7 @@ The panic line numbers (`update_tests.rs:171` and so on) are what Claude saw; yo
 
 **Steps:**
 
-0. Already done? `grep -c 'Restart {} to use the new version' crates/ui-egui/src/update_ui.rs` — `1`: report ALREADY DONE and go to the next stage. `0`: carry on.
+0. Already done? `grep -c 'Restart {} to use the new version' crates/ui-egui/src/update_ui.rs` — `1`: report ALREADY DONE and stop. `0`: carry on.
 
 1. Add the test (run exactly; do not use the edit tool):
    ```bash
@@ -591,13 +592,9 @@ The panic line numbers (`update_tests.rs:171` and so on) are what Claude saw; yo
 
 4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
 
-**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 10 passed; 0 failed`.
+**Needs:** none
 
-**Commit** (only if everything above matched):
-```bash
-git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 9: update screen asks to restart EduDeck"
-```
-Then `git status --short` must print nothing.
+**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
 
 ---
 
@@ -607,7 +604,7 @@ Then `git status --short` must print nothing.
 
 **Steps:**
 
-0. Already done? `grep -c 'newer version of {}? This sends' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE, next stage. `0`: carry on.
+0. Already done? `grep -c 'newer version of {}? This sends' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE and stop. `0`: carry on.
 
 1. Add the test (run exactly):
    ```bash
@@ -647,13 +644,9 @@ Then `git status --short` must print nothing.
 
 4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
 
-**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 11 passed; 0 failed`.
+**Needs:** none
 
-**Commit:**
-```bash
-git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 10: update check screen names EduDeck"
-```
-Then `git status --short` must print nothing.
+**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
 
 ---
 
@@ -663,7 +656,7 @@ Then `git status --short` must print nothing.
 
 **Steps:**
 
-0. Already done? `grep -c 'restarting closes {}' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE, next stage. `0`: carry on.
+0. Already done? `grep -c 'restarting closes {}' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE and stop. `0`: carry on.
 
 1. Add the test (run exactly):
    ```bash
@@ -695,13 +688,9 @@ Then `git status --short` must print nothing.
 
 4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
 
-**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 12 passed; 0 failed`.
+**Needs:** none
 
-**Commit:**
-```bash
-git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 11: restart refusal names EduDeck"
-```
-Then `git status --short` must print nothing.
+**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
 
 **Watch out for:** `format!` already makes a `String`, so there is no `.into()` at the end of the new line.
 
@@ -753,13 +742,9 @@ Then `git status --short` must print nothing.
 
 4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
 
-**Check:** `cargo test -p deckcraft-ui-egui update` → `test result: ok. 13 passed; 0 failed`.
+**Needs:** none
 
-**Commit:**
-```bash
-git add crates/ui-egui/src/update_ui.rs crates/ui-egui/src/update_tests.rs && git commit -m "rebrand stage 12: Home update card names EduDeck"
-```
-Then `git status --short` must print nothing.
+**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
 
 **Watch out for:** keep `({sha})` exactly as it is; only the word DeckCraft becomes `{}`, with the name added at the end.
 
@@ -800,7 +785,7 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 6 The privacy line on File ▸ Account | **Done** — do not redo | c6a4a2c | Qwen 3.6 35B, all three in one session, first try |
 | 7 The title on the toolbar when nothing is open | **Done** — do not redo | 9f86b69 | (same session) |
 | 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
-| 9 "Restart EduDeck to use the new version." | Not started | | Qwen commits itself |
-| 10 "Check GitHub for a newer version of EduDeck?" | Not started | | Qwen commits itself |
-| 11 "restarting closes EduDeck" | Not started | | Qwen commits itself |
-| 12 "A new version of EduDeck is available" | Not started | | Qwen commits itself |
+| 9 "Restart EduDeck to use the new version." | Not started | | Workspace commits |
+| 10 "Check GitHub for a newer version of EduDeck?" | Not started | | Workspace commits |
+| 11 "restarting closes EduDeck" | Not started | | Workspace commits |
+| 12 "A new version of EduDeck is available" | Not started | | Workspace commits |
