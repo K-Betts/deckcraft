@@ -68,7 +68,7 @@ impl SlideApp {
             }
             "update.restart" => {
                 if self.session.documents().iter().any(|d| d.is_dirty()) {
-                    return Err(format!("save your work first: restarting closes {}", deckcraft_engine::brand::APP_NAME));
+                    return Err("save your work first: restarting closes DeckCraft".into());
                 }
                 u.restart()?;
                 self.quit_confirmed = true;
@@ -89,7 +89,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
     let mut close = false;
     match state {
         UpdateState::Idle => {
-            ui.label(format!("Check GitHub for a newer version of {}? This sends no personal information.", deckcraft_engine::brand::APP_NAME));
+            ui.label("Check GitHub for a newer version of DeckCraft? This sends no personal information.");
             ui.horizontal(|ui| {
                 if ui.button("Check now").clicked() {
                     let _ = app.run("update.check", json!({}));
@@ -113,7 +113,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
             });
         }
         UpdateState::Available { label, sha, notes } => {
-            ui.label(RichText::new(format!("A new version of {} is ready.", deckcraft_engine::brand::APP_NAME)).font(theme::bold(15.0)));
+            ui.label(RichText::new("A new version of DeckCraft is ready.").font(theme::bold(15.0)));
             ui.label(RichText::new(format!("You have: {}    New: {} ({label})", current.unwrap_or_else(|| "unknown".into()), sha)).color(t.text_dim));
             if !notes.trim().is_empty() {
                 egui::ScrollArea::vertical().max_height(120.0).show(ui, |ui| {
@@ -136,7 +136,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
         }
         UpdateState::Installed => {
             ui.label(RichText::new("Updated.").font(theme::bold(15.0)));
-            ui.label(format!("Restart {} to use the new version.", deckcraft_engine::brand::APP_NAME));
+            ui.label("Restart DeckCraft to use the new version.");
             let unsaved = app.session.documents().iter().any(|d| d.is_dirty());
             if unsaved {
                 ui.colored_label(Color32::from_rgb(200, 60, 60), "You have unsaved changes: save them first, then restart.");
@@ -189,7 +189,7 @@ pub fn home_card(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
     ui.add_space(12.0);
     egui::Frame::new().fill(t.selected).corner_radius(theme::radius::SURFACE).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
-        ui.add(egui::Label::new(format!("A new version of {} is available ({sha}).", deckcraft_engine::brand::APP_NAME)).wrap());
+        ui.add(egui::Label::new(format!("A new version of DeckCraft is available ({sha}).")).wrap());
         let main = egui::Button::new(RichText::new("See what's new").color(t.accent_text).font(theme::bold(13.0)))
             .fill(t.accent)
             .corner_radius(theme::radius::CONTROL)

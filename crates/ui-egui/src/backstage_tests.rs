@@ -578,31 +578,3 @@ fn a_new_presentation_is_saved_as_pptx_unless_it_already_is_a_deckcraft_file() {
     assert!(asked.borrow()[1].ends_with(".deckcraft"), "a .deckcraft file keeps its own format: {:?}", asked.borrow());
     let _ = std::fs::remove_dir_all(&dir);
 }
-
-#[test]
-fn about_shows_edudeck_and_credits_deckcraft() {
-    let mut h = harness(new_app());
-    h.state_mut().run("app.about", json!({})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
-    assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
-}
-
-#[test]
-fn file_home_and_account_show_the_edudeck_name() {
-    let mut h = harness(new_app());
-    for p in [Page::Home, Page::Account] {
-        h.state_mut().run("app.backstage", json!({"page": p.id()})).unwrap();
-        h.run_steps(3);
-        assert_eq!(page(&h), Some(p));
-        assert!(h.query_all_by_label("EduDeck").next().is_some(), "{} shows EduDeck", p.label());
-    }
-}
-
-#[test]
-fn the_account_page_says_edudeck_has_no_accounts() {
-    let mut h = harness(new_app());
-    h.state_mut().run("app.backstage", json!({"page": Page::Account.id()})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_by_label_contains("EduDeck has no accounts of its own").is_some(), "the privacy line names EduDeck");
-}

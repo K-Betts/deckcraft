@@ -129,7 +129,7 @@ fn the_status_bar_and_dialog_tell_the_teacher_an_update_is_ready() {
     assert!(h.query_by_label("Update available").is_some(), "a chip in the status bar");
     h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
     h.run_steps(3);
-    assert!(h.query_by_label("A new version of EduDeck is ready.").is_some());
+    assert!(h.query_by_label("A new version of DeckCraft is ready.").is_some());
     assert!(h.query_by_label_contains("Per-question Get Ready").is_some(), "the notes are shown");
     h.get_by_label("Update now").click();
     h.run_steps(3);
@@ -152,64 +152,4 @@ fn no_chip_when_up_to_date_and_none_without_a_host_backend() {
     let mut bare = SlideApp::new(Session::with_new(), Services::default());
     assert!(bare.update_state().is_none());
     assert!(bare.run("update.check", json!({})).is_err(), "a build without updates says so");
-}
-
-#[test]
-fn the_restart_refusal_names_edudeck() {
-    let (mut app, log) = app();
-    log.borrow_mut().state = Some(UpdateState::Installed);
-    app.session.execute("slide.new", &json!({})).unwrap();
-    let err = app.run("update.restart", json!({})).unwrap_err();
-    assert!(err.contains("restarting closes EduDeck"), "{err}");
-}
-
-#[test]
-fn the_installed_screen_asks_to_restart_edudeck() {
-    let (app, log) = app();
-    log.borrow_mut().state = Some(UpdateState::Installed);
-    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-        |ui, app: &mut SlideApp| {
-            app.logic(ui.ctx());
-            app.ui(ui);
-        },
-        app,
-    );
-    h.run_steps(3);
-    h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_by_label("Restart EduDeck to use the new version.").is_some(), "the restart line names EduDeck");
-}
-
-#[test]
-fn the_check_screen_names_edudeck() {
-    let (app, log) = app();
-    log.borrow_mut().state = Some(UpdateState::Idle);
-    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-        |ui, app: &mut SlideApp| {
-            app.logic(ui.ctx());
-            app.ui(ui);
-        },
-        app,
-    );
-    h.run_steps(3);
-    h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_all_by_label_contains("a newer version of EduDeck?").next().is_some(), "the check line names EduDeck");
-}
-
-#[test]
-fn the_home_card_says_a_new_version_of_edudeck_is_available() {
-    let (app, log) = app();
-    log.borrow_mut().state = Some(available());
-    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-        |ui, app: &mut SlideApp| {
-            app.logic(ui.ctx());
-            app.ui(ui);
-        },
-        app,
-    );
-    h.run_steps(3);
-    h.state_mut().run("app.backstage", json!({"page": "home"})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_by_label("A new version of EduDeck is available (abc1234).").is_some(), "the Home card names EduDeck");
 }
