@@ -179,3 +179,20 @@ fn the_installed_screen_asks_to_restart_edudeck() {
     h.run_steps(3);
     assert!(h.query_by_label("Restart EduDeck to use the new version.").is_some(), "the restart line names EduDeck");
 }
+
+#[test]
+fn the_check_screen_names_edudeck() {
+    let (app, log) = app();
+    log.borrow_mut().state = Some(UpdateState::Idle);
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(3);
+    h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_all_by_label_contains("a newer version of EduDeck?").next().is_some(), "the check line names EduDeck");
+}

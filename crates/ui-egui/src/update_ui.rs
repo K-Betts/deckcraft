@@ -89,7 +89,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
     let mut close = false;
     match state {
         UpdateState::Idle => {
-            ui.label("Check GitHub for a newer version of DeckCraft? This sends no personal information.");
+            ui.label(format!("Check GitHub for a newer version of {}? This sends no personal information.", deckcraft_engine::brand::APP_NAME));
             ui.horizontal(|ui| {
                 if ui.button("Check now").clicked() {
                     let _ = app.run("update.check", json!({}));
