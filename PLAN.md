@@ -1,791 +1,203 @@
-# PLAN.md — DeckCraft Maths Edition: the About box says EduDeck
+# PLAN.md — DeckCraft maths edition: high-contrast projector theme
 
-> Written by Claude for a local model (running in OpenCode via LM Studio).
-> The local model must follow this plan exactly, one stage at a time.
+> Written by Claude for a local model (Qwen 3.6 35B in OpenCode via LM Studio).
+> The local model follows this plan exactly, one stage at a time.
+> The app stays called **DeckCraft**. The EduDeck rebrand was cancelled on 2026-10-25 (see MATHS.md).
 
 ---
 
 ## 0. Rules for the local model (read first, every stage)
 
 1. Do **only the stage you are told to do**. Never start the next stage.
-2. Only edit the files listed under **Files** for that stage. If another file seems to need changing, stop and report it instead.
-3. Do not rename, move or delete files unless the stage says so.
-4. Do not add new dependencies (crates, packages) unless the stage says so.
-5. Keep changes small. Do not refactor or "tidy up" code outside the stage.
-6. When finished, run the stage's **Check** command.
-7. If the check fails, read the error, fix it, and run the check again. **Maximum 3 attempts.**
-8. After 3 failed attempts, or if anything in this plan is unclear: **stop** and write a short report (what you tried, the exact error). Do not guess.
-9. Do not repeat your plan back to me. Make the changes, then summarise them.
-10. End every stage with the **Stage report** (format in section 6).
-11. **Never find-and-replace `DeckCraft` across files.** Change only the exact lines a stage names. Most `DeckCraft` text in this project must stay for now.
-12. **Start each stage in a new OpenCode session** (ctrl+p → new session). Never continue an earlier stage's session.
-13. **Edit only with the exact text the stage gives.** When a step says "Find" and "Replace with", the Find text appears once in the file; replace only that. Never retype, move or delete the lines around it. When a step gives a shell command, run it exactly as written.
-14. **After every edit, run `git diff --stat -- crates/`** and compare it with the numbers the stage gives. If they differ, run `git checkout -- <that file>` and do the step again.
-15. **STATUS: PASSED only if** the check output contains `test result: ok` and `0 failed`. Paste that line into CHECK OUTPUT. Always use the report format in section 6.
-16. **Trust the progress log (section 7).** A stage marked Done is finished: never redo it. If you are asked for a stage that is not in section 4, stop and report `STATUS: STOPPED (no such stage)`.
-17. **Every stage starts with an "already done?" command.** If it says the work is already there, report `STATUS: ALREADY DONE` and stop.
-18. **Stop if you are going round in circles.** If you run the same command twice and get the same result, or you have used 15 tool calls in this stage, stop and report what you saw.
-19. **Never commit.** Workspace runs the stage's Check itself and commits for you only if it passes. Never use `git add`, `git commit`, `git reset`, `git checkout` (except rule 14), `git stash` or `git push`.
+2. Only edit the files named under **Files** for that stage. If another file seems to need changing, stop and report it.
+3. Do not rename, move or delete files. Do not add dependencies.
+4. Do not refactor or tidy code outside the stage.
+5. Before the first edit of a stage, run the stage's **Already done?** command. If it says the work is there, report `STATUS: ALREADY DONE` and stop.
+6. **Edit only with the exact text a stage gives.** The Find text appears once in the file. Never retype, move or delete the lines around it.
+7. After every edit, run the stage's **diff check** and compare it with the numbers given. If they differ, run `git checkout -- <that file>` and do the step again. Maximum 3 attempts at any step.
+8. If anything is unclear, or a check fails 3 times: **stop** and report the exact output. Do not guess.
+9. **STATUS: PASSED only if** the check output contains `test result: ok` and `0 failed`.
+10. Stop if you go round in circles: the same command giving the same result twice, or more than 15 tool calls in one stage. Report what you saw.
+11. **Commit each stage yourself, but only if every check matched** (the already-done result, each diff count, the test result). Use the exact commit command in the stage. Never use `git add -A`, `git add .`, `git commit -a`, `--amend`, `git push`, `git reset`, `git checkout` (except rule 7), or `git stash`. After committing, `git status --short` must print nothing.
+12. **If you do anything differently from this plan, say so**, even if it worked. Put it under DIFFERENT FROM THE PLAN in the report; write "None" if true.
+13. **Report format** (after each stage):
+
+```
+STAGE: [number and title]
+STATUS: PASSED / FAILED / STOPPED / ALREADY DONE
+FILES CHANGED: [list]
+MUST-FAIL RESULT: [the FAILED line and the panic message, or "not applicable"]
+CHECK OUTPUT: [the final test result line]
+COMMIT: [the short hash from `git log --oneline -1`, or "not committed"]
+GIT STATUS AFTER COMMIT: [empty, or what it printed]
+DIFFERENT FROM THE PLAN: [or "None"]
+PROBLEMS / QUESTIONS: [or "None"]
+```
 
 ---
 
 ## 1. Goal
 
-**What we are building:** Help ▸ About shows the name **EduDeck** and the line "Based on DeckCraft by the ArtCraft Team".
+**What we are building:** a built-in theme called **High Contrast** for projectors: pure black text on pure white, and strong accent colours. Teachers can pick it in the theme list like any other theme.
 
-**Why:** It is the first, smallest step of renaming the app to EduDeck, and it shows whether the local model can do a stage of this project well.
+**Why:** a projector washes out pale colours; the default themes have softer greys.
 
-**Done means:** the new test `about_shows_edudeck_and_credits_deckcraft` passes, all the other tests in the `backstage` group still pass, and Kieran sees "EduDeck" in Help ▸ About.
+**Done means:** the High Contrast theme appears in the theme list, its text is at least 7:1 contrast on its background, its accents are at least 4.5:1, and all existing tests still pass.
 
 **Out of scope (do not do):**
-- Changing "DeckCraft" anywhere a stage does not name (menus, other dialogs, the title drawn on the toolbar, the theme called DeckCraft, folders, file names).
-- Changing the logo, links or anything else in the About box.
+- A title-bar switch for projector mode (a later stage; it needs a design decision).
+- Colour-blind palettes (a later stage).
+- Changing any existing theme.
 
 ---
 
 ## 2. Project context
 
-**Language / framework:** Rust (edition 2024), egui/eframe 0.36, a Cargo workspace.
-
+**Language / framework:** Rust 2024, egui 0.36, a Cargo workspace.
 **Folder:** `/Users/kieranbetts/maths-office/deckcraft-fix`
-
-**How to build:** `cargo build -p deckcraft`
-
-**How to run tests:** `cargo test -p deckcraft-ui-egui backstage` (only the `backstage` tests, which takes a few minutes)
-
-**Full check (used at the end of every stage):** given in each stage.
-
-**Key folders and files:**
+**Build:** `cargo build -p deckcraft`
+**Model tests:** `cargo test -p deckcraft-model`
+**UI tests:** `cargo test -p deckcraft-ui-egui`
 
 | Path | What it contains |
 |---|---|
-| `crates/engine/src/lib.rs` | The engine crate's list of modules (`pub mod …;` lines near the top) |
-| `crates/engine/src/brand.rs` | **New in stage 1**: the app's name |
-| `crates/ui-egui/src/dialogs.rs` | All dialogs, including the About box (`pub fn about`, around line 3749) |
-| `crates/ui-egui/src/backstage_tests.rs` | UI tests for the File menu pages and dialogs |
+| `crates/model/src/theme.rs` | `builtin_themes()` (about line 178): the list of built-in themes, each made by a `t(...)` block. The last entry is "Slate". |
+| `crates/model/src/tests.rs` | Model tests. Uses `use super::*;`. |
+| `crates/color/src/lib.rs` | `Rgba` (with `contrast`, which returns the WCAG contrast ratio as an `f64`) and `SchemeSlot` (with `Dk1`, `Lt1`, `Accent1`…). |
 
-**Conventions to follow:**
-- No `unwrap()` outside tests.
-- Tests in the engine go in a `#[cfg(test)] mod tests { use super::*; … }` at the bottom of the file.
-- After editing, run `cargo fmt -p <package>`. Never reformat by hand.
-
-**Existing code to reuse (do not rewrite):**
-- `harness(app)` and `new_app()` in `backstage_tests.rs`: build the app for a test.
-- `h.state_mut().run("app.about", json!({}))`: opens the About box in a test.
+**Useful facts:**
+- `ColorScheme::get(slot)` returns the `Rgba` for a slot. A theme's colours are in `theme.colors`.
+- A theme's name is the `name` field of the `Theme` in its `t(...)` block.
+- The theme list in the UI reads `builtin_themes()`, so a new theme appears there with no UI change.
 
 ---
 
 ## 3. Design decisions (already made — do not change)
 
-- The name lives in one place, `deckcraft_engine::brand`, so later stages can reuse it.
-- The About box credits the original project: "Based on DeckCraft by the ArtCraft Team".
-- Exact code:
+- The new theme goes **before** "Slate" in the list, so "Slate" stays the last theme.
+- Text colour is pure black `000000` on pure white `FFFFFF`.
+- Font: Arial for both headings and body.
+- The 12 colours, in this order: Dk1, Lt1, Dk2, Lt2, Accent1 to Accent6, Hlink, FolHlink:
 
-```rust
-// crates/engine/src/brand.rs  (the complete file)
-//! The app's name as teachers see it.
-
-/// The display name.
-pub const APP_NAME: &str = "EduDeck";
-
-/// The credit line in the About box.
-pub const BASED_ON: &str = "Based on DeckCraft by the ArtCraft Team";
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn the_name_is_edudeck_and_deckcraft_is_credited() {
-        assert_eq!(APP_NAME, "EduDeck");
-        assert!(BASED_ON.contains("DeckCraft"));
-    }
-}
 ```
-
-```rust
-// crates/ui-egui/src/backstage_tests.rs  (add at the very end of the file)
-#[test]
-fn about_shows_edudeck_and_credits_deckcraft() {
-    let mut h = harness(new_app());
-    h.state_mut().run("app.about", json!({})).unwrap();
-    h.run_steps(3);
-    assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
-    assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
-}
+["000000", "FFFFFF", "000000", "FFFFFF", "0047AB", "B33A00", "006B3C", "6A1B9A", "A4123B", "8A6100", "0047AB", "6A1B9A"]
 ```
 
 ---
 
 ## 4. Stages
 
-### Stage 1 — Add the name
+### Stage 1 — Add the High Contrast theme and test it
 
-**Goal:** The engine has a `brand` module holding the name EduDeck.
+**Goal:** `builtin_themes()` includes "High Contrast", and a test proves its contrast.
 
 **Files:**
-- `crates/engine/src/brand.rs` — create, with exactly the content in section 3.
-- `crates/engine/src/lib.rs` — edit: add one line.
+- `crates/model/src/theme.rs` — edit: add one theme block.
+- `crates/model/src/tests.rs` — add one test (by a shell command).
 
 **Steps:**
-1. Create `crates/engine/src/brand.rs` with exactly the code in section 3.
-2. In `crates/engine/src/lib.rs`, find the line `pub mod cmd;` (near line 10). Add `pub mod brand;` on a new line **directly above it**.
-3. Run `cargo fmt -p deckcraft-engine`.
 
-**Check:** `cargo test -p deckcraft-engine brand`
-
-**Success looks like:** the output shows `test brand::tests::the_name_is_edudeck_and_deckcraft_is_credited ... ok`.
-
-**Watch out for:**
-- Write `pub mod brand;`, not `mod brand;`. Stage 2 uses it from another crate.
-- Put the line with the other `pub mod` lines at the top, not near the `mod tests` lines at the bottom of `lib.rs`.
-
----
-
-### Stage 2 — Show it in the About box
-
-**Goal:** Help ▸ About says EduDeck and credits DeckCraft, and a test proves it.
-
-**Files:**
-- `crates/ui-egui/src/dialogs.rs` — edit: two lines in `pub fn about`.
-- `crates/ui-egui/src/backstage_tests.rs` — edit: add one test.
-
-**Steps:** (do them in this order; check `git diff --stat -- crates/` after each)
-
-1. Edit `crates/ui-egui/src/dialogs.rs`.
-   Find (exactly, 8 spaces at the start):
-   ```
-           ui.label(egui::RichText::new("DeckCraft").font(theme::bold(22.0)));
-   ```
-   Replace with:
-   ```
-           ui.label(egui::RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(22.0)));
-   ```
-   Then `git diff --stat -- crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
-
-2. Edit `crates/ui-egui/src/dialogs.rs` again.
-   Find (exactly):
-   ```
-           ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
-   ```
-   Replace with these two lines:
-   ```
-           ui.label("An open-source, clean-room project. Not affiliated with Microsoft.");
-           ui.label(egui::RichText::new(deckcraft_engine::brand::BASED_ON).color(t.text_dim));
-   ```
-   Then `git diff --stat -- crates/` must show: `1 file changed, 2 insertions(+), 1 deletion(-)`.
-
-3. Add the test. **Do not use the edit tool for this.** Run this exact command, which adds it to the end of the file:
+0. Already done? Run:
    ```bash
-   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
+   grep -c '"High Contrast",' crates/model/src/theme.rs
+   ```
+   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
+
+1. Edit `crates/model/src/theme.rs`.
+   Find (it appears once; the line before `"Slate",` is `        t(`):
+   ```
+           t(
+               "Slate",
+   ```
+   Replace with (the new block, then the same two lines again):
+   ```
+           t(
+               "High Contrast",
+               scheme(
+                   "High Contrast",
+                   ["000000", "FFFFFF", "000000", "FFFFFF", "0047AB", "B33A00", "006B3C", "6A1B9A", "A4123B", "8A6100", "0047AB", "6A1B9A"],
+               ),
+               "Arial",
+               "Arial",
+           ),
+           t(
+               "Slate",
+   ```
+   Then `git diff --stat -- crates/` must show: `1 file changed, 10 insertions(+)`.
+
+2. Add the test. **Do not use the edit tool.** Run exactly:
+   ```bash
+   cat >> crates/model/src/tests.rs <<'EOF'
 
    #[test]
-   fn about_shows_edudeck_and_credits_deckcraft() {
-       let mut h = harness(new_app());
-       h.state_mut().run("app.about", json!({})).unwrap();
-       h.run_steps(3);
-       assert!(h.query_all_by_label("EduDeck").next().is_some(), "the name is shown");
-       assert!(h.query_by_label_contains("Based on DeckCraft").is_some(), "the original is credited");
-   }
-   EOF
-   ```
-   Then `git diff --stat -- crates/` must show: `2 files changed, 11 insertions(+), 1 deletion(-)`.
-   If `backstage_tests.rs` shows any deletion (`-`), run `git checkout -- crates/ui-egui/src/backstage_tests.rs` and run the command again.
-
-4. Run `cargo fmt -p deckcraft-ui-egui`.
-
-**Check:** `cargo test -p deckcraft-ui-egui backstage`
-
-**Success looks like:** the last `test result:` line says `ok` and `0 failed`, and the list includes `about_shows_edudeck_and_credits_deckcraft ... ok`.
-
-**Watch out for:**
-- Stage 1 is already done. Do not touch `crates/engine/` in this stage.
-- `dialogs.rs` has many other `"DeckCraft"` strings (the theme list, dialog titles). Leave all of them.
-- The test checks the Account page for the text "About DeckCraft". That still passes, because you did not change it. Don't change it.
-- If the compiler says `t` is not found, stop and report. Do not add it yourself.
-
----
-
-### Stage 3 — The window's name
-
-**Goal:** the Mac window is named EduDeck (what you see in Mission Control and the Window menu).
-
-**Files:**
-- `apps/deckcraft/src/main.rs` — edit: one line.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c 'with_title(deckcraft_engine::brand::APP_NAME)' apps/deckcraft/src/main.rs
-   ```
-   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on.
-
-1. Edit `apps/deckcraft/src/main.rs`.
-   Find (exactly, 12 spaces at the start; it appears once):
-   ```
-               .with_title("DeckCraft")
-   ```
-   Replace with:
-   ```
-               .with_title(deckcraft_engine::brand::APP_NAME)
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
-
-2. Run `cargo fmt -p deckcraft`. The diff stat must still be the same.
-
-**Check:** `cargo check -p deckcraft && grep -c 'with_title(deckcraft_engine::brand::APP_NAME)' apps/deckcraft/src/main.rs`
-
-**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (This stage has no test of its own, because a test cannot open the real Mac window. In CHECK OUTPUT, paste the `Finished` line and the `1`.)
-
-**Watch out for:**
-- `main.rs` has other `"DeckCraft"` strings (a folder name on line ~65, a file-type filter on line ~115, the app name near line ~247). Leave all of them. Only the `.with_title(` line changes.
-- Do not add a `use` line. The full path `deckcraft_engine::brand::APP_NAME` works as it is.
-- Do not touch `crates/`. The title drawn on the toolbar is a later stage.
-
----
-
-### Stage 4 — The Presenter View window's name
-
-**Goal:** during a slide show, the Presenter View window is called "Presenter View — EduDeck".
-
-**Files:**
-- `crates/ui-egui/src/show.rs` — edit: one line.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c 'Presenter View — {}", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/show.rs
-   ```
-   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on.
-
-1. Edit `crates/ui-egui/src/show.rs`.
-   Find (it appears once; copy it exactly — the dash is a long dash `—`, not `-`):
-   ```
-   .with_title("Presenter View — DeckCraft")
-   ```
-   Replace with:
-   ```
-   .with_title(format!("Presenter View — {}", deckcraft_engine::brand::APP_NAME))
-   ```
-   Change only those characters. The rest of that line (`egui::ViewportBuilder::default()` before it and `.with_inner_size([1100.0, 700.0]),` after it) stays as it is.
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
-
-2. Run `cargo fmt -p deckcraft-ui-egui`. This splits the line into three, which is expected.
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 3 insertions(+), 1 deletion(-)`.
-
-**Check:** `cargo check -p deckcraft-ui-egui && grep -c 'Presenter View — {}", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/show.rs`
-
-**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (No test of its own, like Stage 3: a test cannot open the real window. In CHECK OUTPUT, paste the `Finished` line and the `1`.)
-
-**Watch out for:**
-- `show.rs` mentions "Presenter View" in other places (labels and comments). Change only the `.with_title(` one.
-- Use `format!(…)`, exactly as given. `"Presenter View — " + APP_NAME` does not compile in Rust.
-- Do not add a `use` line. Do not touch `apps/`.
-
----
-
-### Stage 5 — The name on File ▸ Home and File ▸ Account
-
-**Goal:** the big name next to the logo on the File ▸ Home page and on the File ▸ Account page says EduDeck, and a test proves it.
-
-This stage is a little bigger: a test first, then one change in two places. Do the steps in order.
-
-**Files:**
-- `crates/ui-egui/src/backstage_tests.rs` — add one test (by a shell command).
-- `crates/ui-egui/src/backstage.rs` — edit: the same line, in two places.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c 'RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(24.0))' crates/ui-egui/src/backstage.rs
-   ```
-   If it prints `2`, report `STATUS: ALREADY DONE` and stop. If it prints `0`, carry on. Any other number: stop and report it.
-
-1. Add the test. **Do not use the edit tool for this.** Run this exact command, which adds it to the end of the file:
-   ```bash
-   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
-
-   #[test]
-   fn file_home_and_account_show_the_edudeck_name() {
-       let mut h = harness(new_app());
-       for p in [Page::Home, Page::Account] {
-           h.state_mut().run("app.backstage", json!({"page": p.id()})).unwrap();
-           h.run_steps(3);
-           assert_eq!(page(&h), Some(p));
-           assert!(h.query_all_by_label("EduDeck").next().is_some(), "{} shows EduDeck", p.label());
+   fn high_contrast_theme_text_is_at_least_seven_to_one() {
+       let t = theme::builtin_themes().into_iter().find(|t| t.name == "High Contrast").expect("the High Contrast theme exists");
+       let paper = t.colors.get(SchemeSlot::Lt1);
+       let ink = t.colors.get(SchemeSlot::Dk1);
+       assert!(ink.contrast(paper) >= 7.0, "text on paper is {:.1}:1", ink.contrast(paper));
+       for slot in [SchemeSlot::Accent1, SchemeSlot::Accent2, SchemeSlot::Accent3, SchemeSlot::Accent4] {
+           let c = t.colors.get(slot);
+           assert!(c.contrast(paper) >= 4.5, "{slot:?} on paper is {:.1}:1", c.contrast(paper));
        }
    }
    EOF
    ```
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 11 insertions(+)`.
+   Then `git diff --stat -- crates/` must show: `2 files changed, 21 insertions(+)` (10 in theme.rs, 11 in tests.rs).
 
-2. Run the new test. **It must fail at this point** — that proves it tests something:
+   **If the compiler says `SchemeSlot` is not found:** stop and report it. Do not add an import; a person will fix the import path.
+
+3. Run the test. It **passes** here (unlike the rebrand stages, the theme is new, so there is no "must fail" step):
    ```bash
-   cargo test -p deckcraft-ui-egui file_home_and_account
+   cargo test -p deckcraft-model high_contrast_theme
    ```
-   Expected: `test result: FAILED. 0 passed; 1 failed` and the message `Home shows EduDeck`.
-   If it passes instead, or fails with a different message (for example a compile error), stop and report the output.
+   Expected: `high_contrast_theme_text_is_at_least_seven_to_one ... ok` and `test result: ok. 1 passed; 0 failed`.
+   If it fails with `text on paper is …:1` or an accent message, stop and report the exact numbers. Do not change the colours.
 
-3. Edit `crates/ui-egui/src/backstage.rs`. This line appears **exactly twice** (once on the Home page, once on the Account page), and both must change. Use the edit tool's **replace all** option.
-   Find:
-   ```
-   ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
-   ```
-   Replace with:
-   ```
-   ui.label(RichText::new(deckcraft_engine::brand::APP_NAME).font(theme::bold(24.0)).color(t.text));
-   ```
-   Then run the step 0 command again: it must print `2`.
-   And `git diff --stat -- apps/ crates/` must show: `2 files changed, 13 insertions(+), 2 deletions(-)`.
+4. `cargo fmt -p deckcraft-model`. Diff stat must not change.
 
-4. Run `cargo fmt -p deckcraft-ui-egui`. The diff stat must stay the same.
+**Check:** `cargo test -p deckcraft-model`
 
-**Check:** `cargo test -p deckcraft-ui-egui backstage`
+**Success looks like:** `test result: ok.` and `0 failed`, and the list includes `high_contrast_theme_text_is_at_least_seven_to_one ... ok`. Also run `cargo test -p deckcraft-ui-egui backstage` and paste its `test result:` line: it must be `ok` with 0 failed (the New page and theme list tests run against the new theme list).
 
-**Success looks like:** the last `test result:` line says `ok. 21 passed; 0 failed`, and the list includes `file_home_and_account_show_the_edudeck_name ... ok`.
-
-**Watch out for:**
-- Step 2 failing is correct. Do not "fix" the test. Move on to step 3.
-- `backstage.rs` has other `"DeckCraft"` text (a theme name near line 549, comments). Change only the two `ui.label(RichText::new("DeckCraft")` lines.
-- If your edit tool has no replace-all option, do the same edit twice, then check that the step 0 command prints `2`.
-- The test file already has a test that looks for "About DeckCraft" on the Account page. It must still pass. Don't change it.
-
----
-
-> **Stages 6, 7 and 8 are three separate jobs.** Do one per OpenCode session. Each starts from a tree
-> where the earlier stages are already committed, so `git diff --stat` starts empty.
-
-### Stage 6 — The privacy line on File ▸ Account
-
-**Goal:** the line under "User Information" on File ▸ Account says "EduDeck has no accounts of its own…", and a test proves it.
-
-**Files:**
-- `crates/ui-egui/src/backstage_tests.rs` — add one test (by a shell command).
-- `crates/ui-egui/src/backstage.rs` — edit: one line.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c '"{} has no accounts of its own' crates/ui-egui/src/backstage.rs
-   ```
-   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
-
-1. Add the test. **Do not use the edit tool for this.** Run exactly:
-   ```bash
-   cat >> crates/ui-egui/src/backstage_tests.rs <<'EOF'
-
-   #[test]
-   fn the_account_page_says_edudeck_has_no_accounts() {
-       let mut h = harness(new_app());
-       h.state_mut().run("app.backstage", json!({"page": Page::Account.id()})).unwrap();
-       h.run_steps(3);
-       assert!(h.query_by_label_contains("EduDeck has no accounts of its own").is_some(), "the privacy line names EduDeck");
-   }
-   EOF
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 8 insertions(+)`.
-
-2. Run the new test. **It must fail now:**
-   ```bash
-   cargo test -p deckcraft-ui-egui the_account_page_says
-   ```
-   Expected: `test result: FAILED. 0 passed; 1 failed` and the message `the privacy line names EduDeck`. Anything else: stop and report it.
-
-3. Edit `crates/ui-egui/src/backstage.rs`.
-   Find (it appears once):
-   ```
-   dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
-   ```
-   Replace with:
-   ```
-   dim(ui, &format!("{} has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.", deckcraft_engine::brand::APP_NAME));
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `2 files changed, 9 insertions(+), 1 deletion(-)`.
-
-4. Run `cargo fmt -p deckcraft-ui-egui`. It splits the long line, so now the stat must show: `2 files changed, 15 insertions(+), 1 deletion(-)`. The step 0 command must print `1`.
-
-**Check:** `cargo test -p deckcraft-ui-egui backstage`
-
-**Success looks like:** `test result: ok. 22 passed; 0 failed`, including `the_account_page_says_edudeck_has_no_accounts ... ok`.
-
-**Watch out for:**
-- The `&` before `format!` is needed: `dim` takes text by reference.
-- Step 2 failing is correct. Don't change the test.
-
----
-
-### Stage 7 — The title on the toolbar when nothing is open
-
-**Goal:** when no presentation is open, the title in the middle of the top bar says EduDeck.
-
-**Files:**
-- `crates/ui-egui/src/ribbon.rs` — edit: one line.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c 'unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into())' crates/ui-egui/src/ribbon.rs
-   ```
-   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
-
-1. Edit `crates/ui-egui/src/ribbon.rs`.
-   Find (it appears once, at the end of a long line near line 82):
-   ```
-   .unwrap_or_else(|| "DeckCraft".into());
-   ```
-   Replace with:
-   ```
-   .unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into());
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
-
-2. Run `cargo fmt -p deckcraft-ui-egui`. It splits the long line, so the stat must now show: `1 file changed, 5 insertions(+), 2 deletions(-)`.
-
-**Check:** `cargo check -p deckcraft-ui-egui && grep -c 'unwrap_or_else(|| deckcraft_engine::brand::APP_NAME.into())' crates/ui-egui/src/ribbon.rs`
-
-**Success looks like:** `cargo check` ends with `Finished` and no `error`, and the grep prints `1`. (No test: this title is painted, and tests can only read labels. Paste the `Finished` line and the `1`.)
-
-**Watch out for:**
-- Change only the end of that line. The `" — Edited"` part on the same line stays.
-- `dialogs.rs` has a similar `unwrap_or_else(|| "DeckCraft".into())` line. Don't touch it: it is a theme name, not the app name.
-
----
-
-### Stage 8 — "A new version of EduDeck is ready."
-
-**Goal:** the update screen says "A new version of EduDeck is ready." An existing test already checks this sentence, so this stage changes the test first.
-
-**Files:**
-- `crates/ui-egui/src/update_tests.rs` — edit: one line in an existing test.
-- `crates/ui-egui/src/update_ui.rs` — edit: one line.
-
-**Steps:**
-
-0. Already done? Run:
-   ```bash
-   grep -c 'A new version of {} is ready.", deckcraft_engine::brand::APP_NAME' crates/ui-egui/src/update_ui.rs
-   ```
-   If it prints `1`, report `STATUS: ALREADY DONE` and stop. If `0`, carry on.
-
-1. Edit the test first: `crates/ui-egui/src/update_tests.rs`.
-   Find (it appears once, near line 132):
-   ```
-   assert!(h.query_by_label("A new version of DeckCraft is ready.").is_some());
-   ```
-   Replace with:
-   ```
-   assert!(h.query_by_label("A new version of EduDeck is ready.").is_some());
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `1 file changed, 1 insertion(+), 1 deletion(-)`.
-
-2. Run that test. **It must fail now:**
-   ```bash
-   cargo test -p deckcraft-ui-egui the_status_bar_and_dialog
-   ```
-   Expected: `the_status_bar_and_dialog_tell_the_teacher_an_update_is_ready ... FAILED`, panicked at `update_tests.rs:132`, and `test result: FAILED. 0 passed; 1 failed`. Anything else: stop and report it.
-
-3. Edit `crates/ui-egui/src/update_ui.rs`.
-   Find (it appears once, near line 116):
-   ```
-   ui.label(RichText::new("A new version of DeckCraft is ready.").font(theme::bold(15.0)));
-   ```
-   Replace with:
-   ```
-   ui.label(RichText::new(format!("A new version of {} is ready.", deckcraft_engine::brand::APP_NAME)).font(theme::bold(15.0)));
-   ```
-   Then `git diff --stat -- apps/ crates/` must show: `2 files changed, 2 insertions(+), 2 deletions(-)`.
-
-4. Run `cargo fmt -p deckcraft-ui-egui`. The stat must stay the same.
-
-**Check:** `cargo test -p deckcraft-ui-egui update`
-
-**Success looks like:** `test result: ok. 9 passed; 0 failed`.
-
-**Watch out for:**
-- `update_ui.rs` has several other "DeckCraft" sentences (restart, check now, status bar). Change only this one. They come later.
-- In step 1 change only the word DeckCraft → EduDeck in that one test line. Leave every other line of the test alone.
-
----
-
-## 4a. How Stages 9 and later run (Workspace)
-
-Workspace runs each stage in its own OpenCode session, then runs the **Check** itself. If the check passes,
-Workspace commits and ticks the progress log. If it fails, Workspace saves your attempt, resets the tree and
-moves on to the next stage that does not **Need** the failed one.
-
-1. Do **one stage only**, then stop. Never start the next stage.
-2. **Do not commit.** Leave your changes in the working tree for Workspace to check.
-3. **Every stage starts from a clean tree**, so every diff stat in a stage counts that stage's changes only.
-4. If any number in a stage differs from the plan (step 0, a diff stat, the "must fail" result), **stop and report it**. Do not try to make it match.
-5. **If you do anything differently from the plan, say so**, even if it worked, under DIFFERENT FROM THE PLAN. "None" is fine when it's true.
-
-Use this report at the end of the stage:
-
+**Commit** (only if every check above matched):
+```bash
+git add crates/model/src/theme.rs crates/model/src/tests.rs && git commit -m "High Contrast theme for projectors, with a contrast test"
 ```
-STAGE: [number and title]
-STATUS: PASSED / FAILED / STOPPED / ALREADY DONE
-FILES CHANGED: [list]
-MUST-FAIL RESULT: [the FAILED line and the panic message from step 2]
-CHECK OUTPUT: [the final test result line]
-DIFFERENT FROM THE PLAN: [anything you did differently, or "None"]
-PROBLEMS / QUESTIONS: [or "None"]
-```
+Then `git status --short` must print nothing.
 
-All four stages below change the same two files:
-- `crates/ui-egui/src/update_tests.rs` — add one test (by a shell command).
-- `crates/ui-egui/src/update_ui.rs` — edit one line.
-
-Each of Stages 9–12 changes different lines, so none of them needs another to have passed.
-
-The panic line numbers are what Claude saw; yours may differ by a few lines. The message text must match exactly.
-
----
-
-### Stage 9 — "Restart EduDeck to use the new version."
-
-**Goal:** after an update installs, the update screen says "Restart EduDeck to use the new version."
-
-**Steps:**
-
-0. Already done? `grep -c 'Restart {} to use the new version' crates/ui-egui/src/update_ui.rs` — `1`: report ALREADY DONE and stop. `0`: carry on.
-
-1. Add the test (run exactly; do not use the edit tool):
-   ```bash
-   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
-
-   #[test]
-   fn the_installed_screen_asks_to_restart_edudeck() {
-       let (app, log) = app();
-       log.borrow_mut().state = Some(UpdateState::Installed);
-       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-           |ui, app: &mut SlideApp| {
-               app.logic(ui.ctx());
-               app.ui(ui);
-           },
-           app,
-       );
-       h.run_steps(3);
-       h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
-       h.run_steps(3);
-       assert!(h.query_by_label("Restart EduDeck to use the new version.").is_some(), "the restart line names EduDeck");
-   }
-   EOF
-   ```
-   Stat must show: `1 file changed, 17 insertions(+)`.
-
-2. **Must fail:** `cargo test -p deckcraft-ui-egui the_installed_screen` → `test result: FAILED. 0 passed; 1 failed` with the message `the restart line names EduDeck`.
-
-3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
-   ```
-   ui.label("Restart DeckCraft to use the new version.");
-   ```
-   Replace with:
-   ```
-   ui.label(format!("Restart {} to use the new version.", deckcraft_engine::brand::APP_NAME));
-   ```
-   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
-
-4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
-
-**Needs:** none
-
-**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
-
----
-
-### Stage 10 — "Check GitHub for a newer version of EduDeck?"
-
-**Goal:** the first update screen asks "Check GitHub for a newer version of EduDeck? …"
-
-**Steps:**
-
-0. Already done? `grep -c 'newer version of {}? This sends' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE and stop. `0`: carry on.
-
-1. Add the test (run exactly):
-   ```bash
-   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
-
-   #[test]
-   fn the_check_screen_names_edudeck() {
-       let (app, log) = app();
-       log.borrow_mut().state = Some(UpdateState::Idle);
-       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-           |ui, app: &mut SlideApp| {
-               app.logic(ui.ctx());
-               app.ui(ui);
-           },
-           app,
-       );
-       h.run_steps(3);
-       h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
-       h.run_steps(3);
-       assert!(h.query_by_label_contains("a newer version of EduDeck?").is_some(), "the check line names EduDeck");
-   }
-   EOF
-   ```
-   Stat must show: `1 file changed, 17 insertions(+)`.
-
-2. **Must fail:** `cargo test -p deckcraft-ui-egui the_check_screen` → `FAILED. 0 passed; 1 failed` with `the check line names EduDeck`.
-
-3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
-   ```
-   ui.label("Check GitHub for a newer version of DeckCraft? This sends no personal information.");
-   ```
-   Replace with:
-   ```
-   ui.label(format!("Check GitHub for a newer version of {}? This sends no personal information.", deckcraft_engine::brand::APP_NAME));
-   ```
-   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
-
-4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
-
-**Needs:** none
-
-**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
-
----
-
-### Stage 11 — "restarting closes EduDeck"
-
-**Goal:** if you try to restart with unsaved work, the refusal says "save your work first: restarting closes EduDeck".
-
-**Steps:**
-
-0. Already done? `grep -c 'restarting closes {}' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE and stop. `0`: carry on.
-
-1. Add the test (run exactly):
-   ```bash
-   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
-
-   #[test]
-   fn the_restart_refusal_names_edudeck() {
-       let (mut app, log) = app();
-       log.borrow_mut().state = Some(UpdateState::Installed);
-       app.session.execute("slide.new", &json!({})).unwrap();
-       let err = app.run("update.restart", json!({})).unwrap_err();
-       assert!(err.contains("restarting closes EduDeck"), "{err}");
-   }
-   EOF
-   ```
-   Stat must show: `1 file changed, 9 insertions(+)`.
-
-2. **Must fail:** `cargo test -p deckcraft-ui-egui the_restart_refusal` → `FAILED. 0 passed; 1 failed` with the message `save your work first: restarting closes DeckCraft` (the old text, printed by the test).
-
-3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
-   ```
-   return Err("save your work first: restarting closes DeckCraft".into());
-   ```
-   Replace with:
-   ```
-   return Err(format!("save your work first: restarting closes {}", deckcraft_engine::brand::APP_NAME));
-   ```
-   Stat must show: `2 files changed, 10 insertions(+), 1 deletion(-)`.
-
-4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
-
-**Needs:** none
-
-**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
-
-**Watch out for:** `format!` already makes a `String`, so there is no `.into()` at the end of the new line.
-
----
-
-### Stage 12 — "A new version of EduDeck is available"
-
-**Goal:** the card on File ▸ Home says "A new version of EduDeck is available (…)."
-
-**Steps:**
-
-0. Already done? `grep -c 'A new version of {} is available' crates/ui-egui/src/update_ui.rs` — `1`: ALREADY DONE. `0`: carry on.
-
-1. Add the test (run exactly):
-   ```bash
-   cat >> crates/ui-egui/src/update_tests.rs <<'EOF'
-
-   #[test]
-   fn the_home_card_says_a_new_version_of_edudeck_is_available() {
-       let (app, log) = app();
-       log.borrow_mut().state = Some(available());
-       let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
-           |ui, app: &mut SlideApp| {
-               app.logic(ui.ctx());
-               app.ui(ui);
-           },
-           app,
-       );
-       h.run_steps(3);
-       h.state_mut().run("app.backstage", json!({"page": "home"})).unwrap();
-       h.run_steps(3);
-       assert!(h.query_by_label("A new version of EduDeck is available (abc1234).").is_some(), "the Home card names EduDeck");
-   }
-   EOF
-   ```
-   Stat must show: `1 file changed, 17 insertions(+)`.
-
-2. **Must fail:** `cargo test -p deckcraft-ui-egui the_home_card_says` → `FAILED. 0 passed; 1 failed` with `the Home card names EduDeck`.
-
-3. Edit `crates/ui-egui/src/update_ui.rs`. Find (once):
-   ```
-   ui.add(egui::Label::new(format!("A new version of DeckCraft is available ({sha}).")).wrap());
-   ```
-   Replace with:
-   ```
-   ui.add(egui::Label::new(format!("A new version of {} is available ({sha}).", deckcraft_engine::brand::APP_NAME)).wrap());
-   ```
-   Stat must show: `2 files changed, 18 insertions(+), 1 deletion(-)`.
-
-4. `cargo fmt -p deckcraft-ui-egui`. Stat stays the same. Step 0 command now prints `1`.
-
-**Needs:** none
-
-**Check:** `cargo test -p deckcraft-ui-egui update` → `0 failed`
-
-**Watch out for:** keep `({sha})` exactly as it is; only the word DeckCraft becomes `{}`, with the name added at the end.
+**Watch out for:**
+- The Find text must match the file exactly, including the 8, 12 and 16 leading spaces. Copy it as given.
+- Do not add the theme after "Slate". Slate must stay the last entry.
+- Do not change any other colour or any existing theme.
 
 ---
 
 ## 5. Final check (after the last stage)
 
-- [ ] `cargo test -p deckcraft-engine brand` passes
-- [ ] `cargo test -p deckcraft-ui-egui backstage` passes
-- [ ] `cargo clippy -p deckcraft-engine -p deckcraft-ui-egui --all-targets -- -D warnings` shows no warnings
-- [ ] Manual test (Kieran): `cargo run -p deckcraft`, then Help ▸ About shows "EduDeck" and "Based on DeckCraft by the ArtCraft Team"
-- [ ] Manual test (Kieran): with the app running, the Window menu and Mission Control show "EduDeck"
+- [ ] `cargo test -p deckcraft-model` passes
+- [ ] `cargo test -p deckcraft-ui-egui` passes
+- [ ] `cargo clippy -p deckcraft-model -p deckcraft-ui-egui --all-targets -- -D warnings` shows no warnings
+- [ ] Manual (Kieran): Design tab ▸ Themes shows High Contrast; on a projector it reads clearly
 
 ---
 
-## 6. Stage report format (the local model fills this in after each stage)
-
-```
-STAGE: [number and title]
-STATUS: PASSED / FAILED / STOPPED (unclear)
-FILES CHANGED: [list]
-WHAT I DID: [2–4 lines]
-CHECK OUTPUT: [last few lines of the check command]
-PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
-```
-
----
-
-## 7. Progress log (update after each stage)
+## 6. Progress log (update after each stage)
 
 | Stage | Status | Commit | Notes |
 |---|---|---|---|
-| 1 Add the name | **Done** — do not redo | d90694c | Gemma 4 26B |
-| 2 Show it in the About box | **Done** — do not redo | beafb0f | Gemma 4 26B, second try |
-| 3 The window's name | **Done** — do not redo | 254dce5 | Qwen 3.6 35B, first try, 43 s |
-| 4 The Presenter View window's name | **Done** — do not redo | 8167349 | Qwen 3.6 35B, first try, 50 s |
-| 5 The name on File ▸ Home and Account | **Done** — do not redo | e6013d4 | Qwen 3.6 35B, first try, 52 s |
-| 6 The privacy line on File ▸ Account | **Done** — do not redo | c6a4a2c | Qwen 3.6 35B, all three in one session, first try |
-| 7 The title on the toolbar when nothing is open | **Done** — do not redo | 9f86b69 | (same session) |
-| 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
-| 9 "Restart EduDeck to use the new version." | **Done** — do not redo | 6a9c33f | gemma-4-26b-a4b-it-mlx, via Workspace, 49s |
-| 10 "Check GitHub for a newer version of EduDeck?" | **Done** — do not redo | 4f2fa7d | gemma-4-26b-a4b-it-mlx, via Workspace, 406s |
-| 11 "restarting closes EduDeck" | **Done** — do not redo | 169d024 | qwen3.6-35b-a3b, via Workspace, 45s |
-| 12 "A new version of EduDeck is available" | **Done** — do not redo | 2f813ad | qwen3.6-35b-a3b, via Workspace, 58s |
+| 1 High Contrast theme and test | Not started | | |
+
+---
+
+## 7. Not in this plan (needs Kieran's decision first)
+
+| Item | Why it is not planned |
+|---|---|
+| E3 PowerPoint fidelity on more real decks | Needs Kieran's private test decks, and a person to judge the output in PowerPoint. |
+| E4 iPad and touch | Needs real hardware. |
+| E5 Live projection (relay) | Needs a design decision about the relay server and what may be stored. |
+| Projector-mode switch in the title bar | Needs a design choice about where it sits. |
+| Colour-blind palettes | Needs the palettes chosen and tested by a person. |
+| Number lines and coordinate grids as slide shapes | Large; needs the design first. |
+| Sharing: signed `.dmg`, sandbox, privacy statement | Needs an Apple Developer account. |
+| Word and Excel forks | Later phase. |

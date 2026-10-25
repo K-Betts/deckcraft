@@ -12,16 +12,20 @@ committed.
 
 ---
 
-## Phases (rebuilt 2026-10-24)
+## Phases (rebuilt 2026-10-24, revised 2026-10-25)
 
 Rebuilt from an audit of what exists and Kieran's priorities: the next build is **for Kieran's own
-use**; colleagues come later. The app is being renamed **EduDeck**. The original phase tables are
-summarised under "Done so far"; their detail is in the status table below.
+use**; colleagues come later. The original phase tables are summarised under "Done so far"; their
+detail is in the status table below.
+
+**Decision 2026-10-25: the app stays called DeckCraft.** The EduDeck rebrand is cancelled. Its
+code commits (stages 1–12, `d90694c` to `2f813ad`) were undone in `39cad33`; the history is kept.
+`PLAN-rebrand-full.md` is no longer in use.
 
 | Phase | Work | Done when | State |
 | --- | --- | --- | --- |
-| E1. Rebrand, part 1 | Everything a teacher sees says EduDeck; new logo drawn in code. Internal names, settings folder, bundle and updater unchanged. Plan: `PLAN.md` (10 stages, for a local model). | `cargo xtask ci` passes; Kieran sees EduDeck in About, the title bar and the web app; settings and own questions survive. | Planned |
-| E2. Rebrand, part 2 | App icon, `EduDeck.app` bundle with an updater that accepts both names, release file names, bundle id, settings folder migration, theme name, file metadata, `docs/brand/` and README. Decisions listed in `PLAN.md` §8. | An updated install is called EduDeck everywhere, nothing is lost, and the old app updates itself to the new one. | Needs Kieran's decisions |
+| E1. Rebrand, part 1 | Cancelled on 2026-10-25 (staying DeckCraft). | | Cancelled |
+| E2. Rebrand, part 2 | Cancelled on 2026-10-25 (staying DeckCraft). | | Cancelled |
 | E3. PowerPoint fidelity | Run `deckcraft-cli fidelity` on more of Kieran's real decks (copies only); fix each difference or list it as a known gap. Old Phase 2. | Every deck in the test folder has a difference report; each difference is fixed or listed; Kieran confirms in PowerPoint. | Tool built; not run on more decks |
 | E4. iPad and touch | Touch maps to pointer events; Apple Pencil draws on the slide; palm wipe checked on real hardware. Old W2. | Kieran draws on the iPad (web app) with Pencil and fingers during a lesson. | Partly built, unchecked on hardware |
 | E5. Live projection | Presenter URL (editable) and viewer URL (read-only live view) through a tiny stateless relay; no slide content stored or logged. Old W3. | Kieran edits on the iPad and the board shows the change in real time. | Not started |
