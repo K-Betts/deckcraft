@@ -136,7 +136,7 @@ pub fn dialog(app: &mut SlideApp, ui: &mut Ui) -> bool {
         }
         UpdateState::Installed => {
             ui.label(RichText::new("Updated.").font(theme::bold(15.0)));
-            ui.label("Restart DeckCraft to use the new version.");
+            ui.label(format!("Restart {} to use the new version.", deckcraft_engine::brand::APP_NAME));
             let unsaved = app.session.documents().iter().any(|d| d.is_dirty());
             if unsaved {
                 ui.colored_label(Color32::from_rgb(200, 60, 60), "You have unsaved changes: save them first, then restart.");

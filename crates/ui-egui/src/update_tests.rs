@@ -162,3 +162,20 @@ fn the_restart_refusal_names_edudeck() {
     let err = app.run("update.restart", json!({})).unwrap_err();
     assert!(err.contains("restarting closes EduDeck"), "{err}");
 }
+
+#[test]
+fn the_installed_screen_asks_to_restart_edudeck() {
+    let (app, log) = app();
+    log.borrow_mut().state = Some(UpdateState::Installed);
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(3);
+    h.state_mut().run("app.dialog", json!({"id": "update"})).unwrap();
+    h.run_steps(3);
+    assert!(h.query_by_label("Restart EduDeck to use the new version.").is_some(), "the restart line names EduDeck");
+}
