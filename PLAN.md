@@ -788,4 +788,4 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 9 "Restart EduDeck to use the new version." | **Done** — do not redo | 6a9c33f | gemma-4-26b-a4b-it-mlx, via Workspace, 49s |
 | 10 "Check GitHub for a newer version of EduDeck?" | **Done** — do not redo | 4f2fa7d | gemma-4-26b-a4b-it-mlx, via Workspace, 406s |
 | 11 "restarting closes EduDeck" | **Done** — do not redo | 169d024 | qwen3.6-35b-a3b, via Workspace, 45s |
-| 12 "A new version of EduDeck is available" | Not started | | Workspace commits |
+| 12 "A new version of EduDeck is available" | **Done** — do not redo | 2f813ad | qwen3.6-35b-a3b, via Workspace, 58s |
