@@ -68,7 +68,7 @@ impl SlideApp {
             }
             "update.restart" => {
                 if self.session.documents().iter().any(|d| d.is_dirty()) {
-                    return Err("save your work first: restarting closes DeckCraft".into());
+                    return Err(format!("save your work first: restarting closes {}", deckcraft_engine::brand::APP_NAME));
                 }
                 u.restart()?;
                 self.quit_confirmed = true;

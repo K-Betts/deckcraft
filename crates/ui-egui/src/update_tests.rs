@@ -153,3 +153,12 @@ fn no_chip_when_up_to_date_and_none_without_a_host_backend() {
     assert!(bare.update_state().is_none());
     assert!(bare.run("update.check", json!({})).is_err(), "a build without updates says so");
 }
+
+#[test]
+fn the_restart_refusal_names_edudeck() {
+    let (mut app, log) = app();
+    log.borrow_mut().state = Some(UpdateState::Installed);
+    app.session.execute("slide.new", &json!({})).unwrap();
+    let err = app.run("update.restart", json!({})).unwrap_err();
+    assert!(err.contains("restarting closes EduDeck"), "{err}");
+}
