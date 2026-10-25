@@ -787,5 +787,5 @@ PROBLEMS / QUESTIONS: [anything Claude or Kieran should look at]
 | 8 "A new version of EduDeck is ready." | **Done** — do not redo | f14d924 | (same session, 2 min 19 s total) |
 | 9 "Restart EduDeck to use the new version." | Not started | | Workspace commits |
 | 10 "Check GitHub for a newer version of EduDeck?" | Not started | | Workspace commits |
-| 11 "restarting closes EduDeck" | Not started | | Workspace commits |
+| 11 "restarting closes EduDeck" | **Done** — do not redo | 169d024 | qwen3.6-35b-a3b, via Workspace, 45s |
 | 12 "A new version of EduDeck is available" | Not started | | Workspace commits |
