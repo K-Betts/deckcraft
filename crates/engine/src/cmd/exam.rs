@@ -188,7 +188,7 @@ fn exam_question(s: &mut Session, p: &Value) -> Result<Value> {
 }
 
 /// The deck's own "Exam Question" layout, if its master has one.
-fn exam_layout(doc: &deckcraft_model::Presentation, master: usize) -> Option<&deckcraft_model::Layout> {
+pub(super) fn exam_layout(doc: &deckcraft_model::Presentation, master: usize) -> Option<&deckcraft_model::Layout> {
     let norm = |x: &str| x.chars().filter(|c| c.is_alphanumeric()).collect::<String>().to_ascii_lowercase();
     doc.masters.get(master).or(doc.masters.first())?.layouts.iter().find(|l| norm(&l.name).starts_with("examquestion"))
 }

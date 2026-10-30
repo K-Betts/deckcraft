@@ -1459,6 +1459,7 @@ fn insert(app: &mut SlideApp, ui: &mut Ui) {
         group(ui, |ui| {
             big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
             big(app, ui, Icon::NewSlide, "Exam\nQuestion", "app.dialog", json!({"id": "examQuestion"}));
+            big(app, ui, Icon::NewSlide, "Question\nLibrary", "app.dialog", json!({"id": "examLibrary"}));
         });
     }
     group(ui, |ui| {

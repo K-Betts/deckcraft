@@ -261,6 +261,8 @@ pub struct Services {
     pub pick_open: Option<PickFn>,
     /// Save dialog with a suggested name → path.
     pub pick_save: Option<PickFn>,
+    /// Choose-a-folder dialog for a purpose (`library`) → path.
+    pub pick_folder: Option<PickFn>,
     pub read: Option<ReadFn>,
     pub write: Option<WriteFn>,
     /// Asynchronous open dialog (web). The callback receives the purpose and the request id
@@ -368,6 +370,9 @@ pub struct UiState {
     /// The department's curriculum (a curriculum file's JSON, see `deckcraft_engine::curriculum`),
     /// loaded in the Get Ready dialog; empty until one is loaded.
     pub curriculum: String,
+    /// The folder of past-paper questions the Question Library reads (the teacher's own; never
+    /// part of DeckCraft). Empty until one is chosen.
+    pub exam_library_dir: String,
     /// Get Ready: `taught` (plan from the curriculum) or `choose` (each question by hand); empty
     /// until the teacher picks, which means `taught` once a curriculum is loaded.
     pub get_ready_mode: String,
@@ -420,6 +425,7 @@ impl Default for UiState {
             get_ready_skill: vec![String::new(); 4],
             removed_questions: vec![],
             curriculum: String::new(),
+            exam_library_dir: String::new(),
             get_ready_mode: String::new(),
             get_ready_year: String::new(),
             get_ready_route: String::new(),
@@ -484,6 +490,9 @@ impl UiState {
         self.removed_questions.truncate(5_000);
         if self.curriculum.len() > 8 << 20 {
             self.curriculum.clear();
+        }
+        if self.exam_library_dir.len() > 1_000 {
+            self.exam_library_dir.clear();
         }
         for short in [&mut self.get_ready_mode, &mut self.get_ready_year, &mut self.get_ready_route] {
             if short.len() > 40 {
@@ -743,6 +752,8 @@ pub struct SlideApp {
     styled: bool,
     restyle: bool,
     fonts_ready: bool,
+    /// Insert › Question Library: the questions read from the teacher's folder and the last search.
+    pub(crate) exam_lib: dialogs::exam_library::LibState,
     /// `ui` has run in a frame, so egui's fonts exist (they aren't there before the first pass).
     last_time: f64,
     /// When AutoRecover data was last written (monotonic seconds, not wall time).
@@ -1000,6 +1011,7 @@ impl SlideApp {
             styled: false,
             restyle: true,
             fonts_ready: false,
+            exam_lib: Default::default(),
             last_time: 0.0,
             last_recovery: 0.0,
             quit_confirmed: false,
@@ -3798,6 +3810,8 @@ mod compare_tests;
 mod drive_tests;
 #[cfg(test)]
 mod equation_tests;
+#[cfg(test)]
+mod exam_library_tests;
 #[cfg(test)]
 mod exam_question_tests;
 #[cfg(test)]
