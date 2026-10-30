@@ -49,6 +49,8 @@ pub struct Tokens {
     /// The ribbon card and popovers.
     pub card: Color32,
     pub card_border: Color32,
+    /// Text fields. They have no outline, so the fill alone must set them apart from the card.
+    pub text_field: Color32,
     /// Canvas around the slide.
     pub canvas: Color32,
     pub text: Color32,
@@ -70,6 +72,12 @@ pub struct Tokens {
     pub caret: Color32,
     pub text_selection: Color32,
     pub field_bg: Color32,
+    /// Unchecked checkbox and radio boxes and slider rails, drawn without an outline, so they
+    /// must stand apart from the card and the chrome.
+    pub control: Color32,
+    /// [`Tokens::control`] under the pointer and pressed: a step darker each in light mode.
+    pub control_hover: Color32,
+    pub control_pressed: Color32,
     pub shadow: Color32,
 }
 
@@ -80,6 +88,7 @@ impl Tokens {
             chrome: Color32::from_rgb(0xF6, 0xF7, 0xF9),
             card: Color32::WHITE,
             card_border: Color32::from_rgb(0xE6, 0xE8, 0xEE),
+            text_field: Color32::from_rgb(0xED, 0xF0, 0xF7),
             canvas: Color32::from_rgb(0xF6, 0xF7, 0xF9),
             text: Color32::from_rgb(0x14, 0x16, 0x1C),
             text_dim: Color32::from_rgb(0x5B, 0x60, 0x70),
@@ -99,6 +108,9 @@ impl Tokens {
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
             field_bg: Color32::WHITE,
+            control: Color32::from_rgb(0xE0, 0xE7, 0xFF),
+            control_hover: Color32::from_rgb(0xD3, 0xDC, 0xFF),
+            control_pressed: Color32::from_rgb(0xC4, 0xD0, 0xFF),
             shadow: Color32::from_black_alpha(18),
         }
     }
@@ -108,6 +120,7 @@ impl Tokens {
             chrome: Color32::from_rgb(0x16, 0x18, 0x1D),
             card: Color32::from_rgb(0x1F, 0x22, 0x2A),
             card_border: Color32::from_rgb(0x2E, 0x32, 0x3D),
+            text_field: Color32::from_rgb(0x1A, 0x1D, 0x24),
             canvas: Color32::from_rgb(0x10, 0x12, 0x16),
             text: Color32::from_rgb(0xEC, 0xEE, 0xF3),
             text_dim: Color32::from_rgb(0xB3, 0xB8, 0xC6),
@@ -127,6 +140,9 @@ impl Tokens {
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
             field_bg: Color32::from_rgb(0x1A, 0x1D, 0x24),
+            control: Color32::from_rgb(0x2F, 0x36, 0x50),
+            control_hover: Color32::from_rgb(0x3A, 0x42, 0x62),
+            control_pressed: Color32::from_rgb(0x45, 0x4E, 0x72),
             shadow: Color32::from_black_alpha(90),
         }
     }
@@ -158,13 +174,14 @@ pub fn appearance_picker(app: &mut crate::SlideApp, ui: &mut egui::Ui, salt: &st
         "dark" => "Dark",
         _ => "Light",
     };
-    egui::ComboBox::from_id_salt(salt).width(200.0).selected_text(name(now)).show_ui(ui, |ui| {
+    let combo = egui::ComboBox::from_id_salt(salt).width(200.0).selected_text(name(now)).show_ui(ui, |ui| {
         for mode in ["system", "light", "dark"] {
             if ui.selectable_label(now == mode, name(mode)).clicked() {
                 let _ = app.run("view.appearance", serde_json::json!({ "mode": mode }));
             }
         }
     });
+    combo.response.widget_info(|| egui::WidgetInfo::labeled(egui::Role::ComboBox, true, "Appearance"));
 }
 
 /// Apply tokens to egui's style.
@@ -173,6 +190,7 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.panel_fill = t.chrome;
     v.window_fill = t.card;
     v.extreme_bg_color = t.field_bg;
+    v.text_edit_bg_color = Some(t.text_field);
     v.faint_bg_color = t.hover;
     v.window_stroke = Stroke::new(1.0, t.card_border);
     v.window_corner_radius = CornerRadius::same(radius::SURFACE);
@@ -186,14 +204,14 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     }
     v.widgets.noninteractive.bg_stroke = Stroke::new(1.0, t.separator);
     v.widgets.inactive.weak_bg_fill = Color32::TRANSPARENT;
-    v.widgets.inactive.bg_fill = t.pressed;
+    v.widgets.inactive.bg_fill = t.control;
     // Fields, checkboxes and slider rails need an outline at rest, or they vanish on a white card.
     v.widgets.inactive.bg_stroke = Stroke::new(1.0, t.border);
     v.widgets.hovered.weak_bg_fill = t.hover;
-    v.widgets.hovered.bg_fill = t.hover;
+    v.widgets.hovered.bg_fill = t.control_hover;
     v.widgets.hovered.bg_stroke = Stroke::NONE;
     v.widgets.active.weak_bg_fill = t.pressed;
-    v.widgets.active.bg_fill = t.pressed;
+    v.widgets.active.bg_fill = t.control_pressed;
     v.widgets.open.weak_bg_fill = t.pressed;
     v.window_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 28, spread: 0, color: t.shadow };
     v.popup_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 16, spread: 0, color: t.shadow };
@@ -230,7 +248,14 @@ pub fn font_definitions(extra: &[std::sync::Arc<deckcraft_fonts::FontFace>]) -> 
     for (i, f) in deckcraft_fonts::CRAFT_FONTS.iter().enumerate() {
         let wanted = (f.family == "Inter" && (f.style == "Regular" || f.style == "SemiBold" || f.style == "Bold"))
             || (f.family == "BIZ UDPGothic" && f.style == "Regular")
-            || (f.family == "Noto Sans Arabic");
+            // Exact craft-fonts family names: the Korean face is "NanumGothic" (no space), and
+            // the symbol faces are "Noto Sans Symbols" / "Noto Sans Symbols 2". A near-miss here
+            // would leave Hangul and the ◉ laser toggle without a glyph. Hebrew backs the
+            // Language dialog's native "עברית" label where no system font supplies it.
+            || matches!(f.family, "Noto Sans Arabic" | "Noto Sans Hebrew" | "NanumGothic" | "Noto Sans Symbols" | "Noto Sans Symbols 2")
+            // This opt-in native face follows the existing families. Keep per-character
+            // fallback and Latin metrics; no Chinese payload enters the wasm allowlist.
+            || (cfg!(not(target_arch = "wasm32")) && f.family == "LXGW WenKai Lite" && f.style == "Regular");
         if !wanted {
             continue;
         }
@@ -248,6 +273,15 @@ pub fn font_definitions(extra: &[std::sync::Arc<deckcraft_fonts::FontFace>]) -> 
     let mut bold: Vec<String> = names.iter().filter(|(fam, st, _)| *fam == "Inter" && *st == "SemiBold").map(|(_, _, n)| n.clone()).collect();
     bold.extend(defs.families.get(&FontFamily::Proportional).cloned().unwrap_or_default());
     defs.families.insert(FontFamily::Name("bold".into()), bold);
+    // Hack is already bundled for Monospace and covers the interface's arrows and triangles.
+    // Keep it after every proportional face so ordinary text metrics stay unchanged.
+    if defs.font_data.contains_key("Hack") {
+        for chain in defs.families.values_mut() {
+            if !chain.iter().any(|name| name == "Hack") {
+                chain.push("Hack".into());
+            }
+        }
+    }
     add_fallback_faces(&mut defs, extra);
     // The Japanese interface face (the first one when Inter isn't embedded) hints its en and em
     // dashes, bars thinner than a pixel, down to nothing, so they drew as gaps in interface text;
@@ -292,7 +326,7 @@ pub fn to_color32(c: deckcraft_color::Rgba) -> Color32 {
 
 #[cfg(test)]
 mod tests {
-    use super::{Color32, Tokens};
+    use super::*;
 
     /// WCAG relative luminance and contrast ratio.
     fn luminance(c: Color32) -> f64 {
@@ -339,6 +373,9 @@ mod tests {
     /// has ink (a glyph image).
     fn drawn(text: &str) -> Vec<(char, f32, bool)> {
         let ctx = egui::Context::default();
+        // A replacement glyph also gets a nonempty atlas rectangle. Fail before layout when no
+        // font can draw a character, so `uv_rect` cannot mistake tofu for real ink.
+        ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Panic);
         ctx.set_fonts(super::font_definitions(&[]));
         let mut o = ctx.run_ui(Default::default(), |_| {});
         o.textures_delta.clear();
@@ -346,7 +383,11 @@ mod tests {
         ctx.fonts_mut(|f| {
             for size in [11.0, 12.0, 13.0, 16.0] {
                 for family in [egui::FontFamily::Proportional, egui::FontFamily::Name("bold".into())] {
-                    let g = f.layout_no_wrap(text.to_string(), egui::FontId::new(size, family), egui::Color32::WHITE);
+                    let font = egui::FontId::new(size, family);
+                    for c in text.chars() {
+                        assert!(f.has_glyph(&font, c), "no font supplies {c:?} at {size} px in {font:?}");
+                    }
+                    let g = f.layout_no_wrap(text.to_string(), font, egui::Color32::WHITE);
                     for gl in g.rows.iter().flat_map(|r| &r.glyphs) {
                         out.push((gl.chr, size, gl.uv_rect.size.x > 0.0 && gl.uv_rect.size.y > 0.0));
                     }
@@ -356,6 +397,183 @@ mod tests {
         let mut o = ctx.run_ui(Default::default(), |_| {});
         o.textures_delta.clear();
         out
+    }
+
+    /// The UI font library supplies default text fonts and an explicit monochrome emoji face,
+    /// independent of kittest defaults.
+    #[test]
+    fn the_ui_library_has_default_fonts_and_explicit_monochrome_emoji_for_tests() {
+        // `egui`'s `default_fonts` is no longer a default feature and kittest's own dev
+        // dependencies do not propagate. This library enables it (and the test build enables
+        // `monochrome_emoji_fonts`) explicitly.
+        let defs = FontDefinitions::default();
+        assert!(defs.font_data.contains_key("Hack"), "default_fonts must be enabled by deckcraft-ui-egui itself");
+        assert!(defs.font_data.contains_key("Ubuntu-Light"));
+        assert!(defs.font_data.contains_key("NotoEmoji-Regular"), "monochrome_emoji_fonts is an explicit test feature");
+        assert!(defs.families.contains_key(&FontFamily::Proportional));
+        // The production font policy still owns the UI families: craft faces first, then egui's.
+        let ours = super::font_definitions(&[]);
+        assert!(ours.families.contains_key(&FontFamily::Name("bold".into())));
+        assert!(ours.font_data.contains_key("Hack"));
+    }
+
+    /// When the Chinese face is present (required builds guarantee it), exactly one LXGW WenKai
+    /// Lite Regular is embedded, and Chinese labels have glyph coverage and ink; builds without the
+    /// optional face skip this test.
+    #[test]
+    #[cfg(not(target_arch = "wasm32"))]
+    fn native_chinese_fallback_draws_initial_document_labels() {
+        let faces: Vec<_> = deckcraft_fonts::CRAFT_FONTS.iter().filter(|f| f.family == "LXGW WenKai Lite").collect();
+        if faces.is_empty() {
+            assert!(option_env!("CRAFT_FONTS_REQUIRED").is_none(), "required native font input must include the reviewed Chinese fallback");
+            eprintln!("optional Chinese input absent: bundled Chinese coverage was not qualified");
+            return;
+        }
+        assert_eq!(faces.len(), 1);
+        assert_eq!(faces[0].style, "Regular");
+        assert_eq!(faces[0].bytes.len(), 13_949_472);
+        let face = skrifa::FontRef::new(faces[0].bytes).unwrap();
+        use skrifa::MetadataProvider as _;
+        assert!(face.charmap().map('简').is_some(), "the approved fallback supplies the original missing glyph");
+        let defs = font_definitions(&[]);
+        for family in [FontFamily::Proportional, FontFamily::Name("bold".into())] {
+            let chain = &defs.families[&family];
+            let chinese = chain.iter().position(|name| name.contains("LXGW WenKai Lite")).unwrap();
+            let japanese = chain.iter().position(|name| name.contains("BIZ UDPGothic")).unwrap();
+            assert!(japanese < chinese, "retain existing glyph selection and Latin metrics");
+            assert_eq!(chain.iter().filter(|name| name.contains("LXGW WenKai Lite")).count(), 1);
+        }
+        let text = "简体中文演示文稿";
+        let ctx = egui::Context::default();
+        ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Panic);
+        ctx.set_fonts(defs);
+        let mut output = ctx.run_ui(Default::default(), |_| {});
+        output.textures_delta.clear();
+        ctx.fonts_mut(|fonts| {
+            for family in [FontFamily::Proportional, FontFamily::Name("bold".into())] {
+                let font = egui::FontId::new(13.0, family);
+                for c in text.chars() {
+                    assert!(fonts.has_glyph(&font, c), "the embedded fallback does not supply {c:?} in {font:?}");
+                }
+            }
+        });
+        let ink = drawn(text);
+        assert_eq!(ink.len(), text.chars().count() * 4 * 2);
+        for (c, size, visible) in ink {
+            assert!(visible, "Chinese label {c:?} has no ink at {size} px");
+        }
+    }
+
+    /// When the face is present (required builds guarantee it), the native Hebrew fallback is exactly
+    /// one static Regular Noto Sans Hebrew face with glyph coverage and ink for language labels.
+    #[test]
+    #[cfg(not(target_arch = "wasm32"))]
+    fn native_hebrew_fallback_is_one_regular_face_and_draws_language_labels() {
+        let faces: Vec<_> = deckcraft_fonts::CRAFT_FONTS.iter().filter(|f| f.family == "Noto Sans Hebrew").collect();
+        if faces.is_empty() {
+            assert!(option_env!("CRAFT_FONTS_REQUIRED").is_none(), "required native font input must include Noto Sans Hebrew Regular");
+            eprintln!("optional font input absent: native Hebrew coverage was not qualified");
+            return;
+        }
+        assert_eq!(faces.len(), 1, "one static face, without variable named instances");
+        assert_eq!(faces[0].style, "Regular");
+        assert_eq!(faces[0].bytes.len(), 66_156, "use the approved full static Regular face");
+        use skrifa::raw::{ReadError, TableProvider};
+        let face = skrifa::FontRef::new(faces[0].bytes).unwrap();
+        assert_eq!(face.os2().unwrap().us_weight_class(), 400, "the embedded bytes must be Regular, not a renamed Thin face");
+        assert!(matches!(face.fvar(), Err(ReadError::TableIsMissing(_))), "embed one static face, not variable named instances");
+        let defs = super::font_definitions(&[]);
+        let names: Vec<_> = defs.font_data.keys().filter(|name| name.contains("Noto Sans Hebrew")).collect();
+        assert_eq!(names.len(), 1);
+        for family in [FontFamily::Proportional, FontFamily::Name("bold".into())] {
+            assert_eq!(defs.families[&family].iter().filter(|name| *name == names[0]).count(), 1);
+        }
+        let ctx = egui::Context::default();
+        ctx.set_fonts(defs);
+        let mut output = ctx.run_ui(Default::default(), |_| {});
+        output.textures_delta.clear();
+        ctx.fonts_mut(|fonts| {
+            for family in [FontFamily::Proportional, FontFamily::Name("bold".into())] {
+                let font = egui::FontId::new(13.0, family);
+                for c in "עבריתשלוםdeck42".chars() {
+                    assert!(fonts.has_glyph(&font, c), "missing language-label glyph {c:?}");
+                }
+            }
+        });
+        // This checks ink and coverage only, not bidi ordering or GPOS mark positioning.
+        for (c, size, ink) in drawn("עבריתשלוםdeck42") {
+            assert!(ink, "{c:?} has no ink at {size} px");
+        }
+    }
+
+    /// Hebrew fallback preserves logical-order editing in mixed-direction text.
+    #[test]
+    #[cfg(not(target_arch = "wasm32"))]
+    fn native_hebrew_fallback_keeps_mixed_text_editing_in_logical_order() {
+        if !deckcraft_fonts::CRAFT_FONTS.iter().any(|f| f.family == "Noto Sans Hebrew") {
+            assert!(option_env!("CRAFT_FONTS_REQUIRED").is_none(), "required native Hebrew face is absent");
+            return;
+        }
+        let ctx = egui::Context::default();
+        ctx.set_fonts(super::font_definitions(&[]));
+        let id = egui::Id::unique("mixed-hebrew-label-edit");
+        let mut text = "deck שלום 42".to_owned();
+        let frame = |text: &mut String, events: Vec<egui::Event>| {
+            let output = ctx.run_ui(
+                egui::RawInput {
+                    screen_rect: Some(egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(500.0, 100.0))),
+                    events,
+                    ..Default::default()
+                },
+                |ui| {
+                    ui.memory_mut(|m| m.request_focus(id));
+                    ui.add(egui::TextEdit::singleline(text).id(id));
+                },
+            );
+            output.drop_without_applying_deltas();
+        };
+        frame(&mut text, vec![]);
+        // Character offsets remain logical even though the Hebrew glyphs are drawn right-to-left.
+        let mut state = egui::TextEdit::load_state(&ctx, id).unwrap();
+        state.cursor.set_char_range(Some(egui::text::CCursorRange::one(egui::text::CCursor::new(7))));
+        egui::TextEdit::store_state(&ctx, id, state);
+        frame(&mut text, vec![egui::Event::Text("א".into())]);
+        assert_eq!(text, "deck שלאום 42");
+        let state = egui::TextEdit::load_state(&ctx, id).unwrap();
+        assert_eq!(state.cursor.char_range().unwrap().primary.index.0, 8);
+        frame(
+            &mut text,
+            vec![egui::Event::Key { key: egui::Key::Backspace, physical_key: None, pressed: true, repeat: false, modifiers: egui::Modifiers::NONE }],
+        );
+        assert_eq!(text, "deck שלום 42");
+        ctx.fonts_mut(|fonts| {
+            let galley = fonts.layout_no_wrap(text.clone(), egui::FontId::proportional(13.0), egui::Color32::WHITE);
+            let row = &galley.rows[0];
+            let x = |c| row.glyphs.iter().find(|g| g.chr == c).unwrap().pos.x;
+            assert!(x('ש') > x('ל') && x('ל') > x('ו') && x('ו') > x('ם'), "Hebrew paints in visual RTL order");
+            assert!(x('4') < x('2'), "the adjacent number keeps its LTR order");
+        });
+        frame(&mut text, vec![]); // consume the atlas updates from the explicit layout above
+    }
+
+    #[test]
+    fn light_checkboxes_and_slider_rails_stand_out_from_their_background() {
+        // An unchecked checkbox and a slider rail are filled with the inactive widget fill, so in
+        // light mode they vanished into the white dialog (#766). DeckCraft gives them an outline at
+        // rest; without one the fill alone must stand apart from the background.
+        let ctx = egui::Context::default();
+        super::apply(&ctx, &super::Tokens::light());
+        let v = ctx.global_style().visuals.clone();
+        let fill = v.widgets.inactive.bg_fill;
+        let outline = v.widgets.inactive.bg_stroke;
+        assert!(outline.width >= 1.0 && outline.color.a() > 0, "controls have an outline at rest");
+        for (name, bg) in [("dialog", v.window_fill), ("panel", v.panel_fill)] {
+            let diff = [outline.color.r().abs_diff(bg.r()), outline.color.g().abs_diff(bg.g()), outline.color.b().abs_diff(bg.b())];
+            assert!(diff.iter().any(|d| *d >= 16), "control outline {:?} is too close to the {name} background {bg:?}", outline.color);
+        }
+        // Hovering and pressing darken the control a step each, as they do buttons.
+        let (hovered, active) = (v.widgets.hovered.bg_fill, v.widgets.active.bg_fill);
+        assert!(fill.r() > hovered.r() && hovered.r() > active.r(), "idle {fill:?}, hovered {hovered:?}, active {active:?} don't darken in turn");
     }
 
     #[test]

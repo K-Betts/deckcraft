@@ -72,8 +72,7 @@ with *Change skill…*.
 
 ## Making one from a spreadsheet
 
-A department's overview spreadsheet can be converted with a short script. Ringmer's is kept
-outside this repository (it uses MathsPad's objective wording) as `school-curriculum/convert_overview.py`
-next to the checkout: it reads the year tabs (weeks, unit, objectives, prior learning, objectives
+A department's overview spreadsheet can be converted with a short script. A school's own converter is kept
+outside this repository, because the objective wording belongs to the school and its sources. It reads the year tabs (weeks, unit, objectives, prior learning, objectives
 omitted in Support) and the Overview tab's week dates, and writes Core and Support courses for
 Years 7 to 9 and Higher and Foundation for Years 10 and 11.

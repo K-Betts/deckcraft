@@ -28,7 +28,7 @@ Then the web version gets it for free.
 - `engine/src/cmd/get_ready.rs`: builds the slide: cards, full-screen slides, answers on click.
 - `engine/src/cmd/figures.rs`: draws the diagrams from shapes.
 - `ui-egui/src/dialogs.rs`: the Get Ready dialog and Manage Questions.
-- `assets/questions/bank.json`: the built-in questions.
+- `assets/questions/*.json`: the built-in questions, all templates (new numbers each time).
 
 ## How a change reaches teachers
 

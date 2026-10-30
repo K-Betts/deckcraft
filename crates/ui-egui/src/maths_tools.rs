@@ -584,7 +584,7 @@ impl MathsToolsPanel {
     fn paint_instruments(&mut self, ctx: &egui::Context, canvas: Rect) {
         let hover = ctx.input(|i| i.pointer.hover_pos());
         // Below the ink and the toolbar, above the slide.
-        let painter = ctx.layer_painter(self.layer.unwrap_or_else(|| LayerId::new(Order::Middle, Id::new("maths_instruments"))));
+        let painter = ctx.layer_painter(self.layer.unwrap_or_else(|| LayerId::new(Order::Middle, Id::unique("maths_instruments"))));
         for tool in self.open_tools.clone() {
             if !tool.is_instrument() {
                 continue;
@@ -697,7 +697,7 @@ impl MathsToolsPanel {
         let mut close = false;
         let mut pick_close = false;
         let out =
-            egui::Area::new(Id::new("maths_tools_panel")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
+            egui::Area::new(Id::unique("maths_tools_panel")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
                 light_frame().show(ui, |ui| {
                     ui.visuals_mut().override_text_color = Some(Color32::from_rgb(0x14, 0x16, 0x1C));
                     ui.spacing_mut().item_spacing = vec2(8.0, 8.0);
@@ -791,7 +791,7 @@ impl MathsToolsPanel {
                 (canvas.min.y + canvas.height() * 0.18 + (pl.centre.y - canvas.center().y)).max(canvas.min.y),
             )
         };
-        let id = Id::new(("maths_tool", tool));
+        let id = Id::unique(("maths_tool", tool));
         let mut keys = false;
         let out = egui::Area::new(id).order(Order::Foreground).default_pos(default).movable(true).constrain(true).show(ctx, |ui| {
             let frame = if dark { dark_frame() } else { light_frame() };
@@ -897,7 +897,7 @@ enum ChipIcon {
 
 /// A small round button in a card's corner.
 fn chip(ui: &mut Ui, rect: Rect, icon: ChipIcon, tip: &str, dark: bool) -> egui::Response {
-    let resp = ui.interact(rect, ui.id().with(("chip", tip)), Sense::click());
+    let resp = ui.interact(rect, ui.scope_id().with(("chip", tip)), Sense::click());
     let (fill, ink) = match (dark, resp.hovered()) {
         (true, true) => (Color32::from_white_alpha(46), Color32::WHITE),
         (true, false) => (Color32::from_white_alpha(18), Color32::from_gray(220)),
@@ -921,7 +921,7 @@ fn chip(ui: &mut Ui, rect: Rect, icon: ChipIcon, tip: &str, dark: bool) -> egui:
         }
     }
     let name = tip.to_string();
-    resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
+    resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name.clone()));
     resp.on_hover_text(tip)
 }
 
@@ -1197,16 +1197,19 @@ mod tests {
     }
 
     fn harness(panel: MathsToolsPanel, settings: MathsToolsSettings) -> egui_kittest::Harness<'static, State> {
-        egui_kittest::Harness::builder().with_size(vec2(1200.0, 900.0)).build_ui_state(
+        let h = egui_kittest::Harness::builder().with_size(vec2(1200.0, 900.0)).build_ui_state(
             |ui, state: &mut State| {
                 state.panel.ui(ui.ctx(), ui.max_rect(), &mut state.settings);
             },
             State { panel, settings },
-        )
+        );
+        // Only egui's own fonts are installed here, which lack arrows and maths symbols.
+        h.ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Tofu);
+        h
     }
 
     fn area_rect(h: &egui_kittest::Harness<'static, State>, tool: MathsTool) -> Option<Rect> {
-        h.ctx.memory(|m| m.area_rect(Id::new(("maths_tool", tool))))
+        h.ctx.memory(|m| m.area_rect(Id::unique(("maths_tool", tool))))
     }
 
     #[test]

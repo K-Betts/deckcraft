@@ -645,7 +645,8 @@ impl TeacherOverlay {
             beep();
         }
         let (hover, origin) = ctx.input(|i| (i.pointer.hover_pos(), i.pointer.press_origin()));
-        let resp = ui.interact(full, Id::new("teacher_surface"), if self.tool == Tool::Pointer { Sense::hover() } else { Sense::click_and_drag() });
+        let resp =
+            ui.interact(full, Id::unique("teacher_surface"), if self.tool == Tool::Pointer { Sense::hover() } else { Sense::click_and_drag() });
         let palm = ctx.multi_touch().filter(|m| m.num_touches >= PALM_TOUCHES).map(|m| m.center_pos);
         self.palm_wipe(palm);
         // A ruler or protractor under the pointer takes the gesture: dragging it must not also draw.
@@ -663,12 +664,12 @@ impl TeacherOverlay {
         }
         // The board and the instruments share one layer, the board painted first, so the instruments
         // are always on top of it.
-        let board_layer = LayerId::new(Order::Middle, Id::new("teacher_board"));
+        let board_layer = LayerId::new(Order::Middle, Id::unique("teacher_board"));
         if let Some(kind) = self.whiteboard {
             paint_board(&ctx.layer_painter(board_layer), full, kind);
         }
         self.maths_tools_panel.layer = self.whiteboard.map(|_| board_layer);
-        let painter = ctx.layer_painter(LayerId::new(Order::Foreground, Id::new("teacher_overlay")));
+        let painter = ctx.layer_painter(LayerId::new(Order::Foreground, Id::unique("teacher_overlay")));
         self.paint(&painter, full, hover);
         if let Some(c) = self.palm_now {
             painter.circle_stroke(c, PALM_RADIUS, egui::Stroke::new(2.0, Color32::WHITE));
@@ -768,7 +769,7 @@ impl TeacherOverlay {
             (true, Edge::Left, Some(r)) => r.max.x + 2.0,
             _ => full.min.x,
         };
-        let out = egui::Area::new(Id::new("teacher_palette_tab"))
+        let out = egui::Area::new(Id::unique("teacher_palette_tab"))
             .order(Order::Foreground)
             .fixed_pos(pos2(x, full.center().y))
             .pivot(Align2::LEFT_CENTER)
@@ -926,23 +927,27 @@ impl TeacherOverlay {
             Some(p) => (p, Align2::CENTER_CENTER),
             None => palette_anchor(full, self.edge, self.along),
         };
-        let out = egui::Area::new(Id::new("teacher_palette")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
-            egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(10, 6)).show(ui, |ui| {
-                ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                // Room along the docked edge: the tools wrap onto a second line or column on a
-                // phone instead of running off the screen.
-                let limit = if horizontal { full.width() - 2.0 * PALETTE_MARGIN - 20.0 } else { full.height() - 2.0 * PALETTE_MARGIN - 12.0 }
-                    .max(TOUCH_TARGET * 2.0);
-                let mut body = |this: &mut Self, ui: &mut Ui| {
-                    lay(ui, horizontal, limit, |ui| this.main_row(ui, full, horizontal, actions));
-                };
-                if horizontal {
-                    ui.vertical_centered(|ui| body(self, ui));
-                } else {
-                    ui.horizontal(|ui| body(self, ui));
-                }
+        let out =
+            egui::Area::new(Id::unique("teacher_palette")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
+                egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(10, 6)).show(
+                    ui,
+                    |ui| {
+                        ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
+                        // Room along the docked edge: the tools wrap onto a second line or column on a
+                        // phone instead of running off the screen.
+                        let limit = if horizontal { full.width() - 2.0 * PALETTE_MARGIN - 20.0 } else { full.height() - 2.0 * PALETTE_MARGIN - 12.0 }
+                            .max(TOUCH_TARGET * 2.0);
+                        let mut body = |this: &mut Self, ui: &mut Ui| {
+                            lay(ui, horizontal, limit, |ui| this.main_row(ui, full, horizontal, actions));
+                        };
+                        if horizontal {
+                            ui.vertical_centered(|ui| body(self, ui));
+                        } else {
+                            ui.horizontal(|ui| body(self, ui));
+                        }
+                    },
+                );
             });
-        });
         let rect = out.response.rect;
         self.hit_rects.push(rect);
         self.palette_rect = Some(rect);
@@ -958,12 +963,16 @@ impl TeacherOverlay {
         let button = if boards { self.whiteboard_button_rect } else { self.active_tool_rect }.unwrap_or(pal);
         let (pos, pivot) = popover_anchor(self.edge, pal, button, if self.edge == Edge::Left { 44.0 } else { 8.0 });
         let limit = (full.width() - 2.0 * PALETTE_MARGIN - 20.0).max(TOUCH_TARGET * 3.0);
-        let out = egui::Area::new(Id::new("teacher_options")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
-            egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(12, 6)).show(ui, |ui| {
-                ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
-                lay(ui, true, limit, |ui| self.options(ui));
+        let out =
+            egui::Area::new(Id::unique("teacher_options")).order(Order::Foreground).fixed_pos(pos).pivot(pivot).constrain(true).show(ctx, |ui| {
+                egui::Frame::new().fill(INK).corner_radius(CornerRadius::same(SURFACE_RADIUS)).inner_margin(Margin::symmetric(12, 6)).show(
+                    ui,
+                    |ui| {
+                        ui.spacing_mut().item_spacing = vec2(4.0, 4.0);
+                        lay(ui, true, limit, |ui| self.options(ui));
+                    },
+                );
             });
-        });
         self.hit_rects.push(out.response.rect);
         self.options_rect = Some(out.response.rect);
     }
@@ -997,7 +1006,7 @@ impl TeacherOverlay {
                 ui.painter().circle_stroke(r.center(), 16.0, egui::Stroke::new(2.5, Color32::WHITE));
             }
             let name = tip.to_string();
-            resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
+            resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name.clone()));
             resp.on_hover_text(tip)
         };
         match self.tool {
@@ -1254,7 +1263,7 @@ fn icon_button(ui: &mut Ui, selected: bool, tip: &str, paint: impl FnOnce(&Paint
     }
     paint(p, r.shrink(11.0), Color32::WHITE);
     let name = tip.to_string();
-    resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
+    resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name.clone()));
     resp.on_hover_text(tip)
 }
 
@@ -1584,7 +1593,7 @@ fn size_button(ui: &mut Ui, grow: bool) -> Response {
         ui.painter().line_segment([c + vec2(0.0, -k), c + vec2(0.0, k)], s);
     }
     let name = if grow { "Bigger digits" } else { "Smaller digits" };
-    resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name));
+    resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name));
     resp
 }
 
@@ -1612,7 +1621,7 @@ fn timer_widget(ctx: &egui::Context, t: &mut Timer, index: usize, full: Rect, no
     // A small timer gets a snug card.
     let pad_y = (16.0 * t.scale.clamp(0.5, 1.0)) as i8;
     let small = !setting && t.scale < 0.6;
-    let id = Id::new(("teacher_timer", t.id));
+    let id = Id::unique(("teacher_timer", t.id));
     let last_rect: Option<Rect> = ctx.data(|d| d.get_temp(id.with("rect")));
     let hovered = last_rect.zip(ctx.pointer_hover_pos()).is_some_and(|(r, p)| r.expand(8.0).contains(p));
     let digits_w = run_width("00:00:00", size.min(52.0)).max(run_width("00:00", size));

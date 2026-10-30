@@ -9,7 +9,7 @@ use crate::calculator_apps::{App, Device, Form, HOME_APPS, Menu, Overlay, Prompt
 const LCD: Color32 = Color32::from_rgb(0xD9, 0xDF, 0xD6);
 const LCD_INK: Color32 = Color32::from_rgb(0x10, 0x13, 0x16);
 const LCD_DIM: Color32 = Color32::from_rgb(0x7F, 0x88, 0x7D);
-/// The case of an fx-991CW+: near-black plastic with grey round keys.
+/// The case of the on-screen calculator: near-black plastic with grey round keys.
 const BODY: Color32 = Color32::from_rgb(0x1C, 0x1D, 0x20);
 const KEY_NUM: Color32 = Color32::from_rgb(0x4D, 0x4F, 0x55);
 const KEY_FUNC: Color32 = Color32::from_rgb(0x30, 0x32, 0x37);
@@ -19,7 +19,7 @@ const KEY_SHIFT: Color32 = Color32::from_rgb(0xC9, 0xA8, 0x5A);
 const LEGEND: Color32 = Color32::from_rgb(0xC9, 0xA8, 0x5A);
 const PRINT: Color32 = Color32::from_rgb(0xE4, 0xE6, 0xEA);
 
-/// The keypad is laid out in the coordinates of a photograph of the real thing, 870 wide by 1830
+/// The keypad is laid out in the coordinates of a sketch of the keypad, 870 wide by 1830
 /// tall from the top left of the case, and scaled to the size asked for.
 const CASE_W: f32 = 870.0;
 const CASE_H: f32 = 1650.0;
@@ -640,7 +640,7 @@ fn labelled(mut d: KeyDef, label: &'static str) -> KeyDef {
     d
 }
 
-/// Every key, where it is on the real calculator (the fx-991CW+).
+/// Every key, where it is on the keypad.
 fn keys() -> Vec<KeyDef> {
     use Cap::{Icon as I, Sup, Text, Toks};
     use Key::*;
@@ -1409,7 +1409,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
     let p = ui.painter().clone();
     let at = |x: f32, y: f32| rect.min + vec2(x - CASE_X, y - CASE_Y) * k;
     p.rect_filled(rect, CornerRadius::same((46.0 * k) as u8), BODY);
-    p.text(at(627.0, 268.0), Align2::LEFT_CENTER, "fx-991CW+", FontId::proportional(40.0 * k), PRINT.gamma_multiply(0.8));
+    p.text(at(627.0, 268.0), Align2::LEFT_CENTER, "Scientific", FontId::proportional(40.0 * k), PRINT.gamma_multiply(0.8));
 
     // The screen, with the screen's own scale (the screen is 694 photograph units across).
     let screen = Rect::from_min_max(at(618.0, 322.0), at(1312.0, 600.0));
@@ -1460,7 +1460,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
 
     // Touching the screen: a swipe scrolls, a tap chooses.
     if dev.on {
-        let swipe = ui.interact(inside, ui.id().with("calc_swipe"), Sense::drag());
+        let swipe = ui.interact(inside, ui.scope_id().with("calc_swipe"), Sense::drag());
         let step = 20.0 * ss;
         let moved = ui.data_mut(|d| {
             let acc = d.get_temp_mut_or_default::<f32>(swipe.id);
@@ -1477,7 +1477,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
             dev.press(if moved > 0 { Key::Up } else { Key::Down });
         }
         for (n, (r, tap)) in taps.iter().enumerate() {
-            if ui.interact(*r, ui.id().with(("calc_tap", n)), Sense::click()).clicked() {
+            if ui.interact(*r, ui.scope_id().with(("calc_tap", n)), Sense::click()).clicked() {
                 dev.touch(*tap);
             }
         }
@@ -1490,9 +1490,9 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
             Shape2::Pill(w, h) => (w, h),
         };
         let kr = Rect::from_center_size(c, vec2(w, h) * k);
-        let resp = ui.interact(kr, ui.id().with(("calc_key", n)), Sense::click());
+        let resp = ui.interact(kr, ui.scope_id().with(("calc_key", n)), Sense::click());
         let name = key_name(def);
-        resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
+        resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name.clone()));
         let lit = def.key == Key::Shift && dev.shift;
         let (fill, ink) = face(def.style, lit, resp.hovered());
         let down = resp.is_pointer_button_down_on();
@@ -1537,7 +1537,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
     rect
 }
 
-/// Keys typed at the real keyboard while the pointer is over the calculator.
+/// Keys typed at the keyboard while the pointer is over the calculator.
 fn type_keys(ctx: &egui::Context, calc: &mut Device) {
     let events: Vec<Event> = ctx.input(|i| i.events.clone());
     for e in events {

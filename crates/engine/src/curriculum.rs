@@ -653,13 +653,6 @@ pub fn plan(cur: &Curriculum, course: &Course, unit: usize, objective: usize, m:
     let mut rng = seed;
     let tag = |c: &Course, u: &Unit| format!("{} · {}", c.name(), u.title);
     type Cand<'a> = (&'a Objective, String, &'a Course, &'a str);
-    fn shuffled<T>(mut v: Vec<T>, rng: &mut u64) -> Vec<T> {
-        for i in (1..v.len()).rev() {
-            let j = (splitmix(rng) % (i as u64 + 1)) as usize;
-            v.swap(i, j);
-        }
-        v
-    }
     let earlier = |n: usize| -> Vec<&Unit> { course.units[..unit].iter().rev().filter(|u| !u.objectives.is_empty()).skip(n).collect() };
 
     // Last lesson: what was just taught.
@@ -743,19 +736,64 @@ pub fn plan(cur: &Curriculum, course: &Course, unit: usize, objective: usize, m:
     out
 }
 
+/// A mixed starter's level for each card: the last lesson at the class's level, last week a step
+/// harder (it has been practised), the last topic at the class's level, last year a step easier.
+/// The class's level comes from its route: Support 1, Higher 3, anything else 2.
+pub fn mixed_levels(route: &str) -> [u8; 4] {
+    let base: u8 = match route.to_ascii_lowercase().as_str() {
+        "support" => 1,
+        "higher" => 3,
+        _ => 2,
+    };
+    [base, (base + 1).min(4), base, base.saturating_sub(1).max(1)]
+}
+
 /// One question for each slot at `level` (1 to 4, 0 for any), different from each other, from
 /// `bank` made with `seed` (`Bank::instantiate`). A skill with nothing at that level gives a
 /// question at the nearest level it has; a slot no skill fits gives `None`.
 pub fn questions_for(bank: &Bank, slots: &[Slot], level: u8, seed: u64) -> Vec<Option<Question>> {
+    questions_at(bank, slots, &vec![level; slots.len()], seed)
+}
+
+/// [`questions_for`] with a level for each slot (e.g. [`mixed_levels`]); a slot past the end of
+/// `levels` takes any level.
+pub fn questions_at(bank: &Bank, slots: &[Slot], levels: &[u8], seed: u64) -> Vec<Option<Question>> {
     let mut taken: Vec<String> = vec![];
     let mut out = vec![];
     for (i, slot) in slots.iter().enumerate() {
+        let level = levels.get(i).copied().unwrap_or(0);
         let q = pick_for(bank, &slot.skills, level, seed.wrapping_add(i as u64 * 7919), &taken);
         if let Some(q) = &q {
             taken.push(q.id.clone());
         }
         out.push(q);
     }
+    out
+}
+
+/// Up to `n` other questions on any of `skills`, at any level, not in `exclude`: the choices a
+/// teacher picks from to change one card. Chosen by `seed`, easiest first.
+pub fn alternatives(bank: &Bank, skills: &[String], seed: u64, exclude: &[String], n: usize) -> Vec<Question> {
+    let mut pool: Vec<&Question> =
+        bank.questions.iter().filter(|q| q.usable() && !exclude.contains(&q.id) && skills.contains(&q.skill_key())).collect();
+    let mut rng = seed;
+    pool = shuffled(pool, &mut rng);
+    // A spread of levels: one at each level in turn, round again until there are enough.
+    let mut out: Vec<Question> = vec![];
+    while out.len() < n {
+        let before = out.len();
+        for level in crate::questions::DIFFICULTIES {
+            if out.len() < n
+                && let Some(q) = pool.iter().find(|q| q.difficulty == level && !out.iter().any(|o| o.id == q.id))
+            {
+                out.push((*q).clone());
+            }
+        }
+        if out.len() == before {
+            break;
+        }
+    }
+    out.sort_by_key(|q| q.difficulty);
     out
 }
 
@@ -779,6 +817,14 @@ pub fn pick_for(bank: &Bank, skills: &[String], level: u8, seed: u64, exclude: &
         }
     }
     None
+}
+
+fn shuffled<T>(mut v: Vec<T>, rng: &mut u64) -> Vec<T> {
+    for i in (1..v.len()).rev() {
+        let j = (splitmix(rng) % (i as u64 + 1)) as usize;
+        v.swap(i, j);
+    }
+    v
 }
 
 fn splitmix(state: &mut u64) -> u64 {
@@ -1001,6 +1047,26 @@ mod tests {
         assert!(s.execute("slide.getReady", &serde_json::json!({"questions": [{"text": " "}]})).is_err());
         assert!(s.execute("slide.getReady", &serde_json::json!({"questions": []})).is_err());
         assert!(s.execute("slide.getReady", &serde_json::json!({"questions": qs, "headings": 3})).is_err());
+    }
+
+    #[test]
+    fn a_mixed_starter_spreads_the_levels_and_alternatives_offer_a_spread() {
+        assert_eq!(mixed_levels("Core"), [2, 3, 2, 1]);
+        assert_eq!(mixed_levels("support"), [1, 2, 1, 1]);
+        assert_eq!(mixed_levels("Higher"), [3, 4, 3, 2]);
+        assert_eq!(mixed_levels(""), [2, 3, 2, 1]);
+        let (bank, m) = matcher();
+        let c = parse(SAMPLE).unwrap();
+        let slots = plan(&c, c.course("Y7", "Core").unwrap(), 3, 2, &m, 1);
+        let qs = questions_at(&bank, &slots, &mixed_levels("Core"), 3);
+        assert_eq!(qs.iter().map(|q| q.as_ref().unwrap().difficulty).collect::<Vec<_>>(), vec![2, 3, 2, 1]);
+        let first = qs[0].as_ref().unwrap();
+        let alts = alternatives(&bank, &slots[0].skills, 5, std::slice::from_ref(&first.id), 4);
+        assert_eq!(alts.len(), 4);
+        assert!(alts.iter().all(|q| q.id != first.id && slots[0].skills.contains(&q.skill_key())));
+        let mut levels: Vec<u8> = alts.iter().map(|q| q.difficulty).collect();
+        levels.dedup();
+        assert!(levels.len() >= 3, "a spread of levels, easiest first: {levels:?}");
     }
 
     #[test]

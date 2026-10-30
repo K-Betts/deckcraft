@@ -1,4 +1,4 @@
-//! The engine behind the on-screen scientific calculator, modelled on a Casio ClassWiz: an
+//! The engine behind the on-screen scientific calculator, a natural-display scientific calculator: an
 //! expression is edited in place (fractions, roots and powers are templates you step into), answers
 //! stay exact where they can (fractions and surds such as `2√3`), SHIFT reaches the second
 //! function of a key, `Ans` and the replay history are kept, and S⇔D flips an answer between its
@@ -1865,7 +1865,7 @@ fn natural_tokens(v: Value, decimal: bool, cfg: &Config) -> Vec<Tok> {
         Value::Surd(_) | Value::Pi(_) if decimal => float_tokens(v.to_f64(), cfg.num, &mut out),
         Value::Surd(sd) => match surd_tokens(&sd) {
             Some(t) => out = t,
-            // Outside the ranges the screen shows in √ form: a decimal, as the real one does.
+            // Outside the ranges the screen shows in √ form: a decimal, as a scientific calculator does.
             None => float_tokens(v.to_f64(), cfg.num, &mut out),
         },
         Value::Pi(k) if k.n.unsigned_abs() < 1000 && k.d < 1000 => {
@@ -2019,7 +2019,7 @@ pub fn value_tokens(v: Value, decimal: bool) -> Vec<Tok> {
 
 // ---- Tables and equations ------------------------------------------------------------------
 
-/// `f(x)` for each `x` from `start` to `end` in steps of `step` (at most 45 rows, as on the real thing).
+/// `f(x)` for each `x` from `start` to `end` in steps of `step` (at most 45 rows, as on a scientific calculator).
 pub fn table_rows(
     f: &[Tok],
     start: Value,
@@ -2578,7 +2578,7 @@ impl Calc {
                 self.ans = v;
                 self.outcome = Outcome::Answer(v);
                 self.fresh = true;
-                // Typing a decimal point asks for a decimal answer, as on the real thing.
+                // Typing a decimal point asks for a decimal answer, as on a scientific calculator.
                 self.format = if self.tokens.contains(&Tok::Dot) { ResultFormat::Decimal } else { ResultFormat::Standard };
                 self.history.push(Entry { tokens: self.tokens.clone(), value: v });
                 if self.history.len() > HISTORY {
@@ -2737,7 +2737,7 @@ mod tests {
         assert_eq!(shown(&eq([num("2"), vec![Key::Pow], num("10")].concat())), "1,024", "the digit separator is on at first");
         assert_eq!(shown(&eq([num("2"), vec![Key::Inverse]].concat())), "{1/2}");
         let neg_square = eq(vec![Key::Neg, Key::Digit(3), Key::Square]);
-        assert_eq!(shown(&neg_square), "\u{2212}9", "(\u{2212})3\u{00B2} is \u{2212}(3\u{00B2}), as on a Casio");
+        assert_eq!(shown(&neg_square), "\u{2212}9", "(\u{2212})3\u{00B2} is \u{2212}(3\u{00B2}), as on a scientific calculator");
     }
 
     #[test]

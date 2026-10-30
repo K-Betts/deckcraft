@@ -33,8 +33,8 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  # Same craft-fonts commit as ci.yml and release.yml (Latin presentation fonts).
-  CRAFT_FONTS_REF: 43913056ce82a3fdad0ef69f6b88d1dc922a8104
+  # Same craft-fonts commit as ci.yml and release.yml (Latin presentation fonts and the CJK fallbacks).
+  CRAFT_FONTS_REF: 37827adc41fd165f9a9234ac40f94dbad353aa69
 
 jobs:
   mac:

@@ -638,44 +638,46 @@ mod tests {
     use super::*;
 
     #[test]
-    fn the_starter_bank_is_valid_and_has_ks3_ks4_questions() {
+    fn the_starter_bank_is_valid_and_every_built_in_question_is_a_template() {
         let bank = starter().unwrap();
-        let usable = bank.questions.iter().filter(|q| q.usable()).count();
-        // The KS3/KS4 curriculum bank has many more than the 20 placeholder questions.
-        assert!(usable >= 18, "expected at least 18 usable questions, got {usable}");
+        assert!(bank.questions.is_empty(), "no fixed questions ship: each built-in question makes new numbers");
+        let usable = bank.instantiate(0).questions.iter().filter(|q| q.usable()).count();
+        assert!(usable >= 3000, "expected the KS3/KS4 templates, got {usable}");
         assert!(bank.topics().len() >= 4);
     }
 
     #[test]
     fn bank_round_trips_through_to_json() {
         let bank = starter().unwrap();
-        let json = bank.to_json();
-        let bank2 = parse(&json).unwrap();
-        assert_eq!(bank.questions.len(), bank2.questions.len());
-        assert_eq!(bank.questions[0].id, bank2.questions[0].id);
+        let bank2 = parse(&bank.to_json()).unwrap();
+        assert_eq!(bank.templates.len(), bank2.templates.len());
+        assert_eq!(bank.templates[0], bank2.templates[0]);
     }
 
     #[test]
     fn the_same_seed_gives_the_same_questions_and_a_new_seed_a_reroll() {
-        let bank = starter().unwrap();
-        let ids = |seed| bank.pick(&Filter::default(), seed, 4).iter().map(|q| q.id.clone()).collect::<Vec<_>>();
-        assert_eq!(ids(7), ids(7));
-        assert!((1..20).any(|s| ids(s) != ids(7)), "some seed changes the four");
+        let starter = starter().unwrap();
+        let four = |seed| {
+            let bank = starter.instantiate(seed);
+            bank.pick(&Filter::default(), seed, 4).iter().map(|q| (q.id.clone(), q.text.clone())).collect::<Vec<_>>()
+        };
+        assert_eq!(four(7), four(7));
+        assert!((1..20).any(|s| four(s) != four(7)), "some seed changes the four");
     }
 
     #[test]
     fn topic_and_difficulty_narrow_the_pick_and_figures_are_skipped() {
-        let bank = starter().unwrap();
+        let bank = starter().unwrap().instantiate(3);
         let f = Filter { topic: Some("geometry".into()), difficulty: Some(1), query: None, ..Default::default() };
         let got = bank.pick(&f, 3, 4);
-        assert!(!got.is_empty());
+        assert_eq!(got.len(), 4);
         assert!(got.iter().all(|q| q.topic == "Geometry" && q.difficulty == 1 && q.usable()));
         assert!(bank.pick(&Filter::default(), 1, 50).iter().all(|q| q.usable()));
     }
 
     #[test]
     fn with_no_topic_the_four_cover_four_topics() {
-        let bank = starter().unwrap();
+        let bank = starter().unwrap().instantiate(0);
         for seed in 0..10 {
             let picked = bank.pick(&Filter::default(), seed, 4);
             let mut topics: Vec<_> = picked.iter().map(|q| q.topic.clone()).collect();
@@ -687,33 +689,40 @@ mod tests {
 
     #[test]
     fn pick_one_honours_its_filter_and_never_repeats_an_excluded_question() {
-        let bank = starter().unwrap();
-        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1), query: None, ..Default::default() };
+        let bank = starter().unwrap().instantiate(1);
+        let f = Filter { topic: Some("Algebra".into()), difficulty: Some(1), query: Some("equation".into()), ..Default::default() };
         let mut used: Vec<String> = vec![];
         while let Some(q) = bank.pick_one(&f, used.len() as u64, &used) {
             assert!(q.topic == "Algebra" && q.difficulty == 1);
             assert!(!used.contains(&q.id));
             used.push(q.id.clone());
         }
-        assert!(!used.is_empty(), "there are algebra level-1 questions");
+        assert_eq!(used.len(), bank.candidates(&f).len(), "every one, once");
+        assert!(!used.is_empty(), "there are algebra level-1 equation questions");
         assert!(bank.pick_one(&Filter { topic: Some("Origami".into()), difficulty: None, query: None, ..Default::default() }, 1, &[]).is_none());
     }
 
     #[test]
     fn a_loose_slot_never_takes_the_only_question_a_strict_slot_needs() {
-        let bank = starter().unwrap();
-        let strict = Filter { topic: Some("Ratio".into()), difficulty: Some(3), query: None, ..Default::default() };
-        assert_eq!(bank.candidates(&strict).len(), 1, "the bank has exactly one ratio stretch question");
+        let bank = starter().unwrap().instantiate(0);
+        let strict = Filter {
+            skill: Some("Y7 Autumn B3 Expressions and equations · S7 Solve 2-step equations".into()),
+            difficulty: Some(3),
+            ..Default::default()
+        };
+        let only = bank.candidates(&strict);
+        assert_eq!(only.len(), 1, "the bank has exactly one stretch question for this step");
+        let only = only[0].id.clone();
         for seed in 0..300 {
             let got = bank.assign(&[Filter::default(), strict.clone(), Filter::default(), Filter::default()], seed).expect("a set exists");
-            assert_eq!(got[1].id, "rat-006");
+            assert_eq!(got[1].id, only);
             let mut ids: Vec<_> = got.iter().map(|q| q.id.clone()).collect();
             ids.sort();
             ids.dedup();
             assert_eq!(ids.len(), 4, "all different");
         }
         let impossible = bank.assign(&[strict.clone(), strict], 1);
-        assert!(impossible.is_none(), "two questions cannot both be the one ratio stretch question");
+        assert!(impossible.is_none(), "two questions cannot both be the one stretch question");
     }
 
     #[test]
@@ -819,8 +828,8 @@ mod tests {
     #[test]
     fn merging_hides_removed_starter_questions_and_adds_the_teachers_own() {
         let starter = starter().unwrap();
-        let first = starter.questions[0].id.clone();
-        let n = starter.questions.len();
+        let first = starter.templates[0].id.clone();
+        let n = starter.templates.len();
         let mine = Question {
             id: "my-001".into(),
             topic: "Number".into(),
@@ -836,8 +845,9 @@ mod tests {
             diagram: None,
         };
         let merged = Bank::merged(starter, std::slice::from_ref(&first), std::slice::from_ref(&mine), &[]);
-        assert_eq!(merged.questions.len(), n);
-        assert!(merged.questions.iter().all(|q| q.id != first));
+        assert_eq!(merged.templates.len(), n - 1);
+        assert!(merged.templates.iter().all(|t| t.id != first));
+        assert_eq!(merged.questions.len(), 1, "the teacher's own fixed question is kept");
         assert_eq!(merged.questions.last().unwrap().id, "my-001");
         assert_eq!(merged.new_id(&[]), "my-002");
         assert!(parse(&merged.to_json()).is_ok());
