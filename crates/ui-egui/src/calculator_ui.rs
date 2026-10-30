@@ -1460,7 +1460,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
 
     // Touching the screen: a swipe scrolls, a tap chooses.
     if dev.on {
-        let swipe = ui.interact(inside, ui.id().with("calc_swipe"), Sense::drag());
+        let swipe = ui.interact(inside, ui.scope_id().with("calc_swipe"), Sense::drag());
         let step = 20.0 * ss;
         let moved = ui.data_mut(|d| {
             let acc = d.get_temp_mut_or_default::<f32>(swipe.id);
@@ -1477,7 +1477,7 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
             dev.press(if moved > 0 { Key::Up } else { Key::Down });
         }
         for (n, (r, tap)) in taps.iter().enumerate() {
-            if ui.interact(*r, ui.id().with(("calc_tap", n)), Sense::click()).clicked() {
+            if ui.interact(*r, ui.scope_id().with(("calc_tap", n)), Sense::click()).clicked() {
                 dev.touch(*tap);
             }
         }
@@ -1490,9 +1490,9 @@ pub fn show(ui: &mut Ui, dev: &mut Device, scale: f32, keyboard: bool) -> Rect {
             Shape2::Pill(w, h) => (w, h),
         };
         let kr = Rect::from_center_size(c, vec2(w, h) * k);
-        let resp = ui.interact(kr, ui.id().with(("calc_key", n)), Sense::click());
+        let resp = ui.interact(kr, ui.scope_id().with(("calc_key", n)), Sense::click());
         let name = key_name(def);
-        resp.widget_info(move || egui::WidgetInfo::labeled(egui::WidgetType::Button, true, name.clone()));
+        resp.widget_info(move || egui::WidgetInfo::labeled(egui::Role::Button, true, name.clone()));
         let lit = def.key == Key::Shift && dev.shift;
         let (fill, ink) = face(def.style, lit, resp.hovered());
         let down = resp.is_pointer_button_down_on();

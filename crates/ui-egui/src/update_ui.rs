@@ -176,8 +176,8 @@ pub fn status_chip(app: &SlideApp, ui: &mut Ui, rect: Rect) -> bool {
     let t = Tokens::get(ui.ctx());
     let w = 22.0 + ui.fonts_mut(|f| f.layout_no_wrap(label.into(), theme::font(12.0), t.text).size().x);
     let r = Rect::from_center_size(pos2(rect.center().x - 40.0, rect.center().y), vec2(w, 18.0));
-    let resp = ui.interact(r, ui.id().with("update_chip"), Sense::click());
-    resp.widget_info(|| egui::WidgetInfo::labeled(egui::WidgetType::Button, true, label));
+    let resp = ui.interact(r, ui.scope_id().with("update_chip"), Sense::click());
+    resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, label));
     ui.painter().rect_filled(r, CornerRadius::same(9), if resp.hovered() { t.accent.gamma_multiply(0.85) } else { t.accent });
     ui.painter().text(r.center(), egui::Align2::CENTER_CENTER, label, theme::font(12.0), t.accent_text);
     resp.on_hover_text("A newer version of DeckCraft is ready").clicked()

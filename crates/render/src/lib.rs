@@ -53,6 +53,7 @@ pub use extent::{Region, TILE, layout_extent, pasteboard_region, slide_extent};
 pub use images::{decode as decode_image, gif_frame};
 pub use morph_path::PathMorph;
 pub use morph_text::TextMorph;
+pub use pattern::{is_fg as pattern_is_fg, presets as pattern_presets, tile as pattern_tile};
 pub use placed::{Placed, PlacedLink, PlacedShape, PlacedText, place_master_texts, place_slide, text_outline};
 pub use table::cell_body as table_cell_body;
 pub use table::cell_rects as table_cell_rects;
@@ -238,6 +239,10 @@ pub struct RenderOpts<'a> {
     pub date_text: Option<String>,
     /// The local date and time date fields show (`None`: the system clock).
     pub now: Option<DateTime>,
+    /// Leave the slide background out (neither the white underlay nor the background fill), so
+    /// only what is on the slide is drawn over transparency: PNG export with a transparent
+    /// background. Shapes filled with the background (`useBgFill`) still show it.
+    pub transparent_background: bool,
 }
 
 impl Default for RenderOpts<'_> {
@@ -257,6 +262,7 @@ impl Default for RenderOpts<'_> {
             clear: None,
             date_text: None,
             now: None,
+            transparent_background: false,
         }
     }
 }
@@ -595,6 +601,16 @@ pub fn parse_path(d: &str) -> BezPath {
     bp
 }
 
+/// The transform a 3-D camera applies to shape `s` of size `w` x `h` (approximated by the affine
+/// map that fits it best), as drawn; `None` for no camera, and for groups, tables and charts.
+pub fn camera_turn(rctx: &Ctx, s: &Shape, w: f64, h: f64) -> Option<Affine> {
+    if matches!(s.kind, ShapeKind::Group { .. } | ShapeKind::Table(_) | ShapeKind::Chart(_)) {
+        return None;
+    }
+    let (e, _) = resolve::effects(rctx, s);
+    e.as_ref().and_then(|e| e.raw3d.as_deref()).and_then(camera::from_raw).and_then(|c| camera::affine(&c, w, h))
+}
+
 /// The rectangle a picture's image occupies given its crop (fractions; negative = padding).
 pub fn crop_dest(bounds: Rect, crop: [f64; 4]) -> Rect {
     let [l, t, r, b] = crop.map(|v| if v.is_finite() { v.clamp(-10.0, 0.99) } else { 0.0 });
@@ -794,6 +810,10 @@ impl Renderer {
 
     fn background(&mut self, ctx: &mut RenderContext, f: &Frame, rctx: &Ctx, slide: Option<&Slide>, view: Affine) {
         let (fill, ph) = resolve::background(rctx, slide);
+        if f.opts.transparent_background {
+            self.bg = Some((fill, ph, view));
+            return;
+        }
         let r = Rect::new(0.0, 0.0, f.pres.slide_size.width, f.pres.slide_size.height);
         ctx.set_transform(view);
         let path = r.to_path(0.1);
@@ -824,6 +844,15 @@ impl Renderer {
         if depth > 0 && view.determinant().abs() > 1e-12 && view.is_finite() { (view, view.inverse() * m) } else { (m, Affine::IDENTITY) }
     }
 
+    /// Shape-space units per point: a group's child coordinates can scale a shape's box (a legacy
+    /// 1360-unit child space makes one unit hundreds of EMUs), but 3-D sizes kept in points
+    /// (contour width, extrusion depth, bevel) stay points, as PowerPoint draws them. 1 outside a
+    /// group.
+    fn per_point(&self, m: Affine, depth: usize) -> f64 {
+        let k = scale_of(self.line_space(m, depth).1);
+        if k.is_finite() && k > 1e-12 { 1.0 / k } else { 1.0 }
+    }
+
     /// The size and transform a shape's text is set in: inside a group whose child coordinates
     /// scale the shape, the shape's size in slide points and `m` with that scale taken out, so
     /// insets and font sizes stay in points; otherwise `w`, `h` and `m` themselves.
@@ -840,6 +869,27 @@ impl Renderer {
             return (w, h, m);
         }
         (tw, th, m * Affine::scale_non_uniform(1.0 / sx, 1.0 / sy))
+    }
+
+    /// A shape's geometry in its own `w` × `h` space, built at its size on the slide: inside a
+    /// group whose child coordinates scale the shape unevenly, the preset's rounded corners and
+    /// other size-derived features stay as they would be on a plain shape of that size (#1083).
+    fn scaled_geometry(&self, s: &Shape, m: Affine, depth: usize, w: f64, h: f64) -> Geometry {
+        let (tw, th, _) = self.text_space(m, depth, w, h);
+        if (tw, th) == (w, h) {
+            return shape_geometry(s, w, h);
+        }
+        let mut geo = shape_geometry(s, tw, th);
+        let k = |a: f64, b: f64| if b.abs() > 1e-12 { a / b } else { 1.0 };
+        let back = Affine::scale_non_uniform(k(w, tw), k(h, th));
+        for p in &mut geo.paths {
+            p.path.apply_affine(back);
+        }
+        geo.text_rect = back.transform_rect_bbox(geo.text_rect);
+        for p in &mut geo.sites {
+            *p = back * *p;
+        }
+        geo
     }
 
     fn shape_at(&mut self, ctx: &mut RenderContext, f: &Frame, rctx: &Ctx, s: &Shape, parent: Affine, depth: usize) {
@@ -864,15 +914,7 @@ impl Renderer {
                 * Affine::translate(-c.to_vec2());
             m = parent * Affine::translate(st.offset) * x.affine() * around;
         }
-        // A 3-D camera turns the shape (approximated by the affine transform that fits it best).
-        if !matches!(s.kind, ShapeKind::Group { .. } | ShapeKind::Table(_) | ShapeKind::Chart(_))
-            && let Some(a) = resolve::effects(rctx, s)
-                .0
-                .as_ref()
-                .and_then(|e| e.raw3d.as_deref())
-                .and_then(camera::from_raw)
-                .and_then(|c| camera::affine(&c, x.w, x.h))
-        {
+        if let Some(a) = camera_turn(rctx, s, x.w, x.h) {
             m *= a;
         }
         let layered = st.opacity < 0.999 || st.clip.is_some();
@@ -983,6 +1025,51 @@ impl Renderer {
         }
     }
 
+    /// Fill the filled sub-paths of `geo` (a `w` × `h` shape placed by `m`) with `fl`, faded per
+    /// sub-path by `fade`: `useBgFill` shows the slide background through the shape and `grpFill`
+    /// the group's fill.
+    #[allow(clippy::too_many_arguments)]
+    fn fill_geometry(
+        &self,
+        ctx: &mut RenderContext,
+        f: &Frame,
+        rctx: &Ctx,
+        fl: &Fill,
+        fill_ph: Option<Rgba>,
+        geo: &Geometry,
+        (w, h): (f64, f64),
+        m: Affine,
+        fade: &dyn Fn(usize) -> deckcraft_geom::morph::Fade,
+    ) {
+        for (i, sp) in geo.paths.iter().enumerate() {
+            if sp.fill == FillMode::None || fade(i).fill <= 0.0 {
+                continue;
+            }
+            ctx.set_transform(m);
+            ctx.set_fill_rule(if sp.even_odd { peniko::Fill::EvenOdd } else { peniko::Fill::NonZero });
+            match (fl, &self.bg) {
+                // `useBgFill`: the slide's background, laid out on the slide (not the
+                // shape), shows through the shape.
+                (Fill::Background, Some((bg, ph, view))) => {
+                    let slide = Rect::new(0.0, 0.0, f.pres.slide_size.width, f.pres.slide_size.height);
+                    let path = (view.inverse() * m) * sp.path.clone();
+                    paint::fill_path(ctx, rctx, bg, *ph, &path, slide, *view, sp.fill, fade(i).fill, f.pres);
+                }
+                // `grpFill`: the group's fill, laid out over the whole group.
+                (Fill::Group, _) => {
+                    if let Some((gf, gm, gbox)) = &self.group_fill
+                        && gm.determinant().abs() > 1e-12
+                    {
+                        let path = (gm.inverse() * m) * sp.path.clone();
+                        paint::fill_path(ctx, rctx, gf, None, &path, *gbox, *gm, sp.fill, fade(i).fill, f.pres);
+                    }
+                }
+                _ => paint::fill_path(ctx, rctx, fl, fill_ph, &sp.path, Rect::new(0.0, 0.0, w, h), m, sp.fill, fade(i).fill, f.pres),
+            }
+            ctx.set_fill_rule(peniko::Fill::NonZero);
+        }
+    }
+
     #[allow(clippy::too_many_arguments)]
     fn geometry_shape(
         &mut self,
@@ -998,7 +1085,7 @@ impl Renderer {
     ) {
         let (geo, fades) = match self.paths.iter().find(|p| p.id == s.id) {
             Some(pm) => self.morphs.geometry(pm, s, w, h),
-            None => (shape_geometry(s, w, h), Vec::new()),
+            None => (self.scaled_geometry(s, m, depth, w, h), Vec::new()),
         };
         let fade = |i: usize| fades.get(i).copied().unwrap_or(deckcraft_geom::morph::Fade { fill: 1.0, stroke: 1.0 });
         let (fill, fill_ph) = resolve::fill(rctx, s);
@@ -1038,6 +1125,17 @@ impl Renderer {
             ctx.push_layer(None, None, None, None, None);
             let _ = r;
         }
+        // Shape-space units per point for the 3-D sizes, measured without the camera's turn (which
+        // `shape_at` puts in `m`): its foreshortening is not a child-coordinate scale.
+        let pt = {
+            let turn = effects
+                .as_ref()
+                .and_then(|e| e.raw3d.as_deref())
+                .and_then(camera::from_raw)
+                .and_then(|c| camera::affine(&c, w, h))
+                .filter(|t| t.determinant().abs() > 1e-9);
+            self.per_point(turn.map_or(m, |t| m * t.inverse()), depth)
+        };
         // A 3-D extrusion under a turned camera: the sides, swept behind the face.
         if let Some(raw) = effects.as_ref().and_then(|e| e.raw3d.as_deref())
             && let Some(ex) = extrude::from_raw(raw)
@@ -1051,7 +1149,8 @@ impl Renderer {
             };
             let pre = m * turn.inverse();
             let lit = light::Lighting::from_raw(raw);
-            extrude::draw(ctx, &outline, w, h, &cam, ex.depth, pre, turn, extrude::side_color(rctx, &ex, face), &lit);
+            let d = ex.depth * pt;
+            extrude::draw(ctx, &outline, w, h, &cam, d, pre, turn, extrude::side_color(rctx, &ex, face), &lit);
         }
         // A 3-D contour: a band around the outline, behind the face (and in front of any sides).
         if let Some(raw) = effects.as_ref().and_then(|e| e.raw3d.as_deref())
@@ -1062,11 +1161,18 @@ impl Renderer {
                 _ => None,
             };
             let col = c.color.as_ref().map(|k| rctx.color(k, face)).or(face).unwrap_or(Rgba::rgb(0xff, 0xff, 0xff));
-            extrude::draw_contour(ctx, &outline, m, c.width, col, &light::Lighting::from_raw(raw));
+            extrude::draw_contour(ctx, &outline, m, c.width * pt, col, &light::Lighting::from_raw(raw));
         }
         // Fill.
         match &s.kind {
             ShapeKind::Picture { fill: pf } => {
+                // The picture's own fill shows behind its transparent pixels, as in PowerPoint (an
+                // emphasis tint recolours it, as it does any shape's fill).
+                if s.fill.as_ref().is_some_and(|f| !f.is_none())
+                    && let Some(fl) = &fill
+                {
+                    self.fill_geometry(ctx, f, rctx, fl, fill_ph, &geo, (w, h), m, &fade);
+                }
                 ctx.set_transform(m);
                 let bounds = Rect::new(0.0, 0.0, w, h);
                 ctx.push_clip_layer(&outline);
@@ -1077,6 +1183,13 @@ impl Renderer {
             // An object DeckCraft doesn't model (an embedded OLE object, an unknown graphic): its
             // preview picture, stretched over the frame, as PowerPoint draws it.
             ShapeKind::Opaque { preview: Some(media), .. } => {
+                // An embedded object's fallback picture can carry a fill (old equation objects
+                // drawn on coloured boxes): behind the preview, as for a picture.
+                if s.fill.as_ref().is_some_and(|f| !f.is_none())
+                    && let Some(fl) = &fill
+                {
+                    self.fill_geometry(ctx, f, rctx, fl, fill_ph, &geo, (w, h), m, &fade);
+                }
                 ctx.set_transform(m);
                 let pf = deckcraft_model::style::PictureFill { media: *media, ..Default::default() };
                 paint::picture(ctx, f.pres, &pf, Rect::new(0.0, 0.0, w, h), m, None);
@@ -1085,8 +1198,10 @@ impl Renderer {
                 ctx.set_transform(m);
                 let bounds = Rect::new(0.0, 0.0, w, h);
                 if let Some(p) = mc.poster {
-                    let pf = deckcraft_model::style::PictureFill { media: p, ..Default::default() };
+                    let pf = deckcraft_model::style::PictureFill { media: p, crop: mc.crop, ..Default::default() };
+                    ctx.push_clip_layer(&outline);
                     paint::picture(ctx, f.pres, &pf, bounds, m, None);
+                    ctx.pop_layer();
                 } else if mc.video {
                     ctx.set_paint(peniko::Color::from_rgba8(20, 20, 24, 255));
                     ctx.fill_rect(&bounds);
@@ -1097,35 +1212,9 @@ impl Renderer {
             }
             _ => {
                 if let Some(fl) = &fill
-                    && !(empty_ph && f.opts.edit && s.fill.is_none())
+                    && !(empty_ph && f.opts.edit && s.fill.is_none() && s.line.is_none() && s.style.is_none())
                 {
-                    for (i, sp) in geo.paths.iter().enumerate() {
-                        if sp.fill == FillMode::None || fade(i).fill <= 0.0 {
-                            continue;
-                        }
-                        ctx.set_transform(m);
-                        ctx.set_fill_rule(if sp.even_odd { peniko::Fill::EvenOdd } else { peniko::Fill::NonZero });
-                        match (fl, &self.bg) {
-                            // `useBgFill`: the slide's background, laid out on the slide (not the
-                            // shape), shows through the shape.
-                            (Fill::Background, Some((bg, ph, view))) => {
-                                let slide = Rect::new(0.0, 0.0, f.pres.slide_size.width, f.pres.slide_size.height);
-                                let path = (view.inverse() * m) * sp.path.clone();
-                                paint::fill_path(ctx, rctx, bg, *ph, &path, slide, *view, sp.fill, fade(i).fill, f.pres);
-                            }
-                            // `grpFill`: the group's fill, laid out over the whole group.
-                            (Fill::Group, _) => {
-                                if let Some((gf, gm, gbox)) = &self.group_fill
-                                    && gm.determinant().abs() > 1e-12
-                                {
-                                    let path = (gm.inverse() * m) * sp.path.clone();
-                                    paint::fill_path(ctx, rctx, gf, None, &path, *gbox, *gm, sp.fill, fade(i).fill, f.pres);
-                                }
-                            }
-                            _ => paint::fill_path(ctx, rctx, fl, fill_ph, &sp.path, Rect::new(0.0, 0.0, w, h), m, sp.fill, fade(i).fill, f.pres),
-                        }
-                        ctx.set_fill_rule(peniko::Fill::NonZero);
-                    }
+                    self.fill_geometry(ctx, f, rctx, fl, fill_ph, &geo, (w, h), m, &fade);
                 }
             }
         }
@@ -1157,6 +1246,7 @@ impl Renderer {
         };
         // A 3-D bevel: the face and a band inside the outline lit as surfaces.
         if let Some(bv) = effects.as_ref().and_then(|e| e.raw3d.as_deref()).and_then(bevel::from_raw) {
+            let bv = bevel::Bevel { w: bv.w * pt, h: bv.h * pt, ..bv };
             let solid = match &fill {
                 Some(Fill::Solid { color: c }) => Some(rctx.color(c, fill_ph)),
                 _ => None,
@@ -1428,7 +1518,10 @@ impl Renderer {
             }
             ctx.pop_layer();
         }
-        if let Some(g) = &e.glow {
+        // A shape with no fill and no line (a text box) draws nothing to glow around: its text's
+        // own glow is all PowerPoint shows, not a halo round the box.
+        let glows = fill_alpha.is_some() || content.is_some() || outline.is_some();
+        if let Some(g) = e.glow.as_ref().filter(|_| glows) {
             let c = rctx.color(&g.color, ph);
             ctx.set_transform(Affine::IDENTITY);
             // Measured on PowerPoint's export: a glow of radius r is half strength about half of r

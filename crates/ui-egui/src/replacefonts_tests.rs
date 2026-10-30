@@ -7,6 +7,7 @@ use serde_json::json;
 
 use crate::{Services, SlideApp};
 
+/// Build the standard Replace Fonts UI harness with a fresh session.
 fn harness() -> Harness<'static, SlideApp> {
     let mut s = Session::with_new();
     s.execute("slide.new", &json!({"layout": "blank"})).unwrap();
@@ -38,10 +39,27 @@ fn run_font(h: &Harness<'_, SlideApp>) -> Option<String> {
         .and_then(|r| r.props.font.clone())
 }
 
+/// The ribbon folds the groups that do not fit into its More menu (as in the app, where folding is
+/// on); open More if Replace Fonts… was folded away.
+fn reach_replace_fonts<'a>(h: &'a mut Harness<'static, SlideApp>) -> egui_kittest::Node<'a> {
+    h.state_mut().ribbon_fold = true;
+    // The first frames teach the ribbon each group's width; one frame later it folds.
+    h.run_steps(6);
+    if h.query_by_label("Replace Fonts…").is_none() {
+        h.get_by_label("More tools").click();
+        h.run_steps(3);
+    }
+    h.get_by_label("Replace Fonts…")
+}
+
+/// The ribbon command opens Replace Fonts; its Replace button updates the document and leaves
+/// the dialog open with a confirmation.
 #[test]
 fn ribbon_button_opens_the_dialog_and_replaces() {
     let mut h = harness();
-    h.get_by_label("Replace Fonts…").click();
+    let button = reach_replace_fonts(&mut h);
+    assert!(button.rect().max.x <= 1700.0 && button.rect().min.x >= 0.0, "Replace Fonts… is on screen: {:?}", button.rect());
+    button.click();
     h.run_steps(3);
     assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("replaceFonts"));
     // Pick the font to replace and type the new one, the way a person would.
@@ -63,6 +81,7 @@ fn ribbon_button_opens_the_dialog_and_replaces() {
 #[test]
 #[ignore = "writes a screenshot for review"]
 fn screenshot() {
+    let _gpu = crate::gpu_lock::gpu_lock();
     let mut h = harness();
     h.render().unwrap().save("/tmp/replacefonts0.png").unwrap();
     h.state_mut().dialog = Some(crate::dialogs::Dialog::new("replaceFonts"));

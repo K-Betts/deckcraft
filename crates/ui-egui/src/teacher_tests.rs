@@ -236,7 +236,7 @@ fn click_at(h: &mut egui_kittest::Harness<'static, SlideApp>, at: Pos2) {
 }
 
 fn tab_centre(h: &egui_kittest::Harness<'static, SlideApp>) -> Pos2 {
-    h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_palette_tab"))).expect("the tab is drawn").center()
+    h.ctx.memory(|m| m.area_rect(egui::Id::unique("teacher_palette_tab"))).expect("the tab is drawn").center()
 }
 
 #[test]
@@ -244,10 +244,10 @@ fn the_palette_starts_away_and_the_left_tab_brings_it_out_and_puts_it_back() {
     let mut h = harness();
     teacher(&mut h);
     let palette = |h: &egui_kittest::Harness<'static, SlideApp>| {
-        h.ctx.memory(|m| m.areas().visible_last_frame(&egui::LayerId::new(egui::Order::Foreground, egui::Id::new("teacher_palette"))))
+        h.ctx.memory(|m| m.areas().visible_last_frame(&egui::LayerId::new(egui::Order::Foreground, egui::Id::unique("teacher_palette"))))
     };
     assert!(!palette(&h), "out of the way on entry");
-    let tab = h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_palette_tab"))).expect("tab");
+    let tab = h.ctx.memory(|m| m.area_rect(egui::Id::unique("teacher_palette_tab"))).expect("tab");
     assert!(tab.min.x < 12.0 && tab.center().x < 40.0, "the tab sits on the left edge");
     for _ in 0..(5 * 60) {
         h.step();
@@ -287,11 +287,11 @@ fn the_timer_is_a_small_card_not_a_bar_across_the_screen() {
     teacher(&mut h);
     overlay(&mut h).add_timer();
     h.run_steps(3);
-    let setting = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
+    let setting = h.ctx.memory(|m| m.area_rect(egui::Id::unique(("teacher_timer", 1u64)))).expect("timer card");
     assert!(setting.width() < 420.0 && setting.height() < 340.0, "setting: {setting:?}");
     h.get_by_label("Start").click();
     h.run_steps(3);
-    let running = h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).expect("timer card");
+    let running = h.ctx.memory(|m| m.area_rect(egui::Id::unique(("teacher_timer", 1u64)))).expect("timer card");
     assert!(running.width() < 520.0 && running.height() < 260.0, "running: {running:?}");
 }
 
@@ -352,7 +352,7 @@ fn timer_digits_stay_on_one_line_for_every_value() {
     h.run_steps(3);
     h.get_by_label("Start").click();
     h.run_steps(3);
-    let id = egui::Id::new(("teacher_timer", 1u64));
+    let id = egui::Id::unique(("teacher_timer", 1u64));
     let tall = h.ctx.memory(|m| m.area_rect(id)).unwrap().height();
     overlay(&mut h).timers[0].remaining = 48.0;
     h.run_steps(3);
@@ -487,7 +487,7 @@ fn the_pens_choices_pop_out_beside_the_tool_and_drawing_puts_them_away() {
     overlay(&mut h).set_tool(Tool::Pen);
     h.run_steps(3);
     assert!(overlay(&mut h).options_open);
-    let pop = h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_options"))).expect("the popover");
+    let pop = h.ctx.memory(|m| m.area_rect(egui::Id::unique("teacher_options"))).expect("the popover");
     let bar = overlay(&mut h).palette_rect_for_test();
     assert!(pop.min.x >= bar.max.x, "beside the toolbar, not inside it: {pop:?} vs {bar:?}");
     assert!(pop.height() < 80.0, "one row, as in the mock-up");
@@ -495,7 +495,7 @@ fn the_pens_choices_pop_out_beside_the_tool_and_drawing_puts_them_away() {
     drag(&mut h, pos2(600.0, 400.0), pos2(800.0, 400.0));
     assert!(!overlay(&mut h).options_open);
     h.run_steps(2);
-    assert!(h.ctx.memory(|m| m.area_rect(egui::Id::new("teacher_options"))).is_none() || !overlay(&mut h).options_open);
+    assert!(h.ctx.memory(|m| m.area_rect(egui::Id::unique("teacher_options"))).is_none() || !overlay(&mut h).options_open);
 }
 
 #[test]
@@ -509,7 +509,8 @@ fn a_timer_can_be_made_bigger_or_smaller_and_the_next_one_keeps_the_size() {
     h.run_steps(3);
     overlay(&mut h).timers[0].toggle();
     h.run_steps(3);
-    let size = |h: &egui_kittest::Harness<'static, SlideApp>| h.ctx.memory(|m| m.area_rect(egui::Id::new(("teacher_timer", 1u64)))).unwrap().height();
+    let size =
+        |h: &egui_kittest::Harness<'static, SlideApp>| h.ctx.memory(|m| m.area_rect(egui::Id::unique(("teacher_timer", 1u64)))).unwrap().height();
     let before = size(&h);
     h.get_by_label("Smaller digits").click();
     h.run_steps(3);
@@ -560,7 +561,7 @@ fn typing_goes_to_the_calculator_only_while_the_pointer_is_over_it() {
     teacher(&mut h);
     overlay(&mut h).maths_tools_panel.open_tool(MathsTool::Calculator);
     h.run_steps(3);
-    let rect = h.ctx.memory(|m| m.area_rect(egui::Id::new(("maths_tool", MathsTool::Calculator)))).expect("the calculator");
+    let rect = h.ctx.memory(|m| m.area_rect(egui::Id::unique(("maths_tool", MathsTool::Calculator)))).expect("the calculator");
     h.event(Event::PointerMoved(rect.center()));
     h.run_steps(3);
     assert!(overlay(&mut h).keyboard_captured());

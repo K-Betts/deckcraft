@@ -18,6 +18,9 @@ fn harness() -> egui_kittest::Harness<'static, SlideApp> {
         },
         app,
     );
+    // Maths-italic letters (U+1D45B and the like) come from the system's STIX font, which a test
+    // machine may not have; the craft fonts do not cover them.
+    h.ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Tofu);
     h.run_steps(3);
     h
 }
@@ -247,6 +250,7 @@ fn importing_a_question_file_adds_templates_and_skips_repeats() {
         },
         app,
     );
+    h.ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Tofu);
     h.run_steps(3);
     h.state_mut().run("app.dialog", json!({"id": "questionBank"})).unwrap();
     h.run_steps(3);
