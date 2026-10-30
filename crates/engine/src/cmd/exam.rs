@@ -1,4 +1,4 @@
-//! Exam Question: one GCSE-style question on a slide, set out as Edexcel papers do.
+//! Exam Question: one GCSE-style question on a slide, set out as GCSE papers do.
 //!
 //! `slide.examQuestion` draws the question number in a box, the question (and its parts (a), (b), …),
 //! an answer line under each part, and the total marks at the bottom right: "(Total for Question 1
@@ -400,7 +400,7 @@ mod tests {
     }
 
     #[test]
-    fn a_bank_question_is_set_out_edexcel_style_with_hidden_answers_and_notes() {
+    fn a_bank_question_is_set_out_like_an_exam_paper_with_hidden_answers_and_notes() {
         let mut s = Session::with_new();
         // A two-part question from a bank given as JSON, so the test does not depend on the built-in one.
         let bank = json!({"version": 1, "questions": [{

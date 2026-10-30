@@ -25,7 +25,7 @@ pub fn specs() -> Vec<CommandSpec> {
 /// The name that marks a slide made by `slide.getReady`, so a reroll can find it again.
 pub const GET_READY_NAME: &str = "Get Ready";
 
-/// A retrieval starter: four questions in a 2×2 card grid (matching the Dr Frost / MathsWhiteboard
+/// A retrieval starter: four questions in a 2×2 card grid (matching the usual retrieval-starter
 /// format). Each card shows the question with real equations (LaTeX `$…$` rendered as OMML), a
 /// numbered coloured header, and an answer box initially hidden via `shape.visible`. The answers
 /// also go in the speaker notes. Cards save as ordinary shapes, so the deck opens in PowerPoint.
@@ -138,7 +138,7 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         edit_runs(s, u64::from(id), |r| r.size = Some(30.0))?;
     }
 
-    // A 2×2 grid of cards: Last lesson / week / topic / year, as on the MathsWhiteboard starter.
+    // A 2×2 grid of cards: Last lesson / week / topic / year, as on a typical retrieval starter.
     // Each card has its number, question (with equations), figure and an answer that appears on
     // click; its Expand button opens it full screen on a slide of its own, with a Back button.
     let expand = bool_param(p, "expand").unwrap_or(true);

@@ -1,4 +1,4 @@
-//! The fx-991CW's home menu and the apps this emulator has: Calculate, Table and Equation. The
+//! The calculator's home menu and the apps this emulator has: Calculate, Table and Equation. The
 //! others on the menu (Statistics, Inequality, Distribution) are listed but say so when opened.
 
 use std::collections::HashMap;
@@ -1396,7 +1396,7 @@ mod tests {
         assert_eq!(d.forms[&Kind::Equation].rows.as_ref().unwrap()[0].label, "Math ERROR");
     }
 
-    // ---- the real key layout, menus and memory ----
+    // ---- the key layout, menus and memory ----
 
     fn press_all(d: &mut Device, keys: &[Key]) {
         for k in keys {
@@ -1507,7 +1507,7 @@ mod tests {
         assert!(matches!(d.stack.last(), Some(Overlay::Variables { .. })));
         d.press(Key::Ok); // A=
         d.press(Key::Digit(1)); // Store
-        assert!(matches!(d.stack.last(), Some(Overlay::Variables { .. })), "back on the variable list, as on the real thing");
+        assert!(matches!(d.stack.last(), Some(Overlay::Variables { .. })), "back on the variable list, as a calculator does");
         assert_eq!(d.mem.vars[0], Value::int(8));
         press_all(&mut d, &[Key::Ac, Key::Ac]);
         assert!(d.stack.is_empty());
@@ -1607,7 +1607,7 @@ mod tests {
         assert_eq!(d.mem.defs[0], vec![Tok::X]);
     }
 
-    // ---- examples from the fx-991CW+ user's guide ----
+    // ---- worked examples ----
 
     fn calc(keys: &[Key]) -> String {
         let mut d = Device::default();

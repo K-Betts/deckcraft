@@ -3553,7 +3553,7 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
 
 mod taught;
 
-/// Exam Question: one question set out as on an Edexcel paper, from the question bank's exam-style
+/// Exam Question: one question set out as on an exam paper, from the question bank's exam-style
 /// questions (by skill or topic) or blank to type into.
 fn exam_question_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     ui.set_min_width(560.0);
@@ -3634,7 +3634,7 @@ fn exam_question_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool
     field(ui, d, "Question number:", "number", "1");
     ui.label(
         egui::RichText::new(
-            "Set out as on an Edexcel paper. Answers sit on the answer lines, hidden until a click in Slide Show, and are in the speaker notes. \
+            "Set out as on an exam paper. Answers sit on the answer lines, hidden until a click in Slide Show, and are in the speaker notes. \
              Marks are the question's total from the bank; a blank question has ( ) to fill in.",
         )
         .size(11.0)

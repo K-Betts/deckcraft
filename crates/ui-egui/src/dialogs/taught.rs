@@ -82,7 +82,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     };
 
     // What was just taught: year group, route, unit and lesson, and how hard. The questions show
-    // at once and follow every change, as on MathsWhiteboard's starter.
+    // at once and follow every change, as on a typical retrieval starter.
     ui.set_min_width(900.0);
     let years = cur.years();
     let year =
