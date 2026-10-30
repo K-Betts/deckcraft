@@ -8,6 +8,7 @@ pub mod compress;
 pub mod design;
 pub mod edit;
 pub mod exam;
+pub mod exam_library;
 pub mod figures;
 pub mod file;
 pub mod find;
@@ -170,6 +171,7 @@ pub fn command_specs() -> &'static [CommandSpec] {
         v.extend(slide::specs());
         v.extend(get_ready::specs());
         v.extend(exam::specs());
+        v.extend(exam_library::specs());
         v.extend(reuse::specs());
         v.extend(insert::specs());
         v.extend(smartart::specs());

@@ -61,6 +61,7 @@ fn title(id: &str) -> &'static str {
         "dateTime" => "Date and Time",
         "getReady" => "Get Ready Starter",
         "examQuestion" => "Exam Question",
+        "examLibrary" => "Question Library",
         "chooseSkill" => "Choose a Skill",
         "questionBank" => "Manage Questions",
         "update" => "Update DeckCraft",
@@ -100,6 +101,8 @@ pub fn show(app: &mut SlideApp, ctx: &egui::Context) {
         window = window.default_size(vec2(760.0, 420.0)).min_width(720.0).min_height(420.0);
     } else if d.id == "themeFonts" {
         window = window.default_size(vec2(460.0, 320.0)).min_width(420.0).min_height(300.0);
+    } else if d.id == "examLibrary" {
+        window = window.default_size(vec2(980.0, 640.0)).min_width(940.0).min_height(600.0);
     }
     window.show(ctx, |ui| {
         ui.set_min_width(match d.id.as_str() {
@@ -2462,6 +2465,7 @@ fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         "dateTime" => date_time_dialog(app, ui, d),
         "getReady" => get_ready_dialog(app, ui, d),
         "examQuestion" => exam_question_dialog(app, ui, d),
+        "examLibrary" => exam_library::dialog(app, ui, d),
         "chooseSkill" => choose_skill_dialog(app, ui, d),
         "questionBank" => question_bank_dialog(app, ui, d),
         "update" => crate::update_ui::dialog(app, ui),
@@ -3551,6 +3555,7 @@ fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     d.fields.contains_key("cancel")
 }
 
+pub(crate) mod exam_library;
 mod taught;
 
 /// Exam Question: one question set out as on an exam paper, from the question bank's exam-style

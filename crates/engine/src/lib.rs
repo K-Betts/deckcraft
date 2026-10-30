@@ -12,6 +12,7 @@ pub mod compare;
 pub mod connect;
 pub mod curriculum;
 pub mod drawtable;
+pub mod exam_library;
 pub use deckcraft_text::equation;
 pub mod file_access;
 pub mod fonts;
