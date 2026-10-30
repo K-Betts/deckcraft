@@ -36,12 +36,13 @@ fn current(h: &egui_kittest::Harness<'static, SlideApp>) -> (usize, Vec<(String,
 }
 
 #[test]
-fn the_insert_tab_shows_exam_question_only_with_the_maths_pack_on() {
+fn the_insert_tab_has_no_exam_buttons_for_now_but_get_ready_stays() {
     let mut h = harness();
-    assert!(h.query_by_label_contains("Exam").is_none(), "a fresh install is neutral");
     h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
     h.run_steps(3);
-    assert!(h.query_by_label_contains("Exam").is_some());
+    assert!(h.query_by_label_contains("Exam").is_none(), "Exam Question is off the ribbon until it is ready");
+    assert!(h.query_by_label_contains("Question\nLibrary").is_none() && h.query_by_label_contains("Library").is_none());
+    assert!(h.query_by_label_contains("Get Ready").is_some(), "the Get Ready starter stays");
 }
 
 #[test]

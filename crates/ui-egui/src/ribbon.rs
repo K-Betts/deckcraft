@@ -1458,8 +1458,8 @@ fn insert(app: &mut SlideApp, ui: &mut Ui) {
     if app.pack_on(crate::packs::MATHS) {
         group(ui, |ui| {
             big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
-            big(app, ui, Icon::NewSlide, "Exam\nQuestion", "app.dialog", json!({"id": "examQuestion"}));
-            big(app, ui, Icon::NewSlide, "Question\nLibrary", "app.dialog", json!({"id": "examLibrary"}));
+            // Exam Question and Question Library are built (`app.dialog` ids `examQuestion` and
+            // `examLibrary`) but not on the ribbon until they are ready.
         });
     }
     group(ui, |ui| {
