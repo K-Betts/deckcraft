@@ -42,7 +42,7 @@ fn run_font(h: &Harness<'_, SlideApp>) -> Option<String> {
 /// The ribbon folds the groups that do not fit into its More menu (as in the app, where folding is
 /// on); open More if Replace Fonts… was folded away.
 fn reach_replace_fonts<'a>(h: &'a mut Harness<'static, SlideApp>) -> egui_kittest::Node<'a> {
-    h.state_mut().ribbon_fold = true;
+    h.state_mut().maths.ribbon_fold = true;
     // The first frames teach the ribbon each group's width; one frame later it folds.
     h.run_steps(6);
     if h.query_by_label("Replace Fonts…").is_none() {

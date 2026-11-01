@@ -14,7 +14,7 @@ use crate::{SlideApp, widgets};
 pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
     let Some(pane) = app.ui.pane.clone() else { return };
-    let compact = crate::is_compact(ui.ctx().content_rect().width());
+    let compact = crate::maths::app::is_compact(ui.ctx().content_rect().width());
     let base = egui::Panel::right("task_pane").frame(egui::Frame::NONE.fill(t.card).inner_margin(egui::Margin::same(10)));
     let base = if compact {
         base.resizable(false).exact_size(ui.available_width())

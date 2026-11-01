@@ -19,7 +19,7 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     if app.session.active().is_some_and(|d| d.selection.target.is_page_master()) {
         return;
     }
-    let compact = crate::is_compact(ui.ctx().content_rect().width());
+    let compact = crate::maths::app::is_compact(ui.ctx().content_rect().width());
     let base = egui::Panel::left("thumbs").frame(egui::Frame::NONE.fill(t.chrome));
     // A slim strip on a phone, so the slide itself keeps most of the screen.
     let base = if compact {

@@ -12,6 +12,9 @@ use crate::widgets::{
     self, RIBBON_H, big_button, big_button_ex, color_split, dropdown, group, icon_toggle, rows, small_button, small_button_ex, small_button_named,
 };
 
+pub(crate) mod fold;
+mod maths;
+
 pub const TITLE_H: f32 = 38.0;
 
 /// macOS draws the window into the title bar (`with_fullsize_content_view`) and AppKit paints the
@@ -71,7 +74,7 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
             ui.ctx().send_viewport_cmd(egui::ViewportCommand::Maximized(!max));
         }
         // A phone-width bar keeps only the quick-access buttons, Search and Present.
-        let compact = crate::is_compact(rect.width());
+        let compact = crate::maths::app::is_compact(rect.width());
         let left_end = if compact { rect.max.x - 140.0 } else { rect.min.x + 420.0 };
         let mut child = ui.new_child(
             egui::UiBuilder::new()
@@ -248,82 +251,8 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         let mut cui = ui.new_child(egui::UiBuilder::new().max_rect(inner).layout(egui::Layout::left_to_right(egui::Align::Min)));
         cui.set_clip_rect(inner.expand2(vec2(0.0, 3.0)));
         cui.spacing_mut().item_spacing.x = 1.0;
-        responsive_tab(app, &mut cui, inner);
+        fold::responsive_tab(app, &mut cui, inner);
     });
-}
-
-/// The width reserved at the right of the card for the "More" button.
-const MORE_W: f32 = 66.0;
-
-/// Draw the current tab's groups, folding the ones that do not fit into a "More" menu.
-///
-/// The tab functions just call `group` in order. Each group's width is recorded when it is drawn
-/// and remembered per tab, so the next frame can keep whole groups left to right while they fit
-/// and put the rest behind a More button; its menu runs the same tab function again drawing only
-/// the groups that were left out. The first time a tab is shown (widths unknown) every group is
-/// drawn once, clipped as the ribbon always was, which teaches the widths; one frame later it
-/// folds. Nothing is lost in a narrow window, and nothing invisible is ever built (so no phantom
-/// controls for screen readers).
-fn responsive_tab(app: &mut SlideApp, cui: &mut Ui, inner: Rect) {
-    if !app.ribbon_fold {
-        app.ribbon_folded = 0;
-        render_tab(app, cui);
-        return;
-    }
-    let ctx = cui.ctx().clone();
-    let tab = app.ui.tab.clone();
-    let known: Vec<f32> = app.ribbon_widths.get(&tab).cloned().unwrap_or_default();
-    // Decide how many whole groups fit, from what was learned earlier (everything when unknown).
-    let n_known = known.len();
-    let complete = n_known > 0 && known.iter().all(|w| *w > 0.0);
-    let cut = if complete { groups_that_fit(&known, inner.width()) } else { usize::MAX };
-    app.ribbon_folded = if complete { n_known - cut } else { 0 };
-    widgets::set_fold(&ctx, widgets::Fold { pass: widgets::FoldPass::Show, cut, ..Default::default() });
-    render_tab(app, cui);
-    let seen = widgets::take_fold(&ctx);
-    // Learn the widths of the groups just drawn; a change in the number of groups starts over.
-    let mut learned = if seen.index == n_known { known.clone() } else { vec![0.0; seen.index] };
-    for (i, w) in &seen.measured {
-        if let Some(slot) = learned.get_mut(*i) {
-            *slot = *w;
-        }
-    }
-    if learned != known {
-        app.ribbon_widths.insert(tab, learned.clone());
-        ctx.request_repaint();
-    }
-    if complete && cut < n_known {
-        let more = widgets::big_button(cui, Icon::More, "More", true);
-        more.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, "More tools"));
-        let more = more.on_hover_text("More tools");
-        // The folded groups, in a menu.
-        egui::Popup::menu(&more).width(640.0).show(|ui| {
-            ui.set_max_width(640.0);
-            ui.spacing_mut().item_spacing = vec2(1.0, 6.0);
-            widgets::set_fold(&ctx, widgets::Fold { pass: widgets::FoldPass::Overflow, cut, ..Default::default() });
-            ui.horizontal_wrapped(|ui| render_tab(app, ui));
-            widgets::take_fold(&ctx);
-        });
-    }
-}
-
-/// How many leading groups fit in `available` points, leaving room for a More button when some do not.
-pub(crate) fn groups_that_fit(widths: &[f32], available: f32) -> usize {
-    let total: f32 = widths.iter().sum();
-    if total <= available {
-        return widths.len();
-    }
-    let room = available - MORE_W;
-    let mut used = 0.0;
-    let mut n = 0;
-    for w in widths {
-        if used + w > room {
-            break;
-        }
-        used += w;
-        n += 1;
-    }
-    n
 }
 
 /// The groups of the current ribbon tab.
@@ -1454,14 +1383,7 @@ fn insert(app: &mut SlideApp, ui: &mut Ui) {
         big(app, ui, Icon::Equation, "Equation", "app.dialog", json!({"id": "equation"}));
         big(app, ui, Icon::Symbol, "Symbol", "app.dialog", json!({"id": "symbol"}));
     });
-    // Subject packs add; they never move what is already here (principle 4).
-    if app.pack_on(crate::packs::MATHS) {
-        group(ui, |ui| {
-            big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
-            // Exam Question and Question Library are built (`app.dialog` ids `examQuestion` and
-            // `examLibrary`) but not on the ribbon until they are ready.
-        });
-    }
+    maths::insert_group(app, ui);
     group(ui, |ui| {
         big(app, ui, Icon::Video, "Video", "app.insertVideoDialog", json!({}));
         big(app, ui, Icon::Audio, "Audio", "app.insertAudioDialog", json!({}));
@@ -2225,12 +2147,7 @@ fn animations(app: &mut SlideApp, ui: &mut Ui) {
             });
         });
     });
-    // Subject packs add; they never move what is already here (principle 4).
-    if app.pack_on(crate::packs::MATHS) {
-        group(ui, |ui| {
-            big(app, ui, Icon::Numbering, "Reveal\nSteps", "animation.steps", json!({}));
-        });
-    }
+    maths::animations_group(app, ui);
 }
 
 pub fn paint_anim_tile(p: &egui::Painter, r: Rect, label: &str, class: AnimClass, enabled: bool) {
@@ -2455,21 +2372,7 @@ fn view(app: &mut SlideApp, ui: &mut Ui) {
             app.ui.zoom = None;
         }
     });
-    group(ui, |ui| {
-        let has = app.session.active().is_some();
-        if big_button(ui, Icon::PlayFromCurrent, "Teacher\nMode", has)
-            .on_hover_text("Present with pen, revealer, spotlight and timers (Cmd+Shift+T)")
-            .clicked()
-        {
-            let _ = app.run("show.teacher", json!({"on": true}));
-        }
-        rows(ui, |ui| {
-            let mut keep = app.ui.keep_annotations_on_advance;
-            if ui.checkbox(&mut keep, "Keep marks on advance").changed() {
-                app.ui.keep_annotations_on_advance = keep;
-            }
-        });
-    });
+    maths::view_group(app, ui);
     group(ui, |ui| {
         let has = app.session.active().is_some();
         let on = app.doc_window.is_some();

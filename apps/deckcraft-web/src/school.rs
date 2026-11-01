@@ -22,10 +22,10 @@ pub fn apply(app: &mut SlideApp) {
         return;
     }
     let id = fingerprint(CURRICULUM);
-    let store = crate::web::storage();
+    let store = crate::web::settings::storage();
     let seen = store.as_ref().and_then(|s| s.get_item(SEEN_KEY).ok().flatten());
-    if app.ui.curriculum.trim().is_empty() || seen.as_deref() != Some(id.as_str()) {
-        app.ui.curriculum = CURRICULUM.to_string();
+    if app.ui.maths.curriculum.trim().is_empty() || seen.as_deref() != Some(id.as_str()) {
+        app.ui.maths.curriculum = CURRICULUM.to_string();
         if let Some(s) = store {
             let _ = s.set_item(SEEN_KEY, &id);
         }
