@@ -299,7 +299,7 @@ fn curriculum(args: &[String]) -> Result<(), String> {
             .map(|s| format!("{} ({})", s.name, if s.year.is_empty() { "general" } else { &s.year }))
             .unwrap_or_default()
     };
-    let (mut total, mut unmatched) = (0, 0);
+    let (mut total, mut unmatched, mut marked) = (0, 0, 0);
     for course in &cur.courses {
         outln!("\n== {} ({} units)", course.name(), course.units.len());
         for u in &course.units {
@@ -313,7 +313,10 @@ fn curriculum(args: &[String]) -> Result<(), String> {
                 let text = if o.search.trim().is_empty() { &o.text } else { &o.search };
                 let scores: Vec<(usize, f64)> = if o.skills.is_empty() { m.best_in(text, context, &course.year, &course.route, 3) } else { vec![] };
                 let fit = |k: &String| scores.iter().find(|(i, _)| &m.skills[*i].key == k).map(|(_, sc)| format!(" {sc:.2}")).unwrap_or_default();
-                if keys.is_empty() {
+                if o.unmatched {
+                    marked += 1;
+                    outln!("    UNMATCHED {prior}{}", o.text);
+                } else if keys.is_empty() {
                     unmatched += 1;
                     outln!("    NO MATCH  {prior}{}", o.text);
                 } else {
@@ -326,7 +329,7 @@ fn curriculum(args: &[String]) -> Result<(), String> {
             }
         }
     }
-    outln!("\nOK: {} courses, {total} objectives, {unmatched} with no matching skill", cur.courses.len());
+    outln!("\nOK: {} courses, {total} objectives, {unmatched} with no matching skill, {marked} marked unmatched", cur.courses.len());
     Ok(())
 }
 
