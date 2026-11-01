@@ -4,7 +4,7 @@
 
 use egui_kittest::kittest::Queryable;
 
-use crate::ribbon::groups_that_fit;
+use crate::ribbon::fold::groups_that_fit;
 use crate::{Services, SlideApp};
 use deckcraft_engine::Session;
 
