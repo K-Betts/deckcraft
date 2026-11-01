@@ -599,7 +599,12 @@ pub struct Perf {
     pub frame_ms: f64,
     pub render_ms: f64,
     pub fps: f64,
+    /// When a slow frame was last logged ([`now_ms`]); at most one record a second.
+    slow_logged_ms: f64,
 }
+
+/// A frame slower than this (ms) is logged.
+const SLOW_FRAME_MS: f64 = 100.0;
 
 /// Playhead for the in-canvas animation preview.
 struct AnimPreview {
@@ -983,7 +988,7 @@ impl SlideApp {
             opening: None,
             toast: None,
             fonts_noted: Default::default(),
-            perf: Perf { frame_ms: 0.0, render_ms: 0.0, fps: 0.0 },
+            perf: Perf { frame_ms: 0.0, render_ms: 0.0, fps: 0.0, slow_logged_ms: f64::NEG_INFINITY },
             synthetic: vec![],
             synthetic_pending: false,
             synthetic_next: vec![],
@@ -1804,7 +1809,10 @@ impl SlideApp {
     }
 
     pub fn open_path(&mut self, path: &str) -> Result<(), String> {
+        let t0 = now_ms();
         self.session.execute("file.open", &json!({"path": path})).map_err(|e| e.to_string())?;
+        // On the UI thread: the window is frozen for this long. Path left out (it can name a class).
+        log::info!("opened a file on the UI thread in {:.0} ms", now_ms() - t0);
         self.note_recent(path);
         Ok(())
     }
@@ -2351,10 +2359,19 @@ impl SlideApp {
         let now = monotonic_secs();
         if now - self.last_recovery > every {
             self.last_recovery = now;
-            if self.session.documents().iter().any(|d| d.is_dirty())
-                && let Err(e) = self.session.execute("file.recovery.save", &json!({}))
-            {
-                self.set_status(format!("Couldn't save AutoRecover information: {e}"));
+            if self.session.documents().iter().any(|d| d.is_dirty()) {
+                let t0 = now_ms();
+                let saved = self.session.execute("file.recovery.save", &json!({}));
+                let ms = now_ms() - t0;
+                // This runs on the UI thread, so the window is frozen for as long as it takes.
+                if ms > SLOW_FRAME_MS {
+                    log::warn!("AutoRecover froze the window for {ms:.0} ms ({} presentations open)", self.session.documents().len());
+                } else {
+                    log::info!("AutoRecover took {ms:.0} ms");
+                }
+                if let Err(e) = saved {
+                    self.set_status(format!("Couldn't save AutoRecover information: {e}"));
+                }
             }
         }
         if self.session.documents().iter().any(|d| d.is_dirty()) {
@@ -3599,7 +3616,7 @@ impl SlideApp {
             self.anim_preview = None;
             show::ui(self, ui);
             doc_window::show(self, &ctx);
-            self.perf.frame_ms = now_ms() - t0;
+            self.note_frame_time(t0);
             self.ui_end(&ctx);
             return;
         }
@@ -3662,8 +3679,23 @@ impl SlideApp {
         }
         self.drain_requests();
         doc_window::show(self, &ctx);
-        self.perf.frame_ms = now_ms() - t0;
+        self.note_frame_time(t0);
         self.ui_end(&ctx);
+    }
+
+    /// Record how long this pass took since `t0`, and log it when it was slow.
+    fn note_frame_time(&mut self, t0: f64) {
+        let now = now_ms();
+        self.perf.frame_ms = now - t0;
+        if self.perf.frame_ms > SLOW_FRAME_MS && now - self.perf.slow_logged_ms >= 1000.0 {
+            self.perf.slow_logged_ms = now;
+            log::warn!(
+                "slow frame: {:.0} ms ({:.0} ms drawing the slide), {} presentations open",
+                self.perf.frame_ms,
+                self.perf.render_ms,
+                self.session.documents().len()
+            );
+        }
     }
 
     /// Media clocks. Voices belong to the open presentation: closing the last one, or switching

@@ -143,6 +143,7 @@ pub fn save(s: &Session, dir: &Path) -> Result<usize> {
     std::fs::create_dir_all(dir).map_err(|e| EngineError::Other(format!("{}: {e}", dir.display())))?;
     claim_dir(dir);
     let mut n = 0;
+    let mut total = 0usize;
     for d in s.documents() {
         if !d.is_dirty() {
             discard(dir, d.uid);
@@ -150,11 +151,13 @@ pub fn save(s: &Session, dir: &Path) -> Result<usize> {
         }
         let (doc, meta) = files(dir, d.uid);
         let bytes = deckcraft_format::save(&d.doc).map_err(|e| EngineError::Other(e.to_string()))?;
+        total += bytes.len();
         write_atomic(&doc, &bytes)?;
         let m = json!({"path": d.path, "title": d.title(), "saved": now_secs(), "owner": instance_id()});
         write_atomic(&meta, m.to_string().as_bytes())?;
         n += 1;
     }
+    log::info!("recovery: wrote {n} of {} open presentations, {total} bytes", s.documents().len());
     Ok(n)
 }
 

@@ -596,15 +596,19 @@ impl Session {
     }
     pub fn add_document(&mut self, d: DocState) -> usize {
         let was = self.active().map(|d| d.uid);
+        let (uid, slides) = (d.uid, d.doc.slides.len());
         self.docs.push(d);
         self.active = Some(self.docs.len() - 1);
         self.forget_vertex_kind_unless(was);
+        // Counts only: titles and paths can name a class or a pupil.
+        log::info!("presentation {uid} added ({slides} slides); {} open", self.docs.len());
         self.docs.len() - 1
     }
     pub fn close_document(&mut self, i: usize) {
         let was = self.active().map(|d| d.uid);
         if i < self.docs.len() {
             let d = self.docs.remove(i);
+            log::info!("presentation {} closed; {} open", d.uid, self.docs.len());
             if let Some(dir) = &self.recovery_dir {
                 recovery::discard(dir, d.uid);
             }
