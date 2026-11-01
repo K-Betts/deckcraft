@@ -100,7 +100,28 @@ pub fn check(http: &dyn Http, repo: &str, os: &str, arch: &str, current_sha: Opt
         s => return Err(UpdateError::NoRelease(format!("GitHub answered {s}"))),
     }
     let avail = parse(&body, os, arch)?;
-    Ok(differs(current, &avail.sha).then_some(avail))
+    if !differs(current, &avail.sha) || running_is_newer(http, repo, current, &avail.sha) {
+        return Ok(None);
+    }
+    Ok(Some(avail))
+}
+
+/// Does the running build already contain the release's commit? A build made from a later `main`
+/// (e.g. by `packaging/macos/update-local.sh`) would otherwise be offered the older release. When
+/// GitHub cannot say (offline, or a commit it does not have), the release is offered as before.
+fn running_is_newer(http: &dyn Http, repo: &str, current: &str, release_sha: &str) -> bool {
+    #[derive(Deserialize)]
+    struct Compare {
+        status: String,
+    }
+    if !current.chars().all(|c| c.is_ascii_hexdigit()) {
+        return false;
+    }
+    let url = format!("https://api.github.com/repos/{repo}/compare/{release_sha}...{current}");
+    match http.get(&url, 4 << 20) {
+        Ok((200, body)) => serde_json::from_slice::<Compare>(&body).is_ok_and(|c| c.status == "ahead" || c.status == "identical"),
+        _ => false,
+    }
 }
 
 #[cfg(test)]
@@ -126,7 +147,24 @@ mod tests {
         let a = check(&http, REPO, "macos", "aarch64", Some("9ebdf74aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")).unwrap().unwrap();
         assert_eq!((a.sha.as_str(), a.label.as_str(), a.notes.as_str(), a.size), ("abc1234", "build-abc1234", "Notes here", 1234));
         assert!(a.zip_url.ends_with("abc1234.zip") && a.sha256_url.ends_with("abc1234.zip.sha256"));
-        assert_eq!(http.urls(), [URL], "one request, to GitHub's API");
+        assert!(http.urls().iter().all(|u| u.starts_with("https://api.github.com/repos/K-Betts/deckcraft/")), "only GitHub's API");
+    }
+
+    #[test]
+    fn an_older_release_is_not_offered_to_a_newer_build() {
+        let current = "9ebdf74aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+        let compare = format!("https://api.github.com/repos/K-Betts/deckcraft/compare/abc1234...{current}");
+        // The running build is ahead of the release (built from a later main): nothing to offer.
+        let ahead = Fake::default().with(URL, 200, release_json("abc1234")).with(&compare, 200, r#"{"status":"ahead"}"#);
+        assert_eq!(check(&ahead, REPO, "macos", "aarch64", Some(current)).unwrap(), None);
+        // Behind or on another line: the release is offered.
+        for status in ["behind", "diverged"] {
+            let http = Fake::default().with(URL, 200, release_json("abc1234")).with(&compare, 200, format!(r#"{{"status":"{status}"}}"#));
+            assert!(check(&http, REPO, "macos", "aarch64", Some(current)).unwrap().is_some(), "{status}");
+        }
+        // GitHub does not know the running commit (a local, unpushed build): offered as before.
+        let unknown = Fake::default().with(URL, 200, release_json("abc1234")).with(&compare, 404, "{}");
+        assert!(check(&unknown, REPO, "macos", "aarch64", Some(current)).unwrap().is_some());
     }
 
     #[test]

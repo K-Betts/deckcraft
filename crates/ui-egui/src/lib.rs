@@ -733,6 +733,7 @@ pub struct SlideApp {
     /// Monotonic identity for a new slide show instance (`start_show`).
     show_instance: u64,
     /// Monotonic identity for a new background-open attempt.
+    #[cfg_attr(target_arch = "wasm32", expect(dead_code, reason = "the web opens files in the foreground"))]
     opening_generation: u64,
     /// Canvas screen rect and points-per-slide-point scale (for control & tests).
     pub canvas_rect: Option<egui::Rect>,
