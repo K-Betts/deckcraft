@@ -51,6 +51,9 @@ shared.
 - An objective may have **search**, other words to match when its own wording matches the
   wrong questions, or **skills**, a list of skill keys (as the skill picker stores them, e.g.
   `Y7 Autumn B3 Expressions and equations · S7 Solve 2-step equations`) to use outright.
+- An objective nothing in the bank practises can say **`"unmatched": true`**. Its words are not
+  matched, so its card starts empty instead of showing questions that only share its words. It
+  cannot also have `search` or `skills`.
 
 ## How objectives find questions
 
@@ -67,8 +70,9 @@ deckcraft-cli curriculum check our-curriculum.json
 
 It lists every objective with the skills it matched and how well (0 to 1), and marks
 `NO MATCH` where nothing fits. Below about 0.45 a match is often poor: give that objective
-`search` words. An objective nothing fits gives an empty card the teacher fills in by hand or
-with *Change skill…*.
+`search` words, or mark it `"unmatched": true` if nothing in the bank practises it (listed as
+`UNMATCHED`). An objective nothing fits gives an empty card the teacher fills in by hand or with
+*Change skill…*.
 
 ## Making one from a spreadsheet
 

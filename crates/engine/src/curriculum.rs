@@ -16,7 +16,8 @@
 //! (Last week), one from the unit before (Last topic) and one from the unit's prior learning or the
 //! year before (Last year). Objectives are matched to the question bank's skills by their words
 //! ([`Matcher`]); an objective may name its skills (`skills`) or the words to match (`search`)
-//! when the words alone pick the wrong ones. The file is the school's own: none ships in the app.
+//! when the words alone pick the wrong ones, or be `unmatched` when nothing in the bank fits. The
+//! file is the school's own: none ships in the app.
 
 use std::collections::HashMap;
 
@@ -79,6 +80,10 @@ pub struct Objective {
     /// Words to match instead of `text`.
     #[serde(default, skip_serializing_if = "String::is_empty")]
     pub search: String,
+    /// Nothing in the bank practises it: match no skills, so its card starts empty rather than
+    /// with questions its words happen to match.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub unmatched: bool,
 }
 
 pub fn parse(json: &str) -> Result<Curriculum, String> {
@@ -116,6 +121,9 @@ pub fn parse(json: &str) -> Result<Curriculum, String> {
             for o in u.objectives.iter().chain(&u.prior) {
                 if o.text.trim().is_empty() || o.text.chars().count() > MAX_TEXT || o.search.chars().count() > MAX_TEXT {
                     return Err(format!("{name}, {}: an objective is empty or too long", u.title));
+                }
+                if o.unmatched && (!o.skills.is_empty() || !o.search.trim().is_empty()) {
+                    return Err(format!("{name}, {}: “{}” is unmatched but names skills or search words", u.title, o.text));
                 }
             }
         }
@@ -597,13 +605,17 @@ impl Matcher {
     }
 
     /// The skill keys for an objective of a unit called `context`: its own `skills` when it names
-    /// any that exist, else the best matches for its `search` words or its text.
+    /// any that exist, else the best matches for its `search` words or its text; none when it is
+    /// `unmatched`.
     pub fn skills_for(&self, o: &Objective, context: &str, year: &str, route: &str) -> Vec<String> {
         self.scored(o, context, year, route).0
     }
 
     /// [`skills_for`](Self::skills_for) with how well the best one fits (1 for skills the file names).
     pub fn scored(&self, o: &Objective, context: &str, year: &str, route: &str) -> (Vec<String>, f64) {
+        if o.unmatched {
+            return (vec![], 0.0);
+        }
         let named: Vec<String> = o.skills.iter().filter(|k| self.skills.iter().any(|s| &s.key == *k)).cloned().collect();
         if !named.is_empty() {
             return (named, 1.0);
@@ -943,10 +955,28 @@ mod tests {
     fn named_skills_win_over_the_words() {
         let (_, m) = matcher();
         let key = m.skills.iter().find(|s| s.name.to_lowercase().contains("ratio")).unwrap().key.clone();
-        let o = Objective { text: "Solve two-step equations".into(), skills: vec![key.clone(), "no such skill".into()], search: String::new() };
+        let o = Objective { text: "Solve two-step equations".into(), skills: vec![key.clone(), "no such skill".into()], ..Default::default() };
         assert_eq!(m.skills_for(&o, "", "Y7", "Core"), vec![key]);
-        let o = Objective { text: "Something vague".into(), skills: vec![], search: "angles in a triangle".into() };
+        let o = Objective { text: "Something vague".into(), search: "angles in a triangle".into(), ..Default::default() };
         assert!(m.skills_for(&o, "", "Y7", "Core").iter().any(|k| k.to_lowercase().contains("triangle")));
+    }
+
+    #[test]
+    fn unmatched_objectives_get_no_skills() {
+        let (_, m) = matcher();
+        // Its words alone would match: "unmatched" says the bank has nothing that practises it.
+        let words = Objective { text: "Populate and interpret frequency tables".into(), ..Default::default() };
+        assert!(!m.skills_for(&words, "Statistics", "Y8", "Core").is_empty());
+        let o = Objective { unmatched: true, ..words };
+        assert!(m.skills_for(&o, "Statistics", "Y8", "Core").is_empty());
+        assert_eq!(m.scored(&o, "Statistics", "Y8", "Core").1, 0.0);
+        // It survives a round trip, and is left out of the file when false.
+        let c = parse(r#"{"version":1,"courses":[{"year":"Y8","units":[{"title":"Statistics","objectives":[{"text":"Populate and interpret frequency tables","unmatched":true},{"text":"Mean"}]}]}]}"#).unwrap();
+        let back = serde_json::to_string(&c).unwrap();
+        assert!(back.contains(r#""unmatched":true"#) && back.matches("unmatched").count() == 1, "{back}");
+        // It cannot also name skills or search words.
+        let both = r#"{"version":1,"courses":[{"year":"Y8","units":[{"title":"Statistics","objectives":[{"text":"Mean","unmatched":true,"search":"averages"}]}]}]}"#;
+        assert!(parse(both).unwrap_err().contains("unmatched"));
     }
 
     #[test]

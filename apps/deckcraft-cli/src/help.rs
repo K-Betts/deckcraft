@@ -50,7 +50,8 @@ written.
         details: "Reads a curriculum file (JSON: year groups, routes, units and their objectives) with the same
 checks the app makes, then lists every objective with the question-bank skills the Get Ready
 starter will use for it. NO MATCH marks an objective nothing in the bank fits; give it a `search`
-(other words to match) or `skills` (skill keys) in the file. Nothing is written.
+(other words to match) or `skills` (skill keys) in the file. UNMATCHED marks one the file says
+nothing fits (`\"unmatched\": true`), so its card starts empty. Nothing is written.
 
   deckcraft-cli curriculum check our-curriculum.json",
     },
