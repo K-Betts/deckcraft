@@ -615,7 +615,7 @@ fn sides(toks: &[Tok]) -> Option<(&[Tok], &[Tok])> {
 fn random() -> u64 {
     use std::sync::atomic::{AtomicU64, Ordering};
     static S: AtomicU64 = AtomicU64::new(0x2545_F491_4F6C_DD1D);
-    let mut x = S.load(Ordering::Relaxed) ^ std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(1, |d| d.as_nanos() as u64);
+    let mut x = S.load(Ordering::Relaxed) ^ web_time::SystemTime::now().duration_since(web_time::UNIX_EPOCH).map_or(1, |d| d.as_nanos() as u64);
     x ^= x << 13;
     x ^= x >> 7;
     x ^= x << 17;

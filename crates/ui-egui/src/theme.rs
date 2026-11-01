@@ -186,6 +186,23 @@ pub fn appearance_picker(app: &mut crate::SlideApp, ui: &mut egui::Ui, salt: &st
 
 /// Apply tokens to egui's style.
 pub fn apply(ctx: &egui::Context, t: &Tokens) {
+    ctx.set_visuals(visuals(t));
+    ctx.global_style_mut(|s| {
+        s.spacing.item_spacing = egui::vec2(space::S, 6.0);
+        s.spacing.button_padding = egui::vec2(8.0, 5.0);
+        s.spacing.interact_size.y = 26.0;
+        // Dialogs and floating panels: room around their contents.
+        s.spacing.window_margin = egui::Margin::same(20);
+        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(size::CAPTION));
+        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(size::HEADING + 2.0));
+    });
+}
+
+/// egui's colours and shapes for `t`. Also for a surface that keeps one appearance whatever the
+/// app's, such as the light Get Ready cards.
+pub fn visuals(t: &Tokens) -> Visuals {
     let mut v = if t.dark { Visuals::dark() } else { Visuals::light() };
     v.panel_fill = t.chrome;
     v.window_fill = t.card;
@@ -215,18 +232,7 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.widgets.open.weak_bg_fill = t.pressed;
     v.window_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 28, spread: 0, color: t.shadow };
     v.popup_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 16, spread: 0, color: t.shadow };
-    ctx.set_visuals(v);
-    ctx.global_style_mut(|s| {
-        s.spacing.item_spacing = egui::vec2(space::S, 6.0);
-        s.spacing.button_padding = egui::vec2(8.0, 5.0);
-        s.spacing.interact_size.y = 26.0;
-        // Dialogs and floating panels: room around their contents.
-        s.spacing.window_margin = egui::Margin::same(20);
-        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(size::BODY));
-        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(size::BODY));
-        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(size::CAPTION));
-        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(size::HEADING + 2.0));
-    });
+    v
 }
 
 /// UI fonts: Inter (from craft-fonts) when embedded, a Japanese UI face for CJK, then egui's.

@@ -1576,7 +1576,7 @@ fn random() -> u64 {
     static STATE: AtomicU64 = AtomicU64::new(0);
     let mut x = STATE.load(Ordering::Relaxed);
     if x == 0 {
-        x = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map_or(0x9E37_79B9_7F4A_7C15, |d| d.as_nanos() as u64) | 1;
+        x = web_time::SystemTime::now().duration_since(web_time::UNIX_EPOCH).map_or(0x9E37_79B9_7F4A_7C15, |d| d.as_nanos() as u64) | 1;
     }
     x ^= x << 13;
     x ^= x >> 7;

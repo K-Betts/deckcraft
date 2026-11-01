@@ -42,6 +42,7 @@ pub fn start() {
                     let inbox: Inbox = Inbox::default();
                     let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone()));
                     let saved = load_settings(&mut app);
+                    crate::school::apply(&mut app);
                     let q = query();
                     // A teacher opens the app to make or open a deck, so it starts on the Home
                     // screen with an empty presentation behind it; `?sample` loads the demo deck.
@@ -88,7 +89,7 @@ const SETTINGS_KEYS: [&str; 3] = ["deckcraft.ui", "deckcraft.prefs", "deckcraft.
 /// The most often (seconds) the settings are written to local storage.
 const SAVE_EVERY: f64 = 1.0;
 
-fn storage() -> Option<web_sys::Storage> {
+pub(crate) fn storage() -> Option<web_sys::Storage> {
     web_sys::window()?.local_storage().ok().flatten()
 }
 
