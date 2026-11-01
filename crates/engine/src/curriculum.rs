@@ -597,6 +597,11 @@ impl Matcher {
             if s.name.ends_with("(E)") {
                 score *= 0.92;
             }
+            // The same words the other way round (“fractions to recurring decimals” against
+            // “recurring decimals to fractions”) is the reverse skill.
+            if reversed(text, &s.name) {
+                score *= 0.8;
+            }
             scored.push((i, score));
         }
         scored.sort_by(|a, b| b.1.total_cmp(&a.1).then(a.0.cmp(&b.0)));
@@ -625,6 +630,17 @@ impl Matcher {
         let score = found.first().map(|f| f.1).unwrap_or(0.0);
         (found.into_iter().map(|(i, _)| self.skills[i].key.clone()).collect(), score)
     }
+}
+
+/// Whether `a` and `b` both read “… X to Y” and one goes from what the other goes to.
+fn reversed(a: &str, b: &str) -> bool {
+    let sides = |t: &str| {
+        let t = crate::latex::plain(t).to_lowercase();
+        t.split_once(" to ").map(|(from, to)| (words(from), words(to)))
+    };
+    let (Some((a_from, a_to)), Some((b_from, b_to))) = (sides(a), sides(b)) else { return false };
+    let meets = |x: &[String], y: &[String]| x.iter().any(|w| y.iter().any(|v| same_word(w, v)));
+    meets(&a_to, &b_from) && meets(&a_from, &b_to) && !meets(&a_to, &b_to)
 }
 
 /// How much a word of the unit's title counts, against 1 for a word of the objective.
@@ -949,6 +965,16 @@ mod tests {
         // Words no skill uses find nothing rather than something random.
         assert!(m.best("Investigate how Egyptians wrote numbers", "Y7", "Core", 3).len() <= 3);
         assert!(m.best("zzzz qqqq", "Y7", "Core", 3).is_empty());
+    }
+
+    #[test]
+    fn a_conversion_finds_the_skill_that_goes_the_same_way() {
+        let (_, m) = matcher();
+        let names = |text: &str, year: &str| m.best(text, year, "Higher", 3).iter().map(|(i, _)| m.skills[*i].name.clone()).collect::<Vec<_>>();
+        assert_eq!(names("Convert fractions to recurring decimals", "Y9"), ["Convert fractions to recurring decimals"]);
+        assert_eq!(names("Converting fractions to recurring decimals", "Y10"), ["Convert fractions to recurring decimals"]);
+        assert_eq!(names("Convert recurring decimals to fractions", "Y10")[0], "Convert recurring decimals to fractions");
+        assert!(!reversed("Recurring decimal notation", "Convert recurring decimals to fractions"), "no “to”: no direction");
     }
 
     #[test]

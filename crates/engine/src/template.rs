@@ -507,6 +507,36 @@ fn frac_text(x: f64) -> String {
     }
 }
 
+/// `x` as a decimal with dots over the recurring digits, as UK schools write them: 1/3 is 0.3̇,
+/// 5/11 is 0.4̇5̇, 1/6 is 0.16̇ and 1/7 is 0.1̇42857̇ (a dot over the first and last digit of a
+/// longer cycle). A combining dot (U+0307) follows each dotted digit; a decimal that ends is
+/// written as it is.
+fn recurring_text(x: f64) -> String {
+    let Some((n, d)) = fraction(x) else { return trimmed(x) };
+    let (whole, mut r) = (n.abs() / d, n.abs() % d);
+    let mut digits: Vec<i64> = vec![];
+    // Where each remainder was first seen: when one comes back, the digits from there repeat.
+    let mut seen: HashMap<i64, usize> = HashMap::new();
+    while r != 0 && !seen.contains_key(&r) {
+        seen.insert(r, digits.len());
+        r *= 10;
+        digits.push(r / d);
+        r %= d;
+    }
+    let mut out = format!("{}{whole}", if n < 0 { "-" } else { "" });
+    if !digits.is_empty() {
+        out.push('.');
+    }
+    let start = seen.get(&r).copied().filter(|_| r != 0);
+    for (i, digit) in digits.iter().enumerate() {
+        out.push_str(&digit.to_string());
+        if start.is_some_and(|s| i == s || i == digits.len() - 1) {
+            out.push('\u{0307}');
+        }
+    }
+    out
+}
+
 fn coef(x: f64) -> String {
     if (x - 1.0).abs() < EPS {
         String::new()
@@ -670,6 +700,7 @@ fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
             _ => frac_text(x),
         },
         "dec" => plain(x),
+        "recurring" => recurring_text(x),
         "dp" => {
             let places: usize = arg.parse().map_err(|_| format!("dp needs a number of places, like dp:1 (in `{inner}`)"))?;
             if places > 8 {
@@ -679,7 +710,7 @@ fn fill(inner: &str, scope: &Scope) -> Result<(String, Option<f64>), String> {
         }
         other => {
             return Err(format!(
-                "`{other}` is not a filter (use coef, signed, sgn, term:x, sterm:x, frac, mixed, dec, dp:N, abs, words, group, if:A/B, n)"
+                "`{other}` is not a filter (use coef, signed, sgn, term:x, sterm:x, frac, mixed, dec, recurring, dp:N, abs, words, group, if:A/B, n)"
             ));
         }
     };
@@ -1023,6 +1054,66 @@ mod tests {
         assert_eq!(f("[[p|dp:1]]"), "22.6");
         assert_eq!(f("[[a + b * 2]]"), "-5");
         assert_eq!(f("[[1/3|frac]]"), "\\frac{1}{3}");
+    }
+
+    #[test]
+    fn the_recurring_filter_dots_the_first_and_last_digit_of_the_cycle() {
+        let s = Scope::new();
+        let f = |x: &str| fill_all(x, &s).unwrap().as_str().unwrap().to_string();
+        let dot = '\u{0307}';
+        assert_eq!(f("[[1/3|recurring]]"), format!("0.3{dot}"));
+        assert_eq!(f("[[5/11|recurring]]"), format!("0.4{dot}5{dot}"));
+        assert_eq!(f("[[1/6|recurring]]"), format!("0.16{dot}"));
+        assert_eq!(f("[[1/7|recurring]]"), format!("0.1{dot}42857{dot}"));
+        assert_eq!(f("[[5/12|recurring]]"), format!("0.416{dot}"));
+        assert_eq!(f("[[7/22|recurring]]"), format!("0.31{dot}8{dot}"));
+        assert_eq!(f("[[4/3|recurring]]"), format!("1.3{dot}"));
+        assert_eq!(f("[[-2/9|recurring]]"), format!("-0.2{dot}"));
+        // A decimal that ends has no dots.
+        assert_eq!(f("[[3/8|recurring]]"), "0.375");
+        assert_eq!(f("[[2|recurring]]"), "2");
+    }
+
+    #[test]
+    fn the_fraction_to_recurring_decimal_templates_give_the_fractions_value() {
+        // Read a dotted decimal back as a fraction, the way pupils are taught: the digits before
+        // the cycle over a power of 10, the cycle over 9s.
+        let value = |s: &str| -> f64 {
+            let digits: Vec<(char, bool)> = s.chars().fold(vec![], |mut v, c| {
+                match c {
+                    '\u{0307}' => v.last_mut().unwrap().1 = true,
+                    c if c.is_ascii_digit() => v.push((c, false)),
+                    _ => {}
+                }
+                v
+            });
+            let num = |d: &[(char, bool)]| d.iter().fold(0.0, |a, (c, _)| a * 10.0 + f64::from(c.to_digit(10).unwrap()));
+            let start = digits.iter().position(|d| d.1).unwrap();
+            let end = digits.iter().rposition(|d| d.1).unwrap();
+            let (pre, cycle) = (&digits[..start], &digits[start..=end]);
+            // Every bank fraction is below 1, so the leading 0 is the whole part.
+            let pre_places = pre.len() as i32 - 1;
+            (num(pre) + num(cycle) / (10f64.powi(cycle.len() as i32) - 1.0)) / 10f64.powi(pre_places)
+        };
+        let bank = crate::questions::starter().unwrap();
+        let tpls: Vec<_> = bank.templates.iter().filter(|t| t.id.starts_with("y10hsp1-s06-")).collect();
+        assert_eq!(tpls.len(), 4);
+        for tpl in tpls {
+            for seed in 0..60 {
+                let q = tpl.instantiate(seed).unwrap();
+                let frac = q.text.split("\\frac{").nth(1).unwrap();
+                let (n, rest) = frac.split_once("}{").unwrap();
+                let d = rest.split('}').next().unwrap();
+                let x = n.parse::<f64>().unwrap() / d.parse::<f64>().unwrap();
+                let decimal = q.answer.rsplit(" = ").next().unwrap();
+                if decimal.contains('\u{0307}') {
+                    assert!((value(decimal) - x).abs() < 1e-12, "{}: {} -> {}", tpl.id, q.text, q.answer);
+                } else {
+                    assert_eq!(tpl.id, "y10hsp1-s06-l3", "only the terminating-or-recurring question can end: {}", q.answer);
+                    assert!((decimal.parse::<f64>().unwrap() - x).abs() < 1e-12, "{}", q.answer);
+                }
+            }
+        }
     }
 
     #[test]
