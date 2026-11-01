@@ -5,6 +5,7 @@
 //! listed in `docs/fork-changes.md`; everything else lives here.
 
 pub mod app;
+pub mod appearance;
 pub mod calc_basen;
 pub mod calc_complex;
 pub mod calc_matrix;

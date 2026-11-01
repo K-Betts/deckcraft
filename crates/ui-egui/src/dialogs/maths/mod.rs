@@ -81,7 +81,7 @@ pub(super) fn buttons_if(ui: &mut Ui, ok_label: &str, can_ok: bool) -> (bool, bo
 /// What the maths edition adds to Preferences, as it was when the dialog opened.
 pub(super) fn preferences_snapshot(app: &SlideApp) -> Value {
     json!({
-        "appearance": theme::appearance_mode(app.ui.maths.follow_system, app.ui.brightness),
+        "appearance": crate::maths::appearance::appearance_mode(app.ui.maths.follow_system, app.ui.brightness),
         "packs": app.ui.maths.packs,
         "communityLinks": app.ui.maths.show_community_links,
         "drive": app.ui.maths.drive_enabled,
@@ -94,7 +94,7 @@ pub(super) fn preferences_snapshot(app: &SlideApp) -> Value {
 pub(super) fn restore_preferences(app: &mut SlideApp, before: &Value) {
     let Some(maths) = before.get("maths") else { return };
     if let Some(mode) = maths.get("appearance").and_then(Value::as_str)
-        && mode != theme::appearance_mode(app.ui.maths.follow_system, app.ui.brightness)
+        && mode != crate::maths::appearance::appearance_mode(app.ui.maths.follow_system, app.ui.brightness)
     {
         let _ = app.run("view.appearance", json!({ "mode": mode }));
         // "Match this computer" has no colour of its own: put back the one it had.
@@ -122,7 +122,7 @@ pub(super) fn restore_preferences(app: &mut SlideApp, before: &Value) {
 pub(super) fn appearance_row(app: &mut SlideApp, ui: &mut Ui) {
     ui.horizontal(|ui| {
         ui.label("Appearance");
-        crate::theme::appearance_picker(app, ui, "prefs_appearance");
+        crate::maths::appearance::appearance_picker(app, ui, "prefs_appearance");
     });
 }
 

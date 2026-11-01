@@ -1446,7 +1446,7 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
         ui.vertical(|ui| {
             ui.set_width(340.0);
             heading(ui, "Appearance");
-            crate::theme::appearance_picker(app, ui, "backstage_appearance");
+            crate::maths::appearance::appearance_picker(app, ui, "backstage_appearance");
             ui.add_space(16.0);
             heading(ui, "User Information");
             dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
