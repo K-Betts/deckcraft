@@ -63,6 +63,12 @@ pub(super) fn responsive_tab(app: &mut SlideApp, cui: &mut Ui, inner: Rect) {
     }
 }
 
+/// The width all of `tab`'s groups need side by side, once each has been drawn (and measured).
+pub(super) fn tab_width(app: &SlideApp, tab: &str) -> Option<f32> {
+    let widths = app.maths.ribbon_widths.get(tab)?;
+    (app.maths.ribbon_fold && !widths.is_empty() && widths.iter().all(|w| *w > 0.0)).then(|| widths.iter().sum())
+}
+
 /// How many leading groups fit in `available` points, leaving room for a More button when some do not.
 pub(crate) fn groups_that_fit(widths: &[f32], available: f32) -> usize {
     let total: f32 = widths.iter().sum();

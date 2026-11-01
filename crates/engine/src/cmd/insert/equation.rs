@@ -1,7 +1,10 @@
 //! Insert ▸ Equation: a real equation (OMML) typed in linear form, and reading back the typed form
 //! of the selected one so the Equation dialog can open on it.
 
-use super::*;
+use super::{
+    CommandSpec, Result, RunKind, Session, Value, add_shape, bad, bool_or, cmd, default_rect, edit_shapes, has_slide, json, new_text_box, rect_param,
+    str_param,
+};
 use crate::cmd::targets;
 
 pub(super) fn spec() -> CommandSpec {

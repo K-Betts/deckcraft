@@ -1,7 +1,7 @@
 //! Teacher Mode in the slide show: the annotation overlay over the slide, which takes the pointer,
 //! the wheel and (for the calculator) the keyboard while it needs them.
 
-use super::*;
+use super::{Pos2, Presentation, Rect, Show, SlideApp, Ui};
 use crate::maths::teacher_overlay::Action;
 
 /// Before the show reacts to the pointer: whether Teacher Mode's palette or tools take the

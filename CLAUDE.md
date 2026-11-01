@@ -33,6 +33,9 @@ maths teachers. Read in this order:
   wasm). If something can't run (e.g. missing system libraries), run the parts that can, at least
   `cargo fmt --check`, `cargo clippy -p <crate> --all-targets` and `cargo test -p <crate>` for every
   crate you touched, and say what was skipped.
+- New workspace crates include `[lints] workspace = true` in `Cargo.toml`, and production crate
+  roots declare the required crate-level lint attributes before modules or other items (upstream's
+  rule; `//!` docs may come first).
 - Every user-visible action is a command with tests (`crates/engine/src/cmd/*`). Every bug fix gets
   a regression test.
 - Look at what you changed: `deckcraft-cli render FILE --slide N --scale 1 out/sN.png`, or

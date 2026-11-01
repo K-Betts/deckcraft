@@ -1,7 +1,7 @@
 //! Personal templates: Save as Template keeps a copy in the teacher's templates folder, and
 //! File › New starts an untitled copy of one.
 
-use super::*;
+use super::{DocState, EngineError, Result, Session, Value, bad, bool_or, json, open_presentation, save_bytes, str_param};
 
 /// `file.new` with `templateFile`, or a `template` that names one of the teacher's own: the new
 /// presentation, or `None` for an ordinary `file.new`.

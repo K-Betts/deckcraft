@@ -1,7 +1,7 @@
 //! Office Math in a DrawingML paragraph: the plain text that stands in for an equation, and the
 //! formatting it keeps.
 
-use super::*;
+use super::{El, Imp, Part, RunProps, rpr};
 
 /// The plain text that stands in for an equation. Each equation of a display group (`m:oMathPara`
 /// holding several `m:oMath`) is its own line, and relations and binary operators get the space

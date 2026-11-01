@@ -12,7 +12,7 @@ use serde_json::{Value, json};
 use super::get_ready::{
     bank_from, draw_shape, edit_runs, plain_answer, plain_layout_name, rich_text_box, set_rich_shape_text, set_shape_text, slide_is_empty,
 };
-use super::*;
+use super::{CommandSpec, bad, bool_param, cmd, has_doc, str_param, usize_param};
 use crate::{Result, Session};
 
 pub fn specs() -> Vec<CommandSpec> {

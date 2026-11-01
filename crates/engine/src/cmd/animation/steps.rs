@@ -1,6 +1,8 @@
 //! Reveal Step by Step (`animation.steps`): each line of working appears on its own click.
 
-use super::*;
+use super::{
+    AnimStart, Animation, Arc, CommandSpec, Result, Session, TextBuild, Value, bad, build, cmd, has_selection, json, slide_extent, str_param, targets,
+};
 
 pub(super) fn spec() -> CommandSpec {
     cmd!(
@@ -46,7 +48,7 @@ fn steps(s: &mut Session, p: &Value) -> Result<Value> {
     if ids.is_empty() {
         return Err(bad("animation.steps", "select a text box with each step of the working on its own line"));
     }
-    let mut a = build(&json!({"effect": effect, "class": "entrance"}))?;
+    let mut a = build(&json!({"effect": effect, "class": "entrance"}), slide_extent(s)?)?;
     a.text_build = TextBuild::ByParagraph;
     a.start = AnimStart::OnClick;
     s.edit(|doc, sel| {
@@ -75,6 +77,7 @@ fn steps(s: &mut Session, p: &Value) -> Result<Value> {
 mod tests {
     #![allow(clippy::unwrap_used, clippy::expect_used)]
 
+    use super::super::AnimClass;
     use super::*;
 
     fn working_box(s: &mut Session, text: &str) -> u64 {
