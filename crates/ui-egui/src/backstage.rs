@@ -738,8 +738,8 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
         crate::dialogs::paint_logo(ui.painter(), r);
         ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
     });
-    crate::update_ui::home_card(app, ui);
-    if app.ui.packs.is_empty() && !app.ui.subjects_hint_dismissed {
+    crate::maths::update_ui::home_card(app, ui);
+    if app.ui.maths.packs.is_empty() && !app.ui.maths.subjects_hint_dismissed {
         ui.add_space(12.0);
         egui::Frame::new().fill(t.selected).corner_radius(theme::radius::SURFACE).inner_margin(egui::Margin::symmetric(18, 14)).show(ui, |ui| {
             // The text wraps and the buttons sit under it, so the card fits a narrow window (iPad
@@ -751,7 +751,7 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
                 .wrap(),
             );
             ui.horizontal_wrapped(|ui| {
-                for pack in crate::packs::PACKS {
+                for pack in crate::maths::packs::PACKS {
                     let main = egui::Button::new(RichText::new(format!("Turn on {}", pack.label)).color(t.accent_text).font(theme::bold(13.0)))
                         .fill(t.accent)
                         .corner_radius(theme::radius::CONTROL)
@@ -806,7 +806,7 @@ fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mut Outcome) 
             }
         });
     }
-    if app.ui.show_community_links {
+    if app.ui.maths.show_community_links {
         ui.add_space(30.0);
         ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
     }
@@ -1450,8 +1450,8 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             ui.add_space(16.0);
             heading(ui, "User Information");
             dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
-            if app.ui.drive_enabled {
-                crate::drive_ui::section(app, ui);
+            if app.ui.maths.drive_enabled {
+                crate::maths::drive_ui::section(app, ui);
             }
         });
         ui.add_space(40.0);
@@ -1475,7 +1475,7 @@ fn account(app: &mut SlideApp, ui: &mut Ui) {
             ) {
                 let _ = app.run("app.about", json!({}));
             }
-            if app.ui.show_community_links {
+            if app.ui.maths.show_community_links {
                 ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
                 ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
             }

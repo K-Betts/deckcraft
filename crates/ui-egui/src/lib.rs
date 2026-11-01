@@ -8,33 +8,20 @@
 
 pub mod animtimeline;
 pub mod backstage;
-pub mod calc_basen;
-pub mod calc_complex;
-pub mod calc_matrix;
-pub mod calc_poly;
-pub mod calc_sheet;
-pub mod calc_stats;
-pub mod calculator;
-pub mod calculator_apps;
-pub mod calculator_forms;
-pub mod calculator_ui;
 pub mod canvas;
 pub mod capture;
 pub mod control;
 pub mod credits;
 pub mod dialogs;
 pub mod doc_window;
-pub mod drive_ui;
-pub mod equation_view;
 pub mod eyedropper;
 pub mod fillui;
 pub mod icons;
-pub mod maths_tools;
+pub mod maths;
 pub mod media;
 pub mod menus;
 pub mod notes;
 pub mod opening;
-pub mod packs;
 pub mod panes;
 mod preview;
 pub mod qat;
@@ -45,13 +32,11 @@ pub mod show;
 pub mod sorter;
 pub mod squiggles;
 pub mod status;
-pub mod teacher_overlay;
 pub mod textures;
 pub mod theme;
 pub mod thumbs;
 pub mod toast;
 pub mod uifonts;
-pub mod update_ui;
 pub mod widgets;
 
 use std::collections::HashMap;
@@ -261,8 +246,6 @@ pub struct Services {
     pub pick_open: Option<PickFn>,
     /// Save dialog with a suggested name → path.
     pub pick_save: Option<PickFn>,
-    /// Choose-a-folder dialog for a purpose (`library`) → path.
-    pub pick_folder: Option<PickFn>,
     pub read: Option<ReadFn>,
     pub write: Option<WriteFn>,
     /// Asynchronous open dialog (web). The callback receives the purpose and the request id
@@ -279,10 +262,8 @@ pub struct Services {
     pub clipboard_set_html: Option<Box<dyn FnMut(&str, &str) -> bool>>,
     /// Audio output for media playback (cpal on desktop); without one media plays silently.
     pub audio_out: Option<Box<dyn deckcraft_media::AudioOut>>,
-    /// Google Drive, when the host was built with it (desktop only). See [`drive_ui`].
-    pub drive: Option<Box<dyn drive_ui::DriveBackend>>,
-    /// Updating from inside the app, when the host can (installed Mac app). See [`update_ui`].
-    pub updates: Option<Box<dyn update_ui::UpdateBackend>>,
+    /// Folder picking, Google Drive and updates (the maths edition's).
+    pub maths: maths::app::MathsServices,
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq, Serialize, Deserialize)]
@@ -301,8 +282,6 @@ pub enum ViewMode {
 #[serde(default, rename_all = "camelCase")]
 pub struct UiState {
     pub brightness: theme::Brightness,
-    /// Light or dark follows the computer's setting (the default). Choosing Light or Dark yourself turns this off.
-    pub follow_system: bool,
     pub tab: String,
     pub ribbon_collapsed: bool,
     pub view: ViewMode,
@@ -328,8 +307,6 @@ pub struct UiState {
     pub sorter_zoom: f32,
     pub recent: Vec<String>,
     pub presenter_view: bool,
-    /// Teacher Mode keeps its marks and revealer when the slide changes.
-    pub keep_annotations_on_advance: bool,
     pub ui_scale: f32,
     /// Format Shape pane: tab (`fill`, `effects`, `size`, `picture`, `text`).
     pub format_tab: String,
@@ -345,47 +322,15 @@ pub struct UiState {
     pub comment_focus: Option<(usize, usize)>,
     /// Quick Access Toolbar buttons, left to right.
     pub qat: Vec<qat::QatItem>,
-    /// Upstream community links (Discord, app page, source) in Home, Info and About. Off by
-    /// default: a school app does not point staff at another product's chat server.
-    pub show_community_links: bool,
-    /// Subject packs the teacher has switched on (see [`packs`]); empty on a fresh install.
-    pub packs: std::collections::BTreeSet<String>,
-    /// The Home screen's “teach a subject?” card was dismissed.
-    pub subjects_hint_dismissed: bool,
-    /// Google Drive features are switched on (Preferences). Off by default: signed out, silent.
-    pub drive_enabled: bool,
-    /// Ask GitHub for a newer version when DeckCraft starts. Off by default: nothing contacts the
-    /// network until the teacher turns this on or presses Check now.
-    pub check_for_updates: bool,
-    /// The Get Ready starter's last choices, one `(topic, level)` per question; topic "" and level 0 mean any.
-    pub get_ready_slots: Vec<(String, u8)>,
-    /// Questions the teacher has added to the Get Ready bank (Manage Questions).
-    pub my_questions: Vec<deckcraft_engine::questions::Question>,
-    /// Question templates the teacher imported from a file (Manage Questions ▸ Import).
-    pub my_templates: Vec<deckcraft_engine::template::Template>,
-    /// The skill (small step) chosen for each Get Ready question: a `Question::skill_key`, or empty for any.
-    pub get_ready_skill: Vec<String>,
-    /// Ids of built-in questions the teacher has taken out of the bank.
-    pub removed_questions: Vec<String>,
-    /// The department's curriculum (a curriculum file's JSON, see `deckcraft_engine::curriculum`),
-    /// loaded in the Get Ready dialog; empty until one is loaded.
-    pub curriculum: String,
-    /// The folder of past-paper questions the Question Library reads (the teacher's own; never
-    /// part of DeckCraft). Empty until one is chosen.
-    pub exam_library_dir: String,
-    /// Get Ready: `taught` (plan from the curriculum) or `choose` (each question by hand); empty
-    /// until the teacher picks, which means `taught` once a curriculum is loaded.
-    pub get_ready_mode: String,
-    /// Get Ready's last year group and route, e.g. `Y7` and `Core`.
-    pub get_ready_year: String,
-    pub get_ready_route: String,
+    /// The maths edition's settings, kept in the same file.
+    #[serde(flatten)]
+    pub maths: maths::app::MathsUi,
 }
 
 impl Default for UiState {
     fn default() -> Self {
         UiState {
             brightness: theme::Brightness::Light,
-            follow_system: true,
             tab: "Home".into(),
             ribbon_collapsed: false,
             view: ViewMode::Normal,
@@ -405,7 +350,6 @@ impl Default for UiState {
             recent: vec![],
             // A browser tab is one screen: presenter view would float over the slide.
             presenter_view: !cfg!(target_arch = "wasm32"),
-            keep_annotations_on_advance: false,
             ui_scale: 1.0,
             format_tab: "fill".into(),
             smartart_row: 0,
@@ -414,21 +358,7 @@ impl Default for UiState {
             grayscale: false,
             comment_focus: None,
             qat: qat::defaults(),
-            show_community_links: false,
-            packs: Default::default(),
-            subjects_hint_dismissed: false,
-            drive_enabled: false,
-            check_for_updates: false,
-            get_ready_slots: vec![(String::new(), 0); 4],
-            my_questions: vec![],
-            my_templates: vec![],
-            get_ready_skill: vec![String::new(); 4],
-            removed_questions: vec![],
-            curriculum: String::new(),
-            exam_library_dir: String::new(),
-            get_ready_mode: String::new(),
-            get_ready_year: String::new(),
-            get_ready_route: String::new(),
+            maths: Default::default(),
         }
     }
 }
@@ -469,36 +399,7 @@ impl UiState {
             self.format_tab = d.format_tab;
         }
         self.pane = self.pane.filter(short);
-        self.packs = packs::sanitized(std::mem::take(&mut self.packs));
-        self.get_ready_slots.truncate(6);
-        if self.get_ready_slots.len() < 2 {
-            self.get_ready_slots = d.get_ready_slots.clone();
-        }
-        for (topic, level) in &mut self.get_ready_slots {
-            topic.truncate(60);
-            *level = (*level).min(4);
-        }
-        self.my_questions
-            .retain(|q| !q.id.is_empty() && !q.text.trim().is_empty() && deckcraft_engine::questions::DIFFICULTIES.contains(&q.difficulty));
-        self.my_questions.truncate(5_000);
-        self.my_templates.retain(|t| t.check().is_ok());
-        self.my_templates.truncate(2_000);
-        self.get_ready_skill.resize(4, String::new());
-        for w in &mut self.get_ready_skill {
-            w.truncate(200);
-        }
-        self.removed_questions.truncate(5_000);
-        if self.curriculum.len() > 8 << 20 {
-            self.curriculum.clear();
-        }
-        if self.exam_library_dir.len() > 1_000 {
-            self.exam_library_dir.clear();
-        }
-        for short in [&mut self.get_ready_mode, &mut self.get_ready_year, &mut self.get_ready_route] {
-            if short.len() > 40 {
-                short.clear();
-            }
-        }
+        self.maths.sanitize();
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);
@@ -664,20 +565,8 @@ pub struct SlideApp {
     pub session: Session,
     pub services: Services,
     pub ui: UiState,
-    /// Maths tools available to the current local teacher account.
-    pub maths_tools: maths_tools::MathsToolsSettings,
-    pub drive: drive_ui::DriveUi,
-    /// How many groups of the current ribbon tab are folded into its More menu (0 when all fit).
-    pub ribbon_folded: usize,
-    /// Fold ribbon groups that do not fit into a More menu. On in the app; off by default in unit
-    /// tests (their stand-in windows and fonts are narrower than a real one, and most tests are
-    /// about what a button does, not where it sits). Tests of the folding turn it on.
-    pub ribbon_fold: bool,
-    /// Each ribbon tab's group widths, learned as the groups are drawn (see `ribbon::responsive_tab`).
-    pub(crate) ribbon_widths: std::collections::HashMap<String, Vec<f32>>,
-    pub(crate) update_started: bool,
-    /// An update was installed and the teacher chose Restart: close the window on the next frame.
-    pub(crate) pending_quit: bool,
+    /// Teacher Mode, Drive, updates, the folding ribbon and the Question Library (the maths edition's).
+    pub maths: maths::app::MathsApp,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -686,8 +575,6 @@ pub struct SlideApp {
     /// The word looked up in the Thesaurus pane.
     pub thesaurus_query: String,
     pub show: Option<show::Show>,
-    /// Teacher Mode's writing, kept when the show ends so it is still there next time.
-    pub teacher_stash: Option<teacher_overlay::TeacherOverlay>,
     /// Current slide's animations playing on the editor canvas (not the full-screen show).
     anim_preview: Option<AnimPreview>,
     /// Where the Reuse Slides picker inserts: the presentation and slide current when it opened.
@@ -758,8 +645,6 @@ pub struct SlideApp {
     styled: bool,
     restyle: bool,
     fonts_ready: bool,
-    /// Insert › Question Library: the questions read from the teacher's folder and the last search.
-    pub(crate) exam_lib: dialogs::exam_library::LibState,
     /// `ui` has run in a frame, so egui's fonts exist (they aren't there before the first pass).
     last_time: f64,
     /// When AutoRecover data was last written (monotonic seconds, not wall time).
@@ -949,13 +834,6 @@ fn grid_flag(p: &Value, key: &str) -> Result<Option<bool>, String> {
     }
 }
 
-/// Narrower than this (in points) is a phone held upright: panels give way to the slide.
-pub const COMPACT_WIDTH: f32 = 640.0;
-
-pub fn is_compact(width: f32) -> bool {
-    width < COMPACT_WIDTH
-}
-
 impl SlideApp {
     /// Build application UI state, taking ownership of audio output and initialising media, dialogs,
     /// synthetic input, and timing fields.
@@ -968,20 +846,13 @@ impl SlideApp {
             session,
             services,
             ui: UiState::default(),
-            maths_tools: maths_tools::MathsToolsSettings::default(),
-            drive: Default::default(),
-            ribbon_folded: 0,
-            ribbon_fold: !cfg!(test),
-            ribbon_widths: Default::default(),
-            update_started: false,
-            pending_quit: false,
+            maths: Default::default(),
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),
             dialog: None,
             thesaurus_query: String::new(),
             show: None,
-            teacher_stash: None,
             anim_preview: None,
             reuse_target: None,
             media: media::MediaHost::new(audio_out),
@@ -1017,7 +888,6 @@ impl SlideApp {
             styled: false,
             restyle: true,
             fonts_ready: false,
-            exam_lib: Default::default(),
             last_time: 0.0,
             last_recovery: 0.0,
             quit_confirmed: false,
@@ -1358,11 +1228,6 @@ impl SlideApp {
         }
     }
 
-    /// Whether the subject pack `id` is switched on.
-    pub fn pack_on(&self, id: &str) -> bool {
-        self.ui.packs.contains(id)
-    }
-
     fn flag(&mut self, params: &Value, cur: bool) -> bool {
         params.get("on").and_then(Value::as_bool).unwrap_or(!cur)
     }
@@ -1477,16 +1342,7 @@ impl SlideApp {
             "view.dark" => {
                 let on = self.flag(p, self.ui.brightness == theme::Brightness::Dark);
                 self.ui.brightness = if on { theme::Brightness::Dark } else { theme::Brightness::Light };
-                self.ui.follow_system = false;
-                self.restyle = true;
-            }
-            "view.appearance" => {
-                match p.get("mode").and_then(Value::as_str) {
-                    Some("system") => self.ui.follow_system = true,
-                    Some("light") => (self.ui.follow_system, self.ui.brightness) = (false, theme::Brightness::Light),
-                    Some("dark") => (self.ui.follow_system, self.ui.brightness) = (false, theme::Brightness::Dark),
-                    _ => return Err("mode must be system, light or dark".into()),
-                }
+                self.ui.maths.follow_system = false;
                 self.restyle = true;
             }
             "view.grayscale" => self.ui.grayscale = self.flag(p, self.ui.grayscale),
@@ -1500,34 +1356,6 @@ impl SlideApp {
                 }
             }
             "show.presenter" => self.ui.presenter_view = self.flag(p, self.ui.presenter_view),
-            "show.teacher" => {
-                let on = self.flag(p, self.show.as_ref().is_some_and(|s| s.teacher.is_some()));
-                self.set_teacher_mode(on);
-            }
-            "app.pack" => {
-                let id = p.get("id").and_then(Value::as_str).unwrap_or_default();
-                if packs::find(id).is_none() {
-                    return Err(format!("unknown subject pack “{id}”"));
-                }
-                let on = self.flag(p, self.pack_on(id));
-                if on {
-                    self.ui.packs.insert(id.to_string());
-                } else {
-                    self.ui.packs.remove(id);
-                }
-            }
-            "app.updates" => self.ui.check_for_updates = self.flag(p, self.ui.check_for_updates),
-            "update.check" | "update.install" | "update.restart" => return self.run_update(id),
-            "app.drive" => {
-                self.ui.drive_enabled = self.flag(p, self.ui.drive_enabled);
-                if !self.ui.drive_enabled {
-                    self.drive = Default::default();
-                }
-            }
-            "drive.signIn" | "drive.cancel" | "drive.signOut" | "drive.refresh" | "drive.open" | "drive.save" => return self.run_drive(id, p),
-            "app.dismissSubjectsHint" => self.ui.subjects_hint_dismissed = true,
-            "app.communityLinks" => self.ui.show_community_links = self.flag(p, self.ui.show_community_links),
-            "show.teacherKeep" => self.ui.keep_annotations_on_advance = self.flag(p, self.ui.keep_annotations_on_advance),
             "show.end" => {
                 self.stash_teacher();
                 self.show = None;
@@ -1631,6 +1459,7 @@ impl SlideApp {
                 use deckcraft_engine::links::*;
                 return Ok(json!({"discord": DISCORD, "website": WEBSITE, "apps": APPS, "appPage": APP_PAGE, "github": GITHUB}));
             }
+            id if maths::app::owns(id) => return self.run_maths(id, p),
             _ => return Err(format!("unknown UI command `{id}`")),
         }
         Ok(Value::Null)
@@ -1672,32 +1501,6 @@ impl SlideApp {
             let mut show = show::Show::new(&d.doc, from, reading, self.ui.presenter_view && !reading);
             show.instance = self.show_instance;
             self.show = Some(show);
-        }
-    }
-
-    /// Teacher Mode is the slide show with the annotation overlay on top. Turning it on starts a
-    /// show at the current slide when none is running; turning it off puts the overlay away.
-    pub fn set_teacher_mode(&mut self, on: bool) {
-        if on && self.show.is_none() {
-            let from = self.session.active().map(|d| d.selection.slide).unwrap_or(0);
-            self.start_show(from, false);
-        }
-        if on {
-            // The writing from the last time is still on its slides.
-            let mut t = self.teacher_stash.take().unwrap_or_default();
-            t.timers.clear();
-            if let Some(show) = self.show.as_mut() {
-                show.teacher = Some(t);
-            }
-        } else {
-            self.stash_teacher();
-        }
-    }
-
-    /// Puts the Teacher Mode overlay of a show that is ending (or being turned off) aside.
-    pub fn stash_teacher(&mut self) {
-        if let Some(t) = self.show.as_mut().and_then(|s| s.teacher.take()) {
-            self.teacher_stash = Some(t);
         }
     }
 
@@ -2004,13 +1807,6 @@ impl SlideApp {
         }
     }
 
-    /// The format a Save dialog suggests: PowerPoint (`pptx`) for a new presentation, and the
-    /// presentation's own format when it already has a `.deckcraft` or `.pptx` file.
-    pub fn default_save_format(&self) -> &'static str {
-        let path = self.session.active().and_then(|d| d.path.clone()).unwrap_or_default().to_lowercase();
-        if path.ends_with(".deckcraft") { "deckcraft" } else { "pptx" }
-    }
-
     /// Act on requests commands left for the UI.
     fn drain_requests(&mut self) {
         for r in std::mem::take(&mut self.session.ui_requests) {
@@ -2265,10 +2061,7 @@ impl SlideApp {
             return;
         }
         self.tick_hidden_show(ctx, web_time::Instant::now());
-        if self.pending_quit {
-            self.pending_quit = false;
-            ctx.send_viewport_cmd(egui::ViewportCommand::Close);
-        }
+        self.maths_quit_if_asked(ctx);
         // `raw_input_hook` runs before `App::logic`. In a full pass egui has already built
         // `PointerState` and `keys_down` from every injected event, so retracting the events after
         // this pass would not stop the derived click or key from reaching the UI. Defer instead:
@@ -2280,8 +2073,7 @@ impl SlideApp {
         if !self.synthetic_batch_is_live(ctx) {
             self.drain_control(ctx);
             self.poll_opening();
-            self.poll_drive();
-            self.poll_updates();
+            self.poll_maths();
             // Inbox results are host file bytes and do not need fonts or a painted frame. A
             // window that starts hidden must still apply a file picked before its first UI pass.
             self.drain_inbox();
@@ -2334,15 +2126,7 @@ impl SlideApp {
             ctx.request_discard("install interface fonts before layout");
             return false;
         }
-        if self.ui.follow_system
-            && let Some(system) = ctx.input(|i| i.raw.system_theme)
-        {
-            let want = if system == egui::Theme::Dark { theme::Brightness::Dark } else { theme::Brightness::Light };
-            if want != self.ui.brightness {
-                self.ui.brightness = want;
-                self.restyle = true;
-            }
-        }
+        self.follow_system_theme(ctx);
         if self.restyle {
             theme::apply(ctx, &theme::Tokens::for_brightness(self.ui.brightness));
             self.restyle = false;
@@ -3650,7 +3434,7 @@ impl SlideApp {
                     // brings the slide back); thumbnails and notes shrink or step aside.
                     if self.ui.pane.is_some() {
                         panes::show(self, ui);
-                        if is_compact(ui.ctx().content_rect().width()) {
+                        if maths::app::is_compact(ui.ctx().content_rect().width()) {
                             return;
                         }
                     }
@@ -3660,7 +3444,7 @@ impl SlideApp {
                         thumbs::show(self, ui);
                     }
                     egui::CentralPanel::default().frame(egui::Frame::NONE.fill(t.canvas)).show(ui, |ui| {
-                        if self.ui.notes && !is_compact(ui.ctx().content_rect().width()) {
+                        if self.ui.notes && !maths::app::is_compact(ui.ctx().content_rect().width()) {
                             status::notes_pane(self, ui);
                         }
                         canvas::show(self, ui);
@@ -3867,29 +3651,15 @@ fn web_image_files(
 #[cfg(test)]
 mod animpane_tests;
 #[cfg(test)]
-mod appearance_tests;
-#[cfg(test)]
 mod browsetheme_tests;
 #[cfg(test)]
-mod cleanup_tests;
-#[cfg(test)]
 mod compare_tests;
-#[cfg(test)]
-mod drive_tests;
-#[cfg(test)]
-mod equation_tests;
-#[cfg(test)]
-mod exam_library_tests;
-#[cfg(test)]
-mod exam_question_tests;
 #[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]
 mod field_frame_tests;
 #[cfg(test)]
 mod find_dialog_tests;
-#[cfg(test)]
-mod get_ready_tests;
 #[cfg(test)]
 mod gpu_lock;
 #[cfg(test)]
@@ -3899,27 +3669,19 @@ mod ime_tests;
 #[cfg(test)]
 mod last_color_tests;
 #[cfg(test)]
-mod packs_tests;
-#[cfg(test)]
 mod replacefonts_tests;
 #[cfg(test)]
 mod reuse_picker_tests;
 #[cfg(test)]
-mod ribbon_fold_tests;
-#[cfg(test)]
 mod slide_size_tests;
 #[cfg(test)]
 mod split_button_tests;
-#[cfg(test)]
-mod teacher_tests;
 #[cfg(test)]
 mod texture_limit_tests;
 #[cfg(test)]
 mod ui_soak_tests;
 #[cfg(test)]
 mod units_tests;
-#[cfg(test)]
-mod update_tests;
 
 #[cfg(test)]
 #[path = "datetime_tests.rs"]
@@ -4539,7 +4301,7 @@ mod tests {
         harness.run_steps(2);
         let before = harness.state().session.prefs.clone();
         let dark_before = harness.state().ui.brightness;
-        assert!(harness.state().ui.follow_system, "the default follows the computer");
+        assert!(harness.state().ui.maths.follow_system, "the default follows the computer");
         let change = |harness: &mut egui_kittest::Harness<'static, SlideApp>| {
             harness.state_mut().run("app.preferences", json!({})).unwrap();
             harness.run_steps(2);
@@ -4562,7 +4324,7 @@ mod tests {
             let s = harness.state();
             assert!(s.dialog.is_none(), "{how} closes Preferences");
             assert_eq!(s.ui.brightness, dark_before, "{how} restores the appearance");
-            assert!(s.ui.follow_system, "{how} restores following the computer");
+            assert!(s.ui.maths.follow_system, "{how} restores following the computer");
             assert_eq!(s.session.prefs.smart_guides, before.smart_guides, "{how} restores smart guides");
             assert_eq!(s.session.prefs.snap_to_grid, before.snap_to_grid, "{how} restores snap to grid");
         };

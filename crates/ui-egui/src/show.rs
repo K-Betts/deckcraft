@@ -52,7 +52,7 @@ pub struct Show {
     laser: bool,
     strokes: Vec<Vec<Pos2>>,
     /// Teacher Mode: the annotation overlay and its palette, when on.
-    pub teacher: Option<crate::teacher_overlay::TeacherOverlay>,
+    pub teacher: Option<crate::maths::teacher_overlay::TeacherOverlay>,
     /// Digits typed for Go to Slide, shown until Enter, Esc, or a short pause.
     goto: String,
     goto_at: f64,
@@ -953,7 +953,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     let srect = fit(avail, &doc);
     let pointer = ctx.input(|i| i.pointer.interact_pos());
     if let Some(t) = show.teacher.as_mut() {
-        t.keep_on_advance = app.ui.keep_annotations_on_advance;
+        t.keep_on_advance = app.ui.maths.keep_annotations_on_advance;
     }
     let teacher_blocks = show.teacher.as_ref().is_some_and(|t| t.wants_pointer(pointer));
     let teacher_wheel = show.teacher.as_ref().is_some_and(|t| t.owns_wheel());
@@ -1405,23 +1405,23 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     if !show.grid
         && let Some(mut t) = show.teacher.take()
     {
-        let asked = t.ui(ui, full, now, &mut app.maths_tools, app.ui.packs.contains(crate::packs::MATHS));
+        let asked = t.ui(ui, full, now, &mut app.maths.tools, app.ui.maths.packs.contains(crate::maths::packs::MATHS));
         show.teacher = Some(t);
         for action in asked {
             match action {
-                crate::teacher_overlay::Action::Prev => {
+                crate::maths::teacher_overlay::Action::Prev => {
                     show.ended = false;
                     let a = show.state.prev(&doc);
                     show.apply(a, &doc, now);
                 }
-                crate::teacher_overlay::Action::Next if show.ended => keep = false,
-                crate::teacher_overlay::Action::Next => {
+                crate::maths::teacher_overlay::Action::Next if show.ended => keep = false,
+                crate::maths::teacher_overlay::Action::Next => {
                     let a = show.state.next(&doc);
                     if !show.apply(a, &doc, now) {
                         keep = false;
                     }
                 }
-                crate::teacher_overlay::Action::Exit => keep = false,
+                crate::maths::teacher_overlay::Action::Exit => keep = false,
             }
         }
     }
@@ -1529,7 +1529,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
         if let Some(mut t) = show.teacher.take() {
             // Next time the slides come first, with the board's drawing kept for later.
             t.set_whiteboard(false);
-            app.teacher_stash = Some(t);
+            app.maths.teacher_stash = Some(t);
         }
         app.media.stop_owned(crate::media::Owner::Show);
         if !show.reading {

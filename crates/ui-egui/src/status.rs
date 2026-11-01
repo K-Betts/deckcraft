@@ -20,7 +20,7 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
             deckcraft_engine::Target::Slides => format!("Slide {} of {}", (st.selection.slide + 1).min(n.max(1)), n),
             _ => "Slide Master".to_string(),
         };
-        let compact = crate::is_compact(rect.width());
+        let compact = crate::maths::app::is_compact(rect.width());
         let p = ui.painter();
         // Left to right: slide counter, language, status message. Each starts at its usual column, or
         // after the one before it when that runs long ("Slide 100 of 120", "… (not checked)").
@@ -55,7 +55,7 @@ pub fn status_bar(app: &mut SlideApp, ui: &mut Ui) {
             shown_text(ui, mr.intersect(clip), "status_message", &msg);
             ui.ctx().request_repaint_after(std::time::Duration::from_millis(500));
         }
-        if crate::update_ui::status_chip(app, ui, rect) {
+        if crate::maths::update_ui::status_chip(app, ui, rect) {
             app.dialog = Some(crate::dialogs::Dialog::new("update"));
         }
         let mut right = ui.new_child(

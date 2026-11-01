@@ -9,7 +9,7 @@ use std::path::Path;
 
 use deckcraft_engine::Prefs;
 
-use crate::{UiState, maths_tools::MathsToolsSettings};
+use crate::{UiState, maths::maths_tools::MathsToolsSettings};
 
 pub const UI_FILE: &str = "ui.json";
 pub const PREFS_FILE: &str = "prefs.json";
@@ -199,8 +199,9 @@ mod tests {
     #[test]
     fn maths_tools_settings_round_trip_in_the_local_config_file() {
         let d = dir("maths-tools");
-        let settings =
-            MathsToolsSettings { enabled: [crate::maths_tools::MathsTool::Calculator, crate::maths_tools::MathsTool::Ruler].into_iter().collect() };
+        let settings = MathsToolsSettings {
+            enabled: [crate::maths::maths_tools::MathsTool::Calculator, crate::maths::maths_tools::MathsTool::Ruler].into_iter().collect(),
+        };
         save_maths_tools(&d, &settings);
         assert_eq!(load_maths_tools(&d), settings);
         assert!(d.join(MATHS_TOOLS_FILE).is_file());
@@ -238,10 +239,10 @@ mod tests {
     #[test]
     fn text_settings_round_trip_and_damaged_text_gives_none() {
         let mut ui = UiState::default();
-        ui.packs.insert("maths".into());
-        ui.show_community_links = true;
+        ui.maths.packs.insert("maths".into());
+        ui.maths.show_community_links = true;
         let back = text::parse_ui(&text::ui(&ui)).unwrap();
-        assert!(back.packs.contains("maths"), "the Maths pack survives a reload");
+        assert!(back.maths.packs.contains("maths"), "the Maths pack survives a reload");
         let prefs = Prefs { author: "A. Teacher".into(), ..Prefs::default() };
         assert_eq!(text::parse_prefs(&text::prefs(&prefs)).unwrap().author, "A. Teacher");
         let tools = MathsToolsSettings::default();

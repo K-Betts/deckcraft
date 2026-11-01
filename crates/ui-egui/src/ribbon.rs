@@ -71,7 +71,7 @@ pub fn title_bar(app: &mut SlideApp, ui: &mut Ui) {
             ui.ctx().send_viewport_cmd(egui::ViewportCommand::Maximized(!max));
         }
         // A phone-width bar keeps only the quick-access buttons, Search and Present.
-        let compact = crate::is_compact(rect.width());
+        let compact = crate::maths::app::is_compact(rect.width());
         let left_end = if compact { rect.max.x - 140.0 } else { rect.min.x + 420.0 };
         let mut child = ui.new_child(
             egui::UiBuilder::new()
@@ -265,19 +265,19 @@ const MORE_W: f32 = 66.0;
 /// folds. Nothing is lost in a narrow window, and nothing invisible is ever built (so no phantom
 /// controls for screen readers).
 fn responsive_tab(app: &mut SlideApp, cui: &mut Ui, inner: Rect) {
-    if !app.ribbon_fold {
-        app.ribbon_folded = 0;
+    if !app.maths.ribbon_fold {
+        app.maths.ribbon_folded = 0;
         render_tab(app, cui);
         return;
     }
     let ctx = cui.ctx().clone();
     let tab = app.ui.tab.clone();
-    let known: Vec<f32> = app.ribbon_widths.get(&tab).cloned().unwrap_or_default();
+    let known: Vec<f32> = app.maths.ribbon_widths.get(&tab).cloned().unwrap_or_default();
     // Decide how many whole groups fit, from what was learned earlier (everything when unknown).
     let n_known = known.len();
     let complete = n_known > 0 && known.iter().all(|w| *w > 0.0);
     let cut = if complete { groups_that_fit(&known, inner.width()) } else { usize::MAX };
-    app.ribbon_folded = if complete { n_known - cut } else { 0 };
+    app.maths.ribbon_folded = if complete { n_known - cut } else { 0 };
     widgets::set_fold(&ctx, widgets::Fold { pass: widgets::FoldPass::Show, cut, ..Default::default() });
     render_tab(app, cui);
     let seen = widgets::take_fold(&ctx);
@@ -289,7 +289,7 @@ fn responsive_tab(app: &mut SlideApp, cui: &mut Ui, inner: Rect) {
         }
     }
     if learned != known {
-        app.ribbon_widths.insert(tab, learned.clone());
+        app.maths.ribbon_widths.insert(tab, learned.clone());
         ctx.request_repaint();
     }
     if complete && cut < n_known {
@@ -1455,7 +1455,7 @@ fn insert(app: &mut SlideApp, ui: &mut Ui) {
         big(app, ui, Icon::Symbol, "Symbol", "app.dialog", json!({"id": "symbol"}));
     });
     // Subject packs add; they never move what is already here (principle 4).
-    if app.pack_on(crate::packs::MATHS) {
+    if app.pack_on(crate::maths::packs::MATHS) {
         group(ui, |ui| {
             big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
             // Exam Question and Question Library are built (`app.dialog` ids `examQuestion` and
@@ -2226,7 +2226,7 @@ fn animations(app: &mut SlideApp, ui: &mut Ui) {
         });
     });
     // Subject packs add; they never move what is already here (principle 4).
-    if app.pack_on(crate::packs::MATHS) {
+    if app.pack_on(crate::maths::packs::MATHS) {
         group(ui, |ui| {
             big(app, ui, Icon::Numbering, "Reveal\nSteps", "animation.steps", json!({}));
         });
@@ -2464,9 +2464,9 @@ fn view(app: &mut SlideApp, ui: &mut Ui) {
             let _ = app.run("show.teacher", json!({"on": true}));
         }
         rows(ui, |ui| {
-            let mut keep = app.ui.keep_annotations_on_advance;
+            let mut keep = app.ui.maths.keep_annotations_on_advance;
             if ui.checkbox(&mut keep, "Keep marks on advance").changed() {
-                app.ui.keep_annotations_on_advance = keep;
+                app.ui.maths.keep_annotations_on_advance = keep;
             }
         });
     });

@@ -168,7 +168,7 @@ pub fn appearance_mode(follow_system: bool, b: Brightness) -> &'static str {
 
 /// The Appearance drop-down shared by Preferences and the File page.
 pub fn appearance_picker(app: &mut crate::SlideApp, ui: &mut egui::Ui, salt: &str) {
-    let now = appearance_mode(app.ui.follow_system, app.ui.brightness);
+    let now = appearance_mode(app.ui.maths.follow_system, app.ui.brightness);
     let name = |m: &str| match m {
         "system" => "Match this computer",
         "dark" => "Dark",
