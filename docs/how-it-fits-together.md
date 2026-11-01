@@ -27,7 +27,7 @@ Then the web version gets it for free.
 - `engine/src/latex.rs`: turns `$\frac{3}{4}$` into the equation parser's syntax.
 - `engine/src/cmd/get_ready.rs`: builds the slide: cards, full-screen slides, answers on click.
 - `engine/src/cmd/figures.rs`: draws the diagrams from shapes.
-- `ui-egui/src/dialogs.rs`: the Get Ready dialog and Manage Questions.
+- `ui-egui/src/dialogs/maths/get_ready.rs`: the Get Ready dialog and Manage Questions. The maths edition's screens live under `ui-egui/src/maths/` and `dialogs/maths/`; `docs/fork-changes.md` lists every hook it keeps in upstream's files.
 - `assets/questions/*.json`: the built-in questions, all templates (new numbers each time).
 
 ## How a change reaches teachers
