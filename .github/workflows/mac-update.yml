@@ -38,7 +38,7 @@ env:
 
 jobs:
   mac:
-    runs-on: macos-14 # Apple Silicon
+    runs-on: macos-15 # Apple Silicon (macos-14 images retire on 2026-11-02)
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

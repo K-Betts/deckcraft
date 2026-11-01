@@ -44,6 +44,81 @@ does mean anyone who finds the link can use the app. If that matters, use Cloudf
    the address appears in the run summary.
 3. To publish an update later: merge to `main`, then run the workflow again.
 
+## Hosting on a Raspberry Pi (free, your own hardware)
+
+Any Pi from a Pi 3 up will do: it only hands out files, and the app runs in each teacher's
+browser. The one thing a Pi cannot give you on its own is **https**, and without https the
+browser turns off offline use, installing the app, the clipboard and WebGPU (it still runs, more
+slowly, on WebGL2). So pick how people will reach it first:
+
+| Who opens it | How | https? | Cost |
+|---|---|---|---|
+| Only you, on your home network | `http://deckcraft-pi.local` | No (works, but no offline/install) | Free |
+| Anyone with the link, anywhere | Tailscale Funnel gives the Pi a fixed `https://….ts.net` address | Yes | Free |
+| Only people on your Tailscale network | Tailscale (no Funnel) | Yes | Free |
+
+Cloudflare Tunnel also works but needs a domain name of your own, which costs money.
+
+### 1. Set up the Pi (once)
+
+1. Flash **Raspberry Pi OS Lite (64-bit)** with Raspberry Pi Imager. In its settings (the cog), set
+   the hostname to `deckcraft-pi`, turn on SSH, and set your username (these steps use `pi`).
+2. Boot it on your network, then from the Mac:
+   ```bash
+   ssh pi@deckcraft-pi.local
+   ```
+3. On the Pi, install Caddy (a small web server) and make the site folder:
+   ```bash
+   sudo apt update && sudo apt install -y caddy
+   sudo mkdir -p /var/www/deckcraft && sudo chown pi:pi /var/www/deckcraft
+   ```
+4. Replace Caddy's settings with these (`sudo nano /etc/caddy/Caddyfile`, paste, save):
+   ```
+   :80 {
+       root * /var/www/deckcraft
+       encode zstd gzip
+       file_server
+       header X-Content-Type-Options nosniff
+       @hashed path_regexp \-[0-9a-f]{16}(_bg)?\.(wasm|js)$
+       header @hashed Cache-Control "public, max-age=31536000, immutable"
+       @fresh path / /index.html /sw.js /manifest.webmanifest
+       header @fresh Cache-Control "no-cache"
+   }
+   ```
+   then `sudo systemctl reload caddy`. (`sw.js` must not be cached, or updates stop arriving.)
+
+### 2. Publish a version (each time)
+
+On the Mac, from the repository:
+
+```bash
+cd apps/deckcraft-web && trunk build --release && cd ../..
+rsync -av --delete dist/web/ pi@deckcraft-pi.local:/var/www/deckcraft/
+```
+
+Open `http://deckcraft-pi.local` to check it. Teachers who already have it open get the new
+version the next time they open the app.
+
+### 3. Give it an https address with Tailscale (optional)
+
+1. Make a free account at tailscale.com, then on the Pi:
+   ```bash
+   curl -fsSL https://tailscale.com/install.sh | sh
+   sudo tailscale up
+   ```
+   (open the link it prints and sign in).
+2. In the Tailscale admin console, turn on **HTTPS certificates** (DNS page) and allow **Funnel**
+   for this machine (Access controls; the console offers a one-click button).
+3. On the Pi:
+   ```bash
+   sudo tailscale funnel --bg 80
+   ```
+   It prints the address, e.g. `https://deckcraft-pi.<your-tailnet>.ts.net/`. That is the link to
+   share. `sudo tailscale funnel reset` takes it off the internet again. Leave out step 3 to keep
+   it to devices signed in to your Tailscale.
+
+The Pi needs to stay on for the address to work; GitHub Pages does not need anything running.
+
 ## Building it yourself
 
 ```bash

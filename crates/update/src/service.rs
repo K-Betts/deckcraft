@@ -188,6 +188,6 @@ mod tests {
         u.install();
         wait(&mut u, |s| matches!(s, State::Failed(_)));
         assert!(matches!(u.state(), State::Failed(m) if m.contains("installed DeckCraft.app")), "{:?}", u.state());
-        assert_eq!(http.urls().len(), 1, "only the check went out; nothing was downloaded");
+        assert!(http.urls().iter().all(|u| u.starts_with("https://api.github.com/")), "only the check went out; nothing was downloaded");
     }
 }

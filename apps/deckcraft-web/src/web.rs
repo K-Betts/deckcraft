@@ -141,6 +141,7 @@ impl eframe::App for WebShell {
     /// Delegate one eframe logic pass to the wrapped application.
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         self.app.logic(ctx);
+        self.save_settings(ctx);
     }
 
     /// Consume browser drops with fresh input, capture the identity before the asynchronous read,
@@ -167,11 +168,6 @@ impl eframe::App for WebShell {
                 }
             });
         }
-        self.app.logic(ctx);
-        self.save_settings(ctx);
-    }
-
-    fn raw_input_hook(&mut self, ctx: &egui::Context, raw: &mut egui::RawInput) {
         self.app.raw_input_hook(ctx, raw);
     }
 
