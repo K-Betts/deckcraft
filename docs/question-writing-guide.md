@@ -81,6 +81,8 @@ WRITING NUMBERS INTO TEXT: put an expression in double square brackets: [[a + b]
     [[n|words]]        4032 -> "four thousand and thirty-two"
     [[n|group]]        82000000 -> "82 000 000" (use for numbers of 5 or more digits)
     [[r|frac]]         \frac{3}{4}          [[r|mixed]]  1\frac{1}{2}
+    [[r|recurring]]    a recurring decimal with dots: 1/6 -> 0.16̇, 5/11 -> 0.4̇5̇ (outside the
+                       dollars, where the dots are lost: "$1 \\div 6$ = [[1 / 6|recurring]]")
     [[p|dp:1]]         rounded to 1 decimal place, trailing zero kept     [[a|abs]]  positive
     [[v]]              a "pick" variable (a letter or word)
   Maths in text is LaTeX between dollar signs: "Solve $[[a|coef]]x + [[b]] = [[c]]$".

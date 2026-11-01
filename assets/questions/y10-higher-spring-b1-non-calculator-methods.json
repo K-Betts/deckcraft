@@ -1019,6 +1019,208 @@
    ],
    "text": "Work out 0.[[a]][[b]][[b]]… (with [[b]] recurring) + 0.[[b]][[b]][[b]]… (with [[b]] recurring) as a fraction in its simplest form. (4 marks)",
    "answer": "$\\frac{[[9 * a + b]]}{90} + \\frac{[[b]]}{9} = \\frac{[[9 * a + 11 * b]]}{90} = [[(9 * a + 11 * b) / 90|frac]]$"
+  },
+  {
+   "id": "y10hsp1-s06-l1",
+   "topic": "Number",
+   "subtopic": "Convert fractions to recurring decimals",
+   "difficulty": 1,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S6 Convert fractions to recurring decimals",
+   "keywords": [
+    "convert",
+    "fractions",
+    "to",
+    "recurring",
+    "decimals",
+    "year 10",
+    "higher",
+    "support"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       6,
+       7,
+       9,
+       11
+      ]
+     }
+    ]
+   ],
+   "check": [
+    "1 / d < 1"
+   ],
+   "text": "Write $\\frac{1}{[[d]]}$ as a recurring decimal. Use dots to show the digits that repeat.",
+   "answer": "$1 \\div [[d]]$ = [[1 / d|recurring]]"
+  },
+  {
+   "id": "y10hsp1-s06-l2",
+   "topic": "Number",
+   "subtopic": "Convert fractions to recurring decimals",
+   "difficulty": 2,
+   "qtype": "fluency",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S6 Convert fractions to recurring decimals",
+   "keywords": [
+    "convert",
+    "fractions",
+    "to",
+    "recurring",
+    "decimals",
+    "year 10",
+    "higher",
+    "core"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       3,
+       7,
+       9,
+       11
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       2,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(n, d) == 1"
+   ],
+   "check": [
+    "n / d < 1"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a recurring decimal. Use dots to show the digits that repeat.",
+   "answer": "$[[n]] \\div [[d]]$ = [[n / d|recurring]]"
+  },
+  {
+   "id": "y10hsp1-s06-l3",
+   "topic": "Number",
+   "subtopic": "Convert fractions to recurring decimals",
+   "difficulty": 3,
+   "qtype": "reasoning",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S6 Convert fractions to recurring decimals",
+   "keywords": [
+    "convert",
+    "fractions",
+    "to",
+    "recurring",
+    "decimals",
+    "year 10",
+    "higher",
+    "stretch"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       8,
+       12,
+       15,
+       16,
+       20,
+       22,
+       25,
+       30,
+       40
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "calc": [
+    [
+     "e",
+     "d == 8 || d == 16 || d == 20 || d == 25 || d == 40"
+    ]
+   ],
+   "where": [
+    "gcd(n, d) == 1"
+   ],
+   "check": [
+    "n / d < 1"
+   ],
+   "text": "Without working it out, say whether $\\frac{[[n]]}{[[d]]}$ is a terminating or a recurring decimal, and explain how you know. Then write it as a decimal.",
+   "answer": "[[e|if:Terminating/Recurring]]: it is in its simplest form and [[d]] [[e|if:has no prime factors other than 2 and 5/has a prime factor other than 2 and 5]]. $[[n]] \\div [[d]]$ = [[n / d|recurring]]"
+  },
+  {
+   "id": "y10hsp1-s06-l4",
+   "topic": "Number",
+   "subtopic": "Convert fractions to recurring decimals",
+   "difficulty": 4,
+   "qtype": "problem",
+   "year": "Y10",
+   "source": "Y10 Higher Spring B1 Non-calculator methods · S6 Convert fractions to recurring decimals",
+   "keywords": [
+    "convert",
+    "fractions",
+    "to",
+    "recurring",
+    "decimals",
+    "year 10",
+    "higher",
+    "exam style"
+   ],
+   "vars": [
+    [
+     "d",
+     {
+      "choose": [
+       6,
+       12,
+       15,
+       18,
+       22,
+       30,
+       36,
+       44,
+       45
+      ]
+     }
+    ],
+    [
+     "n",
+     {
+      "int": [
+       1,
+       "d - 1"
+      ]
+     }
+    ]
+   ],
+   "where": [
+    "gcd(n, d) == 1"
+   ],
+   "check": [
+    "n / d < 1"
+   ],
+   "text": "Write $\\frac{[[n]]}{[[d]]}$ as a recurring decimal. Show your working. (2 marks)",
+   "answer": "$[[n]] \\div [[d]]$ = [[n / d|recurring]]"
   }
  ]
 }
