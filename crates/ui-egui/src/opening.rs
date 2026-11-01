@@ -36,6 +36,7 @@ impl SlideApp {
     pub fn open_path_in_background(&mut self, path: &str) {
         if let Some(o) = &self.opening {
             let name = o.name();
+            log::warn!("open request dropped: another file has been opening for {:.1} s", (crate::now_ms() - o.started_ms) / 1000.0);
             self.set_status(format!("Still opening {name}"));
             return;
         }
@@ -83,6 +84,7 @@ impl SlideApp {
             Err(TryRecvError::Disconnected) => Err(format!("{}: reading the file stopped unexpectedly", o.path)),
         };
         let Some(o) = self.opening.take() else { return };
+        log::info!("background open finished after {:.0} ms ({})", crate::now_ms() - o.started_ms, if r.is_ok() { "read" } else { "failed" });
         match r {
             Ok(f) => {
                 // Into the session through the command path, like file.open: journaled and guarded.
