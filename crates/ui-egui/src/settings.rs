@@ -9,11 +9,14 @@ use std::path::Path;
 
 use deckcraft_engine::Prefs;
 
-use crate::{UiState, maths::maths_tools::MathsToolsSettings};
+use crate::UiState;
+
+mod maths;
+pub mod text;
+pub use maths::{MATHS_TOOLS_FILE, load_maths_tools, save_maths_tools};
 
 pub const UI_FILE: &str = "ui.json";
 pub const PREFS_FILE: &str = "prefs.json";
-pub const MATHS_TOOLS_FILE: &str = "maths-tools.json";
 /// Larger settings files are not settings.
 pub const MAX_BYTES: u64 = 4 << 20;
 
@@ -39,11 +42,6 @@ pub fn load(dir: &Path) -> (Option<UiState>, Option<Prefs>) {
     (read::<UiState>(&dir.join(UI_FILE)).map(UiState::sanitized), read::<Prefs>(&dir.join(PREFS_FILE)).map(Prefs::sanitized))
 }
 
-/// Load local maths-tool preferences, defaulting when the file is missing or unusable.
-pub fn load_maths_tools(dir: &Path) -> MathsToolsSettings {
-    read(&dir.join(MATHS_TOOLS_FILE)).unwrap_or_default()
-}
-
 /// Write `bytes` to `path` through a temporary file beside it.
 fn write_atomic(path: &Path, bytes: &[u8]) -> std::io::Result<()> {
     let tmp = path.with_extension("json.tmp");
@@ -64,55 +62,6 @@ pub fn save(dir: &Path, ui: &UiState, prefs: &Prefs) {
         if let Err(e) = json.map_err(std::io::Error::other).and_then(|b| write_atomic(&path, &b)) {
             log::warn!("{}: {e}", path.display());
         }
-    }
-}
-
-/// Save maths-tool preferences outside the presentation, beside the other local settings.
-pub fn save_maths_tools(dir: &Path, settings: &MathsToolsSettings) {
-    if let Err(e) = std::fs::create_dir_all(dir) {
-        log::warn!("{}: {e}; maths tools settings not saved", dir.display());
-        return;
-    }
-    let path = dir.join(MATHS_TOOLS_FILE);
-    if let Err(e) = serde_json::to_vec_pretty(settings).map_err(std::io::Error::other).and_then(|b| write_atomic(&path, &b)) {
-        log::warn!("{}: {e}; maths tools settings not saved", path.display());
-    }
-}
-
-/// The three settings as JSON text, for hosts with no settings folder (the browser keeps them in
-/// local storage). Reading is as defensive as for the files: anything unusable gives `None`.
-pub mod text {
-    use super::*;
-
-    fn parse<T: serde::de::DeserializeOwned>(text: &str) -> Option<T> {
-        if text.len() as u64 > MAX_BYTES {
-            return None;
-        }
-        serde_json::from_str(text).ok()
-    }
-
-    pub fn ui(ui: &UiState) -> String {
-        serde_json::to_string(ui).unwrap_or_default()
-    }
-
-    pub fn prefs(prefs: &Prefs) -> String {
-        serde_json::to_string(prefs).unwrap_or_default()
-    }
-
-    pub fn maths_tools(settings: &MathsToolsSettings) -> String {
-        serde_json::to_string(settings).unwrap_or_default()
-    }
-
-    pub fn parse_ui(text: &str) -> Option<UiState> {
-        parse::<UiState>(text).map(UiState::sanitized)
-    }
-
-    pub fn parse_prefs(text: &str) -> Option<Prefs> {
-        parse::<Prefs>(text).map(Prefs::sanitized)
-    }
-
-    pub fn parse_maths_tools(text: &str) -> Option<MathsToolsSettings> {
-        parse(text)
     }
 }
 
@@ -196,18 +145,6 @@ mod tests {
         save(&d.join("blocked"), &ui, &prefs);
     }
 
-    #[test]
-    fn maths_tools_settings_round_trip_in_the_local_config_file() {
-        let d = dir("maths-tools");
-        let settings = MathsToolsSettings {
-            enabled: [crate::maths::maths_tools::MathsTool::Calculator, crate::maths::maths_tools::MathsTool::Ruler].into_iter().collect(),
-        };
-        save_maths_tools(&d, &settings);
-        assert_eq!(load_maths_tools(&d), settings);
-        assert!(d.join(MATHS_TOOLS_FILE).is_file());
-        assert!(!d.join("presentation.pptx").exists());
-    }
-
     /// The window opens with the worst `ui.json` values once they are sanitized; a zoom of
     /// 10,000 % used to panic in egui and 1e30 exhausted memory at start-up.
     #[test]
@@ -234,22 +171,5 @@ mod tests {
             h.run_steps(4);
             assert!(h.state().canvas_scale <= *crate::ZOOM_RANGE.end() + 1e-3, "{}", h.state().canvas_scale);
         }
-    }
-
-    #[test]
-    fn text_settings_round_trip_and_damaged_text_gives_none() {
-        let mut ui = UiState::default();
-        ui.maths.packs.insert("maths".into());
-        ui.maths.show_community_links = true;
-        let back = text::parse_ui(&text::ui(&ui)).unwrap();
-        assert!(back.maths.packs.contains("maths"), "the Maths pack survives a reload");
-        let prefs = Prefs { author: "A. Teacher".into(), ..Prefs::default() };
-        assert_eq!(text::parse_prefs(&text::prefs(&prefs)).unwrap().author, "A. Teacher");
-        let tools = MathsToolsSettings::default();
-        assert_eq!(text::parse_maths_tools(&text::maths_tools(&tools)).unwrap(), tools);
-        for bad in ["", "{", "null", "[1]", "\u{0}", "{\"zoom\": \"big\"}"] {
-            assert!(text::parse_ui(bad).is_none(), "{bad:?}");
-        }
-        assert!(text::parse_ui(&"x".repeat(MAX_BYTES as usize + 1)).is_none());
     }
 }

@@ -18,6 +18,7 @@ pub mod calculator_forms;
 pub mod calculator_ui;
 pub mod drive_ui;
 pub mod equation_view;
+mod logging;
 pub mod maths_tools;
 pub mod packs;
 pub mod teacher_overlay;
@@ -27,6 +28,8 @@ pub mod update_ui;
 mod appearance_tests;
 #[cfg(test)]
 mod cleanup_tests;
+#[cfg(test)]
+mod clipboard_tests;
 #[cfg(test)]
 mod drive_tests;
 #[cfg(test)]
