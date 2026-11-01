@@ -31,6 +31,7 @@ teacher's own device, and the only thing the browser stores is the teacher's pre
 | **GitHub Pages** (recommended to start) | Yes | Anyone with the link (the repository is public) | Workflow included: `.github/workflows/web.yml`. Address: `https://k-betts.github.io/deckcraft/`. Compresses the wasm for you. |
 | **Cloudflare Pages** | Yes | Anyone, **or only people you allow** with *Cloudflare Access* (free for up to 50 users, e.g. only school Google accounts) | Best if the school wants it not to be public. Connect the repo, build command below, output `dist/web`. |
 | **Netlify / Firebase Hosting** | Yes (generous limits) | Anyone | Same idea. `packaging/web/_headers` is already in the Netlify/Cloudflare format. |
+| **Your own Raspberry Pi** | Yes | Staff with the password (see below) | The private copy with your curriculum built in. |
 | **The school's own web server** | Their cost | Whoever IT chooses | Unzip `deckcraft-web-<version>.zip` (from `packaging/web/package.sh`) and see `packaging/web/README.md` for the two settings it needs. |
 
 The app contains no pupil data and no secrets, so a public address is not a data risk, but it
@@ -44,20 +45,19 @@ does mean anyone who finds the link can use the app. If that matters, use Cloudf
    the address appears in the run summary.
 3. To publish an update later: merge to `main`, then run the workflow again.
 
-## Hosting on a Raspberry Pi (free, your own hardware)
+## Hosting on a Raspberry Pi (free, private, with your curriculum built in)
 
-Any Pi from a Pi 3 up will do: it only hands out files, and the app runs in each teacher's
-browser. The one thing a Pi cannot give you on its own is **https**, and without https the
-browser turns off offline use, installing the app, the clipboard and WebGPU (it still runs, more
-slowly, on WebGL2). So pick how people will reach it first:
+A Pi suits a **private** copy for your department: one with the school's curriculum built in,
+so Get Ready works straight away, behind a password that only staff know. Any Pi from a Pi 3 up
+will do: it only hands out files, and the app runs in each teacher's browser.
 
-| Who opens it | How | https? | Cost |
-|---|---|---|---|
-| Only you, on your home network | `http://deckcraft-pi.local` | No (works, but no offline/install) | Free |
-| Anyone with the link, anywhere | Tailscale Funnel gives the Pi a fixed `https://….ts.net` address | Yes | Free |
-| Only people on your Tailscale network | Tailscale (no Funnel) | Yes | Free |
-
-Cloudflare Tunnel also works but needs a domain name of your own, which costs money.
+- **Keep this copy private.** A curriculum file is the school's own and may use a provider's
+  wording, so a build with it in must never go on the public GitHub Pages site (which is built
+  without one). The password below and Tailscale's https address keep it to staff.
+- **https matters.** Without it the browser turns off offline use, installing the app, the
+  clipboard and WebGPU (the app still runs, more slowly). Tailscale Funnel gives the Pi a free,
+  fixed `https://….ts.net` address that works from school and home with nothing to install.
+  (Cloudflare Tunnel also works but needs a domain name, which costs money.)
 
 ### 1. Set up the Pi (once)
 
@@ -72,52 +72,60 @@ Cloudflare Tunnel also works but needs a domain name of your own, which costs mo
    sudo apt update && sudo apt install -y caddy
    sudo mkdir -p /var/www/deckcraft && sudo chown pi:pi /var/www/deckcraft
    ```
-4. Replace Caddy's settings with these (`sudo nano /etc/caddy/Caddyfile`, paste, save):
+4. Choose the staff password and turn it into a hash (type it twice when asked; copy the long
+   line it prints, starting `$2a$`):
+   ```bash
+   caddy hash-password
+   ```
+5. Replace Caddy's settings (`sudo nano /etc/caddy/Caddyfile`), pasting your hash in place of
+   `PASTE-HASH-HERE`. `staff` is the user name teachers type; change it if you like.
    ```
    :80 {
+       basicauth {
+           staff PASTE-HASH-HERE
+       }
        root * /var/www/deckcraft
        encode zstd gzip
        file_server
        header X-Content-Type-Options nosniff
        @hashed path_regexp \-[0-9a-f]{16}(_bg)?\.(wasm|js)$
-       header @hashed Cache-Control "public, max-age=31536000, immutable"
+       header @hashed Cache-Control "private, max-age=31536000, immutable"
        @fresh path / /index.html /sw.js /manifest.webmanifest
        header @fresh Cache-Control "no-cache"
    }
    ```
    then `sudo systemctl reload caddy`. (`sw.js` must not be cached, or updates stop arriving.)
-
-### 2. Publish a version (each time)
-
-On the Mac, from the repository:
-
-```bash
-cd apps/deckcraft-web && trunk build --release && cd ../..
-rsync -av --delete dist/web/ pi@deckcraft-pi.local:/var/www/deckcraft/
-```
-
-Open `http://deckcraft-pi.local` to check it. Teachers who already have it open get the new
-version the next time they open the app.
-
-### 3. Give it an https address with Tailscale (optional)
-
-1. Make a free account at tailscale.com, then on the Pi:
+6. Give it an https address with Tailscale. Make a free account at tailscale.com, then on the Pi:
    ```bash
    curl -fsSL https://tailscale.com/install.sh | sh
    sudo tailscale up
    ```
-   (open the link it prints and sign in).
-2. In the Tailscale admin console, turn on **HTTPS certificates** (DNS page) and allow **Funnel**
-   for this machine (Access controls; the console offers a one-click button).
-3. On the Pi:
+   open the link it prints and sign in. In the Tailscale admin console turn on **HTTPS
+   certificates** (DNS page) and allow **Funnel** for this machine (Access controls; the console
+   offers a one-click button). Then:
    ```bash
    sudo tailscale funnel --bg 80
    ```
    It prints the address, e.g. `https://deckcraft-pi.<your-tailnet>.ts.net/`. That is the link to
-   share. `sudo tailscale funnel reset` takes it off the internet again. Leave out step 3 to keep
-   it to devices signed in to your Tailscale.
+   give staff, with the password. `sudo tailscale funnel reset` takes it off the internet again.
 
-The Pi needs to stay on for the address to work; GitHub Pages does not need anything running.
+### 2. Publish a version (each time)
+
+On the Mac, from the repository, build with the curriculum file and copy it across:
+
+```bash
+cd apps/deckcraft-web
+DECKCRAFT_WEB_CURRICULUM=~/maths-workspace/curriculum/ringmer-2026-27.json trunk build --release --dist ../../dist/web-private
+cd ../..
+rsync -av --delete dist/web-private/ pi@deckcraft-pi.local:/var/www/deckcraft/
+```
+
+The build says `building in the curriculum from …` when the file was found. Teachers get the new
+version, and the new curriculum, the next time they open the app; anyone who had loaded a
+different curriculum file is switched to the published one. After you change the curriculum
+(`convert_overview.py`), run these two steps again.
+
+The Pi needs to stay on for the address to work.
 
 ## Building it yourself
 

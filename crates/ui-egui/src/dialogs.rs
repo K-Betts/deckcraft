@@ -3340,7 +3340,7 @@ fn multiline(ui: &mut Ui, d: &mut Dialog, label: &str, key: &str, rows: usize) {
 /// A seed that differs every time the teacher asks, so Reroll gives different questions. The
 /// engine command stays deterministic: the clock is read here, in the UI.
 fn fresh_seed() -> u64 {
-    std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(1)
+    web_time::SystemTime::now().duration_since(web_time::UNIX_EPOCH).map(|d| d.as_nanos() as u64).unwrap_or(1)
 }
 
 /// Get Ready Starter: each question gets its own topic and level; Insert makes the slide (plain

@@ -55,7 +55,7 @@ fn prepared(app: &SlideApp) -> Rc<Prepared> {
 
 /// Today as `YYYY-MM-DD` (the clock is read here, in the UI; the engine stays deterministic).
 fn today() -> String {
-    let secs = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0);
+    let secs = web_time::SystemTime::now().duration_since(web_time::UNIX_EPOCH).map(|d| d.as_secs()).unwrap_or(0);
     curriculum::date_from_days((secs / 86_400) as i64)
 }
 
@@ -462,6 +462,8 @@ fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, i: usize) -> bool {
     let editing = d.get(&format!("edit{i}"), "") == "1";
     let mut change_topic = false;
     egui::Frame::new().fill(tint).stroke(egui::Stroke::new(2.0, accent)).corner_radius(12.0).inner_margin(egui::Margin::same(12)).show(ui, |ui| {
+        // The cards are light in either appearance, so their buttons and fields are too.
+        *ui.visuals_mut() = theme::visuals(&theme::Tokens::light());
         ui.set_min_height(170.0);
         ui.set_width(ui.available_width());
         // Number badge, heading and level, as on the slide.
