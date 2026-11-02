@@ -190,6 +190,14 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     // A new choice (or New set) makes new questions straight away.
     let choice = format!("{year}|{route}|{unit}|{objective}|{level}");
     let bank = p.bank.as_ref().ok();
+    // Opened on a starter that is already in the deck: its four questions come back into the
+    // cards, so one can be swapped (Change skill…) and the slide replaced.
+    if !d.fields.contains_key("made") && !d.fields.contains_key("reopened") {
+        d.fields.insert("reopened".into(), "1".into());
+        if load_starter(app, d) {
+            d.fields.insert("made".into(), choice.clone());
+        }
+    }
     let again = d.fields.remove("again").is_some();
     if (again || d.fields.get("made") != Some(&choice))
         && let Some(bank) = bank
@@ -601,6 +609,30 @@ fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, all_skills: &[Skill], 
     change_topic
 }
 
+/// Fill the cards from the Get Ready slide that is selected, if it is one made by this version
+/// (it carries its questions in a slide tag). Returns whether it did.
+fn load_starter(app: &SlideApp, d: &mut Dialog) -> bool {
+    use deckcraft_engine::cmd::get_ready::GET_READY_TAG;
+    let Some(st) = app.session.active() else { return false };
+    let Some(tag) = st.doc.slides.get(st.selection.slide).and_then(|s| s.tags.iter().find(|(k, _)| k == GET_READY_TAG).map(|(_, v)| v.clone()))
+    else {
+        return false;
+    };
+    let Ok(state) = serde_json::from_str::<Value>(&tag) else { return false };
+    let Some(qs) = state.get("questions").and_then(|q| serde_json::from_value::<Vec<Question>>(q.clone()).ok()) else { return false };
+    if qs.len() != GET_READY_QUESTIONS {
+        return false;
+    }
+    let heads: Vec<String> = state.get("headings").and_then(|h| serde_json::from_value(h.clone()).ok()).unwrap_or_default();
+    for (i, q) in qs.iter().enumerate() {
+        set_question(d, i, Some(q));
+        d.fields.insert(format!("lvl{i}"), q.difficulty.to_string());
+        d.fields.insert(format!("h{i}"), heads.get(i).cloned().unwrap_or_default());
+        d.fields.insert(format!("skills{i}"), json!([q.skill_key()]).to_string());
+    }
+    true
+}
+
 /// Whether every word typed appears in the skill's name, year, topic, block or keywords.
 fn skill_matches(s: &Skill, typed: &str) -> bool {
     let hay = format!("{} {} {} {} {}", s.name, s.year, s.topic, s.block, s.keywords.join(" ")).to_lowercase();
@@ -720,6 +752,8 @@ fn insert(app: &mut SlideApp, d: &mut Dialog, expand: bool, headings: bool, repl
 
 #[cfg(test)]
 mod swap_tests {
+    #![allow(clippy::unwrap_used)]
+
     use super::*;
 
     fn skill(name: &str, year: &str) -> Skill {
@@ -733,6 +767,20 @@ mod swap_tests {
             keywords: vec!["negatives".into()],
             counts: [1; 4],
         }
+    }
+
+    #[test]
+    fn a_starter_in_the_deck_comes_back_into_the_cards() {
+        let mut app = SlideApp::new(deckcraft_engine::Session::with_new(), crate::Services::default());
+        let mut d = Dialog::new("getReady");
+        assert!(!load_starter(&app, &mut d), "a slide that is not a starter loads nothing");
+        app.run("slide.getReady", json!({"seed": 4})).unwrap();
+        assert!(load_starter(&app, &mut d));
+        for i in 0..GET_READY_QUESTIONS {
+            assert!(!d.get(&format!("text{i}"), "").is_empty() && question(&d, i).is_some());
+            assert!(d.get(&format!("skills{i}"), "").contains('|') || d.get(&format!("skills{i}"), "").starts_with('['));
+        }
+        assert_eq!(d.get("h0", ""), "Last lesson");
     }
 
     #[test]
