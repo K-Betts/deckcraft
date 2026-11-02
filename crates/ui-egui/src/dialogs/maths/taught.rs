@@ -12,7 +12,7 @@ use std::cell::RefCell;
 use std::rc::Rc;
 
 use deckcraft_engine::curriculum::{self, Curriculum, Matcher};
-use deckcraft_engine::questions::{Bank, LEVEL_NAMES, Question};
+use deckcraft_engine::questions::{Bank, LEVEL_NAMES, Question, Skill};
 use egui::{Ui, vec2};
 use serde_json::{Value, json};
 
@@ -207,7 +207,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
 
     let mut done = false;
     ui.separator();
-    if let Some(open_picker) = preview(ui, d, bank) {
+    if let Some(open_picker) = preview(ui, d, bank, &p.matcher.skills) {
         let keep: serde_json::Map<String, Value> = d.fields.iter().map(|(k, v)| (k.clone(), json!(v))).collect();
         *d = Dialog::new("chooseSkill");
         d.params = json!({"slot": open_picker, "return": "getReadyTaught", "keep": keep});
@@ -449,7 +449,7 @@ fn plain_from(from: &str) -> String {
 /// The four cards as a 2×2 grid that looks like the slide: the question as it will read, its
 /// answer, and plain buttons. The wording (with its maths code) shows only after Edit. Returns
 /// the card whose topic the teacher wants to change.
-fn preview(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>) -> Option<usize> {
+fn preview(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, skills: &[Skill]) -> Option<usize> {
     let mut open_picker = None;
     // Leave room below for the options and buttons.
     let room = (ui.ctx().content_rect().height() - 420.0).clamp(240.0, 760.0);
@@ -458,7 +458,7 @@ fn preview(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>) -> Option<usize> {
             ui.columns(2, |cols| {
                 for (c, col) in cols.iter_mut().enumerate() {
                     let i = row * 2 + c;
-                    if i < GET_READY_QUESTIONS && card(col, d, bank, i) {
+                    if i < GET_READY_QUESTIONS && card(col, d, bank, skills, i) {
                         open_picker = Some(i);
                     }
                 }
@@ -470,7 +470,7 @@ fn preview(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>) -> Option<usize> {
 }
 
 /// One card of the preview. Returns true when the teacher asks to change its topic.
-fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, i: usize) -> bool {
+fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, all_skills: &[Skill], i: usize) -> bool {
     let (accent, tint) = (ACCENTS[i % 4], TINTS[i % 4]);
     let editing = d.get(&format!("edit{i}"), "") == "1";
     let mut change_topic = false;
@@ -550,13 +550,14 @@ fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, i: usize) -> bool {
             if skills.is_empty() {
                 // Nothing in the bank fits the objective: choose what the question is about.
                 ui.horizontal(|ui| {
-                    if ui.button("Pick a topic…").clicked() {
-                        change_topic = true;
+                    if ui.button("Change skill…").clicked() {
+                        d.fields.insert(format!("swap{i}"), String::new());
                     }
                     if ui.button("Write my own").clicked() {
                         d.fields.insert(format!("edit{i}"), "1".into());
                     }
                 });
+                skill_search(ui, d, all_skills, i);
             } else if picking {
                 change_topic = pick_list(ui, d, i);
             } else {
@@ -586,14 +587,69 @@ fn card(ui: &mut Ui, d: &mut Dialog, bank: Option<&Bank>, i: usize) -> bool {
                         let alts = curriculum::alternatives(&bank.instantiate(seed), &skills, seed, &exclude, 5);
                         d.fields.insert(format!("alts{i}"), serde_json::to_string(&alts).unwrap_or_default());
                     }
+                    if ui.button("Change skill…").on_hover_text("Type a skill from any year group and use it for this question").clicked() {
+                        d.fields.insert(format!("swap{i}"), String::new());
+                    }
                     if ui.button("Edit").on_hover_text("Change the wording, the answer or the heading").clicked() {
                         d.fields.insert(format!("edit{i}"), "1".into());
                     }
                 });
+                skill_search(ui, d, all_skills, i);
             }
         }
     });
     change_topic
+}
+
+/// Whether every word typed appears in the skill's name, year, topic, block or keywords.
+fn skill_matches(s: &Skill, typed: &str) -> bool {
+    let hay = format!("{} {} {} {} {}", s.name, s.year, s.topic, s.block, s.keywords.join(" ")).to_lowercase();
+    typed.to_lowercase().split_whitespace().all(|w| {
+        // "adding" finds "add", "negatives" finds "negative".
+        let stem = ["ing", "ed", "es", "s"].iter().find_map(|e| w.strip_suffix(e).filter(|r| r.len() >= 3)).unwrap_or(w);
+        hay.contains(w) || hay.contains(stem)
+    })
+}
+
+/// Type-to-filter list of every skill (any year group) under card `i`, open after *Change
+/// skill…*. Choosing one stores it as `pick{i}`, which makes a new question for that skill.
+fn skill_search(ui: &mut Ui, d: &mut Dialog, skills: &[Skill], i: usize) {
+    let key = format!("swap{i}");
+    let Some(mut typed) = d.fields.get(&key).cloned() else { return };
+    let mut chosen = None;
+    let mut close = false;
+    ui.add_space(4.0);
+    ui.horizontal(|ui| {
+        let r = ui.add(egui::TextEdit::singleline(&mut typed).hint_text("Type a skill, e.g. adding negatives").desired_width(220.0));
+        if !r.has_focus() && typed.is_empty() {
+            r.request_focus();
+        }
+        if ui.small_button("✕").on_hover_text("Close").clicked() {
+            close = true;
+        }
+    });
+    let found: Vec<&Skill> = skills.iter().filter(|s| skill_matches(s, &typed)).collect();
+    egui::ScrollArea::vertical().max_height(150.0).id_salt(format!("gr-skills{i}")).show(ui, |ui| {
+        for s in found.iter().take(60) {
+            let year = if s.year.is_empty() { s.topic.clone() } else { s.year.clone() };
+            let label = egui::RichText::new(format!("{}  ·  {year}", s.name)).size(12.5).color(INK);
+            if ui.add(egui::Button::new(label).fill(egui::Color32::WHITE).wrap()).clicked() {
+                chosen = Some(s.key.clone());
+            }
+        }
+        if found.is_empty() {
+            ui.label(egui::RichText::new("No skill matches that.").size(12.0).color(DIM_INK));
+        } else if found.len() > 60 {
+            ui.label(egui::RichText::new(format!("{} more: type more of the name.", found.len() - 60)).size(11.5).color(DIM_INK));
+        }
+    });
+    d.fields.insert(key.clone(), typed);
+    if let Some(k) = chosen {
+        d.fields.remove(&key);
+        d.fields.insert(format!("pick{i}"), k);
+    } else if close {
+        d.fields.remove(&key);
+    }
 }
 
 /// The other questions offered for card `i` (made by Pick…): click one to use it. Returns true
@@ -660,4 +716,30 @@ fn insert(app: &mut SlideApp, d: &mut Dialog, expand: bool, headings: bool, repl
         params["reroll"] = json!(true);
     }
     app.run("slide.getReady", params).map(|_| ())
+}
+
+#[cfg(test)]
+mod swap_tests {
+    use super::*;
+
+    fn skill(name: &str, year: &str) -> Skill {
+        Skill {
+            key: name.into(),
+            name: name.into(),
+            topic: "Algebra".into(),
+            year: year.into(),
+            term: String::new(),
+            block: "Directed number".into(),
+            keywords: vec!["negatives".into()],
+            counts: [1; 4],
+        }
+    }
+
+    #[test]
+    fn typing_narrows_the_list_across_year_groups() {
+        let s = [skill("Add and subtract negatives", "Y7"), skill("Factorise quadratics", "Y10")];
+        assert!(skill_matches(&s[0], "adding neg") && !skill_matches(&s[1], "adding neg"));
+        assert!(skill_matches(&s[1], "y10 quad") && skill_matches(&s[0], ""));
+        assert!(!skill_matches(&s[0], "negatives quad"));
+    }
 }
