@@ -49,15 +49,16 @@ def set_password():
     print(f"Saved in {AUTH_FILE}. Restart the server to use it.")
 
 
-def set_admin():
-    password = getpass.getpass("Admin password for approving question changes: ")
-    if len(password) < 8 or password != getpass.getpass("Again: "):
-        sys.exit("The passwords differ or are shorter than 8 characters; nothing changed.")
-    salt = secrets.token_bytes(16)
-    fd = os.open(bank_portal.ADMIN_FILE, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
-    with os.fdopen(fd, "w") as f:
-        json.dump({"salt": salt.hex(), "hash": derive(password, salt)}, f)
-    print(f"Saved in {bank_portal.ADMIN_FILE}.")
+def add_user():
+    """Make or update a bank login (an editor, or an admin who also manages logins)."""
+    username = input("User name (lowercase, e.g. ksmith): ").strip().lower()
+    name = input("Their name as shown: ").strip()
+    role = input("Role, editor or admin [editor]: ").strip() or "editor"
+    password = getpass.getpass("Password (8+ characters): ")
+    if len(password) < 8 or password != getpass.getpass("Again: ") or role not in bank_portal.ROLES or len(name) < 2 or len(username) < 2:
+        sys.exit("Something was wrong or the passwords differed; nothing changed.")
+    bank_portal.save_user(username, name, role, password)
+    print(f"Saved {username} ({role}) in {bank_portal.DATA_DIR}/users.json. No restart needed.")
 
 
 bank_portal.derive = derive
@@ -105,7 +106,7 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             return self.deny()
         url = self.path.split("?", 1)[0]
         # A custom header makes a browser ask permission first, so another site cannot post here.
-        if not url.startswith("/bank/api/") or not self.headers.get("X-Teacher", "").strip():
+        if not url.startswith("/bank/api/") or not (self.headers.get("X-Teacher", "").strip() or self.headers.get("X-Token") or self.headers.get("X-Bank") == "1"):
             return self.send_error(404)
         try:
             length = int(self.headers.get("Content-Length", "0"))
@@ -184,13 +185,13 @@ def main():
     p = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     p.add_argument("site", nargs="?", help="the built site (trunk's dist folder)")
     p.add_argument("--port", type=int, default=8790)
-    p.add_argument("--set-admin", action="store_true", help="choose the password that approves question changes")
+    p.add_argument("--add-user", action="store_true", help="make or update a question-bank login (editor or admin)")
     p.add_argument("--set-password", action="store_true", help="choose the user name and password")
     a = p.parse_args()
     if a.set_password:
         return set_password()
-    if a.set_admin:
-        return set_admin()
+    if a.add_user:
+        return add_user()
     if not a.site or not os.path.isfile(os.path.join(a.site, "index.html")):
         sys.exit("Give the folder of a built site (it must hold index.html).")
     try:
