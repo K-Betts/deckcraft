@@ -59,6 +59,10 @@ PY
     fi
 fi
 
+# The staff question-bank page (/bank/): the built-in bank with one worked example each.
+(cd "$root" && cargo build -q -p deckcraft-cli)
+python3 "$root/packaging/web/make_catalog.py" "$root/target/debug/deckcraft-cli" "$root/assets/questions" "$out/bank-catalog.json"
+
 # Compressed copies for the server to send to browsers that accept gzip (most of the download).
 (cd "$out" && for f in *.wasm *.js index.html exam/items/exam/library.json; do if [ -f "$f" ]; then gzip -kf9 "$f"; fi; done)
 
@@ -68,5 +72,5 @@ if [ "$host" = --local ]; then
 fi
 ssh "$host" 'mkdir -p ~/deckcraft-web/site'
 rsync -a --delete "$out/" "$host:deckcraft-web/site/"
-rsync -a "$root/packaging/web/serve-private.py" "$host:deckcraft-web/"
+rsync -a "$root/packaging/web/serve-private.py" "$root/packaging/web/bank_portal.py" "$root/packaging/web/bank_page.html" "$host:deckcraft-web/"
 echo "Published to $host:~/deckcraft-web/site"
