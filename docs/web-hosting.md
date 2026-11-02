@@ -168,3 +168,18 @@ console error; CI runs it on every pull request.
 - The iPad-draws-and-the-board-shows idea needs a live link between two devices (a small free relay
   or a direct browser-to-browser connection). That is the next web phase (W3 in `MATHS.md`).
 - Save in place and Google Drive in the browser (see above).
+
+## The staff question-bank page (`/bank/`)
+
+`deploy-private.sh` also publishes `/bank/` on the private site, behind the same staff password.
+Teachers type their name, browse the built-in bank (3,753 templates, one worked example each),
+flag or suggest an edit to a question, and add questions (paste the Gemini Gem's answer, see
+`bank-gem-prompt.md`). Nothing changes the live bank until an admin approves it.
+
+- Once on the Pi: `python3 serve-private.py --set-admin` (the password that approves changes).
+  Restart the server afterwards.
+- Suggestions are kept in `~/deckcraft-web/bank-data/bank.json` on the Pi (back it up).
+- Approved changes: `/bank/api/approved.json`, in the bank file format. Import it with Manage
+  Questions on a Mac or in the browser. Publishing it into the app automatically is not built yet.
+- Fixed questions only: random-number templates are still written by the admin (or the AI prompt in
+  `question-writing-guide.md`) and checked with `deckcraft-cli bank check`.
