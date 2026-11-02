@@ -34,8 +34,10 @@ fn new_from_file(s: &mut Session, path: &str) -> Result<Value> {
 }
 
 pub(super) fn save_template(s: &mut Session, p: &Value) -> Result<Value> {
-    let dir =
-        crate::templates::personal_dir().ok_or_else(|| bad("file.saveTemplate", "templates are kept by the desktop app, not in the browser"))?;
+    // In the browser the folder holds only the templates a private build was published with.
+    let dir = crate::templates::personal_dir()
+        .filter(|_| !cfg!(target_arch = "wasm32"))
+        .ok_or_else(|| bad("file.saveTemplate", "templates are kept by the desktop app, not in the browser"))?;
     save_template_in(s, p, &dir)
 }
 

@@ -22,7 +22,7 @@ commands:
   assets          check that every icon/image/font/asset is attributed in ATTRIBUTION.md
   pdf-deps        verify pinned writer sources and the production feature boundary
   layers          enforce the crate dependency layering (plan/architecture.md §3)
-  wasm            cargo check --target wasm32-unknown-unknown for the wasm-safe crates (one call)
+  wasm            cargo check --target wasm32-unknown-unknown for the wasm-safe crates, clippy for deckcraft-web
   test            workspace tests (cargo nextest when installed, else cargo test), then doctests
   ci              fmt --check, pdf-deps, clippy -D warnings, test, doctest, assets, layers, wasm
                   (stops at first failure)
@@ -153,7 +153,12 @@ fn cmd_wasm() -> Result<(), String> {
         c.args(["-p", pkg]);
     }
     run(c, &format!("cargo check --target wasm32-unknown-unknown --keep-going -p {}", set.join(" -p ")))?;
-    println!("\nwasm32-unknown-unknown check: ok ({} crates: {})", set.len(), set.join(", "));
+    // The browser app itself (maths edition): an app crate, so not in the set above, and the one
+    // place web-only code lives. Built and opened in a browser by the `web` CI job.
+    let mut c = cargo();
+    c.args(["clippy", "-p", "deckcraft-web", "--target", "wasm32-unknown-unknown", "--", "-D", "warnings"]);
+    run(c, "cargo clippy -p deckcraft-web --target wasm32-unknown-unknown -- -D warnings")?;
+    println!("\nwasm32-unknown-unknown check: ok ({} crates: {}, and deckcraft-web)", set.len(), set.join(", "));
     Ok(())
 }
 

@@ -12,6 +12,8 @@ pub(crate) enum FilePurpose {
     ChangePicture,
     /// A drop, or any other purpose: decide from the name and bytes.
     Infer,
+    /// A text file a maths dialog asked for (`curriculum` or `questions`), handed to it as it is.
+    MathsText(&'static str),
 }
 
 /// Where in a presentation a file should land. Ids, not indices: slides can move while

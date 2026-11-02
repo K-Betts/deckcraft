@@ -38,6 +38,19 @@ impl Settings {
         Settings { saved, last_save: 0.0 }
     }
 
+    /// Write the settings now if they changed (after start-up merged in published material, so it
+    /// is kept even if the tab closes at once).
+    pub(super) fn save_now(&mut self, app: &SlideApp) {
+        use deckcraft_ui_egui::settings::text;
+        let Some(s) = storage() else { return };
+        let now_text = [text::ui(&app.ui), text::prefs(&app.session.prefs), text::maths_tools(&app.maths.tools)];
+        for i in 0..3 {
+            if now_text[i] != self.saved[i] && s.set_item(SETTINGS_KEYS[i], &now_text[i]).is_ok() {
+                self.saved[i] = now_text[i].clone();
+            }
+        }
+    }
+
     /// Keep the three settings in local storage up to date. They are compared every frame (three
     /// small JSON strings), and written when they differ, at most once a `SAVE_EVERY` seconds. A
     /// change held back by that limit asks for one more frame when the wait is over, because the

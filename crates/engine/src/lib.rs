@@ -34,6 +34,7 @@ pub mod template;
 pub mod templates;
 pub mod thesaurus;
 pub mod tools;
+pub mod web_files;
 
 use std::sync::Arc;
 

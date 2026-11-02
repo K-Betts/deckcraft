@@ -31,7 +31,7 @@ teacher's own device, and the only thing the browser stores is the teacher's pre
 | **GitHub Pages** (recommended to start) | Yes | Anyone with the link (the repository is public) | Workflow included: `.github/workflows/web.yml`. Address: `https://k-betts.github.io/deckcraft/`. Compresses the wasm for you. |
 | **Cloudflare Pages** | Yes | Anyone, **or only people you allow** with *Cloudflare Access* (free for up to 50 users, e.g. only school Google accounts) | Best if the school wants it not to be public. Connect the repo, build command below, output `dist/web`. |
 | **Netlify / Firebase Hosting** | Yes (generous limits) | Anyone | Same idea. `packaging/web/_headers` is already in the Netlify/Cloudflare format. |
-| **Your own Raspberry Pi** | Yes | Staff with the password (see below) | The private copy with your curriculum built in; nothing to install but Tailscale. |
+| **Your own Raspberry Pi** | Yes | Staff with the password (see below) | The private copy with what the Mac app has built in (curriculum, questions, templates, exam library); nothing to install but Tailscale. |
 | **The school's own web server** | Their cost | Whoever IT chooses | Unzip `deckcraft-web-<version>.zip` (from `packaging/web/package.sh`) and see `packaging/web/README.md` for the two settings it needs. |
 
 The app contains no pupil data and no secrets, so a public address is not a data risk, but it
@@ -45,7 +45,7 @@ does mean anyone who finds the link can use the app. If that matters, use Cloudf
    the address appears in the run summary.
 3. To publish an update later: merge to `main`, then run the workflow again.
 
-## Hosting on a Raspberry Pi (free, private, with your curriculum built in)
+## Hosting on a Raspberry Pi (free, private, a copy of the Mac app)
 
 A Pi suits a **private** copy for your department: one with the school's curriculum built in,
 so Get Ready works straight away, behind a password that only staff know. Any Pi from a Pi 3 up
@@ -102,20 +102,51 @@ is installed: `packaging/web/serve-private.py` is the web server.
    password. `sudo tailscale funnel --https=10000 off` takes it off the internet again. (First
    time on a tailnet: turn on HTTPS certificates and Funnel in the Tailscale admin console.)
 
-### 2. Publish a version (each time)
+### 2. Publish a version (each time): a copy of the Mac app
 
-From the repository on the Mac, with the Pi's SSH address and the curriculum file:
+**The Mac app is the master copy.** Set things up there (the curriculum in Get Ready, your own
+questions, the maths tools in Teacher Mode, your lesson templates, the Question Library's folder),
+then from the repository on the Mac:
 
 ```bash
-packaging/web/deploy-private.sh kieran@<pi-address> ~/maths-workspace/curriculum/ringmer-2026-27.json
+CRAFT_FONTS_DIR=~/maths-office/craft-fonts packaging/web/deploy-private.sh kieran@100.74.218.18
 ```
 
-It builds the app with the curriculum in (it says `building in the curriculum from …`), makes
-compressed copies (the 42 MB app downloads as about 16 MB), and copies it to
-`~/deckcraft-web/site`. The server picks it up at once; teachers get the new version, and the
-new curriculum, the next time they open the app. Anyone who had loaded a different curriculum
-file is switched to the published one. After changing the curriculum (`convert_overview.py`),
-publish again.
+It reads what the Mac app has now, from `~/Library/Application Support/DeckCraft/`, and builds it
+into the web app (it says `building in the school material from …`):
+
+| From the Mac app | In the web app |
+| --- | --- |
+| The curriculum (`ui.json`) | Get Ready plans from it straight away |
+| Your own questions and question recipes, questions you took out of the bank (`ui.json`) | Get Ready and Manage Questions |
+| Subject packs and Get Ready's mode, year and route (`ui.json`) | The Maths buttons on the ribbon |
+| The Teacher Mode maths tools you chose (`maths-tools.json`) | The same tools in Teacher Mode |
+| Lesson templates (`Templates/*.deckcraft`) | Home ▸ Templates and New, with their own layouts (a "Get Ready Task" layout is used by Get Ready as on the Mac) |
+| The Question Library's folder (`ui.json` names it) | Insert ▸ Question Library: the questions (one file, about 1 MB compressed) and their pictures go in `exam/` beside the site, behind the same password; each picture downloads when it is first shown |
+
+Nothing else is read: not the recent files list, not your name (Preferences ▸ author stays each
+teacher's own), not `prefs.json` (editing preferences such as snapping and AutoCorrect are each
+teacher's own). The script prints only counts for the exam library, never its contents.
+
+It then makes compressed copies (the app downloads as about 13 MB) and copies everything to
+`~/deckcraft-web/site` on the Pi. The server picks it up at once; teachers get the new version the
+next time they open the app. **What a teacher changed in the browser is kept:** published things
+are taken when the browser has none or when a newer version is published, and then a published
+question replaces the copy with the same id while questions a teacher added in the browser stay.
+A newer version does replace the curriculum and the Teacher Mode tool list.
+
+Options:
+
+- `deploy-private.sh --local` builds into `dist/web-private` without publishing, to try first with
+  `python3 -m http.server 8765 --directory dist/web-private`.
+- A second argument names another settings folder (a copy, or another teacher's).
+- `DECKCRAFT_EXAM_LIBRARY=/path/to/library` uses another exam library; `DECKCRAFT_EXAM_LIBRARY=none`
+  leaves it out.
+- `CRAFT_FONTS_DIR` is needed when you run it from a worktree (the fonts are found by themselves in
+  the main checkout). Without the fonts the app shows only a grey screen.
+
+**Never publish this build anywhere public.** The curriculum is the school's own and the past papers
+belong to the exam boards. The public GitHub Pages build is made without any of it.
 
 The Pi needs to stay on for the address to work.
 
@@ -127,7 +158,10 @@ python3 -m http.server 8765 --directory dist/web   # then open http://localhost:
 ```
 
 The offline and update logic is `apps/deckcraft-web/sw.js`; check it with
-`node apps/deckcraft-web/tests/sw.test.mjs`.
+`node apps/deckcraft-web/tests/sw.test.mjs`. `node apps/deckcraft-web/tests/smoke.mjs dist/web`
+opens the built app in headless Chrome with `?smoke` (Home, Get Ready, Exam Question, the Question
+Library, a template, Teacher Mode and its tools, at 1920×1080 and 3840×2160) and fails on any
+console error; CI runs it on every pull request.
 
 ## What this does not do yet
 

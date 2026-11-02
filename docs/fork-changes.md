@@ -61,7 +61,9 @@ upstream bug; when merging, check whether upstream fixed it too and keep only on
 ### Get Ready, curriculum, question bank, Exam Question, Question Library
 - `engine/src/lib.rs`: `pub mod curriculum, exam_library, latex, questions, template;` (hooks).
 - `engine/src/cmd.rs` (was `cmd/mod.rs`): `pub mod exam, exam_library, figures, get_ready;` and their `specs()` (hooks).
-- `engine/src/io.rs`: `list_files`, `create_dir` (for the Question Library and personal templates; wasm stubs). Inline.
+- `engine/src/io.rs`: `list_files`, `create_dir` (for the Question Library and personal templates). In the browser `read_file` and `list_files` read the fork's `web_files` store (a private build's templates and exam library). Inline.
+- `engine/src/lib.rs`: `pub mod web_files;` (hook).
+- `ui-egui/src/state.rs`: `FilePurpose::MathsText`; `ui-egui/src/app/files.rs`: `curriculum` and `questions` picks, and the arm in `apply_external_file` that hands their text to `dialogs::maths::text_arrived` (Load curriculum file… and Import questions in the browser). Hooks.
 - `engine/tests/it/main.rs`: `mod deck_scale;` (hook).
 - `ui-egui/src/app/commands.rs`: `app.dialog` passes its params to the dialog (Choose a Skill uses `slot`). Inline.
 - `apps/deckcraft/src/main.rs`: `questions` and `curriculum` file filters in the open dialog. Inline.
@@ -70,6 +72,7 @@ upstream bug; when merging, check whether upstream fixed it too and keep only on
 ### Teacher Mode and maths tools
 - `ui-egui/src/show.rs`: `Show::teacher`, `on_slide_change`. `show/keys.rs`: calculator keys are not show shortcuts (`handle_keys`); Cmd+P/Cmd+L give way to Teacher Mode; E clears and Cmd+Z undoes its ink. `show/ui.rs` (`draw_bars`) and `show/zoom.rs` (`reading_bar_hit`): the show toolbar hides. Inline (keys) and hooks.
 - `ui-egui/src/app/commands.rs` (`show.end`) and `app.rs` (closing the window) put the overlay aside (`stash_teacher`). Hooks.
+- `ui-egui/src/show/ui.rs`: `teacher::overlay` is given the slide's rect (`srect`), which sizes the ink. Hook.
 - `ui-egui/src/menus.rs`: Cmd+Shift+T and the Teacher Mode menu item. Inline.
 - `ui-egui/src/status.rs`: Teacher Mode button. Inline.
 - `UI_COMMANDS` in `lib.rs`: `show.teacher`, `show.teacherKeep`. Inline (table rows).
@@ -138,8 +141,9 @@ upstream bug; when merging, check whether upstream fixed it too and keep only on
 - `ui-egui/src/lib.rs`: `opening_generation` is unused in the browser (`expect(dead_code)`). Inline.
 
 ### Web shell
-- `apps/deckcraft-web/src/web.rs`: settings in local storage (hook, saved in `logic` after upstream's presenter pop-up check), the school curriculum (`school::apply`), starts on Home with an empty presentation, `?sample` for the demo deck. Inline plus hooks.
-- `apps/deckcraft-web/src/main.rs`: `mod school;` (beside upstream's `mod presenter;`) and the doc comment. `index.html`: PWA manifest, icons, service worker. `Cargo.toml`: the `Storage` web-sys feature. Inline.
+- `apps/deckcraft-web/src/web.rs`: settings in local storage (hook, saved in `logic` after upstream's presenter pop-up check), the school material (`school::apply`, then `save_now`), the exam library fetched beside the site (`load_exam_library`, `fetch_wanted`, `fetch_bytes`), `curriculum` and `questions` filters in the browser picker, `?smoke` (`smoke.rs`), starts on Home with an empty presentation, `?sample` for the demo deck. Inline plus hooks.
+- `apps/deckcraft-web/src/main.rs`: `mod school; mod smoke;` (beside upstream's `mod presenter;`) and the doc comment. `index.html`: PWA manifest, icons, service worker. `Cargo.toml`: the `Storage` and `Response` web-sys features, `serde_json` for `build.rs`. `build.rs` is the fork's. Inline.
+- `xtask/src/main.rs`: the `wasm` step also runs clippy on `deckcraft-web`. `.github/workflows/ci.yml`: the `web` job (trunk build and `tests/smoke.mjs`). Inline.
 
 ### Tests that moved without changing
 Moved into fork files: the Reveal Step by Step show tests (`show/steps.rs`), the `animation.steps` tests

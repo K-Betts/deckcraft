@@ -9,13 +9,13 @@ use crate::icons::Icon;
 use crate::maths::packs;
 use crate::widgets::{big_button, group, rows};
 
-/// Insert: Get Ready Starter (Maths pack).
+/// Insert: Get Ready Starter, Exam Question and Question Library (Maths pack).
 pub(super) fn insert_group(app: &mut SlideApp, ui: &mut egui::Ui) {
     if app.pack_on(packs::MATHS) {
         group(ui, |ui| {
             big(app, ui, Icon::NewSlide, "Get Ready\nStarter", "app.dialog", json!({"id": "getReady"}));
-            // Exam Question and Question Library are built (`app.dialog` ids `examQuestion` and
-            // `examLibrary`) but not on the ribbon until they are ready.
+            big(app, ui, Icon::NewSlide, "Exam\nQuestion", "app.dialog", json!({"id": "examQuestion"}));
+            big(app, ui, Icon::OpenFolder, "Question\nLibrary", "app.dialog", json!({"id": "examLibrary"}));
         });
     }
 }

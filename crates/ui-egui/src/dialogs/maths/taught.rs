@@ -256,8 +256,14 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     ui.horizontal(|ui| {
         let name = if cur.name.is_empty() { "your curriculum".to_string() } else { cur.name.clone() };
         ui.label(egui::RichText::new(format!("Planned from {name}.")).size(11.0).color(t.text_dim));
-        if app.services.pick_open.is_some() && ui.small_button("Load another curriculum…").clicked() {
-            let msg = load_curriculum(app);
+        if super::can_pick_text(app) && ui.small_button("Load another curriculum…").clicked() {
+            let picked = super::pick_text(app, "curriculum");
+            let msg = load_curriculum(app, picked);
+            d.fields.insert("error".into(), msg);
+            d.fields.remove("made");
+        }
+        if let Some(picked) = super::take_text(app, "curriculum") {
+            let msg = load_curriculum(app, Some(picked));
             d.fields.insert("error".into(), msg);
             d.fields.remove("made");
         }
@@ -280,13 +286,18 @@ fn no_curriculum(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog, problem: &str)
     ui.add_space(6.0);
     let mut done = false;
     ui.horizontal(|ui| {
-        if app.services.pick_open.is_some() {
+        if super::can_pick_text(app) {
             let button =
                 egui::Button::new(egui::RichText::new("Load curriculum file…").color(t.accent_text)).fill(t.accent).min_size(vec2(170.0, 30.0));
             if ui.add(button).clicked() {
-                let msg = load_curriculum(app);
+                let picked = super::pick_text(app, "curriculum");
+                let msg = load_curriculum(app, picked);
                 d.fields.insert("load".into(), msg);
             }
+        }
+        if let Some(picked) = super::take_text(app, "curriculum") {
+            let msg = load_curriculum(app, Some(picked));
+            d.fields.insert("load".into(), msg);
         }
         if ui.add(egui::Button::new("Choose each question instead").min_size(vec2(200.0, 30.0))).clicked() {
             d.fields.insert("mode".into(), "choose".into());
@@ -325,12 +336,11 @@ fn no_curriculum(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog, problem: &str)
     done
 }
 
-/// Asks for a curriculum file and keeps it if it can be used. Returns a problem to show, or
-/// nothing when it was loaded.
-fn load_curriculum(app: &mut SlideApp) -> String {
-    let Some(path) = app.services.pick_open.as_mut().and_then(|pick| pick("curriculum")) else { return String::new() };
-    let Some(bytes) = app.services.read.as_mut().map(|read| read(&path)) else { return String::new() };
-    let text = match bytes.map_err(|e| e.to_string()).and_then(|b| String::from_utf8(b).map_err(|_| "that file is not text".to_string())) {
+/// Keeps a curriculum file the teacher picked (see `pick_text`) if it can be used. Returns a
+/// problem to show, or nothing when it was loaded (or nothing was picked yet).
+fn load_curriculum(app: &mut SlideApp, picked: Option<Result<String, String>>) -> String {
+    let Some(picked) = picked else { return String::new() };
+    let text = match picked {
         Ok(t) => t,
         Err(e) => return format!("Could not read the file: {e}"),
     };

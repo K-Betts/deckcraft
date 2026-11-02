@@ -11,6 +11,10 @@ pub const PALM_TOUCHES: usize = 4;
 /// How far from the middle of the hand ink is rubbed out.
 pub const PALM_RADIUS: f32 = 70.0;
 pub const HIGHLIGHT_WIDTH: f32 = 20.0;
+/// The slide height (points) at which pen widths and the eraser are the sizes above: a laptop
+/// screen. On other screens they grow and shrink with the slide, so ink looks the same on a
+/// laptop and on a big board whatever its pixel density.
+pub const INK_REFERENCE_HEIGHT: f32 = 810.0;
 /// The quick setting every new timer starts on.
 const TIMER_DEFAULT_SECS: f64 = 300.0;
 const TIMER_MAX_SECS: f64 = 23.0 * 3600.0 + 59.0 * 60.0 + 59.0;
@@ -350,6 +354,10 @@ pub struct TeacherOverlay {
     /// The choices beside the whiteboard button are out (they share `options_open`).
     board_choice: bool,
     whiteboard_button_rect: Option<Rect>,
+    /// Ink sizes are multiplied by this: the slide's height over [`INK_REFERENCE_HEIGHT`].
+    ink_scale: f32,
+    /// How long the toolbar is as one column (points), measured when it was last drawn that way.
+    palette_len: f32,
 }
 
 impl Default for TeacherOverlay {
@@ -398,6 +406,8 @@ impl Default for TeacherOverlay {
             board_marks: Parked::default(),
             board_choice: false,
             whiteboard_button_rect: None,
+            ink_scale: 1.0,
+            palette_len: 0.0,
         }
     }
 }
@@ -405,6 +415,21 @@ impl Default for TeacherOverlay {
 impl TeacherOverlay {
     pub fn new() -> Self {
         Self::default()
+    }
+
+    /// Size new ink for a slide `height` points tall (see [`INK_REFERENCE_HEIGHT`]).
+    pub fn set_slide_height(&mut self, height: f32) {
+        self.ink_scale = if height.is_finite() && height > 0.0 { (height / INK_REFERENCE_HEIGHT).clamp(0.25, 6.0) } else { 1.0 };
+    }
+
+    /// How much bigger than the laptop sizes new ink is on this screen.
+    pub fn ink_scale(&self) -> f32 {
+        self.ink_scale
+    }
+
+    /// The eraser's radius on this screen.
+    fn eraser_radius(&self) -> f32 {
+        ERASER_RADIUS * self.ink_scale
     }
 
     fn next_seq(&mut self) -> u64 {
@@ -595,7 +620,7 @@ impl TeacherOverlay {
 
     /// Rub out under the eraser tool.
     pub fn erase_at(&mut self, p: Pos2) {
-        self.erase_with(p, ERASER_RADIUS);
+        self.erase_with(p, self.eraser_radius());
     }
 
     /// A flat hand on the screen: wipe along the path of its centre, whatever tool is on.
@@ -626,12 +651,13 @@ impl TeacherOverlay {
         let seq = self.next_seq();
         let (colour, width, is_highlight) =
             if self.tool == Tool::Highlighter { (self.highlight_colour, HIGHLIGHT_WIDTH, true) } else { (self.pen_colour, self.pen_width, false) };
+        let width = width * self.ink_scale;
         Stroke { points: vec![at], colour, width, is_highlight, seq }
     }
 
     fn new_shape(&mut self, at: Pos2) -> DrawnShape {
         let seq = self.next_seq();
-        DrawnShape { kind: self.shape_kind, from: at, to: at, colour: self.pen_colour, width: self.pen_width, seq }
+        DrawnShape { kind: self.shape_kind, from: at, to: at, colour: self.pen_colour, width: self.pen_width * self.ink_scale, seq }
     }
 
     /// One frame: timers, pointer tools, painting and the palette. Returns what the palette asked for.
@@ -923,8 +949,8 @@ impl TeacherOverlay {
         if self.tool == Tool::Eraser
             && let Some(h) = hover
         {
-            p.circle_stroke(h, ERASER_RADIUS, egui::Stroke::new(2.0, Color32::WHITE));
-            p.circle_stroke(h, ERASER_RADIUS + 1.0, egui::Stroke::new(1.0, Color32::from_black_alpha(160)));
+            p.circle_stroke(h, self.eraser_radius(), egui::Stroke::new(2.0, Color32::WHITE));
+            p.circle_stroke(h, self.eraser_radius() + 1.0, egui::Stroke::new(1.0, Color32::from_black_alpha(160)));
         }
     }
 
@@ -944,13 +970,18 @@ impl TeacherOverlay {
                         // phone instead of running off the screen.
                         let limit = if horizontal { full.width() - 2.0 * PALETTE_MARGIN - 20.0 } else { full.height() - 2.0 * PALETTE_MARGIN - 12.0 }
                             .max(TOUCH_TARGET * 2.0);
-                        let mut body = |this: &mut Self, ui: &mut Ui| {
-                            lay(ui, horizontal, limit, |ui| this.main_row(ui, full, horizontal, actions));
-                        };
                         if horizontal {
-                            ui.vertical_centered(|ui| body(self, ui));
+                            ui.vertical_centered(|ui| lay(ui, true, limit, |ui| self.main_row(ui, full, true, actions)));
+                        } else if self.palette_len > limit {
+                            // Taller than the screen (a big board at 2x is 540 points tall): a block of
+                            // just enough columns. A wrapping column would spread across the whole
+                            // screen and push the tab that closes it off the edge.
+                            let cols = (self.palette_len / limit).ceil().max(2.0);
+                            lay(ui, true, cols * (TOUCH_TARGET + 4.0), |ui| self.main_row(ui, full, true, actions));
                         } else {
-                            ui.horizontal(|ui| body(self, ui));
+                            let top = ui.cursor().min.y;
+                            ui.vertical(|ui| self.main_row(ui, full, false, actions));
+                            self.palette_len = ui.min_rect().max.y - top;
                         }
                     },
                 );
@@ -1256,7 +1287,7 @@ fn lay(ui: &mut Ui, horizontal: bool, limit: f32, add: impl FnOnce(&mut Ui)) {
         ui.horizontal_wrapped(add);
     } else {
         ui.set_max_height(limit);
-        ui.with_layout(egui::Layout::top_down(egui::Align::Min).with_main_wrap(true), add);
+        ui.vertical(add);
     }
 }
 

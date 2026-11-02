@@ -47,8 +47,13 @@ pub fn start() {
                     }
                     let inbox: Inbox = Inbox::default();
                     let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone()));
-                    let settings = settings::Settings::load(&mut app);
+                    let mut settings = settings::Settings::load(&mut app);
                     crate::school::apply(&mut app);
+                    settings.save_now(&app);
+                    let exam_ready = std::rc::Rc::new(std::cell::Cell::new(false));
+                    if crate::school::exam_library() {
+                        load_exam_library(exam_ready.clone(), cc.egui_ctx.clone());
+                    }
                     let q = query();
                     // A teacher opens the app to make or open a deck, so it starts on the Home
                     // screen with an empty presentation behind it; `?sample` loads the demo deck.
@@ -64,7 +69,8 @@ pub fn start() {
                     if q.contains("show") {
                         app.start_show(0, false);
                     }
-                    Ok(Box::new(WebShell { app, inbox, settings }))
+                    let smoke = q.contains("smoke").then(crate::smoke::Smoke::default);
+                    Ok(Box::new(WebShell { app, inbox, settings, exam_ready, smoke }))
                 }),
             )
             .await;
@@ -88,11 +94,22 @@ struct WebShell {
     inbox: Inbox,
     /// Saved to local storage as they change.
     settings: settings::Settings,
+    /// The published exam question library has arrived: point the Question Library at it.
+    exam_ready: std::rc::Rc<std::cell::Cell<bool>>,
+    /// `?smoke`: the start-up check a headless browser runs (`smoke`).
+    smoke: Option<crate::smoke::Smoke>,
 }
 
 impl eframe::App for WebShell {
     /// Delegate one eframe logic pass to the wrapped application.
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
+        if self.exam_ready.take() {
+            self.app.ui.maths.exam_library_dir = crate::school::EXAM_DIR.to_string();
+        }
+        fetch_wanted(ctx);
+        if let Some(s) = self.smoke.as_mut() {
+            s.tick(&mut self.app, ctx);
+        }
         self.app.logic(ctx);
         if self.app.show.is_none()
             && let Some(host) = self.app.services.presenter.as_mut()
@@ -154,6 +171,8 @@ fn services(inbox: Inbox, ctx: egui::Context) -> Services {
                 "picture" => rfd::AsyncFileDialog::new().add_filter("Pictures", PICTURE_EXTS),
                 "audio" => rfd::AsyncFileDialog::new().add_filter("Audio", AUDIO_EXTS),
                 "video" => rfd::AsyncFileDialog::new().add_filter("Video", VIDEO_EXTS),
+                "curriculum" => rfd::AsyncFileDialog::new().add_filter("Curriculum file", &["json"]),
+                "questions" => rfd::AsyncFileDialog::new().add_filter("Question file", &["json", "txt"]),
                 _ => rfd::AsyncFileDialog::new().add_filter("Presentations", PRESENTATION_EXTS),
             };
             wasm_bindgen_futures::spawn_local(async move {
@@ -176,6 +195,62 @@ fn services(inbox: Inbox, ctx: egui::Context) -> Services {
         inbox: Some(inbox),
         ..Default::default()
     }
+}
+
+/// The exam question library beside a private site: its questions now, each picture when it is
+/// first shown (they are too many to download at once). Only counts are logged, never contents.
+fn load_exam_library(ready: std::rc::Rc<std::cell::Cell<bool>>, ctx: egui::Context) {
+    use deckcraft_engine::web_files;
+    wasm_bindgen_futures::spawn_local(async move {
+        let dir = crate::school::EXAM_DIR;
+        let items = format!("{dir}/items/exam/library.json");
+        let crops = format!("{dir}/derived/exam_crops");
+        let names =
+            fetch_bytes(&format!("{dir}/crops.json")).await.and_then(|b| serde_json::from_slice::<Vec<String>>(&b).map_err(|e| e.to_string()));
+        match (fetch_bytes(&items).await, names) {
+            (Ok(bytes), Ok(names)) => {
+                log::info!("exam question library: {} pictures", names.len());
+                web_files::provide(&items, bytes);
+                web_files::list(&crops, names);
+                web_files::fetch_on_demand(&crops);
+                ready.set(true);
+                ctx.request_repaint();
+            }
+            (Err(e), _) | (_, Err(e)) => log::error!("the exam question library could not be loaded: {e}"),
+        }
+    });
+}
+
+/// Fetch the files something asked the browser's file store for (`deckcraft_engine::web_files`).
+fn fetch_wanted(ctx: &egui::Context) {
+    use deckcraft_engine::web_files;
+    for path in web_files::take_wanted() {
+        let ctx = ctx.clone();
+        wasm_bindgen_futures::spawn_local(async move {
+            match fetch_bytes(&path).await {
+                Ok(bytes) => web_files::provide(&path, bytes),
+                Err(e) => {
+                    log::warn!("{e}");
+                    web_files::failed(&path);
+                }
+            }
+            ctx.request_repaint();
+        });
+    }
+}
+
+/// The bytes at `url`, relative to the page (so a private site's password goes with the request).
+async fn fetch_bytes(url: &str) -> Result<Vec<u8>, String> {
+    use wasm_bindgen_futures::JsFuture;
+    let js = |e: wasm_bindgen::JsValue| format!("{url}: {e:?}");
+    let window = web_sys::window().ok_or("no window")?;
+    let resp: web_sys::Response =
+        JsFuture::from(window.fetch_with_str(url)).await.map_err(js)?.dyn_into().map_err(|_| format!("{url}: not a response"))?;
+    if !resp.ok() {
+        return Err(format!("{url}: HTTP {}", resp.status()));
+    }
+    let buf = JsFuture::from(resp.array_buffer().map_err(js)?).await.map_err(js)?;
+    Ok(js_sys::Uint8Array::new(&buf).to_vec())
 }
 
 fn push_inbox(inbox: &Inbox, event: InboxEvent) {

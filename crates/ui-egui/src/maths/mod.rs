@@ -21,6 +21,7 @@ pub mod equation_view;
 mod logging;
 pub mod maths_tools;
 pub mod packs;
+pub mod published;
 pub mod teacher_overlay;
 pub mod update_ui;
 

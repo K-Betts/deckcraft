@@ -74,6 +74,19 @@ fn slides(h: &egui_kittest::Harness<'static, SlideApp>) -> usize {
 #[test]
 fn without_a_folder_the_dialog_says_what_to_choose() {
     let h = harness(None);
+    assert!(h.query_by_label_contains("Choose the folder").is_none(), "no folder picker (the browser): nothing to choose");
+    assert!(h.query_by_label_contains("no question library").is_some());
+    let mut app = SlideApp::new(Session::with_new(), Services::default());
+    app.services.maths.pick_folder = Some(Box::new(|_: &str| None));
+    app.dialog = Some(crate::dialogs::Dialog::new("examLibrary"));
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 900.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(4);
     assert!(h.query_by_label_contains("Choose the folder").is_some());
 }
 

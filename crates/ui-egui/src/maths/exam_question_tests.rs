@@ -36,13 +36,20 @@ fn current(h: &egui_kittest::Harness<'static, SlideApp>) -> (usize, Vec<(String,
 }
 
 #[test]
-fn the_insert_tab_has_no_exam_buttons_for_now_but_get_ready_stays() {
+fn the_insert_tab_has_the_exam_buttons_beside_get_ready_with_maths_on() {
     let mut h = harness();
+    assert!(h.query_by_label_contains("Exam").is_none() && h.query_by_label_contains("Library").is_none(), "only with Maths on");
     h.state_mut().run("app.pack", json!({"id": "maths", "on": true})).unwrap();
     h.run_steps(3);
-    assert!(h.query_by_label_contains("Exam").is_none(), "Exam Question is off the ribbon until it is ready");
-    assert!(h.query_by_label_contains("Question\nLibrary").is_none() && h.query_by_label_contains("Library").is_none());
     assert!(h.query_by_label_contains("Get Ready").is_some(), "the Get Ready starter stays");
+    h.get_by_label_contains("Exam").click();
+    h.run_steps(3);
+    assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("examQuestion"));
+    h.state_mut().dialog = None;
+    h.run_steps(2);
+    h.get_by_label_contains("Library").click();
+    h.run_steps(3);
+    assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("examLibrary"));
 }
 
 #[test]
