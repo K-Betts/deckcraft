@@ -78,6 +78,15 @@ impl SlideApp {
         }
         Ok(Value::Null)
     }
+
+    /// Help > Check for Updates…: asks this fork's releases and shows the Update dialog with the
+    /// answer (upstream's own updater, which asks `storytold/deckcraft`, is never started).
+    #[cfg(not(target_arch = "wasm32"))]
+    pub(crate) fn check_updates_now(&mut self) -> Result<Value, String> {
+        self.run_update("update.check")?;
+        self.dialog = Some(crate::dialogs::Dialog::new("update"));
+        Ok(Value::Null)
+    }
 }
 
 /// The “Update DeckCraft” dialog body. True to close.

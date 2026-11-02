@@ -1,7 +1,12 @@
 //! Equations in text layout: the stand-in text of an equation not drawn as maths, and equations
 //! drawn as maths (fractions, powers, roots) over blank space as wide as they are.
 
-use crate::*;
+use deckcraft_geom::Rect;
+use deckcraft_model::text::RunKind;
+
+use crate::run::{Deco, DecoLine, GlyphRun};
+use crate::style::Style;
+use crate::{TextLayout, equation, math};
 
 /// The text that stands in for an equation we do not draw as maths: letters are the mathematical
 /// italic ones, as the equation editor writes them, unless the equation sets its own style or the

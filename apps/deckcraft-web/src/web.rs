@@ -41,6 +41,10 @@ pub fn start() {
                         log::info!("deckcraft-web {}: wgpu backend {:?}", env!("CARGO_PKG_VERSION"), rs.adapter.get_info().backend);
                     }
                     deckcraft_ui_egui::install_ime_pass_hooks(&cc.egui_ctx);
+                    if let Some(token) = crate::presenter::token() {
+                        let presenter = crate::presenter::Popup::new(token, cc.egui_ctx.clone()).map_err(std::io::Error::other)?;
+                        return Ok(Box::new(presenter) as Box<dyn eframe::App>);
+                    }
                     let inbox: Inbox = Inbox::default();
                     let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone()));
                     let settings = settings::Settings::load(&mut app);
@@ -90,6 +94,11 @@ impl eframe::App for WebShell {
     /// Delegate one eframe logic pass to the wrapped application.
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         self.app.logic(ctx);
+        if self.app.show.is_none()
+            && let Some(host) = self.app.services.presenter.as_mut()
+        {
+            host.close();
+        }
         self.settings.save(&self.app, ctx);
     }
 
@@ -129,7 +138,15 @@ impl eframe::App for WebShell {
 /// back to `open_async` (browser picker → inbox) and `download`.
 fn services(inbox: Inbox, ctx: egui::Context) -> Services {
     let open_inbox = inbox.clone();
+    let presenter = match crate::presenter::BrowserHost::new(ctx.clone()) {
+        Ok(host) => Some(Box::new(host) as Box<dyn deckcraft_ui_egui::presenter::Host>),
+        Err(error) => {
+            log::error!("Presenter window: {error}");
+            None
+        }
+    };
     Services {
+        presenter,
         open_async: Some(Box::new(move |purpose: &str, request: u64| {
             let inbox = open_inbox.clone();
             let ctx = ctx.clone();

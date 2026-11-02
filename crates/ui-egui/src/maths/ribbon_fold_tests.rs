@@ -100,3 +100,39 @@ fn nothing_is_lost_every_button_is_on_the_ribbon_or_in_the_menu() {
     wide("Insert", &insert);
     narrow("Insert", &insert);
 }
+
+/// Upstream's Picture Styles row sizes itself from the room the tab's groups leave
+/// (`ribbon::spare_room`); with the folding ribbon that room counts the folded groups too, so the
+/// row gives way before Crop and Size fold, and a wide window still shows every style.
+#[test]
+fn the_picture_styles_row_takes_the_room_the_folding_ribbon_leaves() {
+    use deckcraft_engine::cmd::picture_style::STYLES;
+    use serde_json::json;
+    let picture_format = |width: f32| {
+        let mut s = Session::with_new();
+        s.execute("slide.layout", &json!({"layout": "blank"})).unwrap();
+        let png = deckcraft_render::Image { width: 2, height: 2, pixels: vec![200; 16] }.to_png();
+        let data = deckcraft_engine::cmd::base64_encode(&png);
+        let id = s.execute("insert.picture", &json!({"data": data, "name": "a.png"})).unwrap()["id"].as_u64().unwrap();
+        s.execute("edit.select", &json!({"ids": [id]})).unwrap();
+        let mut app = SlideApp::new(s, Services::default());
+        app.maths.ribbon_fold = true;
+        app.ui.tab = "Picture Format".into();
+        let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(width, 900.0)).build_ui_state(
+            |ui, app: &mut SlideApp| {
+                app.logic(ui.ctx());
+                app.ui(ui);
+            },
+            app,
+        );
+        h.run_steps(8);
+        h
+    };
+    let inline = |h: &egui_kittest::Harness<'_, SlideApp>| STYLES.iter().filter(|(_, label)| h.query_by_label(label).is_some()).count();
+    let narrow = picture_format(1440.0);
+    assert_eq!(inline(&narrow), 2, "at 1440pt the row shrinks to two styles");
+    assert!(narrow.query_by_label("Crop").is_some(), "Crop stays on the ribbon, not in More");
+    let wide = picture_format(3200.0);
+    assert_eq!(inline(&wide), STYLES.len(), "a wide window shows every style");
+    assert_eq!(wide.state().maths.ribbon_folded, 0);
+}

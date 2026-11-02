@@ -139,7 +139,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     };
     ui.horizontal(|ui| {
         label(ui, "Unit");
-        egui::ComboBox::from_id_salt("gr-unit").selected_text(unit_name(unit)).width(620.0).height(420.0).show_ui(ui, |ui| {
+        craft_ui::ComboBox::from_id_salt("gr-unit").selected_text(unit_name(unit)).width(620.0).height(420.0).show_ui(ui, |ui| {
             for i in 0..course.units.len() {
                 let has = !course.units[i].objectives.is_empty();
                 if ui.add_enabled(has, egui::Button::selectable(unit == i, unit_name(i))).clicked() {
@@ -161,7 +161,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
     ui.horizontal(|ui| {
         label(ui, "Lesson just taught");
         let current = u.objectives.get(objective).map(|o| o.text.clone()).unwrap_or_default();
-        egui::ComboBox::from_id_salt("gr-lesson").selected_text(current).width(620.0).height(420.0).show_ui(ui, |ui| {
+        craft_ui::ComboBox::from_id_salt("gr-lesson").selected_text(current).width(620.0).height(420.0).show_ui(ui, |ui| {
             for (i, o) in u.objectives.iter().enumerate() {
                 ui.selectable_value(&mut objective, i, o.text.as_str());
             }

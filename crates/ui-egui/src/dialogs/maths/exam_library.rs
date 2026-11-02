@@ -230,7 +230,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, _d: &mut Dialog) -> bool {
         state.query.max_marks = (hi > 0).then_some(hi);
         ui.add_space(12.0);
         let strand_text = state.query.strand.clone().unwrap_or_else(|| "Any strand".into());
-        let combo = egui::ComboBox::from_id_salt("exam-lib-strand").selected_text(strand_text).width(210.0).show_ui(ui, |ui| {
+        let combo = craft_ui::ComboBox::from_id_salt("exam-lib-strand").selected_text(strand_text).width(210.0).show_ui(ui, |ui| {
             if ui.selectable_label(state.query.strand.is_none(), "Any strand").clicked() {
                 state.query.strand = None;
             }
@@ -242,7 +242,7 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, _d: &mut Dialog) -> bool {
         });
         combo.response.widget_info(|| egui::WidgetInfo::labeled(egui::Role::ComboBox, true, "Strand"));
         let year_text = state.query.year.map_or("Any year".to_string(), |y| y.to_string());
-        let combo = egui::ComboBox::from_id_salt("exam-lib-year").selected_text(year_text).width(100.0).show_ui(ui, |ui| {
+        let combo = craft_ui::ComboBox::from_id_salt("exam-lib-year").selected_text(year_text).width(100.0).show_ui(ui, |ui| {
             if ui.selectable_label(state.query.year.is_none(), "Any year").clicked() {
                 state.query.year = None;
             }

@@ -19,7 +19,7 @@ pub fn appearance_picker(app: &mut crate::SlideApp, ui: &mut egui::Ui, salt: &st
         "dark" => "Dark",
         _ => "Light",
     };
-    let combo = egui::ComboBox::from_id_salt(salt).width(200.0).selected_text(name(now)).show_ui(ui, |ui| {
+    let combo = craft_ui::ComboBox::from_id_salt(salt).width(200.0).selected_text(name(now)).show_ui(ui, |ui| {
         for mode in ["system", "light", "dark"] {
             if ui.selectable_label(now == mode, name(mode)).clicked() {
                 let _ = app.run("view.appearance", serde_json::json!({ "mode": mode }));

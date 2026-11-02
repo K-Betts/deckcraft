@@ -21,6 +21,8 @@
 #![forbid(unsafe_code)]
 
 #[cfg(target_arch = "wasm32")]
+mod presenter;
+#[cfg(target_arch = "wasm32")]
 mod school;
 #[cfg(target_arch = "wasm32")]
 mod web;

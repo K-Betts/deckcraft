@@ -4,7 +4,7 @@ use egui::{Ui, vec2};
 use serde_json::{Value, json};
 
 use crate::SlideApp;
-use crate::dialogs::*;
+use crate::dialogs::{Dialog, buttons, check};
 use crate::theme::{self, Tokens};
 
 /// The skill picker: search the small steps (by name, topic, keyword or year), narrow by year
@@ -181,9 +181,10 @@ pub(super) fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
     );
     ui.horizontal(|ui| {
         let topic = d.get("filter", "");
-        egui::ComboBox::from_id_salt("qb-filter").selected_text(if topic.is_empty() { "All topics" } else { topic.as_str() }).width(150.0).show_ui(
-            ui,
-            |ui| {
+        craft_ui::ComboBox::from_id_salt("qb-filter")
+            .selected_text(if topic.is_empty() { "All topics" } else { topic.as_str() })
+            .width(150.0)
+            .show_ui(ui, |ui| {
                 if ui.selectable_label(topic.is_empty(), "All topics").clicked() {
                     d.fields.insert("filter".into(), String::new());
                 }
@@ -192,8 +193,7 @@ pub(super) fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
                         d.fields.insert("filter".into(), tp.clone());
                     }
                 }
-            },
-        );
+            });
         let mut search = d.get("search", "");
         ui.add(egui::TextEdit::singleline(&mut search).hint_text("Search: e.g. both sides, pythagoras").desired_width(260.0));
         d.fields.insert("search".into(), search);
@@ -264,7 +264,7 @@ pub(super) fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
     ui.horizontal(|ui| {
         ui.add_sized(vec2(70.0, 24.0), egui::Label::new("Topic:"));
         let mut tp = d.get("nq_topic", &topics.first().cloned().unwrap_or_default());
-        egui::ComboBox::from_id_salt("qb-topic").selected_text(tp.clone()).width(130.0).show_ui(ui, |ui| {
+        craft_ui::ComboBox::from_id_salt("qb-topic").selected_text(tp.clone()).width(130.0).show_ui(ui, |ui| {
             for x in &topics {
                 if ui.selectable_label(&tp == x, x).clicked() {
                     tp = x.clone();
@@ -606,7 +606,7 @@ pub(super) fn get_ready_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) 
     ui.separator();
     let topic_combo = |ui: &mut Ui, id: String, current: &str| -> Option<String> {
         let mut picked = None;
-        egui::ComboBox::from_id_salt(id).selected_text(if current.is_empty() { "Any topic" } else { current }).width(150.0).show_ui(ui, |ui| {
+        craft_ui::ComboBox::from_id_salt(id).selected_text(if current.is_empty() { "Any topic" } else { current }).width(150.0).show_ui(ui, |ui| {
             if ui.selectable_label(current.is_empty(), "Any topic").clicked() {
                 picked = Some(String::new());
             }

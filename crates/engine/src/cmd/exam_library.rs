@@ -8,7 +8,7 @@ use serde_json::{Value, json};
 
 use super::exam::{EXAM_NAME, exam_layout};
 use super::get_ready::{draw_shape, plain_answer, plain_layout_name, rich_text_box, set_rich_shape_text};
-use super::*;
+use super::{CommandSpec, EngineError, bad, cmd, has_doc, str_param, usize_param};
 use crate::exam_library::{Item, parse_items};
 use crate::{Result, Session};
 

@@ -7,7 +7,7 @@
 
 use serde_json::{Value, json};
 
-use super::*;
+use super::{CommandSpec, EngineError, bad, bool_param, cmd, has_doc, str_param, usize_param};
 use crate::{Result, Session, questions};
 
 pub fn specs() -> Vec<CommandSpec> {

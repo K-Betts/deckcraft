@@ -1,7 +1,8 @@
 //! Reveal Step by Step in the slide show: a click on a line of working, or Tab and Shift+Tab, shows
 //! or hides just that line, without moving the show on.
 
-use super::*;
+use super::render::fit;
+use super::{ParaState, Presentation, Rect, ShapeId, ShapeState, Show, Timeline, Ui, pos2};
 
 /// A step line shown (`true`) or hidden by hand in a slide show: (shape, line, shown).
 pub(super) type StepMark = (ShapeId, usize, bool);
@@ -147,7 +148,11 @@ impl Show {
 mod tests {
     #![allow(clippy::unwrap_used, clippy::expect_used)]
 
+    use super::super::state_for;
     use super::*;
+    use crate::SlideApp;
+    use egui::{Pos2, vec2};
+    use serde_json::json;
 
     /// A session whose first slide has a Reveal Step by Step box of three lines (a blank line
     /// between the second and third) and a second, empty slide.

@@ -5,7 +5,7 @@ use serde_json::{Value, json};
 
 use super::get_ready::{fresh_seed, question_bank};
 use crate::SlideApp;
-use crate::dialogs::*;
+use crate::dialogs::{Dialog, field};
 use crate::theme::Tokens;
 
 /// Exam Question: one question set out as on an exam paper, from the question bank's exam-style
@@ -64,7 +64,7 @@ pub(super) fn exam_question_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
             ui.horizontal(|ui| {
                 ui.add_sized(vec2(60.0, 28.0), egui::Label::new("Topic:"));
                 let current = d.get("topic", "");
-                egui::ComboBox::from_id_salt("exam-topic")
+                craft_ui::ComboBox::from_id_salt("exam-topic")
                     .selected_text(if current.is_empty() { "Any topic" } else { &current })
                     .width(200.0)
                     .show_ui(ui, |ui| {

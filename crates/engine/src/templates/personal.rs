@@ -1,7 +1,7 @@
 //! The teacher's own templates: presentation files in a per-user templates folder, listed by
 //! File › New and written by Save as Template.
 
-use super::*;
+use super::{Result, bad};
 
 /// A teacher's own template: a presentation file kept in the personal templates folder.
 #[derive(Clone, Debug, PartialEq, Eq)]

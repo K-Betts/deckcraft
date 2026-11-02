@@ -1,7 +1,7 @@
 //! The maths edition's subcommands: `fidelity` (compare a deck before and after a save), `bank
 //! check` and `curriculum check` (the Get Ready question bank and a school's curriculum file).
 
-use super::*;
+use super::{Ordering, STDOUT_CLOSED, Value, help_page, is_help, json, stdout_line};
 
 /// Run subcommand `name` (`fidelity`, `bank` or `curriculum`).
 pub(super) fn run(name: &str, args: &[String]) -> Result<(), String> {
@@ -146,6 +146,7 @@ mod tests {
     #![allow(clippy::unwrap_used, clippy::expect_used)]
 
     use super::*;
+    use deckcraft_engine::Session;
 
     fn args(v: &[&str]) -> Vec<String> {
         v.iter().map(|s| s.to_string()).collect()
