@@ -51,3 +51,26 @@ pub fn apply(app: &mut SlideApp) {
 pub fn exam_library() -> bool {
     serde_json::from_str::<serde_json::Value>(SCHOOL).ok().and_then(|v| v.get("examLibrary").and_then(serde_json::Value::as_bool)).unwrap_or(false)
 }
+
+/// Whether this build carries the school's material, i.e. is the private site (which also serves
+/// the live question bank). The public build is made without it.
+pub fn private() -> bool {
+    !SCHOOL.trim().is_empty()
+}
+
+/// Key under which the live bank's last-applied questions are remembered in the browser.
+const LIVE_KEY: &str = "deckcraft.liveBank";
+
+/// Make this browser's questions match the school's live bank (`bank/api/live.json`).
+pub fn apply_live(app: &mut SlideApp, live: &serde_json::Value) {
+    let store = crate::web::settings::storage();
+    let prev = store
+        .as_ref()
+        .and_then(|s| s.get_item(LIVE_KEY).ok().flatten())
+        .and_then(|t| serde_json::from_str::<published::LiveState>(&t).ok())
+        .unwrap_or_default();
+    let state = published::apply_live(&mut app.ui.maths, live, &prev);
+    if let (Some(s), Ok(text)) = (store, serde_json::to_string(&state)) {
+        let _ = s.set_item(LIVE_KEY, &text);
+    }
+}
