@@ -56,6 +56,37 @@ pub fn merge(m: &mut MathsUi, tools: &mut MathsToolsSettings, published: &Value,
     m.sanitize();
 }
 
+/// What the live school bank (the staff question-bank page's `live.json`) put into the settings
+/// last time, so the next version can take it back out first: a question an editor deleted, or a
+/// built-in one they put back, must not stay behind.
+#[derive(Clone, Debug, Default, PartialEq, serde::Serialize, serde::Deserialize)]
+pub struct LiveState {
+    pub questions: Vec<String>,
+    pub removed: Vec<String>,
+}
+
+/// Make `m` match the live school bank `live`: undo what `prev` added, then add the bank's
+/// questions and hide the built-ins it takes out. Returns what to remember for next time. A
+/// question the teacher added themselves (any other id) is left alone.
+pub fn apply_live(m: &mut MathsUi, live: &Value, prev: &LiveState) -> LiveState {
+    m.my_questions.retain(|q| !prev.questions.contains(&q.id));
+    m.removed_questions.retain(|id| !prev.removed.contains(id));
+    let qs = live
+        .get("myQuestions")
+        .and_then(|v| serde_json::from_value::<Vec<deckcraft_engine::questions::Question>>(v.clone()).ok())
+        .unwrap_or_default();
+    let removed = strings(live.get("removedQuestions"));
+    let state = LiveState { questions: qs.iter().map(|q| q.id.clone()).collect(), removed: removed.clone() };
+    upsert(&mut m.my_questions, qs, |q| q.id.clone());
+    for id in removed {
+        if !m.removed_questions.contains(&id) {
+            m.removed_questions.push(id);
+        }
+    }
+    m.sanitize();
+    state
+}
+
 /// Replace the items of `mine` that share an id with one of `theirs`, and add the rest of `theirs`.
 fn upsert<T>(mine: &mut Vec<T>, theirs: Vec<T>, id: impl Fn(&T) -> String) {
     for t in theirs {
@@ -141,6 +172,23 @@ mod tests {
         let texts: Vec<&str> = m.my_questions.iter().map(|q| q.text.as_str()).collect();
         assert_eq!(texts, ["Published, edited", "Made in the browser", "Published two"]);
         assert!(m.curriculum.contains("Published 2"));
+    }
+
+    #[test]
+    fn the_live_bank_follows_the_editors_including_what_they_take_back() {
+        let mut m = MathsUi::default();
+        m.my_questions.push(serde_json::from_value(question("browser-1", "Mine")).unwrap());
+        let v1 = json!({"myQuestions": [question("staff-1", "One"), question("staff-2", "Two")], "removedQuestions": ["alg-1"]});
+        let s1 = apply_live(&mut m, &v1, &LiveState::default());
+        assert_eq!(m.my_questions.len(), 3);
+        assert_eq!(m.removed_questions, ["alg-1"]);
+        // An editor deletes staff-2, edits staff-1 and puts alg-1 back.
+        let v2 = json!({"myQuestions": [question("staff-1", "One, edited")], "removedQuestions": []});
+        let s2 = apply_live(&mut m, &v2, &s1);
+        let texts: Vec<&str> = m.my_questions.iter().map(|q| q.text.as_str()).collect();
+        assert_eq!(texts, ["Mine", "One, edited"]);
+        assert!(m.removed_questions.is_empty());
+        assert_eq!(s2.questions, ["staff-1"]);
     }
 
     #[test]

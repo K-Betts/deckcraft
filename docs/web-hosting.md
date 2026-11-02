@@ -171,15 +171,19 @@ console error; CI runs it on every pull request.
 
 ## The staff question-bank page (`/bank/`)
 
-`deploy-private.sh` also publishes `/bank/` on the private site, behind the same staff password.
-Teachers type their name, browse the built-in bank (3,753 templates, one worked example each),
-flag or suggest an edit to a question, and add questions (paste the Gemini Gem's answer, see
-`bank-gem-prompt.md`). Nothing changes the live bank until an admin approves it.
+`deploy-private.sh` publishes `/bank/` on the private site. Anyone with the staff password can
+browse the built-in bank (3,753 templates, one worked example each) and *suggest* a change. People
+with an **editor login** edit the live bank directly: add questions (paste the Gemini Gem's answer,
+see `bank-gem-prompt.md`), replace a built-in question with their own version, take one out, edit or
+delete their own, approve teachers' suggestions. **Admins** also make and remove logins on the
+Logins tab. The private web app loads the live bank (`/bank/api/live.json`) every time it opens, so
+an edit reaches teachers on their next page load; the Mac app does not read it yet.
 
-- Once on the Pi: `python3 serve-private.py --set-admin` (the password that approves changes).
-  Restart the server afterwards.
-- Suggestions are kept in `~/deckcraft-web/bank-data/bank.json` on the Pi (back it up).
-- Approved changes: `/bank/api/approved.json`, in the bank file format. Import it with Manage
-  Questions on a Mac or in the browser. Publishing it into the app automatically is not built yet.
+- First admin, on the Pi: `python3 ~/deckcraft-web/serve-private.py --add-user` (choose role admin).
+  More logins: that command again, or the Logins tab. No restart needed. A login from the first
+  version (`bank-admin.json`) still works as user `admin`.
+- Data: `~/deckcraft-web/bank-data/bank.json` (live bank, suggestions, history of changes) and
+  `users.json` (salted hashes). Back both up.
 - Fixed questions only: random-number templates are still written by the admin (or the AI prompt in
   `question-writing-guide.md`) and checked with `deckcraft-cli bank check`.
+- Tests: `python3 -m unittest packaging/web/test_bank_portal.py`.

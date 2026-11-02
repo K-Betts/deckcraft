@@ -17,82 +17,101 @@ textarea{width:100%;min-height:80px}.row{display:flex;gap:8px;flex-wrap:wrap;mar
 .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:8px}
 .meta{font-size:12px;color:var(--mut)}.ans{color:var(--ok);font-size:13px}.tag{display:inline-block;border:1px solid var(--line);border-radius:99px;padding:0 8px;font-size:12px;margin-right:4px}
 .err{color:var(--bad)}.okmsg{color:var(--ok)}label{display:block;font-size:13px;color:var(--mut);margin:8px 0 2px}
-.hint{background:#eef1ff;color:#050038;border-radius:8px;padding:8px 12px;font-size:13px;margin:8px 0}
+.who{font-size:13px;color:var(--mut)}.hint{background:#eef1ff;color:#050038;border-radius:8px;padding:8px 12px;font-size:13px;margin:8px 0}
 </style></head><body>
 <header><h1>Maths question bank</h1>
-<label style="margin:0">Your name <input id="who" size="16" placeholder="e.g. A. Smith"></label></header>
-<main>
-<nav id="tabs"></nav>
-<section id="browse"></section><section id="add" hidden></section>
-<section id="changes" hidden></section><section id="review" hidden></section>
-</main>
+<span id="acct"></span></header>
+<main><nav id="tabs"></nav>
+<section id="browse"></section><section id="add" hidden></section><section id="mine" hidden></section>
+<section id="changes" hidden></section><section id="people" hidden></section></main>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
 <script>
 const $=(s,r=document)=>r.querySelector(s);
 const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a))x==='class'?e.className=v:x.startsWith('on')?e[x]=v:e.setAttribute(x,v);e.append(...k.filter(c=>c!=null));return e};
 const LEVELS=['','Support','Core','Stretch','Exam style'];
-let catalog=[],items=[],admin='';
-const who=$('#who');try{who.value=localStorage.getItem('bankName')||''}catch{}
-who.onchange=()=>{try{localStorage.setItem('bankName',who.value)}catch{}};
+let catalog=[],db={items:[],added:{},replaced:{},retired:[],history:[]},me=null;
+const store={get:k=>{try{return sessionStorage.getItem(k)||localStorage.getItem(k)||''}catch{return''}},setS:(k,v)=>{try{sessionStorage.setItem(k,v)}catch{}},setL:(k,v)=>{try{localStorage.setItem(k,v)}catch{}},del:k=>{try{sessionStorage.removeItem(k)}catch{}}};
 function math(root){if(window.renderMathInElement)try{renderMathInElement(root,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false})}catch{}}
 async function call(path,body){
-  const h={'X-Teacher':who.value.trim()};if(admin)h['X-Admin-Password']=admin;
+  const h={'X-Bank':'1'};const t=store.get('bankToken');if(t)h['X-Token']=t;const n=store.get('bankName');if(n)h['X-Teacher']=n;
   const r=await fetch('/bank/api/'+path,body?{method:'POST',headers:{...h,'Content-Type':'application/json'},body:JSON.stringify(body)}:{headers:h});
   const j=await r.json().catch(()=>({error:'The server did not answer.'}));if(!r.ok)throw new Error(j.error||r.statusText);return j}
-const tabs={browse:'Browse the bank',add:'Add a question',changes:'Suggestions so far',review:'Approve (admin)'};
-function show(name){for(const k in tabs){$('#'+k).hidden=k!==name}[...$('#tabs').children].forEach(b=>b.classList.toggle('on',b.dataset.t===name));
-  if(name==='changes'||name==='review')load().then(()=>draw[name]())}
-for(const k in tabs)$('#tabs').append(el('button',{'data-t':k,onclick:()=>show(k)},tabs[k]));
-async function load(){items=(await call('items')).items}
-function qbox(q,extra){const d=el('div',{class:'q'},el('div',{class:'meta'},el('span',{class:'tag'},q.year||''),el('span',{class:'tag'},LEVELS[q.level||q.difficulty]||''),q.topic||'',' · ',q.skill||q.subtopic||''),el('div',{},q.q||q.text),el('div',{class:'ans'},'Answer: '+(q.a||q.answer)),extra||'');return d}
-// Browse
-function drawBrowse(){const s=$('#browse');s.textContent='';
-  const f={q:el('input',{placeholder:'Search skill or words',size:28}),y:el('select',{},el('option',{value:''},'All years'),...['Y7','Y8','Y9','Y10','Y11'].map(y=>el('option',{},y))),
-    l:el('select',{},el('option',{value:''},'All levels'),...[1,2,3,4].map(i=>el('option',{value:i},LEVELS[i])))};
-  const out=el('div'),count=el('div',{class:'meta'});
-  const go=()=>{out.textContent='';const w=f.q.value.toLowerCase().split(/\s+/).filter(Boolean);
-    const hits=catalog.filter(c=>(!f.y.value||c.year===f.y.value)&&(!f.l.value||String(c.level)===f.l.value)&&w.every(x=>{const h=(c.skill+' '+c.topic+' '+c.q+' '+c.id).toLowerCase();const st=x.replace(/(ing|ed|es|s)$/,'');return h.includes(x)||(st.length>=3&&h.includes(st))}));
-    count.textContent=hits.length+' of '+catalog.length+' templates (each sample is one example; the real question changes its numbers each time)';
-    hits.slice(0,40).forEach(c=>out.append(qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},el('button',{onclick:()=>flag(c)},'Something is wrong / suggest an edit')))));math(out)};
-  [f.q,f.y,f.l].forEach(e=>e.oninput=go);s.append(el('div',{class:'row'},f.q,f.y,f.l),count,out);go()}
-function flag(c){const s=$('#browse');const box=el('div',{class:'q'});
-  const act=el('select',{},...[['wrong','This question is wrong'],['retire','Remove it from the bank'],['reword','I would reword it'],['retag','Wrong year or level']].map(([v,t])=>el('option',{value:v},t)));
-  const note=el('textarea',{placeholder:'What is the problem?'});const msg=el('div');
-  const ed=form({text:c.q,answer:c.a,topic:c.topic,year:c.year,difficulty:c.level,subtopic:c.skill});ed.hidden=true;
-  act.onchange=()=>ed.hidden=!['reword','retag'].includes(act.value);
-  box.append(el('b',{},'About '+c.id),el('div',{class:'meta'},c.q),act,note,ed.el,msg,
-    el('button',{class:'pri',onclick:async()=>{try{await call('flag',{target:c.id,action:act.value,note:note.value,question:ed.hidden?undefined:ed.get()});box.textContent='Thank you, sent for approval.'}catch(e){msg.className='err';msg.textContent=e.message}}},'Send'),
-    el('button',{onclick:()=>box.remove()},'Cancel'));
-  s.prepend(box);scrollTo(0,0)}
-// Question form
-function form(init={}){const f={};const mk=(n,l,e)=>{f[n]=e;return[el('label',{},l),e]};
-  const root=el('div');
-  root.append(...mk('text','Question (put equations between $ signs, e.g. $\\frac{3}{4}+\\frac{1}{8}$)',el('textarea')),
+const isEd=()=>!!(me&&me.name),isAdmin=()=>isEd()&&me.role==='admin';
+function drawAcct(){const a=$('#acct');a.textContent='';
+  if(isEd()){a.append(el('span',{class:'who'},`${me.name} (${me.role}) `),el('button',{onclick:()=>{store.del('bankToken');me=null;start()}},'Log out'))}
+  else{const u=el('input',{placeholder:'Editor user name',size:12}),p=el('input',{type:'password',placeholder:'Password',size:12}),n=el('input',{placeholder:'Your name (to suggest)',size:16,value:store.get('bankName')}),m=el('span',{class:'err'});
+    n.onchange=()=>store.setL('bankName',n.value.trim());
+    const go=async()=>{try{const r=await call('login',{username:u.value,password:p.value});store.setS('bankToken',r.token);start()}catch(e){m.textContent=e.message}};
+    p.onkeydown=e=>{if(e.key==='Enter')go()};
+    a.append(n,' · Editors: ',u,p,el('button',{onclick:go},'Log in'),m)}}
+function tabList(){const t={browse:'Browse the bank',add:isEd()?'Add a question':'Suggest a question'};
+  if(isEd())t.mine=`Our questions & changes`;t.changes=isEd()?'Suggestions to approve':'Suggestions so far';if(isAdmin())t.people='Logins';return t}
+function show(name){const t=tabList();for(const k of['browse','add','mine','changes','people'])$('#'+k).hidden=k!==name;
+  [...$('#tabs').children].forEach(b=>b.classList.toggle('on',b.dataset.t===name));
+  if(name==='mine')drawMine();if(name==='changes')drawChanges();if(name==='people')drawPeople()}
+function drawTabs(){const t=tabList();$('#tabs').textContent='';for(const k in t)$('#tabs').append(el('button',{'data-t':k,onclick:()=>show(k)},t[k]))}
+async function loadDb(){db=await call('items')}
+function qbox(q,extra){return el('div',{class:'q'},el('div',{class:'meta'},el('span',{class:'tag'},q.year||''),el('span',{class:'tag'},LEVELS[q.level||q.difficulty]||''),q.topic||'',' · ',q.skill||q.subtopic||''),el('div',{},q.q||q.text),el('div',{class:'ans'},'Answer: '+(q.a||q.answer)),extra||'')}
+function form(init={}){const f={};const mk=(n,l,e)=>{f[n]=e;return[el('label',{},l),e]};const root=el('div');
+  root.append(...mk('text','Question (equations between $ signs, e.g. $\\frac{3}{4}+\\frac{1}{8}$)',el('textarea')),
    ...mk('answer','Answer',el('input',{size:40})),
    ...mk('topic','Topic',el('select',{},...['Number','Algebra','Ratio','Geometry','Statistics','Probability'].map(t=>el('option',{},t)))),
    ...mk('subtopic','Skill (what it practises)',el('input',{size:40,placeholder:'e.g. Adding and subtracting negatives'})),
    ...mk('year','Year group',el('select',{},...['Y7','Y8','Y9','Y10','Y11'].map(t=>el('option',{},t)))),
    ...mk('difficulty','Level',el('select',{},...[1,2,3,4].map(i=>el('option',{value:i},i+' · '+LEVELS[i])))),
    ...mk('keywords','Search words, separated by commas',el('input',{size:40})));
-  for(const[k,v]of Object.entries(init))if(f[k]&&v!=null)f[k].value=v;
-  return{el:root,hidden:false,set hidden(h){root.hidden=h},get hidden(){return root.hidden},get:()=>Object.fromEntries(Object.entries(f).map(([k,e])=>[k,e.value])),fill:o=>{for(const[k,v]of Object.entries(o))if(f[k])f[k].value=Array.isArray(v)?v.join(', '):v}}}
-function drawAdd(){const s=$('#add');s.textContent='';const fm=form();const msg=el('div');
-  const paste=el('textarea',{placeholder:'Paste the Gem’s answer here (JSON), then press Fill the form'});
-  s.append(el('div',{class:'hint'},'Quickest way: photograph the question, give it to the school’s Gemini Gem, check it with the Gem, then paste its answer below.'),paste,
-    el('button',{onclick:()=>{try{const t=paste.value.replace(/```(json)?/g,'').trim();let o=JSON.parse(t);if(Array.isArray(o))o=o[0];fm.fill(o);msg.className='okmsg';msg.textContent='Filled in. Check each box, then Send.'}catch{msg.className='err';msg.textContent='That did not read as the Gem’s JSON answer. You can also type the question in below.'}}},'Fill the form'),
-    fm.el,msg,el('button',{class:'pri',onclick:async()=>{try{await call('new',fm.get());msg.className='okmsg';msg.textContent='Sent for approval. Thank you.'}catch(e){msg.className='err';msg.textContent=e.message}}},'Send for approval'))}
-// Changes and review
-const draw={};
-function itemBox(it,withReview){const q=it.question;const b=el('div',{class:'q'},el('div',{class:'meta'},`#${it.id} · ${it.by} · ${it.at} · `,el('b',{},it.status)),
-  it.kind==='new'?el('div',{},'New question:'):el('div',{},`About ${it.target}: ${it.action}${it.note?' – '+it.note:''}`));
-  if(q)b.append(qbox(q));
-  if(withReview&&it.status==='pending')b.append(el('div',{class:'row'},...['approved','rejected'].map(d=>el('button',{class:d==='approved'?'pri':'',onclick:async()=>{await call('review',{id:it.id,decision:d});await load();draw.review()}},d==='approved'?'Approve':'Reject'))));
-  return b}
-draw.changes=()=>{const s=$('#changes');s.textContent='';[...items].reverse().forEach(i=>s.append(itemBox(i)));if(!items.length)s.append('Nothing yet.');math(s)};
-draw.review=()=>{const s=$('#review');s.textContent='';
-  if(!admin){const p=el('input',{type:'password',placeholder:'Admin password'});s.append(p,el('button',{onclick:()=>{admin=p.value;load().then(draw.review)}},'Unlock'));return}
-  s.append(el('p',{},'Approved changes are listed at ',el('a',{href:'/bank/api/approved.json'},'approved.json'),'. Import that file in Manage Questions, or publish it with deploy-private.sh.'));
-  items.filter(i=>i.status==='pending').forEach(i=>s.append(itemBox(i,true)));math(s)};
-fetch('/bank-catalog.json').then(r=>r.json()).then(c=>{catalog=c}).catch(()=>{}).finally(()=>{drawBrowse();drawAdd();show('browse')});
+  const fill=o=>{for(const[k,v]of Object.entries(o))if(f[k]&&v!=null)f[k].value=Array.isArray(v)?v.join(', '):v};fill(init);
+  return{el:root,get:()=>Object.fromEntries(Object.entries(f).map(([k,e])=>[k,e.value])),fill}}
+const sameSkill=c=>c.skill;
+function builtinState(c){return db.retired.includes(c.id)?'retired':db.replaced[c.id]?'replaced':''}
+function drawBrowse(){const s=$('#browse');s.textContent='';
+  const f={q:el('input',{placeholder:'Search skill or words',size:28}),y:el('select',{},el('option',{value:''},'All years'),...['Y7','Y8','Y9','Y10','Y11'].map(y=>el('option',{},y))),
+    l:el('select',{},el('option',{value:''},'All levels'),...[1,2,3,4].map(i=>el('option',{value:i},LEVELS[i])))};
+  const out=el('div'),count=el('div',{class:'meta'});
+  const go=()=>{out.textContent='';const w=f.q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    const hits=catalog.filter(c=>(!f.y.value||c.year===f.y.value)&&(!f.l.value||String(c.level)===f.l.value)&&w.every(x=>{const h=(c.skill+' '+c.topic+' '+c.q+' '+c.id).toLowerCase();const st=x.replace(/(ing|ed|es|s)$/,'');return h.includes(x)||(st.length>=3&&h.includes(st))}));
+    count.textContent=hits.length+' of '+catalog.length+' built-in templates. Each sample is one example: the real question changes its numbers each time.';
+    hits.slice(0,40).forEach(c=>{const st=builtinState(c);
+      out.append(qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},st?el('span',{class:'tag'},st==='retired'?'Taken out of the bank':'Replaced by a staff question'):null,
+        isEd()?(st?el('button',{onclick:async()=>{await call('edit/restore',{target:c.id});await loadDb();go()}},'Put back'):[el('button',{onclick:()=>editBox(c,true)},'Replace with my version…'),el('button',{onclick:async()=>{if(confirm('Take this out of the bank? It can be put back.')){await call('edit/retire',{target:c.id});await loadDb();go()}}},'Take out')]):null,
+        isEd()?null:el('button',{onclick:()=>editBox(c,false)},'Something is wrong / suggest an edit'))))});math(out)};
+  [f.q,f.y,f.l].forEach(e=>e.oninput=go);s.append(el('div',{class:'row'},f.q,f.y,f.l),count,out);go()}
+function editBox(c,direct){const s=$('#browse');const box=el('div',{class:'q'});const msg=el('div');
+  const ed=form({text:c.q,answer:c.a,topic:c.topic,year:c.year,difficulty:c.level,subtopic:c.skill});
+  const act=el('select',{},...[['reword','I would reword it'],['wrong','This question is wrong'],['retire','Remove it from the bank'],['retag','Wrong year or level']].map(([v,t])=>el('option',{value:v},t)));
+  const note=el('textarea',{placeholder:'What is the problem?'});
+  const send=async()=>{try{if(direct)await call('edit/replace',{target:c.id,...ed.get()});else{const a=act.value;await call('suggest/flag',{target:c.id,action:a,note:note.value,question:['reword','retag'].includes(a)?ed.get():undefined})}
+    box.textContent=direct?'Saved. It is live in the bank now.':'Thank you, sent for approval.';if(direct)await loadDb()}catch(e){msg.className='err';msg.textContent=e.message}};
+  box.append(el('b',{},(direct?'Replace ':'About ')+c.id),el('div',{class:'meta'},direct?'Write the version you want. The built-in one stops being used and yours takes its place; “Put back” undoes it.':c.q),
+    direct?null:act,direct?null:note,ed.el,msg,el('button',{class:'pri',onclick:send},direct?'Save':'Send'),el('button',{onclick:()=>box.remove()},'Cancel'));
+  s.prepend(box);scrollTo(0,0)}
+function drawAdd(existing){const s=$('#add');s.textContent='';const fm=form(existing||{});const msg=el('div');
+  const paste=el('textarea',{placeholder:'Paste the Gem\u2019s answer here (JSON), then press Fill the form'});
+  s.append(el('div',{class:'hint'},'Quickest way: photograph the question, give it to the school\u2019s Gemini Gem, check it with the Gem, then paste its answer below.'),paste,
+    el('button',{onclick:()=>{try{const t=paste.value.replace(/```(json)?/g,'').trim();let o=JSON.parse(t);if(Array.isArray(o))o=o[0];fm.fill(o);msg.className='okmsg';msg.textContent='Filled in. Check each box, then save.'}catch{msg.className='err';msg.textContent='That did not read as the Gem\u2019s JSON answer. You can also type the question in below.'}}},'Fill the form'),
+    fm.el,msg,el('button',{class:'pri',onclick:async()=>{try{await call(isEd()?'edit/save':'suggest/new',{...fm.get(),id:existing&&existing.id});msg.className='okmsg';msg.textContent=isEd()?'Saved. It is live in the bank now.':'Sent for approval. Thank you.';if(isEd())await loadDb()}catch(e){msg.className='err';msg.textContent=e.message}}},isEd()?'Save to the bank':'Send for approval'))}
+function drawMine(){const s=$('#mine');s.textContent='';
+  s.append(el('h3',{},'Staff questions in the live bank'));
+  const ids=Object.keys(db.added);if(!ids.length)s.append(el('p',{class:'meta'},'None yet. Use “Add a question”.'));
+  ids.forEach(id=>s.append(qbox(db.added[id],el('div',{class:'row',style:'margin:6px 0 0'},el('span',{class:'meta'},id),
+    el('button',{onclick:()=>{show('add');drawAdd({...db.added[id],id,keywords:db.added[id].keywords})}},'Edit'),
+    el('button',{onclick:async()=>{if(confirm('Delete this question?')){await call('edit/delete',{id});await loadDb();drawMine()}}},'Delete')))));
+  s.append(el('h3',{},'Built-in questions you have changed'));
+  const ch=[...Object.keys(db.replaced).map(t=>[t,'replaced']),...db.retired.map(t=>[t,'taken out'])];
+  if(!ch.length)s.append(el('p',{class:'meta'},'None.'));
+  ch.forEach(([t,k])=>s.append(el('div',{class:'q'},`${t}: ${k} `,el('button',{onclick:async()=>{await call('edit/restore',{target:t});await loadDb();drawMine()}},'Put back'))));
+  s.append(el('h3',{},'Recent changes'),...db.history.slice().reverse().map(h=>el('div',{class:'meta'},`${h.at} · ${h.by} · ${h.what} ${h.target}`)));math(s)}
+function drawChanges(){const s=$('#changes');s.textContent='';const items=db.items.slice().reverse();if(!items.length)s.append('Nothing yet.');
+  items.forEach(it=>{const q=it.question;const b=el('div',{class:'q'},el('div',{class:'meta'},`#${it.id} · ${it.by} · ${it.at} · `,el('b',{},it.status)),el('div',{},it.kind==='new'?'New question:':`About ${it.target}: ${it.action}${it.note?' – '+it.note:''}`));
+    if(q)b.append(qbox(q));
+    if(isEd()&&it.status==='pending')b.append(el('div',{class:'row'},...['approved','rejected'].map(d=>el('button',{class:d==='approved'?'pri':'',onclick:async()=>{await call('review',{id:it.id,decision:d});await loadDb();drawChanges()}},d==='approved'?'Approve (goes live)':'Reject'))));
+    s.append(b)});math(s)}
+async function drawPeople(){const s=$('#people');s.textContent='';const {users}=await call('users');
+  s.append(el('div',{class:'hint'},'Editors can add, change and take out questions in the live bank. Admins can also make and remove logins. Everyone else only suggests.'));
+  users.forEach(u=>s.append(el('div',{class:'q'},`${u.name} · ${u.username} · ${u.role} `,el('button',{onclick:async()=>{if(confirm('Remove this login?'))try{await call('users/remove',{username:u.username});drawPeople()}catch(e){alert(e.message)}}},'Remove'))));
+  const f={u:el('input',{placeholder:'user name e.g. ksmith'}),n:el('input',{placeholder:'Name'}),r:el('select',{},el('option',{value:'editor'},'editor'),el('option',{value:'admin'},'admin')),p:el('input',{type:'password',placeholder:'Password (8+; blank keeps it)'})};const m=el('div');
+  s.append(el('h3',{},'Add or change a login'),el('div',{class:'row'},f.u,f.n,f.r,f.p,el('button',{class:'pri',onclick:async()=>{try{await call('users/save',{username:f.u.value,name:f.n.value,role:f.r.value,password:f.p.value});drawPeople()}catch(e){m.className='err';m.textContent=e.message}}},'Save')),m)}
+async function start(){me=null;try{me=await call('me')}catch{}try{await loadDb()}catch{}drawAcct();drawTabs();drawBrowse();drawAdd();show('browse')}
+fetch('/bank-catalog.json').then(r=>r.json()).then(c=>{catalog=c}).catch(()=>{}).finally(start);
 </script></body></html>

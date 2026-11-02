@@ -54,6 +54,10 @@ pub fn start() {
                     if crate::school::exam_library() {
                         load_exam_library(exam_ready.clone(), cc.egui_ctx.clone());
                     }
+                    let live_bank = std::rc::Rc::new(std::cell::RefCell::new(None));
+                    if crate::school::private() {
+                        load_live_bank(live_bank.clone(), cc.egui_ctx.clone());
+                    }
                     let q = query();
                     // A teacher opens the app to make or open a deck, so it starts on the Home
                     // screen with an empty presentation behind it; `?sample` loads the demo deck.
@@ -70,7 +74,7 @@ pub fn start() {
                         app.start_show(0, false);
                     }
                     let smoke = q.contains("smoke").then(crate::smoke::Smoke::default);
-                    Ok(Box::new(WebShell { app, inbox, settings, exam_ready, smoke }))
+                    Ok(Box::new(WebShell { app, inbox, settings, exam_ready, live_bank, smoke }))
                 }),
             )
             .await;
@@ -96,6 +100,8 @@ struct WebShell {
     settings: settings::Settings,
     /// The published exam question library has arrived: point the Question Library at it.
     exam_ready: std::rc::Rc<std::cell::Cell<bool>>,
+    /// The live school question bank has arrived (`load_live_bank`): apply it.
+    live_bank: std::rc::Rc<std::cell::RefCell<Option<serde_json::Value>>>,
     /// `?smoke`: the start-up check a headless browser runs (`smoke`).
     smoke: Option<crate::smoke::Smoke>,
 }
@@ -105,6 +111,9 @@ impl eframe::App for WebShell {
     fn logic(&mut self, ctx: &egui::Context, _frame: &mut eframe::Frame) {
         if self.exam_ready.take() {
             self.app.ui.maths.exam_library_dir = crate::school::EXAM_DIR.to_string();
+        }
+        if let Some(live) = self.live_bank.borrow_mut().take() {
+            crate::school::apply_live(&mut self.app, &live);
         }
         fetch_wanted(ctx);
         if let Some(s) = self.smoke.as_mut() {
@@ -217,6 +226,20 @@ fn load_exam_library(ready: std::rc::Rc<std::cell::Cell<bool>>, ctx: egui::Conte
                 ctx.request_repaint();
             }
             (Err(e), _) | (_, Err(e)) => log::error!("the exam question library could not be loaded: {e}"),
+        }
+    });
+}
+
+/// The school's live question bank (`bank/api/live.json` on a private site, edited by the staff
+/// question-bank page). Absent on the public site, which is fine: nothing is logged as an error.
+fn load_live_bank(slot: std::rc::Rc<std::cell::RefCell<Option<serde_json::Value>>>, ctx: egui::Context) {
+    wasm_bindgen_futures::spawn_local(async move {
+        match fetch_bytes("bank/api/live.json").await.and_then(|b| serde_json::from_slice::<serde_json::Value>(&b).map_err(|e| e.to_string())) {
+            Ok(v) => {
+                *slot.borrow_mut() = Some(v);
+                ctx.request_repaint();
+            }
+            Err(e) => log::info!("no live school question bank: {e}"),
         }
     });
 }
