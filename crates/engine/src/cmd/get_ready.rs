@@ -24,6 +24,9 @@ pub fn specs() -> Vec<CommandSpec> {
 
 /// The name that marks a slide made by `slide.getReady`, so a reroll can find it again.
 pub const GET_READY_NAME: &str = "Get Ready";
+/// The slide tag that keeps the starter's questions and headings (JSON), so the dialog can reopen
+/// them to swap one card. It survives saving as .pptx (add-in tags).
+pub const GET_READY_TAG: &str = "deckcraft.getReady";
 
 /// A retrieval starter: four questions in a 2×2 card grid (matching the usual retrieval-starter
 /// format). Each card shows the question with real equations (LaTeX `$…$` rendered as OMML), a
@@ -172,6 +175,15 @@ fn get_ready(s: &mut Session, p: &Value) -> Result<Value> {
         answers.push_str(&format!("{}. {}\n", i + 1, plain_answer(&q.answer)));
     }
     s.execute("slide.notes", &json!({"text": format!("Answers:\n{answers}")}))?;
+    let state = json!({"questions": &picked, "headings": heading_texts}).to_string();
+    s.edit(|doc, _| {
+        if let Some(sl) = doc.slides.get_mut(new_index) {
+            let sl = std::sync::Arc::make_mut(sl);
+            sl.tags.retain(|(k, _)| k != GET_READY_TAG);
+            sl.tags.push((GET_READY_TAG.to_string(), state));
+        }
+        Ok(())
+    })?;
 
     // One full-screen slide per question, straight after this one.
     if expand {
@@ -632,6 +644,7 @@ pub(super) fn rich_text_box(s: &mut Session, text: &str, rect: [f64; 4], size: f
 mod tests {
     use serde_json::{Value, json};
 
+    use super::GET_READY_TAG;
     use crate::Session;
 
     fn ready_texts(s: &Session, i: usize) -> Vec<String> {
@@ -759,6 +772,17 @@ mod tests {
         let usable = starter.questions.iter().filter(|q| q.usable()).count() + starter.templates.len();
         // With this many questions, 900 slides of eight will not reach every one: most are drawn.
         assert!(seen.len() * 10 >= usable * 8, "only {} of {usable} questions were drawn", seen.len());
+    }
+
+    #[test]
+    fn the_starter_keeps_its_questions_in_a_slide_tag_for_reopening() {
+        let mut s = Session::with_new();
+        s.execute("slide.getReady", &json!({"seed": 3})).expect("starter");
+        let st = s.doc().expect("doc");
+        let tag = st.doc.slides[st.selection.slide].tags.iter().find(|(k, _)| k == GET_READY_TAG).map(|(_, v)| v.clone()).expect("tag");
+        let v: Value = serde_json::from_str(&tag).expect("json");
+        assert_eq!(v["questions"].as_array().map(Vec::len), Some(4));
+        assert_eq!(v["headings"].as_array().map(Vec::len), Some(4));
     }
 
     #[test]
