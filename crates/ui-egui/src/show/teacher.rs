@@ -17,10 +17,13 @@ pub(super) fn pointer(app: &SlideApp, show: &mut Show, pointer: Option<Pos2>) ->
 
 /// Draw the overlay over the slide and carry out what its palette asked for; `keep` goes false
 /// when that ends the show.
-pub(super) fn overlay(app: &mut SlideApp, show: &mut Show, ui: &mut Ui, full: Rect, now: f64, doc: &Presentation, keep: &mut bool) {
+/// `slide` is where the slide is drawn: ink is sized by it.
+#[allow(clippy::too_many_arguments)]
+pub(super) fn overlay(app: &mut SlideApp, show: &mut Show, ui: &mut Ui, full: Rect, slide: Rect, now: f64, doc: &Presentation, keep: &mut bool) {
     if !show.grid
         && let Some(mut t) = show.teacher.take()
     {
+        t.set_slide_height(slide.height());
         let asked = t.ui(ui, full, now, &mut app.maths.tools, app.ui.maths.packs.contains(crate::maths::packs::MATHS));
         show.teacher = Some(t);
         for action in asked {

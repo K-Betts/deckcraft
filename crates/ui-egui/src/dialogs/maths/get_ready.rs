@@ -247,10 +247,15 @@ pub(super) fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
             }
         });
     }
-    if app.services.pick_open.is_some() && app.services.read.is_some() {
+    if let Some(picked) = super::take_text(app, "questions") {
+        let msg = import_questions(app, Some(picked));
+        d.fields.insert("import".into(), msg);
+    }
+    if super::can_pick_text(app) {
         ui.horizontal(|ui| {
             if ui.button("Import questions from a file…").on_hover_text("A question file (.json) made for DeckCraft").clicked() {
-                let msg = import_questions(app);
+                let picked = super::pick_text(app, "questions");
+                let msg = import_questions(app, picked);
                 d.fields.insert("import".into(), msg);
             }
             if let Some(m) = d.fields.get("import").filter(|m| !m.is_empty()) {
@@ -345,12 +350,11 @@ pub(super) fn question_bank_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dial
     done
 }
 
-/// Asks for a question file and adds what is in it to the teacher's own bank. Returns what to tell
-/// them: how many were added, or what is wrong with the file.
-fn import_questions(app: &mut SlideApp) -> String {
-    let Some(path) = app.services.pick_open.as_mut().and_then(|pick| pick("questions")) else { return String::new() };
-    let Some(bytes) = app.services.read.as_mut().map(|read| read(&path)) else { return String::new() };
-    let text = match bytes.map_err(|e| e.to_string()).and_then(|b| String::from_utf8(b).map_err(|_| "that file is not text".to_string())) {
+/// Adds what is in a question file the teacher picked (see `pick_text`) to their own bank.
+/// Returns what to tell them (nothing when nothing was picked yet): how many were added, or what is wrong with the file.
+fn import_questions(app: &mut SlideApp, picked: Option<Result<String, String>>) -> String {
+    let Some(picked) = picked else { return String::new() };
+    let text = match picked {
         Ok(t) => t,
         Err(e) => return format!("Could not read the file: {e}"),
     };

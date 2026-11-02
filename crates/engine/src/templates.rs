@@ -14,7 +14,7 @@ use crate::Result;
 use crate::cmd::{bad, slide::find_layout};
 
 mod personal;
-pub use personal::{PersonalTemplate, find_personal, personal, personal_dir, personal_in, personal_path};
+pub use personal::{PersonalTemplate, WEB_DIR, find_personal, personal, personal_dir, personal_in, personal_path};
 
 /// One slide of a starter: a layout, a title, text for each non-title placeholder in order, and
 /// optional speaker notes.

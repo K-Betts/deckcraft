@@ -128,7 +128,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     painter.rect_filled(full, CornerRadius::ZERO, Color32::BLACK);
     draw_slide(app, ui, &mut show, &f, &painter);
     draw_pen_and_hints(ui, &mut show, &f, &painter, pointing);
-    teacher::overlay(app, &mut show, ui, full, now, &doc, &mut out.keep);
+    teacher::overlay(app, &mut show, ui, full, srect, now, &doc, &mut out.keep);
     draw_bars(ui, &mut show, &f, &painter, &mut out);
     draw_extras(&mut show, &f, &painter, &mut out);
     if out.keep

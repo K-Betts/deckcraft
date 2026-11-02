@@ -27,7 +27,8 @@ from functools import partial
 AUTH_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "password.json")
 ITERATIONS = 200_000
 HASHED = re.compile(r"-[0-9a-f]{16}(_bg)?\.(wasm|js|png)$")
-NO_CACHE = {"/", "/index.html", "/sw.js", "/manifest.webmanifest"}
+# The exam question library's list files change when it is published again (its pictures do not).
+NO_CACHE = {"/", "/index.html", "/sw.js", "/manifest.webmanifest", "/exam/items/exam/library.json", "/exam/crops.json"}
 
 
 def derive(password, salt):

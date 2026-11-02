@@ -98,7 +98,14 @@ impl LibState {
         if self.thumbs.len() >= MAX_THUMBS {
             self.thumbs.clear();
         }
-        let tex = deckcraft_engine::io::read_file(&item.crop_path(dir)).ok().and_then(|bytes| deckcraft_render::decode_image(&bytes)).map(|img| {
+        let path = item.crop_path(dir);
+        let read = deckcraft_engine::io::read_file(&path);
+        if read.as_ref().is_err_and(|e| e == deckcraft_engine::web_files::LOADING) {
+            // In the browser the picture is on its way; ask again when it has arrived.
+            ctx.request_repaint_after(std::time::Duration::from_millis(200));
+            return None;
+        }
+        let tex = read.ok().and_then(|bytes| deckcraft_render::decode_image(&bytes)).map(|img| {
             let (w, h) = (img.width() as usize, img.height() as usize);
             let small = shrink(img.as_raw(), w, h, (THUMB_W * 2.0) as usize);
             crate::textures::upload(ctx, format!("exam-lib-{}", item.id), small)
@@ -186,7 +193,12 @@ pub(super) fn dialog(app: &mut SlideApp, ui: &mut Ui, _d: &mut Dialog) -> bool {
     }
     if dir.is_empty() {
         ui.add_space(10.0);
-        ui.label("Choose the folder that holds your questions (it has items/exam inside it and, for the pictures, derived/exam_crops).");
+        if app.services.maths.pick_folder.is_some() {
+            ui.label("Choose the folder that holds your questions (it has items/exam inside it and, for the pictures, derived/exam_crops).");
+        } else {
+            // The browser has no folders: a private copy of the web app is published with the library.
+            ui.label("This copy of DeckCraft has no question library. It is in the Mac app, and in a school's private web copy published from it.");
+        }
         ui.label(egui::RichText::new("The questions stay in that folder. DeckCraft only reads them.").color(t.text_dim));
         app.maths.exam_lib = state;
         return close_row(ui);

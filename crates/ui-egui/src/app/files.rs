@@ -69,6 +69,8 @@ fn purpose_of(purpose: &str) -> FilePurpose {
         "picture" => FilePurpose::Picture,
         "audio" => FilePurpose::Audio,
         "video" => FilePurpose::Video,
+        "curriculum" => FilePurpose::MathsText("curriculum"),
+        "questions" => FilePurpose::MathsText("questions"),
         _ => FilePurpose::Infer,
     }
 }
@@ -122,6 +124,7 @@ fn command_for(purpose: FilePurpose, name: &str, bytes: &[u8]) -> Result<&'stati
         FilePurpose::ChangePicture => deckcraft_engine::cmd::insert::content_type(name, bytes).starts_with("image/").then_some("picture.change"),
         FilePurpose::Open => open_command(name),
         FilePurpose::Infer => infer_command(name, bytes),
+        FilePurpose::MathsText(_) => None,
     };
     cmd.ok_or_else(|| format!("{name}: DeckCraft can't open this kind of file"))
 }
@@ -607,6 +610,10 @@ impl SlideApp {
     fn apply_external_file(&mut self, id: u64, name: &str, bytes: &[u8]) {
         let Some(pos) = self.pending_files.iter().position(|r| r.id == id) else { return };
         let req = self.pending_files.remove(pos);
+        if let FilePurpose::MathsText(purpose) = req.purpose {
+            crate::dialogs::maths::text_arrived(self, purpose, bytes);
+            return;
+        }
         let cmd = match command_for(req.purpose, name, bytes) {
             Ok(cmd) => cmd,
             Err(e) => {

@@ -3,6 +3,9 @@
 
 use super::{Result, bad};
 
+/// Where the web shell puts a private build's templates (see [`crate::web_files`]).
+pub const WEB_DIR: &str = "/DeckCraft/Templates";
+
 /// A teacher's own template: a presentation file kept in the personal templates folder.
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct PersonalTemplate {
@@ -12,10 +15,10 @@ pub struct PersonalTemplate {
 }
 
 /// The per-user folder for personal templates (`DeckCraft/Templates` next to the recovery folder).
-/// Not on the web build, which has no folders.
+/// On the web build, the templates a private build was published with ([`WEB_DIR`]), if any.
 pub fn personal_dir() -> Option<std::path::PathBuf> {
     if cfg!(target_arch = "wasm32") {
-        return None;
+        return crate::web_files::has_dir(WEB_DIR).then(|| std::path::PathBuf::from(WEB_DIR));
     }
     let home = std::env::var_os("HOME").map(std::path::PathBuf::from);
     if cfg!(target_os = "macos") {

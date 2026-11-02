@@ -119,6 +119,21 @@ fn advancing_clears_marks_but_keeps_timers() {
 }
 
 #[test]
+fn pen_ink_is_sized_by_the_slide_not_the_screen_pixels() {
+    // The harness window is 1200 by 800 points, so the slide is a little shorter than the laptop
+    // slide the pen sizes are for, and the ink a little thinner.
+    let mut h = harness();
+    teacher(&mut h);
+    overlay(&mut h).set_tool(Tool::Pen);
+    let pen = overlay(&mut h).pen_width;
+    drag(&mut h, pos2(300.0, 300.0), pos2(500.0, 360.0));
+    let w = overlay(&mut h).strokes[0].width;
+    let slide = 1200.0 * 9.0 / 16.0;
+    let expected = pen * slide / crate::maths::teacher_overlay::INK_REFERENCE_HEIGHT;
+    assert!((w - expected).abs() < 0.2, "a stroke is {w} points wide, expected about {expected}");
+}
+
+#[test]
 fn the_keep_setting_holds_marks_across_slides() {
     let mut h = harness();
     h.state_mut().run("show.teacherKeep", json!({"on": true})).unwrap();
@@ -193,7 +208,7 @@ fn the_eraser_removes_ink_under_the_pointer() {
     drag(&mut h, pos2(400.0, 290.0), pos2(420.0, 290.0));
     let o = overlay(&mut h);
     assert!(o.strokes.len() == 2, "the stroke is split around the gap, not removed");
-    assert!(o.strokes.iter().all(|s| s.points.iter().all(|p| p.x < 385.0 || p.x > 435.0)), "ink under the eraser is gone");
+    assert!(o.strokes.iter().all(|s| s.points.iter().all(|p| p.x < 388.0 || p.x > 432.0)), "ink under the eraser is gone");
 }
 
 fn touch(h: &mut egui_kittest::Harness<'static, SlideApp>, id: u64, phase: egui::TouchPhase, pos: Pos2) {
@@ -809,4 +824,38 @@ fn screenshots_for_review() {
     app_shot(&mut h, 9, &[D(4), Key::Ok, Key::EqSign, Key::Var(0), D(1), Key::Times, D(2), Key::Ok, D(7), Key::Right], "14-sheet.png");
     app_shot(&mut h, 12, &[Key::Tools, D(2), D(1), Key::Var(5), Key::Plus, D(1), Key::Equals], "15-basen.png");
     app_shot(&mut h, 3, &[D(1), D(1), D(1), D(2), Key::Ok, Key::Ok, Key::Ok], "16-equation-menu.png");
+}
+
+/// A board whose browser reports a short screen (a 1080p television at 2x is 960 by 540 points):
+/// the toolbar wraps into a second column but stays a narrow bar, and its tab can still close it.
+#[test]
+fn on_a_short_screen_the_toolbar_wraps_narrow_and_its_tab_closes_it() {
+    let mut s = Session::with_new();
+    s.execute("slide.new", &json!({})).unwrap();
+    let mut app = SlideApp::new(s, Services::default());
+    app.ui.presenter_view = false;
+    app.ui.maths.packs.insert(crate::maths::packs::MATHS.to_string());
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(960.0, 540.0)).with_step_dt(1.0 / 60.0).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.run_steps(2);
+    teacher(&mut h);
+    overlay(&mut h).open_palette();
+    h.run_steps(3);
+    let bar = overlay(&mut h).palette_rect_for_test();
+    assert!(bar.width() < 200.0, "two columns of buttons at most, not the whole screen: {bar:?}");
+    assert!(bar.height() <= 540.0, "{bar:?}");
+    let tab = h.ctx.memory(|m| m.area_rect(egui::Id::unique("teacher_palette_tab"))).expect("the tab");
+    assert!(tab.max.x <= 960.0 && tab.min.x >= bar.max.x - 1.0, "the tab is beside the bar, on screen: {tab:?}");
+    h.event(Event::PointerMoved(tab.center()));
+    h.run_steps(1);
+    h.event(Event::PointerButton { pos: tab.center(), button: PointerButton::Primary, pressed: true, modifiers: Modifiers::NONE });
+    h.run_steps(1);
+    h.event(Event::PointerButton { pos: tab.center(), button: PointerButton::Primary, pressed: false, modifiers: Modifiers::NONE });
+    h.run_steps(3);
+    assert!(!overlay(&mut h).palette_open, "the tab put the toolbar away");
 }

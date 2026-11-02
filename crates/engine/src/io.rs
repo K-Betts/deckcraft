@@ -21,7 +21,9 @@ pub fn read_file(path: &str) -> Result<Vec<u8>, String> {
 
 #[cfg(target_arch = "wasm32")]
 pub fn read_file(path: &str) -> Result<Vec<u8>, String> {
-    Err(format!("{path}: files are opened through the browser on the web"))
+    // Files the web shell was given (a private build's templates and exam library); other files
+    // are opened through the browser.
+    crate::web_files::read(path)
 }
 
 /// Write `bytes` to the file at `path`, inside the automation write root when there is one.
@@ -96,8 +98,8 @@ pub fn list_files(dir: &str) -> Vec<String> {
 }
 
 #[cfg(target_arch = "wasm32")]
-pub fn list_files(_dir: &str) -> Vec<String> {
-    vec![]
+pub fn list_files(dir: &str) -> Vec<String> {
+    crate::web_files::files_in(dir)
 }
 
 /// Create the folder `dir` and any missing parents, inside the automation write root.

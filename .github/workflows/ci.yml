@@ -59,3 +59,44 @@ jobs:
       packages: >-
         libasound2-dev libxkbcommon-dev libwayland-dev libx11-dev libxrandr-dev libxi-dev
         libgl1-mesa-dev
+
+  # The web app, built and opened the way teachers get it (maths edition): `cargo xtask ci` only
+  # type-checks it, which let a crash on start-up ship once. Builds the public site and runs the
+  # browser smoke test (apps/deckcraft-web/tests/smoke.mjs:
+  # Home, Get Ready, Exam Question, the Question Library, a template and Teacher Mode, no console
+  # errors) at a laptop and a 4K size.
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      CRAFT_FONTS_REF: 37827adc41fd165f9a9234ac40f94dbad353aa69
+      TRUNK_VERSION: 0.21.14
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Check out craft-fonts
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: storytold/craft-fonts
+          ref: ${{ env.CRAFT_FONTS_REF }}
+          path: craft-fonts
+      - uses: dtolnay/rust-toolchain@686976e191b89faba57d3206551f0f330d8cb249 # stable
+        with:
+          targets: wasm32-unknown-unknown
+          components: clippy
+      - uses: Swatinem/rust-cache@6323deb102c322ba6fcbdcafc7e3dddab59af2b6 # v2.9.2
+        with:
+          key: web
+      - name: Install trunk
+        run: cargo install trunk --version "${TRUNK_VERSION}" --locked
+      - name: Clippy for the browser
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: cargo clippy -p deckcraft-web --target wasm32-unknown-unknown -- -D warnings
+      - name: Build
+        env:
+          CRAFT_FONTS_DIR: ${{ github.workspace }}/craft-fonts
+        run: cd apps/deckcraft-web && trunk build --release
+      - name: Check the service worker
+        run: node apps/deckcraft-web/tests/sw.test.mjs
+      - name: Browser smoke test
+        run: CHROME="$(command -v google-chrome || command -v chromium)" node apps/deckcraft-web/tests/smoke.mjs dist/web

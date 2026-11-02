@@ -142,6 +142,8 @@ pub struct MathsApp {
     pub teacher_stash: Option<teacher_overlay::TeacherOverlay>,
     /// Insert › Question Library: the questions read from the teacher's folder and the last search.
     pub(crate) exam_lib: crate::dialogs::maths::exam_library::LibState,
+    /// A text file the browser read for a maths dialog: `(purpose, its text or why not)`.
+    pub(crate) picked_text: Option<(&'static str, Result<String, String>)>,
 }
 
 impl Default for MathsApp {
@@ -156,6 +158,7 @@ impl Default for MathsApp {
             pending_quit: false,
             teacher_stash: None,
             exam_lib: Default::default(),
+            picked_text: None,
         }
     }
 }

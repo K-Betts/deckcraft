@@ -19,6 +19,46 @@ use crate::theme::{self, Tokens};
 #[cfg(test)]
 pub(crate) use get_ready::shows_as_for_tests;
 
+/// Whether a text file can be asked for: a file picker with paths (the Mac) or the browser's.
+pub(crate) fn can_pick_text(app: &SlideApp) -> bool {
+    (app.services.pick_open.is_some() && app.services.read.is_some()) || app.services.open_async.is_some()
+}
+
+/// Ask for a text file for `purpose` (`curriculum` or `questions`). With paths the file is read
+/// now: its text, or why not; `None` when the picker was dismissed. In the browser the picker
+/// opens and this is `None`: the text arrives later, for [`take_text`].
+pub(crate) fn pick_text(app: &mut SlideApp, purpose: &'static str) -> Option<Result<String, String>> {
+    if let Some(pick) = app.services.pick_open.as_mut() {
+        let path = pick(purpose)?;
+        let bytes = app.services.read.as_mut().map(|read| read(&path))?;
+        return Some(bytes.map_err(|e| e.to_string()).and_then(text));
+    }
+    if app.services.open_async.is_some() {
+        let id = app.begin_external_file(purpose);
+        if let Some(open) = app.services.open_async.as_mut() {
+            open(purpose, id);
+        }
+    }
+    None
+}
+
+/// The text the browser read for `purpose`, once, when it has arrived.
+pub(crate) fn take_text(app: &mut SlideApp, purpose: &str) -> Option<Result<String, String>> {
+    if app.maths.picked_text.as_ref().is_some_and(|(p, _)| *p == purpose) {
+        return app.maths.picked_text.take().map(|(_, t)| t);
+    }
+    None
+}
+
+/// A file the browser read for a maths dialog (see [`pick_text`]).
+pub(crate) fn text_arrived(app: &mut SlideApp, purpose: &'static str, bytes: &[u8]) {
+    app.maths.picked_text = Some((purpose, text(bytes.to_vec())));
+}
+
+fn text(bytes: Vec<u8>) -> Result<String, String> {
+    String::from_utf8(bytes).map_err(|_| "that file is not text".to_string())
+}
+
 /// The window title of a maths edition dialog.
 pub(super) fn title(id: &str) -> Option<&'static str> {
     Some(match id {

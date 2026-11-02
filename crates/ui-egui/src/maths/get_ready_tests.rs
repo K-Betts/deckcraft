@@ -515,3 +515,38 @@ fn look_at_the_dialog_planned_from_a_curriculum() {
     h.run_steps(4);
     h.render().unwrap().save(format!("{dir}/get-ready-3-slide.png")).unwrap();
 }
+
+#[test]
+fn in_the_browser_load_curriculum_opens_the_picker_and_the_file_arrives_later() {
+    use crate::{Inbox, InboxEvent, InboxFile};
+    use std::sync::{Arc, Mutex};
+    let inbox = Inbox::default();
+    let asked: Arc<Mutex<Vec<(String, u64)>>> = Arc::default();
+    let record = asked.clone();
+    let services = Services {
+        open_async: Some(Box::new(move |purpose: &str, id| record.lock().unwrap().push((purpose.to_string(), id)))),
+        inbox: Some(inbox.clone()),
+        ..Default::default()
+    };
+    let mut app = SlideApp::new(Session::with_new(), services);
+    app.ui.maths.get_ready_mode = "taught".into();
+    let mut h = egui_kittest::Harness::builder().with_size(egui::vec2(1400.0, 800.0)).build_ui_state(
+        |ui, app: &mut SlideApp| {
+            app.logic(ui.ctx());
+            app.ui(ui);
+        },
+        app,
+    );
+    h.ctx.set_missing_glyph_policy(egui::MissingGlyphPolicy::Tofu);
+    h.state_mut().run("app.dialog", json!({"id": "getReady"})).unwrap();
+    h.run_steps(3);
+    h.get_by_label("Load curriculum file…").click();
+    h.run_steps(2);
+    let (purpose, id) = asked.lock().unwrap().first().cloned().expect("the browser picker opened");
+    assert_eq!(purpose, "curriculum");
+    assert!(h.state().ui.maths.curriculum.is_empty(), "nothing yet: the browser reads the file later");
+    inbox.lock().unwrap().push(InboxEvent::File(InboxFile { id, name: "curriculum.json".into(), bytes: CURRICULUM.as_bytes().to_vec() }));
+    h.run_steps(4);
+    assert_eq!(h.state().ui.maths.curriculum, CURRICULUM);
+    assert_eq!(h.state().session.active().unwrap().doc.slides.len(), 1, "the file was not put on a slide");
+}
