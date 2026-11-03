@@ -55,7 +55,7 @@ pub const PEN_COLOURS: [(&str, Color32); 5] = [
     ("Black", Color32::BLACK),
     ("White", Color32::WHITE),
 ];
-pub const WIDTHS: [(&str, f32); 3] = [("Thin", 4.0), ("Medium", 8.0), ("Thick", 14.0)];
+pub const WIDTHS: [(&str, f32); 3] = [("Thin", 2.5), ("Medium", 5.0), ("Thick", 9.0)];
 pub const HIGHLIGHT_COLOURS: [(&str, [u8; 3]); 3] = [("Yellow", [255, 235, 0]), ("Cyan", [0, 220, 255]), ("Pink", [255, 80, 200])];
 pub const HIGHLIGHT_ALPHA: u8 = 60;
 
@@ -358,6 +358,9 @@ pub struct TeacherOverlay {
     ink_scale: f32,
     /// How long the toolbar is as one column (points), measured when it was last drawn that way.
     palette_len: f32,
+    /// The toolbar is laid out as a block of columns (a short, high-density screen): groups start
+    /// a new row instead of drawing a divider.
+    block_layout: bool,
 }
 
 impl Default for TeacherOverlay {
@@ -408,6 +411,7 @@ impl Default for TeacherOverlay {
             whiteboard_button_rect: None,
             ink_scale: 1.0,
             palette_len: 0.0,
+            block_layout: false,
         }
     }
 }
@@ -977,7 +981,9 @@ impl TeacherOverlay {
                             // just enough columns. A wrapping column would spread across the whole
                             // screen and push the tab that closes it off the edge.
                             let cols = (self.palette_len / limit).ceil().max(2.0);
+                            self.block_layout = true;
                             lay(ui, true, cols * (TOUCH_TARGET + 4.0), |ui| self.main_row(ui, full, true, actions));
+                            self.block_layout = false;
                         } else {
                             let top = ui.cursor().min.y;
                             ui.vertical(|ui| self.main_row(ui, full, false, actions));
@@ -1123,6 +1129,16 @@ impl TeacherOverlay {
         }
     }
 
+    /// Between groups of tools: a divider, or in a block of columns a new row, so each group
+    /// starts at the left and no divider lands at the end of a row.
+    fn gap(&self, ui: &mut Ui, horizontal: bool) {
+        if self.block_layout {
+            ui.end_row();
+        } else {
+            group_gap(ui, horizontal);
+        }
+    }
+
     fn main_row(&mut self, ui: &mut Ui, full: Rect, horizontal: bool, actions: &mut Vec<Action>) {
         let grip = ui
             .allocate_response(if horizontal { vec2(24.0, TOUCH_TARGET) } else { vec2(TOUCH_TARGET, 24.0) }, Sense::drag())
@@ -1161,16 +1177,16 @@ impl TeacherOverlay {
         };
         // Four groups, each a different job: look, mark up, rub out, and run the lesson.
         tool_btn(self, ui, Tool::Pointer, "Pointer");
-        group_gap(ui, horizontal);
+        self.gap(ui, horizontal);
         tool_btn(self, ui, Tool::Pen, "Pen");
         tool_btn(self, ui, Tool::Highlighter, "Highlighter");
         tool_btn(self, ui, Tool::Shape, "Shapes");
-        group_gap(ui, horizontal);
+        self.gap(ui, horizontal);
         tool_btn(self, ui, Tool::Eraser, "Eraser");
         if icon_button(ui, false, "Clear all marks", paint_clear_icon).clicked() {
             self.clear();
         }
-        group_gap(ui, horizontal);
+        self.gap(ui, horizontal);
         tool_btn(self, ui, Tool::Revealer, "Revealer (click again to put it away)");
         if icon_button(ui, false, "Add a countdown timer", paint_timer_icon).clicked() {
             self.add_timer();
@@ -1190,7 +1206,7 @@ impl TeacherOverlay {
                 self.maths_tools_panel.toggle();
             }
         }
-        group_gap(ui, horizontal);
+        self.gap(ui, horizontal);
         // On the whiteboard the arrows bring the slide back rather than leave it for another.
         if icon_button(ui, false, "Previous", |p, r, c| paint_arrow_icon(p, r, c, false)).clicked() {
             if self.whiteboard.is_some() {
@@ -1428,9 +1444,49 @@ fn paint_stroke(p: &Painter, s: &Stroke) {
             p.circle_filled(*a, s.width * 0.5, s.colour);
         }
         pts => {
-            p.add(Shape::line(pts.to_vec(), egui::Stroke::new(s.width, s.colour)));
+            // Hand-drawn input arrives as a few straight pieces; round it off, and give the ends
+            // and the sharp turns a round cap so a thick line has no notches. (A highlighter is
+            // see-through, so overlapping caps would darken it: it keeps a plain line.)
+            let line = smooth(pts);
+            if !s.is_highlight && s.width >= 3.0 {
+                let r = s.width * 0.5;
+                p.circle_filled(line[0], r, s.colour);
+                p.circle_filled(line[line.len() - 1], r, s.colour);
+                for w in line.windows(3) {
+                    let (a, b) = (w[1] - w[0], w[2] - w[1]);
+                    if a.length() > 0.01 && b.length() > 0.01 && a.normalized().dot(b.normalized()) < 0.96 {
+                        p.circle_filled(w[1], r, s.colour);
+                    }
+                }
+            }
+            p.add(Shape::line(line, egui::Stroke::new(s.width, s.colour)));
         }
     }
+}
+
+/// Chaikin's corner cutting, twice: the same shape with its corners rounded, ends kept. Long
+/// strokes are thinned first so a page of writing stays cheap to draw.
+fn smooth(points: &[Pos2]) -> Vec<Pos2> {
+    let mut line: Vec<Pos2> = if points.len() > 600 { points.iter().step_by(points.len() / 600 + 1).copied().collect() } else { points.to_vec() };
+    if let (Some(last), Some(end)) = (line.last(), points.last())
+        && last != end
+    {
+        line.push(*end);
+    }
+    for _ in 0..2 {
+        if line.len() < 3 {
+            break;
+        }
+        let mut next = Vec::with_capacity(line.len() * 2);
+        next.push(line[0]);
+        for w in line.windows(2) {
+            next.push(w[0] + (w[1] - w[0]) * 0.25);
+            next.push(w[0] + (w[1] - w[0]) * 0.75);
+        }
+        next.push(line[line.len() - 1]);
+        line = next;
+    }
+    line
 }
 
 fn paint_shape(p: &Painter, s: &DrawnShape) {
@@ -2124,6 +2180,27 @@ mod tests {
     }
 
     #[test]
+    fn smoothing_keeps_the_ends_and_rounds_the_corners() {
+        let corner = [pos2(0.0, 0.0), pos2(100.0, 0.0), pos2(100.0, 100.0)];
+        let line = smooth(&corner);
+        assert_eq!((line[0], line[line.len() - 1]), (corner[0], corner[2]));
+        assert!(line.len() > corner.len());
+        // The sharp corner point itself is cut off.
+        assert!(!line.contains(&pos2(100.0, 0.0)));
+        // Few points and a very long stroke are both fine.
+        assert_eq!(smooth(&corner[..2]).len(), 2);
+        let long: Vec<Pos2> = (0..5000).map(|i| pos2(i as f32, (i % 7) as f32)).collect();
+        let s = smooth(&long);
+        assert!(s.len() < 3000 && s[s.len() - 1] == long[4999]);
+    }
+
+    #[test]
+    fn pen_widths_are_thin_enough_for_a_big_board() {
+        // At the reference height, "Medium" is well under 1% of the slide: a pen, not a marker.
+        assert!(WIDTHS[1].1 / INK_REFERENCE_HEIGHT < 0.007 && WIDTHS[0].1 < WIDTHS[1].1 && WIDTHS[1].1 < WIDTHS[2].1);
+    }
+
+    #[test]
     fn highlighter_strokes_are_translucent_and_wide() {
         let mut o = TeacherOverlay::new();
         o.set_tool(Tool::Highlighter);
@@ -2131,6 +2208,6 @@ mod tests {
         assert!(s.is_highlight && s.width == HIGHLIGHT_WIDTH && s.colour.a() == 60);
         o.set_tool(Tool::Pen);
         let s = o.new_stroke(pos2(0.0, 0.0));
-        assert!(!s.is_highlight && s.width == 8.0 && s.colour == PEN_COLOURS[0].1);
+        assert!(!s.is_highlight && s.width == WIDTHS[1].1 && s.colour == PEN_COLOURS[0].1);
     }
 }
