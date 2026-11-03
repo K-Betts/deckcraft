@@ -186,4 +186,5 @@ an edit reaches teachers on their next page load; the Mac app does not read it y
   `users.json` (salted hashes). Back both up.
 - Fixed questions only: random-number templates are still written by the admin (or the AI prompt in
   `question-writing-guide.md`) and checked with `deckcraft-cli bank check`.
+- Editors can also move questions to another skill (button or drag) and, on the **Tag to curriculum** tab, say which questions practise each curriculum objective. The deploy publishes the Mac app's curriculum as `curriculum.json` for that tab.
 - Tests: `python3 -m unittest packaging/web/test_bank_portal.py`.

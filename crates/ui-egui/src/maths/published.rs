@@ -63,6 +63,49 @@ pub fn merge(m: &mut MathsUi, tools: &mut MathsToolsSettings, published: &Value,
 pub struct LiveState {
     pub questions: Vec<String>,
     pub removed: Vec<String>,
+    /// Objectives (see [`objective_key`]) whose skills the bank's tags set.
+    #[serde(default)]
+    pub tagged: Vec<String>,
+}
+
+/// How the question bank page names a curriculum objective: year, route, unit and objective.
+pub fn objective_key(year: &str, route: &str, unit: &str, objective: &str) -> String {
+    format!("{year}|{route}|{unit}|{objective}")
+}
+
+/// Set the `skills` of the curriculum's objectives from the bank's curriculum tags. An objective
+/// the tags no longer name loses the skills they gave it last time (`prev`). Returns the keys now
+/// tagged. A curriculum that is not valid JSON, or has no courses, is left as it is.
+fn apply_tags(curriculum: &mut String, tags: &serde_json::Map<String, Value>, prev: &[String]) -> Vec<String> {
+    let Ok(mut doc) = serde_json::from_str::<Value>(curriculum) else { return vec![] };
+    let mut done = vec![];
+    let Some(courses) = doc.get_mut("courses").and_then(Value::as_array_mut) else { return vec![] };
+    for course in courses {
+        let (year, route) = (course["year"].as_str().unwrap_or("").to_string(), course["route"].as_str().unwrap_or("").to_string());
+        for unit in course.get_mut("units").and_then(Value::as_array_mut).into_iter().flatten() {
+            let title = unit["title"].as_str().unwrap_or("").to_string();
+            for o in unit.get_mut("objectives").and_then(Value::as_array_mut).into_iter().flatten() {
+                let key = objective_key(&year, &route, &title, o["text"].as_str().unwrap_or(""));
+                let Some(obj) = o.as_object_mut() else { continue };
+                match tags.get(&key).and_then(Value::as_array).map(|a| a.iter().filter_map(Value::as_str).map(String::from).collect::<Vec<_>>()) {
+                    Some(keys) if !keys.is_empty() => {
+                        obj.remove("unmatched");
+                        obj.remove("search");
+                        obj.insert("skills".into(), serde_json::json!(keys));
+                        done.push(key);
+                    }
+                    _ if prev.contains(&key) => {
+                        obj.remove("skills");
+                    }
+                    _ => {}
+                }
+            }
+        }
+    }
+    if let Ok(text) = serde_json::to_string(&doc) {
+        *curriculum = text;
+    }
+    done
 }
 
 /// Make `m` match the live school bank `live`: undo what `prev` added, then add the bank's
@@ -76,7 +119,9 @@ pub fn apply_live(m: &mut MathsUi, live: &Value, prev: &LiveState) -> LiveState 
         .and_then(|v| serde_json::from_value::<Vec<deckcraft_engine::questions::Question>>(v.clone()).ok())
         .unwrap_or_default();
     let removed = strings(live.get("removedQuestions"));
-    let state = LiveState { questions: qs.iter().map(|q| q.id.clone()).collect(), removed: removed.clone() };
+    let tags = live.get("curriculumTags").and_then(Value::as_object).cloned().unwrap_or_default();
+    let tagged = if m.curriculum.trim().is_empty() { vec![] } else { apply_tags(&mut m.curriculum, &tags, &prev.tagged) };
+    let state = LiveState { questions: qs.iter().map(|q| q.id.clone()).collect(), removed: removed.clone(), tagged };
     upsert(&mut m.my_questions, qs, |q| q.id.clone());
     for id in removed {
         if !m.removed_questions.contains(&id) {
@@ -189,6 +234,31 @@ mod tests {
         assert_eq!(texts, ["Mine", "One, edited"]);
         assert!(m.removed_questions.is_empty());
         assert_eq!(s2.questions, ["staff-1"]);
+    }
+
+    #[test]
+    fn curriculum_tags_set_an_objectives_skills_and_are_taken_back_when_removed() {
+        let curriculum = json!({"version": 1, "courses": [{"year": "Y7", "route": "Core", "units": [{"title": "Algebra", "start": "2026-09-07", "weeks": 3,
+            "objectives": [{"text": "Substitute", "search": "words"}, {"text": "Expand", "unmatched": true}, {"text": "Other"}]}]}]});
+        let mut m = MathsUi { curriculum: curriculum.to_string(), ..MathsUi::default() };
+        let key = objective_key("Y7", "Core", "Algebra", "Substitute");
+        let key2 = objective_key("Y7", "Core", "Algebra", "Expand");
+        let live = json!({"curriculumTags": {key.clone(): ["Y7 · S1 Substitute"], key2.clone(): ["Y7 · S2 Expand"]}});
+        let s1 = apply_live(&mut m, &live, &LiveState::default());
+        let doc: Value = serde_json::from_str(&m.curriculum).unwrap();
+        let objs = &doc["courses"][0]["units"][0]["objectives"];
+        assert_eq!(objs[0]["skills"], json!(["Y7 · S1 Substitute"]));
+        assert!(objs[0].get("search").is_none() && objs[1].get("unmatched").is_none(), "tagged objectives are no longer unmatched or searched");
+        assert!(objs[2].get("skills").is_none());
+        assert_eq!(s1.tagged.len(), 2);
+        // The editor removes one tag: its skills go, the other stays.
+        let s2 = apply_live(&mut m, &json!({"curriculumTags": {key: ["Y7 · S1 Substitute"]}}), &s1);
+        let doc: Value = serde_json::from_str(&m.curriculum).unwrap();
+        assert!(doc["courses"][0]["units"][0]["objectives"][1].get("skills").is_none());
+        assert_eq!(s2.tagged, [objective_key("Y7", "Core", "Algebra", "Substitute")]);
+        // A teacher with no curriculum is left with none.
+        let mut empty = MathsUi::default();
+        assert!(apply_live(&mut empty, &live, &LiveState::default()).tagged.is_empty() && empty.curriculum.is_empty());
     }
 
     #[test]

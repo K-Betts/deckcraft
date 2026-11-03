@@ -71,6 +71,24 @@ class Api(unittest.TestCase):
         self.assertEqual(live["removedQuestions"], ["alg-2"])
         self.assertEqual(len(live["myQuestions"]), 1)
 
+    def test_moving_questions_between_skills_and_tagging_the_curriculum(self):
+        h = FakeHandler(self.token("ed", "editorpw1"))
+        self.assertEqual(b.api(FakeHandler(), "POST", "edit/move", {"targets": ["alg-1"], "category": "A02"})[0], 403)
+        self.assertEqual(b.api(h, "POST", "edit/move", {"targets": ["alg-1"], "category": "Z99"})[0], 400)
+        self.assertEqual(b.api(h, "POST", "edit/move", {"targets": [], "category": "A02"})[0], 400)
+        new = b.api(h, "POST", "edit/save", self.good())[1]["id"]
+        self.assertEqual(b.api(h, "POST", "edit/move", {"targets": ["alg-1", "alg-2", new], "category": "A05"})[0], 200)
+        items = b.api(FakeHandler(), "GET", "items", None)[1]
+        self.assertEqual(items["recat"], {"alg-1": "A05", "alg-2": "A05"})
+        self.assertEqual(b.api(h, "GET", "items", None)[1]["added"][new]["category"], "A05")
+        self.assertEqual(b.api(h, "GET", "items", None)[1]["added"][new]["topic"], "Algebra")
+        key = "Y7|Core|Algebra|Substitute"
+        self.assertEqual(b.api(FakeHandler(), "POST", "tags/save", {"key": key, "skills": ["x"]})[0], 403)
+        self.assertEqual(b.api(h, "POST", "tags/save", {"key": key, "skills": ["Y7 · S1 Sub", "Y7 · S2 Sub"]})[0], 200)
+        self.assertEqual(b.api(FakeHandler(), "GET", "live.json", None)[1]["curriculumTags"], {key: ["Y7 · S1 Sub", "Y7 · S2 Sub"]})
+        b.api(h, "POST", "tags/save", {"key": key, "skills": []})
+        self.assertEqual(b.api(FakeHandler(), "GET", "live.json", None)[1]["curriculumTags"], {})
+
     def test_only_admins_manage_logins(self):
         ed, boss = FakeHandler(self.token("ed", "editorpw1")), FakeHandler(self.token("boss", "bosspass1"))
         self.assertEqual(b.api(ed, "GET", "users", None)[0], 404)

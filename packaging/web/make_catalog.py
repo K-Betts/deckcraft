@@ -15,10 +15,12 @@ for path in sorted(glob.glob(f"{qdir}/*.json")):
     for m in re.finditer(r"^(\S+) · (.*?) · (.*?) · level (\d)\n(?:  CHECK THIS:.*\n)*  Q: (.*)\n  A: (.*)$", text, re.M):
         id_, topic, skill, level, q, a = m.groups()
         t = meta.get(id_, {})
-        entries.append({"id": id_, "year": t.get("year") or "", "level": int(level), "topic": topic, "skill": skill, "q": q, "a": a})
+        entries.append({"id": id_, "year": t.get("year") or "", "level": int(level), "topic": topic, "skill": skill, "q": q, "a": a,
+                        "key": t.get("source") or f"{topic} · {skill}"})
     for q in data.get("questions", []):
         entries.append({"id": q["id"], "year": q.get("year") or "", "level": q["difficulty"], "topic": q["topic"],
-                        "skill": q.get("subtopic", ""), "q": q["text"], "a": q.get("answer", "")})
+                        "skill": q.get("subtopic", ""), "q": q["text"], "a": q.get("answer", ""),
+                        "key": q.get("source") or f"{q['topic']} · {q.get('subtopic', '')}"})
 for e in entries:
     e["cat"] = bank_categories.categorise(e["topic"], e["skill"]) or ""
 loose = sum(1 for e in entries if not e["cat"])
