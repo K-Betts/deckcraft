@@ -46,7 +46,9 @@ pub fn start() {
                         return Ok(Box::new(presenter) as Box<dyn eframe::App>);
                     }
                     let inbox: Inbox = Inbox::default();
-                    let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone()));
+                    // A window the presenter tab opened to show the presentation (see `Windowed`).
+                    let audience_token = crate::presenter::audience_token();
+                    let mut app = SlideApp::new(Session::new(), services(inbox.clone(), cc.egui_ctx.clone(), audience_token.clone()));
                     let mut settings = settings::Settings::load(&mut app);
                     crate::school::apply(&mut app);
                     settings.save_now(&app);
@@ -67,14 +69,40 @@ pub fn start() {
                         }
                     } else if let Err(e) = app.run("file.new", serde_json::json!({})) {
                         log::error!("new presentation: {e}");
-                    } else if !q.contains("show") {
+                    } else if audience_token.is_none() && !q.contains("show") {
                         let _ = app.run("app.home", serde_json::json!({"on": true}));
                     }
                     if q.contains("show") {
                         app.start_show(0, false);
                     }
+                    // Start-up check of the presenter tab and its presentation window.
+                    if q.contains("presenttest") && audience_token.is_none() {
+                        app.ui.presenter_view = true;
+                        app.start_show(0, false);
+                    }
                     let smoke = q.contains("smoke").then(crate::smoke::Smoke::default);
-                    Ok(Box::new(WebShell { app, inbox, settings, exam_ready, live_bank, smoke }))
+                    let audience = match audience_token {
+                        Some(token) => match crate::presenter::AudienceLink::new(token, cc.egui_ctx.clone()) {
+                            Ok(link) => Some(link),
+                            Err(e) => {
+                                log::error!("presentation window: {e}");
+                                None
+                            }
+                        },
+                        None => None,
+                    };
+                    Ok(Box::new(WebShell {
+                        app,
+                        inbox,
+                        settings,
+                        exam_ready,
+                        live_bank,
+                        audience,
+                        remote: None,
+                        connected_logged: false,
+                        pending: None,
+                        smoke,
+                    }))
                 }),
             )
             .await;
@@ -102,6 +130,14 @@ struct WebShell {
     exam_ready: std::rc::Rc<std::cell::Cell<bool>>,
     /// The live school question bank has arrived (`load_live_bank`): apply it.
     live_bank: std::rc::Rc<std::cell::RefCell<Option<serde_json::Value>>>,
+    /// This window only shows the presentation: the presenter tab that opened it sends the deck.
+    audience: Option<crate::presenter::AudienceLink>,
+    /// This tab is the presenter view while the presentation plays in the window it opened.
+    remote: Option<crate::presenter::Popup>,
+    /// "Presenter view connected" has been logged for this show (the start-up check looks for it).
+    connected_logged: bool,
+    /// The deck for that window, until it asks for it: the slide to start on and the file.
+    pending: Option<(usize, Vec<u8>)>,
     /// `?smoke`: the start-up check a headless browser runs (`smoke`).
     smoke: Option<crate::smoke::Smoke>,
 }
@@ -115,12 +151,17 @@ impl eframe::App for WebShell {
         if let Some(live) = self.live_bank.borrow_mut().take() {
             crate::school::apply_live(&mut self.app, &live);
         }
+        self.windowed(ctx);
         fetch_wanted(ctx);
         if let Some(s) = self.smoke.as_mut() {
             s.tick(&mut self.app, ctx);
         }
-        self.app.logic(ctx);
+        if self.remote.is_none() {
+            self.app.logic(ctx);
+        }
+        // (The presentation window closes itself when its show ends, and must wait for the deck.)
         if self.app.show.is_none()
+            && self.audience.is_none()
             && let Some(host) = self.app.services.presenter.as_mut()
         {
             host.close();
@@ -156,15 +197,90 @@ impl eframe::App for WebShell {
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
-        self.app.ui(ui);
+        match self.remote.as_mut() {
+            Some(presenter) => presenter.show(ui),
+            None => self.app.ui(ui),
+        }
+    }
+}
+
+impl WebShell {
+    /// Presenter View on: the tab the teacher is working in becomes the presenter view (notes,
+    /// current and next slide, timer) and the presentation plays in a second window to drag onto
+    /// the projector. That window is this same app, started with the deck and told to play it.
+    /// If the browser blocks the window, the show plays in this tab as it does without Presenter View.
+    fn windowed(&mut self, ctx: &egui::Context) {
+        if let Some(link) = &self.audience
+            && let Some(deck) = link.take()
+        {
+            let data = deckcraft_engine::cmd::base64_encode(&deck.bytes);
+            match self.app.run("file.openBytes", serde_json::json!({"name": deck.name, "data": data})) {
+                Ok(_) => {
+                    self.app.ui.presenter_view = true;
+                    self.app.start_show(deck.from, false);
+                    log::info!("presentation window: show started at slide {}", deck.from + 1);
+                }
+                Err(e) => log::error!("presentation window: the deck could not be opened: {e}"),
+            }
+        }
+        if self.audience.is_none()
+            && self.remote.is_none()
+            && let Some((from, bytes)) = self.app.take_show_for_window()
+        {
+            log::info!("presenter view: opening the presentation window");
+            match crate::presenter::Popup::open_audience(ctx.clone()) {
+                Ok(presenter) => {
+                    self.remote = Some(presenter);
+                    self.pending = Some((from, bytes));
+                }
+                Err(e) => {
+                    log::warn!("presenter view: the presentation window could not be opened: {e}");
+                    self.app.ui.presenter_view = false;
+                    self.app.start_show(from, false);
+                    self.app.set_status(format!("{e} The show plays in this tab; allow popups, then turn Presenter View on again."));
+                }
+            }
+        }
+        let Some(presenter) = self.remote.as_mut() else {
+            self.connected_logged = false;
+            return;
+        };
+        if presenter.connected() && !self.connected_logged {
+            self.connected_logged = true;
+            log::info!("presenter view: connected to the presentation window");
+        }
+        if presenter.take_hello()
+            && let Some((from, bytes)) = self.pending.take()
+            && let Err(e) = presenter.start("show.deckcraft", from, &bytes)
+        {
+            log::error!("presentation window: {e}");
+            self.app.set_status("The presentation window could not be started.");
+            presenter.end();
+        }
+        // The window never answered, or the show is over: back to the editor.
+        let silent = self.pending.is_some() && presenter.waited() > 30.0;
+        if presenter.ended() || silent {
+            let slide = presenter.last_slide();
+            if silent {
+                self.app.set_status("The presentation window did not open.");
+            }
+            self.remote = None;
+            self.pending = None;
+            let _ = self.app.run("slide.go", serde_json::json!({"index": slide}));
+            ctx.request_repaint();
+        }
     }
 }
 
 /// Web services: no file paths, so `pick_open`/`pick_save`/`read` stay `None` and the UI falls
 /// back to `open_async` (browser picker → inbox) and `download`.
-fn services(inbox: Inbox, ctx: egui::Context) -> Services {
+fn services(inbox: Inbox, ctx: egui::Context, audience_token: Option<String>) -> Services {
     let open_inbox = inbox.clone();
-    let presenter = match crate::presenter::BrowserHost::new(ctx.clone()) {
+    let host = match audience_token {
+        Some(token) => crate::presenter::BrowserHost::for_opener(ctx.clone(), token),
+        None => crate::presenter::BrowserHost::new(ctx.clone()),
+    };
+    let presenter = match host {
         Ok(host) => Some(Box::new(host) as Box<dyn deckcraft_ui_egui::presenter::Host>),
         Err(error) => {
             log::error!("Presenter window: {error}");

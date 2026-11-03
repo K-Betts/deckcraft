@@ -108,15 +108,26 @@ pub trait Host {
 pub struct View {
     fonts: crate::uifonts::UiFonts,
     styled: bool,
+    /// Drawn inside the editor's own window (its fonts and theme stay as they are).
+    embedded: bool,
     current: Option<egui::TextureHandle>,
     next: Option<egui::TextureHandle>,
     previous_current: Option<Preview>,
     previous_next: Option<Preview>,
 }
 impl View {
+    /// A view that lives inside the running app (the browser tab that became the presenter view)
+    /// instead of owning a window: it installs no fonts or theme of its own.
+    pub fn embedded() -> Self {
+        Self { embedded: true, ..Self::default() }
+    }
+
     /// Install the same interface and dynamic fallback fonts as SlideApp before layout.
     /// Font definitions take effect on the next pass; never forward input on a discarded pass.
     pub fn prepare(&mut self, ctx: &egui::Context, notes: &str) -> bool {
+        if self.embedded {
+            return !ctx.will_discard();
+        }
         if !self.styled {
             crate::theme::install_fonts_with(ctx, &self.fonts.faces);
             crate::theme::apply(ctx, &crate::theme::Tokens::dark());
