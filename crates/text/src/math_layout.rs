@@ -1,6 +1,7 @@
 //! Equations in text layout: the stand-in text of an equation not drawn as maths, and equations
 //! drawn as maths (fractions, powers, roots) over blank space as wide as they are.
 
+use deckcraft_fonts::{FontDb, FontFace};
 use deckcraft_geom::Rect;
 use deckcraft_model::text::RunKind;
 
@@ -11,12 +12,24 @@ use crate::{TextLayout, equation, math};
 /// The text that stands in for an equation we do not draw as maths: letters are the mathematical
 /// italic ones, as the equation editor writes them, unless the equation sets its own style or the
 /// text holds a word (`sin`, `max`), which stays upright. One character in, one out.
-pub(crate) fn stand_in_text(text: &str, omml: &str) -> String {
+///
+/// With `letters_available` false (no font on this system has the maths-italic letters, as in the
+/// browser) the letters stay plain and the second value says they should be set in italic.
+pub(crate) fn stand_in_text(text: &str, omml: &str, letters_available: bool) -> (String, bool) {
     let word = text.chars().collect::<Vec<_>>().windows(3).any(|w| w.iter().all(char::is_ascii_alphabetic));
     if word || omml.contains("<m:sty") {
-        return text.to_string();
+        return (text.to_string(), false);
     }
-    text.chars().map(|c| if c.is_ascii_alphabetic() { equation::math_italic(c) } else { c }).collect()
+    if !letters_available {
+        return (text.to_string(), text.chars().any(|c| c.is_ascii_alphabetic()));
+    }
+    (text.chars().map(|c| if c.is_ascii_alphabetic() { equation::math_italic(c) } else { c }).collect(), false)
+}
+
+/// Whether the face, or some other font on this system, has the maths-italic letters (𝑥). A
+/// browser has only the fonts the app carries, and shows a missing-glyph box for them otherwise.
+pub(crate) fn math_italic_letters_available(face: &FontFace) -> bool {
+    face.glyph_for('\u{1D465}') != 0 || FontDb::global().fallback_for('\u{1D465}', face.id()).is_some()
 }
 
 /// Whether the paragraph is one equation on its own (a display equation), which is laid out whole.
@@ -101,5 +114,22 @@ pub(crate) fn emit_math(out: &mut TextLayout, m: &math::MathBox, st: &Style, lef
             para,
             line: DecoLine::Solid,
         });
+    }
+}
+
+#[cfg(test)]
+mod stand_in_tests {
+    use super::stand_in_text;
+
+    #[test]
+    fn without_maths_italic_letters_a_variable_stays_plain_and_is_set_in_italic() {
+        // A browser has no font with 𝑥: the letter must stay "x" (and be italic), not a box.
+        assert_eq!(stand_in_text("x", "<m:r/>", false), ("x".to_string(), true));
+        assert_eq!(stand_in_text("2x+3", "<m:r/>", false), ("2x+3".to_string(), true));
+        // Numbers alone need no italic, and with the letters available they are used as before.
+        assert_eq!(stand_in_text("23", "<m:r/>", false), ("23".to_string(), false));
+        assert_eq!(stand_in_text("x", "<m:r/>", true), ("\u{1D465}".to_string(), false));
+        // Words (three letters in a row) are plain text either way.
+        assert_eq!(stand_in_text("sin", "<m:r/>", false), ("sin".to_string(), false));
     }
 }
