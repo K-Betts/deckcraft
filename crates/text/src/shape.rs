@@ -1,6 +1,6 @@
 use super::autonum::autonum;
 use super::math;
-use super::math_layout::{inline_math_box, math_blank, math_of_paragraph, math_of_paragraph_kind, stand_in_text};
+use super::math_layout::{inline_math_box, math_blank, math_italic_letters_available, math_of_paragraph, math_of_paragraph_kind, stand_in_text};
 use super::run::{RunEffects, TextShadow};
 use super::style::{Cell, Opts, ParaShaped, Style, face_chain, make_style};
 use super::symbol::{covers_symbol, is_symbol_font, map_symbol_bullet, symbol_font_char, symbol_map_char};
@@ -55,13 +55,20 @@ pub(crate) fn shape_para(
     let single = math_of_paragraph_kind(para);
     let mut inline_math: Vec<(usize, math::MathBox, usize)> = vec![];
     for run in &para.runs {
-        let rp = resolve::run(ctx, shape, para, &run.props);
-        let st = make_style(ctx, &rp, scale, opts.prompt_color);
+        let mut rp = resolve::run(ctx, shape, para, &run.props);
+        let mut st = make_style(ctx, &rp, scale, opts.prompt_color);
         let t: String = match &run.kind {
             RunKind::Text => run.text.clone(),
             RunKind::Break => "\u{b}".into(),
             RunKind::Field { field } => opts.fields.field_in(field, rp.lang.as_deref()).unwrap_or_else(|| run.text.clone()),
-            RunKind::Math { omml } => stand_in_text(&run.text, omml),
+            RunKind::Math { omml } => {
+                let (t, italic) = stand_in_text(&run.text, omml, math_italic_letters_available(&st.face));
+                if italic {
+                    rp.italic = Some(true);
+                    st = make_style(ctx, &rp, scale, opts.prompt_color);
+                }
+                t
+            }
         };
         let si = styles.len();
         let mut t = t;
