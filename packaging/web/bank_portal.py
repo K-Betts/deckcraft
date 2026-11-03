@@ -73,6 +73,8 @@ def load():
     db.setdefault("added", {})  # staff-<n> -> question
     db.setdefault("replaced", {})  # built-in id -> question that takes its place
     db.setdefault("retired", [])  # built-in ids taken out
+    db.setdefault("recat", {})  # built-in id -> skill id it was moved to
+    db.setdefault("tags", {})  # curriculum objective -> skill keys that practise it
     db.setdefault("history", [])
     db.setdefault("revision", 0)
     return db
@@ -159,7 +161,7 @@ def live_export(db):
         mine.append({"id": f"staff-r-{target}", **q})
         removed.append(target)
     return {"version": 1, "revision": db["revision"], "questions": mine, "templates": [],
-            "myQuestions": mine, "removedQuestions": sorted(set(removed))}
+            "myQuestions": mine, "removedQuestions": sorted(set(removed)), "curriculumTags": db["tags"]}
 
 
 # ---- people -----------------------------------------------------------------------------------
@@ -211,6 +213,7 @@ def api(handler, method, path, body):
                 return 200, {"name": me["name"], "role": me["role"], "username": me["username"]} if me else {"name": None}
             if path == "items":
                 return 200, {"items": db["items"], "added": db["added"] if editor else {}, "replaced": db["replaced"],
+                             "recat": db["recat"], "tags": db["tags"],
                              "retired": db["retired"], "history": db["history"][-50:] if editor else []}
             if path == "users" and admin:
                 return 200, {"users": [{"username": k, "name": v["name"], "role": v["role"]} for k, v in users().items()]}
@@ -229,7 +232,7 @@ def api(handler, method, path, body):
                 problem = question_problem(q)
                 if problem:
                     return 400, {"error": problem}
-                q["source"] = f"Staff question · {who}"
+                q["addedBy"] = who
                 item = {"id": db["next"], "kind": "new", "status": "pending", "by": who, "at": now, "question": q}
             else:
                 action = body.get("action")
@@ -243,7 +246,7 @@ def api(handler, method, path, body):
                     problem = question_problem(q)
                     if problem:
                         return 400, {"error": problem}
-                    q["source"] = f"Staff edit of {target} · {who}"
+                    q["addedBy"], q["replaces"] = who, target
                     item["question"] = q
             db["next"] += 1
             db["items"].append(item)
@@ -260,7 +263,7 @@ def api(handler, method, path, body):
             if problem:
                 return 400, {"error": problem}
             qid = clean(body.get("id"), 40)
-            q["source"] = f"Staff question · {me['name']}"
+            q["addedBy"] = me["name"]
             if qid and qid.startswith("staff-") and qid in db["added"]:
                 db["added"][qid] = q
                 log(db, me["name"], "edited", qid)
@@ -275,7 +278,7 @@ def api(handler, method, path, body):
             problem = question_problem(q)
             if not target or problem:
                 return 400, {"error": problem or "No question chosen."}
-            q["source"] = f"Staff edit of {target} · {me['name']}"
+            q["addedBy"], q["replaces"] = me["name"], target
             db["replaced"][target] = q
             log(db, me["name"], "replaced", target)
         elif path == "edit/retire":
@@ -291,6 +294,28 @@ def api(handler, method, path, body):
             if target in db["retired"]:
                 db["retired"].remove(target)
             log(db, me["name"], "restored", target)
+        elif path == "edit/move":  # put questions in another skill (built-in ones, or our own)
+            cat = clean(body.get("category"), 8).upper()
+            targets = [clean(t, 80) for t in (body.get("targets") or []) if clean(t, 80)][:300]
+            if cat not in _skills() or not targets:
+                return 400, {"error": "Choose a skill to move them to."}
+            for t in targets:
+                if t in db["added"]:
+                    db["added"][t]["category"] = cat
+                    db["added"][t]["topic"] = STRAND_TOPIC.get(_skills()[cat][0], db["added"][t]["topic"])
+                else:
+                    db["recat"][t] = cat
+            log(db, me["name"], f"moved {len(targets)} to {cat}:", targets[0])
+        elif path == "tags/save":  # which questions practise a curriculum objective
+            key = clean(body.get("key"), 400)
+            keys = [clean(k, 200) for k in (body.get("skills") or []) if clean(k, 200)][:40]
+            if not key:
+                return 400, {"error": "No objective chosen."}
+            if keys:
+                db["tags"][key] = keys
+            else:
+                db["tags"].pop(key, None)
+            log(db, me["name"], "tagged", key[:60])
         elif path == "edit/delete":
             qid = clean(body.get("id"), 40)
             if db["added"].pop(qid, None) is None:

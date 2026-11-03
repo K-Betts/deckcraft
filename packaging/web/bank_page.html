@@ -22,7 +22,7 @@ textarea{width:100%;min-height:80px}.row{display:flex;gap:8px;flex-wrap:wrap;mar
 <header><h1>Maths question bank</h1>
 <span id="acct"></span></header>
 <main><nav id="tabs"></nav>
-<section id="browse"></section><section id="add" hidden></section><section id="mine" hidden></section>
+<section id="browse"></section><section id="curriculum" hidden></section><section id="add" hidden></section><section id="mine" hidden></section>
 <section id="changes" hidden></section><section id="people" hidden></section></main>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -30,7 +30,7 @@ textarea{width:100%;min-height:80px}.row{display:flex;gap:8px;flex-wrap:wrap;mar
 const $=(s,r=document)=>r.querySelector(s);
 const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a))x==='class'?e.className=v:x.startsWith('on')?e[x]=v:e.setAttribute(x,v);e.append(...k.filter(c=>c!=null));return e};
 const LEVELS=['','Support','Core','Stretch','Exam style'];
-let catalog=[],taxonomy=[],db={items:[],added:{},replaced:{},retired:[],history:[]},me=null;
+let catalog=[],taxonomy=[],db={items:[],added:{},replaced:{},retired:[],history:[],recat:{},tags:{}},me=null,curriculum=null;
 const store={get:k=>{try{return sessionStorage.getItem(k)||localStorage.getItem(k)||''}catch{return''}},setS:(k,v)=>{try{sessionStorage.setItem(k,v)}catch{}},setL:(k,v)=>{try{localStorage.setItem(k,v)}catch{}},del:k=>{try{sessionStorage.removeItem(k)}catch{}}};
 function math(root){if(window.renderMathInElement)try{renderMathInElement(root,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false})}catch{}}
 async function call(path,body){
@@ -46,10 +46,10 @@ function drawAcct(){const a=$('#acct');a.textContent='';
     p.onkeydown=e=>{if(e.key==='Enter')go()};
     a.append(n,' · Editors: ',u,p,el('button',{onclick:go},'Log in'),m)}}
 function tabList(){const t={browse:'Browse the bank',add:isEd()?'Add a question':'Suggest a question'};
-  if(isEd())t.mine=`Our questions & changes`;t.changes=isEd()?'Suggestions to approve':'Suggestions so far';if(isAdmin())t.people='Logins';return t}
-function show(name){const t=tabList();for(const k of['browse','add','mine','changes','people'])$('#'+k).hidden=k!==name;
+  if(isEd())t.curriculum='Tag to curriculum';if(isEd())t.mine=`Our questions & changes`;t.changes=isEd()?'Suggestions to approve':'Suggestions so far';if(isAdmin())t.people='Logins';return t}
+function show(name){const t=tabList();for(const k of['browse','add','curriculum','mine','changes','people'])$('#'+k).hidden=k!==name;
   [...$('#tabs').children].forEach(b=>b.classList.toggle('on',b.dataset.t===name));
-  if(name==='mine')drawMine();if(name==='changes')drawChanges();if(name==='people')drawPeople()}
+  if(name==='curriculum')drawCurriculum();if(name==='mine')drawMine();if(name==='changes')drawChanges();if(name==='people')drawPeople()}
 function drawTabs(){const t=tabList();$('#tabs').textContent='';for(const k in t)$('#tabs').append(el('button',{'data-t':k,onclick:()=>show(k)},t[k]))}
 async function loadDb(){db=await call('items')}
 function qbox(q,extra){return el('div',{class:'q'},el('div',{class:'meta'},el('span',{class:'tag'},q.year||''),el('span',{class:'tag'},LEVELS[q.level||q.difficulty]||''),q.topic||'',' · ',q.skill||q.subtopic||''),el('div',{},q.q||q.text),el('div',{class:'ans'},'Answer: '+(q.a||q.answer)),extra||'')}
@@ -70,8 +70,21 @@ function form(init={}){const f={};const mk=(n,l,e)=>{f[n]=e;return[el('label',{}
 const sameSkill=c=>c.skill;
 function builtinState(c){return db.retired.includes(c.id)?'retired':db.replaced[c.id]?'replaced':''}
 let strandSel='';
+const catOf=c=>c.built?(db.recat[c.id]||c.cat):c.cat;
 function allItems(){const items=catalog.map(c=>({...c,built:true}));
   for(const[id,q]of Object.entries(db.added||{}))items.push({id,year:q.year,level:q.difficulty,topic:q.topic,skill:q.subtopic,q:q.text,a:q.answer,cat:q.category||'',staff:true});return items}
+const skillName=id=>{for(const t of taxonomy)for(const k of t.skills)if(k.id===id)return`${k.id} · ${k.name}`;return id};
+// Every question that shares this one's skill name and place: they move together.
+const sameGroup=c=>allItems().filter(x=>x.built===c.built&&x.skill===c.skill&&catOf(x)===catOf(c)).map(x=>x.id);
+async function moveTo(ids,cat,after){try{await call('edit/move',{targets:ids,category:cat});await loadDb();flash(`Moved ${ids.length} question${ids.length>1?'s':''} to ${skillName(cat)}`);after()}catch(e){alert(e.message)}}
+function flash(t){let f=$('#flash');if(!f){f=el('div',{id:'flash',style:'position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#050038;color:#fff;padding:8px 16px;border-radius:99px;z-index:9'});document.body.append(f)}f.textContent=t;f.hidden=false;clearTimeout(f.t);f.t=setTimeout(()=>f.hidden=true,3500)}
+function moveBox(c,go){const box=el('div',{class:'hint'});const ed=form({category:catOf(c)});
+  const group=sameGroup(c);const all=el('input',{type:'checkbox'});all.checked=group.length>1;
+  const sels=ed.el.querySelectorAll('select');
+  box.append(el('b',{},'Move to which skill? '),sels[0],sels[1]);
+  if(group.length>1)box.append(el('label',{style:'display:flex;gap:6px;align-items:center'},all,`Move all ${group.length} questions called “${c.skill}” together`));
+  box.append(el('div',{class:'row'},el('button',{class:'pri',onclick:()=>{const cat=ed.get().category;if(!cat)return alert('Choose a skill first.');moveTo(all.checked?group:[c.id],cat,go)}},'Move'),el('button',{onclick:()=>box.remove()},'Cancel')));
+  return box}
 function drawBrowse(){const s=$('#browse');s.textContent='';
   const f={q:el('input',{placeholder:'Search all skills and questions',size:30}),y:el('select',{},el('option',{value:''},'All years'),...['Y7','Y8','Y9','Y10','Y11'].map(y=>el('option',{},y))),
     l:el('select',{},el('option',{value:''},'All levels'),...[1,2,3,4].map(i=>el('option',{value:i},LEVELS[i])))};
@@ -80,21 +93,24 @@ function drawBrowse(){const s=$('#browse');s.textContent='';
   const go=()=>{out.textContent='';strands.textContent='';
     const w=f.q.value.toLowerCase().split(/\s+/).filter(Boolean);
     const hits=allItems().filter(c=>(!f.y.value||c.year===f.y.value)&&(!f.l.value||String(c.level)===f.l.value)&&matches(c,w)&&!(c.built&&db.retired.includes(c.id)));
-    const byCat={};for(const h of hits)(byCat[h.cat||'']=byCat[h.cat||'']||[]).push(h);
+    const byCat={};for(const h of hits)(byCat[catOf(h)||'']=byCat[catOf(h)||'']||[]).push(h);
     const groups=[...taxonomy.map(t=>({id:t.id,name:t.name,skills:t.skills.map(k=>({...k,items:byCat[k.id]||[]}))}))];
     const loose=byCat['']||[];if(loose.length)groups.push({id:'_',name:'Not sorted yet',skills:[{id:'',name:'Waiting to be placed in a skill',items:loose}]});
     const total=g=>g.skills.reduce((n,k)=>n+k.items.length,0);
     if(!strandSel||!groups.some(g=>g.id===strandSel))strandSel=groups[0].id;
     if(w.length||f.y.value||f.l.value){const best=groups.find(g=>total(g)>0);if(best&&total(groups.find(g=>g.id===strandSel))===0)strandSel=best.id}
-    for(const g of groups)strands.append(el('button',{class:g.id===strandSel?'on':'',onclick:()=>{strandSel=g.id;go()}},`${g.name} (${total(g)})`));
+    for(const g of groups){const b=el('button',{class:g.id===strandSel?'on':'',onclick:()=>{strandSel=g.id;go()}},`${g.name} (${total(g)})`);
+      if(isEd()){b.ondragover=e=>{e.preventDefault();if(strandSel!==g.id&&!b.t)b.t=setTimeout(()=>{strandSel=g.id;go()},500)};b.ondragleave=()=>{clearTimeout(b.t);b.t=0}}strands.append(b)}
     const g=groups.find(x=>x.id===strandSel);
     note.textContent=`${hits.length} questions here. Built-in ones are recipes: each shows one example, and the real question changes its numbers every time.`;
     for(const k of g.skills){const d=el('details',{class:'q'});if((w.length||f.y.value||f.l.value)&&k.items.length)d.open=true;
-      d.append(el('summary',{},el('b',{},k.id?`${k.id} · ${k.name}`:k.name),' ',el('span',{class:'tag'},k.items.length?`${k.items.length} question${k.items.length>1?'s':''}`:'none yet')));
+      const sum=el('summary',{},el('b',{},k.id?`${k.id} · ${k.name}`:k.name),' ',el('span',{class:'tag'},k.items.length?`${k.items.length} question${k.items.length>1?'s':''}`:'none yet'));
+      if(isEd()&&k.id){sum.ondragover=e=>{e.preventDefault();sum.style.outline='2px solid #4353ff'};sum.ondragleave=()=>sum.style.outline='';sum.ondrop=e=>{e.preventDefault();sum.style.outline='';try{const ids=JSON.parse(e.dataTransfer.getData('text/plain'));moveTo(ids,k.id,go)}catch{}}}
+      d.append(sum);
       const fillItems=()=>{if(d.dataset.done)return;d.dataset.done=1;if(!k.items.length){d.append(el('div',{class:'meta'},isEd()?'Nothing here yet. Use “Add a question” and choose this skill.':'Nothing here yet. You can suggest a question for this skill.'));return}
         k.items.slice(0,30).forEach(c=>{const st=c.built?builtinState(c):'';
-          d.append(qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},st?el('span',{class:'tag'},st==='retired'?'Taken out of the bank':'Replaced by a staff question'):null,c.staff?el('span',{class:'tag'},'Staff question'):null,
-            c.built?(isEd()?(st?el('button',{onclick:async()=>{await call('edit/restore',{target:c.id});await loadDb();go()}},'Put back'):[el('button',{onclick:()=>editBox(c,true)},'Replace with my version…'),el('button',{onclick:async()=>{if(confirm('Take this out of the bank? It can be put back.')){await call('edit/retire',{target:c.id});await loadDb();go()}}},'Take out')]):el('button',{onclick:()=>editBox(c,false)},'Something is wrong / suggest an edit')):null)))});
+          {const row=qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},st?el('span',{class:'tag'},st==='retired'?'Taken out of the bank':'Replaced by a staff question'):null,c.staff?el('span',{class:'tag'},'Staff question'):null,
+            c.built||c.staff?(isEd()?(st?el('button',{onclick:async()=>{await call('edit/restore',{target:c.id});await loadDb();go()}},'Put back'):[el('button',{onclick:(e)=>{const row=e.target.closest('.q');if(!row.querySelector('.hint'))row.append(moveBox(c,go))}},'Move to another skill…'),c.staff?null:el('button',{onclick:()=>editBox(c,true)},'Replace with my version…'),c.staff?null:el('button',{onclick:async()=>{if(confirm('Take this out of the bank? It can be put back.')){await call('edit/retire',{target:c.id});await loadDb();go()}}},'Take out')]):el('button',{onclick:()=>editBox(c,false)},'Something is wrong / suggest an edit')):null));if(isEd()){row.draggable=true;row.style.cursor='grab';row.title='Drag onto another skill to move it (all questions with the same skill name go together)';row.ondragstart=e=>{e.dataTransfer.setData('text/plain',JSON.stringify(sameGroup(c)));e.dataTransfer.effectAllowed='move'}}d.append(row)}});
         if(k.items.length>30)d.append(el('div',{class:'meta'},`${k.items.length-30} more: narrow it with the search, year or level.`));math(d)};
       d.ontoggle=()=>{if(d.open)fillItems()};if(d.open)fillItems();out.append(d)}
     };
@@ -113,6 +129,36 @@ function drawAdd(existing){const s=$('#add');s.textContent='';const fm=form(exis
   s.append(el('div',{class:'hint'},'Quickest way: photograph the question, give it to the school\u2019s Gemini Gem, check it with the Gem, then paste its answer below.'),paste,
     el('button',{onclick:()=>{try{const t=paste.value.replace(/```(json)?/g,'').trim();let o=JSON.parse(t);if(Array.isArray(o))o=o[0];fm.fill(o);msg.className='okmsg';msg.textContent='Filled in. Check each box, then save.'}catch{msg.className='err';msg.textContent='That did not read as the Gem\u2019s JSON answer. You can also type the question in below.'}}},'Fill the form'),
     fm.el,msg,el('button',{class:'pri',onclick:async()=>{try{await call(isEd()?'edit/save':'suggest/new',{...fm.get(),id:existing&&existing.id});msg.className='okmsg';msg.textContent=isEd()?'Saved. It is live in the bank now.':'Sent for approval. Thank you.';if(isEd())await loadDb()}catch(e){msg.className='err';msg.textContent=e.message}}},isEd()?'Save to the bank':'Send for approval'))}
+// Curriculum tagging
+const objKey=(y,r,u,o)=>`${y}|${r}|${u}|${o}`;
+function appSkills(){const m=new Map();for(const c of catalog)if(!m.has(c.key))m.set(c.key,{key:c.key,name:c.skill,year:c.year,cat:catOf(c)});
+  for(const q of Object.values(db.added||{})){const key=`${q.topic} · ${q.subtopic}`;if(!m.has(key))m.set(key,{key,name:q.subtopic,year:q.year,cat:q.category||''})}return[...m.values()]}
+async function drawCurriculum(){const s=$('#curriculum');s.textContent='';
+  if(curriculum===null){try{curriculum=await (await fetch('/curriculum.json')).json()}catch{curriculum=false}}
+  if(!curriculum||!curriculum.courses){s.append(el('div',{class:'hint'},'No curriculum has been published to this site yet. Publish one with deploy-private.sh (it comes from the Mac app’s Get Ready curriculum).'));return}
+  const courses=curriculum.courses;const years=[...new Set(courses.map(c=>c.year))];
+  const sel=(opts,val)=>{const e=el('select',{},...opts.map(o=>el('option',{value:o},o||'(one route)')));e.value=val;return e};
+  const st=drawCurriculum.st=drawCurriculum.st||{};st.year=st.year||years[0];
+  const routes=[...new Set(courses.filter(c=>c.year===st.year).map(c=>c.route||''))];if(!routes.includes(st.route))st.route=routes[0];
+  const course=courses.find(c=>c.year===st.year&&(c.route||'')===st.route)||{units:[]};
+  const units=course.units.map(u=>u.title);if(!units.includes(st.unit))st.unit=units[0];
+  const unit=course.units.find(u=>u.title===st.unit)||{objectives:[]};
+  const y=sel(years,st.year),r=sel(routes,st.route),u=sel(units,st.unit);
+  y.onchange=()=>{st.year=y.value;st.route=st.unit='';drawCurriculum()};r.onchange=()=>{st.route=r.value;st.unit='';drawCurriculum()};u.onchange=()=>{st.unit=u.value;drawCurriculum()};
+  const objs=unit.objectives||[];const tagged=objs.filter(o=>(db.tags[objKey(st.year,st.route,st.unit,o.text)]||[]).length).length;
+  s.append(el('div',{class:'hint'},'Choose the questions that practise each lesson. Get Ready then uses exactly those for “Last lesson”, “Last week” and so on, instead of guessing from the words.'),
+    el('div',{class:'row'},y,r,u),el('div',{class:'meta'},`${tagged} of ${objs.length} objectives in this unit are tagged.`));
+  const skills=appSkills();const byKey=new Map(skills.map(k=>[k.key,k]));
+  objs.forEach(o=>{const key=objKey(st.year,st.route,st.unit,o.text);const cur=db.tags[key]||[];
+    const box=el('div',{class:'q'},el('b',{},o.text),el('div',{class:'meta'},cur.length?'':'Not tagged yet'));
+    const chips=el('div',{class:'row',style:'margin:6px 0'});
+    const save=async list=>{try{await call('tags/save',{key,skills:list});await loadDb();drawCurriculum()}catch(e){alert(e.message)}};
+    cur.forEach(k=>{const sk=byKey.get(k);chips.append(el('span',{class:'tag'},sk?`${sk.name} · ${sk.year||'any'}`:k,' ',el('a',{href:'#',title:'Remove',onclick:e=>{e.preventDefault();save(cur.filter(x=>x!==k))}},'×')))});
+    const add=el('input',{placeholder:'Type a skill to add, e.g. substitution',size:34}),list=el('div');
+    add.oninput=()=>{list.textContent='';const w=add.value.toLowerCase().split(/\s+/).filter(Boolean);if(!w.length)return;
+      skills.filter(k=>!cur.includes(k.key)&&w.every(x=>{const h=(k.name+' '+(k.year||'')+' '+skillName(k.cat)).toLowerCase();const stem=x.replace(/(ing|ed|es|s)$/,'');return h.includes(x)||(stem.length>=3&&h.includes(stem))})).slice(0,10)
+       .forEach(k=>list.append(el('button',{style:'display:block;margin:2px 0;text-align:left',onclick:()=>save([...cur,k.key])},`${k.name} · ${k.year||'any year'}  `,el('span',{class:'meta'},skillName(k.cat)))))};
+    box.append(chips,add,list);s.append(box)})}
 function drawMine(){const s=$('#mine');s.textContent='';
   s.append(el('h3',{},'Staff questions in the live bank'));
   const ids=Object.keys(db.added);if(!ids.length)s.append(el('p',{class:'meta'},'None yet. Use “Add a question”.'));

@@ -63,6 +63,18 @@ fi
 (cd "$root" && cargo build -q -p deckcraft-cli)
 python3 "$root/packaging/web/make_catalog.py" "$root/target/debug/deckcraft-cli" "$root/assets/questions" "$out/bank-catalog.json"
 
+# The department's curriculum, for the curriculum tagging tab on the question bank page. It is the
+# school's own material, so it sits behind the same staff password as everything else here.
+python3 - "$settings/ui.json" "$out/curriculum.json" <<'PY'
+import json, sys
+text = json.load(open(sys.argv[1])).get("curriculum", "")
+if text.strip():
+    open(sys.argv[2], "w", encoding="utf-8").write(text)
+    print("curriculum for the tagging tab: published")
+else:
+    print("no curriculum in the Mac app's settings: the tagging tab will be empty")
+PY
+
 # Compressed copies for the server to send to browsers that accept gzip (most of the download).
 (cd "$out" && for f in *.wasm *.js index.html exam/items/exam/library.json; do if [ -f "$f" ]; then gzip -kf9 "$f"; fi; done)
 
