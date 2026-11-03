@@ -6,7 +6,7 @@ import bank_portal as b
 
 
 def q(**kw):
-    base = {"text": "Work out $2+3$", "answer": "$5$", "topic": "Number", "year": "Y7", "difficulty": 2}
+    base = {"text": "Work out $2+3$", "answer": "$5$", "category": "N02", "year": "Y7", "difficulty": 2}
     return b.read_question({**base, **kw})
 
 
@@ -16,8 +16,13 @@ class Questions(unittest.TestCase):
 
     def test_bad_ones_say_why(self):
         for bad, word in [(q(text="a $ b"), "$"), (q(answer=""), "answer"), (q(year="Y12"), "year"),
-                          (q(difficulty=9), "level"), (q(text="x [[a]] y"), "[["), (q(text="\\frac{1}{2 x"), "curly")]:
+                          (q(difficulty=9), "level"), (q(category=""), "skill"), (q(text="x [[a]] y"), "[["), (q(text="\\frac{1}{2 x"), "curly")]:
             self.assertIn(word, b.question_problem(bad))
+
+    def test_the_skill_chosen_sets_the_topic_and_skill_name(self):
+        v = q(category="a05")
+        self.assertEqual((v["category"], v["topic"], v["subtopic"]), ("A05", "Algebra", "Factorising"))
+        self.assertEqual(q(category="Z99")["category"], "")
 
     def test_control_characters_are_removed(self):
         self.assertEqual(b.clean("a\x00b\x07c", 10), "abc")
@@ -46,7 +51,7 @@ class Api(unittest.TestCase):
         return r["token"]
 
     def good(self, **kw):
-        return {"text": "Work out $2+3$", "answer": "$5$", "topic": "Number", "year": "Y7", "difficulty": 2, **kw}
+        return {"text": "Work out $2+3$", "answer": "$5$", "category": "N02", "year": "Y7", "difficulty": 2, **kw}
 
     def test_login_and_editing(self):
         self.assertEqual(b.api(FakeHandler(), "POST", "login", {"username": "ed", "password": "x"})[0], 403)
@@ -82,6 +87,20 @@ class Api(unittest.TestCase):
         ed = FakeHandler(self.token("ed", "editorpw1"))
         self.assertEqual(b.api(ed, "POST", "review", {"id": 1, "decision": "approved"})[0], 200)
         self.assertEqual(len(b.api(FakeHandler(), "GET", "live.json", None)[1]["myQuestions"]), 1)
+
+
+class Categories(unittest.TestCase):
+    def test_every_rule_names_a_real_skill_and_examples_land_where_expected(self):
+        import bank_categories as c
+        ids = {k["id"] for s in c.taxonomy() for k in s["skills"]}
+        self.assertEqual(len(ids), 116)
+        self.assertTrue(all(r[0] in ids for r in c.RULES))
+        for topic, skill, want in [("Algebra", "Factorise quadratic expressions", "A05"), ("Statistics", "Averages from an ungrouped frequency table", "S04"),
+                                   ("Probability", "Tree diagrams for independent events", "P09"), ("Probability", "Tree diagrams for dependent events", "P10"),
+                                   ("Geometry", "Area of a triangle", "G06"), ("Number", "Convert fractions, decimals and percentages", "N09"),
+                                   ("Number", "Add and subtract algebraic fractions", "A06"), ("Geometry", "Use the sine rule to find an unknown angle", "G12")]:
+            self.assertEqual(c.categorise(topic, skill), want, skill)
+        self.assertIsNone(c.categorise("Number", "Something nobody has named"))
 
 
 if __name__ == "__main__":

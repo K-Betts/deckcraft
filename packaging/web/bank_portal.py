@@ -23,6 +23,17 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LEGACY_ADMIN = os.path.join(HERE, "bank-admin.json")  # from the first version: one admin password
 PAGE = os.path.join(HERE, "bank_page.html")
 TOPICS = {"Number", "Algebra", "Ratio", "Geometry", "Statistics", "Probability"}
+# The department's strands and skills, and the bank's own topic each strand belongs to.
+STRAND_TOPIC = {"01_Number": "Number", "02_Algebra": "Algebra", "03_Ratio_Proportion_Rates": "Ratio",
+                "04_Geometry_Measures": "Geometry", "05_Probability": "Probability", "06_Statistics": "Statistics"}
+
+
+def _skills():
+    try:
+        with open(os.path.join(HERE, "bank_taxonomy.json"), encoding="utf-8") as f:
+            return {k["id"]: (s["id"], k["name"]) for s in json.load(f) for k in s["skills"]}
+    except (OSError, ValueError):
+        return {}
 YEARS = {"Y7", "Y8", "Y9", "Y10", "Y11"}
 ACTIONS = {"retire", "wrong", "reword", "retag"}
 ROLES = {"editor", "admin"}
@@ -93,9 +104,20 @@ def read_question(d):
     kw = d.get("keywords") or []
     if isinstance(kw, str):
         kw = kw.split(",")
+    cat = clean(d.get("category"), 8).upper()
+    skills = _skills()
+    topic = clean(d.get("topic"), 40)
+    sub = clean(d.get("subtopic"), 120)
+    if cat in skills:
+        # The strand and skill the teacher chose give the topic and the skill name the app lists.
+        topic = STRAND_TOPIC.get(skills[cat][0], topic)
+        sub = sub or skills[cat][1]
+    else:
+        cat = ""
     return {
-        "topic": clean(d.get("topic"), 40),
-        "subtopic": clean(d.get("subtopic"), 120),
+        "category": cat,
+        "topic": topic,
+        "subtopic": sub,
         "difficulty": diff,
         "year": clean(d.get("year"), 4).upper(),
         "text": clean(d.get("text"), 2000),
@@ -110,6 +132,8 @@ def question_problem(q):
         return "The question needs some text."
     if not q["answer"]:
         return "The question needs an answer."
+    if not q["category"]:
+        return "Choose a strand and a skill."
     if q["topic"] not in TOPICS:
         return "Choose a topic."
     if q["year"] not in YEARS:
