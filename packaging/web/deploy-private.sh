@@ -72,5 +72,5 @@ if [ "$host" = --local ]; then
 fi
 ssh "$host" 'mkdir -p ~/deckcraft-web/site'
 rsync -a --delete "$out/" "$host:deckcraft-web/site/"
-rsync -a "$root/packaging/web/serve-private.py" "$root/packaging/web/bank_portal.py" "$root/packaging/web/bank_page.html" "$host:deckcraft-web/"
+rsync -a "$root/packaging/web/serve-private.py" "$root/packaging/web/bank_portal.py" "$root/packaging/web/bank_page.html" "$root/packaging/web/bank_taxonomy.json" "$host:deckcraft-web/"
 echo "Published to $host:~/deckcraft-web/site"

@@ -30,7 +30,7 @@ textarea{width:100%;min-height:80px}.row{display:flex;gap:8px;flex-wrap:wrap;mar
 const $=(s,r=document)=>r.querySelector(s);
 const el=(t,a={},...k)=>{const e=document.createElement(t);for(const[x,v]of Object.entries(a))x==='class'?e.className=v:x.startsWith('on')?e[x]=v:e.setAttribute(x,v);e.append(...k.filter(c=>c!=null));return e};
 const LEVELS=['','Support','Core','Stretch','Exam style'];
-let catalog=[],db={items:[],added:{},replaced:{},retired:[],history:[]},me=null;
+let catalog=[],taxonomy=[],db={items:[],added:{},replaced:{},retired:[],history:[]},me=null;
 const store={get:k=>{try{return sessionStorage.getItem(k)||localStorage.getItem(k)||''}catch{return''}},setS:(k,v)=>{try{sessionStorage.setItem(k,v)}catch{}},setL:(k,v)=>{try{localStorage.setItem(k,v)}catch{}},del:k=>{try{sessionStorage.removeItem(k)}catch{}}};
 function math(root){if(window.renderMathInElement)try{renderMathInElement(root,{delimiters:[{left:'$',right:'$',display:false}],throwOnError:false})}catch{}}
 async function call(path,body){
@@ -53,32 +53,54 @@ function show(name){const t=tabList();for(const k of['browse','add','mine','chan
 function drawTabs(){const t=tabList();$('#tabs').textContent='';for(const k in t)$('#tabs').append(el('button',{'data-t':k,onclick:()=>show(k)},t[k]))}
 async function loadDb(){db=await call('items')}
 function qbox(q,extra){return el('div',{class:'q'},el('div',{class:'meta'},el('span',{class:'tag'},q.year||''),el('span',{class:'tag'},LEVELS[q.level||q.difficulty]||''),q.topic||'',' · ',q.skill||q.subtopic||''),el('div',{},q.q||q.text),el('div',{class:'ans'},'Answer: '+(q.a||q.answer)),extra||'')}
+function strandOf(cat){return taxonomy.find(t=>t.skills.some(k=>k.id===cat))}
 function form(init={}){const f={};const mk=(n,l,e)=>{f[n]=e;return[el('label',{},l),e]};const root=el('div');
+  const strand=el('select',{},el('option',{value:''},'Choose a strand…'),...taxonomy.map(t=>el('option',{value:t.id},t.name)));
+  const skill=el('select',{});f.category=skill;
+  const fillSkills=()=>{const t=taxonomy.find(x=>x.id===strand.value);skill.textContent='';skill.append(el('option',{value:''},t?'Choose a skill…':'Choose a strand first'),...(t?t.skills.map(k=>el('option',{value:k.id},`${k.id} · ${k.name}`)):[]))};
+  strand.onchange=fillSkills;fillSkills();
   root.append(...mk('text','Question (equations between $ signs, e.g. $\\frac{3}{4}+\\frac{1}{8}$)',el('textarea')),
    ...mk('answer','Answer',el('input',{size:40})),
-   ...mk('topic','Topic',el('select',{},...['Number','Algebra','Ratio','Geometry','Statistics','Probability'].map(t=>el('option',{},t)))),
-   ...mk('subtopic','Skill (what it practises)',el('input',{size:40,placeholder:'e.g. Adding and subtracting negatives'})),
+   el('label',{},'Strand'),strand,el('label',{},'Skill (where it lives in the bank)'),skill,
    ...mk('year','Year group',el('select',{},...['Y7','Y8','Y9','Y10','Y11'].map(t=>el('option',{},t)))),
    ...mk('difficulty','Level',el('select',{},...[1,2,3,4].map(i=>el('option',{value:i},i+' · '+LEVELS[i])))),
    ...mk('keywords','Search words, separated by commas',el('input',{size:40})));
-  const fill=o=>{for(const[k,v]of Object.entries(o))if(f[k]&&v!=null)f[k].value=Array.isArray(v)?v.join(', '):v};fill(init);
+  const fill=o=>{for(const[k,v]of Object.entries(o)){if(k==='category'&&v){const st=strandOf(v);if(st){strand.value=st.id;fillSkills();skill.value=v}}else if(f[k]&&v!=null)f[k].value=Array.isArray(v)?v.join(', '):v}};fill(init);
   return{el:root,get:()=>Object.fromEntries(Object.entries(f).map(([k,e])=>[k,e.value])),fill}}
 const sameSkill=c=>c.skill;
 function builtinState(c){return db.retired.includes(c.id)?'retired':db.replaced[c.id]?'replaced':''}
+let strandSel='';
+function allItems(){const items=catalog.map(c=>({...c,built:true}));
+  for(const[id,q]of Object.entries(db.added||{}))items.push({id,year:q.year,level:q.difficulty,topic:q.topic,skill:q.subtopic,q:q.text,a:q.answer,cat:q.category||'',staff:true});return items}
 function drawBrowse(){const s=$('#browse');s.textContent='';
-  const f={q:el('input',{placeholder:'Search skill or words',size:28}),y:el('select',{},el('option',{value:''},'All years'),...['Y7','Y8','Y9','Y10','Y11'].map(y=>el('option',{},y))),
+  const f={q:el('input',{placeholder:'Search all skills and questions',size:30}),y:el('select',{},el('option',{value:''},'All years'),...['Y7','Y8','Y9','Y10','Y11'].map(y=>el('option',{},y))),
     l:el('select',{},el('option',{value:''},'All levels'),...[1,2,3,4].map(i=>el('option',{value:i},LEVELS[i])))};
-  const out=el('div'),count=el('div',{class:'meta'});
-  const go=()=>{out.textContent='';const w=f.q.value.toLowerCase().split(/\s+/).filter(Boolean);
-    const hits=catalog.filter(c=>(!f.y.value||c.year===f.y.value)&&(!f.l.value||String(c.level)===f.l.value)&&w.every(x=>{const h=(c.skill+' '+c.topic+' '+c.q+' '+c.id).toLowerCase();const st=x.replace(/(ing|ed|es|s)$/,'');return h.includes(x)||(st.length>=3&&h.includes(st))}));
-    count.textContent=hits.length+' of '+catalog.length+' built-in templates. Each sample is one example: the real question changes its numbers each time.';
-    hits.slice(0,40).forEach(c=>{const st=builtinState(c);
-      out.append(qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},st?el('span',{class:'tag'},st==='retired'?'Taken out of the bank':'Replaced by a staff question'):null,
-        isEd()?(st?el('button',{onclick:async()=>{await call('edit/restore',{target:c.id});await loadDb();go()}},'Put back'):[el('button',{onclick:()=>editBox(c,true)},'Replace with my version…'),el('button',{onclick:async()=>{if(confirm('Take this out of the bank? It can be put back.')){await call('edit/retire',{target:c.id});await loadDb();go()}}},'Take out')]):null,
-        isEd()?null:el('button',{onclick:()=>editBox(c,false)},'Something is wrong / suggest an edit'))))});math(out)};
-  [f.q,f.y,f.l].forEach(e=>e.oninput=go);s.append(el('div',{class:'row'},f.q,f.y,f.l),count,out);go()}
+  const bar=el('div',{class:'row'},f.q,f.y,f.l),strands=el('div',{class:'row'}),out=el('div'),note=el('div',{class:'meta'});
+  const matches=(c,w)=>{const h=(c.skill+' '+c.topic+' '+c.q+' '+c.id).toLowerCase();return w.every(x=>{const st=x.replace(/(ing|ed|es|s)$/,'');return h.includes(x)||(st.length>=3&&h.includes(st))})};
+  const go=()=>{out.textContent='';strands.textContent='';
+    const w=f.q.value.toLowerCase().split(/\s+/).filter(Boolean);
+    const hits=allItems().filter(c=>(!f.y.value||c.year===f.y.value)&&(!f.l.value||String(c.level)===f.l.value)&&matches(c,w)&&!(c.built&&db.retired.includes(c.id)));
+    const byCat={};for(const h of hits)(byCat[h.cat||'']=byCat[h.cat||'']||[]).push(h);
+    const groups=[...taxonomy.map(t=>({id:t.id,name:t.name,skills:t.skills.map(k=>({...k,items:byCat[k.id]||[]}))}))];
+    const loose=byCat['']||[];if(loose.length)groups.push({id:'_',name:'Not sorted yet',skills:[{id:'',name:'Waiting to be placed in a skill',items:loose}]});
+    const total=g=>g.skills.reduce((n,k)=>n+k.items.length,0);
+    if(!strandSel||!groups.some(g=>g.id===strandSel))strandSel=groups[0].id;
+    if(w.length||f.y.value||f.l.value){const best=groups.find(g=>total(g)>0);if(best&&total(groups.find(g=>g.id===strandSel))===0)strandSel=best.id}
+    for(const g of groups)strands.append(el('button',{class:g.id===strandSel?'on':'',onclick:()=>{strandSel=g.id;go()}},`${g.name} (${total(g)})`));
+    const g=groups.find(x=>x.id===strandSel);
+    note.textContent=`${hits.length} questions here. Built-in ones are recipes: each shows one example, and the real question changes its numbers every time.`;
+    for(const k of g.skills){const d=el('details',{class:'q'});if((w.length||f.y.value||f.l.value)&&k.items.length)d.open=true;
+      d.append(el('summary',{},el('b',{},k.id?`${k.id} · ${k.name}`:k.name),' ',el('span',{class:'tag'},k.items.length?`${k.items.length} question${k.items.length>1?'s':''}`:'none yet')));
+      const fillItems=()=>{if(d.dataset.done)return;d.dataset.done=1;if(!k.items.length){d.append(el('div',{class:'meta'},isEd()?'Nothing here yet. Use “Add a question” and choose this skill.':'Nothing here yet. You can suggest a question for this skill.'));return}
+        k.items.slice(0,30).forEach(c=>{const st=c.built?builtinState(c):'';
+          d.append(qbox(c,el('div',{class:'row',style:'margin:6px 0 0'},st?el('span',{class:'tag'},st==='retired'?'Taken out of the bank':'Replaced by a staff question'):null,c.staff?el('span',{class:'tag'},'Staff question'):null,
+            c.built?(isEd()?(st?el('button',{onclick:async()=>{await call('edit/restore',{target:c.id});await loadDb();go()}},'Put back'):[el('button',{onclick:()=>editBox(c,true)},'Replace with my version…'),el('button',{onclick:async()=>{if(confirm('Take this out of the bank? It can be put back.')){await call('edit/retire',{target:c.id});await loadDb();go()}}},'Take out')]):el('button',{onclick:()=>editBox(c,false)},'Something is wrong / suggest an edit')):null)))});
+        if(k.items.length>30)d.append(el('div',{class:'meta'},`${k.items.length-30} more: narrow it with the search, year or level.`));math(d)};
+      d.ontoggle=()=>{if(d.open)fillItems()};if(d.open)fillItems();out.append(d)}
+    };
+  [f.q,f.y,f.l].forEach(e=>e.oninput=go);s.append(bar,strands,note,out);go()}
 function editBox(c,direct){const s=$('#browse');const box=el('div',{class:'q'});const msg=el('div');
-  const ed=form({text:c.q,answer:c.a,topic:c.topic,year:c.year,difficulty:c.level,subtopic:c.skill});
+  const ed=form({text:c.q,answer:c.a,category:c.cat,year:c.year,difficulty:c.level});
   const act=el('select',{},...[['reword','I would reword it'],['wrong','This question is wrong'],['retire','Remove it from the bank'],['retag','Wrong year or level']].map(([v,t])=>el('option',{value:v},t)));
   const note=el('textarea',{placeholder:'What is the problem?'});
   const send=async()=>{try{if(direct)await call('edit/replace',{target:c.id,...ed.get()});else{const a=act.value;await call('suggest/flag',{target:c.id,action:a,note:note.value,question:['reword','retag'].includes(a)?ed.get():undefined})}
@@ -113,5 +135,5 @@ async function drawPeople(){const s=$('#people');s.textContent='';const {users}=
   const f={u:el('input',{placeholder:'user name e.g. ksmith'}),n:el('input',{placeholder:'Name'}),r:el('select',{},el('option',{value:'editor'},'editor'),el('option',{value:'admin'},'admin')),p:el('input',{type:'password',placeholder:'Password (8+; blank keeps it)'})};const m=el('div');
   s.append(el('h3',{},'Add or change a login'),el('div',{class:'row'},f.u,f.n,f.r,f.p,el('button',{class:'pri',onclick:async()=>{try{await call('users/save',{username:f.u.value,name:f.n.value,role:f.r.value,password:f.p.value});drawPeople()}catch(e){m.className='err';m.textContent=e.message}}},'Save')),m)}
 async function start(){me=null;try{me=await call('me')}catch{}try{await loadDb()}catch{}drawAcct();drawTabs();drawBrowse();drawAdd();show('browse')}
-fetch('/bank-catalog.json').then(r=>r.json()).then(c=>{catalog=c}).catch(()=>{}).finally(start);
+fetch('/bank-catalog.json').then(r=>r.json()).then(c=>{catalog=c.items||[];taxonomy=c.taxonomy||[]}).catch(()=>{}).finally(start);
 </script></body></html>
