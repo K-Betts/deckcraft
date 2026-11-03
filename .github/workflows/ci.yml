@@ -100,3 +100,5 @@ jobs:
         run: node apps/deckcraft-web/tests/sw.test.mjs
       - name: Browser smoke test
         run: CHROME="$(command -v google-chrome || command -v chromium)" node apps/deckcraft-web/tests/smoke.mjs dist/web
+      - name: Presenter tab and presentation window
+        run: CHROME="$(command -v google-chrome || command -v chromium)" node apps/deckcraft-web/tests/present.mjs dist/web
