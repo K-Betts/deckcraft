@@ -14,8 +14,8 @@ committed.
 
 ## Phases (rebuilt 2026-10-24, revised 2026-10-25)
 
-Rebuilt from an audit of what exists and the owner's priorities: the next build is **for the owner's own
-use**; colleagues come later. The original phase tables are summarised under "Done so far"; their
+Rebuilt from an audit of what exists. The phase table was written for the owner's own use; since
+2026-11-27 next term's users are the maths department (see the audit section). The original phase tables are summarised under "Done so far"; their
 detail is in the [status log](docs/maths-history.md).
 
 **Decision 2026-10-25: the app stays called DeckCraft.** The EduDeck rebrand is cancelled. Its

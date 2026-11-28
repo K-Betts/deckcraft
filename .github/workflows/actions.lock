@@ -6,17 +6,26 @@ workflows:
     '.github/workflows/ci.yml':
         - 'actions/checkout@v7.0.1'
         - 'step-security/harden-runner@v2.22.4'
+        - 'swatinem/rust-cache@v2.9.2'
     '.github/workflows/freebsd.yml': []
     '.github/workflows/house-rules.yml': []
     '.github/workflows/lockfile.yml':
         - 'actions/checkout@v7.0.1'
         - 'step-security/harden-runner@v2.22.4'
+    '.github/workflows/mac-update.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'swatinem/rust-cache@v2.9.2'
     '.github/workflows/nix.yml': []
     '.github/workflows/packaging-lint.yml':
         - 'actions/checkout@v7.0.1'
         - 'step-security/harden-runner@v2.22.4'
     '.github/workflows/release.yml': []
-    '.github/workflows/sonarcloud.yml': []
+    '.github/workflows/web.yml':
+        - 'actions/checkout@v7.0.1'
+        - 'actions/configure-pages@v5.0.0'
+        - 'actions/deploy-pages@v4.0.5'
+        - 'actions/upload-pages-artifact@v3.0.1'
+        - 'swatinem/rust-cache@v2.9.2'
     '.github/workflows/windows-arm64.yml': []
 dependencies:
     'actions/checkout@v7.0.1':
@@ -24,8 +33,35 @@ dependencies:
         commit: 'sha1-3d3c42e5aac5ba805825da76410c181273ba90b1'
         owner_id: 44036562
         repo_id: 197814629
+    'actions/configure-pages@v5.0.0':
+        ref: 'v5.0.0'
+        commit: 'sha1-983d7736d9b0ae728b81ab479565c72886d7745b'
+        owner_id: 44036562
+        repo_id: 513659658
+    'actions/deploy-pages@v4.0.5':
+        ref: 'v4.0.5'
+        commit: 'sha1-d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e'
+        owner_id: 44036562
+        repo_id: 438112499
+    'actions/upload-artifact@v4':
+        ref: 'v4'
+        commit: 'sha1-ea165f8d65b6e75b540449e92b4886f43607fa02'
+        owner_id: 44036562
+        repo_id: 192625955
+    'actions/upload-pages-artifact@v3.0.1':
+        ref: 'v3.0.1'
+        commit: 'sha1-56afc609e74202658d3ffba0e8f6dda462b719fa'
+        owner_id: 44036562
+        repo_id: 496012378
+        uses:
+            - 'actions/upload-artifact@v4'
     'step-security/harden-runner@v2.22.4':
         ref: 'v2.22.4'
         commit: 'sha1-1d88384fd173af6ecb012dfd0264a306b711241a'
         owner_id: 88700172
         repo_id: 422287306
+    'swatinem/rust-cache@v2.9.2':
+        ref: 'v2.9.2'
+        commit: 'sha1-6323deb102c322ba6fcbdcafc7e3dddab59af2b6'
+        owner_id: 580492
+        repo_id: 298565987
