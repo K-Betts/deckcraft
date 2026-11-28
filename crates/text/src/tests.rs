@@ -1960,6 +1960,8 @@ fn a_paragraph_with_its_own_start_at_restarts_the_count_there() {
     check(&[1, 1, 7, 7], &[1, 2, 7, 8]);
 }
 
+mod equations;
+
 /// #1632: when insets are wider than the shape, they scale down proportionally so the text
 /// rectangle stays inside the shape bounds and unwrapped text does not project outside it.
 #[test]

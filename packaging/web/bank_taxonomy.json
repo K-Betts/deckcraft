@@ -1,0 +1,618 @@
+[
+ {
+  "id": "01_Number",
+  "name": "Number",
+  "skills": [
+   {
+    "id": "N01",
+    "name": "Place value",
+    "folder": "01_Number/N01_PlaceValue"
+   },
+   {
+    "id": "N02",
+    "name": "Addition and subtraction",
+    "folder": "01_Number/N02_AdditionSubtraction"
+   },
+   {
+    "id": "N03",
+    "name": "Multiplication and division",
+    "folder": "01_Number/N03_MultiplicationDivision"
+   },
+   {
+    "id": "N04",
+    "name": "Directed numbers",
+    "folder": "01_Number/N04_DirectedNumbers"
+   },
+   {
+    "id": "N05",
+    "name": "Order of operations",
+    "folder": "01_Number/N05_OrderOfOperations"
+   },
+   {
+    "id": "N06",
+    "name": "Factors, multiples and primes",
+    "folder": "01_Number/N06_FactorsMultiplesPrimes"
+   },
+   {
+    "id": "N07",
+    "name": "Fractions: introduction",
+    "folder": "01_Number/N07_FractionsIntro"
+   },
+   {
+    "id": "N08",
+    "name": "Fractions: arithmetic",
+    "folder": "01_Number/N08_FractionsArithmetic"
+   },
+   {
+    "id": "N09",
+    "name": "Fractions, decimals and percentages: conversions",
+    "folder": "01_Number/N09_FDPConversions"
+   },
+   {
+    "id": "N10",
+    "name": "Recurring decimals",
+    "folder": "01_Number/N10_RecurringDecimals"
+   },
+   {
+    "id": "N11",
+    "name": "Percentages",
+    "folder": "01_Number/N11_Percentages"
+   },
+   {
+    "id": "N12",
+    "name": "Rounding",
+    "folder": "01_Number/N12_Rounding"
+   },
+   {
+    "id": "N13",
+    "name": "Estimation",
+    "folder": "01_Number/N13_Estimation"
+   },
+   {
+    "id": "N14",
+    "name": "Indices",
+    "folder": "01_Number/N14_Indices"
+   },
+   {
+    "id": "N15",
+    "name": "Standard form",
+    "folder": "01_Number/N15_StandardForm"
+   },
+   {
+    "id": "N16",
+    "name": "Surds",
+    "folder": "01_Number/N16_Surds"
+   },
+   {
+    "id": "N17",
+    "name": "Error intervals and bounds",
+    "folder": "01_Number/N17_ErrorIntervalsAndBounds"
+   },
+   {
+    "id": "N18",
+    "name": "Exact answers",
+    "folder": "01_Number/N18_ExactAnswers"
+   },
+   {
+    "id": "N19",
+    "name": "Systematic listing",
+    "folder": "01_Number/N19_SystematicListing"
+   },
+   {
+    "id": "N20",
+    "name": "Financial maths",
+    "folder": "01_Number/N20_FinancialMaths"
+   },
+   {
+    "id": "N21",
+    "name": "Calculator skills",
+    "folder": "01_Number/N21_CalculatorSkills"
+   }
+  ]
+ },
+ {
+  "id": "02_Algebra",
+  "name": "Algebra",
+  "skills": [
+   {
+    "id": "A01",
+    "name": "Algebraic notation",
+    "folder": "02_Algebra/A01_AlgebraicNotation"
+   },
+   {
+    "id": "A02",
+    "name": "Substitution",
+    "folder": "02_Algebra/A02_Substitution"
+   },
+   {
+    "id": "A03",
+    "name": "Simplifying expressions",
+    "folder": "02_Algebra/A03_SimplifyingExpressions"
+   },
+   {
+    "id": "A04",
+    "name": "Expanding brackets",
+    "folder": "02_Algebra/A04_ExpandingBrackets"
+   },
+   {
+    "id": "A05",
+    "name": "Factorising",
+    "folder": "02_Algebra/A05_Factorising"
+   },
+   {
+    "id": "A06",
+    "name": "Algebraic fractions",
+    "folder": "02_Algebra/A06_AlgebraicFractions"
+   },
+   {
+    "id": "A07",
+    "name": "Formulae",
+    "folder": "02_Algebra/A07_Formulae"
+   },
+   {
+    "id": "A08",
+    "name": "Linear equations",
+    "folder": "02_Algebra/A08_LinearEquations"
+   },
+   {
+    "id": "A09",
+    "name": "Inequalities",
+    "folder": "02_Algebra/A09_Inequalities"
+   },
+   {
+    "id": "A10",
+    "name": "Quadratic equations",
+    "folder": "02_Algebra/A10_QuadraticEquations"
+   },
+   {
+    "id": "A11",
+    "name": "Simultaneous equations",
+    "folder": "02_Algebra/A11_SimultaneousEquations"
+   },
+   {
+    "id": "A12",
+    "name": "Sequences",
+    "folder": "02_Algebra/A12_Sequences"
+   },
+   {
+    "id": "A13",
+    "name": "Iteration",
+    "folder": "02_Algebra/A13_Iteration"
+   },
+   {
+    "id": "A14",
+    "name": "Functions",
+    "folder": "02_Algebra/A14_Functions"
+   },
+   {
+    "id": "A15",
+    "name": "Coordinates",
+    "folder": "02_Algebra/A15_Coordinates"
+   },
+   {
+    "id": "A16",
+    "name": "Straight line graphs",
+    "folder": "02_Algebra/A16_StraightLineGraphs"
+   },
+   {
+    "id": "A17",
+    "name": "Quadratic graphs",
+    "folder": "02_Algebra/A17_QuadraticGraphs"
+   },
+   {
+    "id": "A18",
+    "name": "Other graphs",
+    "folder": "02_Algebra/A18_OtherGraphs"
+   },
+   {
+    "id": "A19",
+    "name": "Trigonometric graphs",
+    "folder": "02_Algebra/A19_TrigGraphs"
+   },
+   {
+    "id": "A20",
+    "name": "Graph transformations",
+    "folder": "02_Algebra/A20_GraphTransformations"
+   },
+   {
+    "id": "A21",
+    "name": "Advanced graphs",
+    "folder": "02_Algebra/A21_AdvancedGraphs"
+   },
+   {
+    "id": "A22",
+    "name": "Real-life graphs",
+    "folder": "02_Algebra/A22_RealLifeGraphs"
+   },
+   {
+    "id": "A23",
+    "name": "Kinematic graphs",
+    "folder": "02_Algebra/A23_KinematicGraphs"
+   },
+   {
+    "id": "A24",
+    "name": "Differentiation",
+    "folder": "02_Algebra/A24_Differentiation"
+   },
+   {
+    "id": "A25",
+    "name": "Algebraic proof",
+    "folder": "02_Algebra/A25_AlgebraicProof"
+   }
+  ]
+ },
+ {
+  "id": "03_Ratio_Proportion_Rates",
+  "name": "Ratio, proportion and rates",
+  "skills": [
+   {
+    "id": "R01",
+    "name": "Time",
+    "folder": "03_Ratio_Proportion_Rates/R01_Time"
+   },
+   {
+    "id": "R02",
+    "name": "Units of measure",
+    "folder": "03_Ratio_Proportion_Rates/R02_UnitsOfMeasure"
+   },
+   {
+    "id": "R03",
+    "name": "Speed and rates",
+    "folder": "03_Ratio_Proportion_Rates/R03_SpeedAndRates"
+   },
+   {
+    "id": "R04",
+    "name": "Density and pressure",
+    "folder": "03_Ratio_Proportion_Rates/R04_DensityAndPressure"
+   },
+   {
+    "id": "R05",
+    "name": "Ratio",
+    "folder": "03_Ratio_Proportion_Rates/R05_Ratio"
+   },
+   {
+    "id": "R06",
+    "name": "Ratio problems",
+    "folder": "03_Ratio_Proportion_Rates/R06_RatioProblems"
+   },
+   {
+    "id": "R07",
+    "name": "Proportion word problems",
+    "folder": "03_Ratio_Proportion_Rates/R07_ProportionWordProblems"
+   },
+   {
+    "id": "R08",
+    "name": "Algebraic proportion",
+    "folder": "03_Ratio_Proportion_Rates/R08_AlgebraicProportion"
+   },
+   {
+    "id": "R09",
+    "name": "Percentages",
+    "folder": "03_Ratio_Proportion_Rates/R09_Percentages"
+   }
+  ]
+ },
+ {
+  "id": "04_Geometry_Measures",
+  "name": "Geometry and measures",
+  "skills": [
+   {
+    "id": "G01",
+    "name": "Properties of 2D shapes",
+    "folder": "04_Geometry_Measures/G01_Properties2DShapes"
+   },
+   {
+    "id": "G02",
+    "name": "Properties of 3D shapes",
+    "folder": "04_Geometry_Measures/G02_Properties3DShapes"
+   },
+   {
+    "id": "G03",
+    "name": "Angles: basics",
+    "folder": "04_Geometry_Measures/G03_AnglesBasics"
+   },
+   {
+    "id": "G04",
+    "name": "Angles in triangles and quadrilaterals",
+    "folder": "04_Geometry_Measures/G04_AnglesTrianglesQuadrilaterals"
+   },
+   {
+    "id": "G05",
+    "name": "Angles in parallel lines and polygons",
+    "folder": "04_Geometry_Measures/G05_AnglesParallelLinesPolygons"
+   },
+   {
+    "id": "G06",
+    "name": "Area and perimeter",
+    "folder": "04_Geometry_Measures/G06_AreaAndPerimeter"
+   },
+   {
+    "id": "G07",
+    "name": "Circles",
+    "folder": "04_Geometry_Measures/G07_Circles"
+   },
+   {
+    "id": "G08",
+    "name": "Circle theorems",
+    "folder": "04_Geometry_Measures/G08_CircleTheorems"
+   },
+   {
+    "id": "G09",
+    "name": "Pythagoras",
+    "folder": "04_Geometry_Measures/G09_Pythagoras"
+   },
+   {
+    "id": "G10",
+    "name": "Trigonometry in right-angled triangles",
+    "folder": "04_Geometry_Measures/G10_TrigonometryRightAngled"
+   },
+   {
+    "id": "G11",
+    "name": "Trigonometric graphs",
+    "folder": "04_Geometry_Measures/G11_TrigonometricGraphs"
+   },
+   {
+    "id": "G12",
+    "name": "Trigonometry in non-right-angled triangles",
+    "folder": "04_Geometry_Measures/G12_NonRightAngledTrig"
+   },
+   {
+    "id": "G13",
+    "name": "Congruence and similarity",
+    "folder": "04_Geometry_Measures/G13_CongruenceAndSimilarity"
+   },
+   {
+    "id": "G14",
+    "name": "Surface area",
+    "folder": "04_Geometry_Measures/G14_SurfaceArea"
+   },
+   {
+    "id": "G15",
+    "name": "Volume",
+    "folder": "04_Geometry_Measures/G15_Volume"
+   },
+   {
+    "id": "G16",
+    "name": "3D representations",
+    "folder": "04_Geometry_Measures/G16_3DRepresentations"
+   },
+   {
+    "id": "G17",
+    "name": "Transformations",
+    "folder": "04_Geometry_Measures/G17_Transformations"
+   },
+   {
+    "id": "G18",
+    "name": "Vectors",
+    "folder": "04_Geometry_Measures/G18_Vectors"
+   },
+   {
+    "id": "G19",
+    "name": "Constructions and loci",
+    "folder": "04_Geometry_Measures/G19_ConstructionsAndLoci"
+   },
+   {
+    "id": "G20",
+    "name": "Scale drawings",
+    "folder": "04_Geometry_Measures/G20_ScaleDrawings"
+   },
+   {
+    "id": "G21",
+    "name": "Bearings",
+    "folder": "04_Geometry_Measures/G21_Bearings"
+   },
+   {
+    "id": "G22",
+    "name": "Units and measures",
+    "folder": "04_Geometry_Measures/G22_UnitsAndMeasures"
+   },
+   {
+    "id": "G23",
+    "name": "Coordinates",
+    "folder": "04_Geometry_Measures/G23_Coordinates"
+   },
+   {
+    "id": "G24",
+    "name": "Geometric proof",
+    "folder": "04_Geometry_Measures/G24_GeometricProof"
+   },
+   {
+    "id": "G25",
+    "name": "Bounds and compound measures",
+    "folder": "04_Geometry_Measures/G25_BoundsAndCompoundMeasures"
+   }
+  ]
+ },
+ {
+  "id": "05_Probability",
+  "name": "Probability",
+  "skills": [
+   {
+    "id": "P01",
+    "name": "Probability language",
+    "folder": "05_Probability/P01_ProbabilityLanguage"
+   },
+   {
+    "id": "P02",
+    "name": "Theoretical probability",
+    "folder": "05_Probability/P02_TheoreticalProb"
+   },
+   {
+    "id": "P03",
+    "name": "Experimental probability",
+    "folder": "05_Probability/P03_ExperimentalProb"
+   },
+   {
+    "id": "P04",
+    "name": "Expected frequency",
+    "folder": "05_Probability/P04_ExpectedFrequency"
+   },
+   {
+    "id": "P05",
+    "name": "Sample spaces",
+    "folder": "05_Probability/P05_SampleSpaces"
+   },
+   {
+    "id": "P06",
+    "name": "Frequency trees",
+    "folder": "05_Probability/P06_FrequencyTrees"
+   },
+   {
+    "id": "P07",
+    "name": "Venn diagrams",
+    "folder": "05_Probability/P07_VennDiagrams"
+   },
+   {
+    "id": "P08",
+    "name": "Set notation",
+    "folder": "05_Probability/P08_SetNotation"
+   },
+   {
+    "id": "P09",
+    "name": "Tree diagrams (independent events)",
+    "folder": "05_Probability/P09_TreeDiagramsIndep"
+   },
+   {
+    "id": "P10",
+    "name": "Tree diagrams (dependent events)",
+    "folder": "05_Probability/P10_TreeDiagramsDep"
+   },
+   {
+    "id": "P11",
+    "name": "Conditional probability",
+    "folder": "05_Probability/P11_ConditionalProb"
+   }
+  ]
+ },
+ {
+  "id": "06_Statistics",
+  "name": "Statistics",
+  "skills": [
+   {
+    "id": "S01",
+    "name": "Range",
+    "folder": "06_Statistics/S01_Range"
+   },
+   {
+    "id": "S02",
+    "name": "Mean",
+    "folder": "06_Statistics/S02_Mean"
+   },
+   {
+    "id": "S03",
+    "name": "Median and mode",
+    "folder": "06_Statistics/S03_MedianAndMode"
+   },
+   {
+    "id": "S04",
+    "name": "Averages from frequency tables",
+    "folder": "06_Statistics/S04_AveragesFreqTables"
+   },
+   {
+    "id": "S05",
+    "name": "Averages from grouped data",
+    "folder": "06_Statistics/S05_AveragesGroupedData"
+   },
+   {
+    "id": "S06",
+    "name": "Averages from diagrams",
+    "folder": "06_Statistics/S06_AveragesFromDiagrams"
+   },
+   {
+    "id": "S07",
+    "name": "Choosing averages",
+    "folder": "06_Statistics/S07_ChoosingAverages"
+   },
+   {
+    "id": "S08",
+    "name": "Frequency tables and two-way tables",
+    "folder": "06_Statistics/S08_FreqTablesAndTwoWayTables"
+   },
+   {
+    "id": "S09",
+    "name": "Grouped frequency tables",
+    "folder": "06_Statistics/S09_GroupedFreqTables"
+   },
+   {
+    "id": "S10",
+    "name": "Tally charts and pictograms",
+    "folder": "06_Statistics/S10_TallyAndPictograms"
+   },
+   {
+    "id": "S11",
+    "name": "Bar charts",
+    "folder": "06_Statistics/S11_BarCharts"
+   },
+   {
+    "id": "S12",
+    "name": "Pie charts",
+    "folder": "06_Statistics/S12_PieCharts"
+   },
+   {
+    "id": "S13",
+    "name": "Line graphs",
+    "folder": "06_Statistics/S13_LineGraphs"
+   },
+   {
+    "id": "S14",
+    "name": "Scatter graphs",
+    "folder": "06_Statistics/S14_ScatterGraphs"
+   },
+   {
+    "id": "S15",
+    "name": "Stem and leaf diagrams",
+    "folder": "06_Statistics/S15_StemAndLeaf"
+   },
+   {
+    "id": "S16",
+    "name": "Histograms",
+    "folder": "06_Statistics/S16_Histograms"
+   },
+   {
+    "id": "S17",
+    "name": "Frequency polygons",
+    "folder": "06_Statistics/S17_FrequencyPolygons"
+   },
+   {
+    "id": "S18",
+    "name": "Cumulative frequency",
+    "folder": "06_Statistics/S18_CumulativeFrequency"
+   },
+   {
+    "id": "S19",
+    "name": "Box plots",
+    "folder": "06_Statistics/S19_BoxPlots"
+   },
+   {
+    "id": "S20",
+    "name": "Comparing distributions",
+    "folder": "06_Statistics/S20_ComparingDistributions"
+   },
+   {
+    "id": "S21",
+    "name": "Types of data",
+    "folder": "06_Statistics/S21_TypesOfData"
+   },
+   {
+    "id": "S22",
+    "name": "Questionnaires",
+    "folder": "06_Statistics/S22_Questionnaires"
+   },
+   {
+    "id": "S23",
+    "name": "Collecting and presenting data",
+    "folder": "06_Statistics/S23_CollectingAndPresentingData"
+   },
+   {
+    "id": "S24",
+    "name": "Sampling and bias",
+    "folder": "06_Statistics/S24_SamplingAndBias"
+   },
+   {
+    "id": "S25",
+    "name": "Capture-recapture",
+    "folder": "06_Statistics/S25_CaptureRecapture"
+   }
+  ]
+ }
+]

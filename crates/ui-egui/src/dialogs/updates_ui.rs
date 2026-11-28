@@ -26,6 +26,7 @@ pub(crate) fn enable(app: &mut SlideApp) {
 }
 
 /// Help > Check for Updates…: runs a check and reports the outcome either way.
+#[expect(dead_code, reason = "the maths edition's Help > Check for Updates runs its own updater (maths::update_ui)")]
 pub(crate) fn request_check(app: &mut SlideApp) {
     if !matches!(app.updates_rt.updater.status(), Status::Checking) {
         app.updates_rt.check_requested = true;

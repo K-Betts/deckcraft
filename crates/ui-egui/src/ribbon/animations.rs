@@ -191,6 +191,7 @@ pub(super) fn animations(app: &mut SlideApp, ui: &mut Ui) {
             });
         });
     });
+    super::maths::animations_group(app, ui);
 }
 
 pub fn paint_anim_tile(p: &egui::Painter, r: Rect, label: &str, class: AnimClass, enabled: bool) {

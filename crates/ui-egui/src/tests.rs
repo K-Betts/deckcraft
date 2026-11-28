@@ -690,10 +690,15 @@ fn preferences_cancel_restores_the_settings_done_keeps_them() {
     harness.run_steps(2);
     let before = harness.state().session.prefs.clone();
     let dark_before = harness.state().ui.brightness;
+    assert!(harness.state().ui.maths.follow_system, "the default follows the computer");
     let change = |harness: &mut egui_kittest::Harness<'static, SlideApp>| {
         harness.state_mut().run("app.preferences", json!({})).unwrap();
         harness.run_steps(2);
-        for label in ["Dark appearance", "Show smart guides", "Snap objects to grid"] {
+        // The Appearance drop-down runs this command.
+        let other = if dark_before == theme::Brightness::Dark { "light" } else { "dark" };
+        harness.state_mut().run("view.appearance", json!({ "mode": other })).unwrap();
+        harness.run_steps(1);
+        for label in ["Show smart guides", "Snap objects to grid"] {
             harness
                 .query_all_by_role_and_label(egui::accesskit::Role::CheckBox, label)
                 .next()
@@ -708,6 +713,7 @@ fn preferences_cancel_restores_the_settings_done_keeps_them() {
         let s = harness.state();
         assert!(s.dialog.is_none(), "{how} closes Preferences");
         assert_eq!(s.ui.brightness, dark_before, "{how} restores the appearance");
+        assert!(s.ui.maths.follow_system, "{how} restores following the computer");
         assert_eq!(s.session.prefs.smart_guides, before.smart_guides, "{how} restores smart guides");
         assert_eq!(s.session.prefs.snap_to_grid, before.snap_to_grid, "{how} restores snap to grid");
     };
@@ -985,12 +991,16 @@ fn select_all_follows_the_focused_pane() {
 }
 
 fn harness() -> egui_kittest::Harness<'static, SlideApp> {
+    let mut app = SlideApp::new(Session::new(), Services::default());
+    // The maths edition's first-run "Teaching a subject?" card would push Home's Recent list
+    // below this window; dismissed, Home is laid out as upstream's tests expect.
+    app.ui.maths.subjects_hint_dismissed = true;
     egui_kittest::Harness::builder().with_size(egui::vec2(1200.0, 800.0)).build_ui_state(
         |ui, app: &mut SlideApp| {
             app.logic(ui.ctx());
             app.ui(ui);
         },
-        SlideApp::new(Session::new(), Services::default()),
+        app,
     )
 }
 
@@ -2502,7 +2512,8 @@ fn comments_pane_keeps_its_width_and_resizes() {
     assert!(width < 320.0, "the pane keeps its default width, not {width}");
     // The cards stay compact: the second one starts near the top, not below a stretched first.
     let second = h.get_by_label("Resolved one").rect();
-    assert!(second.top() < 450.0, "the second comment sits near the top, at {second:?}");
+    // 480, not 450: the maths edition's theme spacing makes the first card a little taller.
+    assert!(second.top() < 480.0, "the second comment sits near the top, at {second:?}");
 
     // Drag the pane's left edge: right narrows it, left widens it.
     let drag = |h: &mut egui_kittest::Harness<'_, SlideApp>, dx: f32| {

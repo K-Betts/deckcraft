@@ -16,6 +16,8 @@ mod keys;
 mod media;
 mod presenter;
 mod render;
+mod steps;
+mod teacher;
 mod ui;
 mod zoom;
 pub(crate) use zoom::GRID_CAP;
@@ -28,6 +30,7 @@ use presenter::{NOTES_MAX, NOTES_MIN, NOTES_STEP, format_elapsed, presenter_note
 #[cfg(test)]
 use render::{below_playing_video, next_rect, render_frame, start_prefetch};
 use render::{render_backdrop, render_threads};
+use steps::StepMark;
 #[cfg(test)]
 use ui::transition_layers;
 pub use ui::ui;
@@ -88,6 +91,8 @@ pub struct Show {
     /// A dot that follows the pointer and leaves no ink (`Cmd/Ctrl+L`).
     laser: bool,
     strokes: Vec<Vec<Pos2>>,
+    /// Teacher Mode: the annotation overlay and its palette, when on.
+    pub teacher: Option<crate::maths::teacher_overlay::TeacherOverlay>,
     /// Digits typed for Go to Slide, shown until Enter, Esc, or a short pause.
     goto: String,
     goto_at: f64,
@@ -109,6 +114,8 @@ pub struct Show {
     /// Click areas on slide `.0`, in slide points: hyperlinks and shape actions, and the slide's
     /// shapes in drawing order.
     links: Option<(usize, Vec<PlacedLink>, Vec<PlacedShape>)>,
+    /// Reveal Step by Step: lines of working shown or hidden by hand.
+    steps: steps::Steps,
     /// The main step whose media effects are being set off, and how far into it they have been.
     media_clock: Option<(usize, f64)>,
     /// Media effects set off and not yet carried out: (shape, effect id).
@@ -131,6 +138,8 @@ struct Key {
     plays: Vec<(ShapeId, usize)>,
     /// The frames animated GIFs show.
     gif: u64,
+    /// Step lines shown or hidden by hand.
+    marks: Vec<StepMark>,
 }
 
 /// A slide frame being rendered on another thread: what it will be (`key`) and where it arrives.
@@ -254,6 +263,7 @@ impl Show {
             pen: false,
             laser: false,
             strokes: vec![],
+            teacher: None,
             goto: String::new(),
             goto_at: 0.0,
             started: false,
@@ -267,6 +277,7 @@ impl Show {
             media_slide: None,
             last_viewed: None,
             links: None,
+            steps: steps::Steps::new(from),
             media_clock: None,
             media_cues: vec![],
             hidden_anchor: None,
@@ -503,6 +514,7 @@ impl Show {
                 self.ended = false;
                 self.zoom = None;
                 self.zoom_arm = false;
+                self.steps.slide_changed(i);
                 if self.rehearse {
                     self.timings.push((self.timeline.as_ref().map(|t| t.0).unwrap_or(i), now - self.slide_start));
                 }
@@ -535,6 +547,9 @@ impl Show {
                 self.step_end = now;
                 self.media_clock = None;
                 self.strokes.clear();
+                if let Some(t) = self.teacher.as_mut() {
+                    t.on_slide_change(i);
+                }
                 if self.preview_only {
                     return false;
                 }

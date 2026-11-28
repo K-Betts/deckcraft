@@ -66,7 +66,13 @@ impl SlideApp {
     /// egui-winit drops Ctrl+V, and the shortcut could no longer paste the shape here (#182).
     pub(super) fn publish_clipboard(&mut self, ctx: &egui::Context, cut: bool) {
         let cmd = if cut { "edit.cut" } else { "edit.copy" };
-        let Ok(v) = self.session.execute(cmd, &json!({})) else { return };
+        let v = match self.session.execute(cmd, &json!({})) {
+            Ok(v) => v,
+            Err(e) => {
+                self.set_status(e.to_string());
+                return;
+            }
+        };
         let text = v.get("text").and_then(Value::as_str).unwrap_or("").to_string();
         let html = v.get("html").and_then(Value::as_str).unwrap_or("").to_string();
         if self.session.clipboard.slides.is_empty() && !html.is_empty() && self.services.clipboard_set_html.as_mut().is_some_and(|f| f(&html, &text))

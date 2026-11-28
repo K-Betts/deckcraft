@@ -11,6 +11,8 @@ use crate::{SlideFields, shape_geometry, table};
 
 /// One shape's text as drawn on the slide.
 pub struct PlacedText {
+    /// The shape the text belongs to (for table cell text, the table).
+    pub shape: ShapeId,
     pub layout: TextLayout,
     /// Text-local → slide points (text rotation included, flips not: see [`crate::text_transform`]).
     /// Text-local space is the shape's own space, except inside a group whose child coordinates
@@ -190,7 +192,7 @@ fn place_text(out: &mut Placed, rctx: &Ctx, fields: &SlideFields, owner: ShapeId
         let r = Rect::new(x0, line.top, x1, line.bottom);
         out.links.push(PlacedLink { rect: m.transform_rect_bbox(r), link, shape: owner, text: true });
     }
-    out.texts.push(PlacedText { layout, transform: m, body: placed });
+    out.texts.push(PlacedText { shape: owner, layout, transform: m, body: placed });
 }
 
 /// The size and transform a shape's text is set in. `rel` is the shape's transform relative to

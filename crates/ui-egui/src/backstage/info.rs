@@ -190,10 +190,19 @@ pub(super) fn save_as(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: 
                 // and the dirty flag as they were; a cancelled dialog or a failed save doesn't.
                 let snapshot = |app: &SlideApp| app.session.active().map(|d| (d.path.clone(), d.is_dirty(), d.revision));
                 let before = snapshot(app);
-                app.save_as_dialog(fmt);
+                // On the desktop the dialog is answered later: leave the page then, if it saved.
+                app.save_as_then(fmt, |app, saved| {
+                    if saved {
+                        app.backstage = None;
+                    }
+                });
                 web || snapshot(app) != before
             } else {
-                app.export_as(fmt, json!({}))
+                app.export_then(fmt, json!({}), |app, exported| {
+                    if exported {
+                        app.backstage = None;
+                    }
+                })
             };
             if done {
                 out.close = true;
@@ -233,19 +242,39 @@ pub(super) fn about(app: &mut SlideApp, ui: &mut Ui) {
         ui.vertical(|ui| {
             ui.set_width(340.0);
             heading(ui, "Appearance");
-            let dark = app.ui.brightness == theme::Brightness::Dark;
-            craft_ui::ComboBox::from_id_salt("backstage_appearance")
-                .width(260.0)
-                .selected_text(if dark { "Dark" } else { "Light" })
-                .show_ui(ui, |ui| {
-                    for (on, label) in [(false, "Light"), (true, "Dark")] {
-                        if ui.selectable_label(dark == on, label).clicked() {
-                            let _ = app.run("view.dark", json!({"on": on}));
-                        }
-                    }
-                })
-                .response
-                .widget_info(|| egui::WidgetInfo::labeled(egui::Role::ComboBox, true, "Appearance"));
+            crate::maths::appearance::appearance_picker(app, ui, "backstage_appearance");
+            ui.add_space(16.0);
+            heading(ui, "User Information");
+            dim(ui, "DeckCraft has no accounts of its own, and your presentations stay on your device unless you choose Google Drive.");
+            if app.ui.maths.drive_enabled {
+                crate::maths::drive_ui::section(app, ui);
+            }
+        });
+        ui.add_space(40.0);
+        ui.vertical(|ui| {
+            heading(ui, "Product Information");
+            ui.horizontal(|ui| {
+                let (r, _) = ui.allocate_exact_size(vec2(40.0, 40.0), Sense::hover());
+                crate::dialogs::paint_logo(ui.painter(), r);
+                ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
+            });
+            dim(ui, &crate::dialogs::version_line());
+            dim(ui, "Open source under MIT OR Apache-2.0. Not affiliated with Microsoft.");
+            ui.add_space(14.0);
+            if task(
+                ui,
+                Icon::Help,
+                "About DeckCraft",
+                "About DeckCraft",
+                "The version, the people and models who built it, and where to find us.",
+                true,
+            ) {
+                let _ = app.run("app.about", json!({}));
+            }
+            if app.ui.maths.show_community_links {
+                ui.hyperlink_to("Join our community on Discord", deckcraft_engine::links::DISCORD);
+                ui.hyperlink_to("Source on GitHub", deckcraft_engine::links::GITHUB);
+            }
         });
     });
 }

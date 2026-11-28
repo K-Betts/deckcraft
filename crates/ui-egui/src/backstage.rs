@@ -20,6 +20,7 @@ use crate::theme::{self, Tokens};
 
 mod files;
 mod info;
+mod maths;
 mod print;
 
 pub use files::split_path;
@@ -239,8 +240,9 @@ struct Outcome {
 
 /// Colours of the side menu and the page, from the theme: the menu sits a step darker than the
 /// page, as in PowerPoint.
+/// The side menu is the white card; the page beside it is the quiet window colour that cards sit on.
 fn colours(t: &Tokens) -> (Color32, Color32) {
-    (t.chrome, t.card)
+    (t.card, t.chrome)
 }
 
 /// Runs a side-menu action. Returns the page to show, or None to close the view (Some(current)
@@ -442,14 +444,17 @@ fn nav_item(ui: &mut Ui, nav: Nav, bs: &Backstage, index: usize, t: &Tokens) -> 
     let label = nav.label();
     resp.widget_info(|| egui::WidgetInfo::selected(egui::Role::Button, true, selected, label));
     let p = ui.painter();
-    let row = rect.shrink2(vec2(6.0, 1.0));
-    if resp.hovered() {
-        p.rect_filled(row, CornerRadius::same(2), t.hover);
+    let row = rect.shrink2(vec2(8.0, 2.0));
+    let pill = CornerRadius::same(theme::radius::CARD);
+    if selected {
+        // The current page is a soft accent pill.
+        p.rect_filled(row, pill, t.selected);
+    } else if resp.hovered() {
+        p.rect_filled(row, pill, t.hover);
     }
-    if bs.focus == Some(index) || selected {
-        // The current page (and the keyboard focus) is outlined, as in PowerPoint.
-        let ink = if bs.focus == Some(index) { t.text } else { t.border };
-        p.rect_stroke(row, CornerRadius::same(2), Stroke::new(1.0, ink), StrokeKind::Inside);
+    if bs.focus == Some(index) {
+        // Keyboard focus is a clear ring.
+        p.rect_stroke(row, pill, Stroke::new(2.0, t.accent), StrokeKind::Inside);
     }
     let ink = if selected { t.accent } else { t.text };
     icons::paint(p, Rect::from_center_size(pos2(rect.left() + 26.0, rect.center().y), vec2(16.0, 16.0)), nav.icon(), ink, false);

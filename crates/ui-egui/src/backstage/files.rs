@@ -10,19 +10,24 @@ fn tile(ui: &mut Ui, label: &str, theme: Option<&deckcraft_model::Theme>, big: b
     let (rect, resp) = ui.allocate_exact_size(vec2(thumb_w + 16.0, thumb_w * 9.0 / 16.0 + 44.0), Sense::click());
     resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, label));
     let p = ui.painter();
-    if resp.hovered() {
-        p.rect_filled(rect, CornerRadius::same(4), t.hover);
-    }
+    // A card: raised a little more when the pointer is over it.
+    let card = CornerRadius::same(theme::radius::CARD);
+    let lift = if resp.hovered() { 8 } else { 3 };
+    p.add(
+        egui::epaint::Shadow { offset: [0, lift / 2], blur: lift as u8 * 3, spread: 0, color: t.shadow }.as_shape(rect.shrink2(vec2(4.0, 4.0)), card),
+    );
+    p.rect_filled(rect.shrink2(vec2(4.0, 4.0)), card, t.card);
     let thumb = Rect::from_min_size(rect.min + vec2(8.0, 10.0), vec2(thumb_w, thumb_w * 9.0 / 16.0));
+    let inner = CornerRadius::same(theme::radius::SMALL);
     match theme {
         Some(th) => crate::ribbon::paint_theme_tile(p, thumb, th),
         None => {
-            p.rect_filled(thumb, CornerRadius::same(2), Color32::WHITE);
-            p.rect_stroke(thumb, CornerRadius::same(2), Stroke::new(1.0, Color32::from_gray(200)), StrokeKind::Inside);
+            p.rect_filled(thumb, inner, Color32::WHITE);
+            p.rect_stroke(thumb, inner, Stroke::new(1.0, t.border), StrokeKind::Inside);
         }
     }
     if resp.hovered() {
-        p.rect_stroke(thumb, CornerRadius::same(2), Stroke::new(2.0, t.accent), StrokeKind::Outside);
+        p.rect_stroke(rect.shrink2(vec2(4.0, 4.0)), card, Stroke::new(1.5, t.accent), StrokeKind::Inside);
     }
     let galley = p.layout(label.to_string(), theme::font(12.0), t.text, rect.width() - 8.0);
     p.galley(pos2(rect.center().x - galley.size().x / 2.0, thumb.bottom() + 8.0), galley, t.text);
@@ -66,15 +71,26 @@ fn new_tiles(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize, blank: 
     true
 }
 
-/// Starter decks whose name, summary, theme or a slide title matches `query`, at most `limit` tiles.
+/// Your own templates first, then the starter decks, whose name, summary, theme or a slide title
+/// matches `query`: at most `limit` tiles.
 fn template_tiles(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize) -> bool {
+    let q = query.trim().to_lowercase();
+    let own: Vec<_> = super::maths::personal_templates(ui).into_iter().filter(|p| q.is_empty() || p.name.to_lowercase().contains(&q)).collect();
     let list = deckcraft_engine::templates::matching(query);
-    if list.is_empty() {
+    if list.is_empty() && own.is_empty() {
         return false;
     }
     ui.horizontal_wrapped(|ui| {
         ui.spacing_mut().item_spacing = vec2(10.0, 10.0);
-        for starter in list.into_iter().take(limit) {
+        let mut shown = 0;
+        for template in own.into_iter().take(limit) {
+            shown += 1;
+            let path = template.path.to_string_lossy().to_string();
+            if tile(ui, &template.name, None, false).on_hover_text(format!("Your template: {path}")).clicked() {
+                let _ = app.run("file.new", json!({"templateFile": path}));
+            }
+        }
+        for starter in list.into_iter().take(limit.saturating_sub(shown)) {
             let theme = deckcraft_model::theme::builtin_themes().into_iter().find(|th| th.name == starter.theme);
             if tile(ui, starter.name, theme.as_ref(), false).on_hover_text(starter.summary).clicked() {
                 let _ = app.run("file.new", json!({"template": starter.name}));
@@ -115,7 +131,7 @@ fn recent_list(app: &mut SlideApp, ui: &mut Ui, query: &str, limit: usize) {
         resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, &name));
         let p = ui.painter();
         if resp.hovered() {
-            p.rect_filled(rect, CornerRadius::same(3), t.hover);
+            p.rect_filled(rect, CornerRadius::same(theme::radius::CARD), t.card);
         }
         let ink = if missing { t.text_dim } else { t.text };
         // The row is as wide as the page's content, which a narrow window clips: keep the mark
@@ -212,6 +228,7 @@ pub(super) fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mu
         crate::dialogs::paint_logo(ui.painter(), r);
         ui.label(RichText::new("DeckCraft").font(theme::bold(24.0)).color(t.text));
     });
+    super::maths::home_cards(app, ui);
     ui.add_space(18.0);
     ui.horizontal(|ui| {
         ui.label(RichText::new("New").font(theme::bold(16.0)).color(t.text));
@@ -251,8 +268,10 @@ pub(super) fn home(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage, out: &mu
             }
         });
     }
-    ui.add_space(30.0);
-    ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
+    if app.ui.maths.show_community_links {
+        ui.add_space(30.0);
+        ui.hyperlink_to("Join the ArtCraft community on Discord", deckcraft_engine::links::DISCORD);
+    }
 }
 
 /// New: a blank presentation, then every theme and starter template, with a search box.
@@ -273,7 +292,9 @@ pub(super) fn new_page(app: &mut SlideApp, ui: &mut Ui, bs: &mut Backstage) {
     let templates = if q.trim().is_empty() || !deckcraft_engine::templates::matching(&q).is_empty() {
         ui.add_space(18.0);
         heading(ui, "Templates");
-        template_tiles(app, ui, &q, usize::MAX)
+        let shown = template_tiles(app, ui, &q, usize::MAX);
+        super::maths::templates_folder_hint(ui, &q);
+        shown
     } else {
         false
     };

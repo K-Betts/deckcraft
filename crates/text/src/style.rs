@@ -108,6 +108,12 @@ pub(crate) struct ParaShaped {
     pub(crate) level: u8,
     /// Right-to-left paragraph (`a:pPr/@rtl`).
     pub(crate) rtl: bool,
+    /// The paragraph is one equation drawn as maths: its box and the style it takes colour from.
+    /// The line holds blank space the equation's width, which the equation is drawn over.
+    pub(crate) math: Option<(crate::math::MathBox, usize)>,
+    /// Equations inside a sentence: the cell where the blank space they are drawn over starts, the
+    /// equation, and the style it takes its colour and size from.
+    pub(crate) inline_math: Vec<(usize, crate::math::MathBox, usize)>,
 }
 
 fn style_name(bold: bool, italic: bool) -> &'static str {

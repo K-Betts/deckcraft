@@ -36,7 +36,11 @@ pub fn substitutes(family: &str) -> &'static [&'static str] {
     }
     match f.as_str() {
         "calibri" | "calibri light" => &["Carlito", "Liberation Sans", "Arial", "Inter"],
-        "cambria" | "cambria math" => &["Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
+        // Equations: an open maths font first, which has the math-italic letters (𝑥, 𝑦) and
+        // operators that equations are written in; Caladea and the serifs have neither.
+        // STIX Two Math is installed with macOS and is OFL-1.1.
+        "cambria math" => &["STIX Two Math", "Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
+        "cambria" => &["Caladea", "Liberation Serif", "Times New Roman", "Merriweather"],
         "arial" | "helvetica" | "helvetica neue" | "arial nova" => &["Liberation Sans", "Arial", "Helvetica Neue", "Helvetica", "Inter"],
         "times new roman" | "times" => &["Liberation Serif", "Times New Roman", "Times", "Merriweather"],
         "aptos" | "aptos display" | "aptos narrow" | "segoe ui" | "segoe ui light" | "segoe ui semibold" | "tahoma" | "verdana" => {
@@ -1568,6 +1572,18 @@ impl FontDb {
         }
         MISSES.lock().unwrap_or_else(std::sync::PoisonError::into_inner).get_or_insert_with(Default::default).insert(c);
         false
+    }
+
+    /// The box a glyph's ink fills, `(left, top, right, bottom)` in font units, y-down from the
+    /// baseline (so a letter's top is negative). `None` for a glyph with no outline (a space).
+    pub fn glyph_bounds(&self, face: &FontFace, gid: u32) -> Option<(f64, f64, f64, f64)> {
+        use kurbo::Shape;
+        let path = self.outline(face, gid);
+        if path.elements().is_empty() {
+            return None;
+        }
+        let r = path.bounding_box();
+        Some((r.x0, r.y0, r.x1, r.y1))
     }
 
     /// Glyph outline in font units, y-down (flipped), cached per (face, glyph).

@@ -19,14 +19,21 @@ fn album_item_label(v: &Value) -> String {
     }
 }
 
-fn pick_album_picture(app: &mut SlideApp) -> Option<Value> {
-    let path = if let Some(pick) = app.services.pick_open.as_mut() {
-        pick("picture")
-    } else {
+/// Asks for a picture; the album item built from it is queued in `app.album_picked` (at once
+/// with a blocking picker, on a later pass with a desktop dialog) for the dialog to add.
+fn pick_album_picture(app: &mut SlideApp) {
+    if !app.pick_then(crate::PickKind::Open("picture".into()), |app, path| {
+        if let Some(path) = path
+            && let Some(item) = load_album_picture(app, path)
+        {
+            app.album_picked.push(item);
+        }
+    }) {
         app.set_status("Pass pictures to insert.photoAlbum");
-        None
-    };
-    let path = path?;
+    }
+}
+
+fn load_album_picture(app: &mut SlideApp, path: String) -> Option<Value> {
     let loaded = if let Some(read) = app.services.read.as_ref() {
         match read(&path) {
             Ok(bytes) => bytes,
@@ -170,9 +177,10 @@ pub(super) fn photo_album_dialog(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog
         });
         d.fields.insert("sel".into(), sel.to_string());
         ui.horizontal(|ui| {
-            if ui.button("Add Pictures…").clicked()
-                && let Some(item) = pick_album_picture(app)
-            {
+            if ui.button("Add Pictures…").clicked() {
+                pick_album_picture(app);
+            }
+            for item in std::mem::take(&mut app.album_picked) {
                 match album_items(d) {
                     Some(mut list) if list.len() < 48 => {
                         list.push(item);

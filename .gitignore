@@ -12,3 +12,7 @@ packaging/env.sh
 /packaging/linux/flatpak/cargo-sources.json
 /build-flatpak/
 /.flatpak-builder/
+packaging/web/password.json
+packaging/web/bank-admin.json
+docs/staff-guide/img/*.png
+docs/staff-guide/staff-guide.pdf

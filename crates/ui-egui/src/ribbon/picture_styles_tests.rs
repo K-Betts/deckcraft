@@ -62,10 +62,10 @@ fn the_styles_row_grows_with_the_window_and_keeps_two_when_it_is_narrow() {
     assert!(shown[2] > shown[1], "{shown:?}");
     assert_eq!(shown[4], STYLES.len(), "a wide window shows every style: {shown:?}");
 
-    // Narrow, the ribbon scrolls, but Crop stays in view next to the scroll arrow.
+    // Narrow, Crop stays in view (the maths edition's ribbon has no scroll arrow; groups that do
+    // not fit fold into More).
     let (h, _) = picture_format(1280.0);
-    let arrow = h.get_by_label("Scroll ribbon right").rect();
-    assert!(h.get_by_label("Crop").rect().max.x <= arrow.min.x, "Crop hides behind the scroll arrow at 1280 px");
+    assert!(h.get_by_label("Crop").rect().max.x <= 1280.0, "Crop is past the window's edge at 1280 px");
 }
 
 #[test]

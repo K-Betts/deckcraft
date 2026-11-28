@@ -67,6 +67,7 @@ fn main() -> ExitCode {
         }
         Some("info") => report(info(rest)),
         Some("bench") => report(bench(rest)),
+        Some(c @ ("fidelity" | "bank" | "curriculum")) => report(maths::run(c, rest)),
         Some("render") => report(render(rest)),
         Some("render-transition") => report(render_transition(rest)),
         Some("convert") => report(convert(rest)),
@@ -742,6 +743,8 @@ so drop --connect (or use --connect without the roots)"
     let stdin = std::io::stdin();
     server.serve(stdin.lock(), std::io::stdout()).map_err(|e| e.to_string())
 }
+
+mod maths;
 
 #[cfg(test)]
 mod tests {

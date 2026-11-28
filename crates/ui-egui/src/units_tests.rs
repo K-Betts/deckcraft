@@ -170,7 +170,7 @@ fn a_slide_size_preset_gives_its_exact_size() {
         let mut h = slide_size_dialog(units, 720.0, 540.0);
         h.get_by_role_and_label(Role::ComboBox, "Slides sized for:").click();
         h.run_steps(2);
-        h.get_by_label(label).click();
+        h.get_by_label(label).click_accesskit();
         h.run_steps(2);
         assert_eq!(ok_and_size(&mut h), size, "{units:?} {label}");
     }

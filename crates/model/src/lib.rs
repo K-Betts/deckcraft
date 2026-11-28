@@ -628,6 +628,7 @@ pub struct Slide {
     pub notes: TextBody,
     /// Whether the slide has an associated notes slide even if its text is empty.
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    #[serde(alias = "has_notes_slide")]
     pub has_notes_slide: bool,
     pub comments: Vec<Comment>,
     /// `clrMapOvr`: a colour map replacing the layout's or master's (`bg1`→`dk1`…); None follows

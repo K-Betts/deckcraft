@@ -12,6 +12,8 @@ pub(crate) enum FilePurpose {
     ChangePicture,
     /// A drop, or any other purpose: decide from the name and bytes.
     Infer,
+    /// A text file a maths dialog asked for (`curriculum` or `questions`), handed to it as it is.
+    MathsText(&'static str),
 }
 
 /// Where in a presentation a file should land. Ids, not indices: slides can move while
@@ -94,6 +96,9 @@ pub struct UiState {
     pub comment_focus: Option<(usize, usize)>,
     /// Quick Access Toolbar buttons, left to right.
     pub qat: Vec<qat::QatItem>,
+    /// The maths edition's settings, kept in the same file.
+    #[serde(flatten)]
+    pub maths: crate::maths::app::MathsUi,
 }
 
 impl Default for UiState {
@@ -117,7 +122,8 @@ impl Default for UiState {
             zoom: None,
             sorter_zoom: 1.0,
             recent: vec![],
-            presenter_view: true,
+            // A browser tab is one screen: presenter view would float over the slide.
+            presenter_view: !cfg!(target_arch = "wasm32"),
             show_keep_cursor: false,
             ui_scale: 1.0,
             format_tab: "fill".into(),
@@ -127,6 +133,7 @@ impl Default for UiState {
             grayscale: false,
             comment_focus: None,
             qat: qat::defaults(),
+            maths: Default::default(),
         }
     }
 }
@@ -156,6 +163,7 @@ impl UiState {
             self.format_tab = d.format_tab;
         }
         self.pane = self.pane.filter(short);
+        self.maths.sanitize();
         self.recent.retain(|p| !p.is_empty() && p.len() <= 4096 && !p.contains('\0'));
         self.recent.dedup();
         self.recent.truncate(RECENT_MAX);

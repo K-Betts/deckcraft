@@ -23,6 +23,10 @@ use super::{Dialog, SlideApp, Tokens, Ui, Value, buttons, check, field, field_of
 
 /// Returns true when the dialog should close.
 pub(super) fn body(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
+    // The maths edition's dialogs come first; its Equation dialog replaces the one below.
+    if let Some(close) = super::maths::body(app, ui, d) {
+        return close;
+    }
     match d.id.as_str() {
         "table" => dlg_table(app, ui, d),
         "slideSize" => dlg_slide_size(app, ui, d),
@@ -311,6 +315,9 @@ fn dlg_quit(app: &mut SlideApp, ui: &mut Ui, _d: &mut Dialog) -> bool {
                 if app.save_all() {
                     app.quit_confirmed = true;
                     ui.ctx().send_viewport_cmd(egui::ViewportCommand::Close);
+                } else if app.pick_in_flight() {
+                    // A Save As dialog is open: quit when it has saved the last presentation.
+                    app.quit_when_saved = true;
                 }
                 done = true;
             }
@@ -939,7 +946,7 @@ fn dlg_spelling(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         _ => ui.label(
             egui::RichText::new(format!(
                 "No {} dictionary is installed, so only common misspellings are found. Put a Hunspell .aff/.dic pair in {}.",
-                info.get("lang").and_then(Value::as_str).unwrap_or("en-US"),
+                info.get("lang").and_then(Value::as_str).unwrap_or(deckcraft_model::defaults::DEFAULT_LANG),
                 info.get("folders")
                     .and_then(Value::as_array)
                     .and_then(|a| a.get(1).or(a.first()))
@@ -1346,10 +1353,7 @@ fn dlg_preferences(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         d.params = json!({ "before": preferences_snapshot(app) });
     }
     ui.label(egui::RichText::new("General").font(theme::bold(13.0)));
-    let mut dark = app.ui.brightness == theme::Brightness::Dark;
-    if ui.checkbox(&mut dark, "Dark appearance").changed() {
-        let _ = app.run("view.dark", json!({"on": dark}));
-    }
+    super::maths::appearance_row(app, ui);
     // While the pointer holds the slider its value only waits in the dialog: applying it
     // would rescale the slider under the pointer and run it to an end (#767). It applies
     // on release, and at once from the keyboard.
@@ -1375,6 +1379,7 @@ fn dlg_preferences(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         }
         d.fields.remove("uiScale");
     }
+    super::maths::preferences_sections(app, ui);
     // PowerPoint takes the unit from the system's measurement setting; DeckCraft asks here.
     ui.horizontal(|ui| {
         ui.label("Measurement units:");
@@ -1382,6 +1387,7 @@ fn dlg_preferences(app: &mut SlideApp, ui: &mut Ui, d: &mut Dialog) -> bool {
         ui.radio_value(units, deckcraft_geom::Unit::Inches, "Inches");
         ui.radio_value(units, deckcraft_geom::Unit::Centimeters, "Centimeters");
     });
+    ui.add_space(4.0);
     ui.label(egui::RichText::new("Editing").font(theme::bold(13.0)));
     ui.checkbox(&mut app.session.prefs.smart_guides, "Show smart guides");
     ui.checkbox(&mut app.session.prefs.snap_to_grid, "Snap objects to grid");

@@ -47,9 +47,9 @@ fn insert_opens_the_dialog_and_ok_inserts_one_field() {
     h.run_steps(2);
     assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("dateTime"));
     let _ = h.get_by_label("Update automatically");
-    assert_eq!(h.get_by_role_and_label(egui::accesskit::Role::ComboBox, "Language").value().as_deref(), Some("English (United States)"));
+    assert_eq!(h.get_by_role_and_label(egui::accesskit::Role::ComboBox, "Language").value().as_deref(), Some("English (United Kingdom)"));
     let now = deckcraft_text::datetime::DateTime::now_local().unwrap();
-    let sample = deckcraft_text::datetime::field_text("datetime2", Some("en-US"), now).unwrap();
+    let sample = deckcraft_text::datetime::field_text("datetime2", Some("en-GB"), now).unwrap();
     h.get_by_label(&sample).click();
     h.run_steps(1);
     h.get_by_label("OK").click();

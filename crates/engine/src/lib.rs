@@ -10,7 +10,10 @@
 pub mod cmd;
 pub mod compare;
 pub mod connect;
+pub mod curriculum;
 pub mod drawtable;
+pub mod exam_library;
+pub use deckcraft_text::equation;
 pub mod file_access;
 pub mod fonts;
 pub mod gif_export;
@@ -19,15 +22,19 @@ pub mod icons;
 pub mod inkshape;
 pub mod io;
 pub mod keys;
+pub mod latex;
 pub mod links;
 pub mod media_refs;
+pub mod questions;
 pub mod recovery;
 pub mod sample;
 pub mod sounds;
 pub mod spell;
+pub mod template;
 pub mod templates;
 pub mod thesaurus;
 pub mod tools;
+pub mod web_files;
 
 use std::sync::Arc;
 
@@ -472,6 +479,10 @@ pub struct Clipboard {
     /// regular shapes; a paste in Slide Master view takes these, which stay placeholders.
     pub placeholders: Vec<Shape>,
     pub slides: Vec<Slide>,
+    /// The presentation the slides were copied from, as it was then (a cheap shared snapshot). A
+    /// paste into another presentation brings their masters and layouts from it (Keep Source
+    /// Formatting) or matches them to the destination's layouts (Use Destination Theme).
+    pub slide_source: Option<std::sync::Arc<Presentation>>,
     /// Media the copied shapes/slides reference.
     pub media: Vec<deckcraft_model::MediaItem>,
     pub text: Option<deckcraft_model::TextBody>,
@@ -603,15 +614,19 @@ impl Session {
     }
     pub fn add_document(&mut self, d: DocState) -> usize {
         let was = self.active().map(|d| d.uid);
+        let (uid, slides) = (d.uid, d.doc.slides.len());
         self.docs.push(d);
         self.active = Some(self.docs.len() - 1);
         self.forget_vertex_kind_unless(was);
+        // Counts only: titles and paths can name a class or a pupil.
+        log::info!("presentation {uid} added ({slides} slides); {} open", self.docs.len());
         self.docs.len() - 1
     }
     pub fn close_document(&mut self, i: usize) {
         let was = self.active().map(|d| d.uid);
         if i < self.docs.len() {
             let d = self.docs.remove(i);
+            log::info!("presentation {} closed; {} open", d.uid, self.docs.len());
             if let Some(dir) = &self.recovery_dir {
                 recovery::discard(dir, d.uid);
             }
@@ -913,5 +928,7 @@ pub(crate) fn push_undo(st: &mut DocState, e: HistoryEntry) {
 mod soak_tests;
 #[cfg(test)]
 mod tests;
+#[cfg(test)]
+mod tests_equation;
 #[cfg(test)]
 mod tests_keys;

@@ -1,5 +1,3 @@
-#[cfg(not(target_arch = "wasm32"))]
-use super::updates_ui;
 use super::{SlideApp, UI_COMMANDS, Value, ViewMode, backstage, dialogs, doc_window, json, media, qat, theme};
 
 fn grid_options_touched(p: &Value) -> bool {
@@ -43,7 +41,7 @@ impl SlideApp {
         r
     }
 
-    fn flag(&mut self, params: &Value, cur: bool) -> bool {
+    pub(crate) fn flag(&mut self, params: &Value, cur: bool) -> bool {
         params.get("on").and_then(Value::as_bool).unwrap_or(!cur)
     }
 
@@ -157,6 +155,7 @@ impl SlideApp {
             "view.dark" => {
                 let on = self.flag(p, self.ui.brightness == theme::Brightness::Dark);
                 self.ui.brightness = if on { theme::Brightness::Dark } else { theme::Brightness::Light };
+                self.ui.maths.follow_system = false;
                 self.restyle = true;
             }
             "view.grayscale" => self.ui.grayscale = self.flag(p, self.ui.grayscale),
@@ -181,6 +180,7 @@ impl SlideApp {
                 }
             }
             "show.end" => {
+                self.stash_teacher();
                 self.show = None;
                 self.media.stop_owned(media::Owner::Show);
             }
@@ -226,9 +226,10 @@ impl SlideApp {
                 return Ok(json!({"printed": self.print_pdf(p.clone())}));
             }
             "app.about" => self.dialog = Some(dialogs::Dialog::new("about")),
+            // The maths edition updates from its own releases (`maths::update_ui`), never upstream's.
             "app.checkUpdates" => {
                 #[cfg(not(target_arch = "wasm32"))]
-                updates_ui::request_check(self);
+                return self.check_updates_now();
                 #[cfg(target_arch = "wasm32")]
                 return Err("updates are handled by the browser: reload the page".into());
             }
@@ -246,7 +247,7 @@ impl SlideApp {
             "app.insertAudioDialog" => self.pick_and_insert("audio", "insert.audio"),
             "app.reuseSlidesDialog" => self.pick_and_reuse(p.get("keepFormatting").and_then(Value::as_bool).unwrap_or(false)),
             "app.insertVideoDialog" => self.pick_and_insert("video", "insert.video"),
-            "app.saveAsDialog" => self.save_as_dialog("deckcraft"),
+            "app.saveAsDialog" => self.save_as_dialog(self.default_save_format()),
             "app.exportDialog" => self.dialog = Some(dialogs::Dialog::new("export")),
             "app.pasteSpecial" => self.dialog = Some(dialogs::Dialog::new("pasteSpecial")),
             "app.browseThemeDialog" => {
@@ -280,12 +281,15 @@ impl SlideApp {
             }
             "app.dialog" => {
                 let d = p.get("id").and_then(Value::as_str).ok_or("missing `id`")?;
-                self.dialog = Some(dialogs::Dialog::new(d));
+                let mut dialog = dialogs::Dialog::new(d);
+                dialog.params = p.clone();
+                self.dialog = Some(dialog);
             }
             "app.links" => {
                 use deckcraft_engine::links::{APP_PAGE, APPS, DISCORD, GITHUB, WEBSITE};
                 return Ok(json!({"discord": DISCORD, "website": WEBSITE, "apps": APPS, "appPage": APP_PAGE, "github": GITHUB}));
             }
+            id if crate::maths::app::owns(id) => return self.run_maths(id, p),
             _ => return Err(format!("unknown UI command `{id}`")),
         }
         Ok(Value::Null)

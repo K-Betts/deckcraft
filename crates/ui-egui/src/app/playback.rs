@@ -42,6 +42,20 @@ impl SlideApp {
         }
     }
 
+    /// Browser, Presenter View on: a show that has just started is handed to a second window (the
+    /// audience) while this tab becomes the presenter view. Takes the pending show and returns
+    /// the slide it was to start on and the deck as a `.deckcraft` file for the other window.
+    /// `None` (and the show kept) when there is no such show or the deck cannot be written.
+    pub fn take_show_for_window(&mut self) -> Option<(usize, Vec<u8>)> {
+        let wanted = self.show.as_ref().is_some_and(|s| s.presenter && !s.reading);
+        if !wanted {
+            return None;
+        }
+        let bytes = deckcraft_engine::cmd::file::save_bytes(&self.session.active()?.doc, "deckcraft").ok()?;
+        let show = self.show.take()?;
+        Some((show.state.slide, bytes))
+    }
+
     /// Whether a second display can take Presenter View. Like PowerPoint, one display shows only
     /// the slides: the presenter window would open on the same screen, and whichever of the two
     /// windows ends up behind the other stalls the show (the compositor stops pacing a hidden

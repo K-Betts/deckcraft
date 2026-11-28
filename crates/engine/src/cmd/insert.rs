@@ -16,6 +16,7 @@ use crate::{EngineError, Result, Session};
 
 mod album;
 mod chart;
+mod equation;
 mod links;
 mod picture;
 mod text_fields;
@@ -102,6 +103,8 @@ pub fn specs() -> Vec<CommandSpec> {
             has_slide,
             date_time
         ),
+        equation::spec(),
+        equation::source_spec(),
         cmd!("insert.symbol", "Symbol", ["Insert", "Symbols"], None, "{text: character(s)}", has_slide, symbol),
         cmd!(
             "shape.action",

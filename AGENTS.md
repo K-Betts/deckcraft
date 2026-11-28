@@ -1,3 +1,9 @@
+> **This fork (K-Betts/deckcraft):** the "Fork rules" in `CLAUDE.md` replace this file's git
+> workflow (never commit to `main`: branch per task and open a pull request; never push to
+> `storytold`) and add when to ask the owner. Everything else here still applies.
+
+---
+
 <!-- craft-agents:start source=5b1a2b1982fe7c774739d06d4a3818033cf4884c sha256=41dc0e35957946bfe7639237fbf1eca92093fe7f6bd76a778779c359c4e4a82a -->
 # Rules for agents in Craft repositories
 

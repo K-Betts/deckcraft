@@ -8,6 +8,8 @@ use serde_json::{Value, json};
 use crate::SlideApp;
 use crate::theme::{self, Tokens};
 
+pub(crate) mod maths;
+
 #[derive(Clone, Debug, serde::Serialize)]
 pub struct Dialog {
     pub id: String,
@@ -73,7 +75,7 @@ fn title(id: &str) -> &'static str {
         "quit" => "DeckCraft",
         "themeColors" => "Create New Theme Colors",
         "themeFonts" => "Create New Theme Fonts",
-        _ => "DeckCraft",
+        _ => maths::title(id).unwrap_or("DeckCraft"),
     }
 }
 
@@ -96,6 +98,7 @@ pub fn show(app: &mut SlideApp, ctx: &egui::Context) {
     } else if d.id == "themeFonts" {
         window = window.default_size(vec2(460.0, 320.0)).min_width(420.0).min_height(300.0);
     }
+    window = maths::sized(window, &d.id);
     window.show(ctx, |ui| {
         ui.set_min_width(match d.id.as_str() {
             "themeColors" => 700.0,
@@ -127,21 +130,7 @@ pub fn show(app: &mut SlideApp, ctx: &egui::Context) {
 }
 
 fn buttons(ui: &mut Ui, ok_label: &str) -> (bool, bool) {
-    let mut ok = false;
-    let mut cancel = false;
-    ui.add_space(8.0);
-    ui.with_layout(egui::Layout::right_to_left(egui::Align::Center), |ui| {
-        let t = Tokens::get(ui.ctx());
-        if ui.add(egui::Button::new(egui::RichText::new(ok_label).color(t.accent_text)).fill(t.accent).min_size(vec2(72.0, 24.0))).clicked()
-            || ui.input(|i| i.key_pressed(egui::Key::Enter))
-        {
-            ok = true;
-        }
-        if ui.add(egui::Button::new("Cancel").min_size(vec2(72.0, 24.0))).clicked() {
-            cancel = true;
-        }
-    });
-    (ok, cancel)
+    maths::buttons_if(ui, ok_label, true)
 }
 
 /// Draw a labelled single-line field bound to `key`, falling back to `default`, and store the

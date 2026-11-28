@@ -1,4 +1,5 @@
 use super::breaking::{BreakParams, RawLine, Tab, break_lines, line_metrics, measure_str, tab_advance, tab_segment, tabs_of};
+use super::math_layout::emit_math;
 use super::run::{Deco, DecoLine, GlyphRun};
 use super::shape::{SUB_SUPER, Upright, shape_para};
 use super::style::{Cell, Opts, ParaShaped, Style, spacing_pts};
@@ -499,7 +500,19 @@ fn line_bullet(env: &ParaEnv, align: Align, content_shift: f64, baseline: f64) -
 fn place_line(env: &ParaEnv, pi: usize, rl: &RawLine, li: usize, is_last: bool, flow: &mut Flow) -> PlacedLine {
     let (p, g) = (env.p, env.g);
     let props = &p.props;
-    let (asc, desc, size) = line_extent(p, rl);
+    let (mut asc, mut desc, mut size) = line_extent(p, rl);
+    for (at, m, _) in &p.inline_math {
+        if (rl.start..rl.end).contains(at) {
+            asc = asc.max(m.asc);
+            desc = desc.max(m.desc);
+            size = size.max(1.0);
+        }
+    }
+    if let Some((m, _)) = p.math.as_ref().filter(|_| li == 0) {
+        // An equation sets its own line: as tall as its fractions and roots reach.
+        asc = asc.max(m.asc);
+        desc = desc.max(m.desc);
+    }
     let natural = (asc + desc).max(size * 1.0);
     let lh = match props.line_spacing {
         // The reduction comes off the percentage (90 % less 20 % is 70 %), as PowerPoint
@@ -695,6 +708,21 @@ fn new_run(cell: &Cell, st: &Style, face: &Arc<FontFace>, para: usize, pos: &Cel
 
 /// Emits one line's glyph runs and decorations, in visual order.
 fn emit_line_runs(out: &mut TextLayout, p: &ParaShaped, line: &LineInfo, place: &LinePlace) {
+    // An equation drawn as maths: over the blank line, centred on it.
+    if let Some((m, si)) = p.math.as_ref().filter(|_| line.start == 0)
+        && let Some(st) = p.styles.get(*si)
+    {
+        let left = line.extent.0 + ((line.extent.1 - line.extent.0) - m.w) / 2.0;
+        emit_math(out, m, st, left, line.baseline, line.para);
+        return;
+    }
+    for (at, m, si) in &p.inline_math {
+        if let (true, Some(st), Some(&(x0, _))) =
+            ((line.start..line.end).contains(at), p.styles.get(*si), line.edges.get(at.wrapping_sub(line.start)))
+        {
+            emit_math(out, m, st, x0, line.baseline, line.para);
+        }
+    }
     // Group visually consecutive cells by (style, face).
     let mut cur: Option<GlyphRun> = None;
     let mut cur_key = (usize::MAX, usize::MAX, false, false);

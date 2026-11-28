@@ -24,10 +24,12 @@ mod display;
 mod graphics;
 mod logging;
 #[cfg(not(target_arch = "wasm32"))]
+mod maths;
+#[cfg(not(target_arch = "wasm32"))]
 mod pasteboard;
 
 use deckcraft_engine::Session;
-use deckcraft_ui_egui::{Services, SlideApp};
+use deckcraft_ui_egui::{PickKind, Services, SlideApp};
 
 struct App(
     SlideApp,
@@ -95,6 +97,7 @@ fn load_prefs(app: &mut SlideApp) {
     if let Some(prefs) = prefs {
         app.session.prefs = prefs;
     }
+    maths::load_prefs(app, &dir);
 }
 
 fn save_prefs(app: &SlideApp) {
@@ -103,7 +106,39 @@ fn save_prefs(app: &SlideApp) {
     }
     if let Some(dir) = config_dir() {
         deckcraft_ui_egui::settings::save(&dir, &app.ui, &app.session.prefs);
+        maths::save_prefs(app, &dir);
     }
+}
+
+/// The open dialog for `purpose`: its file filters and the chosen path.
+fn open_dialog(purpose: &str) -> Option<String> {
+    let d = rfd::FileDialog::new();
+    let d = match purpose {
+        "picture" => d.add_filter("Pictures", &["png", "jpg", "jpeg", "gif", "webp", "bmp", "tif", "tiff"]),
+        "audio" => d.add_filter(
+            "Audio",
+            &["wav", "mp3", "m4a", "m4b", "aac", "flac", "ogg", "oga", "opus", "aif", "aiff", "aifc", "caf", "wma", "weba", "mka"],
+        ),
+        "video" => d.add_filter("Video", &["mp4", "m4v", "mov", "webm", "mkv", "wmv"]),
+        "questions" => d.add_filter("Question files", &["json"]),
+        "curriculum" => d.add_filter("Curriculum files", &["json"]),
+        "theme" => d.add_filter("Themes and presentations", &["thmx", "pptx", "potx", "ppsx"]).add_filter("Office Theme", &["thmx"]),
+        _ => d
+            .add_filter("Presentations", &["deckcraft", "pptx", "potx", "ppsx", "ppt", "pot", "pps"])
+            .add_filter("DeckCraft", &["deckcraft"])
+            .add_filter("PowerPoint", &["pptx", "potx", "ppsx"])
+            .add_filter("PowerPoint 97-2003", &["ppt", "pot", "pps"])
+            .add_filter("Outline", &["txt", "md"]),
+    };
+    d.pick_file().map(|p| p.to_string_lossy().to_string())
+}
+
+fn save_dialog(name: &str) -> Option<String> {
+    rfd::FileDialog::new().set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string())
+}
+
+fn folder_dialog() -> Option<String> {
+    rfd::FileDialog::new().pick_folder().map(|p| p.to_string_lossy().to_string())
 }
 
 /// The desktop services. `native_wayland`: the window is a Wayland client (not Xwayland).
@@ -114,28 +149,27 @@ fn services(native_wayland: bool) -> Services {
     // else. There, text goes through egui and pictures arrive as `PasteImage` events.
     let pasteboard = !native_wayland;
     Services {
-        pick_open: Some(Box::new(|purpose: &str| {
-            let d = rfd::FileDialog::new();
-            let d = match purpose {
-                "picture" => d.add_filter("Pictures", &["png", "jpg", "jpeg", "gif", "webp", "bmp", "tif", "tiff"]),
-                "audio" => d.add_filter(
-                    "Audio",
-                    &["wav", "mp3", "m4a", "m4b", "aac", "flac", "ogg", "oga", "opus", "aif", "aiff", "aifc", "caf", "wma", "weba", "mka"],
-                ),
-                "video" => d.add_filter("Video", &["mp4", "m4v", "mov", "webm", "mkv", "wmv"]),
-                "theme" => d.add_filter("Themes and presentations", &["thmx", "pptx", "potx", "ppsx"]).add_filter("Office Theme", &["thmx"]),
-                _ => d
-                    .add_filter("Presentations", &["deckcraft", "pptx", "potx", "ppsx", "ppt", "pot", "pps"])
-                    .add_filter("DeckCraft", &["deckcraft"])
-                    .add_filter("PowerPoint", &["pptx", "potx", "ppsx"])
-                    .add_filter("PowerPoint 97-2003", &["ppt", "pot", "pps"])
-                    .add_filter("Outline", &["txt", "md"]),
-            };
-            d.pick_file().map(|p| p.to_string_lossy().to_string())
+        pick_open: Some(Box::new(|purpose: &str| open_dialog(purpose))),
+        pick_save: Some(Box::new(|name: &str| save_dialog(name))),
+        // Every dialog the app opens goes through here: a blocking dialog run from inside the
+        // event handler aborts the app on macOS (its nested loop re-enters winit's handler), so
+        // the dialog runs on its own thread (rfd hands it to the main queue, outside the handler)
+        // and the app polls for the answer.
+        pick_async: Some(Box::new(|kind: PickKind| {
+            let (tx, rx) = std::sync::mpsc::channel();
+            std::thread::spawn(move || {
+                let answer = match kind {
+                    PickKind::Open(purpose) => open_dialog(&purpose),
+                    PickKind::Save(name) => save_dialog(&name),
+                    PickKind::Folder(_) => folder_dialog(),
+                };
+                let _ = tx.send(answer);
+            });
+            rx
         })),
-        pick_save: Some(Box::new(|name: &str| rfd::FileDialog::new().set_file_name(name).save_file().map(|p| p.to_string_lossy().to_string()))),
         read: Some(Box::new(|p: &str| std::fs::read(p).map_err(|e| e.to_string()))),
         write: Some(Box::new(|p: &str, b: &[u8]| std::fs::write(p, b).map_err(|e| e.to_string()))),
+        maths: maths::services(),
         clipboard_image: pasteboard.then(|| Box::new(pasteboard::image_png) as Box<dyn FnMut() -> Option<Vec<u8>>>),
         clipboard_html: pasteboard.then(|| Box::new(pasteboard::html) as Box<dyn FnMut() -> Option<String>>),
         clipboard_set_html: pasteboard.then(|| Box::new(pasteboard::set_html) as Box<dyn FnMut(&str, &str) -> bool>),
@@ -298,7 +332,9 @@ fn main() -> eframe::Result {
                 app.services.displays = Some(Box::new(move || display_count(&window)));
             }
             load_prefs(&mut app);
-            app.enable_update_checks();
+            // No `enable_update_checks()`: upstream's start-up check asks storytold/deckcraft. The
+            // maths edition's own updater (`maths::services`) checks this fork's releases, and only
+            // when the teacher turns that on.
             // AutoRecover: reopen what a previous run left unsaved, then keep it current.
             if std::env::var_os("DECKCRAFT_NO_RECOVERY").is_none() {
                 app.session.recovery_dir = deckcraft_engine::recovery::default_dir();

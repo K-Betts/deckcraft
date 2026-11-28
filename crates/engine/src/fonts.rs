@@ -29,13 +29,20 @@ pub fn install_embedded_fonts(p: &Presentation) {
 }
 
 /// The font families the slides' text is drawn in (theme fonts resolved, bullet fonts included)
-/// that aren't installed or bundled, sorted, without duplicates (case-insensitive). Names that
-/// start with a dot are macOS hidden system fonts (`.SF NS`); they never appear in a font list
-/// and can't be installed, so they aren't reported.
+/// that aren't installed or bundled **and have no installed open substitute**, sorted, without
+/// duplicates (case-insensitive). Names that start with a dot are macOS hidden system fonts
+/// (`.SF NS`); they never appear in a font list and can't be installed, so they aren't reported.
+///
+/// Families like "Cambria Math" that have STIX Two Math (or another substitute) installed are
+/// excluded: DeckCraft draws them in the substitute, so showing a "not installed" warning would
+/// mislead the teacher.
 pub fn missing_fonts(p: &Presentation) -> Vec<String> {
     let db = FontDb::global();
     // used_fonts is already free of case-insensitive duplicates.
-    let mut out: Vec<String> = used_fonts(p).into_iter().filter(|f| !f.starts_with('.') && !db.has_family(f)).collect();
+    let mut out: Vec<String> = used_fonts(p)
+        .into_iter()
+        .filter(|f| !f.starts_with('.') && !(db.has_family(f) || deckcraft_fonts::substitutes(f).iter().any(|&sub| db.has_family(sub))))
+        .collect();
     out.sort_by_key(|f| f.to_lowercase());
     out
 }

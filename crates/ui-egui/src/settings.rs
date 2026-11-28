@@ -11,6 +11,10 @@ use deckcraft_engine::Prefs;
 
 use crate::UiState;
 
+mod maths;
+pub mod text;
+pub use maths::{MATHS_TOOLS_FILE, load_maths_tools, save_maths_tools};
+
 pub const UI_FILE: &str = "ui.json";
 pub const PREFS_FILE: &str = "prefs.json";
 /// Larger settings files are not settings.

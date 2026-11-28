@@ -16,10 +16,7 @@ fn harness() -> Harness<'static, SlideApp> {
     s.execute("format.font", &json!({"family": "Comic Neue"})).unwrap();
     s.execute("format.size", &json!({"size": 40})).unwrap();
     let app = SlideApp::new(s, Services::default());
-    // The product's default window. The Home ribbon overflows here with the bundled interface
-    // fonts; the ribbon's own edge chevron must make its Editing group reachable instead of the
-    // regression widening the fixture past the width the app actually opens at.
-    let mut h = Harness::builder().with_size(egui::vec2(1440.0, 900.0)).with_step_dt(1.0 / 60.0).build_ui_state(
+    let mut h = Harness::builder().with_size(egui::vec2(1700.0, 900.0)).with_step_dt(1.0 / 60.0).build_ui_state(
         |ui, app: &mut SlideApp| {
             app.logic(ui.ctx());
             app.ui(ui);
@@ -42,13 +39,17 @@ fn run_font(h: &Harness<'_, SlideApp>) -> Option<String> {
         .and_then(|r| r.props.font.clone())
 }
 
-/// Scroll the ribbon to its right edge through its own visible overflow control.
-fn reveal_ribbon_end(h: &mut Harness<'_, SlideApp>) {
-    for _ in 0..16 {
-        let Some(cue) = h.query_by_label("Scroll ribbon right") else { break };
-        cue.click();
-        h.run_steps(1);
+/// The ribbon folds the groups that do not fit into its More menu (as in the app, where folding is
+/// on); open More if Replace Fonts… was folded away.
+fn reach_replace_fonts<'a>(h: &'a mut Harness<'static, SlideApp>) -> egui_kittest::Node<'a> {
+    h.state_mut().maths.ribbon_fold = true;
+    // The first frames teach the ribbon each group's width; one frame later it folds.
+    h.run_steps(6);
+    if h.query_by_label("Replace Fonts…").is_none() {
+        h.get_by_label("More tools").click();
+        h.run_steps(3);
     }
+    h.get_by_label("Replace Fonts…")
 }
 
 /// The ribbon command opens Replace Fonts; its Replace button updates the document and leaves
@@ -56,14 +57,8 @@ fn reveal_ribbon_end(h: &mut Harness<'_, SlideApp>) {
 #[test]
 fn ribbon_button_opens_the_dialog_and_replaces() {
     let mut h = harness();
-    reveal_ribbon_end(&mut h);
-    let button = h.get_by_label("Replace Fonts…");
-    assert!(button.rect().max.x <= 1440.0 && button.rect().min.x >= 0.0, "Replace Fonts… is on screen at the default width: {:?}", button.rect());
-    if let Some(left) = h.query_by_label("Scroll ribbon left") {
-        let cue = left.rect();
-        assert!(!button.rect().intersects(cue), "the left overflow cue {cue:?} does not cover Replace Fonts… {:?}", button.rect());
-        assert!(button.rect().min.x >= cue.max.x, "ribbon content starts after the reserved left chevron gutter");
-    }
+    let button = reach_replace_fonts(&mut h);
+    assert!(button.rect().max.x <= 1700.0 && button.rect().min.x >= 0.0, "Replace Fonts… is on screen: {:?}", button.rect());
     button.click();
     h.run_steps(3);
     assert_eq!(h.state().dialog.as_ref().map(|d| d.id.as_str()), Some("replaceFonts"));

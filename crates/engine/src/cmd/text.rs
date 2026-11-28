@@ -10,8 +10,8 @@ use deckcraft_model::{Presentation, Shape, ShapeId, ShapeKind};
 use serde_json::{Value, json};
 
 use super::{
-    CommandSpec, NO_TEXT_POINT, SELECT_TEXT_OR_SHAPE, always, bad, bool_or, cmd, edit_shapes, has_doc, has_slide, has_text, id_param, ok, shape_of,
-    str_param, xfrm_of,
+    CommandSpec, NO_TEXT_POINT, SELECT_TEXT_OR_SHAPE, always, bad, bool_or, bool_param, cmd, edit_shapes, has_doc, has_slide, has_text, id_param, ok,
+    shape_of, str_param, xfrm_of,
 };
 use crate::{DocState, HistoryEntry, Result, Selection, Session, Target, TextSel, push_undo};
 
@@ -126,7 +126,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Set Text",
             [],
             None,
-            "{id?, text, cell?: [r, c]} — replaces the whole text, keeping the first run's formatting",
+            "{id?, text, cell?: [r, c], maths?: bool} — replaces the whole text, keeping the first run's formatting; with `maths`, `$…$` is drawn as equations (a line that is all one equation stacks its fractions)",
             has_slide,
             set
         ),

@@ -30,7 +30,12 @@ pub(super) fn handle_keys(
     let mut consumed = vec![];
     let mut keep = true;
     let mut actions = vec![];
+    // Typing at the on-screen calculator is not also a show shortcut (E clears the board, B blanks it).
+    let to_calculator = show.teacher.as_ref().is_some_and(|t| t.keyboard_captured());
     for (k, m) in keys {
+        if to_calculator && k != egui::Key::Escape {
+            continue;
+        }
         let handled = if grid_open(show, presenter) && !matches!(k, egui::Key::Escape | egui::Key::Minus) {
             // See All Slides takes no other keys until a slide is chosen.
             if k == egui::Key::G && plain(m) {
@@ -116,7 +121,9 @@ fn navigation_key(
             show.ended = false;
             actions.push(show.state.prev(doc));
         }
-        P if m.command => show.set_pen(!show.pen),
+        // Teacher Mode draws with its own pen (Cmd+P is its shortcut too).
+        P if m.command && show.teacher.is_none() => show.set_pen(!show.pen),
+        P if m.command => return false,
         P => {
             show.ended = false;
             actions.push(show.state.prev(doc));
@@ -131,6 +138,10 @@ fn navigation_key(
                 actions.push(show.state.goto(doc, i));
             }
         }
+        // Reveal Step by Step: the next hidden line of working, or (Shift) hide the last.
+        Tab if !m.command && !m.alt => {
+            show.tab_step(doc, !m.shift);
+        }
         _ => return false,
     }
     true
@@ -141,11 +152,21 @@ fn navigation_key(
 fn tool_key(show: &mut Show, k: egui::Key, m: egui::Modifiers, now: f64, presenter: bool) -> bool {
     use egui::Key::*;
     match k {
-        L if m.command => show.set_laser(!show.laser),
+        L if m.command && show.teacher.is_none() => show.set_laser(!show.laser),
         A if m.command => show.arrow(),
         B | Period => toggle_blank(show, Color32::BLACK),
         W | Comma => toggle_blank(show, Color32::WHITE),
-        E => show.strokes.clear(),
+        E => {
+            show.strokes.clear();
+            if let Some(t) = show.teacher.as_mut() {
+                t.clear();
+            }
+        }
+        Z if m.command && !m.shift && show.teacher.is_some() => {
+            if let Some(t) = show.teacher.as_mut() {
+                t.undo();
+            }
+        }
         G if plain(m) => show.open_grid(presenter),
         Z if plain(m) => show.zoom_key(),
         T if plain(m) => show.timer.toggle(now),

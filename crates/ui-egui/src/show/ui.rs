@@ -4,6 +4,8 @@ use super::media::{
 };
 use super::presenter::{PresenterTimer, format_elapsed, presenter_window};
 use super::render::{below_playing_video, fit, part_textures, quad_mesh, render_frame, render_overlay, render_threads, start_prefetch};
+use super::steps::step_line_under_pointer;
+use super::teacher;
 use super::zoom::{
     Zoom, grid_indices, norm_on_slide, paint_grid, see_all_hit, slide_aspect, slide_box, slide_to_screen, toggle_blank, tool_bar_rect, unit_uv,
     wheel_zoom_lines,
@@ -27,6 +29,9 @@ struct Fr<'a> {
     clicked: bool,
     secondary: bool,
     pointer: Option<Pos2>,
+    /// Teacher Mode's palette or pen has the pointer (no slide clicks) and the wheel (no page turns).
+    teacher_blocks: bool,
+    teacher_wheel: bool,
 }
 
 /// Whether the show goes on, and the steps input asked for.
@@ -124,10 +129,11 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     let avail = if show.reading { Rect::from_min_max(full.min, pos2(full.max.x, full.max.y - 34.0)) } else { full };
     let srect = fit(avail, &doc);
     let pointer = ctx.input(|i| i.pointer.interact_pos());
+    let (teacher_blocks, teacher_wheel) = teacher::pointer(app, &mut show, pointer);
     show.expire_goto(now);
     // The clock of the triggered animations runs before anything reacts to the pointer.
     show.tick_triggers(&doc, now);
-    let f = Fr { ctx: &ctx, doc: &doc, doc_uid, now, full, srect, clicked, secondary, pointer };
+    let f = Fr { ctx: &ctx, doc: &doc, doc_uid, now, full, srect, clicked, secondary, pointer, teacher_blocks, teacher_wheel };
     let pointing = handle_clicks(app, ui, &mut show, &f, &mut out);
     handle_wheel_and_swipe(&mut show, &f, &mut out);
     advance(app, &mut show, &f, &mut out);
@@ -135,6 +141,7 @@ pub fn ui(app: &mut SlideApp, ui: &mut Ui) {
     painter.rect_filled(full, CornerRadius::ZERO, Color32::BLACK);
     draw_slide(app, ui, &mut show, &f, &painter);
     draw_pen_and_hints(ui, &mut show, &f, &painter, pointing);
+    teacher::overlay(app, &mut show, ui, full, srect, now, &doc, &mut out.keep);
     draw_bars(ui, &mut show, &f, &painter, &mut out);
     draw_extras(&mut show, &f, &painter, &mut out);
     if out.keep
@@ -228,10 +235,11 @@ fn begin_show(ctx: &egui::Context, show: &mut Show, doc: &Presentation, now: f64
 }
 
 fn handle_clicks(app: &mut SlideApp, ui: &mut Ui, show: &mut Show, f: &Fr, out: &mut Out) -> bool {
-    let Fr { ctx, doc, doc_uid, now, full, srect, clicked, secondary, pointer } = *f;
+    let Fr { ctx, doc, doc_uid, now, full, srect, clicked, secondary, pointer, teacher_blocks, .. } = *f;
     let on_slide = !show.grid
         && !show.pen
         && !show.laser
+        && !teacher_blocks
         && !show.ended
         && show.blank.is_none()
         && show.zoom.is_none()
@@ -277,11 +285,14 @@ fn handle_clicks(app: &mut SlideApp, ui: &mut Ui, show: &mut Show, f: &Fr, out: 
         }
     } else if clicked && show.zoom.is_some() && !show.pen && !show.reading_bar_hit(ctx) {
         show.dismiss_zoom();
-    } else if clicked && !show.pen && !show.reading_bar_hit(ctx) && !pointer_on_media_bar(ctx, ui, doc, show, now) {
+    } else if clicked && !show.pen && !teacher_blocks && !show.reading_bar_hit(ctx) && !pointer_on_media_bar(ctx, ui, doc, show, now) {
         if show.ended {
             out.keep = false;
         } else if show.blank.is_some() {
             show.blank = None;
+        } else if !pointing && let Some((id, line)) = step_line_under_pointer(ctx, ui, show, doc) {
+            // A line of working in a Reveal Step by Step box shows or hides just that line.
+            show.toggle_step(doc, id, line);
         } else {
             // A shape with an action or a triggered animation, or the background.
             let none = Under::default();
@@ -300,7 +311,7 @@ fn handle_clicks(app: &mut SlideApp, ui: &mut Ui, show: &mut Show, f: &Fr, out: 
 }
 
 fn handle_wheel_and_swipe(show: &mut Show, f: &Fr, out: &mut Out) {
-    let Fr { ctx, doc, now, srect, pointer, .. } = *f;
+    let Fr { ctx, doc, now, srect, pointer, teacher_wheel, .. } = *f;
     // Ctrl+wheel (Cmd+wheel on a Mac) zooms around the pointer, as in PowerPoint (#1286). egui
     // keeps it out of `smooth_scroll_delta`, so it does not also turn the page below.
     let line_points = ctx.options(|o| o.input_options.line_scroll_speed);
@@ -315,6 +326,7 @@ fn handle_wheel_and_swipe(show: &mut Show, f: &Fr, out: &mut Out) {
     // A trackpad swipe (and the mouse wheel) turns the page. The pen is drawing, so a flick
     // there stays on the slide. Pinch zoom is not a show gesture.
     if !show.pen
+        && !teacher_wheel
         && let Some(next) = crate::canvas::page_flick(ctx.input(|i| i.smooth_scroll_delta))
         && now - show.last_swipe > 0.35
     {
@@ -377,7 +389,8 @@ fn begin_slide(app: &mut SlideApp, show: &Show, f: &Fr, size: (u32, u32)) -> Sl 
     crate::media::gif_repaint(ctx, &gifs);
     let gif = crate::media::gif_key(&gifs);
     let done: Vec<(ShapeId, usize)> = plays.iter().map(|p| (p.trigger, p.step)).collect();
-    let key = Key { slide: idx, step, size, doc: std::sync::Arc::as_ptr(doc) as usize, hidden: hidden.clone(), plays: done, gif };
+    let marks = show.current_marks();
+    let key = Key { slide: idx, step, size, doc: std::sync::Arc::as_ptr(doc) as usize, hidden: hidden.clone(), plays: done, gif, marks };
     let back_key = BackKey { slide: idx, size, doc: key.doc };
     Sl { idx, step, animating, t, plays, stamps, media, hidden, times, gifs, key, back_key, size }
 }
@@ -399,7 +412,21 @@ fn frame_texture(show: &mut Show, f: &Fr, sl: &Sl) -> Option<TextureHandle> {
                 let tl = show.timeline(doc).clone();
                 // Animating: the backdrop doesn't change, only the shapes over it are drawn.
                 let back = animating.then(|| show.backdrop(doc, sl.back_key));
-                render_frame(doc, idx, tl, step, sl.t, size, sl.hidden.clone(), &sl.times, render_threads(), &sl.plays, &sl.stamps, back.as_deref())
+                render_frame(
+                    doc,
+                    idx,
+                    tl,
+                    step,
+                    sl.t,
+                    size,
+                    sl.hidden.clone(),
+                    sl.key.marks.clone(),
+                    &sl.times,
+                    render_threads(),
+                    &sl.plays,
+                    &sl.stamps,
+                    back.as_deref(),
+                )
             }
         };
         if show.remote_opened && show.presenter {
@@ -498,7 +525,7 @@ fn draw_transition(show: &mut Show, f: &Fr, sl: &Sl, painter: &egui::Painter, te
                     if cfg!(target_arch = "wasm32") { 0 } else { std::thread::available_parallelism().map(|n| n.get().min(8) as u16).unwrap_or(0) };
                 let timeline = ShowState::timeline(doc, prev);
                 let step = timeline.steps();
-                let ci = render_frame(doc, prev, timeline, step, 0.0, size, vec![], &[], threads, &[], &[], None);
+                let ci = render_frame(doc, prev, timeline, step, 0.0, size, vec![], vec![], &[], threads, &[], &[], None);
                 tr.old = Some(crate::textures::upload(ctx, "trans-old", ci));
             }
             let aspect = doc.slide_size.width / doc.slide_size.height.max(1.0);
@@ -782,7 +809,7 @@ fn draw_bars(ui: &mut Ui, show: &mut Show, f: &Fr, painter: &egui::Painter, out:
             let a = show.state.prev(doc);
             show.apply(a, doc, now);
         }
-    } else if !show.grid && (show.pointer_awake(now) || show.zoom_arm) {
+    } else if !show.grid && show.teacher.is_none() && (show.pointer_awake(now) || show.zoom_arm) {
         let bar = tool_bar_rect(full);
         painter.rect_filled(bar, CornerRadius::same(17), Color32::from_black_alpha(140));
         let mut child =
@@ -853,6 +880,7 @@ fn finish(app: &mut SlideApp, mut show: Show, f: &Fr, keep: bool) {
     if keep {
         app.show = Some(show);
     } else {
+        teacher::stash_on_exit(app, &mut show);
         if let Some(host) = app.services.presenter.as_mut() {
             host.close();
         }

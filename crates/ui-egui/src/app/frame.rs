@@ -1,4 +1,4 @@
-use super::{SlideApp, json, media, monotonic_secs, theme};
+use super::{SlideApp, media, monotonic_secs, theme};
 
 impl SlideApp {
     /// Style, fonts and zoom setup. Runs in a real UI pass, not from `run_logic`, because
@@ -17,6 +17,7 @@ impl SlideApp {
             ctx.request_discard("install interface fonts before layout");
             return false;
         }
+        self.follow_system_theme(ctx);
         if self.restyle {
             theme::apply(ctx, &theme::Tokens::for_brightness(self.ui.brightness));
             self.restyle = false;
@@ -35,7 +36,7 @@ impl SlideApp {
         if now - self.last_recovery > every {
             self.last_recovery = now;
             if self.session.documents().iter().any(|d| d.is_dirty())
-                && let Err(e) = self.session.execute("file.recovery.save", &json!({}))
+                && let Err(e) = self.save_recovery_logged()
             {
                 self.set_status(format!("Couldn't save AutoRecover information: {e}"));
             }

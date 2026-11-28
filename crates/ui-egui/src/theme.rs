@@ -1,4 +1,5 @@
-//! Design tokens (light, PowerPoint-like; and dark) and fonts for the UI.
+//! Design tokens (light and dark: "Fresh Paper", airy neutrals with one cobalt accent) and fonts
+//! for the UI. The system is written down in `docs/design/design-system.md`; this file is its code.
 
 use egui::{Color32, CornerRadius, FontData, FontDefinitions, FontFamily, Stroke, Visuals};
 use serde::{Deserialize, Serialize};
@@ -10,6 +11,9 @@ pub enum Brightness {
     Light,
     Dark,
 }
+
+mod design;
+pub use design::{radius, size, space};
 
 /// Every colour the chrome uses.
 #[derive(Clone, Copy, Debug)]
@@ -56,22 +60,22 @@ impl Tokens {
     pub fn light() -> Self {
         Tokens {
             dark: false,
-            chrome: Color32::from_rgb(0xF5, 0xF5, 0xF5),
+            chrome: Color32::from_rgb(0xF6, 0xF7, 0xF9),
             card: Color32::WHITE,
-            card_border: Color32::from_rgb(0xE3, 0xE3, 0xE3),
-            text_field: Color32::from_rgb(0xEB, 0xEB, 0xEB),
-            canvas: Color32::from_rgb(0xF0, 0xF0, 0xF0),
-            text: Color32::from_rgb(0x24, 0x24, 0x24),
-            text_dim: Color32::from_rgb(0x5C, 0x5C, 0x5C),
-            text_faint: Color32::from_rgb(0x99, 0x99, 0x99),
-            border: Color32::from_rgb(0xD6, 0xD6, 0xD6),
-            separator: Color32::from_rgb(0xE1, 0xE1, 0xE1),
-            hover: Color32::from_rgb(0xEB, 0xEB, 0xEB),
-            pressed: Color32::from_rgb(0xDE, 0xDE, 0xDE),
-            selected: Color32::from_rgb(0xE6, 0xE6, 0xE6),
-            accent: Color32::from_rgb(0xD9, 0x5A, 0x1A),
+            card_border: Color32::from_rgb(0xE6, 0xE8, 0xEE),
+            text_field: Color32::from_rgb(0xED, 0xF0, 0xF7),
+            canvas: Color32::from_rgb(0xF6, 0xF7, 0xF9),
+            text: Color32::from_rgb(0x14, 0x16, 0x1C),
+            text_dim: Color32::from_rgb(0x5B, 0x60, 0x70),
+            text_faint: Color32::from_rgb(0x6A, 0x70, 0x82),
+            border: Color32::from_rgb(0xD8, 0xDC, 0xE6),
+            separator: Color32::from_rgb(0xE6, 0xE8, 0xEE),
+            hover: Color32::from_rgb(0xEE, 0xF2, 0xFF),
+            pressed: Color32::from_rgb(0xE0, 0xE7, 0xFF),
+            selected: Color32::from_rgb(0xE3, 0xEA, 0xFF),
+            accent: Color32::from_rgb(0x2B, 0x59, 0xFF),
             accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0xC2, 0x4E, 0x14),
+            contextual: Color32::from_rgb(0x1F, 0x3F, 0xBF),
             selection: Color32::from_rgb(0x7A, 0x7A, 0x7A),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
@@ -79,41 +83,41 @@ impl Tokens {
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
             field_bg: Color32::WHITE,
-            control: Color32::from_rgb(0xD6, 0xD6, 0xD6),
-            control_hover: Color32::from_rgb(0xC8, 0xC8, 0xC8),
-            control_pressed: Color32::from_rgb(0xBC, 0xBC, 0xBC),
-            shadow: Color32::from_black_alpha(28),
+            control: Color32::from_rgb(0xE0, 0xE7, 0xFF),
+            control_hover: Color32::from_rgb(0xD3, 0xDC, 0xFF),
+            control_pressed: Color32::from_rgb(0xC4, 0xD0, 0xFF),
+            shadow: Color32::from_black_alpha(18),
         }
     }
     pub fn dark() -> Self {
         Tokens {
             dark: true,
-            chrome: Color32::from_rgb(0x26, 0x26, 0x26),
-            card: Color32::from_rgb(0x33, 0x33, 0x33),
-            card_border: Color32::from_rgb(0x44, 0x44, 0x44),
-            text_field: Color32::from_rgb(0x2A, 0x2A, 0x2A),
-            canvas: Color32::from_rgb(0x1E, 0x1E, 0x1E),
-            text: Color32::from_rgb(0xEE, 0xEE, 0xEE),
-            text_dim: Color32::from_rgb(0xBB, 0xBB, 0xBB),
-            text_faint: Color32::from_rgb(0x88, 0x88, 0x88),
-            border: Color32::from_rgb(0x4A, 0x4A, 0x4A),
-            separator: Color32::from_rgb(0x48, 0x48, 0x48),
-            hover: Color32::from_rgb(0x40, 0x40, 0x40),
-            pressed: Color32::from_rgb(0x4C, 0x4C, 0x4C),
-            selected: Color32::from_rgb(0x47, 0x47, 0x47),
-            accent: Color32::from_rgb(0xF2, 0x6B, 0x1D),
-            accent_text: Color32::WHITE,
-            contextual: Color32::from_rgb(0xF5, 0x8A, 0x4B),
+            chrome: Color32::from_rgb(0x16, 0x18, 0x1D),
+            card: Color32::from_rgb(0x1F, 0x22, 0x2A),
+            card_border: Color32::from_rgb(0x2E, 0x32, 0x3D),
+            text_field: Color32::from_rgb(0x1A, 0x1D, 0x24),
+            canvas: Color32::from_rgb(0x10, 0x12, 0x16),
+            text: Color32::from_rgb(0xEC, 0xEE, 0xF3),
+            text_dim: Color32::from_rgb(0xB3, 0xB8, 0xC6),
+            text_faint: Color32::from_rgb(0x8B, 0x91, 0xA1),
+            border: Color32::from_rgb(0x3A, 0x3F, 0x4C),
+            separator: Color32::from_rgb(0x2E, 0x32, 0x3D),
+            hover: Color32::from_rgb(0x26, 0x2B, 0x3A),
+            pressed: Color32::from_rgb(0x2F, 0x36, 0x50),
+            selected: Color32::from_rgb(0x27, 0x30, 0x4F),
+            accent: Color32::from_rgb(0x6C, 0x8C, 0xFF),
+            accent_text: Color32::from_rgb(0x0E, 0x12, 0x24),
+            contextual: Color32::from_rgb(0x8F, 0xA8, 0xFF),
             selection: Color32::from_rgb(0xAA, 0xAA, 0xAA),
             handle_fill: Color32::WHITE,
             handle_stroke: Color32::from_rgb(0x6E, 0x6E, 0x6E),
             guide: Color32::from_rgb(0xF2, 0x8A, 0x4B),
             caret: Color32::BLACK,
             text_selection: Color32::from_rgba_unmultiplied(0x5A, 0x8F, 0xE0, 90),
-            field_bg: Color32::from_rgb(0x2A, 0x2A, 0x2A),
-            control: Color32::from_rgb(0x2A, 0x2A, 0x2A),
-            control_hover: Color32::from_rgb(0x40, 0x40, 0x40),
-            control_pressed: Color32::from_rgb(0x4C, 0x4C, 0x4C),
+            field_bg: Color32::from_rgb(0x1A, 0x1D, 0x24),
+            control: Color32::from_rgb(0x2F, 0x36, 0x50),
+            control_hover: Color32::from_rgb(0x3A, 0x42, 0x62),
+            control_pressed: Color32::from_rgb(0x45, 0x4E, 0x72),
             shadow: Color32::from_black_alpha(90),
         }
     }
@@ -130,6 +134,23 @@ impl Tokens {
 
 /// Apply tokens to egui's style.
 pub fn apply(ctx: &egui::Context, t: &Tokens) {
+    ctx.set_visuals(visuals(t));
+    ctx.global_style_mut(|s| {
+        s.spacing.item_spacing = egui::vec2(space::S, 6.0);
+        s.spacing.button_padding = egui::vec2(8.0, 5.0);
+        s.spacing.interact_size.y = 26.0;
+        // Dialogs and floating panels: room around their contents.
+        s.spacing.window_margin = egui::Margin::same(20);
+        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(size::BODY));
+        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(size::CAPTION));
+        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(size::HEADING + 2.0));
+    });
+}
+
+/// egui's colours and shapes for `t`. Also for a surface that keeps one appearance whatever the
+/// app's, such as the light Get Ready cards.
+pub fn visuals(t: &Tokens) -> Visuals {
     let mut v = if t.dark { Visuals::dark() } else { Visuals::light() };
     v.panel_fill = t.chrome;
     v.window_fill = t.card;
@@ -137,37 +158,29 @@ pub fn apply(ctx: &egui::Context, t: &Tokens) {
     v.text_edit_bg_color = Some(t.text_field);
     v.faint_bg_color = t.hover;
     v.window_stroke = Stroke::new(1.0, t.card_border);
-    v.window_corner_radius = CornerRadius::same(10);
-    v.menu_corner_radius = CornerRadius::same(8);
+    v.window_corner_radius = CornerRadius::same(radius::SURFACE);
+    v.menu_corner_radius = CornerRadius::same(radius::CARD);
     v.selection.bg_fill = t.accent.gamma_multiply(0.85);
     v.selection.stroke = Stroke::new(1.0, t.accent_text);
     v.hyperlink_color = t.accent;
     v.override_text_color = Some(t.text);
     for w in [&mut v.widgets.noninteractive, &mut v.widgets.inactive, &mut v.widgets.hovered, &mut v.widgets.active, &mut v.widgets.open] {
-        w.corner_radius = CornerRadius::same(5);
+        w.corner_radius = CornerRadius::same(radius::CONTROL);
     }
     v.widgets.noninteractive.bg_stroke = Stroke::new(1.0, t.separator);
     v.widgets.inactive.weak_bg_fill = Color32::TRANSPARENT;
     v.widgets.inactive.bg_fill = t.control;
-    v.widgets.inactive.bg_stroke = Stroke::NONE;
+    // Fields, checkboxes and slider rails need an outline at rest, or they vanish on a white card.
+    v.widgets.inactive.bg_stroke = Stroke::new(1.0, t.border);
     v.widgets.hovered.weak_bg_fill = t.hover;
     v.widgets.hovered.bg_fill = t.control_hover;
     v.widgets.hovered.bg_stroke = Stroke::NONE;
     v.widgets.active.weak_bg_fill = t.pressed;
     v.widgets.active.bg_fill = t.control_pressed;
     v.widgets.open.weak_bg_fill = t.pressed;
-    v.window_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 18, spread: 0, color: t.shadow };
-    v.popup_shadow = egui::epaint::Shadow { offset: [0, 3], blur: 12, spread: 0, color: t.shadow };
-    ctx.set_visuals(v);
-    ctx.global_style_mut(|s| {
-        s.spacing.item_spacing = egui::vec2(6.0, 4.0);
-        s.spacing.button_padding = egui::vec2(6.0, 3.0);
-        s.spacing.interact_size.y = 22.0;
-        s.text_styles.insert(egui::TextStyle::Body, egui::FontId::proportional(13.0));
-        s.text_styles.insert(egui::TextStyle::Button, egui::FontId::proportional(13.0));
-        s.text_styles.insert(egui::TextStyle::Small, egui::FontId::proportional(11.0));
-        s.text_styles.insert(egui::TextStyle::Heading, egui::FontId::proportional(18.0));
-    });
+    v.window_shadow = egui::epaint::Shadow { offset: [0, 8], blur: 28, spread: 0, color: t.shadow };
+    v.popup_shadow = egui::epaint::Shadow { offset: [0, 4], blur: 16, spread: 0, color: t.shadow };
+    v
 }
 
 /// UI fonts: Inter (from craft-fonts) when embedded, a Japanese UI face for CJK, then egui's.
@@ -458,16 +471,18 @@ mod tests {
 
     #[test]
     fn light_checkboxes_and_slider_rails_stand_out_from_their_background() {
-        // An unchecked checkbox and a slider rail are filled with the inactive widget fill and
-        // have no outline, so in light mode they vanished into the white dialog (#766).
+        // An unchecked checkbox and a slider rail are filled with the inactive widget fill, so in
+        // light mode they vanished into the white dialog (#766). DeckCraft gives them an outline at
+        // rest; without one the fill alone must stand apart from the background.
         let ctx = egui::Context::default();
         super::apply(&ctx, &super::Tokens::light());
         let v = ctx.global_style().visuals.clone();
-        assert_eq!(v.widgets.inactive.bg_stroke, egui::Stroke::NONE, "the test assumes no outline");
         let fill = v.widgets.inactive.bg_fill;
+        let outline = v.widgets.inactive.bg_stroke;
+        assert!(outline.width >= 1.0 && outline.color.a() > 0, "controls have an outline at rest");
         for (name, bg) in [("dialog", v.window_fill), ("panel", v.panel_fill)] {
-            let diff = [fill.r().abs_diff(bg.r()), fill.g().abs_diff(bg.g()), fill.b().abs_diff(bg.b())];
-            assert!(diff.iter().all(|d| *d >= 24), "control fill {fill:?} is too close to the {name} background {bg:?}");
+            let diff = [outline.color.r().abs_diff(bg.r()), outline.color.g().abs_diff(bg.g()), outline.color.b().abs_diff(bg.b())];
+            assert!(diff.iter().any(|d| *d >= 16), "control outline {:?} is too close to the {name} background {bg:?}", outline.color);
         }
         // Hovering and pressing darken the control a step each, as they do buttons.
         let (hovered, active) = (v.widgets.hovered.bg_fill, v.widgets.active.bg_fill);

@@ -10,6 +10,8 @@ use serde_json::{Value, json};
 use super::{CommandSpec, always, bad, base64_decode, base64_encode, bool_or, cmd, f64_or, has_doc, ok, opt_usize_param, str_param, usize_param};
 use crate::{DocState, EngineError, Result, Session};
 
+mod personal;
+
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         cmd!(
@@ -17,11 +19,11 @@ pub fn specs() -> Vec<CommandSpec> {
             "New Presentation",
             ["File"],
             Some("Cmd+N"),
-            "{theme?: name, template?: starter name, size?: [w,h] pt, blank?: bool}",
+            "{theme?: name, template?: starter or personal template name, templateFile?: path of a presentation to start a copy of, size?: [w,h] pt, blank?: bool}",
             always,
             new
         ),
-        cmd!(query "file.templates", "Starter Templates", [], None, "{} → [{name, summary, theme, slides}]", always, templates),
+        cmd!(query "file.templates", "Starter Templates", [], None, "{} → {templates: [{name, summary, theme, slides}], personal: [{name, path}], personalFolder}", always, templates),
         cmd!(noundo "file.open", "Open…", ["File"], Some("Cmd+O"), "{path}", always, open),
         cmd!(
             noundo "file.adopt",
@@ -35,7 +37,15 @@ pub fn specs() -> Vec<CommandSpec> {
         cmd!(noundo "file.openBytes", "Open Data", [], None, "{name, data: base64}", always, open_bytes),
         cmd!(noundo "file.save", "Save", ["File"], Some("Cmd+S"), "{path?, format?: deckcraft|pptx}", has_doc, save),
         cmd!(noundo "file.saveAs", "Save As…", ["File"], Some("Cmd+Shift+S"), "{path, format?}", has_doc, save_as),
-        cmd!(noundo "file.saveTemplate", "Save as Template…", ["File"], None, "{path}", has_doc, save_as),
+        cmd!(
+            noundo "file.saveTemplate",
+            "Save as Template…",
+            ["File"],
+            None,
+            "{name?: the template's name (default the presentation's)} → {name, path} — keeps a copy in your templates folder, which File › New lists; never overwrites one",
+            has_doc,
+            personal::save_template
+        ),
         cmd!(query "file.saveBytes", "Save to Data", [], None, "{format?: deckcraft|pptx} → {data: base64}", has_doc, save_bytes_cmd),
         cmd!(noundo "file.export", "Export…", ["File"], None, "{path, format?: png|jpeg|pptx|deckcraft|outline|rtf|pdf|gif (else by path), slide?: index, all?: bool, scale?: px per pt, layout?: slides|notes|handouts (pdf), perPage?: 1|2|3|4|6|9, paper?: letter|a4|legal|a3 (pdf), orientation?: portrait|landscape (pdf), dpi?, slides?: [index]|range (\"1-3,5\"), includeHidden?, textLayer?, frame?, transparentBackground?: bool (png: leave the slide background out), width?: px 16-3840|small|medium|large|extraLarge (gif), secondsPerSlide?: 0.1-600 (gif; 5), loop?: bool (gif; true: forever)} → {path, bytes} or {files} (png, jpeg); gif adds frames, width, height, secondsPerSlide", has_doc, export),
         cmd!(
@@ -96,12 +106,17 @@ fn templates(_s: &mut Session, _p: &Value) -> Result<Value> {
             "theme": t.theme,
             "slides": t.slides.len(),
         })).collect::<Vec<_>>(),
+        "personal": crate::templates::personal().iter().map(|t| json!({"name": t.name, "path": t.path.to_string_lossy()})).collect::<Vec<_>>(),
+        "personalFolder": crate::templates::personal_dir().map(|d| d.to_string_lossy().to_string()),
     }))
 }
 
 fn new(s: &mut Session, p: &Value) -> Result<Value> {
     let template = str_param(p, "template").filter(|t| !t.is_empty());
     let theme_name = str_param(p, "theme").filter(|t| !t.is_empty());
+    if let Some(r) = personal::new(s, p, template, theme_name) {
+        return r;
+    }
     if template.is_some() && theme_name.is_some() {
         return Err(bad("file.new", "pass `theme` or `template`, not both"));
     }

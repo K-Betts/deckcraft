@@ -11,6 +11,9 @@ use serde_json::json;
 use crate::SlideApp;
 use crate::theme::{self, Tokens};
 
+/// Width of the thumbnail strip on a phone.
+const COMPACT_THUMBS: f32 = 96.0;
+
 /// A slide drag in the thumbnail pane or the Slide Sorter.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub(crate) struct SlideDrag {
@@ -87,25 +90,30 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     if app.session.active().is_some_and(|d| d.selection.target.is_page_master()) {
         return;
     }
-    let panel = egui::Panel::left("thumbs")
-        .resizable(true)
-        .default_size(app.ui.thumbs_width)
-        .size_range(150.0..=420.0)
-        .frame(egui::Frame::NONE.fill(t.chrome))
-        .show(ui, |ui| {
+    let compact = crate::maths::app::is_compact(ui.ctx().content_rect().width());
+    let base = egui::Panel::left("thumbs").frame(egui::Frame::NONE.fill(t.chrome));
+    // A slim strip on a phone, so the slide itself keeps most of the screen.
+    let base = if compact {
+        base.resizable(false).exact_size(COMPACT_THUMBS)
+    } else {
+        base.resizable(true).default_size(app.ui.thumbs_width).size_range(150.0..=420.0)
+    };
+    let panel = base.show(ui, |ui| {
+        if !compact {
             app.ui.thumbs_width = ui.available_width();
-            if in_master {
-                master_list(app, ui);
-                return;
-            }
-            let out = egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| {
-                ui.add_space(8.0);
-                list(app, ui);
-                ui.add_space(20.0);
-            });
-            // Where the pane is scrolled to, for the control channel and tests (#917).
-            app.ui.thumbs_scroll = out.state.clamped_offset().y;
+        }
+        if in_master {
+            master_list(app, ui);
+            return;
+        }
+        let out = egui::ScrollArea::vertical().auto_shrink([false, false]).show(ui, |ui| {
+            ui.add_space(8.0);
+            list(app, ui);
+            ui.add_space(20.0);
         });
+        // Where the pane is scrolled to, for the control channel and tests (#917).
+        app.ui.thumbs_scroll = out.state.clamped_offset().y;
+    });
     // Focus follows the last press: inside the pane keeps it, anywhere else (canvas, ribbon) drops it.
     if let Some(pos) = ui.input(|i| if i.pointer.primary_pressed() { i.pointer.interact_pos() } else { None }) {
         app.slides_focused = panel.response.rect.contains(pos);
@@ -314,6 +322,17 @@ pub fn slide_menu(app: &mut SlideApp, ui: &mut Ui, i: usize) {
         if ui.button(l).clicked() {
             let _ = app.run(id, p);
             ui.close();
+        }
+    }
+    // Slides copied from another presentation: PowerPoint's paste options.
+    if app.session.clipboard.slides.is_empty() {
+        // nothing to offer
+    } else {
+        for (l, how) in [("Paste, Keep Source Formatting", "keepSource"), ("Paste, Use Destination Theme", "destinationTheme")] {
+            if ui.button(l).clicked() {
+                let _ = app.run("edit.pasteSpecial", json!({"as": how}));
+                ui.close();
+            }
         }
     }
     ui.separator();

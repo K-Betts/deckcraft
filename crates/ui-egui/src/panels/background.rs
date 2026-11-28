@@ -33,12 +33,7 @@ pub(super) fn background(app: &mut SlideApp, ui: &mut Ui) {
                     run(app, "design.background", json!({"gradient": crate::fillui::gradient_json(&g)}));
                 }
                 "picture" => {
-                    if let Some(pick) = app.services.pick_open.as_mut()
-                        && let Some(path) = pick("picture")
-                        && let Some(Ok(bytes)) = app.services.read.as_ref().map(|r| r(&path))
-                    {
-                        let _ = app.run("design.background", json!({"picture": deckcraft_engine::cmd::base64_encode(&bytes)}));
-                    }
+                    pick_background_picture(app);
                 }
                 "pattern" => run(app, "design.background", json!({"pattern": {"preset": "pct20", "fg": "accent1", "bg": "bg1"}})),
                 _ => run(app, "design.background", json!({"reset": true})),
@@ -76,12 +71,8 @@ pub(super) fn background(app: &mut SlideApp, ui: &mut Ui) {
             }
         }
         Some(Fill::Picture(pf)) => {
-            if ui.button("Insert picture from file…").clicked()
-                && let Some(pick) = app.services.pick_open.as_mut()
-                && let Some(path) = pick("picture")
-                && let Some(Ok(bytes)) = app.services.read.as_ref().map(|r| r(&path))
-            {
-                let _ = app.run("design.background", json!({"picture": deckcraft_engine::cmd::base64_encode(&bytes)}));
+            if ui.button("Insert picture from file…").clicked() {
+                pick_background_picture(app);
             }
             picture_background_options(app, ui, pf);
         }
@@ -191,5 +182,16 @@ fn picture_background_options(app: &mut SlideApp, ui: &mut Ui, pf: &deckcraft_mo
             }
         });
         let _ = combo.response.labelled_by(field.id);
+    });
+}
+
+/// Asks for a picture file and makes it the slide background.
+fn pick_background_picture(app: &mut SlideApp) {
+    app.pick_then(crate::PickKind::Open("picture".into()), |app, path| {
+        if let Some(path) = path
+            && let Some(Ok(bytes)) = app.services.read.as_ref().map(|r| r(&path))
+        {
+            let _ = app.run("design.background", json!({"picture": deckcraft_engine::cmd::base64_encode(&bytes)}));
+        }
     });
 }

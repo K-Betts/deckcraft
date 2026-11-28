@@ -165,7 +165,7 @@ impl Show {
         // Clicks on the on-screen controls must not also advance.
         ctx.input(|i| i.pointer.interact_pos()).is_some_and(|p| {
             let r = ctx.content_rect();
-            (self.reading && p.y > r.max.y - 34.0) || (!self.reading && tool_bar_rect(r).expand(8.0).contains(p))
+            (self.reading && p.y > r.max.y - 34.0) || (!self.reading && self.teacher.is_none() && tool_bar_rect(r).expand(8.0).contains(p))
         })
     }
 }

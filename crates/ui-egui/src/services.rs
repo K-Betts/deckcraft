@@ -4,6 +4,23 @@ pub type WriteFn = Box<dyn FnMut(&str, &[u8]) -> Result<(), String>>;
 
 pub type PickFn = Box<dyn FnMut(&str) -> Option<String>>;
 
+/// What a native file dialog asks for.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum PickKind {
+    /// Open a file for a purpose (`open`, `picture`, `audio`, `video`, ...).
+    Open(String),
+    /// Save with a suggested file name.
+    Save(String),
+    /// Choose a folder for a purpose (`library`).
+    Folder(String),
+}
+
+/// Starts a native dialog without blocking the UI thread and returns where its answer will arrive
+/// (`None` when it was dismissed). On macOS a blocking dialog run from inside the event handler
+/// runs a nested loop that re-enters winit's handler and aborts the app, so desktop hosts run the
+/// dialog elsewhere and the app polls ([`SlideApp::pick_then`](crate::SlideApp)).
+pub type SpawnPickFn = Box<dyn FnMut(PickKind) -> std::sync::mpsc::Receiver<Option<String>>>;
+
 /// `(purpose, request id)`. The host shows a picker and later pushes an [`InboxEvent`]
 /// carrying that same id. Completing a cancelled or unknown id does nothing: the file is
 /// not applied to whichever document happens to be active.
@@ -46,6 +63,9 @@ pub struct Services {
     pub pick_open: Option<PickFn>,
     /// Save dialog with a suggested name → path.
     pub pick_save: Option<PickFn>,
+    /// Non-blocking form of `pick_open`, `pick_save` and the maths folder picker. When set, every
+    /// dialog goes through it; the blocking pickers stay for tests and for hosts without it.
+    pub pick_async: Option<SpawnPickFn>,
     pub read: Option<ReadFn>,
     pub write: Option<WriteFn>,
     /// Asynchronous open dialog (web). The callback receives the purpose and the request id
@@ -71,6 +91,8 @@ pub struct Services {
     pub clipboard_set_html: Option<Box<dyn FnMut(&str, &str) -> bool>>,
     /// Audio output for media playback (cpal on desktop); without one media plays silently.
     pub audio_out: Option<Box<dyn deckcraft_media::AudioOut>>,
+    /// Folder picking, Google Drive and updates (the maths edition's).
+    pub maths: crate::maths::app::MathsServices,
     /// How many displays are connected, when the host can tell: Presenter View needs a second.
     pub displays: Option<Box<dyn FnMut() -> Option<usize>>>,
 }

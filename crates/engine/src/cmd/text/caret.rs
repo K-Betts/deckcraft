@@ -3,8 +3,8 @@ use super::editing::{inherited_aligns, insert_text, promote_rtl_if_needed};
 use super::ime::{composition_range, model_pos, walk_backward, walk_forward};
 use super::layout::{ctx_for, fit_text_box, layout_for, pos_param};
 use super::{
-    DocState, HistoryEntry, Pos, Result, Session, ShapeId, ShapeKind, TextBody, Value, bad, body_of, bool_or, ed, edit_shapes, edit_text, id_param,
-    json, ok, push_undo, str_param, xfrm_of,
+    DocState, HistoryEntry, Pos, Result, Run, RunKind, RunProps, Session, ShapeId, ShapeKind, TextBody, Value, bad, body_of, bool_or, bool_param, ed,
+    edit_shapes, edit_text, id_param, json, ok, push_undo, str_param, xfrm_of,
 };
 
 /// A table cell's text laid out the way it is drawn, mapped into slide coordinates.
@@ -330,6 +330,7 @@ pub(super) fn set(s: &mut Session, p: &Value) -> Result<Value> {
         None => s.doc()?.selection.shapes.first().copied().ok_or_else(|| bad("text.set", "missing `id` (or select a shape)"))?,
     };
     let cell = p.get("cell").and_then(Value::as_array).and_then(|a| Some((a.first()?.as_u64()? as usize, a.get(1)?.as_u64()? as usize)));
+    let maths = bool_param(p, "maths").unwrap_or(false);
     let inherited = inherited_aligns(s, id);
     edit_shapes(s, &json!({"id": id}), "text.set", |sh| {
         let target = match (&mut sh.kind, cell) {
@@ -350,8 +351,12 @@ pub(super) fn set(s: &mut Session, p: &Value) -> Result<Value> {
                 para.props = pp.clone();
             }
             promote_rtl_if_needed(para, &inherited);
-            for r in &mut para.runs {
-                r.props = keep.clone();
+            if maths && para.text().contains('$') {
+                para.runs = math_runs(&para.text(), &keep);
+            } else {
+                for r in &mut para.runs {
+                    r.props = keep.clone();
+                }
             }
         }
         body.paragraphs = nb.paragraphs;
@@ -359,6 +364,25 @@ pub(super) fn set(s: &mut Session, p: &Value) -> Result<Value> {
     })?;
     fit_text_box(s, id)?;
     ok()
+}
+
+/// Runs for a line with `$…$` maths: the words keep `keep`, each equation becomes a maths run.
+fn math_runs(text: &str, keep: &RunProps) -> Vec<Run> {
+    use crate::latex::{Segment, segments};
+    segments(text)
+        .into_iter()
+        .map(|seg| match seg {
+            Segment::Text(t) => Run::with(t, keep.clone()),
+            Segment::Math(m) => {
+                let parsed = crate::equation::parse(&m);
+                Run {
+                    text: crate::equation::to_plain(&parsed),
+                    props: RunProps { font: Some("Cambria Math".into()), ..keep.clone() },
+                    kind: RunKind::Math { omml: crate::equation::to_omml_sized(&parsed, keep.size) },
+                }
+            }
+        })
+        .collect()
 }
 
 pub(super) fn get(s: &mut Session, p: &Value) -> Result<Value> {

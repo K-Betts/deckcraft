@@ -16,11 +16,14 @@ mod animations;
 mod arrange;
 mod chart;
 mod design;
+mod doc_tabs;
 mod draw;
+pub(crate) mod fold;
 mod galleries;
 mod home;
 mod insert;
 mod masters;
+mod maths;
 mod picture_format;
 mod playback;
 mod review;
@@ -40,6 +43,7 @@ pub use arrange::{align_menu, arrange_menu};
 use chart::chart_design;
 use design::design;
 pub use design::paint_theme_tile;
+pub use doc_tabs::doc_tabs;
 use draw::draw;
 pub use galleries::{cref_param, effects_menu, outline_menu, paint_preset, shapes_gallery};
 pub use home::font_families;
@@ -126,6 +130,12 @@ fn tab_label(id: &str) -> &str {
 
 const TABS: [&str; 10] = ["Home", "Insert", "Draw", "Design", "Transitions", "Animations", "Slide Show", "Record", "Review", "View"];
 
+/// Height of the tab row, the card's inner padding, its side margin, and the gap under it.
+const TAB_ROW: f32 = 40.0;
+const CARD_PAD: f32 = 12.0;
+const CARD_MARGIN: f32 = 12.0;
+const CARD_GAP: f32 = 8.0;
+
 /// Tab row and the ribbon card.
 pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     let t = Tokens::get(ui.ctx());
@@ -133,22 +143,37 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
     if !TABS.contains(&app.ui.tab.as_str()) && !ctx_tabs.contains(&app.ui.tab.as_str()) {
         app.ui.tab = "Home".into();
     }
-    let h = 28.0 + if app.ui.ribbon_collapsed { 4.0 } else { RIBBON_H + 20.0 };
+    // The tab row, then a floating card with room around its contents (the design system's
+    // "roomy ribbon": space between groups instead of rules, rounded, softly raised).
+    let h = TAB_ROW + if app.ui.ribbon_collapsed { 6.0 } else { CARD_PAD * 2.0 + RIBBON_H + CARD_GAP };
     egui::Panel::top("ribbon").exact_size(h).frame(egui::Frame::NONE.fill(t.chrome)).show(ui, |ui| {
         let rect = ui.max_rect();
-        // Tabs. File comes first and opens the File tab's full-window view (Backstage), as in
-        // PowerPoint.
-        let mut x = rect.min.x + 12.0;
-        let y = rect.min.y + 2.0;
-        {
-            let w = ui.fonts_mut(|f| f.layout_no_wrap("File".to_string(), theme::font(13.0), t.text).size().x) + 18.0;
-            let r = Rect::from_min_size(pos2(x, y), vec2(w, 24.0));
-            let resp = ui.interact(r, ui.scope_id().with("tab_file"), Sense::click());
-            resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, "File"));
-            if resp.hovered() {
-                ui.painter().rect_filled(r.shrink2(vec2(2.0, 2.0)), CornerRadius::same(4), t.hover);
+        // Tabs: text in a row of pills, the current one a white raised pill with the accent
+        // colour as its text. File comes first and opens the File tab's full-window view
+        // (Backstage), as in PowerPoint.
+        let mut x = rect.min.x + CARD_MARGIN;
+        let y = rect.min.y + 5.0;
+        let pill = |ui: &mut Ui, x: f32, label: &str, id: egui::Id, active: bool, ink: egui::Color32| -> (egui::Response, f32) {
+            let font = if active { theme::bold(13.5) } else { theme::font(13.5) };
+            let w = ui.fonts_mut(|f| f.layout_no_wrap(label.to_string(), font.clone(), t.text).size().x) + 26.0;
+            let r = Rect::from_min_size(pos2(x, y), vec2(w, 30.0));
+            let resp = ui.interact(r, id, Sense::click());
+            // Only File is named for screen readers and tests (as before): naming every tab
+            // would make a tab and a dialog button of the same name ("Insert") ambiguous.
+            if label == "File" {
+                resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, label));
             }
-            ui.painter().text(r.center(), Align2::CENTER_CENTER, "File", theme::font(13.0), t.text);
+            if active {
+                ui.painter().add(egui::epaint::Shadow { offset: [0, 1], blur: 6, spread: 0, color: t.shadow }.as_shape(r, CornerRadius::same(15)));
+                ui.painter().rect_filled(r, CornerRadius::same(15), t.card);
+            } else if resp.hovered() {
+                ui.painter().rect_filled(r, CornerRadius::same(15), t.hover);
+            }
+            ui.painter().text(r.center(), Align2::CENTER_CENTER, label, font, ink);
+            (resp, w)
+        };
+        {
+            let (resp, w) = pill(ui, x, "File", ui.scope_id().with("tab_file"), false, t.text);
             if resp.on_hover_text("File (Alt+F)").clicked() {
                 app.open_backstage(crate::backstage::Page::Home);
             }
@@ -156,23 +181,9 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         }
         let all: Vec<(&str, bool)> = TABS.iter().map(|s| (*s, false)).chain(ctx_tabs.iter().map(|s| (*s, true))).collect();
         for (name, contextual) in all {
-            let label = tab_label(name);
-            let font = theme::font(13.0);
-            let w = ui.fonts_mut(|f| f.layout_no_wrap(label.to_string(), font.clone(), t.text).size().x) + 18.0;
-            let r = Rect::from_min_size(pos2(x, y), vec2(w, 24.0));
-            let resp = ui.interact(r, ui.scope_id().with(("tab", name)), Sense::click());
-            resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, label));
             let active = app.ui.tab == name;
-            if resp.hovered() && !active {
-                ui.painter().rect_filled(r.shrink2(vec2(2.0, 2.0)), CornerRadius::same(4), t.hover);
-            }
-            let col = if contextual { t.contextual } else { t.text };
-            let f = if active { theme::bold(13.0) } else { font };
-            ui.painter().text(r.center(), Align2::CENTER_CENTER, label, f, col);
-            if active {
-                let uw = (w - 20.0).max(16.0);
-                ui.painter().rect_filled(Rect::from_center_size(pos2(r.center().x, r.max.y - 1.0), vec2(uw, 3.0)), CornerRadius::same(1), t.accent);
-            }
+            let ink = if active || contextual { if contextual { t.contextual } else { t.accent } } else { t.text_dim };
+            let (resp, w) = pill(ui, x, tab_label(name), ui.scope_id().with(("tab", name)), active, ink);
             if resp.clicked() {
                 if active {
                     app.ui.ribbon_collapsed = !app.ui.ribbon_collapsed;
@@ -189,94 +200,31 @@ pub fn show(app: &mut SlideApp, ui: &mut Ui) {
         if app.ui.ribbon_collapsed {
             return;
         }
-        // The white card.
-        let card = Rect::from_min_max(pos2(rect.min.x + 8.0, rect.min.y + 30.0), pos2(rect.max.x - 8.0, rect.min.y + 30.0 + RIBBON_H + 10.0));
-        ui.painter().rect_filled(card.translate(vec2(0.0, 1.0)), CornerRadius::same(10), t.card_border);
-        ui.painter().rect_filled(card, CornerRadius::same(10), t.card);
-        let inner = Rect::from_min_size(pos2(card.min.x + 10.0, card.min.y + 5.0), vec2(card.width() - 20.0, RIBBON_H));
-        let mut cui = ui.new_child(egui::UiBuilder::new().max_rect(inner));
+        // The card: white, 16 radius, a hairline and a soft shadow.
+        let card = Rect::from_min_max(
+            pos2(rect.min.x + CARD_MARGIN, rect.min.y + TAB_ROW),
+            pos2(rect.max.x - CARD_MARGIN, rect.min.y + TAB_ROW + CARD_PAD * 2.0 + RIBBON_H),
+        );
+        let corner = CornerRadius::same(theme::radius::SURFACE);
+        ui.painter().add(egui::epaint::Shadow { offset: [0, 4], blur: 18, spread: 0, color: t.shadow }.as_shape(card, corner));
+        ui.painter().rect_filled(card, corner, t.card);
+        ui.painter().rect_stroke(card, corner, egui::Stroke::new(1.0, t.card_border), egui::StrokeKind::Inside);
+        let inner =
+            Rect::from_min_size(pos2(card.min.x + CARD_MARGIN - 2.0, card.min.y + CARD_PAD), vec2(card.width() - CARD_MARGIN * 2.0 + 4.0, RIBBON_H));
+        let mut cui = ui.new_child(egui::UiBuilder::new().max_rect(inner).layout(egui::Layout::left_to_right(egui::Align::Min)));
         cui.set_clip_rect(inner.expand2(vec2(0.0, 3.0)));
-        // Reserve a gutter on both sides for the overflow chevrons. They are painted and
-        // interacted in that gutter, never on top of the first/last visible button: the bar they
-        // reveal must not steal the click they were meant to make reachable.
-        let edge = 18.0_f32.min(inner.width() * 0.25);
-        let scroll_rect = inner.shrink2(vec2(edge, 0.0));
-        let mut sui = ui.new_child(egui::UiBuilder::new().max_rect(scroll_rect));
-        sui.set_clip_rect(scroll_rect.expand2(vec2(0.0, 3.0)));
-        let tab = app.ui.tab.clone();
-        // The card used to clip a too-wide group row with no way to reach the rest. A horizontal
-        // scroll area plus edge chevrons keeps every group reachable at the default 1440 px
-        // window, including Home's Editing group (Replace Fonts…). The bar is hidden; the
-        // chevrons are the visible overflow control and are accessible buttons of their own.
-        let request_id = cui.make_persistent_id(("ribbon_scroll_request", tab.as_str()));
-        let requested = cui.ctx().data_mut(|d| d.remove_temp::<f32>(request_id));
-        let mut area = egui::ScrollArea::horizontal().id_salt(("ribbon_scroll", tab.as_str()));
-        if let Some(offset) = requested {
-            area = area.horizontal_scroll_offset(offset);
-        }
-        let scroll =
-            area.scroll_bar_visibility(egui::scroll_area::ScrollBarVisibility::AlwaysHidden).auto_shrink([false, false]).show(&mut sui, |ui| {
-                ui.set_min_height(RIBBON_H);
-                ui.horizontal_top(|ui| {
-                    ui.spacing_mut().item_spacing.x = 1.0;
-                    match tab.as_str() {
-                        "Home" => home(app, ui),
-                        "Insert" => insert(app, ui),
-                        "Draw" => draw(app, ui),
-                        "Design" => design(app, ui),
-                        "Transitions" => transitions(app, ui),
-                        "Animations" => animations(app, ui),
-                        "Slide Show" => slide_show(app, ui),
-                        "Record" => record(app, ui),
-                        "Review" => review(app, ui),
-                        "View" => view(app, ui),
-                        "Shape Format" => shape_format(app, ui),
-                        "Picture Format" => picture_format(app, ui),
-                        "Table Design" => table_design(app, ui),
-                        "Layout" => table_layout(app, ui),
-                        "Chart Design" => chart_design(app, ui),
-                        DIAGRAM_TAB_ID => smartart_design(app, ui),
-                        "Playback" => playback(app, ui),
-                        "Slide Master" => slide_master(app, ui),
-                        "Handout Master" => handout_master(app, ui),
-                        "Notes Master" => notes_master(app, ui),
-                        _ => {}
-                    }
-                });
-            });
-        let r = scroll.inner_rect;
+        cui.spacing_mut().item_spacing.x = 1.0;
+        fold::responsive_tab(app, &mut cui, inner);
         // A gallery sized from this reads it on the next frame, so a change (a resize, a tab
         // shown for the first time) asks for one; within half a point it is the same layout.
-        let spare = r.width() - scroll.content_size.x;
+        let tab = app.ui.tab.clone();
+        let spare = inner.width() - fold::tab_width(app, &tab).unwrap_or_else(|| cui.min_rect().width());
         let moved = ui.ctx().data_mut(|d| {
             let was = d.get_temp::<f32>(spare_room_id(&tab));
             d.insert_temp(spare_room_id(&tab), spare);
             was.is_none_or(|was| (was - spare).abs() > 0.5)
         });
         if moved {
-            ui.ctx().request_repaint();
-        }
-        let overflow = (scroll.content_size.x - r.width()).max(0.0);
-        let offset = scroll.state.clamped_offset().x;
-        // Record the rendered offset for `InputTarget`: the same window point hits a different
-        // button when the ribbon scrolls between queueing and delivering a control click.
-        app.ribbon_scroll.insert(tab.clone(), offset.to_bits());
-        let step = 160.0;
-        let mut next = None;
-        if offset > 1.0 {
-            let left = Rect::from_min_max(pos2((r.left() - edge).max(inner.left()), r.top()), pos2(r.left(), r.bottom()));
-            if edge_cue(&mut cui, left, "‹", "Scroll ribbon left", &t) {
-                next = Some(offset - step);
-            }
-        }
-        if overflow - offset > 1.0 {
-            let right = Rect::from_min_max(pos2(r.right(), r.top()), pos2((r.right() + edge).min(inner.right()), r.bottom()));
-            if edge_cue(&mut cui, right, "›", "Scroll ribbon right", &t) {
-                next = Some(offset + step);
-            }
-        }
-        if let Some(x) = next {
-            ui.ctx().data_mut(|d| d.insert_temp(request_id, x.clamp(0.0, overflow)));
             ui.ctx().request_repaint();
         }
     });
@@ -287,20 +235,38 @@ fn spare_room_id(tab: &str) -> egui::Id {
 }
 
 /// The width the tab's groups left free in the ribbon on the last frame it was drawn; negative
-/// when they ran past its edge. A gallery that gives way to the groups after it sizes itself
-/// from this.
+/// when they ran past its edge (folded into More included). A gallery that gives way to the
+/// groups after it sizes itself from this.
 pub(super) fn spare_room(ctx: &egui::Context, tab: &str) -> Option<f32> {
     ctx.data(|d| d.get_temp::<f32>(spare_room_id(tab)))
 }
 
-/// A chevron over a ribbon edge that scrolls it; `true` on the frame it is clicked.
-fn edge_cue(ui: &mut Ui, rect: Rect, glyph: &str, hint: &str, t: &Tokens) -> bool {
-    let resp = ui.interact(rect, ui.scope_id().with(glyph), Sense::click()).on_hover_text(hint);
-    resp.widget_info(|| egui::WidgetInfo::labeled(egui::Role::Button, true, hint));
-    let ink = if resp.hovered() { t.text } else { t.text_dim };
-    ui.painter().rect_filled(rect, CornerRadius::ZERO, t.card);
-    ui.painter().text(rect.center(), Align2::CENTER_CENTER, glyph, egui::FontId::proportional(18.0), ink);
-    resp.clicked()
+/// The groups of the current ribbon tab.
+fn render_tab(app: &mut SlideApp, ui: &mut Ui) {
+    let tab = app.ui.tab.clone();
+    match tab.as_str() {
+        "Home" => home(app, ui),
+        "Insert" => insert(app, ui),
+        "Draw" => draw(app, ui),
+        "Design" => design(app, ui),
+        "Transitions" => transitions(app, ui),
+        "Animations" => animations(app, ui),
+        "Slide Show" => slide_show(app, ui),
+        "Record" => record(app, ui),
+        "Review" => review(app, ui),
+        "View" => view(app, ui),
+        "Shape Format" => shape_format(app, ui),
+        "Picture Format" => picture_format(app, ui),
+        "Table Design" => table_design(app, ui),
+        "Layout" => table_layout(app, ui),
+        "Chart Design" => chart_design(app, ui),
+        "SmartArt Design" => smartart_design(app, ui),
+        "Playback" => playback(app, ui),
+        "Slide Master" => slide_master(app, ui),
+        "Handout Master" => handout_master(app, ui),
+        "Notes Master" => notes_master(app, ui),
+        _ => {}
+    }
 }
 
 /// Draw a large ribbon command button, honour its enabled state, run the command on click, and

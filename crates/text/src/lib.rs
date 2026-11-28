@@ -22,6 +22,10 @@
 mod bidi;
 pub mod datetime;
 
+pub mod equation;
+pub mod math;
+mod math_layout;
+
 use std::collections::HashMap;
 use std::sync::Arc;
 

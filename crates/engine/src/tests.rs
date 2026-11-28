@@ -7322,6 +7322,8 @@ fn master_body_placeholder_format_keeps_per_level_formatting() {
     assert_eq!(shown(&s), vec![Some(28.0), Some(24.0)]);
 }
 
+mod fixes;
+
 #[test]
 fn table_edits_past_the_cell_cap_are_refused_not_trimmed() {
     use deckcraft_model::table::{MAX_CELLS, Row};
@@ -7623,4 +7625,39 @@ fn shape_adjust_and_quick_style_reject_invalid_index() {
     assert_eq!(s.doc().unwrap().shape(id).unwrap().geom, before.geom);
     assert_eq!(s.doc().unwrap().shape(id).unwrap().style, before.style);
     s.execute("shape.adjust", &json!({"value": 0.4})).unwrap();
+}
+
+/// Slides copied from one presentation and pasted into another bring their own master and layouts
+/// (PowerPoint's default, Keep Source Formatting), instead of being re-pointed at whichever layout
+/// of the destination shares an id. Paste Special › Use Destination Theme matches by layout name.
+#[test]
+fn slides_pasted_into_another_presentation_keep_their_source_formatting() {
+    let layout_name = |s: &Session| {
+        let st = s.doc().unwrap();
+        let sl = st.current_slide().unwrap();
+        st.doc.layout(sl.layout).map(|(_, l)| l.name.clone()).unwrap()
+    };
+    for (how, keeps) in [("edit.paste", true), ("destinationTheme", false), ("keepSource", true)] {
+        let mut s = session();
+        {
+            let st = s.doc_mut().unwrap();
+            let doc = std::sync::Arc::make_mut(&mut st.doc);
+            let layout = doc.slides[0].layout;
+            let m = std::sync::Arc::make_mut(&mut doc.masters[0]);
+            m.layouts.iter_mut().find(|l| l.id == layout).unwrap().name = "Source Layout".into();
+        }
+        s.execute("edit.copy", &json!({"scope": "slides"})).unwrap();
+        s.execute("file.new", &json!({})).unwrap();
+        assert_eq!(s.doc().unwrap().doc.masters.len(), 1);
+        if how == "edit.paste" {
+            s.execute("edit.paste", &json!({"scope": "slides"})).unwrap();
+        } else {
+            s.execute("edit.pasteSpecial", &json!({"as": how})).unwrap();
+        }
+        let st = s.doc().unwrap();
+        assert_eq!(st.doc.slides.len(), 2, "{how}");
+        assert_eq!(st.doc.masters.len(), if keeps { 2 } else { 1 }, "{how}: source master brought along or not");
+        assert_eq!(layout_name(&s) == "Source Layout", keeps, "{how}");
+        assert!(st.doc.validate().is_empty(), "{how}");
+    }
 }

@@ -1,7 +1,8 @@
 use super::{
     FilePlace, FilePurpose, FileTarget, InboxEvent, LocatedPlace, PendingFile, RECENT_MAX, SlideApp, Target, UiRequest, Value, ViewMode, dialogs,
-    json, media,
+    json, media, now_ms,
 };
+use crate::services::PickKind;
 
 #[derive(Default)]
 pub(crate) struct PrintPreviews(Vec<std::path::PathBuf>);
@@ -69,6 +70,8 @@ fn purpose_of(purpose: &str) -> FilePurpose {
         "picture" => FilePurpose::Picture,
         "audio" => FilePurpose::Audio,
         "video" => FilePurpose::Video,
+        "curriculum" => FilePurpose::MathsText("curriculum"),
+        "questions" => FilePurpose::MathsText("questions"),
         _ => FilePurpose::Infer,
     }
 }
@@ -125,6 +128,7 @@ fn command_for(purpose: FilePurpose, name: &str, bytes: &[u8]) -> Result<&'stati
         FilePurpose::ChangePicture => deckcraft_engine::cmd::insert::content_type(name, bytes).starts_with("image/").then_some("picture.change"),
         FilePurpose::Open => open_command(name),
         FilePurpose::Infer => infer_command(name, bytes),
+        FilePurpose::MathsText(_) => None,
     };
     cmd.ok_or_else(|| format!("{name}: DeckCraft can't open this kind of file"))
 }
@@ -190,6 +194,13 @@ impl SlideApp {
     /// on the web. `extra` adds `file.export` params (the PDF's layout, slides…). The
     /// presentation keeps its own file. Returns whether a file was written or handed over.
     pub fn export_as(&mut self, fmt: &str, extra: Value) -> bool {
+        self.export_then(fmt, extra, |_, _| {})
+    }
+
+    /// [`export_as`](Self::export_as), then `after(app, exported)`. On the desktop the save dialog
+    /// is answered later, so the result is `false` here and `after` runs once it is known; on the
+    /// web the result is known now and `after` runs before this returns.
+    pub fn export_then(&mut self, fmt: &str, extra: Value, after: impl FnOnce(&mut SlideApp, bool) + 'static) -> bool {
         let Some(slide) = self.session.active().map(|d| d.selection.slide) else { return false };
         let (ext, format, all) = match fmt {
             "pdf" => ("pdf", "pdf", false),
@@ -208,20 +219,35 @@ impl SlideApp {
             }
         };
         let suggested = self.suggested_name(ext);
-        if let Some(pick) = self.services.pick_save.as_mut() {
-            let Some(path) = pick(&suggested) else { return false };
-            let mut params = json!({"path": path, "format": format, "all": all});
-            if let (Some(o), Some(x)) = (params.as_object_mut(), extra.as_object()) {
-                o.extend(x.clone());
-            }
-            return match self.run("file.export", params) {
-                Ok(_) => {
-                    self.set_status(format!("Exported {path}"));
-                    true
+        if self.can_pick(&PickKind::Save(String::new())) {
+            let (format, extra) = (format.to_string(), extra.clone());
+            let now = std::rc::Rc::new(std::cell::Cell::new(false));
+            let seen = now.clone();
+            self.pick_then(PickKind::Save(suggested), move |app, path| {
+                let Some(path) = path else { return after(app, false) };
+                let mut params = json!({"path": path, "format": format, "all": all});
+                if let (Some(o), Some(x)) = (params.as_object_mut(), extra.as_object()) {
+                    o.extend(x.clone());
                 }
-                Err(_) => false,
-            };
+                let ok = match app.run("file.export", params) {
+                    Ok(_) => {
+                        app.set_status(format!("Exported {path}"));
+                        true
+                    }
+                    Err(_) => false,
+                };
+                seen.set(ok);
+                after(app, ok);
+            });
+            return now.get();
         }
+        let ok = self.export_download(format, ext, all, slide, &extra, &suggested);
+        after(self, ok);
+        ok
+    }
+
+    /// The web half of [`export_then`](Self::export_then): the file goes to the browser.
+    fn export_download(&mut self, format: &str, ext: &str, all: bool, slide: usize, extra: &Value, suggested: &str) -> bool {
         let Some(doc) = self.session.active().map(|d| d.doc.clone()) else { return false };
         let bytes = match format {
             "png" | "jpeg" => {
@@ -234,11 +260,11 @@ impl SlideApp {
                 }
                 return any;
             }
-            "pdf" => deckcraft_engine::cmd::file::pdf_bytes(&doc, &extra),
-            "gif" => deckcraft_engine::cmd::file::gif_bytes(&doc, &extra),
+            "pdf" => deckcraft_engine::cmd::file::pdf_bytes(&doc, extra),
+            "gif" => deckcraft_engine::cmd::file::gif_bytes(&doc, extra),
             other => deckcraft_engine::cmd::file::save_bytes(&doc, other),
         };
-        self.download(&suggested, bytes)
+        self.download(suggested, bytes)
     }
 
     /// Hands `bytes` to the browser as a download (web); false (with the reason in the status
@@ -297,11 +323,14 @@ impl SlideApp {
     }
 
     pub(crate) fn pick_and_open(&mut self) {
-        if let Some(pick) = self.services.pick_open.as_mut() {
-            if let Some(path) = pick("open") {
-                self.open_path_in_background(&path);
+        if self.pick_then(PickKind::Open("open".into()), |app, path| {
+            if let Some(path) = path {
+                app.open_path_in_background(&path);
             }
-        } else if self.services.open_async.is_some() {
+        }) {
+            return;
+        }
+        if self.services.open_async.is_some() {
             let id = self.begin_external_file("open");
             if let Some(f) = self.services.open_async.as_mut() {
                 f("open", id);
@@ -310,7 +339,10 @@ impl SlideApp {
     }
 
     pub fn open_path(&mut self, path: &str) -> Result<(), String> {
+        let t0 = now_ms();
         self.session.execute("file.open", &json!({"path": path})).map_err(|e| e.to_string())?;
+        // On the UI thread: the window is frozen for this long. Path left out (it can name a class).
+        log::info!("opened a file on the UI thread in {:.0} ms", now_ms() - t0);
         self.note_recent(path);
         Ok(())
     }
@@ -358,11 +390,17 @@ impl SlideApp {
     /// Home › New Slide › Reuse Slides…: pick a presentation and insert all its slides after the
     /// current one (desktop only: the browser picker opens what it picks as a document).
     pub(super) fn pick_and_reuse(&mut self, keep: bool) {
-        let Some(pick) = self.services.pick_open.as_mut() else {
+        if !self.pick_then(PickKind::Open("open".into()), move |app, path| {
+            if let Some(path) = path {
+                app.reuse_slides_from(path, keep);
+            }
+        }) {
             self.set_status("Reuse Slides needs the desktop app".to_string());
-            return;
-        };
-        let Some(path) = pick("open") else { return };
+        }
+    }
+
+    /// Reads the presentation at `path` and offers its slides in the Reuse Slides dialog.
+    fn reuse_slides_from(&mut self, path: String, keep: bool) {
         // Read the file once: the list shown and the slides inserted come from the same bytes, even
         // if the file changes while the dialog is open. Without a reader the path is used as is.
         let mut source = json!({});
@@ -421,26 +459,30 @@ impl SlideApp {
 
     /// Pick a file and run `cmd` with it (`name` + `data`, or `path`) added to `extra`.
     pub(super) fn pick_and_run(&mut self, purpose: &str, cmd: &str, extra: &Value) {
-        if let Some(pick) = self.services.pick_open.as_mut() {
-            if let Some(path) = pick(purpose) {
-                let mut args = if extra.is_object() { extra.clone() } else { json!({}) };
-                let r = match self.services.read.as_ref().map(|r| r(&path)) {
-                    Some(Ok(bytes)) => {
-                        let name = std::path::Path::new(&path).file_name().map(|n| n.to_string_lossy().to_string()).unwrap_or_default();
-                        args["name"] = json!(name);
-                        args["data"] = json!(deckcraft_engine::cmd::base64_encode(&bytes));
-                        self.session.execute(cmd, &args)
-                    }
-                    _ => {
-                        args["path"] = json!(path);
-                        self.session.execute(cmd, &args)
-                    }
-                };
-                if let Err(e) = r {
-                    self.set_status(e.to_string());
+        let (cmd_owned, extra) = (cmd.to_string(), extra.clone());
+        if self.pick_then(PickKind::Open(purpose.into()), move |app, path| {
+            let Some(path) = path else { return };
+            let cmd = cmd_owned.as_str();
+            let mut args = if extra.is_object() { extra } else { json!({}) };
+            let r = match app.services.read.as_ref().map(|r| r(&path)) {
+                Some(Ok(bytes)) => {
+                    let name = std::path::Path::new(&path).file_name().map(|n| n.to_string_lossy().to_string()).unwrap_or_default();
+                    args["name"] = json!(name);
+                    args["data"] = json!(deckcraft_engine::cmd::base64_encode(&bytes));
+                    app.session.execute(cmd, &args)
                 }
+                _ => {
+                    args["path"] = json!(path);
+                    app.session.execute(cmd, &args)
+                }
+            };
+            if let Err(e) = r {
+                app.set_status(e.to_string());
             }
-        } else if self.services.open_async.is_some() {
+        }) {
+            return;
+        }
+        if self.services.open_async.is_some() {
             let id = self.begin_external_file(purpose);
             // Change Picture: the picture that arrives replaces the selected one (#115).
             if cmd == "picture.change"
@@ -455,21 +497,41 @@ impl SlideApp {
     }
 
     pub fn save_as_dialog(&mut self, format: &str) {
+        self.save_as_then(format, |_, _| {});
+    }
+
+    /// Save As, then `after(app, saved)`. On the desktop the dialog is answered later, so `after`
+    /// runs once it is known (`saved` is false when it was dismissed or the save failed); the web
+    /// has no dialog and `after` runs at once with `true`.
+    pub fn save_as_then(&mut self, format: &str, after: impl FnOnce(&mut SlideApp, bool) + 'static) {
         let name = self.session.active().map(|d| d.title()).unwrap_or_else(|| "Presentation".into());
         let ext = if format == "pptx" { "pptx" } else { "deckcraft" };
         let suggested = format!("{name}.{ext}");
-        if let Some(pick) = self.services.pick_save.as_mut() {
-            if let Some(path) = pick(&suggested) {
-                match self.session.execute("file.saveAs", &json!({"path": path})) {
+        if self.can_pick(&PickKind::Save(String::new())) {
+            self.save_dismissed = false;
+            self.pick_then(PickKind::Save(suggested), move |app, path| {
+                let Some(path) = path else {
+                    app.save_dismissed = true;
+                    return after(app, false);
+                };
+                let saved = match app.session.execute("file.saveAs", &json!({"path": path})) {
                     Ok(_) => {
-                        self.set_status(format!("Saved {path}"));
-                        self.ui.recent.retain(|p| *p != path);
-                        self.ui.recent.insert(0, path);
+                        app.set_status(format!("Saved {path}"));
+                        app.ui.recent.retain(|p| *p != path);
+                        app.ui.recent.insert(0, path);
+                        true
                     }
-                    Err(e) => self.set_status(e.to_string()),
-                }
-            }
-        } else if self.services.host_save.is_some() {
+                    Err(e) => {
+                        app.set_status(e.to_string());
+                        false
+                    }
+                };
+                app.save_dismissed = !saved;
+                after(app, saved);
+            });
+            return;
+        }
+        if self.services.host_save.is_some() {
             let _ = self.save_to_host(Some(ext));
         } else if let Some(dl) = self.services.download.as_mut()
             && let Some(d) = self.session.active()
@@ -479,6 +541,7 @@ impl SlideApp {
                 Err(e) => self.set_status(e.to_string()),
             }
         }
+        after(self, true);
     }
 
     /// Save every presentation with unsaved changes (asking for a location where needed).
@@ -506,7 +569,7 @@ impl SlideApp {
                 Err(e) => self.set_status(e.to_string()),
             }
         } else {
-            self.save_as_dialog("deckcraft");
+            self.save_as_dialog(self.default_save_format());
         }
     }
 
@@ -603,7 +666,7 @@ impl SlideApp {
                 UiRequest::Message { text } => self.set_status(text),
                 UiRequest::PickFile { purpose } => {
                     if purpose == "saveAs" {
-                        self.save_as_dialog("deckcraft");
+                        self.save_as_dialog(self.default_save_format());
                     }
                 }
                 UiRequest::Media { action, shape, ms } => {
@@ -696,6 +759,10 @@ impl SlideApp {
     fn apply_external_file(&mut self, id: u64, name: &str, bytes: &[u8]) {
         let Some(pos) = self.pending_files.iter().position(|r| r.id == id) else { return };
         let req = self.pending_files.remove(pos);
+        if let FilePurpose::MathsText(purpose) = req.purpose {
+            crate::dialogs::maths::text_arrived(self, purpose, bytes);
+            return;
+        }
         let cmd = match command_for(req.purpose, name, bytes) {
             Ok(cmd) => cmd,
             Err(e) => {

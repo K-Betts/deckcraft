@@ -76,6 +76,7 @@ pub(super) fn view(app: &mut SlideApp, ui: &mut Ui) {
             app.ui.zoom = None;
         }
     });
+    super::maths::view_group(app, ui);
     group(ui, |ui| {
         let has = app.session.active().is_some();
         let on = app.doc_window.is_some();

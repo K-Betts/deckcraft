@@ -23,6 +23,7 @@ pub mod dialogs;
 pub mod doc_window;
 pub mod eyedropper;
 pub mod icons;
+pub mod maths;
 pub mod media;
 pub mod menus;
 pub mod opening;
@@ -72,7 +73,7 @@ pub use panels::notes;
 pub use panels::selpane;
 pub use panels::thumbs;
 pub use ribbon::qat;
-pub use services::{DownloadFn, HostSaveFn, Inbox, InboxEvent, InboxFile, OpenAsyncFn, PickFn, ReadFn, Services, WriteFn};
+pub use services::{DownloadFn, HostSaveFn, Inbox, InboxEvent, InboxFile, OpenAsyncFn, PickFn, PickKind, ReadFn, Services, SpawnPickFn, WriteFn};
 use state::{FilePlace, FilePurpose, ImeDescriptorKey, ImeDestination, ImeTerminalStamp};
 pub use state::{RECENT_MAX, UiState, ViewMode, ZOOM_RANGE};
 
@@ -115,7 +116,8 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
     ("review.thesaurusPane", "Thesaurus", Some("Shift+F7"), "{word?}: open the Thesaurus pane on the selected word"),
     ("view.tab", "Ribbon Tab", None, "{tab}"),
     ("view.collapseRibbon", "Collapse the Ribbon", Some("Cmd+F1"), "{}"),
-    ("view.dark", "Dark Mode", None, "{on?: bool}"),
+    ("view.dark", "Dark Mode", None, "{on?: bool}: choosing it yourself stops following the computer"),
+    ("view.appearance", "Appearance", None, "{mode: \"system\"|\"light\"|\"dark\"}"),
     ("view.grayscale", "Grayscale", None, "{on?: bool}"),
     ("view.newWindow", "New Window", None, "{on?: bool, slide?: index, delta?: int}"),
     ("show.start", "Slide Show", Some("F5"), "{from?: index, custom?: name}"),
@@ -126,7 +128,33 @@ pub const UI_COMMANDS: &[(&str, &str, Option<&str>, &str)] = &[
         "{on?: bool} → {on, window} (presenter view, with notes, a clock and the next slide, appears in its own separate window beside the show window when the show starts; window is false in the browser build, which draws it inside the page)",
     ),
     ("show.keepCursor", "Keep Mouse Cursor Visible", None, "{on?: bool}"),
+    ("show.teacher", "Teacher Mode", Some("Cmd+Shift+T"), "{on?: bool}: present with the annotation overlay"),
+    ("show.teacherKeep", "Keep Annotations on Advance", None, "{on?: bool}"),
     ("show.end", "End Show", None, "{}"),
+    ("app.dismissSubjectsHint", "Dismiss the Subjects Hint", None, "{}: stop showing the Home card that offers subject tools"),
+    ("app.updates", "Check for Updates at Start", None, "{on?: bool}: ask GitHub for a newer version when DeckCraft starts (off by default)"),
+    ("update.check", "Check for Updates", None, "{}: ask GitHub whether a newer version exists"),
+    ("update.install", "Update DeckCraft", None, "{}: download and install the version `update.check` found"),
+    ("update.restart", "Restart to Finish Update", None, "{}: restart into the installed update (refuses while there are unsaved changes)"),
+    ("app.drive", "Google Drive Features", None, "{on?: bool}: switch the optional Google Drive features on or off (off by default)"),
+    ("drive.signIn", "Sign in to Google Drive", None, "{}: opens your browser; asks only for files DeckCraft saves"),
+    ("drive.cancel", "Cancel Google Sign-in", None, "{}"),
+    ("drive.signOut", "Sign out of Google Drive", None, "{}: deletes the stored sign-in"),
+    ("drive.refresh", "Refresh Google Drive List", None, "{}"),
+    ("drive.open", "Open from Google Drive", None, "{id, name, modified}"),
+    (
+        "drive.save",
+        "Save to Google Drive",
+        None,
+        "{}: saves the open presentation as .pptx in your DeckCraft folder, or updates the Drive file it came from",
+    ),
+    ("app.pack", "Switch Subject Pack", None, "{id: maths, on?: bool}: switch a subject pack on or off"),
+    (
+        "app.communityLinks",
+        "Show Community Links in Menus",
+        None,
+        "{on?: bool}: show the upstream Discord, app-page and source links in Home, Info and About",
+    ),
     ("animation.preview", "Preview Animations", None, "{on?: bool, from?: effect index}"),
     ("app.home", "Home", None, "{on?}"),
     ("app.backstage", "File", Some("Alt+F"), "{page?: home|new|open|info|saveAs|print|export|about, on?: bool}"),
@@ -164,6 +192,8 @@ pub struct Perf {
     pub frame_ms: f64,
     pub render_ms: f64,
     pub fps: f64,
+    /// When a slow frame was last logged ([`now_ms`]); at most one record a second.
+    slow_logged_ms: f64,
 }
 
 /// Playhead for the in-canvas animation preview.
@@ -224,6 +254,8 @@ pub struct SlideApp {
     pub session: Session,
     pub services: Services,
     pub ui: UiState,
+    /// Teacher Mode, Drive, updates, the folding ribbon and the Question Library (the maths edition's).
+    pub maths: maths::app::MathsApp,
     pub textures: textures::Textures,
     pub control_rx: Option<Receiver<ControlRequest>>,
     /// Spelling squiggles, checked on a worker thread.
@@ -236,6 +268,14 @@ pub struct SlideApp {
     anim_preview: Option<AnimPreview>,
     /// Where the Reuse Slides picker inserts: the presentation and slide current when it opened.
     reuse_target: Option<FileTarget>,
+    /// A native file dialog that is open on another thread, and what to do with its answer.
+    pending_pick: Option<app::picks::PendingPick>,
+    /// Photo album items made from pictures a desktop dialog returned, waiting for the dialog to add them.
+    album_picked: Vec<serde_json::Value>,
+    /// The quit dialog's Save is waiting for Save As dialogs: quit once every presentation is saved.
+    quit_when_saved: bool,
+    /// The last Save As dialog was dismissed or failed (stops the quit above from asking again).
+    save_dismissed: bool,
     /// Audio/video playback (editor control bar, slide show, `media.*` commands).
     pub media: media::MediaHost,
     pub status: Option<(String, f64)>,
@@ -305,6 +345,7 @@ pub struct SlideApp {
     styled: bool,
     restyle: bool,
     fonts_ready: bool,
+    /// `ui` has run in a frame, so egui's fonts exist (they aren't there before the first pass).
     last_time: f64,
     /// When AutoRecover data was last written (monotonic seconds, not wall time).
     pub last_recovery: f64,
@@ -451,6 +492,8 @@ mod animpane_tests;
 mod browsetheme_tests;
 #[cfg(test)]
 mod compare_tests;
+#[cfg(test)]
+mod doc_tabs_tests;
 #[cfg(test)]
 mod eyedropper_tests;
 #[cfg(test)]

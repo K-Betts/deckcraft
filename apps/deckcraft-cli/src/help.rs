@@ -18,6 +18,44 @@ The shapes of one slide, with their ids, boxes and text, come from the slide.ins
   deckcraft-cli run --in deck.deckcraft --print --cmd 'slide.inspect={\"index\":0}'",
     },
     Subcommand {
+        name: "fidelity",
+        usage: "fidelity ORIGINAL SAVED",
+        summary: "compare two decks and print a machine-readable difference report",
+        details: "Opens ORIGINAL and SAVED (.deckcraft or .pptx) and compares their slides by position. Prints a
+JSON report to stdout with slide counts, a `hasSlideChanges` flag and slide-level changes, including changed
+text, formatting, notes, pictures, transitions and animations. The input files are never modified.
+`hasSlideChanges` is scoped to the fields checked by the slide-model comparison; it is not a claim
+that every part of the Office package is byte-for-byte equal. This does not compare rendered
+pixels; use `render` to inspect visual differences.
+
+  deckcraft-cli fidelity original.pptx saved.pptx > fidelity-report.json",
+    },
+    Subcommand {
+        name: "bank",
+        usage: "bank check FILE [--samples N]",
+        summary: "check a question bank file and show example questions from each template",
+        details: "Reads a question bank (JSON) with the same checks the app makes, so mistakes are found here and
+not in front of a class. It reports the number of fixed questions and templates, then prints N
+(default 3) different questions generated from each template, with their answers, so you can read
+them and check the maths. A problem is named with the question or template it is in; nothing is
+written.
+
+  deckcraft-cli bank check my-questions.json
+  deckcraft-cli bank check my-questions.json --samples 6",
+    },
+    Subcommand {
+        name: "curriculum",
+        usage: "curriculum check FILE",
+        summary: "check a curriculum file and show the skills each objective is matched to",
+        details: "Reads a curriculum file (JSON: year groups, routes, units and their objectives) with the same
+checks the app makes, then lists every objective with the question-bank skills the Get Ready
+starter will use for it. NO MATCH marks an objective nothing in the bank fits; give it a `search`
+(other words to match) or `skills` (skill keys) in the file. UNMATCHED marks one the file says
+nothing fits (`\"unmatched\": true`), so its card starts empty. Nothing is written.
+
+  deckcraft-cli curriculum check our-curriculum.json",
+    },
+    Subcommand {
         name: "render",
         usage: "render (FILE | --sample) [--slide N | --all] [--scale S] [--edit] [--transparent] OUT",
         summary: "draw slides as PNG images",

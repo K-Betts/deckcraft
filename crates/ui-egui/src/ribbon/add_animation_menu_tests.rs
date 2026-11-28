@@ -46,7 +46,9 @@ fn added_effect(h: &Harness<'_, SlideApp>) -> Option<(String, deckcraft_model::a
 
 #[test]
 fn the_last_effect_is_reachable_by_scrolling() {
-    let size = egui::vec2(800.0, 700.0);
+    // Wide enough for Add Animation to be on the ribbon: the maths edition's ribbon has no scroll
+    // chevrons (groups that do not fit fold into More). The menu's height is what is tested.
+    let size = egui::vec2(1280.0, 700.0);
     let mut h = harness(size);
     open_add_animation(&mut h, size);
     let before = h.get_by_label("Neutron — Motion").rect();

@@ -1,4 +1,6 @@
 use super::autonum::autonum;
+use super::math;
+use super::math_layout::{inline_math_box, math_blank, math_italic_letters_available, math_of_paragraph, math_of_paragraph_kind, stand_in_text};
 use super::run::{RunEffects, TextShadow};
 use super::style::{Cell, Opts, ParaShaped, Style, face_chain, make_style};
 use super::symbol::{covers_symbol, is_symbol_font, map_symbol_bullet, symbol_font_char, symbol_map_char};
@@ -33,29 +35,58 @@ pub(crate) fn shape_para(
             bullet: None,
             level: 0,
             rtl: false,
+            math: None,
+            inline_math: vec![],
         };
     };
-    let props = resolve::para(ctx, shape, para);
+    let mut props = resolve::para(ctx, shape, para);
+    // A display equation sits where its own justification puts it (centred by default).
+    if let Some(a) = para.display_math_align() {
+        props.align = Some(a);
+    }
     let rtl = props.rtl.unwrap_or(false);
     let mut styles: Vec<Style> = vec![];
     let mut faces: Vec<Arc<FontFace>> = vec![];
     // The logical paragraph: its text and each character's style.
     let mut text = String::new();
     let mut char_style: Vec<usize> = vec![];
+    // Equations among other text are laid out as maths and drawn over blank space as wide as they
+    // are (a non-breaking space run, so a line never splits them).
+    let single = math_of_paragraph_kind(para);
+    let mut inline_math: Vec<(usize, math::MathBox, usize)> = vec![];
     for run in &para.runs {
-        let rp = resolve::run(ctx, shape, para, &run.props);
-        let st = make_style(ctx, &rp, scale, opts.prompt_color);
+        let mut rp = resolve::run(ctx, shape, para, &run.props);
+        let mut st = make_style(ctx, &rp, scale, opts.prompt_color);
         let t: String = match &run.kind {
             RunKind::Text => run.text.clone(),
             RunKind::Break => "\u{b}".into(),
             RunKind::Field { field } => opts.fields.field_in(field, rp.lang.as_deref()).unwrap_or_else(|| run.text.clone()),
-            RunKind::Math { .. } => run.text.clone(),
+            RunKind::Math { omml } => {
+                let (t, italic) = stand_in_text(&run.text, omml, math_italic_letters_available(&st.face));
+                if italic {
+                    rp.italic = Some(true);
+                    st = make_style(ctx, &rp, scale, opts.prompt_color);
+                }
+                t
+            }
         };
         let si = styles.len();
+        let mut t = t;
+        if !single && let Some(b) = inline_math_box(&run.kind, &st) {
+            t = math_blank(&b, &st);
+            inline_math.push((text.chars().count(), b, si));
+        }
         styles.push(st);
         char_style.extend(std::iter::repeat_n(si, t.chars().count()));
         text.push_str(&t);
     }
+    // One display equation of fractions, powers or roots is drawn as maths over blank space as
+    // wide as it is; the line is as tall as it needs, and the saved text stays the stand-in.
+    let math = math_of_paragraph(para, &styles).map(|(b, si)| {
+        text = math_blank(&b, &styles[si]);
+        char_style = vec![si; text.chars().count()];
+        (b, si)
+    });
     let cells = shape_cells(ctx, &text, &char_style, &styles, &mut faces, rtl, vertical);
     let lead = para.runs.first().map(|r| resolve::run(ctx, shape, para, &r.props)).unwrap_or_else(|| resolve::run(ctx, shape, para, &para.end_props));
     let lead_style = make_style(ctx, &lead, scale, opts.prompt_color);
@@ -114,7 +145,7 @@ pub(crate) fn shape_para(
         }
         _ => None,
     };
-    ParaShaped { cells, styles, faces, props, lead_size, lead_face, end_size, end_face, bullet, level: para.level, rtl }
+    ParaShaped { cells, styles, faces, props, lead_size, lead_face, end_size, end_face, bullet, level: para.level, rtl, math, inline_math }
 }
 
 /// A face that draws the bullet `label` when the bullet's own can't (circled numbers ①, arrows

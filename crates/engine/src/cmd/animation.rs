@@ -10,6 +10,8 @@ use super::{
 };
 use crate::{Result, Session};
 
+mod steps;
+
 pub fn specs() -> Vec<CommandSpec> {
     vec![
         cmd!(
@@ -50,6 +52,7 @@ pub fn specs() -> Vec<CommandSpec> {
             has_slide,
             options
         ),
+        steps::spec(),
         cmd!("animation.clear", "Remove All Animations", [], None, "{index?: slide}", has_slide, clear),
         cmd!(
             noundo "animation.painter",

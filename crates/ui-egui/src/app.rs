@@ -18,6 +18,7 @@ mod frame;
 mod ime;
 mod input;
 mod keys;
+pub(crate) mod picks;
 mod playback;
 
 #[cfg(test)]
@@ -46,6 +47,7 @@ impl SlideApp {
             session,
             services,
             ui: UiState::default(),
+            maths: Default::default(),
             textures: textures::Textures::default(),
             control_rx: None,
             squiggles: Default::default(),
@@ -54,12 +56,16 @@ impl SlideApp {
             show: None,
             anim_preview: None,
             reuse_target: None,
+            pending_pick: None,
+            album_picked: Vec::new(),
+            quit_when_saved: false,
+            save_dismissed: false,
             media: media::MediaHost::new(audio_out),
             status: None,
             opening: None,
             toast: None,
             fonts_noted: Default::default(),
-            perf: Perf { frame_ms: 0.0, render_ms: 0.0, fps: 0.0 },
+            perf: Perf { frame_ms: 0.0, render_ms: 0.0, fps: 0.0, slow_logged_ms: f64::NEG_INFINITY },
             synthetic: vec![],
             synthetic_pending: false,
             synthetic_next: vec![],
@@ -219,6 +225,7 @@ impl SlideApp {
             return;
         }
         self.tick_hidden_show(ctx, web_time::Instant::now());
+        self.maths_quit_if_asked(ctx);
         // `raw_input_hook` runs before `App::logic`. In a full pass egui has already built
         // `PointerState` and `keys_down` from every injected event, so retracting the events after
         // this pass would not stop the derived click or key from reaching the UI. Defer instead:
@@ -230,6 +237,7 @@ impl SlideApp {
         if !self.synthetic_batch_is_live(ctx) {
             self.drain_control(ctx);
             self.poll_opening();
+            self.poll_maths();
             #[cfg(not(target_arch = "wasm32"))]
             updates_ui::tick(self, ctx);
             // Inbox results are host file bytes and do not need fonts or a painted frame. A
@@ -250,6 +258,7 @@ impl SlideApp {
         // Closing the window with unsaved changes asks first.
         if ctx.input(|i| i.viewport().close_requested()) && !self.quit_confirmed && self.session.documents().iter().any(|d| d.is_dirty()) {
             ctx.send_viewport_cmd(egui::ViewportCommand::CancelClose);
+            self.stash_teacher();
             self.show = None;
             if self.dialog.as_ref().is_none_or(|d| d.id != "quit") {
                 self.dialog = Some(dialogs::Dialog::new("quit"));
@@ -293,6 +302,8 @@ impl SlideApp {
         let ctx = ui.ctx().clone();
         self.ime_frame_viewport = Some(ctx.viewport_id());
         self.ime_pending = None;
+        self.poll_pick(&ctx);
+        self.continue_quit_after_save(&ctx);
         if !self.ui_setup(&ctx) {
             // This pass is discarded for the new fonts. The input events were already consumed
             // by egui, so keep them queued for the next frame instead of silently losing them.
@@ -310,7 +321,7 @@ impl SlideApp {
             self.anim_preview = None;
             show::ui(self, ui);
             doc_window::show(self, &ctx);
-            self.perf.frame_ms = now_ms() - t0;
+            self.note_frame_time(t0);
             self.ui_end(&ctx);
             return;
         }
@@ -318,6 +329,7 @@ impl SlideApp {
         self.keyboard(&ctx);
         self.sync_backstage();
         ribbon::title_bar(self, ui);
+        ribbon::doc_tabs(self, ui);
         if self.backstage.is_none() && self.session.active().is_some() {
             ribbon::show(self, ui);
             status::status_bar(self, ui);
@@ -339,8 +351,13 @@ impl SlideApp {
                 ViewMode::Sorter => sorter::show(self, ui),
                 ViewMode::NotesPage => sorter::notes_page(self, ui),
                 ViewMode::Outline | ViewMode::Normal | ViewMode::Reading => {
+                    // On a phone-width window a task pane takes the whole screen (its close button
+                    // brings the slide back); thumbnails and notes shrink or step aside.
                     if self.ui.pane.is_some() {
                         panes::show(self, ui);
+                        if crate::maths::app::is_compact(ui.ctx().content_rect().width()) {
+                            return;
+                        }
                     }
                     if self.ui.view == ViewMode::Outline {
                         sorter::outline_pane(self, ui);
@@ -348,7 +365,7 @@ impl SlideApp {
                         thumbs::show(self, ui);
                     }
                     egui::CentralPanel::default().frame(egui::Frame::NONE.fill(t.canvas)).show(ui, |ui| {
-                        if self.ui.notes {
+                        if self.ui.notes && !crate::maths::app::is_compact(ui.ctx().content_rect().width()) {
                             status::notes_pane(self, ui);
                         }
                         canvas::show(self, ui);
@@ -370,7 +387,7 @@ impl SlideApp {
         }
         self.drain_requests();
         doc_window::show(self, &ctx);
-        self.perf.frame_ms = now_ms() - t0;
+        self.note_frame_time(t0);
         self.ui_end(&ctx);
     }
 
