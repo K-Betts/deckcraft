@@ -16,11 +16,11 @@ log = { workspace = true }
 # HTTPS client with rustls and no async runtime.
 ureq = "3"
 # SHA-256 for the PKCE code challenge.
-sha2 = "0.10"
+sha2 = "0.11"
 # URL-safe base64 for PKCE and base64 of nothing else.
-base64 = "0.22"
+base64 = "0.23"
 # Cryptographically random bytes for the PKCE verifier and OAuth state.
-getrandom = "0.3"
+getrandom = "0.4"
 
 # The refresh token lives in the system credential store. keyring v3 has NO default store: each
 # platform's must be switched on or it silently falls back to a mock that forgets the token.

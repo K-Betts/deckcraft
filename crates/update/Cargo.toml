@@ -14,4 +14,4 @@ serde_json = { workspace = true }
 log = { workspace = true }
 # Already used by deckcraft-drive; no new packages enter Cargo.lock.
 ureq = "3"
-sha2 = "0.10"
+sha2 = "0.11"
